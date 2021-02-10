@@ -11,6 +11,9 @@ struct RunwayRow: View {
         HStack {
             Text(runway.name!).bold()
             RunwayDistances(runway: runway, operation: operation)
+            if runway.turf {
+                Text("(turf)")
+            }
             if wind != nil {
                 Spacer()
                 WindComponents(runway: runway,
@@ -30,6 +33,7 @@ struct RunwayRow_Previews: PreviewProvider {
         r.takeoffRun = 2600
         r.takeoffDistance = 2800
         r.heading = 302
+        r.turf = true
         return r
     }()
     
