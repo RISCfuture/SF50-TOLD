@@ -5,13 +5,19 @@ struct SearchField: View {
     @Binding var text: String
     @State private var isEditing = false
     
+    #if canImport(UIKit)
+    var backgroundColor = Color(.secondarySystemFill)
+    #else
+    var backgroundColor = NSColor.clear
+    #endif
+    
     var body: some View {
         HStack {
             TextField(placeholder, text: $text)
                 .disableAutocorrection(true)
                 .padding(7)
                 .padding(.horizontal, 25)
-                .background(Color(.secondarySystemFill))
+                .background(backgroundColor)
                 .cornerRadius(100)
                 .overlay(
                     HStack {
