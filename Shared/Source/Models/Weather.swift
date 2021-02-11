@@ -39,7 +39,7 @@ struct Weather: CustomDebugStringConvertible {
     
     // ft
     func pressureAltitude(elevation: Double) -> Double {
-        return 145366.45*pow(1 - absolutePressure(elevation: elevation)/inHg2hPa(standardSLP), 0.190284)
+        return 145366.45*(1-pow(absolutePressure(elevation: elevation)/standardSLP, 0.190284))
     }
     
     func temperature(at elevation: Double) -> Double {
