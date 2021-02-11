@@ -34,8 +34,8 @@
 		012CBA1C2AF4B2C60015270A /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 012CBA1B2AF4B2C60015270A /* SwiftCSV */; };
 		012CBA1F2AF4B8410015270A /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 012CBA1E2AF4B8410015270A /* Gzip */; };
 		012CBA212AF4B8480015270A /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 012CBA202AF4B8480015270A /* Gzip */; };
-		0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
-		0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
+		0135A7EC2587091800892558 /* SR22_G2_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SR22_G2_TOLDApp.swift */; };
+		0135A7ED2587091800892558 /* SR22_G2_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SR22_G2_TOLDApp.swift */; };
 		0135A7EE2587091800892558 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C42587091300892558 /* ContentView.swift */; };
 		0135A7EF2587091800892558 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C42587091300892558 /* ContentView.swift */; };
 		0135A7F02587091800892558 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0135A7C52587091700892558 /* Assets.xcassets */; };
@@ -135,10 +135,6 @@
 		016A0B2A27E5D25500F16C21 /* LandingDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */; };
 		016A0B2B27E5D25500F16C21 /* LandingDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */; };
 		016A0B2C27E5D25500F16C21 /* LandingDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */; };
-		016A0B2E27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */; };
-		016A0B2F27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */; };
-		016A0B3027E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */; };
-		016A0B3127E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */; };
 		016A0B3427E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3327E5D53700F16C21 /* TakeoffGroundRollView.swift */; };
 		016A0B3527E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3327E5D53700F16C21 /* TakeoffGroundRollView.swift */; };
 		016A0B3627E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3327E5D53700F16C21 /* TakeoffGroundRollView.swift */; };
@@ -169,7 +165,7 @@
 		016C736D25AE40120008455F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FA01F25AC230C006C807F /* SettingsView.swift */; };
 		016C736F25AE40120008455F /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A83625872EDE00892558 /* WeatherService.swift */; };
 		016C737125AE40120008455F /* AirportDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014808ED25AAF4910041A90D /* AirportDataLoader.swift */; };
-		016C737325AE40120008455F /* PerformanceModelG1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModelG1.swift */; };
+		016C737325AE40120008455F /* PerformanceModelG2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModelG2.swift */; };
 		016C737525AE40120008455F /* WeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B6699258898DA00AA2DE9 /* WeatherState.swift */; };
 		016C737725AE40120008455F /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8A425874C3B00892558 /* Global.swift */; };
 		016C737825AE40120008455F /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7DE2587091700892558 /* Tests_iOS.swift */; };
@@ -191,7 +187,7 @@
 		016C739225AE40200008455F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FA01F25AC230C006C807F /* SettingsView.swift */; };
 		016C739425AE40200008455F /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A83625872EDE00892558 /* WeatherService.swift */; };
 		016C739625AE40200008455F /* AirportDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014808ED25AAF4910041A90D /* AirportDataLoader.swift */; };
-		016C739825AE40200008455F /* PerformanceModelG1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModelG1.swift */; };
+		016C739825AE40200008455F /* PerformanceModelG2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModelG2.swift */; };
 		016C739A25AE40200008455F /* WeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B6699258898DA00AA2DE9 /* WeatherState.swift */; };
 		016C739C25AE40200008455F /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8A425874C3B00892558 /* Global.swift */; };
 		016C739D25AE40200008455F /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7E92587091800892558 /* Tests_macOS.swift */; };
@@ -217,8 +213,8 @@
 		0179867125C280D30031A453 /* WeatherForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0179866F25C280D30031A453 /* WeatherForm.swift */; };
 		0179867225C280D30031A453 /* WeatherForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0179866F25C280D30031A453 /* WeatherForm.swift */; };
 		0179867325C280D30031A453 /* WeatherForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0179866F25C280D30031A453 /* WeatherForm.swift */; };
-		017B66902588980F00AA2DE9 /* PerformanceModelG1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModelG1.swift */; };
-		017B66912588980F00AA2DE9 /* PerformanceModelG1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModelG1.swift */; };
+		017B66902588980F00AA2DE9 /* PerformanceModelG2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModelG2.swift */; };
+		017B66912588980F00AA2DE9 /* PerformanceModelG2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModelG2.swift */; };
 		017B669A258898DA00AA2DE9 /* WeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B6699258898DA00AA2DE9 /* WeatherState.swift */; };
 		017B669B258898DA00AA2DE9 /* WeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B6699258898DA00AA2DE9 /* WeatherState.swift */; };
 		017ED15B261027A9002C69DE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 017ED15A261027A9002C69DE /* Alamofire */; };
@@ -280,10 +276,6 @@
 		01DD6DA125B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */; };
 		01DD6DA225B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */; };
 		01E2A1EB25ABA7D20076CC84 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2A1EA25ABA7D20076CC84 /* LoadingView.swift */; };
-		01E83CE927FD3969001342BF /* PerformanceModelG2+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CE827FD3969001342BF /* PerformanceModelG2+.swift */; };
-		01E83CEA27FD3969001342BF /* PerformanceModelG2+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CE827FD3969001342BF /* PerformanceModelG2+.swift */; };
-		01E83CEB27FD3969001342BF /* PerformanceModelG2+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CE827FD3969001342BF /* PerformanceModelG2+.swift */; };
-		01E83CEC27FD3969001342BF /* PerformanceModelG2+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CE827FD3969001342BF /* PerformanceModelG2+.swift */; };
 		01E83CEF27FD3B70001342BF /* PerformanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CEE27FD3B70001342BF /* PerformanceModel.swift */; };
 		01E83CF027FD3B70001342BF /* PerformanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CEE27FD3B70001342BF /* PerformanceModel.swift */; };
 		01E83CF127FD3B70001342BF /* PerformanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CEE27FD3B70001342BF /* PerformanceModel.swift */; };
@@ -334,14 +326,14 @@
 			containerPortal = 0135A7BE2587091300892558 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0135A7C92587091700892558;
-			remoteInfo = "SF50 TOLD (iOS)";
+			remoteInfo = "SR22-G2 TOLD (iOS)";
 		};
 		0135A7E62587091800892558 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0135A7BE2587091300892558 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0135A7D12587091700892558;
-			remoteInfo = "SF50 TOLD (macOS)";
+			remoteInfo = "SR22-G2 TOLD (macOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -366,12 +358,12 @@
 		010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingResultsView.swift; sourceTree = "<group>"; };
 		010F675727E9B99C00BDBDB0 /* Cycle+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cycle+Defaults.swift"; sourceTree = "<group>"; };
 		011A95A527E477D500F3A127 /* NOTAMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMView.swift; sourceTree = "<group>"; };
-		0135A7C32587091300892558 /* SF50_TOLDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF50_TOLDApp.swift; sourceTree = "<group>"; };
+		0135A7C32587091300892558 /* SR22_G2_TOLDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SR22_G2_TOLDApp.swift; sourceTree = "<group>"; };
 		0135A7C42587091300892558 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0135A7C52587091700892558 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0135A7CA2587091700892558 /* SF50 TOLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SF50 TOLD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0135A7CA2587091700892558 /* SR22-G2 TOLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SR22-G2 TOLD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0135A7CD2587091700892558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0135A7D22587091700892558 /* SF50 TOLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SF50 TOLD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0135A7D22587091700892558 /* SR22-G2 TOLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SR22-G2 TOLD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0135A7D42587091700892558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0135A7D52587091700892558 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		0135A7DA2587091700892558 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -411,7 +403,6 @@
 		016A0B1E27E5D15F00F16C21 /* VREFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VREFView.swift; sourceTree = "<group>"; };
 		016A0B2327E5D1F600F16C21 /* LandingGroundRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingGroundRollView.swift; sourceTree = "<group>"; };
 		016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingDistanceView.swift; sourceTree = "<group>"; };
-		016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoAroundClimbGradientView.swift; sourceTree = "<group>"; };
 		016A0B3327E5D53700F16C21 /* TakeoffGroundRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeoffGroundRollView.swift; sourceTree = "<group>"; };
 		016A0B3827E5D5AC00F16C21 /* TakeoffDistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeoffDistanceView.swift; sourceTree = "<group>"; };
 		016A0B3D27E5D60300F16C21 /* VxClimbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VxClimbView.swift; sourceTree = "<group>"; };
@@ -420,7 +411,7 @@
 		0179865925C280B60031A453 /* WeatherSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSource.swift; sourceTree = "<group>"; };
 		0179866625C280C40031A453 /* RawWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawWeather.swift; sourceTree = "<group>"; };
 		0179866F25C280D30031A453 /* WeatherForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForm.swift; sourceTree = "<group>"; };
-		017B668F2588980F00AA2DE9 /* PerformanceModelG1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceModelG1.swift; sourceTree = "<group>"; };
+		017B668F2588980F00AA2DE9 /* PerformanceModelG2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceModelG2.swift; sourceTree = "<group>"; };
 		017B6699258898DA00AA2DE9 /* WeatherState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherState.swift; sourceTree = "<group>"; };
 		018CF99C2682A54000F52821 /* AirportLoaderTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportLoaderTask.swift; sourceTree = "<group>"; };
 		0191C05D25B2BF7800C4B810 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -442,7 +433,6 @@
 		01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffscaleWarningView.swift; sourceTree = "<group>"; };
 		01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportLoadingService.swift; sourceTree = "<group>"; };
 		01E2A1EA25ABA7D20076CC84 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		01E83CE827FD3969001342BF /* PerformanceModelG2+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PerformanceModelG2+.swift"; sourceTree = "<group>"; };
 		01E83CEE27FD3B70001342BF /* PerformanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceModel.swift; sourceTree = "<group>"; };
 		01F18D2525B198B6007D76BA /* LoadoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadoutView.swift; sourceTree = "<group>"; };
 		01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndPlaceView.swift; sourceTree = "<group>"; };
@@ -618,7 +608,7 @@
 			isa = PBXGroup;
 			children = (
 				0135A7C52587091700892558 /* Assets.xcassets */,
-				0135A7C32587091300892558 /* SF50_TOLDApp.swift */,
+				0135A7C32587091300892558 /* SR22_G2_TOLDApp.swift */,
 				0135A80725870E0A00892558 /* Source */,
 			);
 			path = Shared;
@@ -627,8 +617,8 @@
 		0135A7CB2587091700892558 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0135A7CA2587091700892558 /* SF50 TOLD.app */,
-				0135A7D22587091700892558 /* SF50 TOLD.app */,
+				0135A7CA2587091700892558 /* SR22-G2 TOLD.app */,
+				0135A7D22587091700892558 /* SR22-G2 TOLD.app */,
 				0135A7DA2587091700892558 /* Tests iOS.xctest */,
 				0135A7E52587091800892558 /* Tests macOS.xctest */,
 				01AEDA9C28D6F2D400F38948 /* DownloadNASR */,
@@ -763,7 +753,6 @@
 		016A0B1D27E5D13F00F16C21 /* LandingView */ = {
 			isa = PBXGroup;
 			children = (
-				016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */,
 				016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */,
 				016A0B2327E5D1F600F16C21 /* LandingGroundRollView.swift */,
 				010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */,
@@ -854,8 +843,7 @@
 		01E83CED27FD3B4D001342BF /* Performance */ = {
 			isa = PBXGroup;
 			children = (
-				017B668F2588980F00AA2DE9 /* PerformanceModelG1.swift */,
-				01E83CE827FD3969001342BF /* PerformanceModelG2+.swift */,
+				017B668F2588980F00AA2DE9 /* PerformanceModelG2.swift */,
 				01E83CEE27FD3B70001342BF /* PerformanceModel.swift */,
 			);
 			path = Performance;
@@ -885,9 +873,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0135A7C92587091700892558 /* SF50 TOLD (iOS) */ = {
+		0135A7C92587091700892558 /* SR22-G2 TOLD (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0135A7F42587091800892558 /* Build configuration list for PBXNativeTarget "SF50 TOLD (iOS)" */;
+			buildConfigurationList = 0135A7F42587091800892558 /* Build configuration list for PBXNativeTarget "SR22-G2 TOLD (iOS)" */;
 			buildPhases = (
 				0135A7C62587091700892558 /* Sources */,
 				0135A7C72587091700892558 /* Frameworks */,
@@ -897,7 +885,7 @@
 			);
 			dependencies = (
 			);
-			name = "SF50 TOLD (iOS)";
+			name = "SR22-G2 TOLD (iOS)";
 			packageProductDependencies = (
 				0135A84B25872F6700892558 /* SwiftNASR */,
 				0135A894258749F500892558 /* Defaults */,
@@ -907,13 +895,13 @@
 				012CBA192AF4B2BA0015270A /* SwiftCSV */,
 				012CBA1E2AF4B8410015270A /* Gzip */,
 			);
-			productName = "SF50 TOLD (iOS)";
-			productReference = 0135A7CA2587091700892558 /* SF50 TOLD.app */;
+			productName = "SR22-G2 TOLD (iOS)";
+			productReference = 0135A7CA2587091700892558 /* SR22-G2 TOLD.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0135A7D12587091700892558 /* SF50 TOLD (macOS) */ = {
+		0135A7D12587091700892558 /* SR22-G2 TOLD (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0135A7F72587091800892558 /* Build configuration list for PBXNativeTarget "SF50 TOLD (macOS)" */;
+			buildConfigurationList = 0135A7F72587091800892558 /* Build configuration list for PBXNativeTarget "SR22-G2 TOLD (macOS)" */;
 			buildPhases = (
 				0135A7CE2587091700892558 /* Sources */,
 				0135A7CF2587091700892558 /* Frameworks */,
@@ -923,7 +911,7 @@
 			);
 			dependencies = (
 			);
-			name = "SF50 TOLD (macOS)";
+			name = "SR22-G2 TOLD (macOS)";
 			packageProductDependencies = (
 				0135A85325872F7000892558 /* SwiftNASR */,
 				0135A89A25874A0100892558 /* Defaults */,
@@ -933,8 +921,8 @@
 				012CBA1B2AF4B2C60015270A /* SwiftCSV */,
 				012CBA202AF4B8480015270A /* Gzip */,
 			);
-			productName = "SF50 TOLD (macOS)";
-			productReference = 0135A7D22587091700892558 /* SF50 TOLD.app */;
+			productName = "SR22-G2 TOLD (macOS)";
+			productReference = 0135A7D22587091700892558 /* SR22-G2 TOLD.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0135A7D92587091700892558 /* Tests iOS */ = {
@@ -1032,7 +1020,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0135A7C12587091300892558 /* Build configuration list for PBXProject "SF50 TOLD" */;
+			buildConfigurationList = 0135A7C12587091300892558 /* Build configuration list for PBXProject "SR22-G2 TOLD" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1056,8 +1044,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0135A7C92587091700892558 /* SF50 TOLD (iOS) */,
-				0135A7D12587091700892558 /* SF50 TOLD (macOS) */,
+				0135A7C92587091700892558 /* SR22-G2 TOLD (iOS) */,
+				0135A7D12587091700892558 /* SR22-G2 TOLD (macOS) */,
 				0135A7D92587091700892558 /* Tests iOS */,
 				0135A7E42587091800892558 /* Tests macOS */,
 				01AEDA9B28D6F2D400F38948 /* DownloadNASR */,
@@ -1126,7 +1114,6 @@
 				0191C05E25B2BF7800C4B810 /* AppState.swift in Sources */,
 				01698D1525C148B8002D44A0 /* LoadingConsentView.swift in Sources */,
 				01F18D3325B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
-				01E83CE927FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				016A0B3427E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
 				01DD6D9F25B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,
 				01535DE225A2FD0800AC0F5F /* ValueFormatter.swift in Sources */,
@@ -1158,7 +1145,6 @@
 				01F18D2625B198B6007D76BA /* LoadoutView.swift in Sources */,
 				010F675227E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */,
 				01641E9B28066C2F00BBD18C /* ListResults.swift in Sources */,
-				016A0B2E27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				016A0B1927E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
 				01F59A1F25AE63AC0055E81B /* PerformanceView.swift in Sources */,
 				01D265B625AD808600322A45 /* WindComponents.swift in Sources */,
@@ -1166,7 +1152,7 @@
 				0105D5CB28123F49003EA0AA /* ContaminationView.swift in Sources */,
 				019CC28425B91C0F00FEA895 /* DecimalField.swift in Sources */,
 				01F7EB9E25BBFA2A00CE5024 /* ConfigurationView.swift in Sources */,
-				0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */,
+				0135A7EC2587091800892558 /* SR22_G2_TOLDApp.swift in Sources */,
 				01FC1F41280E7F7E0066E374 /* NearestView.swift in Sources */,
 				016A0B1F27E5D15F00F16C21 /* VREFView.swift in Sources */,
 				0135A8CC2587599D00892558 /* AirportPicker.swift in Sources */,
@@ -1181,7 +1167,7 @@
 				01FC1F37280E3B1D0066E374 /* RoundedCorners.swift in Sources */,
 				01D2C8F025D126C10036B6FE /* Weather.swift in Sources */,
 				01D265C325AD821200322A45 /* RunwayDistances.swift in Sources */,
-				017B66902588980F00AA2DE9 /* PerformanceModelG1.swift in Sources */,
+				017B66902588980F00AA2DE9 /* PerformanceModelG2.swift in Sources */,
 				01F7EBAB25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */,
 				0166FCA325C00C16006F7258 /* TapToDismiss.swift in Sources */,
 				01641E922806668A00BBD18C /* FavoritesView.swift in Sources */,
@@ -1199,7 +1185,6 @@
 				01D7DA6D25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				01D4FA5628D7869400AC322B /* CircularProgressView.swift in Sources */,
 				01FC1F42280E7F7E0066E374 /* NearestView.swift in Sources */,
-				01E83CEA27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				0105D5C928123C5A003EA0AA /* ObstacleView.swift in Sources */,
 				0179865B25C280B60031A453 /* WeatherSource.swift in Sources */,
 				01535DE325A2FD0800AC0F5F /* ValueFormatter.swift in Sources */,
@@ -1250,17 +1235,16 @@
 				016A0B2027E5D15F00F16C21 /* VREFView.swift in Sources */,
 				01F18D3425B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
 				016A0B2527E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */,
-				0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */,
 				01D4FA5B28D7BFE000AC322B /* Errors.swift in Sources */,
+				0135A7ED2587091800892558 /* SR22_G2_TOLDApp.swift in Sources */,
 				0135A8CD2587599D00892558 /* AirportPicker.swift in Sources */,
 				016A0B1027E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				017B669B258898DA00AA2DE9 /* WeatherState.swift in Sources */,
 				0135A8A625874C3B00892558 /* Global.swift in Sources */,
-				016A0B2F27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				0166FC9725BFFDA7006F7258 /* View Functions.swift in Sources */,
 				01FC1F5D280F50CE0066E374 /* Airport.swift in Sources */,
 				01D2C8F125D126C10036B6FE /* Weather.swift in Sources */,
-				017B66912588980F00AA2DE9 /* PerformanceModelG1.swift in Sources */,
+				017B66912588980F00AA2DE9 /* PerformanceModelG2.swift in Sources */,
 				01A6DB1C25AD776C00A3341F /* RunwayRow.swift in Sources */,
 				016A0B1A27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
 				01C7EA7B25B1963600CCFBE1 /* InterpolationView.swift in Sources */,
@@ -1290,7 +1274,6 @@
 				016A0B3627E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
 				0158291825BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				016C736225AE40120008455F /* SearchField.swift in Sources */,
-				01E83CEB27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				016C736325AE40120008455F /* WeatherRow.swift in Sources */,
 				016C736425AE40120008455F /* AirportRow.swift in Sources */,
 				01F59A2125AE63AC0055E81B /* PerformanceView.swift in Sources */,
@@ -1308,7 +1291,6 @@
 				016C736925AE40120008455F /* LoadingView.swift in Sources */,
 				0191C06025B2BF7800C4B810 /* AppState.swift in Sources */,
 				0179866925C280C40031A453 /* RawWeather.swift in Sources */,
-				016A0B3027E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				01D7DA6E25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				016C736A25AE40120008455F /* ErrorView.swift in Sources */,
 				016C736B25AE40120008455F /* TakeoffView.swift in Sources */,
@@ -1331,7 +1313,7 @@
 				016A0B1127E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				01007B8525D5268700C8BFF2 /* AboutView.swift in Sources */,
 				016A0B1627E5C62E00F16C21 /* SearchResults.swift in Sources */,
-				016C737325AE40120008455F /* PerformanceModelG1.swift in Sources */,
+				016C737325AE40120008455F /* PerformanceModelG2.swift in Sources */,
 				0166FC9825BFFDA7006F7258 /* View Functions.swift in Sources */,
 				016C737525AE40120008455F /* WeatherState.swift in Sources */,
 				01C7EA7C25B1963600CCFBE1 /* InterpolationView.swift in Sources */,
@@ -1364,7 +1346,6 @@
 				016A0B3727E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
 				0158291925BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				016C738725AE40200008455F /* SearchField.swift in Sources */,
-				01E83CEC27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				016C738825AE40200008455F /* WeatherRow.swift in Sources */,
 				016C738925AE40200008455F /* AirportRow.swift in Sources */,
 				01F59A2225AE63AC0055E81B /* PerformanceView.swift in Sources */,
@@ -1382,7 +1363,6 @@
 				016C738E25AE40200008455F /* LoadingView.swift in Sources */,
 				0191C06125B2BF7800C4B810 /* AppState.swift in Sources */,
 				0179866A25C280C40031A453 /* RawWeather.swift in Sources */,
-				016A0B3127E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				01D7DA6F25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				016C738F25AE40200008455F /* ErrorView.swift in Sources */,
 				016C739025AE40200008455F /* TakeoffView.swift in Sources */,
@@ -1405,7 +1385,7 @@
 				016A0B1227E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				01007B8625D5268700C8BFF2 /* AboutView.swift in Sources */,
 				016A0B1727E5C62E00F16C21 /* SearchResults.swift in Sources */,
-				016C739825AE40200008455F /* PerformanceModelG1.swift in Sources */,
+				016C739825AE40200008455F /* PerformanceModelG2.swift in Sources */,
 				0166FC9925BFFDA7006F7258 /* View Functions.swift in Sources */,
 				016C739A25AE40200008455F /* WeatherState.swift in Sources */,
 				01C7EA7D25B1963600CCFBE1 /* InterpolationView.swift in Sources */,
@@ -1435,12 +1415,12 @@
 /* Begin PBXTargetDependency section */
 		0135A7DC2587091700892558 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0135A7C92587091700892558 /* SF50 TOLD (iOS) */;
+			target = 0135A7C92587091700892558 /* SR22-G2 TOLD (iOS) */;
 			targetProxy = 0135A7DB2587091700892558 /* PBXContainerItemProxy */;
 		};
 		0135A7E72587091800892558 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0135A7D12587091700892558 /* SF50 TOLD (macOS) */;
+			target = 0135A7D12587091700892558 /* SR22-G2 TOLD (macOS) */;
 			targetProxy = 0135A7E62587091800892558 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1603,8 +1583,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.5.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
-				PRODUCT_NAME = "SF50 TOLD";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SR22-G2-TOLD";
+				PRODUCT_NAME = "SR22-G2 TOLD";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1628,8 +1608,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.5.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
-				PRODUCT_NAME = "SF50 TOLD";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SR22-G2-TOLD";
+				PRODUCT_NAME = "SR22-G2 TOLD";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1658,8 +1638,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.5.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
-				PRODUCT_NAME = "SF50 TOLD";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SR22-G2-TOLD";
+				PRODUCT_NAME = "SR22-G2 TOLD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -1687,8 +1667,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.5.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
-				PRODUCT_NAME = "SF50 TOLD";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SR22-G2-TOLD";
+				PRODUCT_NAME = "SR22-G2 TOLD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -1713,7 +1693,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "SF50 TOLD (iOS)";
+				TEST_TARGET_NAME = "SR22-G2 TOLD (iOS)";
 			};
 			name = Debug;
 		};
@@ -1735,7 +1715,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "SF50 TOLD (iOS)";
+				TEST_TARGET_NAME = "SR22-G2 TOLD (iOS)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1759,7 +1739,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "SF50 TOLD (macOS)";
+				TEST_TARGET_NAME = "SR22-G2 TOLD (macOS)";
 			};
 			name = Debug;
 		};
@@ -1782,7 +1762,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "SF50 TOLD (macOS)";
+				TEST_TARGET_NAME = "SR22-G2 TOLD (macOS)";
 			};
 			name = Release;
 		};
@@ -1823,7 +1803,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0135A7C12587091300892558 /* Build configuration list for PBXProject "SF50 TOLD" */ = {
+		0135A7C12587091300892558 /* Build configuration list for PBXProject "SR22-G2 TOLD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0135A7F22587091800892558 /* Debug */,
@@ -1832,7 +1812,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0135A7F42587091800892558 /* Build configuration list for PBXNativeTarget "SF50 TOLD (iOS)" */ = {
+		0135A7F42587091800892558 /* Build configuration list for PBXNativeTarget "SR22-G2 TOLD (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0135A7F52587091800892558 /* Debug */,
@@ -1841,7 +1821,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0135A7F72587091800892558 /* Build configuration list for PBXNativeTarget "SF50 TOLD (macOS)" */ = {
+		0135A7F72587091800892558 /* Build configuration list for PBXNativeTarget "SR22-G2 TOLD (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0135A7F82587091800892558 /* Debug */,

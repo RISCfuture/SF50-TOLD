@@ -11,7 +11,7 @@ extension TAF {
     var originDateOrToday: Date { originDate ?? Date() }
 }
 
-fileprivate let loadingQueue = DispatchQueue(label: "codes.tim.SF50-TOLD.ExpiringCache", qos: .utility, attributes: .concurrent)
+fileprivate let loadingQueue = DispatchQueue(label: "codes.tim.SR22-TOLD.ExpiringCache", qos: .utility, attributes: .concurrent)
 
 fileprivate class WeatherLoader<T> {
     private let subject = CurrentValueSubject<FetchState<Dictionary<String, WeatherResult<T>>>, Never>(FetchState.notLoaded)
@@ -103,10 +103,9 @@ class WeatherService: ObservableObject {
     private static let METAR_URL = URL(string: "https://aviationweather.gov/data/cache/metars.cache.csv.gz")!
     private static let TAF_URL = URL(string: "https://aviationweather.gov/data/cache/tafs.cache.csv.gz")!
 
-    private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "WeatherService")
-    
     private let METARLoader: WeatherLoader<METAR>
     private let TAFLoader: WeatherLoader<TAF>
+    private static let logger = Logger(subsystem: "codes.tim.SR22-G2-TOLD", category: "WeatherService")
     
     let reachable = CurrentValueSubject<NetworkReachabilityManager.NetworkReachabilityStatus, Never>(NetworkReachabilityManager.NetworkReachabilityStatus.unknown)
     private var reachability: NetworkReachabilityManager { .init(host: Self.METAR_URL.host!)! }

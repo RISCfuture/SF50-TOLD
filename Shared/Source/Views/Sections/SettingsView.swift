@@ -6,13 +6,6 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             Form {
-                VStack(alignment: .leading) {
-                    Toggle("Use Updated Thrust Schedule", isOn: $state.updatedThrustSchedule)
-                    Text("Turn this setting on when flying a G2+ Vision Jet or one with SB5X-72-01 completed.")
-                        .font(.system(size: 11))
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                
                 HStack {
                     Text("Empty Weight")
                     Spacer()
@@ -37,6 +30,12 @@ struct SettingsView: View {
                     DecimalField("Factor",
                                  value: $state.safetyFactor,
                                  formatter: numberFormatter(precision: 1, minimum: 1.0))
+                }
+                
+                HStack {
+                    Text("G3 Wing")
+                    Spacer()
+                    Toggle("", isOn: $state.g3Wing)
                 }
             }.navigationTitle("Settings")
         }.navigationViewStyle(navigationStyle)

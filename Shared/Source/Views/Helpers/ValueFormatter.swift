@@ -25,7 +25,7 @@ class ValueFormatter {
         .init(roundingMode: .plain, scale: Int16(precision), raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     }
     private var numberFormatter: NumberFormatter {
-        SF50_TOLD.numberFormatter(precision: precision, minimum: minimum, maximum: maximum)
+        SR22_G2_TOLD.numberFormatter(precision: precision, minimum: minimum, maximum: maximum)
     }
     
     required init(precision: UInt = 0, minimum: Double? = 0, maximum: Double? = nil) {

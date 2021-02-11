@@ -5,19 +5,15 @@ protocol PerformanceModel {
     var runway: Runway? { get set }
     var weather: Weather { get set }
     var weight: Double { get set }
-    var flaps: FlapSetting? { get set }
     
     var takeoffRoll: Interpolation? { get }
     var takeoffDistance: Interpolation? { get }
-    var takeoffPermitted: Bool? { get }
     var landingRoll: Interpolation? { get }
     var landingDistance: Interpolation? { get }
     var takeoffClimbGradient: Interpolation? { get }
     var takeoffClimbRate: Interpolation? { get }
-    var vref: Interpolation? { get }
-    var meetsGoAroundClimbGradient: Bool? { get }
     
-    init(runway: Runway?, weather: Weather, weight: Double, flaps: FlapSetting?)
+    init(runway: Runway?, weather: Weather, weight: Double, ac: Bool)
 }
 
 

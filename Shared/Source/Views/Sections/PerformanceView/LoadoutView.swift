@@ -26,7 +26,7 @@ struct LoadoutView: View {
                              value: $state.fuel,
                              formatter: numberFormatter(precision: 0, minimum: 0),
                              suffix: "gal",
-                             maximum: maxFuel)
+                             maximum: state.maxFuel)
             }
             HStack(spacing: 0) {
                 Text("\(title) Weight")

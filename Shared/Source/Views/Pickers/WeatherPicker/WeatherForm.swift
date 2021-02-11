@@ -54,6 +54,11 @@ struct WeatherForm: View {
                     if editing { weather.source = .entered }
                 })
             }
+            HStack {
+                Text("Damp Runway")
+                Spacer()
+                Toggle("", isOn: $weather.wet)
+            }
         }
     }
 }

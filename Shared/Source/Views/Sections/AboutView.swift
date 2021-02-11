@@ -16,7 +16,7 @@ struct AboutView: View {
                     HStack {
                         Text("Aircraft")
                         Spacer()
-                        Text("Cirrus SF50 Vision (G1 through G2+)")
+                        Text("Cirrus SR22 (G2)")
                             .bold()
                     }
                     
@@ -28,11 +28,11 @@ struct AboutView: View {
                     }
                 }
                 
-                Section(header: Text("SF50 G1 Data Source")) {
+                Section(header: Text("SR22 G2/G3 Data Source")) {
                     HStack {
                         Text("Serials")
                         Spacer()
-                        Text("with Cirrus Perspective Touch Avionics System and FL280 Maximum Operating Altitude")
+                        Text("0002 thru 2978, 2980 thru 2991, 2993 thru 3001, 3003 thru 3025, 3027 and subs with Analog or Avidyne Avionics System")
                             .bold()
                             .font(.system(size: 14))
                     }
@@ -40,7 +40,7 @@ struct AboutView: View {
                     HStack {
                         Text("P/N")
                         Spacer()
-                        Text("31452-001")
+                        Text("13772-001")
                             .bold()
                     }
                     
@@ -52,50 +52,26 @@ struct AboutView: View {
                     }
                 }
                 
-                Section(header: Text("SF50 G2–G2+ Data Source")) {
+                Section(header: Text("Tornado Alley Turbo Data Source")) {
                     HStack {
-                        Text("Serials")
+                        Text("Supplemental Type Certificates")
                         Spacer()
-                        Text("with Cirrus Perspective Touch+ Avionics System and FL310 Maximum Operating Altitude")
+                        Text("SA10588SC, SE10589SC")
                             .bold()
                             .font(.system(size: 14))
                     }
                     
                     HStack {
-                        Text("P/N")
+                        Text("Report")
                         Spacer()
-                        Text("31452-002")
+                        Text("215-6")
                             .bold()
                     }
                     
                     HStack {
                         Text("Revision")
                         Spacer()
-                        Text("2 (04 Feb 2022)")
-                            .bold()
-                    }
-                }
-                
-                Section(header: Text("Updated Thrust Schedule Data Source")) {
-                    HStack {
-                        Text("Serials")
-                        Spacer()
-                        Text("26000-004 or Compliance with SB5X-72-01")
-                            .bold()
-                            .font(.system(size: 14))
-                    }
-                    
-                    HStack {
-                        Text("P/N")
-                        Spacer()
-                        Text("31452-111")
-                            .bold()
-                    }
-                    
-                    HStack {
-                        Text("Revision")
-                        Spacer()
-                        Text("1 (10 Feb 2022)")
+                        Text("3")
                             .bold()
                     }
                 }

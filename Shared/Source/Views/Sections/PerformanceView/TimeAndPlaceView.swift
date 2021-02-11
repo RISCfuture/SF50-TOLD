@@ -42,7 +42,6 @@ struct TimeAndPlaceView: View {
             if let airport = state.airport {
                 NavigationLink(destination: RunwayPicker(airport: airport,
                                                          weather: state.weatherState,
-                                                         flaps: $state.flaps,
                                                          operation: operation,
                                                          onSelect: { runway in
                     state.runway = runway

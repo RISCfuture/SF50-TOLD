@@ -15,6 +15,7 @@ class WeatherState: ObservableObject {
     @Published var windSpeed: Double
     @Published var temperature: Temperature
     @Published var altimeter: Double
+    @Published var wet: Bool
     
     @Published var userEditedTemperature: Double
     
@@ -41,6 +42,7 @@ class WeatherState: ObservableObject {
                 wind: wind,
                 temperature: temperature,
                 altimeter: altimeter,
+                wet: wet,
                 source: source)
     }
     
@@ -48,11 +50,12 @@ class WeatherState: ObservableObject {
         self.init(wind: .calm, temperature: .ISA, altimeter: standardSLP, source: .ISA)
     }
     
-    required init(wind: Wind = .calm, temperature: Temperature = .ISA, altimeter: Double = standardSLP, source: Source, observation: String? = nil, forecast: String? = nil, draft: Bool = false) {
+    required init(wind: Wind = .calm, temperature: Temperature = .ISA, altimeter: Double = standardSLP, wet: Bool = false, source: Source, observation: String? = nil, forecast: String? = nil, draft: Bool = false) {
         windDirection = wind.direction
         windSpeed = wind.speed
         self.temperature = temperature
         self.altimeter = altimeter
+        self.wet = wet
         self.observation = observation
         self.forecast = forecast
         self.draft = draft
