@@ -1,10 +1,3 @@
-//
-//  RunwayDistances.swift
-//  SF50 TOLD
-//
-//  Created by Tim Morgan on 1/11/21.
-//
-
 import SwiftUI
 
 fileprivate func formatDistance(_ distance: Int16) -> String {

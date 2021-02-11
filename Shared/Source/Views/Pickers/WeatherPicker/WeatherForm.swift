@@ -13,11 +13,19 @@ struct WeatherForm: View {
             HStack {
                 Text("Winds")
                 Spacer()
-                DecimalField("Direction", value: $weather.windDirection, formatter: headingFormatter, suffix: "°T", onEditingChanged: { editing in
+                DecimalField("Direction",
+                             value: $weather.windDirection,
+                             formatter: headingFormatter,
+                             suffix: "°T",
+                             onEditingChanged: { editing in
                     if editing { weather.source = .entered }
                 })
                 Text("@").foregroundColor(.secondary)
-                DecimalField("Speed", value: $weather.windSpeed, formatter: speedFormatter, suffix: "kts.", onEditingChanged: { editing in
+                DecimalField("Speed",
+                             value: $weather.windSpeed,
+                             formatter: speedFormatter,
+                             suffix: "kts.",
+                             onEditingChanged: { editing in
                     if editing { weather.source = .entered }
                 })
                 .frame(maxWidth: 70)
@@ -25,7 +33,11 @@ struct WeatherForm: View {
             
             HStack {
                 Text("Temperature")
-                DecimalField("Temperature", value: $weather.userEditedTemperature, formatter: tempFormatter, suffix: "°C", onEditingChanged: { editing in
+                DecimalField("Temperature",
+                             value: $weather.userEditedTemperature,
+                             formatter: tempFormatter,
+                             suffix: "°C",
+                             onEditingChanged: { editing in
                     if editing { weather.source = .entered }
                 })
                 .multilineTextAlignment(.trailing)
@@ -34,7 +46,11 @@ struct WeatherForm: View {
             HStack {
                 Text("Altimeter")
                 Spacer()
-                DecimalField("Altimeter", value: $weather.altimeter, formatter: altimeterFormatter, suffix: "inHg", onEditingChanged: { editing in
+                DecimalField("Altimeter",
+                             value: $weather.altimeter,
+                             formatter: altimeterFormatter,
+                             suffix: "inHg",
+                             onEditingChanged: { editing in
                     if editing { weather.source = .entered }
                 })
             }
