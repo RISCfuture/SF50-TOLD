@@ -12,7 +12,7 @@ struct WidgetNoAirportView: View {
     }
     
     var body: some View {
-        Text("Select an airport from the SF50 TOLD app first.")
+        Text("Select an airport from the SR22-G2 TOLD app first.")
             .foregroundColor(.secondary)
             .font(.system(size: fontSize))
             .containerBackground(for: .widget) { Color("WidgetBackground") }

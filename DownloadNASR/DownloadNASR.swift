@@ -32,7 +32,7 @@ final class DownloadNASR: AsyncParsableCommand {
     }
     
     func run() async throws {
-        let logger = Logger(label: "codes.tim.SF50-TOLD.DownloadNASR")
+        let logger = Logger(label: "codes.tim.SR22-G2-TOLD.DownloadNASR")
         configureLogLevel()
         
         let nasr = NASR(loader: ArchiveDataDownloader(cycle: cycle))

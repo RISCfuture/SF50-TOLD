@@ -60,10 +60,10 @@ struct WeatherValues {
 
 fileprivate func windFromEnum(_ wind: SwiftMETAR.Wind) -> Wind {
     switch wind {
-        case let .direction(heading, speed, _):
-            return .init(direction: Double(heading), speed: Double(speed.measurement.converted(to: .knots).value))
-        case let .directionRange(heading, _, speed, _):
-            return .init(direction: Double(heading), speed: Double(speed.measurement.converted(to: .knots).value))
-        default: return .calm
+    case let .direction(heading, speed, _):
+        return .init(direction: Double(heading), speed: Double(speed.measurement.converted(to: .knots).value))
+    case let .directionRange(heading, _, speed, _):
+        return .init(direction: Double(heading), speed: Double(speed.measurement.converted(to: .knots).value))
+    default: return .calm
     }
 }

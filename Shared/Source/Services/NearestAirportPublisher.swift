@@ -18,7 +18,7 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
     
     private let manager = CLLocationManager()
     private var cancellables = Set<AnyCancellable>()
-    private static let logger = Logger(label: "codes.tim.SF50-TOLD.NearestAirportPublisher")
+    private static let logger = Logger(label: "codes.tim.SR22-G2-TOLD.NearestAirportPublisher")
     
     var predicate: NSPredicate { predicate(coordinate: location) }
     

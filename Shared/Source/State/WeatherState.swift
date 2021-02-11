@@ -46,7 +46,7 @@ class WeatherState: ObservableObject {
         self.init(wind: .calm, temperature: .ISA, altimeter: standardSLP, source: .ISA)
     }
     
-    required init(wind: Wind = .calm, temperature: Temperature = .ISA, altimeter: Double = standardSLP, source: Source, observation: String? = nil, forecast: String? = nil, draft: Bool = false) {
+    required init(wind: Wind = .calm, temperature: Temperature = .ISA, altimeter: Double = standardSLP, wet: Bool = false, source: Source, observation: String? = nil, forecast: String? = nil, draft: Bool = false) {
         windDirection = wind.direction
         windSpeed = wind.speed
         self.temperature = temperature

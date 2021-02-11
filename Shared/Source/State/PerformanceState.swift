@@ -3,7 +3,9 @@ import Combine
 import Defaults
 import CoreData
 import Logging
+#if canImport(UIKit)
 import UIKit
+#endif
 
 class PerformanceState: ObservableObject {
     var operation: Operation
@@ -12,18 +14,16 @@ class PerformanceState: ObservableObject {
     @Published var airportID: String? = nil
     @Published var airport: Airport? = nil
     @Published var runway: Runway? = nil
-    @Published var flaps: FlapSetting!
     @Published private(set) var weatherState = WeatherState()
     @Published var weight = 0.0
 
     @Published private(set) var takeoffRoll: Interpolation? = nil
     @Published private(set) var takeoffDistance: Interpolation? = nil
+    @Published private(set) var climbSpeed: Interpolation? = nil
     @Published private(set) var climbGradient: Interpolation? = nil
     @Published private(set) var climbRate: Interpolation? = nil
     @Published private(set) var landingRoll: Interpolation? = nil
     @Published private(set) var landingDistance: Interpolation? = nil
-    @Published private(set) var vref: Interpolation? = nil
-    @Published private(set) var meetsGoAroundClimbGradient: Bool? = nil
     @Published private(set) var notamCount = 0
 
     @Published private(set) var error: Swift.Error? = nil
@@ -35,15 +35,16 @@ class PerformanceState: ObservableObject {
         }
     }
 
+    @Published private(set) var maxFuel: Double
+
     private var emptyWeight: Double { Defaults[.emptyWeight] }
     private var fuelDensity: Double { Defaults[.fuelDensity] }
     private var payload: Double { Defaults[.payload] }
     private var fuel: Double { Defaults[fuelDefault] }
-    private var updatedThrustSchedule: Bool { Defaults[.updatedThrustSchedule] }
 
     private var cancellables = Set<AnyCancellable>()
 
-    private static let logger = Logger(label: "codes.tim.SF50-TOLD.PerformanceState")
+    private static let logger = Logger(label: "codes.tim.SR22-G2-TOLD.PerformanceState")
 
     var elevation: Double {
         Double(runway?.elevation ?? airport?.elevation ?? 0.0)
@@ -55,9 +56,9 @@ class PerformanceState: ObservableObject {
         
         switch operation {
             case .takeoff:
-                fields = [takeoffRoll, takeoffDistance, climbGradient, climbRate]
+                fields = [takeoffRoll, takeoffDistance, climbSpeed, climbGradient, climbRate]
             case .landing:
-                fields = [landingRoll, landingDistance, vref]
+                fields = [landingRoll, landingDistance]
         }
 
         for field in fields {
@@ -94,10 +95,14 @@ class PerformanceState: ObservableObject {
 
     init(operation: Operation) {
         self.operation = operation
-        switch operation {
-            case .takeoff: self.flaps = .flaps50
-            case .landing: self.flaps = .flaps100
-        }
+
+        if Defaults[.g3Wing] { maxFuel = g3MaxFuel }
+        else { maxFuel = g2MaxFuel }
+        Defaults.publisher(.g3Wing).map { change in
+            if change.newValue { return g3MaxFuel }
+            else { return g2MaxFuel }
+        }.assign(to: &$maxFuel)
+
 
         airportID = Defaults[defaultKey]
         $airportID.receive(on: DispatchQueue.main).sink { Defaults[self.defaultKey] = $0 }.store(in: &cancellables)
@@ -123,7 +128,7 @@ class PerformanceState: ObservableObject {
         // update runway, weather, and performance when airport changes
         $airport.sink { airport in
             self.runway = nil
-            self.updatePerformanceData(runway: nil, weather: self.weatherState.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
+            self.updatePerformanceData(runway: nil, weather: self.weatherState.weather, weight: self.weight, ac: Defaults[.airConditioning], takeoff: true, landing: true)
             if let airportID = airport?.id {
                 Defaults[.recentAirports] = Array((Defaults[.recentAirports] + [airportID])
                     .uniqued()
@@ -155,17 +160,14 @@ class PerformanceState: ObservableObject {
     func setDateToNow() { date = Date() }
 
     private func initializeModel() {
-        let model: PerformanceModel = updatedThrustSchedule ?
-            PerformanceModelG2Plus(runway: runway, weather: weatherState.weather, weight: weight, flaps: flaps) :
-        PerformanceModelG1(runway: runway, weather: weatherState.weather, weight: weight, flaps: flaps)
+        let model = PerformanceModelG2(runway: runway, weather: weatherState.weather, weight: weight, ac: Defaults[.airConditioning])
         takeoffRoll = model.takeoffRoll
         takeoffDistance = model.takeoffDistance
+        climbSpeed = model.climbSpeed
         climbGradient = model.takeoffClimbGradient
         climbRate = model.takeoffClimbRate
         landingRoll = model.landingRoll
         landingDistance = model.landingDistance
-        vref = model.vref
-        meetsGoAroundClimbGradient = model.meetsGoAroundClimbGradient
     }
 
     private func updateWeight() {
@@ -179,38 +181,30 @@ class PerformanceState: ObservableObject {
     }
 
     private func updatePerformanceWhenConditionsChange() {
-        Publishers.CombineLatest3($runway, $weatherState, $weight)
-            .sink { runway, weatherState, weight in
-                self.updatePerformanceData(runway: runway, weather: weatherState.weather, weight: weight, flaps: self.flaps, takeoff: true, landing: false)
-            }.store(in: &cancellables)
-        Publishers.CombineLatest4($runway, $weatherState, $weight, $flaps)
-            .sink { runway, weatherState, weight, flaps in
-                self.updatePerformanceData(runway: runway, weather: weatherState.weather, weight: weight, flaps: flaps, takeoff: false, landing: true)
+        Publishers.CombineLatest4($runway, $weatherState, $weight, Defaults.publisher(.airConditioning))
+            .sink { runway, weatherState, weight, ac in
+                self.updatePerformanceData(runway: runway, weather: weatherState.weather, weight: weight, ac: ac.newValue, takeoff: true, landing: false)
             }.store(in: &cancellables)
     }
 
     private func updatePerformanceWhenSafetyFactorChanges() {
         Defaults.publisher(.safetyFactor).sink { _ in
-            self.updatePerformanceData(runway: self.runway, weather: self.weatherState.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
-        }.store(in: &cancellables)
-        
-        Defaults.publisher(.updatedThrustSchedule).sink { _ in
-            self.updatePerformanceData(runway: self.runway, weather: self.weatherState.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
+            self.updatePerformanceData(runway: self.runway, weather: self.weatherState.weather, weight: self.weight, ac: Defaults[.airConditioning], takeoff: true, landing: true)
         }.store(in: &cancellables)
     }
 
-    private func updatePerformanceData(runway: Runway?, weather: Weather, weight: Double, flaps: FlapSetting?, takeoff: Bool, landing: Bool) {
-        let model: PerformanceModel = updatedThrustSchedule ?
-            PerformanceModelG2Plus(runway: runway, weather: weather, weight: weight, flaps: flaps) :
-            PerformanceModelG1(runway: runway, weather: weather, weight: weight, flaps: flaps)
+    private func updatePerformanceData(runway: Runway?, weather: Weather, weight: Double, ac: Bool, takeoff: Bool, landing: Bool) {
+        let model = PerformanceModelG2(runway: runway, weather: weatherState.weather, weight: weight, ac: ac)
         if takeoff {
             let takeoffRoll = model.takeoffRoll
             let takeoffDistance = model.takeoffDistance
+            let climbSpeed = model.climbSpeed
             let climbGradient = model.takeoffClimbGradient
             let climbRate = model.takeoffClimbRate
             DispatchQueue.main.async {
                 self.takeoffRoll = takeoffRoll
                 self.takeoffDistance = takeoffDistance
+                self.climbSpeed = climbSpeed
                 self.climbGradient = climbGradient
                 self.climbRate = climbRate
             }
@@ -219,13 +213,9 @@ class PerformanceState: ObservableObject {
         if landing {
             let landingRoll = model.landingRoll
             let landingDistance = model.landingDistance
-            let vref = model.vref
-            let meetsGoAroundClimbGradient = model.meetsGoAroundClimbGradient
             DispatchQueue.main.async {
                 self.landingRoll = landingRoll
                 self.landingDistance = landingDistance
-                self.vref = vref
-                self.meetsGoAroundClimbGradient = meetsGoAroundClimbGradient
             }
         }
     }
@@ -245,7 +235,7 @@ class PerformanceState: ObservableObject {
                 }
                 self.notamCount = notam.notamCountFor(self.operation)
 
-                self.updatePerformanceData(runway: runway, weather: self.weatherState.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
+                self.updatePerformanceData(runway: runway, weather: self.weatherState.weather, weight: self.weight, ac: Defaults[.airConditioning], takeoff: true, landing: true)
             }).store(in: &cancellables)
     }
 

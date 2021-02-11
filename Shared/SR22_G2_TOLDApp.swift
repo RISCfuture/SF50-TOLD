@@ -29,7 +29,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 #endif
 
 @main
-struct SF50_TOLDApp: App {
+struct SR22_G2_TOLDApp: App {
     @StateObject private var state = AppState()
 #if canImport(UIKit)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate

@@ -6,12 +6,10 @@ enum Model {
 }
 
 struct WelcomeView: View {
-    @Default(.updatedThrustSchedule) var updatedThrustSchedule
+    @Default(.g3Wing) var g3Wing
     @Default(.initialSetupComplete) var initialSetupComplete
     @Default(.emptyWeight) var emptyWeight
     
-    @State private var model: Model = .g2
-    @State private var g2UseUpdatedThrustSchedule = false
     @State private var showForm = false
     @State private var formOpacity = 0.0
     
@@ -22,12 +20,12 @@ struct WelcomeView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                Text("Welcome to SF50 TOLD")
+                Text("Welcome to SR22-G2 TOLD")
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .padding(.bottom)
                 if showForm {
-                    Text("Let’s start by getting some information about your Vision Jet.")
+                    Text("Let’s start by getting some information about your Cirrus.")
                         .multilineTextAlignment(.leading)
                         .opacity(formOpacity)
                 }
@@ -36,26 +34,15 @@ struct WelcomeView: View {
             if showForm {
                 Spacer()
                 Form {
-                    HStack {
-                        Text("Model")
-                        Spacer()
-                        Picker("", selection: $model) {
-                            Text("G1").tag(Model.g1)
-                            Text("G2").tag(Model.g2)
-                            Text("G2+").tag(Model.g2Plus)
-                        }.pickerStyle(.segmented).frame(maxWidth: 200)
-                            .accessibilityIdentifier("modelPicker")
-                    }
                     
-                    if model == .g2 {
+                    
                         VStack(alignment: .leading) {
-                            Toggle("Use Updated Thrust Schedule", isOn: $g2UseUpdatedThrustSchedule)
-                                .accessibilityIdentifier("updatedThrustScheduleToggle")
-                            Text("Turn this setting on if your Vision Jet has SB5X-72-01 completed (G2+ equivalent).")
+                            Toggle("G3 Wing", isOn: $g3Wing)
+                                .accessibilityIdentifier("g3WingToggle")
+                            Text("Turn this setting on if your SR22 G2 has the G3 wing installed.")
                                 .font(.system(size: 11))
                                 .fixedSize(horizontal: false, vertical: true)
                         }
-                    }
                     
                     HStack {
                         Text("Empty Weight")
@@ -70,11 +57,6 @@ struct WelcomeView: View {
                 Spacer()
                 
                 Button("Continue") {
-                    switch model {
-                        case .g1: updatedThrustSchedule = false
-                        case .g2: updatedThrustSchedule = g2UseUpdatedThrustSchedule
-                        case .g2Plus: updatedThrustSchedule = true
-                    }
                     initialSetupComplete = true
                 }.opacity(formOpacity)
                     .accessibilityIdentifier("continueButton")

@@ -5,7 +5,6 @@ struct RunwayPicker: View {
     @ObservedObject var airport: Airport
     @ObservedObject var weather: WeatherState
     @Environment(\.presentationMode) var mode
-    @Binding var flaps: FlapSetting?
     
     var operation: Operation
     var onSelect: (Runway) -> Void
@@ -21,7 +20,7 @@ struct RunwayPicker: View {
                 RunwayRow(runway: runway,
                           operation: operation,
                           wind: weather.wind,
-                          crosswindLimit: crosswindLimitForFlapSetting(flaps),
+                          crosswindLimit: crosswindLimit,
                           tailwindLimit: tailwindLimit)
                 .onTapGesture {
                     onSelect(runway)
@@ -66,7 +65,6 @@ struct RunwayPicker_Previews: PreviewProvider {
     static var previews: some View {
         RunwayPicker(airport: SQL,
                      weather: WeatherState(),
-                     flaps: .constant(.flaps100),
                      operation: .landing,
                      onSelect: { _ in })
     }

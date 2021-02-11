@@ -5,10 +5,9 @@ struct LandingResultsView: View {
     
     var body: some View {
         Section(header: Text("Performance")) {
-            VREFView(state: state)
+            VREFView()
             LandingGroundRollView(state: state)
             LandingDistanceView(state: state)
-            GoAroundClimbGradientView(state: state)
         }
         
         if state.offscale != .none {

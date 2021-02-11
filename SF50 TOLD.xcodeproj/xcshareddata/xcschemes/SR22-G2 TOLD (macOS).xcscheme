@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1500"
+   LastUpgradeVersion = "1330"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0135A7C92587091700892558"
-               BuildableName = "SF50 TOLD.app"
-               BlueprintName = "SF50 TOLD (iOS)"
+               BlueprintIdentifier = "0135A7D12587091700892558"
+               BuildableName = "SR22-G2 TOLD.app"
+               BlueprintName = "SR22-G2 TOLD (macOS)"
                ReferencedContainer = "container:SF50 TOLD.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,13 +29,12 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0195EB812C44E4A40091BAD9"
-               BuildableName = "Generate Screenshots.xctest"
-               BlueprintName = "Generate Screenshots"
+               BlueprintIdentifier = "0135A7E42587091800892558"
+               BuildableName = "Tests macOS.xctest"
+               BlueprintName = "Tests macOS"
                ReferencedContainer = "container:SF50 TOLD.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -55,9 +54,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0135A7C92587091700892558"
-            BuildableName = "SF50 TOLD.app"
-            BlueprintName = "SF50 TOLD (iOS)"
+            BlueprintIdentifier = "0135A7D12587091700892558"
+            BuildableName = "SR22-G2 TOLD.app"
+            BlueprintName = "SR22-G2 TOLD (macOS)"
             ReferencedContainer = "container:SF50 TOLD.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -72,9 +71,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0135A7C92587091700892558"
-            BuildableName = "SF50 TOLD.app"
-            BlueprintName = "SF50 TOLD (iOS)"
+            BlueprintIdentifier = "0135A7D12587091700892558"
+            BuildableName = "SR22-G2 TOLD.app"
+            BlueprintName = "SR22-G2 TOLD (macOS)"
             ReferencedContainer = "container:SF50 TOLD.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

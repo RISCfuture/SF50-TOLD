@@ -16,6 +16,6 @@ func configureLogLevel() {
 
 func reloadOnAirportChange() {
     NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main) { _ in
-        WidgetCenter.shared.reloadTimelines(ofKind: "SF50_SelectedAirport")
+        WidgetCenter.shared.reloadTimelines(ofKind: "SR22G2_SelectedAirport")
     }
 }

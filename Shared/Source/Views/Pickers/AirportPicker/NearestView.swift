@@ -1,6 +1,8 @@
 import SwiftUI
 import CoreData
+#if canImport(CoreLocationUI)
 import CoreLocationUI
+#endif
 import MapKit
 
 fileprivate let earthRadius = 21638.0 // NM

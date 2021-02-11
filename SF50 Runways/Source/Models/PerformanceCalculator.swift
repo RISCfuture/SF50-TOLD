@@ -12,7 +12,7 @@ fileprivate let ISA = Weather(wind: .calm,
 
 class PerformanceCalculator {
     private lazy var nearestAirportPublisher = NearestAirportPublisher() // don't initialize it until we need location info
-    private static let logger = Logger(label: "codes.tim.SF50-TOLD.PerformanceCalculator")
+    private static let logger = Logger(label: "codes.tim.SR22-G2-TOLD.PerformanceCalculator")
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -116,8 +116,6 @@ class PerformanceCalculator {
     }
     
     private func performanceModel(runway: Runway, weather: Weather) -> PerformanceModel {
-        Defaults[.updatedThrustSchedule]
-        ? PerformanceModelG2Plus(runway: runway, weather: weather, weight: takeoffWeight, flaps: .flaps50)
-        : PerformanceModelG1(runway: runway, weather: weather, weight: takeoffWeight, flaps: .flaps50)
+        PerformanceModelG2(runway: runway, weather: weather, weight: takeoffWeight, ac: Defaults[.airConditioning])
     }
 }

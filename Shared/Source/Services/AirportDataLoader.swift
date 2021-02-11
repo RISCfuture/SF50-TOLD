@@ -10,8 +10,8 @@ class AirportDataLoader: ObservableObject {
     @Published private(set) var decompressProgress = StepProgress.pending
     @Published private(set) var processingProgress = StepProgress.pending
     
-    private let logger = Logger(label: "codes.tim.SF50-TOLD.AirportDataLoader")
-    private let queue = DispatchQueue(label: "SF50-TOLD.AirportService", qos: .background)
+    private let logger = Logger(label: "codes.tim.SR22-G2-TOLD.AirportDataLoader")
+    private let queue = DispatchQueue(label: "SR22-G2-TOLD.AirportService", qos: .background)
     
     private var dataURL: URL {
         URL(string: "https://github.com/RISCfuture/SF50-TOLD-Airports/blob/main/\(Cycle.current).plist.lzma?raw=true")!

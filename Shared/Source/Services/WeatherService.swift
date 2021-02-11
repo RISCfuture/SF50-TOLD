@@ -11,14 +11,14 @@ extension TAF {
     var originDateOrToday: Date { originDate ?? Date() }
 }
 
-fileprivate let loadingQueue = DispatchQueue(label: "codes.tim.SF50-TOLD.ExpiringCache", qos: .utility, attributes: .concurrent)
+fileprivate let loadingQueue = DispatchQueue(label: "codes.tim.SR22-G2-TOLD.ExpiringCache", qos: .utility, attributes: .concurrent)
 
 fileprivate class WeatherLoader<T> {
     private let subject = CurrentValueSubject<FetchState<Dictionary<String, WeatherResult<T>>>, Never>(FetchState.notLoaded)
     private let url: URL
     private let parse: ((String) throws -> T)
     
-    private let logger = Logger(label: "codes.tim.SF50-TOLD.WeatherLoader")
+    private let logger = Logger(label: "codes.tim.SR22-G2-TOLD.WeatherLoader")
     
     init(url: URL, parse: @escaping ((String) throws -> T)) {
         self.url = url
@@ -119,7 +119,7 @@ class WeatherService: ObservableObject {
     private static let allTAFsURL = URL(string: "https://aviationweather.gov/data/cache/tafs.cache.csv.gz")!
     private static let airportWeatherURLTemplate = "https://aviationweather.gov/api/data/metar?ids=%{icao}&format=raw&taf=true"
     
-    private static let logger = Logger(label: "codes.tim.SF50-TOLD.WeatherService")
+    private static let logger = Logger(label: "codes.tim.SR22-G2-TOLD.WeatherService")
     
     private let METARLoader: WeatherLoader<METAR>
     private let TAFLoader: WeatherLoader<TAF>

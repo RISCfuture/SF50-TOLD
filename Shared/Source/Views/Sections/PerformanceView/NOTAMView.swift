@@ -22,7 +22,7 @@ struct NOTAMView: View {
         Form {
             RunwayShorteningView(operation: operation, notam: notam)
             if operation == .takeoff { ObstacleView(notam: notam) }
-            if operation == .landing { ContaminationView(notam: notam) }
+            ContaminationView(notam: notam)
             
             Button("Clear NOTAMs") {
                 notam.clearFor(operation)

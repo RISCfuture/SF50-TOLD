@@ -2,7 +2,7 @@ import WidgetKit
 import SwiftUI
 
 @main
-struct SF50_RunwaysBundle: WidgetBundle {
+struct SR22G2_RunwaysBundle: WidgetBundle {
     init() {
         configureLogLevel()
         reloadOnAirportChange()

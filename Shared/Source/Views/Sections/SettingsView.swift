@@ -2,22 +2,14 @@ import SwiftUI
 import Defaults
 
 struct SettingsView: View {
-    @Default(.updatedThrustSchedule) var updatedThrustSchedule
     @Default(.emptyWeight) var emptyWeight
     @Default(.fuelDensity) var fuelDensity
     @Default(.safetyFactor) var safetyFactor
+    @Default(.g3Wing) var g3Wing
     
     var body: some View {
         NavigationView {
             Form {
-                VStack(alignment: .leading) {
-                    Toggle("Use Updated Thrust Schedule", isOn: $updatedThrustSchedule)
-                    Text("Turn this setting on when flying a G2+ Vision Jet or one with SB5X-72-01 completed.")
-                        .font(.system(size: 11))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityIdentifier("updatedThrustScheduleToggle")
-                }
-                
                 HStack {
                     Text("Empty Weight")
                     Spacer()
@@ -45,6 +37,13 @@ struct SettingsView: View {
                                  value: $safetyFactor,
                                  formatter: numberFormatter(precision: 1, minimum: 1.0))
                     .accessibilityIdentifier("safetyFactorField")
+                }
+                
+                HStack {
+                    Text("G3 Wing")
+                    Spacer()
+                    Toggle("", isOn: $g3Wing)
+                        .accessibilityIdentifier("g3WingToggle")
                 }
             }.navigationTitle("Settings")
         }.navigationViewStyle(navigationStyle)

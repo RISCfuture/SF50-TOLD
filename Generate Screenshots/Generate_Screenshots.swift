@@ -29,7 +29,7 @@ final class Generate_Screenshots: XCTestCase {
         setupSnapshot(app, waitForAnimations: true)
         app.launch()
         
-        XCTAssert(app.collectionViews.buttons["G1"].waitForExistence(timeout: 5))
+        XCTAssert(app.collectionViews.switches["g3WingToggle"].waitForExistence(timeout: 5))
         snapshot("5-welcome")
         app/*@START_MENU_TOKEN@*/.buttons["continueButton"]/*[[".buttons[\"Continue\"]",".buttons[\"continueButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         
@@ -40,7 +40,7 @@ final class Generate_Screenshots: XCTestCase {
         app.textFields["payloadField"].typeText("425")
         
         app.textFields["fuelField"].doubleTap()
-        app.textFields["fuelField"].typeText("260")
+        app.textFields["fuelField"].typeText("47")
         
         app.buttons["airportSelector"].tap()
         if springboardApp.alerts.buttons["Allow While Using App"].waitForExistence(timeout: 5) {
@@ -48,8 +48,8 @@ final class Generate_Screenshots: XCTestCase {
         }
         app/*@START_MENU_TOKEN@*/.buttons["Search"]/*[[".otherElements[\"mainTabView\"]",".segmentedControls[\"airportListPicker\"].buttons[\"Search\"]",".buttons[\"Search\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.searchFields["searchAirportsField"].tap()
-        app.searchFields["searchAirportsField"].typeText("OAK")
-        app.buttons.matching(identifier: "airportRow-01971.*A").firstMatch.tap()
+        app.searchFields["searchAirportsField"].typeText("SQL")
+        app.buttons.matching(identifier: "airportRow-02160.1*A").firstMatch.tap()
         
         XCTAssert(app.staticTexts["weatherSummary"].waitForExistence(timeout: 60))
         
@@ -66,7 +66,7 @@ final class Generate_Screenshots: XCTestCase {
         app/*@START_MENU_TOKEN@*/.tabBars["Tab Bar"]/*[[".otherElements[\"mainTabView\"].tabBars[\"Tab Bar\"]",".tabBars[\"Tab Bar\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.buttons["Landing"].tap()
         
         app.textFields["fuelField"].doubleTap()
-        app.textFields["fuelField"].typeText("80")
+        app.textFields["fuelField"].typeText("24")
         
         app.buttons["airportSelector"].tap()
         app/*@START_MENU_TOKEN@*/.buttons["Search"]/*[[".otherElements[\"mainTabView\"]",".segmentedControls[\"airportListPicker\"].buttons[\"Search\"]",".buttons[\"Search\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
@@ -81,11 +81,7 @@ final class Generate_Screenshots: XCTestCase {
         
         app.textFields["distanceField"].doubleTap()
         app.textFields["distanceField"].typeText("250")
-        
-        app.buttons["contaminationTypePicker"].tap()
-        app.buttons["Water/Slush"].tap()
-        app.sliders["contaminationDepthSlider"].adjust(toNormalizedSliderPosition: 0.5)
-        
+        app.switches["wetToggle"].tap()
         snapshot("4-notams")
         
         app.navigationBars["NOTAMs"].buttons["Landing"].tap()

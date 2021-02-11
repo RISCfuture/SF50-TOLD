@@ -21,7 +21,7 @@ class AirportLoadingService: ObservableObject {
     private let airportDataLoader: AirportDataLoader
     
     private let networkMonitor = NWPathMonitor()
-    private let networkMonitorQueue = DispatchQueue(label: "codes.tim.SF50-TOLD.networkMonitorQueue")
+    private let networkMonitorQueue = DispatchQueue(label: "codes.tim.SR22-G2-TOLD.networkMonitorQueue")
     
     private var noData: Bool { ((try? airportCount()) ?? 0) == 0 }
     

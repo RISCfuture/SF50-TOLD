@@ -42,8 +42,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0135A7C92587091700892558"
-            BuildableName = "SF50 TOLD.app"
-            BlueprintName = "SF50 TOLD (iOS)"
+            BuildableName = "SR22-G2 TOLD.app"
+            BlueprintName = "SR22-G2 TOLD (iOS)"
             ReferencedContainer = "container:SF50 TOLD.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -58,8 +58,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0135A7C92587091700892558"
-            BuildableName = "SF50 TOLD.app"
-            BlueprintName = "SF50 TOLD (iOS)"
+            BuildableName = "SR22-G2 TOLD.app"
+            BlueprintName = "SR22-G2 TOLD (iOS)"
             ReferencedContainer = "container:SF50 TOLD.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
