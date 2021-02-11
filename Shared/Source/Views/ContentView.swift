@@ -26,6 +26,9 @@ struct ContentView: View {
                 SettingsView().environmentObject(state.settings).tabItem {
                     Label("Settings", systemImage: "gear")
                 }.tag(3)
+                AboutView().tabItem {
+                    Label("About", systemImage: "info.circle")
+                }.tag(4)
             }.tapToDismissKeyboard()
         }
     }

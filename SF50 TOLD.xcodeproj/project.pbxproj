@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01007B8325D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
+		01007B8425D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
+		01007B8525D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
+		01007B8625D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
 		0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
 		0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
 		0135A7EE2587091800892558 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C42587091300892558 /* ContentView.swift */; };
@@ -231,6 +235,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01007B8225D5268700C8BFF2 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		0135A7C32587091300892558 /* SF50_TOLDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF50_TOLDApp.swift; sourceTree = "<group>"; };
 		0135A7C42587091300892558 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0135A7C52587091700892558 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -355,6 +360,7 @@
 		0112E57325AC4D510048E921 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				01007B8225D5268700C8BFF2 /* AboutView.swift */,
 				0135A87C258748DF00892558 /* LandingView.swift */,
 				01F18D2425B198A5007D76BA /* Performance Views */,
 				01F59A1E25AE63AC0055E81B /* PerformanceView.swift */,
@@ -798,6 +804,7 @@
 				0135A83725872EDE00892558 /* WeatherService.swift in Sources */,
 				0135A7EE2587091800892558 /* ContentView.swift in Sources */,
 				0179867025C280D30031A453 /* WeatherForm.swift in Sources */,
+				01007B8325D5268700C8BFF2 /* AboutView.swift in Sources */,
 				01750AC825B27C2D00555CDB /* PerformanceState.swift in Sources */,
 				014808EE25AAF4910041A90D /* AirportDataLoader.swift in Sources */,
 				01A6DB1B25AD776C00A3341F /* RunwayRow.swift in Sources */,
@@ -852,6 +859,7 @@
 				01F59A2025AE63AC0055E81B /* PerformanceView.swift in Sources */,
 				01F7EB9F25BBFA2A00CE5024 /* ConfigurationView.swift in Sources */,
 				0191C06C25B2C02900C4B810 /* SectionState.swift in Sources */,
+				01007B8425D5268700C8BFF2 /* AboutView.swift in Sources */,
 				0179867125C280D30031A453 /* WeatherForm.swift in Sources */,
 				01D265B725AD808600322A45 /* WindComponents.swift in Sources */,
 				014808EF25AAF4910041A90D /* AirportDataLoader.swift in Sources */,
@@ -926,6 +934,7 @@
 				016C736F25AE40120008455F /* WeatherService.swift in Sources */,
 				016C737025AE40120008455F /* AirportStorage.swift in Sources */,
 				016C737125AE40120008455F /* AirportDataLoader.swift in Sources */,
+				01007B8525D5268700C8BFF2 /* AboutView.swift in Sources */,
 				016C737225AE40120008455F /* AirportDataLoader+Progress.swift in Sources */,
 				016C737325AE40120008455F /* PerformanceModel.swift in Sources */,
 				0166FC9825BFFDA7006F7258 /* View Functions.swift in Sources */,
@@ -978,6 +987,7 @@
 				016C739425AE40200008455F /* WeatherService.swift in Sources */,
 				016C739525AE40200008455F /* AirportStorage.swift in Sources */,
 				016C739625AE40200008455F /* AirportDataLoader.swift in Sources */,
+				01007B8625D5268700C8BFF2 /* AboutView.swift in Sources */,
 				016C739725AE40200008455F /* AirportDataLoader+Progress.swift in Sources */,
 				016C739825AE40200008455F /* PerformanceModel.swift in Sources */,
 				0166FC9925BFFDA7006F7258 /* View Functions.swift in Sources */,
