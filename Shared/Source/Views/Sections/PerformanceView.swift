@@ -13,7 +13,7 @@ struct PerformanceView: View {
     var body: some View {
         LoadoutView(title: title, maxWeight: maxWeight)
             .environmentObject(state.performance)
-        if operation == .landing { ConfigurationView().environmentObject(state.performance) }
+        ConfigurationView(operation: operation).environmentObject(state.performance)
         TimeAndPlaceView(moment: moment, operation: operation, downloadWeather: {
             // force a reload of the weather unless we are reverting from custom
             // to downloaded weather
