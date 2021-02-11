@@ -9,8 +9,6 @@ struct PerformanceModel {
     var weight: Double
     var flaps: FlapSetting? = nil
     
-    private let data = PerformanceData()
-    
     private var isInitialized: Bool {
         runway != nil
     }
@@ -44,122 +42,116 @@ struct PerformanceModel {
     // feet
     var takeoffRoll: Interpolation? {
         return ifInitialized { runway, weather, weight in
-            let distance = data.takeoffGroundRoll.interpolate(dimensions: [weight, weather.densityAltitude(elevation: Double(runway.elevation))])
-            return passthroughOffscale(distance) { distance in
-                var distance = distance
-                distance *= (1 - 0.007*headwind) // 7% for every 10 knots of headwind
-                distance *= (1 + 0.04*tailwind) // 40% for every 10 knots of tailwind
-                
-                distance *= (1 - 2*downhillGradient) // 2% for every 1% of downhill gradient
-                distance *= (1 + 14*uphillGradient) // 14% for every 1% of uphill gradient
-                
-                distance *= Defaults[.safetyFactor]
-                return .value(distance)
-            }
+            let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
+            let temp = weather.temperature(at: Double(runway.elevation))
+            var distance = takeoffRollModel(weight: weight, pressureAlt: pa, temp: temp)
+            
+            distance *= (1 - 0.007*headwind) // 7% for every 10 knots of headwind
+            distance *= (1 + 0.04*tailwind) // 40% for every 10 knots of tailwind
+            
+            distance *= (1 - 2*downhillGradient) // 2% for every 1% of downhill gradient
+            distance *= (1 + 14*uphillGradient) // 14% for every 1% of uphill gradient
+            
+            distance *= Defaults[.safetyFactor]
+            return .value(distance)
         }
     }
     
     // feet
     var takeoffDistance: Interpolation? {
         return ifInitialized { runway, weather, weight in
-            let distance = data.takeoffOverObstacle.interpolate(dimensions: [weight, weather.densityAltitude(elevation: Double(runway.elevation))])
-            return passthroughOffscale(distance) { distance in
-                var distance = distance
-                distance *= (1 - 0.006*headwind) // 6% for every 10 knots of headwind
-                distance *= (1 + 0.035*tailwind) // 35% for every 10 knots of tailwind
-                
-                if runway.turf { distance *= 1.21 } // 21% for unpaved runway
-                
-                distance *= Defaults[.safetyFactor]
-                return .value(distance)
-            }
+            let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
+            let temp = weather.temperature(at: Double(runway.elevation))
+            var distance = takeoffDistanceModel(weight: weight, pressureAlt: pa, temp: temp)
+            
+            distance *= (1 - 0.006*headwind) // 6% for every 10 knots of headwind
+            distance *= (1 + 0.035*tailwind) // 35% for every 10 knots of tailwind
+            
+            if runway.turf { distance *= 1.21 } // 21% for unpaved runway
+            
+            distance *= Defaults[.safetyFactor]
+            return .value(distance)
         }
     }
     
     // feet
     var landingRoll: Interpolation? {
         return ifInitialized { runway, weather, weight in
-            let table: Table
+            let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
+            let temp = weather.temperature(at: Double(runway.elevation))
+            var distance: Double
             var factor = 1.0
+            
             switch flaps {
                 case .flapsUp:
-                    table = data.landingGroundRoll_flaps50
+                    distance = landingRollModel_flaps50(weight: weight, pressureAlt: pa, temp: temp)
                     factor = 1.35
                 case .flapsUpIce:
-                    table = data.landingGroundRoll_flaps50Ice
+                    distance = landingRollModel_flaps50Ice(weight: weight, pressureAlt: pa, temp: temp)
                     factor = 1.35
                 case .flaps50:
-                    table = data.landingGroundRoll_flaps50
+                    distance = landingRollModel_flaps50(weight: weight, pressureAlt: pa, temp: temp)
                 case .flaps50Ice:
-                    table = data.landingGroundRoll_flaps50Ice
+                    distance = landingRollModel_flaps50Ice(weight: weight, pressureAlt: pa, temp: temp)
                 case .flaps100:
-                    table = data.landingGroundRoll_flaps100
+                    distance = landingRollModel_flaps100(weight: weight, pressureAlt: pa, temp: temp)
                 case .none: return nil
             }
+                
+            distance *= factor
             
-            return passthroughOffscale(table.interpolate(dimensions: [weight, weather.densityAltitude(elevation: Double(runway.elevation))])) { distance in
-                var distance = distance
-                
-                distance *= factor
-                
-                distance *= (1 - 0.008*headwind) // 8% for every 10 knots of headwind
-                distance *= (1 + 0.046*tailwind) // 46% for every 10 knots of tailwind
-                
-                distance *= (1 + 10*downhillGradient) // 10% for every 1% of downhill gradient
-                
-                distance *= Defaults[.safetyFactor]
-                return .value(distance)
-            }
+            distance *= (1 - 0.008*headwind) // 8% for every 10 knots of headwind
+            distance *= (1 + 0.046*tailwind) // 46% for every 10 knots of tailwind
+            
+            distance *= (1 + 10*downhillGradient) // 10% for every 1% of downhill gradient
+            
+            distance *= Defaults[.safetyFactor]
+            return .value(distance)
         }
     }
     
     // feet
     var landingDistance: Interpolation? {
         return ifInitialized { runway, weather, weight in
-            let table: Table
+            let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
+            let temp = weather.temperature(at: Double(runway.elevation))
+            var distance: Double
+            
             switch flaps {
                 case .flapsUp, .flapsUpIce: return .configNotAuthorized
                 case .flaps50:
-                    table = data.landingOverObstacle_flaps50
+                    distance = landingDistanceModel_flaps50(weight: weight, pressureAlt: pa, temp: temp)
                 case .flaps50Ice:
-                    table = data.landingOverObstacle_flaps50Ice
+                    distance = landingDistanceModel_flaps50Ice(weight: weight, pressureAlt: pa, temp: temp)
                 case .flaps100:
-                    table = data.landingOverObstacle_flaps100
+                    distance = landingDistanceModel_flaps100(weight: weight, pressureAlt: pa, temp: temp)
                 case .none: return nil
             }
             
-            return passthroughOffscale(table.interpolate(dimensions: [weight, weather.densityAltitude(elevation: Double(runway.elevation))])) { distance in
-                var distance = distance
-                
-                distance *= (1 - 0.007*headwind) // 7% for every 10 knots of headwind
-                distance *= (1 + 0.041*tailwind) // 41% for every 10 knots of tailwind
-                
-                if runway.turf { distance *= 1.2 } // 20% for unpaved runway
-                
-                distance *= Defaults[.safetyFactor]
-                return .value(distance)
-            }
+            distance *= (1 - 0.007*headwind) // 7% for every 10 knots of headwind
+            distance *= (1 + 0.041*tailwind) // 41% for every 10 knots of tailwind
+            
+            if runway.turf { distance *= 1.2 } // 20% for unpaved runway
+            
+            distance *= Defaults[.safetyFactor]
+            return .value(distance)
         }
-    }
-    
+    }    
     // knots
     var vref: Interpolation? {
-        return ifInitialized { runway, weather, weight in
-            let table: Table
+        return ifInitialized { runway, _, weight in
             switch flaps {
                 case .flapsUp:
-                    table = data.vref_flapsUp
+                    return .value(vrefModel_flapsUp(weight: weight))
                 case .flapsUpIce: return .value(136)
                 case .flaps50:
-                    table = data.vref_flaps50
+                    return .value(vrefModel_flaps50(weight: weight))
                 case .flaps50Ice:
-                    table = data.vref_flaps50Ice
+                    return .value(vrefModel_flaps50Ice(weight: weight))
                 case .flaps100:
-                    table = data.vref_flaps100
+                    return .value(vrefModel_flaps100(weight: weight))
                 case .none: return nil
             }
-            
-            return passthroughOffscale(table.interpolate(dimensions: [weight])) { .value($0) }
         }
     }
     
@@ -198,12 +190,101 @@ struct PerformanceModel {
         return block(runway, weather, weight)
     }
     
-    private func passthroughOffscale(_ interpolation: Interpolation, block: (_ value: Double) -> Interpolation) -> Interpolation {
-        switch interpolation {
-            case .value(let number):
-                return block(number)
-            default: return interpolation
-        }
+    private func takeoffRollModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
+        -197.275 + 0.399234*weight - 9.45585e-6*pow(weight, 2)
+            - 0.21092*pressureAlt + 0.0000324229*pressureAlt*weight
+            + 0.0000217183*pow(pressureAlt, 2) - 50.0514*temp
+            + 0.00855754*weight*temp + 0.00847911*pressureAlt*temp
+            - 3.57985e-7*weight*pressureAlt*temp + 0.950821*pow(temp, 2)
+    }
+    
+    private func takeoffDistanceModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
+        714.938 + 0.0402663*weight + 0.0000535694*pow(weight, 2)
+            - 0.489578*pressureAlt + 0.0000772696*weight*pressureAlt
+            + 0.0000358613*pow(pressureAlt, 2) - 111.079*temp
+            + 0.0188733*weight*temp + 0.0108537*pressureAlt*temp
+            + 3.7521e-8*weight*pressureAlt*temp + 1.62572*pow(temp, 2)
+    }
+    
+    private func landingRollModel_flaps100(weight: Double, pressureAlt: Double, temp: Double) -> Double {
+        1294.13 + 0.104398*weight - 0.0000102682*pow(weight, 2)
+            + 0.0402938*pressureAlt - 3.69751e-7*weight*pressureAlt
+            + 3.99551e-6*pow(pressureAlt, 2) + 5.98559*temp
+            - 0.0000611486*weight*temp + 0.000205449*pressureAlt*temp
+            + 8.86236e-9*weight*pressureAlt*temp - 0.00163661*pow(temp, 2)
+    }
+    
+    private func landingRollModel_flaps50(weight: Double, pressureAlt: Double, temp: Double) -> Double {
+        1844.73 + 0.144565*weight - 0.0000146011*pow(weight, 2) +
+            0.049307*pressureAlt + 2.41878e-7*weight*pressureAlt
+            + 5.9718e-6*pow(pressureAlt, 2) + 7.04726*temp
+            + 0.000145488*weight*temp + 0.000548356*pressureAlt*temp
+            - 3.12059e-8*weight*pressureAlt*temp - 8.39093e-6*pow(temp, 2)
+    }
+    
+    private func landingRollModel_flaps50Ice(weight: Double, pressureAlt: Double, temp: Double) -> Double {
+        2470.86 + 0.191851*weight - 0.0000191851*pow(weight, 2)
+            + 0.0732799*pressureAlt + 5.72651e-20*weight*pressureAlt
+            + 7.4831e-6*pow(pressureAlt, 2) + 10.3618*temp
+            + 3.06076e-17*weight*temp + 0.000544*pressureAlt*temp
+            - 2.54158e-21*weight*pressureAlt*temp - 4.20536e-15*pow(temp, 2)
+    }
+    
+    private func landingDistanceModel_flaps100(weight: Double, pressureAlt: Double, temp: Double) -> Double {
+        745.258 + 0.175659*weight + 0.0000393569*pow(weight, 2)
+            - 0.018141*pressureAlt + 0.0000136696*weight*pressureAlt
+            + 6.11232e-6*pow(pressureAlt, 2) + 2.58291*temp
+            + 0.00104391*weight*temp + 0.00046088*pressureAlt*temp
+            - 2.03208e-8*weight*pressureAlt*temp + 0.000239866*pow(temp, 2)
+    }
+    
+    private func landingDistanceModel_flaps50(weight: Double, pressureAlt: Double, temp: Double) -> Double {
+        1408.02 + 0.200707*weight + 0.0000235989*pow(weight, 2)
+            + 0.0172962*pressureAlt + 7.97491e-6*weight*pressureAlt
+            + 7.70576e-6*pow(pressureAlt, 2) + 6.08067*temp
+            + 0.0006374*weight*temp + 0.000574651*pressureAlt*temp
+            - 1.60863e-8*weight*pressureAlt*temp + 0.000942593*pow(temp, 2)
+    }
+    
+    private func landingDistanceModel_flaps50Ice(weight: Double, pressureAlt: Double, temp: Double) -> Double {
+        1395.53 + 0.322528*weight + 0.0000707841*pow(weight, 2)
+            - 0.083997*pressureAlt + 0.0000372718*weight*pressureAlt
+            + 0.0000117844*pow(pressureAlt, 2) + 3.60932*temp
+            + 0.00229182*weight*temp - 0.0000174545*pressureAlt*temp
+            + 1.73455e-7*weight*pressureAlt*temp + 0.00306818*pow(temp, 2)
+    }
+    
+    private func takeoffClimbGradientModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
+        5208.88 - 0.0889881*pressureAlt - 1.13082e-6*pow(pressureAlt, 2)
+            - 0.957868*weight + 8.73354e-6*pressureAlt*weight
+            + 0.0000505919*pow(weight, 2) - 14.4936*temp
+            - 0.00099401*pressureAlt*temp + 0.00165187*weight*temp
+            + 4.96139e-8*pressureAlt*weight*temp - 0.175661*pow(temp, 2)
+
+    }
+    
+    private func takeoffClimbRateModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
+        8477.18 - 0.0770992*pressureAlt - 2.73029e-6*pow(pressureAlt, 2)
+            - 1.60472*weight + 7.16136e-6*pressureAlt*weight
+            + 0.0000880764*pow(weight, 2) - 32.1438*temp
+            - 0.00196259*pressureAlt*temp + 0.00368127*weight*temp
+            + 1.18543e-7*pressureAlt*weight*temp - 0.251046*pow(temp, 2)
+    }
+    
+    private func vrefModel_flapsUp(weight: Double) -> Double {
+        31.7702 + 0.0174768*weight - 7.78149e-7*pow(weight, 2)
+    }
+    
+    private func vrefModel_flaps50(weight: Double) -> Double {
+        42.5451 + 0.0105481*weight - 1.6364e-7*pow(weight, 2)
+    }
+    
+    private func vrefModel_flaps50Ice(weight: Double) -> Double {
+        36.7496 + 0.0182773*weight - 7.3871e-7*pow(weight, 2)
+    }
+    
+    private func vrefModel_flaps100(weight: Double) -> Double {
+        17.0545 + 0.016547*weight - 7.6355e-7*pow(weight, 2)
     }
 }
 
