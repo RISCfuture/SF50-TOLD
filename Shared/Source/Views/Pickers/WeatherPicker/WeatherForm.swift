@@ -5,7 +5,7 @@ struct WeatherForm: View {
     
     private let headingFormatter = numberFormatter(precision: 0, minimum: 0, maximum: 360)
     private let speedFormatter = numberFormatter(precision: 0, minimum: 0)
-    private let tempFormatter = numberFormatter(precision: 0)
+    private let tempFormatter = numberFormatter(precision: 0, minimum: nil)
     private let altimeterFormatter = numberFormatter(precision: 2, minimum: 0)
     
     var body: some View {

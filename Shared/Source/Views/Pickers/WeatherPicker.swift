@@ -33,7 +33,7 @@ struct WeatherPicker: View {
 
 struct WeatherPicker_Previews: PreviewProvider {
     static let weather = WeatherState(wind: .init(direction: 280, speed: 15),
-                                      temperature: .value(20),
+                                      temperature: .value(-5),
                                       altimeter: 30.12,
                                       source: .downloaded,
                                       observation: "KSFO 172156Z 00000KT 10SM FEW200 19/08 A3004 RMK AO2 SLP173 T01940078",
