@@ -16,8 +16,7 @@ struct LandingView: View {
             Form {
                 PerformanceView(operation: .landing,
                                 title: "Landing", moment: "Arrival",
-                                maxWeight: maxLandingWeight,
-                                maxFuel: maxFuel)
+                                maxWeight: maxLandingWeight)
             
                 Section(header: Text("Performance")) {
                     HStack {

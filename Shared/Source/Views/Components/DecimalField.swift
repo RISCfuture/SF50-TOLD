@@ -32,9 +32,11 @@ struct DecimalField : View {
     let label: LocalizedStringKey
     @Binding var value: Double
     let formatter: NumberFormatter
+    let suffix: String?
+    let minimum: Double?
+    let maximum: Double?
     let onEditingChanged: (Bool) -> Void
     let onCommit: () -> Void
-    let suffix: String?
     
     // The formatter that formats the editing string.
     private let editStringFormatter: NumberFormatter
@@ -48,11 +50,9 @@ struct DecimalField : View {
                 return
             }
             // This is the only place we update `value`.
-            if let num = self.formatter.number(from: textValue)?.doubleValue {
-                self.value = num
-                self.valid = true
-            }
-            else { self.valid = false }
+            let num = self.formatter.number(from: textValue)
+            self.valid = self.isValid(number: num)
+            if let value = num?.doubleValue { self.value = value }
         }
     }
     
@@ -68,6 +68,8 @@ struct DecimalField : View {
         value: Binding<Double>,
         formatter: NumberFormatter,
         suffix: String? = nil,
+        minimum: Double? = nil,
+        maximum: Double? = nil,
         onEditingChanged: @escaping (Bool) -> Void = { _ in },
         onCommit: @escaping () -> Void = {}
     ) {
@@ -75,6 +77,8 @@ struct DecimalField : View {
         self._value = value
         self.formatter = formatter
         self.suffix = suffix
+        self.minimum = minimum
+        self.maximum = maximum
         self.onEditingChanged = onEditingChanged
         self.onCommit = onCommit
         
@@ -99,12 +103,12 @@ struct DecimalField : View {
                 // is treated as a label and shows the formatted value.
                 if isInFocus {
                     let newValue = self.formatter.number(from: self.textValue)
-                    self.valid = newValue != nil
+                    self.valid = self.isValid(number: newValue)
                     self.textValue = self.editStringFormatter.string(for: newValue) ?? ""
                 } else {
                     let f = self.formatter
-                    let newValue = f.number(from: self.textValue)?.doubleValue
-                    self.valid = newValue != nil
+                    let newValue = f.number(from: self.textValue)
+                    self.valid = self.isValid(number: newValue)
                     self.textValue = f.string(for: newValue) ?? ""
                 }
                 self.onEditingChanged(isInFocus)
@@ -128,6 +132,17 @@ struct DecimalField : View {
                 Text(verbatim: " \(suffix)").foregroundColor(.secondary)
             }
         }
+    }
+    
+    private func isValid(number: NSNumber?) -> Bool {
+        guard let num = number?.doubleValue else { return false }
+        if let min = minimum {
+            if num < min { return false }
+        }
+        if let max = maximum {
+            if num > max { return false }
+        }
+        return true
     }
 }
 

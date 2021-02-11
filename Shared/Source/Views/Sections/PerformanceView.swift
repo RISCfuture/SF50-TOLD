@@ -9,10 +9,9 @@ struct PerformanceView: View {
     var title: String
     var moment: String
     var maxWeight: Double
-    var maxFuel: Double
     
     var body: some View {
-        LoadoutView(title: title, maxWeight: maxWeight, maxFuel: maxFuel)
+        LoadoutView(title: title, maxWeight: maxWeight)
             .environmentObject(state.performance)
         if operation == .landing { ConfigurationView().environmentObject(state.performance) }
         TimeAndPlaceView(moment: moment, operation: operation, downloadWeather: {
@@ -64,8 +63,7 @@ struct PerformanceView_Previews: PreviewProvider {
             PerformanceView(operation: .takeoff,
                             title: "Takeoff",
                             moment: "Departure",
-                            maxWeight: maxTakeoffWeight,
-                            maxFuel: maxFuel)
+                            maxWeight: maxTakeoffWeight)
                 .environmentObject(state.takeoff)
         }
     }

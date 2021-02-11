@@ -7,7 +7,6 @@ struct LoadoutView: View {
     @EnvironmentObject var state: PerformanceState
     var title: String
     var maxWeight: Double
-    var maxFuel: Double
     
     var payload = Binding(get: { Defaults[.payload] }, set: { Defaults[.payload] = $0 })
     
@@ -23,7 +22,11 @@ struct LoadoutView: View {
             HStack {
                 Text("\(title) Fuel")
                 Spacer()
-                DecimalField("\(title) Fuel", value: $state.fuel, formatter: formatter, suffix: "gal.")
+                DecimalField("\(title) Fuel",
+                             value: $state.fuel,
+                             formatter: numberFormatter(precision: 0, minimum: 0),
+                             suffix: "gal.",
+                             maximum: maxFuel)
             }
             HStack(spacing: 0) {
                 Text("\(title) Weight")
@@ -42,8 +45,7 @@ struct LoadoutView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
             LoadoutView(title: "Takeoff",
-                        maxWeight: maxTakeoffWeight,
-                        maxFuel: maxFuel)
+                        maxWeight: maxTakeoffWeight)
                 .environmentObject(PerformanceState())
         }
     }

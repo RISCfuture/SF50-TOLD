@@ -21,8 +21,7 @@ struct TakeoffView: View {
             Form {
                 PerformanceView(operation: .takeoff,
                                 title: "Takeoff", moment: "Departure",
-                                maxWeight: maxTakeoffWeight,
-                                maxFuel: maxFuel)
+                                maxWeight: maxTakeoffWeight)
                 Section(header: Text("Performance")) {
                     HStack {
                         Text("Ground Roll")
