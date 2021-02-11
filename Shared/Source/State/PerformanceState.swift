@@ -31,6 +31,34 @@ class PerformanceState: ObservableObject {
         Double(runway?.elevation ?? airport?.elevation ?? 0.0)
     }
     
+    var offscale: Offscale {
+        var cum: Offscale = .none
+        
+        let fields = [
+            takeoffRoll,
+            takeoffDistance,
+            climbGradient,
+            climbRate,
+            landingRoll,
+            landingDistance,
+            vref
+        ]
+        
+        for field in fields {
+            switch field {
+                case .value(_, let offscale):
+                    switch offscale {
+                        case .high: return .high
+                        case .low: if cum == .none { cum = .low }
+                        default: break
+                    }
+                default: break
+            }
+        }
+        
+        return cum
+    }
+    
     init() {
         weather = weatherState.weather
 

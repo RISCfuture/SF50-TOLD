@@ -53,6 +53,10 @@ struct LandingView: View {
                         }
                     }
                 }
+                
+                if performance.offscale != .none {
+                    OffscaleWarningView(offscale: performance.offscale)
+                }
             }.navigationTitle("Landing")
         }.navigationViewStyle(navigationStyle)
     }

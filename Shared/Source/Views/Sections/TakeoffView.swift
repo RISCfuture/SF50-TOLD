@@ -55,6 +55,10 @@ struct TakeoffView: View {
                                           minimum: 0)
                     }
                 }
+                
+                if performance.offscale != .none {
+                    OffscaleWarningView(offscale: performance.offscale)
+                }
             }.navigationTitle("Takeoff")
         }.navigationViewStyle(navigationStyle)
     }

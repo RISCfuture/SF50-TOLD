@@ -53,7 +53,17 @@ struct PerformanceModel {
             distance *= (1 + 14*uphillGradient) // 14% for every 1% of uphill gradient
             
             distance *= Defaults[.safetyFactor]
-            return .value(distance)
+            
+            var offscaleLow = false
+            var offscaleHigh = false
+            if weight < 5000 { offscaleLow = true }
+            if weight > 6000 { offscaleHigh = true }
+            if pa < 0 { offscaleLow = true }
+            if pa > 10000 { offscaleHigh = true }
+            if temp < -20 { offscaleLow = true }
+            if temp > 50 { offscaleHigh = true }
+            
+            return .value(distance, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
     }
     
@@ -70,7 +80,17 @@ struct PerformanceModel {
             if runway.turf { distance *= 1.21 } // 21% for unpaved runway
             
             distance *= Defaults[.safetyFactor]
-            return .value(distance)
+            
+            var offscaleLow = false
+            var offscaleHigh = false
+            if weight < 5000 { offscaleLow = true }
+            if weight > 6000 { offscaleHigh = true }
+            if pa < 0 { offscaleLow = true }
+            if pa > 10000 { offscaleHigh = true }
+            if temp < -20 { offscaleLow = true }
+            if temp > 50 { offscaleHigh = true }
+            
+            return .value(distance, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
     }
     
@@ -106,7 +126,23 @@ struct PerformanceModel {
             distance *= (1 + 10*downhillGradient) // 10% for every 1% of downhill gradient
             
             distance *= Defaults[.safetyFactor]
-            return .value(distance)
+            
+            var offscaleLow = false
+            var offscaleHigh = false
+            if weight < 4500 { offscaleLow = true }
+            if weight > 5550 { offscaleHigh = true }
+            if pa < 0 { offscaleLow = true }
+            if pa > 10000 { offscaleHigh = true }
+            switch flaps {
+                case .flaps50Ice, .flapsUpIce:
+                    if temp < -20 { offscaleLow = true }
+                    if temp > 10 { offscaleHigh = true }
+                default:
+                    if temp < 0 { offscaleLow = true }
+                    if temp > 50 { offscaleHigh = true }
+            }
+            
+            return .value(distance, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
     }
     
@@ -134,7 +170,23 @@ struct PerformanceModel {
             if runway.turf { distance *= 1.2 } // 20% for unpaved runway
             
             distance *= Defaults[.safetyFactor]
-            return .value(distance)
+            
+            var offscaleLow = false
+            var offscaleHigh = false
+            if weight < 4500 { offscaleLow = true }
+            if weight > 5550 { offscaleHigh = true }
+            if pa < 0 { offscaleLow = true }
+            if pa > 10000 { offscaleHigh = true }
+            switch flaps {
+                case .flaps50Ice, .flapsUpIce:
+                    if temp < -20 { offscaleLow = true }
+                    if temp > 10 { offscaleHigh = true }
+                default:
+                    if temp < 0 { offscaleLow = true }
+                    if temp > 50 { offscaleHigh = true }
+            }
+            
+            return .value(distance, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
     }
     
@@ -143,10 +195,20 @@ struct PerformanceModel {
         return ifInitialized { runway, weather, weight in
             let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
             let temp = weather.temperature(at: Double(runway.elevation))
-            var distance = takeoffClimbGradientModel(weight: weight, pressureAlt: pa, temp: temp)
+            var gradient = takeoffClimbGradientModel(weight: weight, pressureAlt: pa, temp: temp)
             
-            distance *= Defaults[.safetyFactor]
-            return .value(distance)
+            gradient *= Defaults[.safetyFactor]
+            
+            var offscaleLow = false
+            var offscaleHigh = false
+            if weight < 4500 { offscaleLow = true }
+            if weight > 6000 { offscaleHigh = true }
+            if pa < 0 { offscaleLow = true }
+            if pa > 10000 { offscaleHigh = true }
+            if temp < -40 { offscaleLow = true }
+            if temp > 50 { offscaleHigh = true }
+            
+            return .value(gradient, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
     }
     
@@ -155,10 +217,22 @@ struct PerformanceModel {
         return ifInitialized { runway, weather, weight in
             let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
             let temp = weather.temperature(at: Double(runway.elevation))
-            var distance = takeoffClimbRateModel(weight: weight, pressureAlt: pa, temp: temp)
+            var rate = takeoffClimbRateModel(weight: weight, pressureAlt: pa, temp: temp)
             
-            distance *= Defaults[.safetyFactor]
-            return .value(distance)
+            rate *= Defaults[.safetyFactor]
+            
+            rate *= Defaults[.safetyFactor]
+            
+            var offscaleLow = false
+            var offscaleHigh = false
+            if weight < 4500 { offscaleLow = true }
+            if weight > 6000 { offscaleHigh = true }
+            if pa < 0 { offscaleLow = true }
+            if pa > 10000 { offscaleHigh = true }
+            if temp < -40 { offscaleLow = true }
+            if temp > 50 { offscaleHigh = true }
+            
+            return .value(rate, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
     }
     
@@ -167,14 +241,18 @@ struct PerformanceModel {
         return ifInitialized { runway, _, weight in
             switch flaps {
                 case .flapsUp:
-                    return .value(vrefModel_flapsUp(weight: weight))
+                    let speed = vrefModel_flapsUp(weight: weight)
+                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > 6000))
                 case .flapsUpIce: return .value(136)
                 case .flaps50:
-                    return .value(vrefModel_flaps50(weight: weight))
+                    let speed = vrefModel_flaps50(weight: weight)
+                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > 6000))
                 case .flaps50Ice:
-                    return .value(vrefModel_flaps50Ice(weight: weight))
+                    let speed = vrefModel_flaps50Ice(weight: weight)
+                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > 6000))
                 case .flaps100:
-                    return .value(vrefModel_flaps100(weight: weight))
+                    let speed = vrefModel_flaps100(weight: weight)
+                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > 6000))
                 case .none: return nil
             }
         }
@@ -315,4 +393,10 @@ struct PerformanceModel {
 
 fileprivate func deg2rad(_ degrees: Double) -> Double {
     return degrees * .pi/180
+}
+
+fileprivate func offscale(low: Bool, high: Bool) -> Offscale {
+    if high { return .high }
+    else if low { return .low }
+    else { return .none }
 }

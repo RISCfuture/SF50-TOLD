@@ -15,10 +15,14 @@ extension Defaults.Keys {
     static let lastCycleLoaded = Key<Cycle?>("lastCycleLoaded")
 }
 
+enum Offscale {
+    case none
+    case low
+    case high
+}
+
 enum Interpolation {
-    case value(_ number: Double)
-    case offscaleLow
-    case offscaleHigh
+    case value(_ number: Double, offscale: Offscale = .none)
     case configNotAuthorized
 }
 
