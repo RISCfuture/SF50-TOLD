@@ -7,7 +7,7 @@ let navigationStyle = DefaultNavigationViewStyle()
 #endif
 
 @main
-struct SF50_TOLDApp: App {
+struct SR22_G2_TOLDApp: App {
     @StateObject private var state = AppState()
     
     var body: some Scene {

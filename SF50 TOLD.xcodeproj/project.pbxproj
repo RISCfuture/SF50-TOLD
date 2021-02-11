@@ -11,8 +11,8 @@
 		01007B8425D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
 		01007B8525D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
 		01007B8625D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
-		0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
-		0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
+		0135A7EC2587091800892558 /* SR22_G2_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SR22_G2_TOLDApp.swift */; };
+		0135A7ED2587091800892558 /* SR22_G2_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SR22_G2_TOLDApp.swift */; };
 		0135A7EE2587091800892558 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C42587091300892558 /* ContentView.swift */; };
 		0135A7EF2587091800892558 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C42587091300892558 /* ContentView.swift */; };
 		0135A7F02587091800892558 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0135A7C52587091700892558 /* Assets.xcassets */; };
@@ -223,25 +223,25 @@
 			containerPortal = 0135A7BE2587091300892558 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0135A7C92587091700892558;
-			remoteInfo = "SF50 TOLD (iOS)";
+			remoteInfo = "SR22-G2 TOLD (iOS)";
 		};
 		0135A7E62587091800892558 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0135A7BE2587091300892558 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0135A7D12587091700892558;
-			remoteInfo = "SF50 TOLD (macOS)";
+			remoteInfo = "SR22-G2 TOLD (macOS)";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		01007B8225D5268700C8BFF2 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		0135A7C32587091300892558 /* SF50_TOLDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF50_TOLDApp.swift; sourceTree = "<group>"; };
+		0135A7C32587091300892558 /* SR22_G2_TOLDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SR22_G2_TOLDApp.swift; sourceTree = "<group>"; };
 		0135A7C42587091300892558 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0135A7C52587091700892558 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0135A7CA2587091700892558 /* SF50 TOLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SF50 TOLD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0135A7CA2587091700892558 /* SR22-G2 TOLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SR22-G2 TOLD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0135A7CD2587091700892558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0135A7D22587091700892558 /* SF50 TOLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SF50 TOLD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0135A7D22587091700892558 /* SR22-G2 TOLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SR22-G2 TOLD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0135A7D42587091700892558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0135A7D52587091700892558 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		0135A7DA2587091700892558 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -416,7 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				0135A7C52587091700892558 /* Assets.xcassets */,
-				0135A7C32587091300892558 /* SF50_TOLDApp.swift */,
+				0135A7C32587091300892558 /* SR22_G2_TOLDApp.swift */,
 				0135A80725870E0A00892558 /* Source */,
 			);
 			path = Shared;
@@ -425,8 +425,8 @@
 		0135A7CB2587091700892558 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0135A7CA2587091700892558 /* SF50 TOLD.app */,
-				0135A7D22587091700892558 /* SF50 TOLD.app */,
+				0135A7CA2587091700892558 /* SR22-G2 TOLD.app */,
+				0135A7D22587091700892558 /* SR22-G2 TOLD.app */,
 				0135A7DA2587091700892558 /* Tests iOS.xctest */,
 				0135A7E52587091800892558 /* Tests macOS.xctest */,
 			);
@@ -602,9 +602,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0135A7C92587091700892558 /* SF50 TOLD (iOS) */ = {
+		0135A7C92587091700892558 /* SR22-G2 TOLD (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0135A7F42587091800892558 /* Build configuration list for PBXNativeTarget "SF50 TOLD (iOS)" */;
+			buildConfigurationList = 0135A7F42587091800892558 /* Build configuration list for PBXNativeTarget "SR22-G2 TOLD (iOS)" */;
 			buildPhases = (
 				0135A7C62587091700892558 /* Sources */,
 				0135A7C72587091700892558 /* Frameworks */,
@@ -614,7 +614,7 @@
 			);
 			dependencies = (
 			);
-			name = "SF50 TOLD (iOS)";
+			name = "SR22-G2 TOLD (iOS)";
 			packageProductDependencies = (
 				0135A84425872F1500892558 /* SwiftMETAR */,
 				0135A84B25872F6700892558 /* SwiftNASR */,
@@ -623,13 +623,13 @@
 				017ED15A261027A9002C69DE /* Alamofire */,
 				0153741F26107AFF0098B529 /* SWXMLHash */,
 			);
-			productName = "SF50 TOLD (iOS)";
-			productReference = 0135A7CA2587091700892558 /* SF50 TOLD.app */;
+			productName = "SR22-G2 TOLD (iOS)";
+			productReference = 0135A7CA2587091700892558 /* SR22-G2 TOLD.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0135A7D12587091700892558 /* SF50 TOLD (macOS) */ = {
+		0135A7D12587091700892558 /* SR22-G2 TOLD (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0135A7F72587091800892558 /* Build configuration list for PBXNativeTarget "SF50 TOLD (macOS)" */;
+			buildConfigurationList = 0135A7F72587091800892558 /* Build configuration list for PBXNativeTarget "SR22-G2 TOLD (macOS)" */;
 			buildPhases = (
 				0135A7CE2587091700892558 /* Sources */,
 				0135A7CF2587091700892558 /* Frameworks */,
@@ -639,7 +639,7 @@
 			);
 			dependencies = (
 			);
-			name = "SF50 TOLD (macOS)";
+			name = "SR22-G2 TOLD (macOS)";
 			packageProductDependencies = (
 				0135A85125872F7000892558 /* SwiftMETAR */,
 				0135A85325872F7000892558 /* SwiftNASR */,
@@ -648,8 +648,8 @@
 				015373F62610286D0098B529 /* Alamofire */,
 				0153742926107B0A0098B529 /* SWXMLHash */,
 			);
-			productName = "SF50 TOLD (macOS)";
-			productReference = 0135A7D22587091700892558 /* SF50 TOLD.app */;
+			productName = "SR22-G2 TOLD (macOS)";
+			productReference = 0135A7D22587091700892558 /* SR22-G2 TOLD.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0135A7D92587091700892558 /* Tests iOS */ = {
@@ -724,7 +724,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0135A7C12587091300892558 /* Build configuration list for PBXProject "SF50 TOLD" */;
+			buildConfigurationList = 0135A7C12587091300892558 /* Build configuration list for PBXProject "SR22-G2 TOLD" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -745,8 +745,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0135A7C92587091700892558 /* SF50 TOLD (iOS) */,
-				0135A7D12587091700892558 /* SF50 TOLD (macOS) */,
+				0135A7C92587091700892558 /* SR22-G2 TOLD (iOS) */,
+				0135A7D12587091700892558 /* SR22-G2 TOLD (macOS) */,
 				0135A7D92587091700892558 /* Tests iOS */,
 				0135A7E42587091800892558 /* Tests macOS */,
 			);
@@ -823,7 +823,7 @@
 				015A392E25C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
 				019CC28425B91C0F00FEA895 /* DecimalField.swift in Sources */,
 				01F7EB9E25BBFA2A00CE5024 /* ConfigurationView.swift in Sources */,
-				0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */,
+				0135A7EC2587091800892558 /* SR22_G2_TOLDApp.swift in Sources */,
 				0135A8CC2587599D00892558 /* AirportPicker.swift in Sources */,
 				01C7EA7A25B1963600CCFBE1 /* InterpolationView.swift in Sources */,
 				01E2A1EB25ABA7D20076CC84 /* LoadingView.swift in Sources */,
@@ -880,7 +880,7 @@
 				0135A875258748D400892558 /* TakeoffView.swift in Sources */,
 				01DD6DA025B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,
 				01F18D3425B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
-				0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */,
+				0135A7ED2587091800892558 /* SR22_G2_TOLDApp.swift in Sources */,
 				0135A8CD2587599D00892558 /* AirportPicker.swift in Sources */,
 				017B669B258898DA00AA2DE9 /* WeatherState.swift in Sources */,
 				0135A8A625874C3B00892558 /* Global.swift in Sources */,
@@ -1008,12 +1008,12 @@
 /* Begin PBXTargetDependency section */
 		0135A7DC2587091700892558 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0135A7C92587091700892558 /* SF50 TOLD (iOS) */;
+			target = 0135A7C92587091700892558 /* SR22-G2 TOLD (iOS) */;
 			targetProxy = 0135A7DB2587091700892558 /* PBXContainerItemProxy */;
 		};
 		0135A7E72587091800892558 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0135A7D12587091700892558 /* SF50 TOLD (macOS) */;
+			target = 0135A7D12587091700892558 /* SR22-G2 TOLD (macOS) */;
 			targetProxy = 0135A7E62587091800892558 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1151,8 +1151,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.2;
-				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
-				PRODUCT_NAME = "SF50 TOLD";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SR22-G2-TOLD";
+				PRODUCT_NAME = "SR22-G2 TOLD";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1176,8 +1176,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.2;
-				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
-				PRODUCT_NAME = "SF50 TOLD";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SR22-G2-TOLD";
+				PRODUCT_NAME = "SR22-G2 TOLD";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1205,8 +1205,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.2.2;
-				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
-				PRODUCT_NAME = "SF50 TOLD";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SR22-G2-TOLD";
+				PRODUCT_NAME = "SR22-G2 TOLD";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1232,8 +1232,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.2.2;
-				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
-				PRODUCT_NAME = "SF50 TOLD";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SR22-G2-TOLD";
+				PRODUCT_NAME = "SR22-G2 TOLD";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1257,7 +1257,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "SF50 TOLD (iOS)";
+				TEST_TARGET_NAME = "SR22-G2 TOLD (iOS)";
 			};
 			name = Debug;
 		};
@@ -1279,7 +1279,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "SF50 TOLD (iOS)";
+				TEST_TARGET_NAME = "SR22-G2 TOLD (iOS)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1302,7 +1302,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "SF50 TOLD (macOS)";
+				TEST_TARGET_NAME = "SR22-G2 TOLD (macOS)";
 			};
 			name = Debug;
 		};
@@ -1324,14 +1324,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "SF50 TOLD (macOS)";
+				TEST_TARGET_NAME = "SR22-G2 TOLD (macOS)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0135A7C12587091300892558 /* Build configuration list for PBXProject "SF50 TOLD" */ = {
+		0135A7C12587091300892558 /* Build configuration list for PBXProject "SR22-G2 TOLD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0135A7F22587091800892558 /* Debug */,
@@ -1340,7 +1340,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0135A7F42587091800892558 /* Build configuration list for PBXNativeTarget "SF50 TOLD (iOS)" */ = {
+		0135A7F42587091800892558 /* Build configuration list for PBXNativeTarget "SR22-G2 TOLD (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0135A7F52587091800892558 /* Debug */,
@@ -1349,7 +1349,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0135A7F72587091800892558 /* Build configuration list for PBXNativeTarget "SF50 TOLD (macOS)" */ = {
+		0135A7F72587091800892558 /* Build configuration list for PBXNativeTarget "SR22-G2 TOLD (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0135A7F82587091800892558 /* Debug */,

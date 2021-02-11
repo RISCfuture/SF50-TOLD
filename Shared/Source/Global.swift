@@ -5,8 +5,8 @@ import SwiftNASR
 fileprivate let groupDefaults = UserDefaults(suiteName: "group.codes.tim.TOLD")!
 
 extension Defaults.Keys {
-    static let emptyWeight = Key<Double>("emptyWeight", default: 3550) // lbs
-    static let fuelDensity = Key<Double>("fuelDensity", default: 6.71) // lb/gal
+    static let emptyWeight = Key<Double>("emptyWeight", default: 2250) // lbs
+    static let fuelDensity = Key<Double>("fuelDensity", default: 6.01) // lb/gal
     static let safetyFactor = Key<Double>("safetyFactor", default: 1.0)
     
     static let payload = Key<Double>("payload", default: 0.0) // lbs
@@ -33,28 +33,12 @@ enum Operation {
     case landing
 }
 
-enum FlapSetting: String, CaseIterable, Identifiable {
-    var id: String { self.rawValue }
-    
-    case flapsUp
-    case flapsUpIce
-    case flaps50
-    case flaps50Ice
-    case flaps100
-}
-
-func crosswindLimitForFlapSetting(_ flaps: FlapSetting?) -> UInt? {
-    guard let flaps = flaps else { return nil }
-    switch flaps {
-        case .flapsUp, .flapsUpIce, .flaps50, .flaps50Ice: return 18
-        case .flaps100: return 16
-    }
-}
-
-let maxFuel = 296.0 // gal
-let maxTakeoffWeight = 6000.0 // lbs
-let maxLandingWeight = 5550.0 // lbs
-let minRunwayLength = 1400 // ft
-let minTemperature = -40.0 // °C
-let maxTemperature = 50.0 // °C
+let maxFuel = 81.0 // gal
+let maxTakeoffWeight = 3400.0 // lbs
+let maxLandingWeight = 3400.0 // lbs
+let minRunwayLength = 600 // ft
+let minTemperature = -20.0 // °C
+let maxTemperature = 40.0 // °C
 let tailwindLimit: UInt = 10 // kts
+let crosswindLimit: UInt = 20 // kts
+let vref = 77 // kts

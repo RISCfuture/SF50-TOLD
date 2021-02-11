@@ -40,6 +40,13 @@ struct TakeoffView: View {
                     }
                     
                     HStack {
+                        Text("Vx Climb Speed")
+                        Spacer()
+                        InterpolationView(interpolation: performance.climbSpeed,
+                                          suffix: "kts.")
+                    }
+                    
+                    HStack {
                         Text("Vx Climb Gradient")
                         Spacer()
                         InterpolationView(interpolation: performance.climbGradient,

@@ -22,7 +22,7 @@ struct LandingView: View {
                     HStack {
                         Text("VREF")
                         Spacer()
-                        InterpolationView(interpolation: performance.vref, suffix: "kts.")
+                        Text("\(integerFormatter.string(for: vref)) kts.")
                     }
                     
                     HStack {
@@ -39,18 +39,6 @@ struct LandingView: View {
                         InterpolationView(interpolation: performance.landingDistance,
                                           suffix: "ft.",
                                           maximum: landingDistance)
-                    }
-                    
-                    if let meets = performance.meetsGoAroundClimbGradient {
-                        HStack {
-                            Text("Meets Go-Around Climb Gradient")
-                            Spacer()
-                            if meets {
-                                Text("Yes").bold()
-                            } else {
-                                Text("No").bold().foregroundColor(.red)
-                            }
-                        }
                     }
                 }
                 

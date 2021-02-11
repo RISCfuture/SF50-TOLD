@@ -15,7 +15,7 @@ struct AboutView: View {
                     HStack {
                         Text("Aircraft")
                         Spacer()
-                        Text("Cirrus SF50 Vision (G1)")
+                        Text("Cirrus SR22 (G2)")
                             .bold()
                     }
                     
@@ -31,7 +31,7 @@ struct AboutView: View {
                     HStack {
                         Text("Serials")
                         Spacer()
-                        Text("Aircraft Serials with Cirrus Perspective Touch Avionics System and FL280 Maximum Operating Altitude")
+                        Text("0002 thru 2978, 2980 thru 2991, 2993 thru 3001, 3003 thru 3025, 3027 and subs with Analog or Avidyne Avionics System")
                             .bold()
                             .font(.system(size: 14))
                     }
@@ -39,7 +39,7 @@ struct AboutView: View {
                     HStack {
                         Text("P/N")
                         Spacer()
-                        Text("31452-001")
+                        Text("13772-001")
                             .bold()
                     }
                     

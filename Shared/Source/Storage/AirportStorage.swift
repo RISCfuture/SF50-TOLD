@@ -6,8 +6,8 @@ import OSLog
 import Defaults
 
 class AirportStorage: ObservableObject {
-    private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "AirportStorage")
-    private let queue = DispatchQueue(label: "SF50-Told.AirportService", qos: .background)
+    private let logger = Logger(subsystem: "codes.tim.SR22-G2-TOLD", category: "AirportStorage")
+    private let queue = DispatchQueue(label: "SR22-G2-Told.AirportService", qos: .background)
     
     private let context: NSManagedObjectContext
     

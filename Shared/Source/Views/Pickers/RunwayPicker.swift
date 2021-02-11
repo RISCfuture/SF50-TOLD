@@ -19,7 +19,7 @@ struct RunwayPicker: View {
                 RunwayRow(runway: runway,
                           operation: operation,
                           wind: state.weather.wind,
-                          crosswindLimit: crosswindLimitForFlapSetting(state.flaps),
+                          crosswindLimit: crosswindLimit,
                           tailwindLimit: tailwindLimit).onTapGesture {
                     state.runway = runway
                     self.mode.wrappedValue.dismiss()

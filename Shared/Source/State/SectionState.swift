@@ -21,7 +21,7 @@ class SectionState: ObservableObject {
         }
     }
     
-    private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "SectionState")
+    private let logger = Logger(subsystem: "codes.tim.SR22-G2-TOLD", category: "SectionState")
     
     private let persistentContainer: NSPersistentContainer
     lazy private var airportStorage = AirportStorage(context: persistentContainer.newBackgroundContext())

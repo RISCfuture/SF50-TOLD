@@ -25,6 +25,7 @@ struct Weather: CustomDebugStringConvertible {
     var wind: Wind
     var temperature: Temperature
     var altimeter: Double
+    var wet: Bool
     
     var source: Source
     

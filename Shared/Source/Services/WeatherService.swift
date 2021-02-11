@@ -6,7 +6,7 @@ import Alamofire
 import SWXMLHash
 import SwiftMETAR
 
-fileprivate let loadingQueue = DispatchQueue(label: "codes.tim.SF50-TOLD.ExpiringCache", qos: .utility, attributes: .concurrent)
+fileprivate let loadingQueue = DispatchQueue(label: "codes.tim.SR22-TOLD.ExpiringCache", qos: .utility, attributes: .concurrent)
 
 fileprivate class ExpiringCache<Key: Hashable, Value, Error: Swift.Error> {
     typealias Result = WeatherService.FetchResult<Value>
@@ -103,7 +103,7 @@ class WeatherService: ObservableObject {
     private static let METARPattern = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=%{icao}&hoursBeforeNow=2"
     private static let TAFPattern = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=tafs&requestType=retrieve&format=xml&stationString=%{icao}&hoursBeforeNow=8"
 
-    private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "WeatherService")
+    private static let logger = Logger(subsystem: "codes.tim.SR22-G2-TOLD", category: "WeatherService")
     private let METARTimeout: TimeInterval = 5400 // METARs valid until 1.5 hours old
     private let TAFTimeout: TimeInterval = 43200 // TAFs valid until 12 hours old
 

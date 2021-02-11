@@ -22,7 +22,7 @@ class AppState: ObservableObject {
     let persistentContainer: NSPersistentContainer
     var airportLoadingService: AirportLoadingService!
     
-    let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "MainViewController")
+    let logger = Logger(subsystem: "codes.tim.SR22-G2-TOLD", category: "MainViewController")
     
     private let weightFormatter = ValueFormatter(precision: 0)
     private let networkMonitor = NWPathMonitor()
