@@ -39,6 +39,22 @@ struct TakeoffView: View {
                                           suffix: "ft.",
                                           maximum: takeoffDistance)
                     }
+                    
+                    HStack {
+                        Text("Vx Climb Gradient")
+                        Spacer()
+                        InterpolationView(interpolation: performance.climbGradient,
+                                          suffix: "ft/NM",
+                                          minimum: 0)
+                    }
+                    
+                    HStack {
+                        Text("Vx Climb Rate")
+                        Spacer()
+                        InterpolationView(interpolation: performance.climbRate,
+                                          suffix: "ft/min",
+                                          minimum: 0)
+                    }
                 }
             }.navigationTitle("Takeoff")
         }.navigationViewStyle(navigationStyle)

@@ -136,7 +136,32 @@ struct PerformanceModel {
             distance *= Defaults[.safetyFactor]
             return .value(distance)
         }
-    }    
+    }
+    
+    // ft/NM
+    var takeoffClimbGradient: Interpolation? {
+        return ifInitialized { runway, weather, weight in
+            let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
+            let temp = weather.temperature(at: Double(runway.elevation))
+            var distance = takeoffClimbGradientModel(weight: weight, pressureAlt: pa, temp: temp)
+            
+            distance *= Defaults[.safetyFactor]
+            return .value(distance)
+        }
+    }
+    
+    // ft/min
+    var takeoffClimbRate: Interpolation? {
+        return ifInitialized { runway, weather, weight in
+            let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
+            let temp = weather.temperature(at: Double(runway.elevation))
+            var distance = takeoffClimbRateModel(weight: weight, pressureAlt: pa, temp: temp)
+            
+            distance *= Defaults[.safetyFactor]
+            return .value(distance)
+        }
+    }
+    
     // knots
     var vref: Interpolation? {
         return ifInitialized { runway, _, weight in

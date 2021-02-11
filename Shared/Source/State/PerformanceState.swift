@@ -14,6 +14,8 @@ class PerformanceState: ObservableObject {
     
     @Published var takeoffRoll: Interpolation? = nil
     @Published var takeoffDistance: Interpolation? = nil
+    @Published var climbGradient: Interpolation? = nil
+    @Published var climbRate: Interpolation? = nil
     @Published var landingRoll: Interpolation? = nil
     @Published var landingDistance: Interpolation? = nil
     @Published var vref: Interpolation? = nil
@@ -62,6 +64,8 @@ class PerformanceState: ObservableObject {
         let model = PerformanceModel(runway: runway, weather: weather, weight: weight, flaps: flaps)
         takeoffRoll = model.takeoffRoll
         takeoffDistance = model.takeoffDistance
+        climbGradient = model.takeoffClimbGradient
+        climbRate = model.takeoffClimbRate
         landingRoll = model.landingRoll
         landingDistance = model.landingDistance
         vref = model.vref
@@ -100,9 +104,13 @@ class PerformanceState: ObservableObject {
         if takeoff {
             let takeoffRoll = model.takeoffRoll
             let takeoffDistance = model.takeoffDistance
+            let climbGradient = model.takeoffClimbGradient
+            let climbRate = model.takeoffClimbRate
             RunLoop.main.perform {
                 self.takeoffRoll = takeoffRoll
                 self.takeoffDistance = takeoffDistance
+                self.climbGradient = climbGradient
+                self.climbRate = climbRate
             }
         }
         

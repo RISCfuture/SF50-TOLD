@@ -3,6 +3,7 @@ import SwiftUI
 struct InterpolationView: View {
     var interpolation: Interpolation?
     var suffix: String? = nil
+    var minimum: Double? = nil
     var maximum: Double? = nil
     
     var body: some View {
@@ -24,17 +25,27 @@ struct InterpolationView: View {
                     case .value(let number):
                         Text(NSNumber(value: number), formatter: integerFormatter.forView)
                             .bold()
-                            .foregroundColor(maximum != nil && number > maximum! ? .red : .primary)
+                            .foregroundColor(color(for: number))
                             .multilineTextAlignment(.trailing)
                         if let suffix = suffix {
                             Text(" \(suffix)")
-                                .foregroundColor(maximum != nil && number > maximum! ? .red : .primary)
+                                .foregroundColor(color(for: number))
                         }
                 }
             }
         } else {
             Spacer()
         }
+    }
+    
+    private func color(for number: Double) -> Color {
+        if let min = minimum {
+            if number < min { return .red }
+        }
+        if let max = maximum {
+            if number > max { return .red }
+        }
+        return .primary
     }
 }
 
