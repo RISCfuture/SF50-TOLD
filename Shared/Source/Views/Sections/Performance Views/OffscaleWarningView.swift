@@ -10,7 +10,7 @@ struct OffscaleWarningView: View {
                 Label("The input values are below the minimums specified in the AFM table.",
                       systemImage: "info.circle")
                     .font(.system(size: 14))
-                    .foregroundColor(.gray)
+                    .foregroundColor(.secondary)
             case .high:
                 Label("The input values are above the maximums specified in the AFM table. Proceed with extreme caution.",
                       systemImage: "exclamationmark.triangle")
