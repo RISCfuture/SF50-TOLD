@@ -31,6 +31,12 @@ struct SettingsView: View {
                                  value: $state.safetyFactor,
                                  formatter: numberFormatter(precision: 1, minimum: 1.0))
                 }
+                
+                HStack {
+                    Text("G3 Wing")
+                    Spacer()
+                    Toggle("", isOn: $state.g3Wing)
+                }
             }.navigationTitle("Settings")
         }.navigationViewStyle(navigationStyle)
     }

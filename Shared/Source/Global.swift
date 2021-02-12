@@ -8,6 +8,7 @@ extension Defaults.Keys {
     static let emptyWeight = Key<Double>("emptyWeight", default: 2250) // lbs
     static let fuelDensity = Key<Double>("fuelDensity", default: 6.01) // lb/gal
     static let safetyFactor = Key<Double>("safetyFactor", default: 1.0)
+    static let g3Wing = Key<Bool>("g3Wing", default: false)
     
     static let payload = Key<Double>("payload", default: 0.0) // lbs
     
@@ -33,7 +34,8 @@ enum Operation {
     case landing
 }
 
-let maxFuel = 81.0 // gal
+let g2MaxFuel = 81.0 // gal
+let g3MaxFuel = 92.0 // gal
 let maxTakeoffWeight = 3400.0 // lbs
 let maxLandingWeight = 3400.0 // lbs
 let minRunwayLength = 600 // ft

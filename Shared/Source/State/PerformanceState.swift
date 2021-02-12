@@ -20,6 +20,8 @@ class PerformanceState: ObservableObject {
     @Published var landingRoll: Interpolation? = nil
     @Published var landingDistance: Interpolation? = nil
     
+    @Published var maxFuel: Double
+    
     private var emptyWeight: Double { Defaults[.emptyWeight] }
     private var fuelDensity: Double { Defaults[.fuelDensity] }
     private var payload: Double { Defaults[.payload] }
@@ -60,6 +62,13 @@ class PerformanceState: ObservableObject {
     
     init() {
         weather = weatherState.weather
+        
+        if Defaults[.g3Wing] { maxFuel = g3MaxFuel }
+        else { maxFuel = g2MaxFuel }
+        Defaults.publisher(.g3Wing).map { change in
+            if change.newValue { return g3MaxFuel }
+            else { return g2MaxFuel }
+        }.assign(to: &$maxFuel)
 
         // update runway, weather, and performance when airport changes
         $airport.sink { airport in
