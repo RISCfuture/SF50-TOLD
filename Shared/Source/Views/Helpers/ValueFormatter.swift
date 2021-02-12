@@ -8,7 +8,6 @@ func numberFormatter(precision: UInt = 0, minimum: Double? = 0, maximum: Double?
     formatter.roundingIncrement = pow(10, -Double(precision)) as NSNumber
     formatter.minimumFractionDigits = Int(precision)
     formatter.maximumFractionDigits = Int(precision)
-    formatter.allowsFloats = precision != 0
     formatter.minimum = minimum as NSNumber?
     formatter.maximum = maximum as NSNumber?
     formatter.locale = .current
