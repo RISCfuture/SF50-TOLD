@@ -27,8 +27,10 @@ struct LoadingConsentView: View {
                 Button("Download Airport Data") {
                     self.state.airportLoadingService.loadNASR()
                 }
-                Button("Skip For Now") {
-                    self.state.airportLoadingService.skipLoadThisSession = true
+                if state.canSkipLoad {
+                    Button("Skip For Now") {
+                        self.state.airportLoadingService.skipLoadThisSession = true
+                    }
                 }
             }
         }.padding(.vertical, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)

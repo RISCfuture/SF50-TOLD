@@ -8,13 +8,14 @@ class AppState: ObservableObject {
     @Published var error: Error? = nil
     @Published var loadingAirports = false
     @Published var needsLoad = true
+    @Published var canSkipLoad = false
     
-    @Published var takeoff: SectionState
-    @Published var landing: SectionState
-    @Published var settings: SettingsState
+    @Published var takeoff: SectionState!
+    @Published var landing: SectionState!
+    @Published var settings = SettingsState()
         
     let persistentContainer: NSPersistentContainer
-    let airportLoadingService: AirportLoadingService
+    var airportLoadingService: AirportLoadingService!
     
     let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "MainViewController")
     
@@ -24,34 +25,45 @@ class AppState: ObservableObject {
     
     init() {
         persistentContainer = NSPersistentContainer(name: "Airports")
+        configurePersistentContainer()
+
+        airportLoadingService = AirportLoadingService(container: persistentContainer)
+        configureLoadingService()
+        
+        takeoff = SectionState(operation: .takeoff, persistentContainer: persistentContainer)
+        landing = SectionState(operation: .landing, persistentContainer: persistentContainer)
+        handleNestedChanges()
+        
+    }
+    
+    deinit {
+        for c in cancellables { c.cancel() }
+    }
+    
+    private func configurePersistentContainer() {
+        guard let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.codes.tim.TOLD") else {
+            fatalError("Shared file container couild not be created.")
+        }
+        let storeURL = containerURL.appendingPathComponent("Airports.sqlite")
+        
+        persistentContainer.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
         persistentContainer.loadPersistentStores { description, error in
             if let error = error {
                 fatalError("Unable to load persistent stores: \(error)")
             }
         }
-        
-        airportLoadingService = AirportLoadingService(container: persistentContainer)
-        
-        takeoff = SectionState(operation: .takeoff, persistentContainer: persistentContainer)
-        landing = SectionState(operation: .landing, persistentContainer: persistentContainer)
-        settings = SettingsState()
-        
-        // propogate errors up
+    }
+    
+    private func configureLoadingService() {
         airportLoadingService.$error.receive(on: RunLoop.main).assign(to: &$error)
-        takeoff.$error.receive(on: RunLoop.main).assign(to: &$error)
-        landing.$error.receive(on: RunLoop.main).assign(to: &$error)
-        
-        // handle nested changes
+        airportLoadingService.$progress.receive(on: RunLoop.main).map { $0 != nil }.assign(to: &$loadingAirports)
+        airportLoadingService.$needsLoad.receive(on: RunLoop.main).assign(to: &$needsLoad)
+        airportLoadingService.$canSkip.receive(on: RunLoop.main).assign(to: &$canSkipLoad)
+    }
+    
+    private func handleNestedChanges() {
         takeoff.objectWillChange.receive(on: RunLoop.main).sink { [weak self] _ in self?.objectWillChange.send() }.store(in: &cancellables)
         landing.objectWillChange.receive(on: RunLoop.main).sink { [weak self] _ in self?.objectWillChange.send() }.store(in: &cancellables)
         settings.objectWillChange.receive(on: RunLoop.main).sink { [weak self] _ in self?.objectWillChange.send() }.store(in: &cancellables)
-        
-        // airport loading state
-        airportLoadingService.$progress.receive(on: RunLoop.main).map { $0 != nil }.assign(to: &$loadingAirports)
-        airportLoadingService.$needsLoad.receive(on: RunLoop.main).assign(to: &$needsLoad)
-    }
-    
-    deinit {
-        for c in cancellables { c.cancel() }
     }
 }

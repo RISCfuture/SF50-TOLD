@@ -257,6 +257,7 @@
 		0135A8A425874C3B00892558 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		0135A8BE2587599300892558 /* WeatherPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPicker.swift; sourceTree = "<group>"; };
 		0135A8CB2587599D00892558 /* AirportPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportPicker.swift; sourceTree = "<group>"; };
+		013E94D725D73E8300084C10 /* SF50 TOLD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SF50 TOLD.entitlements"; sourceTree = "<group>"; };
 		014808DA25AAEEF10041A90D /* Schema.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Schema.xcdatamodel; sourceTree = "<group>"; };
 		014808ED25AAF4910041A90D /* AirportDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportDataLoader.swift; sourceTree = "<group>"; };
 		014F100A25AAAD410081EAC3 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
@@ -399,6 +400,7 @@
 		0135A7BD2587091300892558 = {
 			isa = PBXGroup;
 			children = (
+				013E94D725D73E8300084C10 /* SF50 TOLD.entitlements */,
 				0135A7C22587091300892558 /* Shared */,
 				0135A7CC2587091700892558 /* iOS */,
 				0135A7D32587091700892558 /* macOS */,
@@ -1136,6 +1138,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "SF50 TOLD.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
@@ -1160,6 +1163,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "SF50 TOLD.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;

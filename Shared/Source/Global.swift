@@ -2,6 +2,8 @@ import Foundation
 import Defaults
 import SwiftNASR
 
+fileprivate let groupDefaults = UserDefaults(suiteName: "group.codes.tim.TOLD")!
+
 extension Defaults.Keys {
     static let emptyWeight = Key<Double>("emptyWeight", default: 3550) // lbs
     static let fuelDensity = Key<Double>("fuelDensity", default: 6.71) // lb/gal
@@ -12,7 +14,7 @@ extension Defaults.Keys {
     static let takeoffAirport = Key<String?>("takeoffAirport") // site #
     static let landingAirport = Key<String?>("landingAirport") // site #
     
-    static let lastCycleLoaded = Key<Cycle?>("lastCycleLoaded")
+    static let lastCycleLoaded = Key<Cycle?>("lastCycleLoaded", suite: groupDefaults)
 }
 
 enum Offscale {
