@@ -120,6 +120,7 @@ class AirportDataLoader: ObservableObject {
         record.lid = airport.LID
         record.name = airport.name
         record.elevation = airport.referencePoint.elevation ?? 0
+        record.longestRunway = Int16(airport.runways.max { $0.length ?? 0 < $1.length ?? 0 }?.length ?? 0)
     }
     
     private func configureRecord(_ record: inout Runway, from runway: SwiftNASR.Runway, end: SwiftNASR.RunwayEnd, airport: SwiftNASR.Airport) -> Bool {
@@ -128,8 +129,6 @@ class AirportDataLoader: ObservableObject {
         guard let LDA = end.LDA ?? runway.length else { return false }
         guard let TODA = end.TODA ?? runway.length else { return false }
         guard let TORA = end.TORA ?? runway.length else { return false }
-        
-        if LDA < minRunwayLength && TODA < minRunwayLength && TORA < minRunwayLength { return false }
         
         record.name = end.ID
         record.elevation = elevation

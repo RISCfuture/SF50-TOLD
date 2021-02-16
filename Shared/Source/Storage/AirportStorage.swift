@@ -37,7 +37,8 @@ class AirportStorage: ObservableObject {
         request.fetchLimit = 100
         request.includesPropertyValues = true
         request.returnsObjectsAsFaults = false
-        let predicate = NSPredicate(format: "lid ==[c] %@ OR icao ==[c] %@ OR name CONTAINS[cd] %@ OR city CONTAINS[cd] %@", string, string, string, string)
+        let predicate = NSPredicate(format: "longestRunway >= %@ AND (lid ==[c] %@ OR icao ==[c] %@ OR name CONTAINS[cd] %@ OR city CONTAINS[cd] %@)",
+                                    NSNumber(integerLiteral: minRunwayLength), string, string, string, string)
         request.predicate = predicate
         return request
     }

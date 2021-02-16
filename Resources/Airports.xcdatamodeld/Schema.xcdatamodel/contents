@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Airport" representedClassName="Airport" syncable="YES" codeGenerationType="class">
         <attribute name="city" optional="YES" attributeType="String"/>
         <attribute name="elevation" optional="YES" attributeType="Float" usesScalarValueType="YES"/>
         <attribute name="icao" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="lid" attributeType="String"/>
+        <attribute name="longestRunway" attributeType="Integer 16" minValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="runways" toMany="YES" deletionRule="Cascade" destinationEntity="Runway" inverseName="airport" inverseEntity="Runway"/>
     </entity>
     <entity name="Runway" representedClassName="Runway" syncable="YES" codeGenerationType="class">
         <attribute name="elevation" attributeType="Float" usesScalarValueType="YES"/>
-        <attribute name="heading" attributeType="Integer 16" usesScalarValueType="YES"/>
-        <attribute name="landingDistance" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="heading" attributeType="Integer 16" minValueString="0" maxValueString="360" usesScalarValueType="YES"/>
+        <attribute name="landingDistance" attributeType="Integer 16" minValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="slope" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
-        <attribute name="takeoffDistance" attributeType="Integer 16" usesScalarValueType="YES"/>
-        <attribute name="takeoffRun" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="takeoffDistance" attributeType="Integer 16" minValueString="0" usesScalarValueType="YES"/>
+        <attribute name="takeoffRun" attributeType="Integer 16" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="turf" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="airport" maxCount="1" deletionRule="Nullify" destinationEntity="Airport" inverseName="runways" inverseEntity="Airport"/>
     </entity>
     <elements>
-        <element name="Airport" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="Airport" positionX="-63" positionY="-18" width="128" height="149"/>
         <element name="Runway" positionX="-54" positionY="27" width="128" height="164"/>
     </elements>
 </model>
