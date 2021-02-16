@@ -195,9 +195,7 @@ struct PerformanceModel {
         return ifInitialized { runway, weather, weight in
             let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
             let temp = weather.temperature(at: Double(runway.elevation))
-            var gradient = takeoffClimbGradientModel(weight: weight, pressureAlt: pa, temp: temp)
-            
-            gradient *= Defaults[.safetyFactor]
+            let gradient = takeoffClimbGradientModel(weight: weight, pressureAlt: pa, temp: temp)
             
             var offscaleLow = false
             var offscaleHigh = false
@@ -217,11 +215,7 @@ struct PerformanceModel {
         return ifInitialized { runway, weather, weight in
             let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
             let temp = weather.temperature(at: Double(runway.elevation))
-            var rate = takeoffClimbRateModel(weight: weight, pressureAlt: pa, temp: temp)
-            
-            rate *= Defaults[.safetyFactor]
-            
-            rate *= Defaults[.safetyFactor]
+            let rate = takeoffClimbRateModel(weight: weight, pressureAlt: pa, temp: temp)
             
             var offscaleLow = false
             var offscaleHigh = false
