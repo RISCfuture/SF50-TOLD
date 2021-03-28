@@ -13,7 +13,7 @@ struct WeatherPicker: View {
     
     var body: some View {
         Form {
-            if WeatherService.instance.loading  {
+            if state.loading  {
                 HStack(spacing: 10) {
                     ProgressView().progressViewStyle(CircularProgressViewStyle())
                     Text("Loading weather…").foregroundColor(.secondary)

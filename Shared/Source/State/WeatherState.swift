@@ -19,6 +19,7 @@ class WeatherState: ObservableObject {
     @Published var userEditedTemperature: Double
     
     @Published var source: Source
+    @Published var loading = false
     var draft: Bool
     
     var observationError: Swift.Error? = nil
@@ -84,7 +85,7 @@ class WeatherState: ObservableObject {
         for c in cancellables { c.cancel() }
     }
     
-    func resetToISA() {
+    func resetToISA(observationError: Swift.Error? = nil, forecastError: Swift.Error? = nil) {
         windDirection = 0
         windSpeed = 0
         temperature = .ISA
@@ -92,27 +93,31 @@ class WeatherState: ObservableObject {
         altimeter = standardSLP
         source = .ISA
         observation = nil
-        observationError = nil
+        self.observationError = observationError
         forecast = nil
-        forecastError = nil
+        self.forecastError = forecastError
     }
     
-    func updateFrom(date: Date, observation observationResult: METARResult?, forecast forecastResult: TAFResult?) {
+    func updateFrom(date: Date, observationResult: WeatherService.FetchResult<METAR>, forecastResult: WeatherService.FetchResult<TAF>) {
         let observation: METAR?
         let forecast: TAF?
         let rawObservation: String?
         let rawForecast: String?
-        let observationError: Error?
-        let forecastError: Error?
+        let observationError: Swift.Error?
+        let forecastError: Swift.Error?
         
         switch observationResult {
-            case .success(let value):
+            case .some(let value):
                 observation = value
-                rawObservation = value?.text
+                rawObservation = value.text
                 observationError = nil
-            case .failure(let error, let raw):
+            case .parseError(let error, let raw):
                 observation = nil
                 rawObservation = raw
+                observationError = error
+            case .error(let error):
+                observation = nil
+                rawObservation = nil
                 observationError = error
             case .none:
                 observation = nil
@@ -120,13 +125,17 @@ class WeatherState: ObservableObject {
                 observationError = nil
         }
         switch forecastResult {
-            case .success(let value):
+            case .some(let value):
                 forecast = value
-                rawForecast = value?.text
+                rawForecast = value.text
                 forecastError = nil
-            case .failure(let error, let raw):
+            case .parseError(let error, let raw):
                 forecast = nil
                 rawForecast = raw
+                forecastError = error
+            case .error(let error):
+                forecast = nil
+                rawForecast = nil
                 forecastError = error
             case .none:
                 forecast = nil
@@ -135,7 +144,7 @@ class WeatherState: ObservableObject {
         }
 
         guard let values = valuesFrom(date: date, observation: observation, forecast: forecast) else {
-            RunLoop.main.perform { self.resetToISA() }
+            RunLoop.main.perform { self.resetToISA(observationError: observationError, forecastError: forecastError) }
             return
         }
         
@@ -152,8 +161,8 @@ class WeatherState: ObservableObject {
             
             self.observation = rawObservation
             self.forecast = rawForecast
-            self.observationError = observationError
-            self.forecastError = forecastError
+//            self.observationError = observationError
+//            self.forecastError = forecastError
 
         }
     }
@@ -176,6 +185,8 @@ fileprivate struct WeatherValues {
 }
 
 fileprivate func valuesFrom(date: Date, observation: METAR?, forecast: TAF?) -> WeatherValues? {
+    if observation == nil && forecast == nil { return nil }
+    
     if let observation = observation {
         let sinceMETAR = date.timeIntervalSince(observation.date)
         if sinceMETAR > METARUpdatePeriod {

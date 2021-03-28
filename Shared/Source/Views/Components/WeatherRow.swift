@@ -36,14 +36,14 @@ struct WeatherRow: View {
     }
     
     var body: some View {
-        if WeatherService.instance.loading {
+        if conditions.loading {
             HStack(spacing: 10) {
                 ProgressView().progressViewStyle(CircularProgressViewStyle())
                 Text("Loading weather…").foregroundColor(.secondary)
             }
         } else if conditions.source == .ISA {
             if conditions.observationError != nil || conditions.forecastError != nil {
-                Text("Couldn’t parse weather — using ISA").foregroundColor(.red)
+                Text("Couldn’t load weather — using ISA").foregroundColor(.red)
             } else {
                 Text("No weather — using ISA").foregroundColor(.secondary)
             }

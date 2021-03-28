@@ -2,168 +2,205 @@ import Foundation
 import Combine
 import Dispatch
 import OSLog
-import CSV
+import Alamofire
+import SWXMLHash
 import SwiftMETAR
 
-fileprivate let loadingQueue = DispatchQueue(label: "codes.tim.SF50-TOLD.LazyLoadingPublisher", qos: .utility, attributes: .concurrent)
+fileprivate let loadingQueue = DispatchQueue(label: "codes.tim.SF50-TOLD.ExpiringCache", qos: .utility, attributes: .concurrent)
 
-fileprivate class LazyLoadingPublisher<T>: ObservableObject {
-    typealias Processor = (_ data: Data) throws -> T
+fileprivate class ExpiringCache<Key: Hashable, Value, Error: Swift.Error> {
+    typealias Result = WeatherService.FetchResult<Value>
+    typealias ValueGenerator = (Key) -> AnyPublisher<Result, Error>
+    typealias ValueState = WeatherService.FetchState<Result>
+    typealias ValuePublisher = AnyPublisher<ValueState, Error>
+    typealias ValueSubject = CurrentValueSubject<ValueState, Error>
     
-    @Published var loading = false
-    private var loadingMutex = DispatchSemaphore(value: 1)
-    
-    private let url: URL
+    private var dictionary = Dictionary<Key, ValueSubject>()
+    private let expiryKey: KeyPath<Value, Date>
     private let timeout: TimeInterval
-    private let process: Processor
-    
-    private let value = CurrentValueSubject<T?, Swift.Error>(nil)
-    lazy var stream = value.filter { $0 != nil }.map { $0! }.eraseToAnyPublisher()
-    
-    private var lastLoaded: Date
+    private let valueGenerator: ValueGenerator
+    private let mutex = DispatchSemaphore(value: 1)
     private var cancellables = Set<AnyCancellable>()
     
-    private var sessionConfiguration: URLSessionConfiguration {
-        let config = URLSessionConfiguration.ephemeral
-        config.allowsCellularAccess = true
-        config.allowsConstrainedNetworkAccess = true
-        config.allowsExpensiveNetworkAccess = true
-        config.timeoutIntervalForRequest = 2
-        config.timeoutIntervalForResource = 2
-        return config
-    }
-    
-    init(url: URL, timeout: TimeInterval, process: @escaping Processor) {
-        self.url = url
+    init(expiryKey: KeyPath<Value, Date>, timeout: TimeInterval, valueGenerator: @escaping ValueGenerator) {
+        self.expiryKey = expiryKey
         self.timeout = timeout
-        self.lastLoaded = Date()
-        self.process = process
+        self.valueGenerator = valueGenerator
+        
+        AF.sessionConfiguration.timeoutIntervalForResource = 60
+        AF.sessionConfiguration.waitsForConnectivity = false
     }
     
     deinit {
         for c in cancellables { c.cancel() }
     }
     
-    func load(force: Bool = false) {
-        if !force && value.value != nil && lastLoaded.timeIntervalSinceNow < timeout {
-            return
+    subscript(key: Key) -> ValuePublisher {
+        mutex.wait()
+        guard let subject = dictionary[key] else {
+            let subject = CurrentValueSubject<ValueState, Error>(.loading)
+            dictionary[key] = subject
+            touch(key)
+            mutex.signal()
+            return subject.eraseToAnyPublisher()
         }
-        
-        loadingQueue.async {
-            let result = self.loadingMutex.wait(timeout: DispatchTime.now())
-            if result == .timedOut { return }
-            self.loading = true
-            
-            let session = URLSession(configuration: self.sessionConfiguration)
-            session.dataTaskPublisher(for: self.url)
-                .tryMap { data, response -> T in try self.process(data) }
-                .sink(receiveCompletion: { result in
-                    switch result {
-                        case .finished:
-                            self.lastLoaded = Date()
-                        case .failure(let error):
-                            self.value.send(completion: .failure(error))
-                    }
-                    self.loading = false
-                    self.loadingMutex.signal()
-                }, receiveValue: { value in
-                    self.value.send(value)
-                })
-                .store(in: &self.cancellables)
+        mutex.signal()
+        if isExpired(subject.value) { touch(key) }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    func reload(_ key: Key) -> ValuePublisher {
+        send(key: key, value: .loading)
+        touch(key)
+        return dictionary[key]!.eraseToAnyPublisher()
+    }
+    
+    func send(key: Key, value: ValueState) {
+        mutex.wait()
+        if dictionary.keys.contains(key) {
+            dictionary[key]!.send(value)
+        } else {
+            dictionary[key] = CurrentValueSubject<ValueState, Error>(value)
+        }
+        mutex.signal()
+    }
+    
+    private func isExpired(_ state: ValueState) -> Bool {
+        switch state {
+            case .loading: return false
+            case.finished(let result):
+                switch result {
+                    case .some(let value):
+                        let date = value[keyPath: expiryKey]
+                        return date.timeIntervalSinceNow > 0 || date.timeIntervalSinceNow <= -timeout
+                    default:
+                        return false
+                }
         }
     }
+    
+    private func touch(_ key: Key) {
+        valueGenerator(key).sink(receiveCompletion: { completion in
+            switch completion {
+                case .finished: break // keep our stream open for future requests
+                case .failure(let error):
+                    self.send(key: key, value: .finished(.error(error)))
+            }
+        }, receiveValue: { value in
+            var state: ValueState = .finished(value)
+            if self.isExpired(state) { state = .finished(.none) }
+            self.send(key: key, value: state)
+        }).store(in: &cancellables)
+    }
 }
-
-enum ParseResult<T, E: Swift.Error> {
-    case success(_ value: T?)
-    case failure(_ error: E, raw: String)
-}
-
-typealias METARResult = ParseResult<METAR, SwiftMETAR.Error>
-typealias TAFResult = ParseResult<TAF, SwiftMETAR.Error>
 
 class WeatherService: ObservableObject {
     static let instance = WeatherService()
     
-    @Published private(set) var loading = false
+    private let METARCache: ExpiringCache<String, METAR, Never>
+    private let TAFCache: ExpiringCache<String, TAF, Never>
     
-    private var METARs: LazyLoadingPublisher<Dictionary<String, ParseResult<METAR, SwiftMETAR.Error>>>
-    private var TAFs: LazyLoadingPublisher<Dictionary<String, ParseResult<TAF, SwiftMETAR.Error>>>
-    
-    private let METAR_URL = URL(string: "https://www.aviationweather.gov/adds/dataserver_current/current/metars.cache.csv")!
-    private let TAF_URL = URL(string: "https://www.aviationweather.gov/adds/dataserver_current/current/tafs.cache.csv")!
+    private static let METARPattern = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=%{icao}&hoursBeforeNow=2"
+    private static let TAFPattern = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=tafs&requestType=retrieve&format=xml&stationString=%{icao}&hoursBeforeNow=8"
     
     private let weatherTimeout: TimeInterval = 3600
-    private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "WeatherService")
+    private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "WeatherService")
     
-    private let METARProcessor: LazyLoadingPublisher<Dictionary<String, ParseResult<METAR, SwiftMETAR.Error>>>.Processor
-    private let TAFProcessor: LazyLoadingPublisher<Dictionary<String, ParseResult<TAF, SwiftMETAR.Error>>>.Processor
-        
-    private init() {
-        METARProcessor = { [logger] data in
-            let CSV = try CSVReader(stream: InputStream(data: data))
-            var METARs = Dictionary<String, ParseResult<METAR, SwiftMETAR.Error>>()
-            CSV.forEach { row in
-                guard row.count > 1 && row[0] != "raw_text" else { return }
-                do {
-                    let observation = try METAR.from(string: row[0])
-                    METARs[observation.stationID] = .success(observation)
-                } catch (let error as SwiftMETAR.Error) {
-                    METARs[row[1]] = .failure(error, raw: row[0])
-                } catch (let error) {
-                    logger.error("Error while parsing METAR: \(error.localizedDescription)")
-                }
-            }
-            return METARs
+    init() {
+        METARCache = .init(expiryKey: \.date, timeout: 3600) { icao -> AnyPublisher<FetchResult<METAR>, Never> in
+            return AF.request(Self.METAR_URL(icao))
+                .publishUnserialized(queue: loadingQueue)
+                .map { response in
+                    if let error = response.error { return .error(error) }
+                    guard let data = response.data else { return .none }
+                    
+                    let XML = SWXMLHash.parse(data)
+                    guard let rawText = XML["response"]["data"]["METAR"][0]["raw_text"].element?.text else {
+                        Self.logger.notice("No METAR in response for \(icao)")
+                        return .none
+                    }
+                    Self.logger.info("Loaded METAR: \(rawText)")
+                    do {
+                        return .some(try METAR.from(string: rawText))
+                    } catch (let error as Error) {
+                        Self.logger.error("Failed to parse METAR: \(error.localizedDescription)")
+                        return .parseError(error, raw: rawText)
+                    } catch (let error) {
+                        Self.logger.error("Failed to parse METAR: \(error.localizedDescription)")
+                        return .none
+                    }
+                }.eraseToAnyPublisher()
         }
-        
-        TAFProcessor = { [logger] data in
-            let CSV = try CSVReader(stream: InputStream(data: data))
-            var TAFs = Dictionary<String, ParseResult<TAF, SwiftMETAR.Error>>()
-            CSV.forEach { row in
-                guard row.count > 1 && row[0] != "raw_text" else { return }
-                do {
-                    let forecast = try TAF.from(string: row[0])
-                    TAFs[forecast.airportID] = .success(forecast)
-                } catch (let error as SwiftMETAR.Error) {
-                    TAFs[row[1]] = .failure(error, raw: row[0])
-                } catch (let error) {
-                    logger.error("Error while parsing METAR: \(error.localizedDescription)")
-                }
-            }
-            return TAFs
+        TAFCache = .init(expiryKey: \.originDate, timeout: 3600) { icao -> AnyPublisher<FetchResult<TAF>, Never> in
+            return AF.request(Self.TAF_URL(icao))
+                .publishUnserialized(queue: loadingQueue)
+                .map { response in
+                    if let error = response.error { return .error(error) }
+                    guard let data = response.data else { return .none }
+                    
+                    let XML = SWXMLHash.parse(data)
+                    guard let rawText = XML["response"]["data"]["TAF"][0]["raw_text"].element?.text else {
+                        Self.logger.notice("No TAF in response for \(icao)")
+                        return .none
+                    }
+                    Self.logger.info("Loaded TAF: \(rawText)")
+                    do {
+                        return .some(try TAF.from(string: rawText))
+                    } catch (let error as Error) {
+                        Self.logger.error("Failed to parse TAF: \(error.localizedDescription)")
+                        return .parseError(error, raw: rawText)
+                    } catch (let error) {
+                        Self.logger.error("Failed to parse TAF: \(error.localizedDescription)")
+                        return .none
+                    }
+                }.eraseToAnyPublisher()
         }
-        
-        METARs = LazyLoadingPublisher(url: METAR_URL, timeout: weatherTimeout, process: METARProcessor)
-        TAFs = LazyLoadingPublisher(url: TAF_URL, timeout: weatherTimeout, process: TAFProcessor)
-        
-        Publishers.CombineLatest(METARs.$loading, TAFs.$loading)
-            .map { $0 || $1 }
-            .assign(to: &$loading)
     }
     
-    
-    func getMETAR(for location: String, force: Bool = false) -> AnyPublisher<METARResult?, Never> {
-        METARs.load(force: force)
-        return METARs.stream
-            .mapError { error -> Swift.Error in self.logger.error("Error while getting METAR: \(error.localizedDescription)"); return error }
-            .map { $0[location] }
-            .replaceError(with: nil)
-            .eraseToAnyPublisher()
+    func getMETAR(for location: String, force: Bool = false) -> AnyPublisher<FetchState<FetchResult<METAR>>, Never> {
+        if force { return METARCache.reload(location) }
+        else { return METARCache[location] }
     }
     
-    func getTAF(for location: String, force: Bool = false) -> AnyPublisher<TAFResult?, Never> {
-        TAFs.load(force: force)
-        return TAFs.stream
-            .mapError { error -> Swift.Error in self.logger.error("Error while getting METAR: \(error.localizedDescription)"); return error }
-            .map { $0[location] }
-            .replaceError(with: nil)
-            .eraseToAnyPublisher()
+    func getTAF(for location: String, force: Bool = false) -> AnyPublisher<FetchState<FetchResult<TAF>>, Never> {
+        if force { return TAFCache.reload(location) }
+        else { return TAFCache[location] }
     }
     
-    func conditionsFor(airport: Airport, runway: Runway?, date: Date, force: Bool = false) -> AnyPublisher<(METARResult?, TAFResult?), Never> {
+    func conditionsFor(airport: Airport, runway: Runway?, date: Date, force: Bool = false) -> AnyPublisher<(FetchState<(FetchResult<METAR>, FetchResult<TAF>)>), Never> {
         let fakeICAO = airport.icao ?? "K\(airport.lid!)"
-        return Publishers.CombineLatest(getMETAR(for: fakeICAO, force: force), getTAF(for: fakeICAO, force: force))
-            .eraseToAnyPublisher()
+        return Publishers.CombineLatest(
+            getMETAR(for: fakeICAO, force: force),
+            getTAF(for: fakeICAO, force: force)
+        ).map { METARState, TAFState -> FetchState<(FetchResult<METAR>, FetchResult<TAF>)> in
+            switch METARState {
+                case .loading: return .loading
+                case .finished(let METAR):
+                    switch TAFState {
+                        case .loading: return .loading
+                        case .finished(let TAF): return .finished((METAR, TAF))
+                    }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    private static func METAR_URL(_ icao: String) -> URL {
+        return URL(string: METARPattern.replacingOccurrences(of: "%{icao}", with: icao))!
+    }
+    
+    private static func TAF_URL(_ icao: String) -> URL {
+        return URL(string: TAFPattern.replacingOccurrences(of: "%{icao}", with: icao))!
+    }
+    
+    enum FetchResult<Value> {
+        case none
+        case some(_ value: Value)
+        case error(_ error: Swift.Error)
+        case parseError(_ error: SwiftMETAR.Error, raw: String)
+    }
+    
+    enum FetchState<Value> {
+        case loading
+        case finished(_ value: Value)
     }
 }

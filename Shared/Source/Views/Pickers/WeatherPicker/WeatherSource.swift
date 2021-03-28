@@ -34,7 +34,7 @@ struct WeatherSource: View {
             HStack {
                 if weather.resetDueToError {
                     VStack(alignment: .leading) {
-                        Text("Couldn’t parse weather — using ISA")
+                        Text("Couldn’t load weather — using ISA")
                             .font(.system(size: 14))
                             .foregroundColor(.red)
                     }

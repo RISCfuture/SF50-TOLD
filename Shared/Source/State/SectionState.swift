@@ -76,16 +76,16 @@ class SectionState: ObservableObject {
         }
         
         WeatherService.instance.conditionsFor(airport: airport, runway: runway, date: date, force: force)
-            .sink {
-                guard let observation = $0, let forecast = $1 else {
-                    RunLoop.main.perform {
-                        self.performance.weatherState.resetToISA()
-                    }
-                    return
+            .sink { state in
+                switch state {
+                    case .loading:
+                        RunLoop.main.perform { self.performance.weatherState.loading = true }
+                    case .finished(let pair):
+                        self.performance.weatherState.updateFrom(date: date,
+                                                                 observationResult: pair.0,
+                                                                 forecastResult: pair.1)
+                        RunLoop.main.perform { self.performance.weatherState.loading = false }
                 }
-                self.performance.weatherState.updateFrom(date: date,
-                                                    observation: observation,
-                                                    forecast: forecast)
             }
             .store(in: &cancellables)
     }
