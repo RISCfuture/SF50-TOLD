@@ -46,7 +46,7 @@ struct LoadingConsentView: View {
                     }
                 }
             }
-        }.padding(.vertical, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+        }.padding()
     }
 }
 

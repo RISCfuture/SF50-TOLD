@@ -15,7 +15,7 @@ struct ErrorView: View {
             }
             Text(error.localizedDescription)
                 .font(.subheadline)
-        }
+        }.padding()
     }
 }
 
