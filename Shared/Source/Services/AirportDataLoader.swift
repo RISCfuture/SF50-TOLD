@@ -13,9 +13,9 @@ class AirportDataLoader: ObservableObject {
     
     private var urlSessionConfiguration: URLSessionConfiguration {
         let config = URLSessionConfiguration.ephemeral
-        config.allowsConstrainedNetworkAccess = false
-        config.allowsExpensiveNetworkAccess = false
-        config.waitsForConnectivity = true
+//        config.allowsConstrainedNetworkAccess = false
+//        config.allowsExpensiveNetworkAccess = false
+        config.waitsForConnectivity = false
         return config
     }
     

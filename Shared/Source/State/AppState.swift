@@ -1,14 +1,19 @@
 import Foundation
 import Combine
 import CoreData
+import Dispatch
 import OSLog
+import Network
 
 class AppState: ObservableObject {
     @Published var payload = 0.0
+    
     @Published var error: Error? = nil
+    
     @Published var loadingAirports = false
     @Published var needsLoad = true
     @Published var canSkipLoad = false
+    @Published var networkIsExpensive = false
     
     @Published var takeoff: SectionState!
     @Published var landing: SectionState!
@@ -20,7 +25,8 @@ class AppState: ObservableObject {
     let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "MainViewController")
     
     private let weightFormatter = ValueFormatter(precision: 0)
-    
+    private let networkMonitor = NWPathMonitor()
+    private let networkMonitorQueue = DispatchQueue(label: "codes.tim.SF50-Told.networkMonitorQueue")
     private var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -34,6 +40,12 @@ class AppState: ObservableObject {
         landing = SectionState(operation: .landing, persistentContainer: persistentContainer)
         handleNestedChanges()
         
+        networkMonitor.pathUpdateHandler = { path in
+            RunLoop.main.perform {
+                self.networkIsExpensive = (path.isConstrained || path.isExpensive)
+            }
+        }
+        networkMonitor.start(queue: networkMonitorQueue)
     }
     
     deinit {
