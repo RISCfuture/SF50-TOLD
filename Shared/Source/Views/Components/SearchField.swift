@@ -10,7 +10,6 @@ struct SearchField: View {
     #else
     var backgroundColor = NSColor.clear
     #endif
-    
     var body: some View {
         HStack {
             TextField(placeholder, text: $text)

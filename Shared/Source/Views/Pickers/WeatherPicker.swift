@@ -1,5 +1,4 @@
 import SwiftUI
-import CoreData
 
 struct WeatherPicker: View {
     var downloadWeather: () -> Void

@@ -1,53 +1,18 @@
 import Foundation
 import Combine
 import CoreData
-import Defaults
 import OSLog
 import SwiftMETAR
 
 class SectionState: ObservableObject {
-    @Published var performance = PerformanceState()
-    @Published var airportID: String? = nil
-    @Published var airportFilterText = ""
-    @Published var matchingAirports = Array<Airport>()
-    
+    @Published var performance: PerformanceState
     @Published var error: Swift.Error? = nil
-    
-    let operation: Operation
-    private var defaultKey: Defaults.Key<String?> {
-        switch operation {
-            case .takeoff: return .takeoffAirport
-            case .landing: return .landingAirport
-        }
-    }
-    
+        
     private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "SectionState")
-    
-    private let persistentContainer: NSPersistentContainer
-    lazy private var airportStorage = AirportStorage(context: persistentContainer.newBackgroundContext())
-    
     private var cancellables = Set<AnyCancellable>()
     
-    init(operation: Operation, persistentContainer: NSPersistentContainer) {
-        self.operation = operation
-        self.persistentContainer = persistentContainer
-        
-        $airportFilterText.tryMap { text in
-            try self.airportStorage.findAirports(query: text)
-        }.replaceError(with: [])
-        .receive(on: RunLoop.main)
-        .assign(to: &$matchingAirports)
-        
-        airportID = Defaults[defaultKey]
-        $airportID.receive(on: RunLoop.main).sink { Defaults[self.defaultKey] = $0 }.store(in: &cancellables)
-        $airportID.tryMap { ID -> Airport? in
-            guard let ID = ID else { return nil }
-            return try self.airportStorage.airport(id: ID)
-        }.catch { error -> AnyPublisher<Airport?, Never> in
-            self.error = error
-            return Just(nil).eraseToAnyPublisher()
-        }.receive(on: RunLoop.main)
-        .assign(to: &performance.$airport)
+    init(operation: Operation) {
+        performance = PerformanceState(operation: operation)
         
         Publishers.CombineLatest3(
             performance.$airport,

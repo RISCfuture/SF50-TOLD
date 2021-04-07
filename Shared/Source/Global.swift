@@ -58,3 +58,5 @@ let minRunwayLength = 1500 // ft
 let minTemperature = -40.0 // °C
 let maxTemperature = 50.0 // °C
 let tailwindLimit: UInt = 10 // kts
+
+let maxRecents = 10

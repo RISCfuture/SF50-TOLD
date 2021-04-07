@@ -1,5 +1,4 @@
 import SwiftUI
-import CoreData
 import Defaults
 
 
@@ -46,7 +45,7 @@ struct LoadoutView_Previews: PreviewProvider {
         Form {
             LoadoutView(title: "Takeoff",
                         maxWeight: maxTakeoffWeight)
-                .environmentObject(PerformanceState())
+                .environmentObject(PerformanceState(operation: .takeoff))
         }
     }
 }

@@ -4,18 +4,18 @@ import CoreData
 
 struct TakeoffView: View {
     @EnvironmentObject var state: SectionState
-    @ObservedObject var performance: PerformanceState
-        
+    private var performance: PerformanceState { state.performance }
+
     private var takeoffRun: Double? {
         guard let run = performance.runway?.takeoffRun else { return nil }
         return Double(run)
     }
-    
+
     private var takeoffDistance: Double? {
         guard let distance = performance.runway?.takeoffDistance else { return nil }
         return Double(distance)
     }
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -65,7 +65,7 @@ struct TakeoffView: View {
 }
 
 struct TakeoffView_Previews: PreviewProvider {
-    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+    static let model = AppState().persistentContainer.managedObjectModel
     static let runway = model.entitiesByName["Runway"]!
     static var rwy12 = { () -> Runway in
         let r = Runway(entity: runway, insertInto: nil)
@@ -94,12 +94,9 @@ struct TakeoffView_Previews: PreviewProvider {
         a.addToRunways(rwy30)
         return a
     }()
-    static var state: AppState {
-        let state = AppState()
-        return state
-    }
-    
+
     static var previews: some View {
-        TakeoffView(performance: state.takeoff.performance).environmentObject(state.takeoff)
+        TakeoffView()
+            .environmentObject(AppState().takeoff)
     }
 }

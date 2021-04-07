@@ -1,22 +1,28 @@
 import Foundation
-import Combine
 import CoreData
 import Dispatch
 import OSLog
 import Defaults
 
-class AirportStorage: ObservableObject {
+class AirportStorage {
+    static let instance = AirportStorage()
+    
     private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "AirportStorage")
     private let queue = DispatchQueue(label: "SF50-Told.AirportService", qos: .background)
+    private lazy var airportCache = ManagedObjectCache<Airport>(context: context!)
     
-    private let context: NSManagedObjectContext
-    
-    required init(context: NSManagedObjectContext) {
-        self.context = context
+    private var context: NSManagedObjectContext? { AppState.instance?.viewContext }
+    private var favoritesRequest: NSFetchRequest<Airport> {
+        let request = NSFetchRequest<Airport>(entityName: "Airport")
+        request.predicate = NSPredicate(format: "favorite == YES")
+        request.sortDescriptors = [.init(key: "lid", ascending: true)]
+        return request
     }
     
+    private init() {}
+    
     func airport(id: String) throws -> Airport? {
-        let results = try context.fetch(byIDRequest(id: id))
+        let results = try airportCache.fetch(byIDRequest(id: id))
         guard results.count == 1 else {
             logger.error("Couldn't find exactly one airport with ID '\(id)'")
             return nil
@@ -24,19 +30,23 @@ class AirportStorage: ObservableObject {
         return results[0]
     }
     
-    func findAirports(query: String) throws -> Array<Airport> {
+    func airportsForQuery(_ query: String) throws -> Array<Airport> {
         guard query.count >= 3 else { return [] }
         
-        var airports = try context.fetch(filterRequest(string: query))
+        var airports = try airportCache.fetch(filterRequest(string: query))
         airports.sort { decreasingSimilarity(query: query, airport1: $0, airport2: $1) }
         return airports
+    }
+    
+    func favoritesAndRecents() throws -> Array<Airport> {
+        let faves = try airportCache.fetch(favoritesRequest)
+        let recents = try airportCache.fetch(recentsRequest(excludeIDs: faves.map { $0.id! }))
+        return faves + recents
     }
     
     private func filterRequest(string: String) -> NSFetchRequest<Airport> {
         let request = NSFetchRequest<Airport>(entityName: "Airport")
         request.fetchLimit = 100
-        request.includesPropertyValues = true
-        request.returnsObjectsAsFaults = false
         let predicate = NSPredicate(format: "longestRunway >= %@ AND (lid ==[c] %@ OR icao ==[c] %@ OR name CONTAINS[cd] %@ OR city CONTAINS[cd] %@)",
                                     NSNumber(integerLiteral: minRunwayLength), string, string, string, string)
         request.predicate = predicate
@@ -46,11 +56,16 @@ class AirportStorage: ObservableObject {
     private func byIDRequest(id: String) -> NSFetchRequest<Airport> {
         let request = NSFetchRequest<Airport>(entityName: "Airport")
         request.fetchLimit = 1
-        request.includesPropertyValues = true
-        request.includesSubentities = true
-        request.returnsObjectsAsFaults = false
         let predicate = NSPredicate(format: "id == %@", id)
         request.predicate = predicate
+        return request
+    }
+    
+    private func recentsRequest(excludeIDs: Array<String>) -> NSFetchRequest<Airport> {
+        let request = NSFetchRequest<Airport>(entityName: "Airport")
+        request.predicate = NSPredicate(format: "lastUsed != NIL AND NOT (id IN %@)", excludeIDs)
+        request.sortDescriptors = [.init(key: "lastUsed", ascending: false)]
+        request.fetchLimit = maxRecents
         return request
     }
     

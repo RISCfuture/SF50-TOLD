@@ -1,6 +1,5 @@
 import SwiftUI
 import Combine
-import CoreData
 
 struct PerformanceView: View {
     @EnvironmentObject var state: SectionState
@@ -13,8 +12,8 @@ struct PerformanceView: View {
     var body: some View {
         LoadoutView(title: title, maxWeight: maxWeight)
             .environmentObject(state.performance)
-        ConfigurationView(operation: operation).environmentObject(state.performance)
-        TimeAndPlaceView(moment: moment, operation: operation, downloadWeather: {
+        ConfigurationView().environmentObject(state.performance)
+        TimeAndPlaceView(moment: moment, downloadWeather: {
             // force a reload of the weather unless we are reverting from custom
             // to downloaded weather
             let force = state.performance.weather.source != .entered
@@ -28,7 +27,7 @@ struct PerformanceView: View {
 }
 
 struct PerformanceView_Previews: PreviewProvider {
-    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+    static let model = state.persistentContainer.managedObjectModel
     static var rwy12 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "12"

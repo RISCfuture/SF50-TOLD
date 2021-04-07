@@ -2,11 +2,10 @@ import SwiftUI
 
 struct ConfigurationView: View {
     @EnvironmentObject var state: PerformanceState
-    var operation: Operation
         
     var body: some View {
         Section(header: Text("Configuration")) {
-            switch operation {
+            switch state.operation {
                 case .takeoff:
                     HStack {
                         Text("Flaps")
@@ -33,7 +32,7 @@ struct ConfigurationView: View {
 struct LandingConfigurationView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            ConfigurationView(operation: .landing).environmentObject(PerformanceState())
+            ConfigurationView().environmentObject(PerformanceState(operation: .takeoff))
         }
     }
 }

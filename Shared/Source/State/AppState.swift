@@ -6,58 +6,66 @@ import OSLog
 import Network
 
 class AppState: ObservableObject {
+    static var instance: AppState? = nil
+
     @Published var payload = 0.0
-    
+
     @Published var error: Error? = nil
-    
+
     @Published var loadingAirports = false
     @Published var needsLoad = true
     @Published var canSkipLoad = false
     @Published var networkIsExpensive = false
-    
+
     @Published var takeoff: SectionState!
     @Published var landing: SectionState!
     @Published var settings = SettingsState()
-        
+
     let persistentContainer: NSPersistentContainer
     var airportLoadingService: AirportLoadingService!
-    
+
     let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "MainViewController")
-    
+
     private let weightFormatter = ValueFormatter(precision: 0)
     private let networkMonitor = NWPathMonitor()
     private let networkMonitorQueue = DispatchQueue(label: "codes.tim.SF50-Told.networkMonitorQueue")
     private var cancellables = Set<AnyCancellable>()
-    
+
+    var viewContext: NSManagedObjectContext { persistentContainer.viewContext }
+
     init() {
+        guard Self.instance == nil else { fatalError("Tried to initialize AppState twice") }
+
         persistentContainer = NSPersistentContainer(name: "Airports")
         configurePersistentContainer()
 
         airportLoadingService = AirportLoadingService(container: persistentContainer)
         configureLoadingService()
-        
-        takeoff = SectionState(operation: .takeoff, persistentContainer: persistentContainer)
-        landing = SectionState(operation: .landing, persistentContainer: persistentContainer)
+
+        takeoff = SectionState(operation: .takeoff)
+        landing = SectionState(operation: .landing)
         handleNestedChanges()
-        
+
         networkMonitor.pathUpdateHandler = { path in
             RunLoop.main.perform {
                 self.networkIsExpensive = (path.isConstrained || path.isExpensive)
             }
         }
         networkMonitor.start(queue: networkMonitorQueue)
+
+        Self.instance = self
     }
-    
+
     deinit {
         for c in cancellables { c.cancel() }
     }
-    
+
     private func configurePersistentContainer() {
         guard let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.codes.tim.TOLD") else {
             fatalError("Shared file container couild not be created.")
         }
         let storeURL = containerURL.appendingPathComponent("Airports.sqlite")
-        
+
         persistentContainer.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
         persistentContainer.loadPersistentStores { description, error in
             if let error = error {
@@ -65,17 +73,19 @@ class AppState: ObservableObject {
             }
         }
     }
-    
+
     private func configureLoadingService() {
         airportLoadingService.$error.receive(on: RunLoop.main).assign(to: &$error)
         airportLoadingService.$progress.receive(on: RunLoop.main).map { $0 != nil }.assign(to: &$loadingAirports)
         airportLoadingService.$needsLoad.receive(on: RunLoop.main).assign(to: &$needsLoad)
         airportLoadingService.$canSkip.receive(on: RunLoop.main).assign(to: &$canSkipLoad)
     }
-    
+
     private func handleNestedChanges() {
         takeoff.objectWillChange.receive(on: RunLoop.main).sink { [weak self] _ in self?.objectWillChange.send() }.store(in: &cancellables)
         landing.objectWillChange.receive(on: RunLoop.main).sink { [weak self] _ in self?.objectWillChange.send() }.store(in: &cancellables)
         settings.objectWillChange.receive(on: RunLoop.main).sink { [weak self] _ in self?.objectWillChange.send() }.store(in: &cancellables)
     }
+
+    func backgroundContext() -> NSManagedObjectContext { persistentContainer.newBackgroundContext() }
 }

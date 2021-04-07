@@ -4,7 +4,9 @@ import Defaults
 
 struct AirportPicker: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @EnvironmentObject var state: SectionState
+    @EnvironmentObject var state: AirportPickerState
+    
+    var setAirport: (Airport) -> Void
     
     private var predicate: NSPredicate {
         let text = state.airportFilterText
@@ -21,26 +23,34 @@ struct AirportPicker: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            SearchField(placeholder: "Find Airport", text: $state.airportFilterText)
-            
-            if state.matchingAirports.isEmpty && state.airportFilterText.isEmpty {
-                List {
-                    Text("No results.")
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.leading)
-                }
-            } else {
-                List(state.matchingAirports) { (airport: Airport) in
-                    AirportRow(airport: airport).onTapGesture {
-                        state.airportID = airport.id!
-                        self.mode.wrappedValue.dismiss()
+        ErrorView(error: state.error) {
+            VStack(alignment: .leading) {
+                SearchField(placeholder: "Find Airport", text: $state.airportFilterText)
+                if state.matchingAirports.isEmpty && state.favoriteAndRecentAirports.isEmpty {
+                    List {
+                        Text("No results.")
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.leading)
+                    }
+                } else if state.matchingAirports.isEmpty {
+                    List(state.favoriteAndRecentAirports) { (airport: Airport) in
+                        AirportRow(showIcon: true) {
+                            self.setAirport(airport)
+                            self.mode.wrappedValue.dismiss()
+                        }.environmentObject(AirportState(airport: airport))
+                    }
+                } else {
+                    List(state.matchingAirports) { (airport: Airport) in
+                        AirportRow(showIcon: true) {
+                            self.setAirport(airport)
+                            self.mode.wrappedValue.dismiss()
+                        }.environmentObject(AirportState(airport: airport))
                     }
                 }
-            }
-            
-            Spacer()
-        }.navigationTitle("Airport")
+                
+                Spacer()
+            }.navigationTitle("Airport")
+        }
     }
 }
 
@@ -60,6 +70,6 @@ struct AirportPicker_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        AirportPicker().environmentObject(SectionState(operation: .takeoff, persistentContainer: AppState().persistentContainer))
+        AirportPicker(setAirport: { _ in }).environmentObject(AirportPickerState())
     }
 }

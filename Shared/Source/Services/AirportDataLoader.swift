@@ -3,8 +3,12 @@ import CoreData
 import OSLog
 import SwiftNASR
 
+fileprivate struct FavoritesAndRecents {
+    var favorites: Set<String>
+    var recents: Dictionary<String, Date>
+}
+
 class AirportDataLoader: ObservableObject {
-    private let persistentContainer: NSPersistentContainer
     @Published private(set) var progress: Progress? = nil
     @Published private(set) var error: Swift.Error? = nil
     
@@ -25,8 +29,23 @@ class AirportDataLoader: ObservableObject {
         return loader
     }
     
-    required init(container: NSPersistentContainer) {
-        persistentContainer = container
+    private var favoritesFetchRequest: NSFetchRequest<Airport> {
+        let request = NSFetchRequest<Airport>(entityName: "Airport")
+        request.predicate = NSPredicate(format: "favorite == YES")
+        request.includesPropertyValues = true
+        return request
+    }
+    
+    private var recentsFetchRequest: NSFetchRequest<Airport> {
+        let request = NSFetchRequest<Airport>(entityName: "Airport")
+        request.predicate = NSPredicate(format: "favorite == NO AND lastUsed != NIL")
+        request.sortDescriptors = [.init(key: "lastUsed", ascending: false)]
+        request.includesPropertyValues = true
+        request.fetchLimit = maxRecents
+        return request
+    }
+    
+    required init() {
         ConcurrentDistribution.progressQueue = DispatchQueue.main
     }
     
@@ -69,24 +88,42 @@ class AirportDataLoader: ObservableObject {
     }
     
     private func loadAirports(_ data: NASRData, progress: Progress) throws {
-        let context = persistentContainer.newBackgroundContext()
+        guard let context = AppState.instance?.backgroundContext() else { return }
+        let favoritesAndRecents = try storeFavoritesAndRecents(context: context)
         try deleteExistingAirports(context: context)
-        try addNewAirportsFrom(data, context: context, progress: progress)
+        try addNewAirportsFrom(data, context: context, progress: progress, favoritesAndRecents: favoritesAndRecents)
         try context.save()
     }
     
-    private func deleteExistingAirports(context: NSManagedObjectContext) throws {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Airport")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-        try persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: context)
+    private func storeFavoritesAndRecents(context: NSManagedObjectContext) throws -> FavoritesAndRecents {
+        let favesResult = try context.fetch(favoritesFetchRequest)
+        let faves = Set<String>(favesResult.map { $0.id! })
+        
+        let recentsResult = try context.fetch(recentsFetchRequest)
+        let recents = Dictionary(uniqueKeysWithValues: recentsResult.map { ($0.id!, $0.lastUsed!) })
+        
+        return FavoritesAndRecents(favorites: faves, recents: recents)
     }
     
-    private func addNewAirportsFrom(_ data: NASRData, context: NSManagedObjectContext, progress: Progress) throws {
+    private func deleteExistingAirports(context: NSManagedObjectContext) throws {
+        guard let coordinator = AppState.instance?.persistentContainer.persistentStoreCoordinator else { return }
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Airport")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+        try coordinator.execute(deleteRequest, with: context)
+    }
+    
+    private func addNewAirportsFrom(_ data: NASRData, context: NSManagedObjectContext, progress: Progress, favoritesAndRecents: FavoritesAndRecents) throws {
         progress.addChild(identifier: "addRecords", totalUnitCount: Int64(data.airports!.count), pendingUnitCount: 1)
         
         for airport in data.airports! {
             var airportRecord = Airport(entity: Airport.entity(), insertInto: context)
             configureRecord(&airportRecord, from: airport)
+            if favoritesAndRecents.favorites.contains(airport.id) {
+                airportRecord.favorite = true
+            }
+            if favoritesAndRecents.recents.keys.contains(airport.id) {
+                airportRecord.lastUsed = favoritesAndRecents.recents[airport.id]
+            }
             
             for runway in airport.runways {
                 var baseEndRecord = Runway(entity: Runway.entity(), insertInto: context)

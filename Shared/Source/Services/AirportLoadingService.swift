@@ -12,12 +12,10 @@ class AirportLoadingService: ObservableObject {
     @Published private(set) var canSkip = false
     @Published var skipLoadThisSession = false
     
-    private let airportDataLoader: AirportDataLoader
+    private let airportDataLoader = AirportDataLoader()
     
     var loading: Bool { progress != nil }
-        
     required init(container: NSPersistentContainer) {
-        airportDataLoader = .init(container: container)
         airportDataLoader.$progress.receive(on: RunLoop.main).assign(to: &$progress)
         airportDataLoader.$error.receive(on: RunLoop.main).assign(to: &$error)
         

@@ -1,11 +1,8 @@
 import SwiftUI
-import CoreData
 
 struct RunwayPicker: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @EnvironmentObject var state: PerformanceState
-    
-    var operation: Operation
     
     var runways: Array<Runway> {
         guard let airport = state.airport else { return [] }
@@ -17,7 +14,7 @@ struct RunwayPicker: View {
         VStack(alignment: .leading) {
             List(runways, id: \.name) { runway in
                 RunwayRow(runway: runway,
-                          operation: operation,
+                          operation: state.operation,
                           wind: state.weather.wind,
                           crosswindLimit: crosswindLimitForFlapSetting(state.flaps),
                           tailwindLimit: tailwindLimit).onTapGesture {
@@ -31,7 +28,7 @@ struct RunwayPicker: View {
 }
 
 struct RunwayPicker_Previews: PreviewProvider {
-    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+    static let model = AppState().persistentContainer.managedObjectModel
     static let runway = model.entitiesByName["Runway"]!
     static let airport = model.entitiesByName["Airport"]!
     
@@ -53,7 +50,7 @@ struct RunwayPicker_Previews: PreviewProvider {
     }()
     
     static var state: PerformanceState {
-        let state = PerformanceState()
+        let state = PerformanceState(operation: .takeoff)
         state.airport = Airport(entity: airport, insertInto: nil)
         state.airport!.addToRunways(rwy12)
         state.airport!.addToRunways(rwy30)
@@ -61,7 +58,7 @@ struct RunwayPicker_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        RunwayPicker(operation: .takeoff)
+        RunwayPicker()
             .environmentObject(state)
     }
 }
