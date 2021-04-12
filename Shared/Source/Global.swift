@@ -54,7 +54,7 @@ func crosswindLimitForFlapSetting(_ flaps: FlapSetting?) -> UInt? {
 let maxFuel = 296.0 // gal
 let maxTakeoffWeight = 6000.0 // lbs
 let maxLandingWeight = 5550.0 // lbs
-let minRunwayLength = 1500 // ft
+let minRunwayLength = 1400 // ft
 let minTemperature = -40.0 // °C
 let maxTemperature = 50.0 // °C
 let tailwindLimit: UInt = 10 // kts
