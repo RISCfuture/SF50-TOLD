@@ -69,7 +69,10 @@ class SectionState: ObservableObject {
     func downloadWeather(airport: Airport? = nil, date: Date = Date(), force: Bool = false) {
         weatherLoadingCanceled = false
         guard let airport = airport else {
-            RunLoop.main.perform { self.performance.weatherState.resetToISA() }
+            RunLoop.main.perform {
+                self.performance.weatherState.resetToISA()
+                self.performance.weatherState.loading = false
+            }
             return
         }
         
