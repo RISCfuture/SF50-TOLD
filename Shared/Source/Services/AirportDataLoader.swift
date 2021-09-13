@@ -22,6 +22,7 @@ class AirportDataLoader: ObservableObject {
     func loadNASR(callback: @escaping (Result<Cycle?, Swift.Error>) -> Void) {
         let progress = Progress(totalUnitCount: 10)
         DispatchQueue.main.async { self.progress = progress }
+        RunLoop.main.perform { UIApplication.shared.isIdleTimerDisabled = true }
         
         queue.async {
             let nasr = NASR(loader: self.loader)
@@ -40,6 +41,7 @@ class AirportDataLoader: ObservableObject {
                                 try self.loadAirports(nasr.data, progress: progress)
                                 self.logger.info("NASR airports loaded")
                                 DispatchQueue.main.async { self.progress = nil }
+                                RunLoop.main.perform { UIApplication.shared.isIdleTimerDisabled = false }
                                 callback(.success(nasr.data.cycle))
                             } catch (let error) {
                                 self.logger.error("Couldn't parse airports: \(error.localizedDescription)")
