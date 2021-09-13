@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
 import OSLog
+import UIKit
 import SwiftNASR
 
 class AirportDataLoader: ObservableObject {
@@ -11,19 +12,7 @@ class AirportDataLoader: ObservableObject {
     private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "AirportDataLoader")
     private let queue = DispatchQueue(label: "SF50-Told.AirportService", qos: .background)
     
-    private var urlSessionConfiguration: URLSessionConfiguration {
-        let config = URLSessionConfiguration.ephemeral
-//        config.allowsConstrainedNetworkAccess = false
-//        config.allowsExpensiveNetworkAccess = false
-        config.waitsForConnectivity = false
-        return config
-    }
-    
-    private var loader: Loader {
-        let loader = ArchiveDataDownloader()
-        loader.session = URLSession(configuration: urlSessionConfiguration)
-        return loader
-    }
+    private var loader = BackgroundDownloader()
     
     required init(container: NSPersistentContainer) {
         persistentContainer = container

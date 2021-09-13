@@ -150,6 +150,7 @@
 		017B669A258898DA00AA2DE9 /* WeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B6699258898DA00AA2DE9 /* WeatherState.swift */; };
 		017B669B258898DA00AA2DE9 /* WeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B6699258898DA00AA2DE9 /* WeatherState.swift */; };
 		017ED15B261027A9002C69DE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 017ED15A261027A9002C69DE /* Alamofire */; };
+		018CF99D2682A54100F52821 /* AirportLoaderTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CF99C2682A54000F52821 /* AirportLoaderTask.swift */; };
 		0191C05E25B2BF7800C4B810 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0191C05D25B2BF7800C4B810 /* AppState.swift */; };
 		0191C05F25B2BF7800C4B810 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0191C05D25B2BF7800C4B810 /* AppState.swift */; };
 		0191C06025B2BF7800C4B810 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0191C05D25B2BF7800C4B810 /* AppState.swift */; };
@@ -203,6 +204,10 @@
 		01F18D3425B19990007D76BA /* TimeAndPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */; };
 		01F18D3525B19990007D76BA /* TimeAndPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */; };
 		01F18D3625B19990007D76BA /* TimeAndPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */; };
+		01F4C9232681A3D100F2F705 /* BackgroundDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */; };
+		01F4C9242681A3D100F2F705 /* BackgroundDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */; };
+		01F4C9252681A3D100F2F705 /* BackgroundDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */; };
+		01F4C9262681A3D100F2F705 /* BackgroundDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */; };
 		01F59A1F25AE63AC0055E81B /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59A1E25AE63AC0055E81B /* PerformanceView.swift */; };
 		01F59A2025AE63AC0055E81B /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59A1E25AE63AC0055E81B /* PerformanceView.swift */; };
 		01F59A2125AE63AC0055E81B /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59A1E25AE63AC0055E81B /* PerformanceView.swift */; };
@@ -275,6 +280,7 @@
 		0179866F25C280D30031A453 /* WeatherForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForm.swift; sourceTree = "<group>"; };
 		017B668F2588980F00AA2DE9 /* PerformanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceModel.swift; sourceTree = "<group>"; };
 		017B6699258898DA00AA2DE9 /* WeatherState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherState.swift; sourceTree = "<group>"; };
+		018CF99C2682A54000F52821 /* AirportLoaderTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportLoaderTask.swift; sourceTree = "<group>"; };
 		0191C05D25B2BF7800C4B810 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0191C06A25B2C02900C4B810 /* SectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionState.swift; sourceTree = "<group>"; };
 		019CC28325B91C0F00FEA895 /* DecimalField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalField.swift; sourceTree = "<group>"; };
@@ -293,6 +299,7 @@
 		01E2A1EA25ABA7D20076CC84 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		01F18D2525B198B6007D76BA /* LoadoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadoutView.swift; sourceTree = "<group>"; };
 		01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndPlaceView.swift; sourceTree = "<group>"; };
+		01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDownloader.swift; sourceTree = "<group>"; };
 		01F59A1E25AE63AC0055E81B /* PerformanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceView.swift; sourceTree = "<group>"; };
 		01F7EB9D25BBFA2A00CE5024 /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
 		01F7EBAA25BBFFCB00CE5024 /* CompactLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactLabelStyle.swift; sourceTree = "<group>"; };
@@ -476,6 +483,7 @@
 				0135A83525872EC100892558 /* Services */,
 				0135A80825870E1800892558 /* State */,
 				01DD6D7C25B3AC4E004A2CA8 /* Storage */,
+				018CF99B2682A53300F52821 /* Tasks */,
 				0135A86E2587482600892558 /* Views */,
 			);
 			path = Source;
@@ -507,6 +515,7 @@
 				01D0B59025AD50AF00922ED0 /* AirportDataLoader+Progress.swift */,
 				01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */,
 				0135A83625872EDE00892558 /* WeatherService.swift */,
+				01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -553,6 +562,14 @@
 				0179865925C280B60031A453 /* WeatherSource.swift */,
 			);
 			path = WeatherPicker;
+			sourceTree = "<group>";
+		};
+		018CF99B2682A53300F52821 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				018CF99C2682A54000F52821 /* AirportLoaderTask.swift */,
+			);
+			path = Tasks;
 			sourceTree = "<group>";
 		};
 		01D265B425AD807100322A45 /* RunwayRow */ = {
@@ -791,6 +808,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				018CF99D2682A54100F52821 /* AirportLoaderTask.swift in Sources */,
+				01F4C9232681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				0179866725C280C40031A453 /* RawWeather.swift in Sources */,
 				01D7DA6C25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				0166FC9625BFFDA7006F7258 /* View Functions.swift in Sources */,
@@ -846,6 +865,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01F4C9242681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				01D0B59225AD50AF00922ED0 /* AirportDataLoader+Progress.swift in Sources */,
 				01D7DA6D25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				0179865B25C280B60031A453 /* WeatherSource.swift in Sources */,
@@ -931,6 +951,7 @@
 				015A393025C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
 				016C736C25AE40120008455F /* LandingView.swift in Sources */,
 				016C736D25AE40120008455F /* SettingsView.swift in Sources */,
+				01F4C9252681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				01F18D3525B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
 				01F7EBAD25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */,
 				01DD6DA125B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,
@@ -984,6 +1005,7 @@
 				015A393125C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
 				016C739125AE40200008455F /* LandingView.swift in Sources */,
 				016C739225AE40200008455F /* SettingsView.swift in Sources */,
+				01F4C9262681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				01F18D3625B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
 				01F7EBAE25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */,
 				01DD6DA225B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,

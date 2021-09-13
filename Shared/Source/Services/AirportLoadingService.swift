@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import CoreData
+import BackgroundTasks
 import Defaults
 import SwiftNASR
 
@@ -43,6 +44,11 @@ class AirportLoadingService: ObservableObject {
                 default: return
             }
         }
+    }
+    
+    func loadNASRLater() {
+        AirportLoaderTask.submit()
+        RunLoop.main.perform { self.skipLoadThisSession = true }
     }
     
     private func airportCount(container: NSPersistentContainer) throws -> Int {
