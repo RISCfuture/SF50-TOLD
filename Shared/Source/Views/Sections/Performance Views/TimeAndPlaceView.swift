@@ -8,6 +8,7 @@ struct TimeAndPlaceView: View {
     var operation: Operation
     
     var downloadWeather: () -> Void
+    var cancelDownload: () -> Void
     
     private var elevation: Float? { state.runway?.elevation ?? state.airport?.elevation }
     
@@ -37,7 +38,7 @@ struct TimeAndPlaceView: View {
                         }
                     } icon: {}
                 }
-                NavigationLink(destination: WeatherPicker(downloadWeather: downloadWeather, elevation: elevation)
+                NavigationLink(destination: WeatherPicker(downloadWeather: downloadWeather, cancelDownload: cancelDownload, elevation: elevation)
                                 .environmentObject(state.weatherState)) {
                     WeatherRow(elevation: state.elevation)
                         .environmentObject(state.weatherState)
@@ -93,7 +94,8 @@ struct TimeAndPlaceView_Previews: PreviewProvider {
         Form {
             TimeAndPlaceView(moment: "Takeoff",
                              operation: .takeoff,
-                             downloadWeather: {})
+                             downloadWeather: {},
+                             cancelDownload: {})
                 .environmentObject(state)
         }
     }

@@ -106,6 +106,9 @@ class WeatherService: ObservableObject {
     private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "WeatherService")
     private let METARTimeout: TimeInterval = 5400 // METARs valid until 1.5 hours old
     private let TAFTimeout: TimeInterval = 43200 // TAFs valid until 12 hours old
+    
+    let reachable = CurrentValueSubject<NetworkReachabilityManager.NetworkReachabilityStatus, Never>(NetworkReachabilityManager.NetworkReachabilityStatus.unknown)
+    private var reachability: NetworkReachabilityManager { .init(host: Self.METAR_URL("ZZZZ").host!)! }
 
     init() {
         METARCache = .init(expiryKey: \.date, timeout: METARTimeout) { icao -> AnyPublisher<FetchResult<METAR>, Never> in
@@ -156,6 +159,15 @@ class WeatherService: ObservableObject {
                     }
                 }.eraseToAnyPublisher()
         }
+        
+        reachability.startListening(onQueue: loadingQueue) { status in
+            self.reachable.send(status)
+        }
+    }
+    
+    deinit {
+        reachability.stopListening()
+        reachable.send(completion: .finished)
     }
 
     func getMETAR(for location: String, force: Bool = false) -> AnyPublisher<FetchState<FetchResult<METAR>>, Never> {
@@ -168,7 +180,7 @@ class WeatherService: ObservableObject {
         else { return TAFCache[location] }
     }
 
-    func conditionsFor(airport: Airport, runway: Runway?, date: Date, force: Bool = false) -> AnyPublisher<(FetchState<(FetchResult<METAR>, FetchResult<TAF>)>), Never> {
+    func conditionsFor(airport: Airport, date: Date, force: Bool = false) -> AnyPublisher<(FetchState<(FetchResult<METAR>, FetchResult<TAF>)>), Never> {
         let fakeICAO = airport.icao ?? "K\(airport.lid!)"
         return Publishers.CombineLatest(
             getMETAR(for: fakeICAO, force: force),

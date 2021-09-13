@@ -19,10 +19,9 @@ struct PerformanceView: View {
             // to downloaded weather
             let force = state.performance.weather.source != .entered
             state.downloadWeather(airport: state.performance.airport,
-                                  runway: state.performance.runway,
                                   date: state.performance.date,
                                   force: force)
-        })
+        }, cancelDownload: { state.cancelWeatherDownload() })
             .environmentObject(state.performance)
     }
 }

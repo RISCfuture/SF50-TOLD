@@ -98,6 +98,13 @@ class WeatherState: ObservableObject {
         self.forecastError = forecastError
     }
     
+    func beginLoading() {
+        observation = nil
+        forecast = nil
+        observationError = nil
+        forecastError = nil
+    }
+    
     func updateFrom(date: Date, observationResult: WeatherService.FetchResult<METAR>, forecastResult: WeatherService.FetchResult<TAF>) {
         let observation: METAR?
         let forecast: TAF?
@@ -161,8 +168,8 @@ class WeatherState: ObservableObject {
             
             self.observation = rawObservation
             self.forecast = rawForecast
-//            self.observationError = observationError
-//            self.forecastError = forecastError
+            self.observationError = observationError
+            self.forecastError = forecastError
 
         }
     }

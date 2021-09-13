@@ -28,6 +28,8 @@ class SectionState: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
+    private var weatherLoadingCanceled = false
+    
     init(operation: Operation, persistentContainer: NSPersistentContainer) {
         self.operation = operation
         self.persistentContainer = persistentContainer
@@ -49,14 +51,11 @@ class SectionState: ObservableObject {
         }.receive(on: RunLoop.main)
         .assign(to: &performance.$airport)
         
-        Publishers.CombineLatest3(
+        Publishers.CombineLatest(
             performance.$airport,
-            performance.$runway,
             performance.$date
-        ).sink { airport, runway, date in
-            if self.performance.weatherState.source != .entered {
-                self.downloadWeather(airport: airport, runway: runway, date: date, force: false)
-            }
+        ).sink { airport, date in
+            self.downloadWeather(airport: airport, date: date, force: false)
         }.store(in: &cancellables)
         
         // handle nested changes
@@ -67,16 +66,17 @@ class SectionState: ObservableObject {
         for c in cancellables { c.cancel() }
     }
     
-    func downloadWeather(airport: Airport?, runway: Runway?, date: Date, force: Bool) {
+    func downloadWeather(airport: Airport? = nil, date: Date = Date(), force: Bool = false) {
+        weatherLoadingCanceled = false
         guard let airport = airport else {
-            RunLoop.main.perform {
-                self.performance.weatherState.resetToISA()
-            }
+            RunLoop.main.perform { self.performance.weatherState.resetToISA() }
             return
         }
         
-        WeatherService.instance.conditionsFor(airport: airport, runway: runway, date: date, force: force)
+        self.performance.weatherState.beginLoading()
+        WeatherService.instance.conditionsFor(airport: airport, date: date, force: force)
             .sink { state in
+                if self.weatherLoadingCanceled { return }
                 switch state {
                     case .loading:
                         RunLoop.main.perform { self.performance.weatherState.loading = true }
@@ -88,5 +88,13 @@ class SectionState: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    func cancelWeatherDownload() {
+        weatherLoadingCanceled = true
+        RunLoop.main.perform {
+            self.performance.weatherState.resetToISA()
+            self.performance.weatherState.loading = false
+        }
     }
 }

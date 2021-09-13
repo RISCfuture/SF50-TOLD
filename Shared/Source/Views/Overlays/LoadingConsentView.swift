@@ -41,8 +41,8 @@ struct LoadingConsentView: View {
                     self.state.airportLoadingService.loadNASR()
                 }
                 if state.canSkipLoad {
-                    Button("Skip For Now") {
-                        self.state.airportLoadingService.skipLoadThisSession = true
+                    Button("Defer Until Later") {
+                        self.state.airportLoadingService.loadNASRLater()
                     }
                 }
             }
