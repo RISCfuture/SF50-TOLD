@@ -76,11 +76,11 @@ class AirportDataLoader: ObservableObject {
         progress.addChild(identifier: "addRecords", totalUnitCount: Int64(data.airports!.count), pendingUnitCount: 1)
         
         for airport in data.airports! {
-            var airportRecord = Airport(entity: Airport.entity(), insertInto: context)
+            var airportRecord = Airport(context: context)
             configureRecord(&airportRecord, from: airport)
             
             for runway in airport.runways {
-                var baseEndRecord = Runway(entity: Runway.entity(), insertInto: context)
+                var baseEndRecord = Runway(context: context)
                 guard configureRecord(&baseEndRecord, from: runway, end: runway.baseEnd, airport: airport) else {
                     context.delete(baseEndRecord)
                     continue
@@ -89,7 +89,7 @@ class AirportDataLoader: ObservableObject {
                 airportRecord.addToRunways(baseEndRecord)
                 
                 if let reciprocalEnd = runway.reciprocalEnd {
-                    var reciprocalEndRecord = Runway(entity: Runway.entity(), insertInto: context)
+                    var reciprocalEndRecord = Runway(context: context)
                     guard configureRecord(&reciprocalEndRecord, from: runway, end: reciprocalEnd, airport: airport) else {
                         context.delete(reciprocalEndRecord)
                         continue
