@@ -47,7 +47,7 @@ class AirportLoadingService: ObservableObject {
     }
     
     func loadNASRLater() {
-        AirportLoaderTask.submit()
+        //AirportLoaderTask.submit()
         RunLoop.main.perform { self.skipLoadThisSession = true }
     }
     

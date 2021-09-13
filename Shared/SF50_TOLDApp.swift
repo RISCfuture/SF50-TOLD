@@ -17,7 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? =
                         nil) -> Bool {
-        AirportLoaderTask.register(persistentContainer: AppState().persistentContainer)
+        //AirportLoaderTask.register(persistentContainer: AppState().persistentContainer)
         return true
     }
 }
