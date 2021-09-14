@@ -116,7 +116,7 @@ class AirportDataLoader: ObservableObject {
     
     private func configureRecord(_ record: inout Runway, from runway: SwiftNASR.Runway, end: SwiftNASR.RunwayEnd, airport: SwiftNASR.Airport) -> Bool {
         guard let elevation = end.touchdownZoneElevation ?? airport.referencePoint.elevation else { return false }
-        guard let heading = end.trueHeading else { return false }
+        guard let heading = bestGuessTrueHeading(end: end, airport: airport) else { return false }
         guard let LDA = end.LDA ?? runway.length else { return false }
         guard let TODA = end.TODA ?? runway.length else { return false }
         guard let TORA = end.TORA ?? runway.length else { return false }
@@ -131,5 +131,17 @@ class AirportDataLoader: ObservableObject {
         record.turf = !runway.isPaved
         
         return true
+    }
+    
+    private func bestGuessTrueHeading(end: SwiftNASR.RunwayEnd, airport: SwiftNASR.Airport) -> UInt? {
+        if let th = end.trueHeading { return th }
+        guard let mv = airport.magneticVariation else { return nil }
+        guard let IDNum = Int(end.ID) else { return nil }
+        
+        var dir = IDNum*10 + mv
+        while (dir < 0)  { dir += 360 }
+        while (dir > 360) { dir -= 360 }
+        
+        return UInt(dir)
     }
 }
