@@ -6,18 +6,18 @@ import OSLog
 import Network
 
 class AppState: ObservableObject {
-    @Published var payload = 0.0
+    @Published private(set) var payload = 0.0
     
-    @Published var error: Error? = nil
+    @Published private(set) var error: Error? = nil
     
-    @Published var loadingAirports = false
-    @Published var needsLoad = true
-    @Published var canSkipLoad = false
-    @Published var networkIsExpensive = false
+    @Published private(set) var loadingAirports = false
+    @Published private(set) var needsLoad = true
+    @Published private(set) var canSkipLoad = false
+    @Published private(set) var networkIsExpensive = false
     
-    @Published var takeoff: SectionState!
-    @Published var landing: SectionState!
-    @Published var settings = SettingsState()
+    @Published private(set) var takeoff: SectionState!
+    @Published private(set) var landing: SectionState!
+    @Published private(set) var settings = SettingsState()
         
     let persistentContainer: NSPersistentContainer
     var airportLoadingService: AirportLoadingService!

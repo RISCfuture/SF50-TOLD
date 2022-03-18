@@ -12,14 +12,14 @@ class PerformanceState: ObservableObject {
     @Published var fuel = 0.0
     @Published var weight = 0.0
     
-    @Published var takeoffRoll: Interpolation? = nil
-    @Published var takeoffDistance: Interpolation? = nil
-    @Published var climbGradient: Interpolation? = nil
-    @Published var climbRate: Interpolation? = nil
-    @Published var landingRoll: Interpolation? = nil
-    @Published var landingDistance: Interpolation? = nil
-    @Published var vref: Interpolation? = nil
-    @Published var meetsGoAroundClimbGradient: Bool? = nil
+    @Published private(set) var takeoffRoll: Interpolation? = nil
+    @Published private(set) var takeoffDistance: Interpolation? = nil
+    @Published private(set) var climbGradient: Interpolation? = nil
+    @Published private(set) var climbRate: Interpolation? = nil
+    @Published private(set) var landingRoll: Interpolation? = nil
+    @Published private(set) var landingDistance: Interpolation? = nil
+    @Published private(set) var vref: Interpolation? = nil
+    @Published private(set) var meetsGoAroundClimbGradient: Bool? = nil
     
     private var emptyWeight: Double { Defaults[.emptyWeight] }
     private var fuelDensity: Double { Defaults[.fuelDensity] }

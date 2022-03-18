@@ -6,7 +6,7 @@ import OSLog
 import SwiftMETAR
 
 class SectionState: ObservableObject {
-    @Published var performance = PerformanceState()
+    @Published private(set)  var performance = PerformanceState()
     @Published var airportID: String? = nil
     @Published var airportFilterText = ""
     @Published var matchingAirports = Array<Airport>()

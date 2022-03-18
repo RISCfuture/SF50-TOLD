@@ -8,8 +8,8 @@ var standardSLP = 29.921
 fileprivate var METARUpdatePeriod: TimeInterval = 3600
 
 class WeatherState: ObservableObject {
-    @Published var observation: String?
-    @Published var forecast: String?
+    @Published private(set) var observation: String?
+    @Published private(set) var forecast: String?
     
     @Published var windDirection: Double
     @Published var windSpeed: Double
