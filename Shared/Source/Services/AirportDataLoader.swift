@@ -17,7 +17,7 @@ class AirportDataLoader: ObservableObject {
     }
     
     func loadNASR(withProgress progressHandler: (Progress) -> Void) async throws -> Cycle? {
-        let nasr = NASR(loader: self.loader)
+        let nasr = NASR(loader: loader)
         let progress = Progress(totalUnitCount: 100)
         progressHandler(progress)
         
@@ -30,7 +30,7 @@ class AirportDataLoader: ObservableObject {
             self.logger.error("Couldn't parse airport: \(error.localizedDescription)")
             return true
         })
-        try await self.loadAirports(nasr.data, progress: progress)
+        try await loadAirports(nasr.data, progress: progress)
         return nasr.data.cycle
     }
     
