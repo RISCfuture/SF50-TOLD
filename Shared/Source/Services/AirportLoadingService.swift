@@ -5,8 +5,16 @@ import BackgroundTasks
 import Defaults
 import SwiftNASR
 
+fileprivate func resetProgress(finished: Bool = false) -> Progress {
+    let progress = Progress(totalUnitCount: 1)
+    if finished { progress.completedUnitCount = 1 }
+    progress.localizedDescription = ""
+    progress.localizedAdditionalDescription = ""
+    return progress
+}
+
 class AirportLoadingService: ObservableObject {
-    @Published private(set) var progress: Progress? = nil
+    @Published private(set) var progress = { resetProgress(finished: true) }()
     @Published private(set) var error: Swift.Error? = nil
     
     @Published private(set) var needsLoad = true
@@ -15,7 +23,7 @@ class AirportLoadingService: ObservableObject {
     
     private let airportDataLoader: AirportDataLoader
     
-    var loading: Bool { progress != nil }
+    var loading: Bool { !progress.isFinished }
         
     required init(container: NSPersistentContainer) {
         airportDataLoader = .init(container: container)
@@ -33,18 +41,18 @@ class AirportLoadingService: ObservableObject {
             return this.outOfDate(container: container, cycle: cycle)
         }.receive(on: RunLoop.main)
         .assign(to: &$needsLoad)
+        
+        progress.completedUnitCount = 1
     }
     
     func loadNASR() {
-        progress = Progress(totalUnitCount: 1)
-        progress!.localizedDescription = ""
-        progress!.localizedAdditionalDescription = ""
+        progress = resetProgress()
         
         Task {
-            guard let cycle = try! await self.airportDataLoader.loadNASR(withProgress: { self.progress?.addChild($0, withPendingUnitCount: 1) }) else { return }
+            guard let cycle = try! await self.airportDataLoader.loadNASR(withProgress: { self.progress.addChild($0, withPendingUnitCount: 1) }) else { return }
             RunLoop.main.perform {
                 Defaults[.lastCycleLoaded] = cycle
-                self.progress = nil
+                self.progress = resetProgress(finished: true)
             }
         }
     }

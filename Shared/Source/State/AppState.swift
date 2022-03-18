@@ -68,7 +68,7 @@ class AppState: ObservableObject {
     
     private func configureLoadingService() {
         airportLoadingService.$error.receive(on: RunLoop.main).assign(to: &$error)
-        airportLoadingService.$progress.receive(on: RunLoop.main).map { $0 != nil }.assign(to: &$loadingAirports)
+        airportLoadingService.$progress.receive(on: RunLoop.main).map { !$0.isFinished }.assign(to: &$loadingAirports)
         airportLoadingService.$needsLoad.receive(on: RunLoop.main).assign(to: &$needsLoad)
         airportLoadingService.$canSkip.receive(on: RunLoop.main).assign(to: &$canSkipLoad)
     }
