@@ -7,8 +7,6 @@ struct SearchField: View {
     
     #if canImport(UIKit)
     var backgroundColor = Color(.secondarySystemFill)
-    #else
-    var backgroundColor = NSColor.clear
     #endif
     
     var body: some View {
@@ -17,7 +15,9 @@ struct SearchField: View {
                 .disableAutocorrection(true)
                 .padding(7)
                 .padding(.horizontal, 25)
+            #if canImport(UIKit)
                 .background(backgroundColor)
+            #endif
                 .cornerRadius(100)
                 .overlay(
                     HStack {

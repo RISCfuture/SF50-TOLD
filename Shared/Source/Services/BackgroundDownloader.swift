@@ -1,8 +1,10 @@
 import Foundation
 import Combine
 import Dispatch
-import UIKit
 import SwiftNASR
+#if canImport(UIKit)
+import UIKit
+#endif
 
 typealias BackgroundDownloaderCallback = (Result<Distribution, Swift.Error>) -> Void
 
@@ -11,8 +13,10 @@ typealias BackgroundDownloaderCallback = (Result<Distribution, Swift.Error>) -> 
     
     func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
         DispatchQueue.main.async {
+            #if canImport(UIKit)
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
             appDelegate.airportDownloadCompletionHandler()
+            #endif
         }
     }
     

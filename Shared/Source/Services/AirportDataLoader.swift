@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 import OSLog
-import UIKit
 import SwiftNASR
 
 class AirportDataLoader: ObservableObject {

@@ -1,6 +1,8 @@
 import SwiftUI
-import UIKit
 import BackgroundTasks
+#if canImport(UIKit)
+import UIKit
+#endif
 
 #if canImport(UIKit)
 let navigationStyle = StackNavigationViewStyle()
@@ -8,6 +10,7 @@ let navigationStyle = StackNavigationViewStyle()
 let navigationStyle = DefaultNavigationViewStyle()
 #endif
 
+#if canImport(UIKit)
 class AppDelegate: NSObject, UIApplicationDelegate {
     var airportDownloadCompletionHandler: () -> Void = {}
     
@@ -21,11 +24,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 }
+#endif
 
 @main
 struct SF50_TOLDApp: App {
     @StateObject private var state = AppState()
+    #if canImport(UIKit)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    #endif
     
     var body: some Scene {
         WindowGroup {
