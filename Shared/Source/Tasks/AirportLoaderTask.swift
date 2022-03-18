@@ -18,14 +18,15 @@ class AirportLoaderTask {
     }
     
     func run(task: BGTask) {
-        let airportDataLoader = AirportDataLoader(container: persistentContainer)
-        airportDataLoader.loadNASR { result in
-            switch result {
-                case .success(let cycle):
-                    Defaults[.lastCycleLoaded] = cycle
-                    task.setTaskCompleted(success: true)
-                default:
-                    task.setTaskCompleted(success: false)
+        Task(priority: .background) {
+            let airportDataLoader = AirportDataLoader(container: self.persistentContainer)
+            let progress = Progress(totalUnitCount: 1)
+            do {
+                let cycle = try await airportDataLoader.loadNASR(withProgress: { progress.addChild($0, withPendingUnitCount: 1) })
+                Defaults[.lastCycleLoaded] = cycle
+                task.setTaskCompleted(success: true)
+            } catch (_) {
+                task.setTaskCompleted(success: false)
             }
         }
     }

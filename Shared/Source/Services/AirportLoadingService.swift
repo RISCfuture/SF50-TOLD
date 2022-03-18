@@ -19,7 +19,6 @@ class AirportLoadingService: ObservableObject {
         
     required init(container: NSPersistentContainer) {
         airportDataLoader = .init(container: container)
-        airportDataLoader.$progress.receive(on: RunLoop.main).assign(to: &$progress)
         airportDataLoader.$error.receive(on: RunLoop.main).assign(to: &$error)
         
         needsLoad = outOfDate(container: container, cycle: Defaults[.lastCycleLoaded])
@@ -37,11 +36,15 @@ class AirportLoadingService: ObservableObject {
     }
     
     func loadNASR() {
-        airportDataLoader.loadNASR { result in
-            switch result {
-                case .success(let cycle):
-                    Defaults[.lastCycleLoaded] = cycle
-                default: return
+        progress = Progress(totalUnitCount: 1)
+        progress!.localizedDescription = ""
+        progress!.localizedAdditionalDescription = ""
+        
+        Task {
+            guard let cycle = try! await self.airportDataLoader.loadNASR(withProgress: { self.progress?.addChild($0, withPendingUnitCount: 1) }) else { return }
+            RunLoop.main.perform {
+                Defaults[.lastCycleLoaded] = cycle
+                self.progress = nil
             }
         }
     }

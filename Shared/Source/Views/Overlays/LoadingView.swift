@@ -3,7 +3,7 @@ import SwiftUI
 fileprivate let indeterminate = Foundation.Progress(totalUnitCount: 0)
 
 struct LoadingView: View {
-    var progress: Foundation.Progress? = nil
+    var progress: Progress? = nil
     
     var body: some View {
         VStack {
@@ -19,7 +19,7 @@ struct LoadingView: View {
 
 struct LoadingView_Previews: PreviewProvider {
     static var previews: some View {
-        let progress = Foundation.Progress(totalUnitCount: 100)
+        let progress = Progress(totalUnitCount: 100)
         progress.localizedDescription = ""
         progress.localizedAdditionalDescription = ""
         

@@ -11,7 +11,7 @@ struct ContentView: View {
         if let error = state.error {
             ErrorView(error: error)
         } else if state.loadingAirports {
-            LoadingView(progress: state.airportLoadingService.progress?.progress)
+            LoadingView(progress: state.airportLoadingService.progress)
                 .padding(.all, 20)
         } else if state.needsLoad {
             LoadingConsentView()

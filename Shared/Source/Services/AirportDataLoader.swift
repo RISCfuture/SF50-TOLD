@@ -6,7 +6,6 @@ import SwiftNASR
 
 class AirportDataLoader: ObservableObject {
     private let persistentContainer: NSPersistentContainer
-    @Published private(set) var progress: Progress? = nil
     @Published private(set) var error: Swift.Error? = nil
     
     private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "AirportDataLoader")
@@ -16,91 +15,72 @@ class AirportDataLoader: ObservableObject {
     
     required init(container: NSPersistentContainer) {
         persistentContainer = container
-        ConcurrentDistribution.progressQueue = DispatchQueue.main
     }
     
-    func loadNASR(callback: @escaping (Result<Cycle?, Swift.Error>) -> Void) {
-        let progress = Progress(totalUnitCount: 10)
-        DispatchQueue.main.async { self.progress = progress }
-        RunLoop.main.perform { UIApplication.shared.isIdleTimerDisabled = true }
+    func loadNASR(withProgress progressHandler: (Progress) -> Void) async throws -> Cycle? {
+        let nasr = NASR(loader: self.loader)
+        let progress = Progress(totalUnitCount: 100)
+        progressHandler(progress)
         
-        queue.async {
-            let nasr = NASR(loader: self.loader)
-            
-            let loadProgress = nasr.load { result in
-                switch result {
-                    case .success:
-                        self.queue.async {
-                            do {
-                                self.logger.info("NASR data loaded from remote")
-                                try nasr.parse(.airports, progressHandler: { progress.addChild($0, identifier: "parseAirports", pendingUnitCount: 7) }) { error in
-                                    self.logger.error("Couldn't parse airport: \(error.localizedDescription)")
-                                    return true
-                                }
-                                self.logger.info("NASR airports parsed")
-                                try self.loadAirports(nasr.data, progress: progress)
-                                self.logger.info("NASR airports loaded")
-                                DispatchQueue.main.async { self.progress = nil }
-                                RunLoop.main.perform { UIApplication.shared.isIdleTimerDisabled = false }
-                                callback(.success(nasr.data.cycle))
-                            } catch (let error) {
-                                self.logger.error("Couldn't parse airports: \(error.localizedDescription)")
-                                DispatchQueue.main.async { self.error = error }
-                                callback(.failure(error))
-                            }
-                        }
-                    case .failure(let error):
-                        self.logger.error("Couldn't load remote NASR data: \(error.localizedDescription)")
-                        DispatchQueue.main.async { self.error = error }
-                        callback(.failure(error))
-                }
-            }
-            progress.addChild(loadProgress, identifier: "loadProgress", pendingUnitCount: 2)
+        let _ = try await nasr.load(withProgress: { progress.addChild($0, withPendingUnitCount: 25) })
+        logger.info("NASR data loaded from remote")
+        
+        let _ = try await nasr.parseAirports(withProgress: {
+            progress.addChild($0, withPendingUnitCount: 25)
+        }, errorHandler: { error in
+            self.logger.error("Couldn't parse airport: \(error.localizedDescription)")
+            return true
+        })
+        try await self.loadAirports(nasr.data, progress: progress)
+        return nasr.data.cycle
+    }
+    
+    private func loadAirports(_ data: NASRData, progress: Progress) async throws {
+        let context = persistentContainer.newBackgroundContext()
+        try await deleteExistingAirports(context: context)
+        await addNewAirportsFrom(data, context: context, progress: progress)
+        try await context.perform { try context.save() }
+    }
+    
+    private func deleteExistingAirports(context: NSManagedObjectContext) async throws {
+        try await persistentContainer.persistentStoreCoordinator.perform {
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Airport")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+            try self.persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: context)
         }
     }
     
-    private func loadAirports(_ data: NASRData, progress: Progress) throws {
-        let context = persistentContainer.newBackgroundContext()
-        try deleteExistingAirports(context: context)
-        try addNewAirportsFrom(data, context: context, progress: progress)
-        try context.save()
-    }
-    
-    private func deleteExistingAirports(context: NSManagedObjectContext) throws {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Airport")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-        try persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: context)
-    }
-    
-    private func addNewAirportsFrom(_ data: NASRData, context: NSManagedObjectContext, progress: Progress) throws {
-        progress.addChild(identifier: "addRecords", totalUnitCount: Int64(data.airports!.count), pendingUnitCount: 1)
+    private func addNewAirportsFrom(_ data: NASRData, context: NSManagedObjectContext, progress: Progress) async {
+        let childProgress = Progress(totalUnitCount: Int64(data.airports!.count), parent: progress, pendingUnitCount: 50)
         
-        for airport in data.airports! {
-            var airportRecord = Airport(context: context)
-            configureRecord(&airportRecord, from: airport)
-            
-            for runway in airport.runways {
-                var baseEndRecord = Runway(context: context)
-                guard configureRecord(&baseEndRecord, from: runway, end: runway.baseEnd, airport: airport) else {
-                    context.delete(baseEndRecord)
-                    continue
-                }
-                baseEndRecord.airport = airportRecord
-                airportRecord.addToRunways(baseEndRecord)
+        await context.perform {
+            for airport in data.airports! {
+                var airportRecord = Airport(context: context)
+                self.configureRecord(&airportRecord, from: airport)
                 
-                if let reciprocalEnd = runway.reciprocalEnd {
-                    var reciprocalEndRecord = Runway(context: context)
-                    guard configureRecord(&reciprocalEndRecord, from: runway, end: reciprocalEnd, airport: airport) else {
-                        context.delete(reciprocalEndRecord)
+                for runway in airport.runways {
+                    var baseEndRecord = Runway(context: context)
+                    guard self.configureRecord(&baseEndRecord, from: runway, end: runway.baseEnd, airport: airport) else {
+                        context.delete(baseEndRecord)
                         continue
                     }
-                    reciprocalEndRecord.airport = airportRecord
-                    airportRecord.addToRunways(reciprocalEndRecord)
+                    baseEndRecord.airport = airportRecord
+                    airportRecord.addToRunways(baseEndRecord)
+                    
+                    if let reciprocalEnd = runway.reciprocalEnd {
+                        var reciprocalEndRecord = Runway(context: context)
+                        guard self.configureRecord(&reciprocalEndRecord, from: runway, end: reciprocalEnd, airport: airport) else {
+                            context.delete(reciprocalEndRecord)
+                            continue
+                        }
+                        reciprocalEndRecord.airport = airportRecord
+                        airportRecord.addToRunways(reciprocalEndRecord)
+                    }
                 }
+                
+                if airportRecord.runways?.count == 0 { context.delete(airportRecord) }
+                childProgress.completedUnitCount += 1
             }
-            
-            if airportRecord.runways?.count == 0 { context.delete(airportRecord) }
-            progress.increment("addRecords")
         }
     }
     
