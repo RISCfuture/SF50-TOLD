@@ -19,7 +19,7 @@ class AirportLoaderTask {
     
     func run(task: BGTask) {
         Task(priority: .background) {
-            let airportDataLoader = AirportDataLoader(container: self.persistentContainer)
+            let airportDataLoader = AirportDataLoader()
             let progress = Progress(totalUnitCount: 1)
             do {
                 let cycle = try await airportDataLoader.loadNASR(withProgress: { progress.addChild($0, withPendingUnitCount: 1) })

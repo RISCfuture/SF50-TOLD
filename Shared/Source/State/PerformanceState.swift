@@ -1,14 +1,19 @@
 import Foundation
 import Combine
 import Defaults
+import CoreData
+import OSLog
+import UIKit
 
 class PerformanceState: ObservableObject {
+    var operation: Operation
+    
     @Published var date = Date()
+    @Published var airportID: String? = nil
     @Published var airport: Airport? = nil
     @Published var runway: Runway? = nil
     @Published var flaps: FlapSetting? = nil
-    var weatherState = WeatherState()
-    @Published var weather: Weather
+    @Published private(set) var weatherState = WeatherState()
     @Published var fuel = 0.0
     @Published var weight = 0.0
     
@@ -20,12 +25,17 @@ class PerformanceState: ObservableObject {
     @Published private(set) var landingDistance: Interpolation? = nil
     @Published private(set) var vref: Interpolation? = nil
     @Published private(set) var meetsGoAroundClimbGradient: Bool? = nil
+    @Published private(set) var notamCount = 0
+    
+    @Published private(set) var error: Swift.Error? = nil
     
     private var emptyWeight: Double { Defaults[.emptyWeight] }
     private var fuelDensity: Double { Defaults[.fuelDensity] }
     private var payload: Double { Defaults[.payload] }
     
     private var cancellables = Set<AnyCancellable>()
+    
+    private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "PerformanceState")
     
     var elevation: Double {
         Double(runway?.elevation ?? airport?.elevation ?? 0.0)
@@ -59,13 +69,52 @@ class PerformanceState: ObservableObject {
         return cum
     }
     
-    init() {
-        weather = weatherState.weather
-
+    var requiredClimbGradient: Double {
+        guard let takeoffRollInterp = takeoffRoll,
+              let runwayLength = runway?.takeoffRun,
+              let obstacleHeight = runway?.notam?.obstacleHeight,
+              let obstacleDistance = runway?.notam?.obstacleDistance else { return 0 }
+        guard case let .value(takeoffRoll, _) = takeoffRollInterp else { return 0 }
+        
+        let distanceFromRunwayStart = obstacleDistance + Double(runwayLength)
+        let distanceFromLiftoffPoint = distanceFromRunwayStart - takeoffRoll
+        
+        return (obstacleHeight / distanceFromLiftoffPoint) * 6076
+    }
+    
+    private var defaultKey: Defaults.Key<String?> {
+        switch operation {
+            case .takeoff: return .takeoffAirport
+            case .landing: return .landingAirport
+        }
+    }
+    
+    init(operation: Operation) {
+        self.operation = operation
+        
+        airportID = Defaults[defaultKey]
+        $airportID.receive(on: RunLoop.main).sink { Defaults[self.defaultKey] = $0 }.store(in: &cancellables)
+        $airportID.tryMap { ID -> Airport? in
+            guard let ID = ID else { return nil }
+            return try self.findAirport(id: ID)
+        }.catch { error -> AnyPublisher<Airport?, Never> in
+            self.error = error
+            return Just(nil).eraseToAnyPublisher()
+        }.receive(on: RunLoop.main)
+            .assign(to: &$airport)
+        
         // update runway, weather, and performance when airport changes
         $airport.sink { airport in
             self.runway = nil
-            self.updatePerformanceData(runway: nil, weather: self.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
+            self.updatePerformanceData(runway: nil, weather: self.weatherState.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
+        }.store(in: &cancellables)
+        
+        $runway.sink { runway in
+            guard let runway = runway, let notam = runway.notam else {
+                self.notamCount = 0
+                return
+            }
+            self.notamCount = notam.notamCountFor(self.operation)
         }.store(in: &cancellables)
         
         weight = emptyWeight + payload + fuel*fuelDensity
@@ -74,14 +123,7 @@ class PerformanceState: ObservableObject {
         updateWeight()
         updatePerformanceWhenConditionsChange()
         updatePerformanceWhenSafetyFactorChanges()
-        
-        weatherState.objectWillChange.sink {
-            // next runloop, wx state is changed
-            RunLoop.main.perform { [weak self] in
-                guard let this = self else { return }
-                this.weather = this.weatherState.weather
-            }
-        }.store(in: &cancellables)
+        updateNOTAMCountWhenNOTAMChanges()
     }
     
     deinit {
@@ -89,7 +131,7 @@ class PerformanceState: ObservableObject {
     }
     
     private func initializeModel() {
-        let model = PerformanceModel(runway: runway, weather: weather, weight: weight, flaps: flaps)
+        let model = PerformanceModel(runway: runway, weather: weatherState.weather, weight: weight, flaps: flaps)
         takeoffRoll = model.takeoffRoll
         takeoffDistance = model.takeoffDistance
         climbGradient = model.takeoffClimbGradient
@@ -111,19 +153,19 @@ class PerformanceState: ObservableObject {
     }
     
     private func updatePerformanceWhenConditionsChange() {
-        Publishers.CombineLatest3($runway, $weather, $weight)
-            .sink { runway, weather, weight in
-                self.updatePerformanceData(runway: runway, weather: weather, weight: weight, flaps: self.flaps, takeoff: true, landing: false)
+        Publishers.CombineLatest3($runway, $weatherState, $weight)
+            .sink { runway, weatherState, weight in
+                self.updatePerformanceData(runway: runway, weather: weatherState.weather, weight: weight, flaps: self.flaps, takeoff: true, landing: false)
             }.store(in: &cancellables)
-        Publishers.CombineLatest4($runway, $weather, $weight, $flaps)
-            .sink { runway, weather, weight, flaps in
-                self.updatePerformanceData(runway: runway, weather: weather, weight: weight, flaps: flaps, takeoff: false, landing: true)
+        Publishers.CombineLatest4($runway, $weatherState, $weight, $flaps)
+            .sink { runway, weatherState, weight, flaps in
+                self.updatePerformanceData(runway: runway, weather: weatherState.weather, weight: weight, flaps: flaps, takeoff: false, landing: true)
             }.store(in: &cancellables)
     }
     
     private func updatePerformanceWhenSafetyFactorChanges() {
         Defaults.publisher(.safetyFactor).sink { _ in
-            self.updatePerformanceData(runway: self.runway, weather: self.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
+            self.updatePerformanceData(runway: self.runway, weather: self.weatherState.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
         }.store(in: &cancellables)
     }
     
@@ -154,6 +196,45 @@ class PerformanceState: ObservableObject {
                 self.meetsGoAroundClimbGradient = meetsGoAroundClimbGradient
             }
         }
+    }
+    
+    private func updateNOTAMCountWhenNOTAMChanges() {
+        NotificationCenter.default.publisher(for: Notification.Name.NSManagedObjectContextObjectsDidChange)
+            .filter { notification in
+                let inserted = notification.userInfo?[NSInsertedObjectsKey] as? Set<NSManagedObject> ?? Set<NSManagedObject>()
+                let updated = notification.userInfo?[NSUpdatedObjectsKey] as? Set<NSManagedObject> ?? Set<NSManagedObject>()
+                let deleted = notification.userInfo?[NSDeletedObjectsKey] as? Set<NSManagedObject> ?? Set<NSManagedObject>()
+                return inserted.union(updated).union(deleted).contains { $0.entity == NOTAM.entity() }
+            }.receive(on: RunLoop.main)
+            .sink(receiveValue: { notam in
+                guard let runway = self.runway, let notam = runway.notam else {
+                    self.notamCount = 0
+                    return
+                }
+                self.notamCount = notam.notamCountFor(self.operation)
+                
+                self.updatePerformanceData(runway: runway, weather: self.weatherState.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
+            }).store(in: &cancellables)
+    }
+    
+    private func findAirport(id: String) throws -> Airport? {
+        let results = try PersistentContainer.shared.viewContext.fetch(byIDRequest(id: id))
+        guard results.count == 1 else {
+            Self.logger.error("Couldn't find exactly one airport with ID '\(id)'")
+            return nil
+        }
+        return results[0]
+    }
+    
+    private func byIDRequest(id: String) -> NSFetchRequest<Airport> {
+        let request = NSFetchRequest<Airport>(entityName: "Airport")
+        request.fetchLimit = 1
+        request.includesPropertyValues = true
+        request.includesSubentities = true
+        request.returnsObjectsAsFaults = false
+        let predicate = NSPredicate(format: "id == %@", id)
+        request.predicate = predicate
+        return request
     }
 }
 

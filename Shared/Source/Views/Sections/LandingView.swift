@@ -3,60 +3,27 @@ import Combine
 import CoreData
 
 struct LandingView: View {
-    @EnvironmentObject var state: SectionState
-    @ObservedObject var performance: PerformanceState
+    @ObservedObject var state: SectionState
         
-    private var landingDistance: Double? {
-        guard let run = performance.runway?.landingDistance else { return nil }
-        return Double(run)
-    }
-    
     var body: some View {
         NavigationView {
             Form {
-                PerformanceView(operation: .landing,
+                PerformanceView(state: state.performance,
+                                operation: .landing,
                                 title: "Landing", moment: "Arrival",
-                                maxWeight: maxLandingWeight)
-            
-                Section(header: Text("Performance")) {
-                    HStack {
-                        Text("VREF")
-                        Spacer()
-                        InterpolationView(interpolation: performance.vref, suffix: "kts.")
-                    }
+                                maxWeight: maxLandingWeight,
+                                downloadWeather: {
+                    // force a reload of the weather unless we are reverting from custom
+                    // to downloaded weather
+                    let force = state.performance.weatherState.source != .entered
+                    state.downloadWeather(airport: state.performance.airport,
+                                          date: state.performance.date,
+                                          force: force)
                     
-                    HStack {
-                        Text("Ground Roll")
-                        Spacer()
-                        InterpolationView(interpolation: performance.landingRoll,
-                                          suffix: "ft.",
-                                          maximum: landingDistance)
-                    }
-
-                    HStack {
-                        Text("Total Distance")
-                        Spacer()
-                        InterpolationView(interpolation: performance.landingDistance,
-                                          suffix: "ft.",
-                                          maximum: landingDistance)
-                    }
-                    
-                    if let meets = performance.meetsGoAroundClimbGradient {
-                        HStack {
-                            Text("Meets Go-Around Climb Gradient")
-                            Spacer()
-                            if meets {
-                                Text("Yes").bold()
-                            } else {
-                                Text("No").bold().foregroundColor(.red)
-                            }
-                        }
-                    }
-                }
+                },
+                                cancelDownload: { state.cancelWeatherDownload() })
                 
-                if performance.offscale != .none {
-                    OffscaleWarningView(offscale: performance.offscale)
-                }
+                LandingResultsView(state: state.performance)
             }.navigationTitle("Landing")
         }.navigationViewStyle(navigationStyle)
     }
@@ -64,9 +31,9 @@ struct LandingView: View {
 
 struct LandingView_Previews: PreviewProvider {
     static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    static let runway = model.entitiesByName["Runway"]!
+    
     static var rwy12 = { () -> Runway in
-        let r = Runway(entity: runway, insertInto: nil)
+        let r = Runway(entity: Runway.entity(), insertInto: nil)
         r.name = "12"
         r.takeoffRun = 2600
         r.takeoffDistance = 2800
@@ -75,7 +42,7 @@ struct LandingView_Previews: PreviewProvider {
         return r
     }()
     static var rwy30 = { () -> Runway in
-        let r = Runway(entity: runway, insertInto: nil)
+        let r = Runway(entity: Runway.entity(), insertInto: nil)
         r.name = "30"
         r.takeoffRun = 2600
         r.takeoffDistance = 2800
@@ -84,7 +51,7 @@ struct LandingView_Previews: PreviewProvider {
         return r
     }()
     private static let SQL = { () -> Airport in
-        let a = Airport(entity: runway, insertInto: nil)
+        let a = Airport(entity: Runway.entity(), insertInto: nil)
         a.id = "SQL"
         a.lid = "SQL"
         a.name = "San Carlos"
@@ -92,12 +59,14 @@ struct LandingView_Previews: PreviewProvider {
         a.addToRunways(rwy30)
         return a
     }()
-    static var state: AppState {
-        let state = AppState()
+    static var state: SectionState {
+        let state = SectionState(operation: .landing)
+        state.performance.airport = SQL
+        state.performance.runway = rwy30
         return state
     }
     
     static var previews: some View {
-        LandingView(performance: state.landing.performance).environmentObject(state.landing)
+        LandingView(state: state)
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject private var state: AppState
+    @ObservedObject var state: AppState
     
     @State private var tab = 1
     
@@ -14,16 +14,16 @@ struct ContentView: View {
             LoadingView(progress: state.airportLoadingService.progress)
                 .padding(.all, 20)
         } else if state.needsLoad {
-            LoadingConsentView()
+            LoadingConsentView(state: state)
         } else {
             TabView(selection: $tab) {
-                TakeoffView(performance: state.takeoff.performance).tabItem {
+                TakeoffView(state: state.takeoff).tabItem {
                     Label("Takeoff", image: "Takeoff")
-                }.tag(1).environmentObject(state.takeoff)
-                LandingView(performance: state.landing.performance).tabItem {
+                }.tag(1)
+                LandingView(state: state.landing).tabItem {
                     Label("Landing", image: "Landing")
-                }.tag(2).environmentObject(state.landing)
-                SettingsView().environmentObject(state.settings).tabItem {
+                }.tag(2)
+                SettingsView(state: state.settings).tabItem {
                     Label("Settings", systemImage: "gear")
                 }.tag(3)
                 AboutView().tabItem {
@@ -36,6 +36,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        return ContentView().environmentObject(AppState())
+        return ContentView(state: AppState())
     }
 }

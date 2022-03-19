@@ -11,6 +11,18 @@
 		01007B8425D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
 		01007B8525D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
 		01007B8625D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
+		010F674D27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */; };
+		010F674E27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */; };
+		010F674F27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */; };
+		010F675027E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */; };
+		010F675227E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */; };
+		010F675327E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */; };
+		010F675427E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */; };
+		010F675527E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */; };
+		011A95A627E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
+		011A95A727E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
+		011A95A827E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
+		011A95A927E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
 		0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
 		0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
 		0135A7EE2587091800892558 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C42587091300892558 /* ContentView.swift */; };
@@ -23,8 +35,6 @@
 		0135A84C25872F6700892558 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 0135A84B25872F6700892558 /* SwiftNASR */; };
 		0135A85225872F7000892558 /* SwiftMETAR in Frameworks */ = {isa = PBXBuildFile; productRef = 0135A85125872F7000892558 /* SwiftMETAR */; };
 		0135A85425872F7000892558 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 0135A85325872F7000892558 /* SwiftNASR */; };
-		0135A8622587358000892558 /* AirportStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8612587358000892558 /* AirportStorage.swift */; };
-		0135A8632587358000892558 /* AirportStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8612587358000892558 /* AirportStorage.swift */; };
 		0135A874258748D400892558 /* TakeoffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A873258748D400892558 /* TakeoffView.swift */; };
 		0135A875258748D400892558 /* TakeoffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A873258748D400892558 /* TakeoffView.swift */; };
 		0135A87D258748DF00892558 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A87C258748DF00892558 /* LandingView.swift */; };
@@ -73,6 +83,54 @@
 		0166FCBF25C00E1D006F7258 /* SelectAllOnFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166FCBC25C00E1D006F7258 /* SelectAllOnFocus.swift */; };
 		0166FCC025C00E1D006F7258 /* SelectAllOnFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166FCBC25C00E1D006F7258 /* SelectAllOnFocus.swift */; };
 		01698D1525C148B8002D44A0 /* LoadingConsentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01698D1425C148B8002D44A0 /* LoadingConsentView.swift */; };
+		016A0AFF27E5358100F16C21 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0AFE27E5358100F16C21 /* NOTAM.swift */; };
+		016A0B0027E5358100F16C21 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0AFE27E5358100F16C21 /* NOTAM.swift */; };
+		016A0B0127E5358100F16C21 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0AFE27E5358100F16C21 /* NOTAM.swift */; };
+		016A0B0227E5358100F16C21 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0AFE27E5358100F16C21 /* NOTAM.swift */; };
+		016A0B0A27E5B98900F16C21 /* Runway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0927E5B98900F16C21 /* Runway.swift */; };
+		016A0B0B27E5B98900F16C21 /* Runway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0927E5B98900F16C21 /* Runway.swift */; };
+		016A0B0C27E5B98900F16C21 /* Runway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0927E5B98900F16C21 /* Runway.swift */; };
+		016A0B0D27E5B98900F16C21 /* Runway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0927E5B98900F16C21 /* Runway.swift */; };
+		016A0B0F27E5BE7200F16C21 /* Color+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0E27E5BE7200F16C21 /* Color+Assets.swift */; };
+		016A0B1027E5BE7200F16C21 /* Color+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0E27E5BE7200F16C21 /* Color+Assets.swift */; };
+		016A0B1127E5BE7200F16C21 /* Color+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0E27E5BE7200F16C21 /* Color+Assets.swift */; };
+		016A0B1227E5BE7200F16C21 /* Color+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0E27E5BE7200F16C21 /* Color+Assets.swift */; };
+		016A0B1427E5C62E00F16C21 /* AirportPickerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */; };
+		016A0B1527E5C62E00F16C21 /* AirportPickerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */; };
+		016A0B1627E5C62E00F16C21 /* AirportPickerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */; };
+		016A0B1727E5C62E00F16C21 /* AirportPickerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */; };
+		016A0B1927E5CD7B00F16C21 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */; };
+		016A0B1A27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */; };
+		016A0B1B27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */; };
+		016A0B1C27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */; };
+		016A0B1F27E5D15F00F16C21 /* VREFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1E27E5D15F00F16C21 /* VREFView.swift */; };
+		016A0B2027E5D15F00F16C21 /* VREFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1E27E5D15F00F16C21 /* VREFView.swift */; };
+		016A0B2127E5D15F00F16C21 /* VREFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1E27E5D15F00F16C21 /* VREFView.swift */; };
+		016A0B2227E5D15F00F16C21 /* VREFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1E27E5D15F00F16C21 /* VREFView.swift */; };
+		016A0B2427E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2327E5D1F600F16C21 /* LandingGroundRollView.swift */; };
+		016A0B2527E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2327E5D1F600F16C21 /* LandingGroundRollView.swift */; };
+		016A0B2627E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2327E5D1F600F16C21 /* LandingGroundRollView.swift */; };
+		016A0B2727E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2327E5D1F600F16C21 /* LandingGroundRollView.swift */; };
+		016A0B2927E5D25500F16C21 /* LandingDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */; };
+		016A0B2A27E5D25500F16C21 /* LandingDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */; };
+		016A0B2B27E5D25500F16C21 /* LandingDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */; };
+		016A0B2C27E5D25500F16C21 /* LandingDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */; };
+		016A0B2E27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */; };
+		016A0B2F27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */; };
+		016A0B3027E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */; };
+		016A0B3127E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */; };
+		016A0B3427E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3327E5D53700F16C21 /* TakeoffGroundRollView.swift */; };
+		016A0B3527E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3327E5D53700F16C21 /* TakeoffGroundRollView.swift */; };
+		016A0B3627E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3327E5D53700F16C21 /* TakeoffGroundRollView.swift */; };
+		016A0B3727E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3327E5D53700F16C21 /* TakeoffGroundRollView.swift */; };
+		016A0B3927E5D5AC00F16C21 /* TakeoffDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3827E5D5AC00F16C21 /* TakeoffDistanceView.swift */; };
+		016A0B3A27E5D5AC00F16C21 /* TakeoffDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3827E5D5AC00F16C21 /* TakeoffDistanceView.swift */; };
+		016A0B3B27E5D5AC00F16C21 /* TakeoffDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3827E5D5AC00F16C21 /* TakeoffDistanceView.swift */; };
+		016A0B3C27E5D5AC00F16C21 /* TakeoffDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3827E5D5AC00F16C21 /* TakeoffDistanceView.swift */; };
+		016A0B3E27E5D60300F16C21 /* VxClimbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3D27E5D60300F16C21 /* VxClimbView.swift */; };
+		016A0B3F27E5D60300F16C21 /* VxClimbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3D27E5D60300F16C21 /* VxClimbView.swift */; };
+		016A0B4027E5D60300F16C21 /* VxClimbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3D27E5D60300F16C21 /* VxClimbView.swift */; };
+		016A0B4127E5D60300F16C21 /* VxClimbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B3D27E5D60300F16C21 /* VxClimbView.swift */; };
 		016C735C25AE40120008455F /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
 		016C735E25AE40120008455F /* WeatherPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8BE2587599300892558 /* WeatherPicker.swift */; };
 		016C735F25AE40120008455F /* AirportPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8CB2587599D00892558 /* AirportPicker.swift */; };
@@ -90,7 +148,6 @@
 		016C736C25AE40120008455F /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A87C258748DF00892558 /* LandingView.swift */; };
 		016C736D25AE40120008455F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FA01F25AC230C006C807F /* SettingsView.swift */; };
 		016C736F25AE40120008455F /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A83625872EDE00892558 /* WeatherService.swift */; };
-		016C737025AE40120008455F /* AirportStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8612587358000892558 /* AirportStorage.swift */; };
 		016C737125AE40120008455F /* AirportDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014808ED25AAF4910041A90D /* AirportDataLoader.swift */; };
 		016C737325AE40120008455F /* PerformanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModel.swift */; };
 		016C737525AE40120008455F /* WeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B6699258898DA00AA2DE9 /* WeatherState.swift */; };
@@ -113,7 +170,6 @@
 		016C739125AE40200008455F /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A87C258748DF00892558 /* LandingView.swift */; };
 		016C739225AE40200008455F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FA01F25AC230C006C807F /* SettingsView.swift */; };
 		016C739425AE40200008455F /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A83625872EDE00892558 /* WeatherService.swift */; };
-		016C739525AE40200008455F /* AirportStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8612587358000892558 /* AirportStorage.swift */; };
 		016C739625AE40200008455F /* AirportDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014808ED25AAF4910041A90D /* AirportDataLoader.swift */; };
 		016C739825AE40200008455F /* PerformanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModel.swift */; };
 		016C739A25AE40200008455F /* WeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B6699258898DA00AA2DE9 /* WeatherState.swift */; };
@@ -237,6 +293,9 @@
 
 /* Begin PBXFileReference section */
 		01007B8225D5268700C8BFF2 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeoffResultsView.swift; sourceTree = "<group>"; };
+		010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingResultsView.swift; sourceTree = "<group>"; };
+		011A95A527E477D500F3A127 /* NOTAMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMView.swift; sourceTree = "<group>"; };
 		0135A7C32587091300892558 /* SF50_TOLDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF50_TOLDApp.swift; sourceTree = "<group>"; };
 		0135A7C42587091300892558 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0135A7C52587091700892558 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -252,7 +311,6 @@
 		0135A7E92587091800892558 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		0135A7EB2587091800892558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0135A83625872EDE00892558 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
-		0135A8612587358000892558 /* AirportStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportStorage.swift; sourceTree = "<group>"; };
 		0135A873258748D400892558 /* TakeoffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeoffView.swift; sourceTree = "<group>"; };
 		0135A87C258748DF00892558 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		0135A8A425874C3B00892558 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -269,6 +327,18 @@
 		0166FCA225C00C16006F7258 /* TapToDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapToDismiss.swift; sourceTree = "<group>"; };
 		0166FCBC25C00E1D006F7258 /* SelectAllOnFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAllOnFocus.swift; sourceTree = "<group>"; };
 		01698D1425C148B8002D44A0 /* LoadingConsentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingConsentView.swift; sourceTree = "<group>"; };
+		016A0AFE27E5358100F16C21 /* NOTAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAM.swift; sourceTree = "<group>"; };
+		016A0B0927E5B98900F16C21 /* Runway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runway.swift; sourceTree = "<group>"; };
+		016A0B0E27E5BE7200F16C21 /* Color+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Assets.swift"; sourceTree = "<group>"; };
+		016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportPickerResults.swift; sourceTree = "<group>"; };
+		016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
+		016A0B1E27E5D15F00F16C21 /* VREFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VREFView.swift; sourceTree = "<group>"; };
+		016A0B2327E5D1F600F16C21 /* LandingGroundRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingGroundRollView.swift; sourceTree = "<group>"; };
+		016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingDistanceView.swift; sourceTree = "<group>"; };
+		016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoAroundClimbGradientView.swift; sourceTree = "<group>"; };
+		016A0B3327E5D53700F16C21 /* TakeoffGroundRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeoffGroundRollView.swift; sourceTree = "<group>"; };
+		016A0B3827E5D5AC00F16C21 /* TakeoffDistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeoffDistanceView.swift; sourceTree = "<group>"; };
+		016A0B3D27E5D60300F16C21 /* VxClimbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VxClimbView.swift; sourceTree = "<group>"; };
 		016FA01F25AC230C006C807F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		01750AC725B27C2D00555CDB /* PerformanceState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceState.swift; sourceTree = "<group>"; };
 		0179865925C280B60031A453 /* WeatherSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSource.swift; sourceTree = "<group>"; };
@@ -350,6 +420,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		010F674B27E68C1200BDBDB0 /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				016A0AFE27E5358100F16C21 /* NOTAM.swift */,
+				016A0B0927E5B98900F16C21 /* Runway.swift */,
+			);
+			path = Records;
+			sourceTree = "<group>";
+		};
 		0112E56E25AC4D460048E921 /* Overlays */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,10 +443,12 @@
 			isa = PBXGroup;
 			children = (
 				01007B8225D5268700C8BFF2 /* AboutView.swift */,
+				016A0B1D27E5D13F00F16C21 /* LandingView */,
 				0135A87C258748DF00892558 /* LandingView.swift */,
-				01F18D2425B198A5007D76BA /* Performance Views */,
+				01F18D2425B198A5007D76BA /* PerformanceView */,
 				01F59A1E25AE63AC0055E81B /* PerformanceView.swift */,
 				016FA01F25AC230C006C807F /* SettingsView.swift */,
+				016A0B3227E5D52000F16C21 /* TakeoffView */,
 				0135A873258748D400892558 /* TakeoffView.swift */,
 			);
 			path = Sections;
@@ -392,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				0135A8CB2587599D00892558 /* AirportPicker.swift */,
+				016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */,
 				01C133F025AD6BBA00AE33C5 /* RunwayPicker.swift */,
 				0179865825C2809A0031A453 /* WeatherPicker */,
 				0135A8BE2587599300892558 /* WeatherPicker.swift */,
@@ -509,6 +591,7 @@
 				014808ED25AAF4910041A90D /* AirportDataLoader.swift */,
 				01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */,
 				01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */,
+				017B668F2588980F00AA2DE9 /* PerformanceModel.swift */,
 				0135A83625872EDE00892558 /* WeatherService.swift */,
 			);
 			path = Services;
@@ -531,6 +614,7 @@
 		01535DE025A2FCD200AC0F5F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				016A0B0E27E5BE7200F16C21 /* Color+Assets.swift */,
 				0166FCBC25C00E1D006F7258 /* SelectAllOnFocus.swift */,
 				0166FCA225C00C16006F7258 /* TapToDismiss.swift */,
 				01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */,
@@ -539,10 +623,32 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		016A0B1D27E5D13F00F16C21 /* LandingView */ = {
+			isa = PBXGroup;
+			children = (
+				016A0B2D27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift */,
+				016A0B2827E5D25500F16C21 /* LandingDistanceView.swift */,
+				016A0B2327E5D1F600F16C21 /* LandingGroundRollView.swift */,
+				010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */,
+				016A0B1E27E5D15F00F16C21 /* VREFView.swift */,
+			);
+			path = LandingView;
+			sourceTree = "<group>";
+		};
+		016A0B3227E5D52000F16C21 /* TakeoffView */ = {
+			isa = PBXGroup;
+			children = (
+				016A0B3827E5D5AC00F16C21 /* TakeoffDistanceView.swift */,
+				016A0B3327E5D53700F16C21 /* TakeoffGroundRollView.swift */,
+				010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */,
+				016A0B3D27E5D60300F16C21 /* VxClimbView.swift */,
+			);
+			path = TakeoffView;
+			sourceTree = "<group>";
+		};
 		01750AB625B27AA700555CDB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				017B668F2588980F00AA2DE9 /* PerformanceModel.swift */,
 				01D2C8EF25D126C10036B6FE /* Weather.swift */,
 			);
 			path = Models;
@@ -578,7 +684,8 @@
 		01DD6D7C25B3AC4E004A2CA8 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				0135A8612587358000892558 /* AirportStorage.swift */,
+				016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */,
+				010F674B27E68C1200BDBDB0 /* Records */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -591,15 +698,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		01F18D2425B198A5007D76BA /* Performance Views */ = {
+		01F18D2425B198A5007D76BA /* PerformanceView */ = {
 			isa = PBXGroup;
 			children = (
 				01F7EB9D25BBFA2A00CE5024 /* ConfigurationView.swift */,
 				01F18D2525B198B6007D76BA /* LoadoutView.swift */,
+				011A95A527E477D500F3A127 /* NOTAMView.swift */,
 				01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */,
 				01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */,
 			);
-			path = "Performance Views";
+			path = PerformanceView;
 			sourceTree = "<group>";
 		};
 		01F7EBBB25BC0C1600CE5024 /* Styles */ = {
@@ -806,45 +914,59 @@
 				01F4C9232681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				0179866725C280C40031A453 /* RawWeather.swift in Sources */,
 				01D7DA6C25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
+				016A0B0F27E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				0166FC9625BFFDA7006F7258 /* View Functions.swift in Sources */,
 				0166FCBD25C00E1D006F7258 /* SelectAllOnFocus.swift in Sources */,
 				01C133F125AD6BBA00AE33C5 /* RunwayPicker.swift in Sources */,
+				016A0B2427E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */,
 				016FA02025AC230C006C807F /* SettingsView.swift in Sources */,
 				0191C05E25B2BF7800C4B810 /* AppState.swift in Sources */,
 				01698D1525C148B8002D44A0 /* LoadingConsentView.swift in Sources */,
 				01F18D3325B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
+				016A0B3427E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
 				01DD6D9F25B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,
 				01535DE225A2FD0800AC0F5F /* ValueFormatter.swift in Sources */,
+				016A0B2927E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
 				0135A8BF2587599300892558 /* WeatherPicker.swift in Sources */,
 				0135A83725872EDE00892558 /* WeatherService.swift in Sources */,
 				0135A7EE2587091800892558 /* ContentView.swift in Sources */,
 				0179867025C280D30031A453 /* WeatherForm.swift in Sources */,
+				016A0B3927E5D5AC00F16C21 /* TakeoffDistanceView.swift in Sources */,
 				01007B8325D5268700C8BFF2 /* AboutView.swift in Sources */,
 				01750AC825B27C2D00555CDB /* PerformanceState.swift in Sources */,
 				014808EE25AAF4910041A90D /* AirportDataLoader.swift in Sources */,
 				01A6DB1B25AD776C00A3341F /* RunwayRow.swift in Sources */,
+				010F674D27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
 				0135A87D258748DF00892558 /* LandingView.swift in Sources */,
+				016A0B1427E5C62E00F16C21 /* AirportPickerResults.swift in Sources */,
+				016A0AFF27E5358100F16C21 /* NOTAM.swift in Sources */,
 				0179865A25C280B60031A453 /* WeatherSource.swift in Sources */,
+				016A0B3E27E5D60300F16C21 /* VxClimbView.swift in Sources */,
 				0191C06B25B2C02900C4B810 /* SectionState.swift in Sources */,
 				014F100B25AAAD410081EAC3 /* SearchField.swift in Sources */,
 				0135A874258748D400892558 /* TakeoffView.swift in Sources */,
 				01D265CC25AD99AF00322A45 /* WeatherRow.swift in Sources */,
+				016A0B0A27E5B98900F16C21 /* Runway.swift in Sources */,
 				01F18D2625B198B6007D76BA /* LoadoutView.swift in Sources */,
+				010F675227E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */,
+				016A0B2E27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
+				016A0B1927E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
 				01F59A1F25AE63AC0055E81B /* PerformanceView.swift in Sources */,
 				01D265B625AD808600322A45 /* WindComponents.swift in Sources */,
 				015A392E25C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
 				019CC28425B91C0F00FEA895 /* DecimalField.swift in Sources */,
 				01F7EB9E25BBFA2A00CE5024 /* ConfigurationView.swift in Sources */,
 				0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */,
+				016A0B1F27E5D15F00F16C21 /* VREFView.swift in Sources */,
 				0135A8CC2587599D00892558 /* AirportPicker.swift in Sources */,
 				01C7EA7A25B1963600CCFBE1 /* InterpolationView.swift in Sources */,
 				01E2A1EB25ABA7D20076CC84 /* LoadingView.swift in Sources */,
 				01A6DB1425AD76BE00A3341F /* AirportRow.swift in Sources */,
 				0158291625BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				017B669A258898DA00AA2DE9 /* WeatherState.swift in Sources */,
+				011A95A627E477D500F3A127 /* NOTAMView.swift in Sources */,
 				0135A8A525874C3B00892558 /* Global.swift in Sources */,
 				01D2C8F025D126C10036B6FE /* Weather.swift in Sources */,
-				0135A8622587358000892558 /* AirportStorage.swift in Sources */,
 				01D265C325AD821200322A45 /* RunwayDistances.swift in Sources */,
 				017B66902588980F00AA2DE9 /* PerformanceModel.swift in Sources */,
 				01F7EBAB25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */,
@@ -859,6 +981,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01F4C9242681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
+				016A0B0B27E5B98900F16C21 /* Runway.swift in Sources */,
 				01D7DA6D25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				0179865B25C280B60031A453 /* WeatherSource.swift in Sources */,
 				01535DE325A2FD0800AC0F5F /* ValueFormatter.swift in Sources */,
@@ -885,25 +1008,38 @@
 				0135A87E258748DF00892558 /* LandingView.swift in Sources */,
 				0191C05F25B2BF7800C4B810 /* AppState.swift in Sources */,
 				015A393625C3A73100FEFDBF /* LoadingView.swift in Sources */,
+				016A0B0027E5358100F16C21 /* NOTAM.swift in Sources */,
 				015A392F25C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
+				011A95A727E477D500F3A127 /* NOTAMView.swift in Sources */,
 				01A6DB1525AD76BE00A3341F /* AirportRow.swift in Sources */,
+				010F674E27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
+				016A0B3527E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
+				016A0B3F27E5D60300F16C21 /* VxClimbView.swift in Sources */,
+				016A0B2A27E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
 				014F100C25AAAD410081EAC3 /* SearchField.swift in Sources */,
+				010F675327E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */,
 				01F7EBAC25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */,
 				0135A875258748D400892558 /* TakeoffView.swift in Sources */,
 				01DD6DA025B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,
+				016A0B2027E5D15F00F16C21 /* VREFView.swift in Sources */,
 				01F18D3425B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
+				016A0B2527E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */,
 				0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */,
 				0135A8CD2587599D00892558 /* AirportPicker.swift in Sources */,
+				016A0B1027E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				017B669B258898DA00AA2DE9 /* WeatherState.swift in Sources */,
 				0135A8A625874C3B00892558 /* Global.swift in Sources */,
-				0135A8632587358000892558 /* AirportStorage.swift in Sources */,
+				016A0B2F27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				0166FC9725BFFDA7006F7258 /* View Functions.swift in Sources */,
 				01D2C8F125D126C10036B6FE /* Weather.swift in Sources */,
 				017B66912588980F00AA2DE9 /* PerformanceModel.swift in Sources */,
 				01A6DB1C25AD776C00A3341F /* RunwayRow.swift in Sources */,
+				016A0B1A27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
 				01C7EA7B25B1963600CCFBE1 /* InterpolationView.swift in Sources */,
+				016A0B3A27E5D5AC00F16C21 /* TakeoffDistanceView.swift in Sources */,
 				019CC28525B91C0F00FEA895 /* DecimalField.swift in Sources */,
 				014808DC25AAEEF10041A90D /* Airports.xcdatamodeld in Sources */,
+				016A0B1527E5C62E00F16C21 /* AirportPickerResults.swift in Sources */,
 				01D265CD25AD99AF00322A45 /* WeatherRow.swift in Sources */,
 				01F18D2725B198B6007D76BA /* LoadoutView.swift in Sources */,
 			);
@@ -920,6 +1056,8 @@
 				0166FCBF25C00E1D006F7258 /* SelectAllOnFocus.swift in Sources */,
 				016C735F25AE40120008455F /* AirportPicker.swift in Sources */,
 				016C736025AE40120008455F /* RunwayPicker.swift in Sources */,
+				016A0B4027E5D60300F16C21 /* VxClimbView.swift in Sources */,
+				016A0B3627E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
 				0158291825BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				016C736225AE40120008455F /* SearchField.swift in Sources */,
 				016C736325AE40120008455F /* WeatherRow.swift in Sources */,
@@ -933,32 +1071,44 @@
 				0179867225C280D30031A453 /* WeatherForm.swift in Sources */,
 				016C736725AE40120008455F /* RunwayDistances.swift in Sources */,
 				01750ACA25B27C2D00555CDB /* PerformanceState.swift in Sources */,
+				011A95A827E477D500F3A127 /* NOTAMView.swift in Sources */,
 				016C736825AE40120008455F /* ContentView.swift in Sources */,
 				016C736925AE40120008455F /* LoadingView.swift in Sources */,
 				0191C06025B2BF7800C4B810 /* AppState.swift in Sources */,
 				0179866925C280C40031A453 /* RawWeather.swift in Sources */,
+				016A0B3027E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				01D7DA6E25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				016C736A25AE40120008455F /* ErrorView.swift in Sources */,
 				016C736B25AE40120008455F /* TakeoffView.swift in Sources */,
 				015A393025C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
 				016C736C25AE40120008455F /* LandingView.swift in Sources */,
 				016C736D25AE40120008455F /* SettingsView.swift in Sources */,
+				010F674F27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
 				01F4C9252681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				01F18D3525B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
 				01F7EBAD25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */,
 				01DD6DA125B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,
 				016C736F25AE40120008455F /* WeatherService.swift in Sources */,
-				016C737025AE40120008455F /* AirportStorage.swift in Sources */,
+				016A0B2B27E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
+				016A0B2127E5D15F00F16C21 /* VREFView.swift in Sources */,
+				016A0B0127E5358100F16C21 /* NOTAM.swift in Sources */,
 				016C737125AE40120008455F /* AirportDataLoader.swift in Sources */,
+				016A0B1B27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
+				016A0B1127E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				01007B8525D5268700C8BFF2 /* AboutView.swift in Sources */,
+				016A0B1627E5C62E00F16C21 /* AirportPickerResults.swift in Sources */,
 				016C737325AE40120008455F /* PerformanceModel.swift in Sources */,
 				0166FC9825BFFDA7006F7258 /* View Functions.swift in Sources */,
 				016C737525AE40120008455F /* WeatherState.swift in Sources */,
 				01C7EA7C25B1963600CCFBE1 /* InterpolationView.swift in Sources */,
 				019CC28625B91C0F00FEA895 /* DecimalField.swift in Sources */,
+				010F675427E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */,
+				016A0B3B27E5D5AC00F16C21 /* TakeoffDistanceView.swift in Sources */,
 				016C737725AE40120008455F /* Global.swift in Sources */,
+				016A0B2627E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */,
 				016C737825AE40120008455F /* Tests_iOS.swift in Sources */,
 				01F18D2825B198B6007D76BA /* LoadoutView.swift in Sources */,
+				016A0B0C27E5B98900F16C21 /* Runway.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -973,6 +1123,8 @@
 				0166FCC025C00E1D006F7258 /* SelectAllOnFocus.swift in Sources */,
 				016C738425AE40200008455F /* AirportPicker.swift in Sources */,
 				016C738525AE40200008455F /* RunwayPicker.swift in Sources */,
+				016A0B4127E5D60300F16C21 /* VxClimbView.swift in Sources */,
+				016A0B3727E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
 				0158291925BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				016C738725AE40200008455F /* SearchField.swift in Sources */,
 				016C738825AE40200008455F /* WeatherRow.swift in Sources */,
@@ -986,32 +1138,44 @@
 				0179867325C280D30031A453 /* WeatherForm.swift in Sources */,
 				016C738C25AE40200008455F /* RunwayDistances.swift in Sources */,
 				01750ACB25B27C2D00555CDB /* PerformanceState.swift in Sources */,
+				011A95A927E477D500F3A127 /* NOTAMView.swift in Sources */,
 				016C738D25AE40200008455F /* ContentView.swift in Sources */,
 				016C738E25AE40200008455F /* LoadingView.swift in Sources */,
 				0191C06125B2BF7800C4B810 /* AppState.swift in Sources */,
 				0179866A25C280C40031A453 /* RawWeather.swift in Sources */,
+				016A0B3127E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				01D7DA6F25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				016C738F25AE40200008455F /* ErrorView.swift in Sources */,
 				016C739025AE40200008455F /* TakeoffView.swift in Sources */,
 				015A393125C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
 				016C739125AE40200008455F /* LandingView.swift in Sources */,
 				016C739225AE40200008455F /* SettingsView.swift in Sources */,
+				010F675027E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
 				01F4C9262681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				01F18D3625B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
 				01F7EBAE25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */,
 				01DD6DA225B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,
 				016C739425AE40200008455F /* WeatherService.swift in Sources */,
-				016C739525AE40200008455F /* AirportStorage.swift in Sources */,
+				016A0B2C27E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
+				016A0B2227E5D15F00F16C21 /* VREFView.swift in Sources */,
+				016A0B0227E5358100F16C21 /* NOTAM.swift in Sources */,
 				016C739625AE40200008455F /* AirportDataLoader.swift in Sources */,
+				016A0B1C27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
+				016A0B1227E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				01007B8625D5268700C8BFF2 /* AboutView.swift in Sources */,
+				016A0B1727E5C62E00F16C21 /* AirportPickerResults.swift in Sources */,
 				016C739825AE40200008455F /* PerformanceModel.swift in Sources */,
 				0166FC9925BFFDA7006F7258 /* View Functions.swift in Sources */,
 				016C739A25AE40200008455F /* WeatherState.swift in Sources */,
 				01C7EA7D25B1963600CCFBE1 /* InterpolationView.swift in Sources */,
 				019CC28725B91C0F00FEA895 /* DecimalField.swift in Sources */,
+				010F675527E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */,
+				016A0B3C27E5D5AC00F16C21 /* TakeoffDistanceView.swift in Sources */,
 				016C739C25AE40200008455F /* Global.swift in Sources */,
+				016A0B2727E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */,
 				016C739D25AE40200008455F /* Tests_macOS.swift in Sources */,
 				01F18D2925B198B6007D76BA /* LoadoutView.swift in Sources */,
+				016A0B0D27E5B98900F16C21 /* Runway.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

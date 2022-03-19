@@ -3,62 +3,26 @@ import Combine
 import CoreData
 
 struct TakeoffView: View {
-    @EnvironmentObject var state: SectionState
-    @ObservedObject var performance: PerformanceState
-        
-    private var takeoffRun: Double? {
-        guard let run = performance.runway?.takeoffRun else { return nil }
-        return Double(run)
-    }
-    
-    private var takeoffDistance: Double? {
-        guard let distance = performance.runway?.takeoffDistance else { return nil }
-        return Double(distance)
-    }
+    @ObservedObject var state: SectionState
     
     var body: some View {
         NavigationView {
             Form {
-                PerformanceView(operation: .takeoff,
+                PerformanceView(state: state.performance,
+                                operation: .takeoff,
                                 title: "Takeoff", moment: "Departure",
-                                maxWeight: maxTakeoffWeight)
-                Section(header: Text("Performance")) {
-                    HStack {
-                        Text("Ground Roll")
-                        Spacer()
-                        InterpolationView(interpolation: performance.takeoffRoll,
-                                          suffix: "ft.",
-                                          maximum: takeoffRun)
-                    }
-
-                    HStack {
-                        Text("Total Distance")
-                        Spacer()
-                        InterpolationView(interpolation: performance.takeoffDistance,
-                                          suffix: "ft.",
-                                          maximum: takeoffDistance)
-                    }
-                    
-                    HStack {
-                        Text("Vx Climb Gradient")
-                        Spacer()
-                        InterpolationView(interpolation: performance.climbGradient,
-                                          suffix: "ft/NM",
-                                          minimum: 0)
-                    }
-                    
-                    HStack {
-                        Text("Vx Climb Rate")
-                        Spacer()
-                        InterpolationView(interpolation: performance.climbRate,
-                                          suffix: "ft/min",
-                                          minimum: 0)
-                    }
-                }
+                                maxWeight: maxTakeoffWeight,
+                                downloadWeather: {
+                    // force a reload of the weather unless we are reverting from custom
+                    // to downloaded weather
+                    let force = state.performance.weatherState.source != .entered
+                    state.downloadWeather(airport: state.performance.airport,
+                                          date: state.performance.date,
+                                          force: force)
+                },
+                                cancelDownload: { state.cancelWeatherDownload() })
                 
-                if performance.offscale != .none {
-                    OffscaleWarningView(offscale: performance.offscale)
-                }
+                TakeoffResultsView(state: state.performance)
             }.navigationTitle("Takeoff")
         }.navigationViewStyle(navigationStyle)
     }
@@ -94,12 +58,14 @@ struct TakeoffView_Previews: PreviewProvider {
         a.addToRunways(rwy30)
         return a
     }()
-    static var state: AppState {
-        let state = AppState()
+    static var state: SectionState {
+        let state = SectionState(operation: .takeoff)
+        state.performance.airport = SQL
+        state.performance.runway = rwy30
         return state
     }
     
     static var previews: some View {
-        TakeoffView(performance: state.takeoff.performance).environmentObject(state.takeoff)
+        TakeoffView(state: state)
     }
 }

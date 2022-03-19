@@ -4,17 +4,12 @@ import OSLog
 import SwiftNASR
 
 class AirportDataLoader: ObservableObject {
-    private let persistentContainer: NSPersistentContainer
     @Published private(set) var error: Swift.Error? = nil
     
     private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "AirportDataLoader")
     private let queue = DispatchQueue(label: "SF50-Told.AirportService", qos: .background)
     
     private var loader = BackgroundDownloader()
-    
-    required init(container: NSPersistentContainer) {
-        persistentContainer = container
-    }
     
     func loadNASR(withProgress progressHandler: (Progress) -> Void) async throws -> Cycle? {
         let nasr = NASR(loader: loader)
@@ -35,17 +30,17 @@ class AirportDataLoader: ObservableObject {
     }
     
     private func loadAirports(_ data: NASRData, progress: Progress) async throws {
-        let context = persistentContainer.newBackgroundContext()
+        let context = PersistentContainer.shared.newBackgroundContext()
         try await deleteExistingAirports(context: context)
         await addNewAirportsFrom(data, context: context, progress: progress)
         try await context.perform { try context.save() }
     }
     
     private func deleteExistingAirports(context: NSManagedObjectContext) async throws {
-        try await persistentContainer.persistentStoreCoordinator.perform {
+        try await PersistentContainer.shared.persistentStoreCoordinator.perform {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Airport")
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-            try self.persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: context)
+            try context.execute(deleteRequest)
         }
     }
     

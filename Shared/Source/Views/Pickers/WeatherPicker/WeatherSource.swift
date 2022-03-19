@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct WeatherSource: View {
+    @ObservedObject var weather: WeatherState
+    
     var downloadWeather: () -> Void
-    @EnvironmentObject var weather: WeatherState
     
     private var downloadButtonTitle: String {
         if weather.resetDueToError { return "Try Again" }
@@ -76,8 +77,7 @@ struct WeatherSource: View {
 struct WeatherSource_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            WeatherSource(downloadWeather: {})
-                .environmentObject(WeatherState())
+            WeatherSource(weather: WeatherState(), downloadWeather: {})
         }
     }
 }

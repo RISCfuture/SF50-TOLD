@@ -21,7 +21,7 @@ fileprivate func densityAltString(_ conditions: Weather, elevation: Double, comp
 }
 
 struct WeatherRow: View {
-    @EnvironmentObject var conditions: WeatherState
+    @ObservedObject var conditions: WeatherState
     var elevation: Double
     
     var windColor: Color { conditions.source == .ISA ? .secondary : .primary }
@@ -67,10 +67,10 @@ struct WeatherRow: View {
 
 struct WeatherRow_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherRow(elevation: 0.0)
-            .environmentObject(WeatherState.init(wind: .calm,
+        WeatherRow(conditions: WeatherState.init(wind: .calm,
                                                  temperature: .value(9),
                                                  altimeter: 29.97,
-                                                 source: .downloaded))
+                                                 source: .downloaded),
+                   elevation: 0.0)
     }
 }

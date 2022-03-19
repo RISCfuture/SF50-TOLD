@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var state: SettingsState
+    @ObservedObject var state: SettingsState
     
     var body: some View {
         NavigationView {
@@ -38,6 +38,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView().environmentObject(SettingsState())
+        SettingsView(state: SettingsState())
     }
 }

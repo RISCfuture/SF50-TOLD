@@ -2,13 +2,15 @@ import SwiftUI
 import CoreData
 
 struct RunwayPicker: View {
+    @ObservedObject var airport: Airport
+    @ObservedObject var weather: WeatherState
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @EnvironmentObject var state: PerformanceState
+    @Binding var flaps: FlapSetting?
     
     var operation: Operation
+    var onSelect: (Runway) -> Void
     
     var runways: Array<Runway> {
-        guard let airport = state.airport else { return [] }
         return (airport.runways!.allObjects as! Array<Runway>)
             .sorted { $0.name!.localizedCompare($1.name!) == .orderedAscending }
     }
@@ -18,10 +20,10 @@ struct RunwayPicker: View {
             List(runways, id: \.name) { runway in
                 RunwayRow(runway: runway,
                           operation: operation,
-                          wind: state.weather.wind,
-                          crosswindLimit: crosswindLimitForFlapSetting(state.flaps),
+                          wind: weather.wind,
+                          crosswindLimit: crosswindLimitForFlapSetting(flaps),
                           tailwindLimit: tailwindLimit).onTapGesture {
-                    state.runway = runway
+                    onSelect(runway)
                     self.mode.wrappedValue.dismiss()
                 }
             }
@@ -33,33 +35,18 @@ struct RunwayPicker: View {
 struct RunwayPicker_Previews: PreviewProvider {
     static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
     
-    static var rwy30 = { () -> Runway in
-        let r = Runway(entity: Runway.entity(), insertInto: nil)
-        r.name = "30"
-        r.takeoffRun = 2600
-        r.takeoffDistance = 2600
-        r.heading = 302
-        return r
+    private static let SQL = { () -> Airport in
+        let a = Airport(entity: Airport.entity(), insertInto: nil)
+        a.lid = "SQL"
+        a.name = "San Carlos"
+        return a
     }()
-    static var rwy12 = { () -> Runway in
-        let r = Runway(entity: Runway.entity(), insertInto: nil)
-        r.name = "12"
-        r.takeoffRun = 2600
-        r.takeoffDistance = 2600
-        r.heading = 122
-        return r
-    }()
-    
-    static var state: PerformanceState {
-        let state = PerformanceState()
-        state.airport = Airport(entity: Airport.entity(), insertInto: nil)
-        state.airport!.addToRunways(rwy12)
-        state.airport!.addToRunways(rwy30)
-        return state
-    }
     
     static var previews: some View {
-        RunwayPicker(operation: .takeoff)
-            .environmentObject(state)
+        RunwayPicker(airport: SQL,
+                     weather: WeatherState(),
+                     flaps: .constant(.flaps100),
+                     operation: .landing,
+                     onSelect: { _ in })
     }
 }

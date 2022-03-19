@@ -3,28 +3,30 @@ import Combine
 import CoreData
 
 struct PerformanceView: View {
-    @EnvironmentObject var state: SectionState
+    @ObservedObject var state: PerformanceState
+    
     
     var operation: Operation
     var title: String
     var moment: String
     var maxWeight: Double
     
+    var downloadWeather: () -> Void
+    var cancelDownload: () -> Void
+    
     var body: some View {
-        LoadoutView(title: title, maxWeight: maxWeight)
-            .environmentObject(state.performance)
+        LoadoutView(state: state, title: title, maxWeight: maxWeight)
         
-        ConfigurationView(operation: operation).environmentObject(state.performance)
+        ConfigurationView(state: state, operation: operation)
         
-        TimeAndPlaceView(moment: moment, operation: operation, downloadWeather: {
-            // force a reload of the weather unless we are reverting from custom
-            // to downloaded weather
-            let force = state.performance.weather.source != .entered
-            state.downloadWeather(airport: state.performance.airport,
-                                  date: state.performance.date,
-                                  force: force)
-        }, cancelDownload: { state.cancelWeatherDownload() })
-            .environmentObject(state.performance)
+        TimeAndPlaceView(state: state,
+                         moment: moment,
+                         operation: operation,
+                         downloadWeather: downloadWeather,
+                         cancelDownload: cancelDownload,
+                         onChangeAirport: { airport in
+            state.airportID = airport.id!
+        })
     }
 }
 
@@ -57,15 +59,22 @@ struct PerformanceView_Previews: PreviewProvider {
         return a
     }()
     
-    static var state: AppState { AppState() }
+    static var state: PerformanceState {
+        let state = PerformanceState(operation: .takeoff)
+        state.airport = SQL
+        state.runway = rwy30
+        return state
+    }
     
     static var previews: some View {
         Form {
-            PerformanceView(operation: .takeoff,
+            PerformanceView(state: state,
+                            operation: .takeoff,
                             title: "Takeoff",
                             moment: "Departure",
-                            maxWeight: maxTakeoffWeight)
-                .environmentObject(state.takeoff)
+                            maxWeight: maxTakeoffWeight,
+                            downloadWeather: {},
+                            cancelDownload: {})
         }
     }
 }

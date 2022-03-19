@@ -3,44 +3,32 @@ import CoreData
 import Defaults
 
 struct AirportPicker: View {
+    @State var filter = ""
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @EnvironmentObject var state: SectionState
     
-    private var predicate: NSPredicate {
-        let text = state.airportFilterText
-        return NSPredicate(format: "lid ==[c] %@ OR icao ==[c] %@ OR name CONTAINS[cd] %@ OR city CONTAINS[cd] %@", text, text, text, text)
+    var onSelect: (Airport) -> Void
+    
+    private var fetchAirportsPredicate: NSPredicate {
+        .init(format: "lid ==[c] %@ OR icao ==[c] %@ OR name CONTAINS[cd] %@ OR city CONTAINS[cd] %@",
+              filter, filter, filter, filter)
     }
     
-    lazy var fetchRequest = FetchRequest<Airport>(entity: Airport.entity(),
-                                         sortDescriptors: [],
-                                         predicate: predicate)
-    
-    private mutating func matchingAirports() -> Array<Airport> {
-        fetchRequest.wrappedValue
-            .sorted { $0.name!.localizedCompare($1.name!) == .orderedAscending }
+    private var fetchAirports: FetchRequest<Airport> {
+        .init(entity: Airport.entity(),
+              sortDescriptors: [
+                .init(keyPath: \Airport.lid, ascending: true)
+              ],
+              predicate: fetchAirportsPredicate)
     }
     
     var body: some View {
         VStack(alignment: .leading) {
-            SearchField(placeholder: "Find Airport", text: $state.airportFilterText)
-            
-            if state.matchingAirports.isEmpty && state.airportFilterText.isEmpty {
-                List {
-                    Text("No results.")
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.leading)
-                }
-            } else {
-                List(state.matchingAirports) { (airport: Airport) in
-                    AirportRow(airport: airport).onTapGesture {
-                        state.airportID = airport.id!
-                        self.mode.wrappedValue.dismiss()
-                    }
-                }
-            }
-            
-            Spacer()
-        }.navigationTitle("Airport")
+            SearchField(placeholder: "Find Airport", text: $filter)
+            AirportPickerResults(airports: fetchAirports, filterText: $filter, onSelect: { airport in
+                onSelect(airport)
+                self.mode.wrappedValue.dismiss()
+            })
+        }
     }
 }
 
@@ -58,7 +46,9 @@ struct AirportPicker_Previews: PreviewProvider {
         return a
     }()
     
+    private static let state = SectionState(operation: .takeoff)
+    
     static var previews: some View {
-        AirportPicker().environmentObject(SectionState(operation: .takeoff, persistentContainer: AppState().persistentContainer))
+        AirportPicker() { _ in }
     }
 }

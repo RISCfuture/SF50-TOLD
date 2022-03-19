@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct WeatherForm: View {
-    @EnvironmentObject var weather: WeatherState
+    @ObservedObject var weather: WeatherState
     
     private let headingFormatter = numberFormatter(precision: 0, minimum: 0, maximum: 360)
     private let speedFormatter = numberFormatter(precision: 0, minimum: 0)
@@ -60,6 +60,6 @@ struct WeatherForm: View {
 
 struct WeatherForm_Previews: PreviewProvider {
     static var previews: some View {
-        Form { WeatherForm().environmentObject(WeatherState()) }
+        Form { WeatherForm(weather: WeatherState()) }
     }
 }

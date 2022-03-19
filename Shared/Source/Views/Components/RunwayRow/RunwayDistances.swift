@@ -5,28 +5,36 @@ fileprivate func formatDistance(_ distance: Int16) -> String {
 }
 
 struct RunwayDistances: View {
-    var runway: Runway
+    @ObservedObject var runway: Runway
     var operation: Operation
     
     var body: some View {
         switch operation {
             case .takeoff:
                 if runway.takeoffRun == runway.takeoffDistance {
-                    Text(formatDistance(runway.takeoffRun))
+                    distanceText(runway.notamedTakeoffRun, notamed: runway.hasTakeoffDistanceNOTAM)
                 } else {
                     HStack {
                         HStack(alignment: .bottom, spacing: 3) {
-                            Text(formatDistance(runway.takeoffRun))
+                            distanceText(runway.notamedTakeoffRun, notamed: runway.hasTakeoffDistanceNOTAM)
                             Text("TORA").font(.system(size: 9)).padding(.bottom, 2)
                         }
                         HStack(alignment: .bottom, spacing: 3) {
-                            Text(formatDistance(runway.takeoffRun))
+                            distanceText(runway.notamedTakeoffDistance, notamed: runway.hasTakeoffDistanceNOTAM)
                             Text("TODA").font(.system(size: 9)).padding(.bottom, 2)
                         }
                     }
                 }
             case .landing:
-                Text(formatDistance(runway.landingDistance))
+                distanceText(runway.notamedLandingDistance, notamed: runway.hasLandingDistanceNOTAM)
+        }
+    }
+    
+    private func distanceText(_ distance: Int16, notamed: Bool) -> some View {
+        if notamed {
+            return Text(formatDistance(distance)).foregroundColor(.ui.warning)
+        } else {
+            return Text(formatDistance(distance))
         }
     }
 }

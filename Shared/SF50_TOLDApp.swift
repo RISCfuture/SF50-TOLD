@@ -1,5 +1,6 @@
 import SwiftUI
 import BackgroundTasks
+import CoreData
 #if canImport(UIKit)
 import UIKit
 #endif
@@ -20,7 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? =
                         nil) -> Bool {
-        //AirportLoaderTask.register(persistentContainer: AppState().persistentContainer)
+        //AirportLoaderTask.register()
         return true
     }
 }
@@ -35,7 +36,8 @@ struct SF50_TOLDApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(state)
+            ContentView(state: state)
+                .environment(\.managedObjectContext, PersistentContainer.shared.viewContext)
         }
     }
 }

@@ -2,10 +2,11 @@ import SwiftUI
 import CoreData
 
 struct WeatherPicker: View {
+    @ObservedObject var state: WeatherState
+
     var downloadWeather: () -> Void
     var cancelDownload: () -> Void
     var elevation: Float? = nil
-    @EnvironmentObject var state: WeatherState
     
     private var densityAltitude: Double? {
         guard let elevation = self.elevation else { return nil }
@@ -22,8 +23,8 @@ struct WeatherPicker: View {
                     Button("Cancel") { cancelDownload() }
                 }
             } else {
-                WeatherSource(downloadWeather: downloadWeather)
-                WeatherForm()
+                WeatherSource(weather: state, downloadWeather: downloadWeather)
+                WeatherForm(weather: state)
                 if let densityAltitude = densityAltitude {
                     Text("Density altitude: \(integerFormatter.string(for: densityAltitude)) ft.")
                         .foregroundColor(.secondary)
@@ -43,7 +44,6 @@ struct WeatherPicker_Previews: PreviewProvider {
                                       forecast: "KSFO 172057Z 1721/1824 VRB04KT P6SM SKC WS020/02025KT FM172200 31008KT P6SM SKC FM180100 28013KT P6SM FEW200 FM180800 28006KT P6SM FEW200 FM181000 VRB05KT P6SM SKC WS020/02030KT FM181500 36008KT P6SM SKC WS015/03030KT FM182000 36012KT P6SM SKC WS015/03035KT")
     
     static var previews: some View {
-        WeatherPicker(downloadWeather: {}, cancelDownload: {}, elevation: 1234)
-            .environmentObject(weather)
+        WeatherPicker(state: weather, downloadWeather: {}, cancelDownload: {}, elevation: 1234)
     }
 }

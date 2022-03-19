@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ConfigurationView: View {
-    @EnvironmentObject var state: PerformanceState
+    @ObservedObject var state: PerformanceState
     var operation: Operation
         
     var body: some View {
@@ -33,7 +33,8 @@ struct ConfigurationView: View {
 struct LandingConfigurationView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            ConfigurationView(operation: .landing).environmentObject(PerformanceState())
+            ConfigurationView(state: PerformanceState(operation: .landing),
+                              operation: .takeoff)
         }
     }
 }

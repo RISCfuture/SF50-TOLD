@@ -2,7 +2,7 @@ import SwiftUI
 import Defaults
 
 struct LoadingConsentView: View {
-    @EnvironmentObject var state: AppState
+    @ObservedObject var state: AppState
     
     var titleString: String {
         if Defaults[.lastCycleLoaded] == nil {
@@ -52,6 +52,6 @@ struct LoadingConsentView: View {
 
 struct LoadingConsentView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingConsentView().preferredColorScheme(.dark).environmentObject(AppState())
+        LoadingConsentView(state: AppState())
     }
 }

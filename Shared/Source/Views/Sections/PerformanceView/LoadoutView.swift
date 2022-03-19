@@ -4,7 +4,7 @@ import Defaults
 
 
 struct LoadoutView: View {
-    @EnvironmentObject var state: PerformanceState
+    @ObservedObject var state: PerformanceState
     var title: String
     var maxWeight: Double
     
@@ -44,9 +44,9 @@ struct LoadoutView: View {
 struct LoadoutView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            LoadoutView(title: "Takeoff",
+            LoadoutView(state: PerformanceState(operation: .takeoff),
+                        title: "Takeoff",
                         maxWeight: maxTakeoffWeight)
-                .environmentObject(PerformanceState())
         }
     }
 }

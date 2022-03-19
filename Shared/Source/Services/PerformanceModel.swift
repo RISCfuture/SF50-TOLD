@@ -58,7 +58,7 @@ struct PerformanceModel {
             var offscaleHigh = false
             if weight < 5000 { offscaleLow = true }
             if weight > 6000 { offscaleHigh = true }
-            if pa < 0 { offscaleLow = true }
+            if pa < -100 { offscaleLow = true } // add a little slop because the PA equation isn't exact
             if pa > 10000 { offscaleHigh = true }
             if temp < -20 { offscaleLow = true }
             if temp > 50 { offscaleHigh = true }
@@ -85,7 +85,7 @@ struct PerformanceModel {
             var offscaleHigh = false
             if weight < 5000 { offscaleLow = true }
             if weight > 6000 { offscaleHigh = true }
-            if pa < 0 { offscaleLow = true }
+            if pa < -100 { offscaleLow = true } // add a little slop because the PA equation isn't exact
             if pa > 10000 { offscaleHigh = true }
             if temp < -20 { offscaleLow = true }
             if temp > 50 { offscaleHigh = true }
@@ -131,7 +131,7 @@ struct PerformanceModel {
             var offscaleHigh = false
             if weight < 4500 { offscaleLow = true }
             if weight > 5550 { offscaleHigh = true }
-            if pa < 0 { offscaleLow = true }
+            if pa < -100 { offscaleLow = true } // add a little slop because the PA equation isn't exact
             if pa > 10000 { offscaleHigh = true }
             switch flaps {
                 case .flaps50Ice, .flapsUpIce:
@@ -175,7 +175,7 @@ struct PerformanceModel {
             var offscaleHigh = false
             if weight < 4500 { offscaleLow = true }
             if weight > 5550 { offscaleHigh = true }
-            if pa < 0 { offscaleLow = true }
+            if pa < -100 { offscaleLow = true } // add a little slop because the PA equation isn't exact
             if pa > 10000 { offscaleHigh = true }
             switch flaps {
                 case .flaps50Ice, .flapsUpIce:
@@ -201,7 +201,7 @@ struct PerformanceModel {
             var offscaleHigh = false
             if weight < 4500 { offscaleLow = true }
             if weight > 6000 { offscaleHigh = true }
-            if pa < 0 { offscaleLow = true }
+            if pa < -100 { offscaleLow = true } // add a little slop because the PA equation isn't exact
             if pa > 10000 { offscaleHigh = true }
             if temp < -40 { offscaleLow = true }
             if temp > 50 { offscaleHigh = true }
@@ -221,7 +221,7 @@ struct PerformanceModel {
             var offscaleHigh = false
             if weight < 4500 { offscaleLow = true }
             if weight > 6000 { offscaleHigh = true }
-            if pa < 0 { offscaleLow = true }
+            if pa < -100 { offscaleLow = true } // add a little slop because the PA equation isn't exact
             if pa > 10000 { offscaleHigh = true }
             if temp < -40 { offscaleLow = true }
             if temp > 50 { offscaleHigh = true }

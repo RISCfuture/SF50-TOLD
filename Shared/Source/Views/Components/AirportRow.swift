@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AirportRow: View {
-    var airport: Airport
+    @ObservedObject var airport: Airport
     
     var body: some View {
         HStack {

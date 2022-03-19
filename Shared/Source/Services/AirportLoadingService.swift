@@ -25,12 +25,12 @@ class AirportLoadingService: ObservableObject {
     
     var loading: Bool { !progress.isFinished }
         
-    required init(container: NSPersistentContainer) {
-        airportDataLoader = .init(container: container)
+    required init() {
+        airportDataLoader = .init()
         airportDataLoader.$error.receive(on: RunLoop.main).assign(to: &$error)
         
-        needsLoad = outOfDate(container: container, cycle: Defaults[.lastCycleLoaded])
-        canSkip = ((try? airportCount(container: container)) ?? 0) > 0
+        needsLoad = outOfDate(cycle: Defaults[.lastCycleLoaded])
+        canSkip = ((try? airportCount()) ?? 0) > 0
         
         Publishers.CombineLatest(
             $skipLoadThisSession,
@@ -38,7 +38,7 @@ class AirportLoadingService: ObservableObject {
         ).map { [weak self] skipLoadThisSession, cycle in
             guard let this = self else { return false }
             if skipLoadThisSession { return false }
-            return this.outOfDate(container: container, cycle: cycle)
+            return this.outOfDate(cycle: cycle)
         }.receive(on: RunLoop.main)
         .assign(to: &$needsLoad)
         
@@ -62,15 +62,15 @@ class AirportLoadingService: ObservableObject {
         RunLoop.main.perform { self.skipLoadThisSession = true }
     }
     
-    private func airportCount(container: NSPersistentContainer) throws -> Int {
+    private func airportCount() throws -> Int {
         let fetchRequest: NSFetchRequest<Airport> = Airport.fetchRequest()
-        return try container.viewContext.count(for: fetchRequest)
+        return try PersistentContainer.shared.viewContext.count(for: fetchRequest)
     }
     
-    private func outOfDate(container: NSPersistentContainer, cycle: Cycle?) -> Bool {
+    private func outOfDate(cycle: Cycle?) -> Bool {
         guard let cycle = cycle else { return true }
         if !cycle.isEffective { return true }
-        guard let count = try? airportCount(container: container) else { return true }
+        guard let count = try? airportCount() else { return true }
         if count == 0 { return true }
         return false
     }

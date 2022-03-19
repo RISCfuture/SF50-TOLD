@@ -1,11 +1,17 @@
 import SwiftUI
+import Combine
 
 struct RunwayRow: View {
-    var runway: Runway
+    @ObservedObject var runway: Runway
+    
     var operation: Operation
-    var wind: Wind?
+    var wind: Wind
     var crosswindLimit: UInt? = nil
     var tailwindLimit: UInt? = nil
+    
+    private var notamWillChange: ObservableObjectPublisher {
+        runway.notam?.objectWillChange ?? ObservableObjectPublisher()
+    }
     
     var body: some View {
         HStack {
@@ -14,14 +20,17 @@ struct RunwayRow: View {
             if runway.turf {
                 Text("(turf)")
             }
-            if wind != nil {
-                Spacer()
-                WindComponents(runway: runway,
-                               wind: wind,
-                               crosswindLimit: crosswindLimit,
-                               tailwindLimit: tailwindLimit)
-            }
+            
+            Spacer()
+            
+            WindComponents(runway: runway,
+                           wind: wind,
+                           crosswindLimit: crosswindLimit,
+                           tailwindLimit: tailwindLimit)
         }.contentShape(Rectangle())
+            .onReceive(notamWillChange) {
+                runway.objectWillChange.send()
+            }
     }
 }
 
