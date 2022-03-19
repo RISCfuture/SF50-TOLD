@@ -68,9 +68,8 @@ struct WindComponents: View {
 }
 
 struct WindComponents_Previews: PreviewProvider {
-    static let runway = AppState().persistentContainer.managedObjectModel.entitiesByName["Runway"]!
     static var rwy30 = { () -> Runway in
-        let r = Runway(entity: runway, insertInto: nil)
+        let r = Runway(entity: Runway.entity(), insertInto: nil)
         r.name = "30"
         r.takeoffRun = 2600
         r.takeoffDistance = 2800

@@ -45,15 +45,14 @@ struct AirportPicker: View {
 }
 
 struct AirportPicker_Previews: PreviewProvider {
-    private static let entity = AppState().persistentContainer.managedObjectModel.entitiesByName["Airport"]!
     private static let OAK = { () -> Airport in
-        let a = Airport(entity: entity, insertInto: nil)
+        let a = Airport(entity: Airport.entity(), insertInto: nil)
         a.lid = "OAK"
         a.name = "Metro Oakland Intl"
         return a
     }()
     private static let SQL = { () -> Airport in
-        let a = Airport(entity: entity, insertInto: nil)
+        let a = Airport(entity: Airport.entity(), insertInto: nil)
         a.lid = "SQL"
         a.name = "San Carlos"
         return a

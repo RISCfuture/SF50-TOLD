@@ -66,9 +66,9 @@ struct TakeoffView: View {
 
 struct TakeoffView_Previews: PreviewProvider {
     static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    static let runway = model.entitiesByName["Runway"]!
+    
     static var rwy12 = { () -> Runway in
-        let r = Runway(entity: runway, insertInto: nil)
+        let r = Runway(entity: Runway.entity(), insertInto: nil)
         r.name = "12"
         r.takeoffRun = 2600
         r.takeoffDistance = 2800
@@ -77,7 +77,7 @@ struct TakeoffView_Previews: PreviewProvider {
         return r
     }()
     static var rwy30 = { () -> Runway in
-        let r = Runway(entity: runway, insertInto: nil)
+        let r = Runway(entity: Runway.entity(), insertInto: nil)
         r.name = "30"
         r.takeoffRun = 2600
         r.takeoffDistance = 2800
@@ -86,7 +86,7 @@ struct TakeoffView_Previews: PreviewProvider {
         return r
     }()
     private static let SQL = { () -> Airport in
-        let a = Airport(entity: runway, insertInto: nil)
+        let a = Airport(entity: Runway.entity(), insertInto: nil)
         a.id = "SQL"
         a.lid = "SQL"
         a.name = "San Carlos"

@@ -32,11 +32,9 @@ struct RunwayPicker: View {
 
 struct RunwayPicker_Previews: PreviewProvider {
     static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    static let runway = model.entitiesByName["Runway"]!
-    static let airport = model.entitiesByName["Airport"]!
     
     static var rwy30 = { () -> Runway in
-        let r = Runway(entity: runway, insertInto: nil)
+        let r = Runway(entity: Runway.entity(), insertInto: nil)
         r.name = "30"
         r.takeoffRun = 2600
         r.takeoffDistance = 2600
@@ -44,7 +42,7 @@ struct RunwayPicker_Previews: PreviewProvider {
         return r
     }()
     static var rwy12 = { () -> Runway in
-        let r = Runway(entity: runway, insertInto: nil)
+        let r = Runway(entity: Runway.entity(), insertInto: nil)
         r.name = "12"
         r.takeoffRun = 2600
         r.takeoffDistance = 2600
@@ -54,7 +52,7 @@ struct RunwayPicker_Previews: PreviewProvider {
     
     static var state: PerformanceState {
         let state = PerformanceState()
-        state.airport = Airport(entity: airport, insertInto: nil)
+        state.airport = Airport(entity: Airport.entity(), insertInto: nil)
         state.airport!.addToRunways(rwy12)
         state.airport!.addToRunways(rwy30)
         return state

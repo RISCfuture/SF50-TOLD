@@ -13,9 +13,8 @@ struct AirportRow: View {
 }
 
 struct AirportRow_Previews: PreviewProvider {
-    private static let entity = AppState().persistentContainer.managedObjectModel.entitiesByName["Airport"]!
     private static let SQL = { () -> Airport in
-        let a = Airport(entity: entity, insertInto: nil)
+        let a = Airport(entity: Airport.entity(), insertInto: nil)
         a.lid = "SQL"
         a.name = "San Carlos"
         return a
