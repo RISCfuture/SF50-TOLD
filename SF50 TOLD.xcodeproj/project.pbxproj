@@ -19,6 +19,7 @@
 		010F675327E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */; };
 		010F675427E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */; };
 		010F675527E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */; };
+		010F675827E9B99C00BDBDB0 /* Cycle+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675727E9B99C00BDBDB0 /* Cycle+Defaults.swift */; };
 		011A95A627E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
 		011A95A727E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
 		011A95A827E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
@@ -295,6 +296,7 @@
 		01007B8225D5268700C8BFF2 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeoffResultsView.swift; sourceTree = "<group>"; };
 		010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingResultsView.swift; sourceTree = "<group>"; };
+		010F675727E9B99C00BDBDB0 /* Cycle+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cycle+Defaults.swift"; sourceTree = "<group>"; };
 		011A95A527E477D500F3A127 /* NOTAMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMView.swift; sourceTree = "<group>"; };
 		0135A7C32587091300892558 /* SF50_TOLDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF50_TOLDApp.swift; sourceTree = "<group>"; };
 		0135A7C42587091300892558 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -429,6 +431,14 @@
 			path = Records;
 			sourceTree = "<group>";
 		};
+		010F675627E9B98D00BDBDB0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				010F675727E9B99C00BDBDB0 /* Cycle+Defaults.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0112E56E25AC4D460048E921 /* Overlays */ = {
 			isa = PBXGroup;
 			children = (
@@ -555,6 +565,7 @@
 		0135A80725870E0A00892558 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				010F675627E9B98D00BDBDB0 /* Extensions */,
 				0135A8A425874C3B00892558 /* Global.swift */,
 				01750AB625B27AA700555CDB /* Models */,
 				0135A83525872EC100892558 /* Services */,
@@ -912,6 +923,7 @@
 			files = (
 				018CF99D2682A54100F52821 /* AirportLoaderTask.swift in Sources */,
 				01F4C9232681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
+				010F675827E9B99C00BDBDB0 /* Cycle+Defaults.swift in Sources */,
 				0179866725C280C40031A453 /* RawWeather.swift in Sources */,
 				01D7DA6C25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				016A0B0F27E5BE7200F16C21 /* Color+Assets.swift in Sources */,
@@ -1577,8 +1589,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Defaults";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		0153741E26107AFF0098B529 /* XCRemoteSwiftPackageReference "SWXMLHash" */ = {
