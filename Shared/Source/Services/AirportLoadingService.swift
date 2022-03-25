@@ -27,7 +27,7 @@ class AirportLoadingService: ObservableObject {
         
     required init() {
         airportDataLoader = .init()
-        airportDataLoader.$error.receive(on: RunLoop.main).assign(to: &$error)
+        airportDataLoader.$error.receive(on: DispatchQueue.main).assign(to: &$error)
         
         needsLoad = outOfDate(cycle: Defaults[.lastCycleLoaded])
         canSkip = ((try? airportCount()) ?? 0) > 0
@@ -39,7 +39,7 @@ class AirportLoadingService: ObservableObject {
             guard let this = self else { return false }
             if skipLoadThisSession { return false }
             return this.outOfDate(cycle: cycle)
-        }.receive(on: RunLoop.main)
+        }.receive(on: DispatchQueue.main)
         .assign(to: &$needsLoad)
         
         progress.completedUnitCount = 1
@@ -51,7 +51,7 @@ class AirportLoadingService: ObservableObject {
         Task {
             do {
                 guard let cycle = try await self.airportDataLoader.loadNASR(withProgress: { self.progress.addChild($0, withPendingUnitCount: 1) }) else { return }
-                RunLoop.main.perform {
+                DispatchQueue.main.async {
                     Defaults[.lastCycleLoaded] = cycle
                     self.progress = resetProgress(finished: true)
                 }
@@ -63,7 +63,7 @@ class AirportLoadingService: ObservableObject {
     
     func loadNASRLater() {
         //AirportLoaderTask.submit()
-        RunLoop.main.perform { self.skipLoadThisSession = true }
+        DispatchQueue.main.async { self.skipLoadThisSession = true }
     }
     
     private func airportCount() throws -> Int {

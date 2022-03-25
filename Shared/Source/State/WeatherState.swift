@@ -63,7 +63,7 @@ class WeatherState: ObservableObject {
             case .value(let num): userEditedTemperature = num
         }
         
-        $userEditedTemperature.receive(on: RunLoop.main).sink { [weak self] temp in self?.temperature = .value(temp) }.store(in: &cancellables)
+        $userEditedTemperature.receive(on: DispatchQueue.main).sink { [weak self] temp in self?.temperature = .value(temp) }.store(in: &cancellables)
     }
     
     convenience init(date: Date, observation: METAR?, forecast: TAF?) {
@@ -151,11 +151,11 @@ class WeatherState: ObservableObject {
         }
 
         guard let values = valuesFrom(date: date, observation: observation, forecast: forecast) else {
-            RunLoop.main.perform { self.resetToISA(observationError: observationError, forecastError: forecastError) }
+            DispatchQueue.main.async { self.resetToISA(observationError: observationError, forecastError: forecastError) }
             return
         }
         
-        RunLoop.main.perform {
+        DispatchQueue.main.async {
             self.windDirection = values.wind.direction
             self.windSpeed = values.wind.speed
             self.temperature = values.temperature

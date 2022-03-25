@@ -31,7 +31,7 @@ class SectionState: ObservableObject {
     func downloadWeather(airport: Airport? = nil, date: Date = Date(), force: Bool = false) {
         weatherLoadingCanceled = false
         guard let airport = airport else {
-            RunLoop.main.perform {
+            DispatchQueue.main.async {
                 self.performance.weatherState.resetToISA()
                 self.performance.weatherState.loading = false
             }
@@ -44,12 +44,12 @@ class SectionState: ObservableObject {
                 if self.weatherLoadingCanceled { return }
                 switch state {
                     case .loading:
-                        RunLoop.main.perform { self.performance.weatherState.loading = true }
+                        DispatchQueue.main.async { self.performance.weatherState.loading = true }
                     case .finished(let pair):
                         self.performance.weatherState.updateFrom(date: date,
                                                                  observationResult: pair.0,
                                                                  forecastResult: pair.1)
-                        RunLoop.main.perform { self.performance.weatherState.loading = false }
+                        DispatchQueue.main.async { self.performance.weatherState.loading = false }
                 }
             }
             .store(in: &cancellables)
@@ -57,7 +57,7 @@ class SectionState: ObservableObject {
     
     func cancelWeatherDownload() {
         weatherLoadingCanceled = true
-        RunLoop.main.perform {
+        DispatchQueue.main.async {
             self.performance.weatherState.resetToISA()
             self.performance.weatherState.loading = false
         }
