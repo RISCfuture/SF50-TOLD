@@ -49,10 +49,14 @@ class AirportLoadingService: ObservableObject {
         progress = resetProgress()
         
         Task {
-            guard let cycle = try! await self.airportDataLoader.loadNASR(withProgress: { self.progress.addChild($0, withPendingUnitCount: 1) }) else { return }
-            RunLoop.main.perform {
-                Defaults[.lastCycleLoaded] = cycle
-                self.progress = resetProgress(finished: true)
+            do {
+                guard let cycle = try await self.airportDataLoader.loadNASR(withProgress: { self.progress.addChild($0, withPendingUnitCount: 1) }) else { return }
+                RunLoop.main.perform {
+                    Defaults[.lastCycleLoaded] = cycle
+                    self.progress = resetProgress(finished: true)
+                }
+            } catch (let error) {
+                self.error = error
             }
         }
     }
