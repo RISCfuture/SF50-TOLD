@@ -13,6 +13,11 @@ struct ConfigurationView: View {
                         Spacer()
                         Text("50%")
                     }
+                    HStack {
+                        Text("Engine IPS")
+                        Spacer()
+                        Text("As Required")
+                    }
                 case .landing:
                     HStack {
                         Picker("Flaps", selection: $state.flaps) {
