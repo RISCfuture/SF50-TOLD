@@ -6,6 +6,13 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             Form {
+                VStack(alignment: .leading) {
+                    Toggle("Use Updated Thrust Schedule", isOn: $state.updatedThrustSchedule)
+                    Text("Turn this setting on when flying a G2+ VisionJet or one with SB5X-72-01 completed.")
+                        .font(.system(size: 11))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                
                 HStack {
                     Text("Empty Weight")
                     Spacer()

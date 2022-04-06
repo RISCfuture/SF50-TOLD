@@ -8,6 +8,7 @@ extension Defaults.Keys {
     static let emptyWeight = Key<Double>("emptyWeight", default: 3550) // lbs
     static let fuelDensity = Key<Double>("fuelDensity", default: 6.71) // lb/gal
     static let safetyFactor = Key<Double>("safetyFactor", default: 1.0)
+    static let updatedThrustSchedule = Key<Bool>("updatedThrustSchedule", default: false)
     
     static let payload = Key<Double>("payload", default: 0.0) // lbs
     

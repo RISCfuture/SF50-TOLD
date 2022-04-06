@@ -3,41 +3,11 @@ import SwiftMETAR
 import Combine
 import Defaults
 
-struct PerformanceModel {
+struct PerformanceModelG2Plus: PerformanceModel {
     var runway: Runway?
     var weather: Weather
     var weight: Double
     var flaps: FlapSetting? = nil
-    
-    private var isInitialized: Bool {
-        runway != nil
-    }
-    
-    private var windComponent: Double {
-        guard let runwayHeading = runway?.heading else { return weather.wind.speed }
-        
-        return Double(weather.wind.speed) * cos(deg2rad(weather.wind.direction - Double(runwayHeading)))
-    }
-    
-    private var headwind: Double {
-        abs(max(windComponent, 0.0))
-    }
-    
-    private var tailwind: Double {
-        abs(min(windComponent, 0.0))
-    }
-    
-    private var gradient: Double {
-        runway?.slope?.doubleValue ?? 0
-    }
-    
-    private var uphillGradient: Double {
-        abs(max(gradient, 0.0))
-    }
-    
-    private var downhillGradient: Double {
-        abs(min(gradient, 0.0))
-    }
     
     // feet
     var takeoffRoll: Interpolation? {
@@ -47,10 +17,10 @@ struct PerformanceModel {
             var distance = takeoffRollModel(weight: weight, pressureAlt: pa, temp: temp)
             
             distance *= (1 - 0.007*headwind) // 7% for every 10 knots of headwind
-            distance *= (1 + 0.04*tailwind) // 40% for every 10 knots of tailwind
+            distance *= (1 + 0.044*tailwind) // 44% for every 10 knots of tailwind
             
-            distance *= (1 - 2*downhillGradient) // 2% for every 1% of downhill gradient
-            distance *= (1 + 14*uphillGradient) // 14% for every 1% of uphill gradient
+            distance *= (1 - downhillGradientGroundRunFactorModel(weight: weight)*downhillGradient)
+            distance *= (1 + uphillGradientGroundRunFactorModel(weight: weight)*uphillGradient)
             
             distance *= Defaults[.safetyFactor]
             
@@ -74,8 +44,8 @@ struct PerformanceModel {
             let temp = weather.temperature(at: Double(runway.elevation))
             var distance = takeoffDistanceModel(weight: weight, pressureAlt: pa, temp: temp)
             
-            distance *= (1 - 0.006*headwind) // 6% for every 10 knots of headwind
-            distance *= (1 + 0.035*tailwind) // 35% for every 10 knots of tailwind
+            distance *= (1 - 0.007*headwind) // 7% for every 10 knots of headwind
+            distance *= (1 + tailwindTotalDistanceModel(weight: weight)*tailwind)
             
             if runway.turf { distance *= 1.21 } // 21% for unpaved runway
             
@@ -288,35 +258,34 @@ struct PerformanceModel {
     }
     
     private func takeoffRollModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        -197.275 + 0.399234*weight - 9.45585e-6*pow(weight, 2)
-            - 0.21092*pressureAlt + 0.0000324229*pressureAlt*weight
-            + 0.0000217183*pow(pressureAlt, 2) - 50.0514*temp
-            + 0.00855754*weight*temp + 0.00847911*pressureAlt*temp
-            - 3.57985e-7*weight*pressureAlt*temp + 0.950821*pow(temp, 2)
+        -1382.43 - 0.210407*pressureAlt + 0.0000206701*pow(pressureAlt, 2)
+            - 34.6806*temp + 0.00403706*pressureAlt*temp + 0.790156*pow(temp, 2)
+            + 0.823508*weight + 0.0000293076*pressureAlt*weight
+            + 0.00496562*temp*weight + 2.46892e-7*pressureAlt*temp*weight
+            - 0.0000504959*pow(weight, 2)
     }
     
     private func takeoffDistanceModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        714.938 + 0.0402663*weight + 0.0000535694*pow(weight, 2)
-            - 0.489578*pressureAlt + 0.0000772696*weight*pressureAlt
-            + 0.0000358613*pow(pressureAlt, 2) - 111.079*temp
-            + 0.0188733*weight*temp + 0.0108537*pressureAlt*temp
-            + 3.7521e-8*weight*pressureAlt*temp + 1.62572*pow(temp, 2)
+        -1501 - 0.425876*pressureAlt + 0.0000319546*pow(pressureAlt, 2)
+            - 67.906*temp + 0.00330889*pressureAlt*temp + 1.25352*pow(temp, 2)
+            + 0.857987*weight + 0.0000618535*pressureAlt*weight
+            + 0.00992476*temp*weight + 9.52756e-7*pressureAlt*temp*weight
+            - 0.0000305466*pow(weight, 2)
     }
     
     private func landingRollModel_flaps100(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        1294.13 + 0.104398*weight - 0.0000102682*pow(weight, 2)
-            + 0.0402938*pressureAlt - 3.69751e-7*weight*pressureAlt
-            + 3.99551e-6*pow(pressureAlt, 2) + 5.98559*temp
-            - 0.0000611486*weight*temp + 0.000205449*pressureAlt*temp
-            + 8.86236e-9*weight*pressureAlt*temp - 0.00163661*pow(temp, 2)
+        489.494 - 0.0367061*pressureAlt + 3.59535e-6*pow(pressureAlt, 2)
+            - 0.437313*temp + 0.00018658*pressureAlt*temp - 0.00123224*pow(temp, 2)
+            + 0.0937324*weight + 0.0000142284*pressureAlt*weight + 0.00110728*temp*weight
+            + 6.97652e-9*pressureAlt*temp*weight + 0.0000173626*pow(weight, 2)
     }
     
     private func landingRollModel_flaps50(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        1844.73 + 0.144565*weight - 0.0000146011*pow(weight, 2) +
-            0.049307*pressureAlt + 2.41878e-7*weight*pressureAlt
-            + 5.9718e-6*pow(pressureAlt, 2) + 7.04726*temp
-            + 0.000145488*weight*temp + 0.000548356*pressureAlt*temp
-            - 3.12059e-8*weight*pressureAlt*temp - 8.39093e-6*pow(temp, 2)
+        653.481 - 0.0534954*pressureAlt + 5.08827e-6*pow(pressureAlt, 2)
+            - 0.524595*temp + 0.000216905*pressureAlt*temp - 0.00386111*pow(temp, 2)
+            + 0.12391*weight + 0.0000190989*pressureAlt*weight
+            + 0.00145229*temp*weight + 2.06111e-8*pressureAlt*temp*weight
+            + 0.0000227563*pow(weight, 2)
     }
     
     private func landingRollModel_flaps50Ice(weight: Double, pressureAlt: Double, temp: Double) -> Double {
@@ -328,19 +297,18 @@ struct PerformanceModel {
     }
     
     private func landingDistanceModel_flaps100(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        745.258 + 0.175659*weight + 0.0000393569*pow(weight, 2)
-            - 0.018141*pressureAlt + 0.0000136696*weight*pressureAlt
-            + 6.11232e-6*pow(pressureAlt, 2) + 2.58291*temp
-            + 0.00104391*weight*temp + 0.00046088*pressureAlt*temp
-            - 2.03208e-8*weight*pressureAlt*temp + 0.000239866*pow(temp, 2)
+        164.713 - 0.0530245*pressureAlt + 4.94734e-6*pow(pressureAlt, 2)
+            - 0.646999*temp + 0.000314351*pressureAlt*temp - 0.0000877975*pow(temp, 2)
+            + 0.141972*weight + 0.0000184321*pressureAlt*weight + 0.00136939*temp*weight
+            - 4.22073e-9*pressureAlt*temp*weight + 0.0000482159*pow(weight, 2)
     }
     
     private func landingDistanceModel_flaps50(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        1408.02 + 0.200707*weight + 0.0000235989*pow(weight, 2)
-            + 0.0172962*pressureAlt + 7.97491e-6*weight*pressureAlt
-            + 7.70576e-6*pow(pressureAlt, 2) + 6.08067*temp
-            + 0.0006374*weight*temp + 0.000574651*pressureAlt*temp
-            - 1.60863e-8*weight*pressureAlt*temp + 0.000942593*pow(temp, 2)
+        259.201 - 0.0901406*pressureAlt + 6.91078e-6*pow(pressureAlt, 2)
+            - 1.61071*temp + 0.000219209*pressureAlt*temp - 0.00467595*pow(temp, 2)
+            + 0.18085*weight + 0.0000277562*pressureAlt*weight
+            + 0.00199616*temp*weight + 4.11752e-8*pressureAlt*temp*weight
+            + 0.0000588788*pow(weight, 2)
     }
     
     private func landingDistanceModel_flaps50Ice(weight: Double, pressureAlt: Double, temp: Double) -> Double {
@@ -352,20 +320,20 @@ struct PerformanceModel {
     }
     
     private func takeoffClimbGradientModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        5208.88 - 0.0889881*pressureAlt - 1.13082e-6*pow(pressureAlt, 2)
-            - 0.957868*weight + 8.73354e-6*pressureAlt*weight
-            + 0.0000505919*pow(weight, 2) - 14.4936*temp
-            - 0.00099401*pressureAlt*temp + 0.00165187*weight*temp
-            + 4.96139e-8*pressureAlt*weight*temp - 0.175661*pow(temp, 2)
+        5539.56 - 0.0873634*pressureAlt - 1.47337e-6*pow(pressureAlt, 2)
+            - 9.5197*temp - 0.00131228*pressureAlt*temp - 0.168227*pow(temp, 2)
+            - 1.05924*weight + 9.38506e-6*pressureAlt*weight
+            + 0.00109303*temp*weight + 1.09117e-7*pressureAlt*temp*weight
+            + 0.0000591182*pow(weight, 2)
 
     }
     
     private func takeoffClimbRateModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        8477.18 - 0.0770992*pressureAlt - 2.73029e-6*pow(pressureAlt, 2)
-            - 1.60472*weight + 7.16136e-6*pressureAlt*weight
-            + 0.0000880764*pow(weight, 2) - 32.1438*temp
-            - 0.00196259*pressureAlt*temp + 0.00368127*weight*temp
-            + 1.18543e-7*pressureAlt*weight*temp - 0.251046*pow(temp, 2)
+        8906.38 - 0.073698*pressureAlt - 3.05868e-6*pow(pressureAlt, 2)
+            - 24.838*temp - 0.00235051*pressureAlt*temp - 0.241037*pow(temp, 2)
+            - 1.73114*weight + 7.92607e-6*pressureAlt*weight
+            + 0.00285048*temp*weight + 2.03076e-7*pressureAlt*temp*weight
+            + 0.0000984818*pow(weight, 2)
     }
     
     private func vrefModel_flapsUp(weight: Double) -> Double {
@@ -382,6 +350,18 @@ struct PerformanceModel {
     
     private func vrefModel_flaps100(weight: Double) -> Double {
         17.0545 + 0.016547*weight - 7.6355e-7*pow(weight, 2)
+    }
+    
+    private func tailwindTotalDistanceModel(weight: Double) -> Double {
+        0.0451667 - 1e-6*weight
+    }
+    
+    private func downhillGradientGroundRunFactorModel(weight: Double) -> Double {
+        -1.16667 + 0.001*weight
+    }
+    
+    private func uphillGradientGroundRunFactorModel(weight: Double) -> Double {
+        3 + 0.002*weight
     }
 }
 

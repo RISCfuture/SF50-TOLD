@@ -32,6 +32,7 @@ class PerformanceState: ObservableObject {
     private var emptyWeight: Double { Defaults[.emptyWeight] }
     private var fuelDensity: Double { Defaults[.fuelDensity] }
     private var payload: Double { Defaults[.payload] }
+    private var updatedThrustSchedule: Bool { Defaults[.updatedThrustSchedule] }
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -131,7 +132,9 @@ class PerformanceState: ObservableObject {
     }
 
     private func initializeModel() {
-        let model = PerformanceModel(runway: runway, weather: weatherState.weather, weight: weight, flaps: flaps)
+        let model: PerformanceModel = updatedThrustSchedule ?
+            PerformanceModelG2Plus(runway: runway, weather: weatherState.weather, weight: weight, flaps: flaps) :
+        PerformanceModelG1(runway: runway, weather: weatherState.weather, weight: weight, flaps: flaps)
         takeoffRoll = model.takeoffRoll
         takeoffDistance = model.takeoffDistance
         climbGradient = model.takeoffClimbGradient
@@ -167,10 +170,16 @@ class PerformanceState: ObservableObject {
         Defaults.publisher(.safetyFactor).sink { _ in
             self.updatePerformanceData(runway: self.runway, weather: self.weatherState.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
         }.store(in: &cancellables)
+        
+        Defaults.publisher(.updatedThrustSchedule).sink { _ in
+            self.updatePerformanceData(runway: self.runway, weather: self.weatherState.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
+        }.store(in: &cancellables)
     }
 
     private func updatePerformanceData(runway: Runway?, weather: Weather, weight: Double, flaps: FlapSetting?, takeoff: Bool, landing: Bool) {
-        let model = PerformanceModel(runway: runway, weather: weather, weight: weight, flaps: flaps)
+        let model: PerformanceModel = updatedThrustSchedule ?
+            PerformanceModelG2Plus(runway: runway, weather: weather, weight: weight, flaps: flaps) :
+            PerformanceModelG1(runway: runway, weather: weather, weight: weight, flaps: flaps)
         if takeoff {
             let takeoffRoll = model.takeoffRoll
             let takeoffDistance = model.takeoffDistance

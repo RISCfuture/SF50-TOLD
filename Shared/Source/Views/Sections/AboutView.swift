@@ -4,6 +4,7 @@ struct AboutView: View {
     private var releaseVersionNumber: String {
         return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
     }
+    
     private var buildVersionNumber: String {
         return Bundle.main.infoDictionary!["CFBundleVersion"] as! String
     }
@@ -15,7 +16,7 @@ struct AboutView: View {
                     HStack {
                         Text("Aircraft")
                         Spacer()
-                        Text("Cirrus SF50 Vision (G1)")
+                        Text("Cirrus SF50 Vision (G1 through G2+)")
                             .bold()
                     }
                     
@@ -27,7 +28,7 @@ struct AboutView: View {
                     }
                 }
                 
-                Section(header: Text("Data Source")) {
+                Section(header: Text("SF50 G1 Data Source")) {
                     HStack {
                         Text("Serials")
                         Spacer()
@@ -47,6 +48,54 @@ struct AboutView: View {
                         Text("Reissue")
                         Spacer()
                         Text("A")
+                            .bold()
+                    }
+                }
+                
+                Section(header: Text("SF50 G2 Data Source")) {
+                    HStack {
+                        Text("Serials")
+                        Spacer()
+                        Text("Aircraft Serials with Cirrus Perspective Touch+ Avionics System and FL310 Maximum Operating Altitude")
+                            .bold()
+                            .font(.system(size: 14))
+                    }
+                    
+                    HStack {
+                        Text("P/N")
+                        Spacer()
+                        Text("31452-002")
+                            .bold()
+                    }
+                    
+                    HStack {
+                        Text("Reissue")
+                        Spacer()
+                        Text("Original")
+                            .bold()
+                    }
+                }
+                
+                Section(header: Text("Updated Thrust Schedule Data Source")) {
+                    HStack {
+                        Text("Serials")
+                        Spacer()
+                        Text("26000-004 or Compliance with SB5X-72-01")
+                            .bold()
+                            .font(.system(size: 14))
+                    }
+                    
+                    HStack {
+                        Text("P/N")
+                        Spacer()
+                        Text("31452-111")
+                            .bold()
+                    }
+                    
+                    HStack {
+                        Text("Revision")
+                        Spacer()
+                        Text("1 (10 Feb 2022)")
                             .bold()
                     }
                 }

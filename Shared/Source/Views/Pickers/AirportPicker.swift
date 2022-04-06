@@ -1,6 +1,5 @@
 import SwiftUI
 import CoreData
-import Defaults
 
 struct AirportPicker: View {
     @State var filter = ""
