@@ -10,6 +10,9 @@ extension Defaults.Keys {
     static let safetyFactor = Key<Double>("safetyFactor", default: 1.0)
     static let updatedThrustSchedule = Key<Bool>("updatedThrustSchedule", default: false)
     
+    static let favoriteAirports = Key<Set<String>>("favoriteAirports", default: [])
+    static let recentAirports = Key<Array<String>>("recentAirports", default: [])
+    
     static let payload = Key<Double>("payload", default: 0.0) // lbs
     
     static let takeoffAirport = Key<String?>("takeoffAirport") // site #

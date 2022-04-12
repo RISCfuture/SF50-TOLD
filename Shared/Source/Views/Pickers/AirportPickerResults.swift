@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreData
+import Defaults
 
 struct AirportPickerResults: View {
     @FetchRequest var airports: FetchedResults<Airport>
@@ -7,12 +8,22 @@ struct AirportPickerResults: View {
     
     let onSelect: (Airport) -> Void
     
-    private var sortedAirports: Array<Airport> {
-        airports.sorted(by: { decreasingSimilarity(airport1: $0, airport2: $1) })
+    private var sortedAiports: Array<Airport> {
+        if filterText.count < 3 {
+            return airports.sorted(by: { favoriteAndRecentSort(airport1: $0, airport2: $1) })
+        } else {
+            return airports.sorted(by: { decreasingSimilarity(airport1: $0, airport2: $1) })
+        }
     }
     
     var body: some View {
-        if airports.isEmpty && filterText.isEmpty {
+        if (1...2).contains(filterText.count) {
+            List {
+                Text("Keep typing…")
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.leading)
+            }
+        } else if airports.isEmpty {
             List {
                 Text("No results.")
                     .foregroundColor(.secondary)
@@ -20,10 +31,29 @@ struct AirportPickerResults: View {
             }
         } else {
             List(airports) { (airport: Airport) in
-                AirportRow(airport: airport).onTapGesture {
+                AirportRow(airport: airport, showFavoriteButton: true).onTapGesture {
                     onSelect(airport)
                 }
             }
+        }
+    }
+    
+    private func favoriteAndRecentSort(airport1: Airport, airport2: Airport) -> Bool {
+        guard let id1 = airport1.id else { return false }
+        guard let id2 = airport2.id else { return false }
+        guard let lid1 = airport1.lid else { return false }
+        guard let lid2 = airport2.lid else { return false }
+        
+        if Defaults[.favoriteAirports].contains(id1) {
+            if Defaults[.favoriteAirports].contains(id2) {
+                return caseInsensitiveEqual(lid1, lid2)
+            } else {
+                return true
+            }
+        } else if Defaults[.favoriteAirports].contains(id2) {
+            return false
+        } else {
+            return caseInsensitiveEqual(lid1, lid2)
         }
     }
     

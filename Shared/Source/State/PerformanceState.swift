@@ -108,6 +108,11 @@ class PerformanceState: ObservableObject {
         $airport.sink { airport in
             self.runway = nil
             self.updatePerformanceData(runway: nil, weather: self.weatherState.weather, weight: self.weight, flaps: self.flaps, takeoff: true, landing: true)
+            if let airportID = airport?.id {
+                Defaults[.recentAirports] = Array((Defaults[.recentAirports] + [airportID])
+                    .uniqued()
+                    .prefix(10))
+            }
         }.store(in: &cancellables)
 
         $runway.sink { runway in

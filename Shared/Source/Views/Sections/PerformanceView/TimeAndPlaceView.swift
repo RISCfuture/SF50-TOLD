@@ -32,7 +32,7 @@ struct TimeAndPlaceView: View {
             NavigationLink(destination: AirportPicker(onSelect: onChangeAirport)) {
                 Label {
                     if let airport = state.airport {
-                        AirportRow(airport: airport)
+                        AirportRow(airport: airport, showFavoriteButton: false)
                     } else {
                         Text("Choose Airport").foregroundColor(.accentColor)
                     }

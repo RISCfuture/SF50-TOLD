@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreData
+import Defaults
 
 struct AirportPicker: View {
     @State var filter = ""
@@ -12,12 +13,24 @@ struct AirportPicker: View {
               filter, filter, filter, filter)
     }
     
+    private var fetchFavoritesAndRecentsPredicate: NSPredicate {
+        NSPredicate(format: "%@ contains[c] id", favoriteAndRecentIDs)
+    }
+    
+    private var favoriteAndRecentIDs: Set<String> {
+        return Set(Defaults[.favoriteAirports] + Defaults[.recentAirports])
+    }
+    
+    private var fetchPredicate: NSPredicate {
+        filter.count < 3 ? fetchFavoritesAndRecentsPredicate : fetchAirportsPredicate
+    }
+    
     private var fetchAirports: FetchRequest<Airport> {
         .init(entity: Airport.entity(),
               sortDescriptors: [
                 .init(keyPath: \Airport.lid, ascending: true)
               ],
-              predicate: fetchAirportsPredicate)
+              predicate: fetchPredicate)
     }
     
     var body: some View {
