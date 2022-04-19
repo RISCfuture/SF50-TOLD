@@ -24,5 +24,7 @@
 	<string>public.app-category.reference</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>NSLocationWhenInUseUsageDescriptionNSLocationWhenInUseUsageDescription</key>
+	<string>NSLocationWhenInUseUsageDescription</string>
 </dict>
 </plist>

@@ -27,7 +27,7 @@ struct RunwayPicker: View {
                     self.mode.wrappedValue.dismiss()
                 }
             }
-        }.padding(.all, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+        }
         .navigationTitle("Runway")
     }
 }

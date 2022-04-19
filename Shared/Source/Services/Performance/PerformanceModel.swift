@@ -58,13 +58,13 @@ extension PerformanceModel {
         abs(min(gradient, 0.0))
     }
     
-    func deg2rad(_ degrees: Double) -> Double {
-        return degrees * .pi/180
-    }
-    
     func offscale(low: Bool, high: Bool) -> Offscale {
         if high { return .high }
         else if low { return .low }
         else { return .none }
     }
+}
+
+func deg2rad(_ degrees: Double) -> Double {
+    return degrees * .pi/180
 }

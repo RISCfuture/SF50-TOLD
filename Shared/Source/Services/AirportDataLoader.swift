@@ -84,6 +84,8 @@ class AirportDataLoader: ObservableObject {
         record.icao = airport.ICAOIdentifier
         record.lid = airport.LID
         record.name = airport.name
+        record.latitude = Double(airport.referencePoint.latitude/3600)
+        record.longitude = Double(airport.referencePoint.longitude/3600)
         record.elevation = airport.referencePoint.elevation ?? 0
         record.longestRunway = Int16(airport.runways.max { $0.length ?? 0 < $1.length ?? 0 }?.length ?? 0)
     }

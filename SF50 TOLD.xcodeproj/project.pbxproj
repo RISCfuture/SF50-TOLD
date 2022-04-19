@@ -70,6 +70,14 @@
 		015A393625C3A73100FEFDBF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2A1EA25ABA7D20076CC84 /* LoadingView.swift */; };
 		015A393B25C3A73D00FEFDBF /* LoadingConsentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01698D1425C148B8002D44A0 /* LoadingConsentView.swift */; };
 		01641E8F2806641300BBD18C /* Array+Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E8E2806641300BBD18C /* Array+Unique.swift */; };
+		01641E922806668A00BBD18C /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E912806668A00BBD18C /* FavoritesView.swift */; };
+		01641E932806668A00BBD18C /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E912806668A00BBD18C /* FavoritesView.swift */; };
+		01641E952806677800BBD18C /* RecentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E942806677800BBD18C /* RecentsView.swift */; };
+		01641E962806677800BBD18C /* RecentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E942806677800BBD18C /* RecentsView.swift */; };
+		01641E98280667CB00BBD18C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E97280667CB00BBD18C /* SearchView.swift */; };
+		01641E99280667CB00BBD18C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E97280667CB00BBD18C /* SearchView.swift */; };
+		01641E9B28066C2F00BBD18C /* ListResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E9A28066C2F00BBD18C /* ListResults.swift */; };
+		01641E9C28066C2F00BBD18C /* ListResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E9A28066C2F00BBD18C /* ListResults.swift */; };
 		0166FC9625BFFDA7006F7258 /* View Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166FC9525BFFDA6006F7258 /* View Functions.swift */; };
 		0166FC9725BFFDA7006F7258 /* View Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166FC9525BFFDA6006F7258 /* View Functions.swift */; };
 		0166FC9825BFFDA7006F7258 /* View Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166FC9525BFFDA6006F7258 /* View Functions.swift */; };
@@ -97,10 +105,10 @@
 		016A0B1027E5BE7200F16C21 /* Color+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0E27E5BE7200F16C21 /* Color+Assets.swift */; };
 		016A0B1127E5BE7200F16C21 /* Color+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0E27E5BE7200F16C21 /* Color+Assets.swift */; };
 		016A0B1227E5BE7200F16C21 /* Color+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0E27E5BE7200F16C21 /* Color+Assets.swift */; };
-		016A0B1427E5C62E00F16C21 /* AirportPickerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */; };
-		016A0B1527E5C62E00F16C21 /* AirportPickerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */; };
-		016A0B1627E5C62E00F16C21 /* AirportPickerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */; };
-		016A0B1727E5C62E00F16C21 /* AirportPickerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */; };
+		016A0B1427E5C62E00F16C21 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* SearchResults.swift */; };
+		016A0B1527E5C62E00F16C21 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* SearchResults.swift */; };
+		016A0B1627E5C62E00F16C21 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* SearchResults.swift */; };
+		016A0B1727E5C62E00F16C21 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1327E5C62E00F16C21 /* SearchResults.swift */; };
 		016A0B1927E5CD7B00F16C21 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */; };
 		016A0B1A27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */; };
 		016A0B1B27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */; };
@@ -282,6 +290,24 @@
 		01F7EBAC25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F7EBAA25BBFFCB00CE5024 /* CompactLabelStyle.swift */; };
 		01F7EBAD25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F7EBAA25BBFFCB00CE5024 /* CompactLabelStyle.swift */; };
 		01F7EBAE25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F7EBAA25BBFFCB00CE5024 /* CompactLabelStyle.swift */; };
+		01FC1F37280E3B1D0066E374 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F36280E3B1D0066E374 /* RoundedCorners.swift */; };
+		01FC1F38280E3B1D0066E374 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F36280E3B1D0066E374 /* RoundedCorners.swift */; };
+		01FC1F39280E3B1D0066E374 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F36280E3B1D0066E374 /* RoundedCorners.swift */; };
+		01FC1F3A280E3B1D0066E374 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F36280E3B1D0066E374 /* RoundedCorners.swift */; };
+		01FC1F41280E7F7E0066E374 /* NearestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F40280E7F7E0066E374 /* NearestView.swift */; };
+		01FC1F42280E7F7E0066E374 /* NearestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F40280E7F7E0066E374 /* NearestView.swift */; };
+		01FC1F43280E7F7E0066E374 /* NearestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F40280E7F7E0066E374 /* NearestView.swift */; };
+		01FC1F44280E7F7E0066E374 /* NearestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F40280E7F7E0066E374 /* NearestView.swift */; };
+		01FC1F4A280E9AD90066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F4F280E9AD90066E374 /* InfoPlist.strings */; };
+		01FC1F4C280E9AD90066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F4F280E9AD90066E374 /* InfoPlist.strings */; };
+		01FC1F4D280E9AD90066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F4F280E9AD90066E374 /* InfoPlist.strings */; };
+		01FC1F56280E9B080066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F5A280E9B080066E374 /* InfoPlist.strings */; };
+		01FC1F57280E9B080066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F5A280E9B080066E374 /* InfoPlist.strings */; };
+		01FC1F58280E9B080066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F5A280E9B080066E374 /* InfoPlist.strings */; };
+		01FC1F5C280F50CE0066E374 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F5B280F50CE0066E374 /* Airport.swift */; };
+		01FC1F5D280F50CE0066E374 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F5B280F50CE0066E374 /* Airport.swift */; };
+		01FC1F5E280F50CE0066E374 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F5B280F50CE0066E374 /* Airport.swift */; };
+		01FC1F5F280F50CE0066E374 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F5B280F50CE0066E374 /* Airport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -335,6 +361,10 @@
 		0158291525BC0F8100AA0CC4 /* SettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsState.swift; sourceTree = "<group>"; };
 		015A392D25C3A64B00FEFDBF /* DecimalFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalFieldModifier.swift; sourceTree = "<group>"; };
 		01641E8E2806641300BBD18C /* Array+Unique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Unique.swift"; sourceTree = "<group>"; };
+		01641E912806668A00BBD18C /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		01641E942806677800BBD18C /* RecentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsView.swift; sourceTree = "<group>"; };
+		01641E97280667CB00BBD18C /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		01641E9A28066C2F00BBD18C /* ListResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResults.swift; sourceTree = "<group>"; };
 		0166FC9525BFFDA6006F7258 /* View Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Functions.swift"; sourceTree = "<group>"; };
 		0166FCA225C00C16006F7258 /* TapToDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapToDismiss.swift; sourceTree = "<group>"; };
 		0166FCBC25C00E1D006F7258 /* SelectAllOnFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAllOnFocus.swift; sourceTree = "<group>"; };
@@ -342,7 +372,7 @@
 		016A0AFE27E5358100F16C21 /* NOTAM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAM.swift; sourceTree = "<group>"; };
 		016A0B0927E5B98900F16C21 /* Runway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runway.swift; sourceTree = "<group>"; };
 		016A0B0E27E5BE7200F16C21 /* Color+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Assets.swift"; sourceTree = "<group>"; };
-		016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportPickerResults.swift; sourceTree = "<group>"; };
+		016A0B1327E5C62E00F16C21 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
 		016A0B1E27E5D15F00F16C21 /* VREFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VREFView.swift; sourceTree = "<group>"; };
 		016A0B2327E5D1F600F16C21 /* LandingGroundRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingGroundRollView.swift; sourceTree = "<group>"; };
@@ -382,6 +412,11 @@
 		01F59A1E25AE63AC0055E81B /* PerformanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceView.swift; sourceTree = "<group>"; };
 		01F7EB9D25BBFA2A00CE5024 /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
 		01F7EBAA25BBFFCB00CE5024 /* CompactLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactLabelStyle.swift; sourceTree = "<group>"; };
+		01FC1F36280E3B1D0066E374 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
+		01FC1F40280E7F7E0066E374 /* NearestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestView.swift; sourceTree = "<group>"; };
+		01FC1F4E280E9AD90066E374 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		01FC1F59280E9B080066E374 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		01FC1F5B280F50CE0066E374 /* Airport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,6 +474,7 @@
 			children = (
 				016A0AFE27E5358100F16C21 /* NOTAM.swift */,
 				016A0B0927E5B98900F16C21 /* Runway.swift */,
+				01FC1F5B280F50CE0066E374 /* Airport.swift */,
 			);
 			path = Records;
 			sourceTree = "<group>";
@@ -484,6 +520,7 @@
 				019CC28325B91C0F00FEA895 /* DecimalField.swift */,
 				015A392D25C3A64B00FEFDBF /* DecimalFieldModifier.swift */,
 				01C7EA7925B1963600CCFBE1 /* InterpolationView.swift */,
+				01FC1F36280E3B1D0066E374 /* RoundedCorners.swift */,
 				01D265B425AD807100322A45 /* RunwayRow */,
 				01A6DB1A25AD776C00A3341F /* RunwayRow.swift */,
 				014F100A25AAAD410081EAC3 /* SearchField.swift */,
@@ -495,8 +532,7 @@
 		011C08E6258C686C0022B3E2 /* Pickers */ = {
 			isa = PBXGroup;
 			children = (
-				0135A8CB2587599D00892558 /* AirportPicker.swift */,
-				016A0B1327E5C62E00F16C21 /* AirportPickerResults.swift */,
+				01641E902806666E00BBD18C /* AirportPicker */,
 				01C133F025AD6BBA00AE33C5 /* RunwayPicker.swift */,
 				0179865825C2809A0031A453 /* WeatherPicker */,
 				0135A8BE2587599300892558 /* WeatherPicker.swift */,
@@ -544,6 +580,7 @@
 			isa = PBXGroup;
 			children = (
 				0135A7CD2587091700892558 /* Info.plist */,
+				01FC1F4F280E9AD90066E374 /* InfoPlist.strings */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -552,6 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				0135A7D42587091700892558 /* Info.plist */,
+				01FC1F5A280E9B080066E374 /* InfoPlist.strings */,
 				0135A7D52587091700892558 /* macOS.entitlements */,
 			);
 			path = macOS;
@@ -645,6 +683,20 @@
 				0166FC9525BFFDA6006F7258 /* View Functions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		01641E902806666E00BBD18C /* AirportPicker */ = {
+			isa = PBXGroup;
+			children = (
+				0135A8CB2587599D00892558 /* AirportPicker.swift */,
+				01641E912806668A00BBD18C /* FavoritesView.swift */,
+				01641E9A28066C2F00BBD18C /* ListResults.swift */,
+				01FC1F40280E7F7E0066E374 /* NearestView.swift */,
+				01641E942806677800BBD18C /* RecentsView.swift */,
+				016A0B1327E5C62E00F16C21 /* SearchResults.swift */,
+				01641E97280667CB00BBD18C /* SearchView.swift */,
+			);
+			path = AirportPicker;
 			sourceTree = "<group>";
 		};
 		016A0B1D27E5D13F00F16C21 /* LandingView */ = {
@@ -912,6 +964,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0135A7F02587091800892558 /* Assets.xcassets in Resources */,
+				01FC1F4A280E9AD90066E374 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -920,6 +973,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0135A7F12587091800892558 /* Assets.xcassets in Resources */,
+				01FC1F56280E9B080066E374 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,6 +981,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01FC1F4C280E9AD90066E374 /* InfoPlist.strings in Resources */,
+				01FC1F57280E9B080066E374 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,6 +990,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01FC1F4D280E9AD90066E374 /* InfoPlist.strings in Resources */,
+				01FC1F58280E9B080066E374 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -947,6 +1005,7 @@
 				018CF99D2682A54100F52821 /* AirportLoaderTask.swift in Sources */,
 				01641E8F2806641300BBD18C /* Array+Unique.swift in Sources */,
 				01F4C9232681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
+				01FC1F5C280F50CE0066E374 /* Airport.swift in Sources */,
 				010F675827E9B99C00BDBDB0 /* Cycle+Defaults.swift in Sources */,
 				0179866725C280C40031A453 /* RawWeather.swift in Sources */,
 				01D7DA6C25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
@@ -954,6 +1013,7 @@
 				0166FC9625BFFDA7006F7258 /* View Functions.swift in Sources */,
 				0166FCBD25C00E1D006F7258 /* SelectAllOnFocus.swift in Sources */,
 				01C133F125AD6BBA00AE33C5 /* RunwayPicker.swift in Sources */,
+				01641E98280667CB00BBD18C /* SearchView.swift in Sources */,
 				016A0B2427E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */,
 				016FA02025AC230C006C807F /* SettingsView.swift in Sources */,
 				0191C05E25B2BF7800C4B810 /* AppState.swift in Sources */,
@@ -975,7 +1035,7 @@
 				01A6DB1B25AD776C00A3341F /* RunwayRow.swift in Sources */,
 				010F674D27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
 				0135A87D258748DF00892558 /* LandingView.swift in Sources */,
-				016A0B1427E5C62E00F16C21 /* AirportPickerResults.swift in Sources */,
+				016A0B1427E5C62E00F16C21 /* SearchResults.swift in Sources */,
 				016A0AFF27E5358100F16C21 /* NOTAM.swift in Sources */,
 				0179865A25C280B60031A453 /* WeatherSource.swift in Sources */,
 				016A0B3E27E5D60300F16C21 /* VxClimbView.swift in Sources */,
@@ -986,6 +1046,7 @@
 				016A0B0A27E5B98900F16C21 /* Runway.swift in Sources */,
 				01F18D2625B198B6007D76BA /* LoadoutView.swift in Sources */,
 				010F675227E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */,
+				01641E9B28066C2F00BBD18C /* ListResults.swift in Sources */,
 				016A0B2E27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				016A0B1927E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
 				01F59A1F25AE63AC0055E81B /* PerformanceView.swift in Sources */,
@@ -994,20 +1055,24 @@
 				019CC28425B91C0F00FEA895 /* DecimalField.swift in Sources */,
 				01F7EB9E25BBFA2A00CE5024 /* ConfigurationView.swift in Sources */,
 				0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */,
+				01FC1F41280E7F7E0066E374 /* NearestView.swift in Sources */,
 				016A0B1F27E5D15F00F16C21 /* VREFView.swift in Sources */,
 				0135A8CC2587599D00892558 /* AirportPicker.swift in Sources */,
 				01C7EA7A25B1963600CCFBE1 /* InterpolationView.swift in Sources */,
 				01E2A1EB25ABA7D20076CC84 /* LoadingView.swift in Sources */,
 				01A6DB1425AD76BE00A3341F /* AirportRow.swift in Sources */,
+				01641E952806677800BBD18C /* RecentsView.swift in Sources */,
 				0158291625BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				017B669A258898DA00AA2DE9 /* WeatherState.swift in Sources */,
 				011A95A627E477D500F3A127 /* NOTAMView.swift in Sources */,
 				0135A8A525874C3B00892558 /* Global.swift in Sources */,
+				01FC1F37280E3B1D0066E374 /* RoundedCorners.swift in Sources */,
 				01D2C8F025D126C10036B6FE /* Weather.swift in Sources */,
 				01D265C325AD821200322A45 /* RunwayDistances.swift in Sources */,
 				017B66902588980F00AA2DE9 /* PerformanceModelG1.swift in Sources */,
 				01F7EBAB25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */,
 				0166FCA325C00C16006F7258 /* TapToDismiss.swift in Sources */,
+				01641E922806668A00BBD18C /* FavoritesView.swift in Sources */,
 				014808DB25AAEEF10041A90D /* Airports.xcdatamodeld in Sources */,
 				01E83CEF27FD3B70001342BF /* PerformanceModel.swift in Sources */,
 				01B79FD725AC4BF70037C0C6 /* ErrorView.swift in Sources */,
@@ -1021,10 +1086,12 @@
 				01F4C9242681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				016A0B0B27E5B98900F16C21 /* Runway.swift in Sources */,
 				01D7DA6D25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
+				01FC1F42280E7F7E0066E374 /* NearestView.swift in Sources */,
 				01E83CEA27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				0179865B25C280B60031A453 /* WeatherSource.swift in Sources */,
 				01535DE325A2FD0800AC0F5F /* ValueFormatter.swift in Sources */,
 				0166FCBE25C00E1D006F7258 /* SelectAllOnFocus.swift in Sources */,
+				01641E962806677800BBD18C /* RecentsView.swift in Sources */,
 				01C133F225AD6BBA00AE33C5 /* RunwayPicker.swift in Sources */,
 				0135A8C02587599300892558 /* WeatherPicker.swift in Sources */,
 				0158291725BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
@@ -1033,6 +1100,7 @@
 				01B79FD825AC4BF70037C0C6 /* ErrorView.swift in Sources */,
 				0166FCA425C00C16006F7258 /* TapToDismiss.swift in Sources */,
 				016FA02125AC230C006C807F /* SettingsView.swift in Sources */,
+				01641E932806668A00BBD18C /* FavoritesView.swift in Sources */,
 				01F59A2025AE63AC0055E81B /* PerformanceView.swift in Sources */,
 				01F7EB9F25BBFA2A00CE5024 /* ConfigurationView.swift in Sources */,
 				0191C06C25B2C02900C4B810 /* SectionState.swift in Sources */,
@@ -1042,9 +1110,11 @@
 				01D265B725AD808600322A45 /* WindComponents.swift in Sources */,
 				014808EF25AAF4910041A90D /* AirportDataLoader.swift in Sources */,
 				015A393B25C3A73D00FEFDBF /* LoadingConsentView.swift in Sources */,
+				01641E99280667CB00BBD18C /* SearchView.swift in Sources */,
 				01750AC925B27C2D00555CDB /* PerformanceState.swift in Sources */,
 				01D265C425AD821200322A45 /* RunwayDistances.swift in Sources */,
 				0179866825C280C40031A453 /* RawWeather.swift in Sources */,
+				01641E9C28066C2F00BBD18C /* ListResults.swift in Sources */,
 				0135A87E258748DF00892558 /* LandingView.swift in Sources */,
 				0191C05F25B2BF7800C4B810 /* AppState.swift in Sources */,
 				015A393625C3A73100FEFDBF /* LoadingView.swift in Sources */,
@@ -1055,6 +1125,7 @@
 				010F674E27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
 				016A0B3527E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
 				016A0B3F27E5D60300F16C21 /* VxClimbView.swift in Sources */,
+				01FC1F38280E3B1D0066E374 /* RoundedCorners.swift in Sources */,
 				016A0B2A27E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
 				014F100C25AAAD410081EAC3 /* SearchField.swift in Sources */,
 				010F675327E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */,
@@ -1071,6 +1142,7 @@
 				0135A8A625874C3B00892558 /* Global.swift in Sources */,
 				016A0B2F27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				0166FC9725BFFDA7006F7258 /* View Functions.swift in Sources */,
+				01FC1F5D280F50CE0066E374 /* Airport.swift in Sources */,
 				01D2C8F125D126C10036B6FE /* Weather.swift in Sources */,
 				017B66912588980F00AA2DE9 /* PerformanceModelG1.swift in Sources */,
 				01A6DB1C25AD776C00A3341F /* RunwayRow.swift in Sources */,
@@ -1079,7 +1151,7 @@
 				016A0B3A27E5D5AC00F16C21 /* TakeoffDistanceView.swift in Sources */,
 				019CC28525B91C0F00FEA895 /* DecimalField.swift in Sources */,
 				014808DC25AAEEF10041A90D /* Airports.xcdatamodeld in Sources */,
-				016A0B1527E5C62E00F16C21 /* AirportPickerResults.swift in Sources */,
+				016A0B1527E5C62E00F16C21 /* SearchResults.swift in Sources */,
 				01D265CD25AD99AF00322A45 /* WeatherRow.swift in Sources */,
 				01F18D2725B198B6007D76BA /* LoadoutView.swift in Sources */,
 			);
@@ -1114,6 +1186,7 @@
 				01750ACA25B27C2D00555CDB /* PerformanceState.swift in Sources */,
 				011A95A827E477D500F3A127 /* NOTAMView.swift in Sources */,
 				016C736825AE40120008455F /* ContentView.swift in Sources */,
+				01FC1F43280E7F7E0066E374 /* NearestView.swift in Sources */,
 				016C736925AE40120008455F /* LoadingView.swift in Sources */,
 				0191C06025B2BF7800C4B810 /* AppState.swift in Sources */,
 				0179866925C280C40031A453 /* RawWeather.swift in Sources */,
@@ -1122,6 +1195,7 @@
 				016C736A25AE40120008455F /* ErrorView.swift in Sources */,
 				016C736B25AE40120008455F /* TakeoffView.swift in Sources */,
 				015A393025C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
+				01FC1F39280E3B1D0066E374 /* RoundedCorners.swift in Sources */,
 				016C736C25AE40120008455F /* LandingView.swift in Sources */,
 				016C736D25AE40120008455F /* SettingsView.swift in Sources */,
 				010F674F27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
@@ -1132,12 +1206,13 @@
 				016C736F25AE40120008455F /* WeatherService.swift in Sources */,
 				016A0B2B27E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
 				016A0B2127E5D15F00F16C21 /* VREFView.swift in Sources */,
+				01FC1F5E280F50CE0066E374 /* Airport.swift in Sources */,
 				016A0B0127E5358100F16C21 /* NOTAM.swift in Sources */,
 				016C737125AE40120008455F /* AirportDataLoader.swift in Sources */,
 				016A0B1B27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
 				016A0B1127E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				01007B8525D5268700C8BFF2 /* AboutView.swift in Sources */,
-				016A0B1627E5C62E00F16C21 /* AirportPickerResults.swift in Sources */,
+				016A0B1627E5C62E00F16C21 /* SearchResults.swift in Sources */,
 				016C737325AE40120008455F /* PerformanceModelG1.swift in Sources */,
 				0166FC9825BFFDA7006F7258 /* View Functions.swift in Sources */,
 				016C737525AE40120008455F /* WeatherState.swift in Sources */,
@@ -1183,6 +1258,7 @@
 				01750ACB25B27C2D00555CDB /* PerformanceState.swift in Sources */,
 				011A95A927E477D500F3A127 /* NOTAMView.swift in Sources */,
 				016C738D25AE40200008455F /* ContentView.swift in Sources */,
+				01FC1F44280E7F7E0066E374 /* NearestView.swift in Sources */,
 				016C738E25AE40200008455F /* LoadingView.swift in Sources */,
 				0191C06125B2BF7800C4B810 /* AppState.swift in Sources */,
 				0179866A25C280C40031A453 /* RawWeather.swift in Sources */,
@@ -1191,6 +1267,7 @@
 				016C738F25AE40200008455F /* ErrorView.swift in Sources */,
 				016C739025AE40200008455F /* TakeoffView.swift in Sources */,
 				015A393125C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
+				01FC1F3A280E3B1D0066E374 /* RoundedCorners.swift in Sources */,
 				016C739125AE40200008455F /* LandingView.swift in Sources */,
 				016C739225AE40200008455F /* SettingsView.swift in Sources */,
 				010F675027E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
@@ -1201,12 +1278,13 @@
 				016C739425AE40200008455F /* WeatherService.swift in Sources */,
 				016A0B2C27E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
 				016A0B2227E5D15F00F16C21 /* VREFView.swift in Sources */,
+				01FC1F5F280F50CE0066E374 /* Airport.swift in Sources */,
 				016A0B0227E5358100F16C21 /* NOTAM.swift in Sources */,
 				016C739625AE40200008455F /* AirportDataLoader.swift in Sources */,
 				016A0B1C27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
 				016A0B1227E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				01007B8625D5268700C8BFF2 /* AboutView.swift in Sources */,
-				016A0B1727E5C62E00F16C21 /* AirportPickerResults.swift in Sources */,
+				016A0B1727E5C62E00F16C21 /* SearchResults.swift in Sources */,
 				016C739825AE40200008455F /* PerformanceModelG1.swift in Sources */,
 				0166FC9925BFFDA7006F7258 /* View Functions.swift in Sources */,
 				016C739A25AE40200008455F /* WeatherState.swift in Sources */,
@@ -1237,6 +1315,25 @@
 			targetProxy = 0135A7E62587091800892558 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		01FC1F4F280E9AD90066E374 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01FC1F4E280E9AD90066E374 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		01FC1F5A280E9B080066E374 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01FC1F59280E9B080066E374 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0135A7F22587091800892558 /* Debug */ = {

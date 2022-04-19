@@ -1,63 +1,35 @@
 import SwiftUI
-import CoreData
 import Defaults
 
-struct AirportPickerResults: View {
-    @FetchRequest var airports: FetchedResults<Airport>
-    @Binding var filterText: String
+struct SearchView: View {
+    @State var filter = ""
+    var onSelect: (Airport) -> Void
     
-    let onSelect: (Airport) -> Void
+    private var predicate: NSPredicate {
+        .init(format: "lid ==[c] %@ OR icao ==[c] %@ OR name CONTAINS[cd] %@ OR city CONTAINS[cd] %@",
+              filter, filter, filter, filter)
+    }
     
-    private var sortedAiports: Array<Airport> {
-        if filterText.count < 3 {
-            return airports.sorted(by: { favoriteAndRecentSort(airport1: $0, airport2: $1) })
-        } else {
-            return airports.sorted(by: { decreasingSimilarity(airport1: $0, airport2: $1) })
-        }
+    private var fetchAirports: FetchRequest<Airport> {
+        .init(entity: Airport.entity(), sortDescriptors: [
+            .init(keyPath: \Airport.id, ascending: true)
+        ],
+              predicate: predicate)
     }
     
     var body: some View {
-        if (1...2).contains(filterText.count) {
-            List {
-                Text("Keep typing…")
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.leading)
-            }
-        } else if airports.isEmpty {
-            List {
-                Text("No results.")
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.leading)
-            }
-        } else {
-            List(airports) { (airport: Airport) in
-                AirportRow(airport: airport, showFavoriteButton: true).onTapGesture {
-                    onSelect(airport)
-                }
-            }
+        VStack(alignment: .leading) {
+            SearchField(placeholder: "Find Airport", text: $filter)
+            SearchResults(airports: fetchAirports,
+                          filterText: $filter,
+                          sort: decreasingSimilarity,
+                          onSelect: { airport in
+                onSelect(airport)
+            })
         }
     }
     
-    private func favoriteAndRecentSort(airport1: Airport, airport2: Airport) -> Bool {
-        guard let id1 = airport1.id else { return false }
-        guard let id2 = airport2.id else { return false }
-        guard let lid1 = airport1.lid else { return false }
-        guard let lid2 = airport2.lid else { return false }
-        
-        if Defaults[.favoriteAirports].contains(id1) {
-            if Defaults[.favoriteAirports].contains(id2) {
-                return caseInsensitiveEqual(lid1, lid2)
-            } else {
-                return true
-            }
-        } else if Defaults[.favoriteAirports].contains(id2) {
-            return false
-        } else {
-            return caseInsensitiveEqual(lid1, lid2)
-        }
-    }
-    
-    private func decreasingSimilarity(airport1: Airport, airport2: Airport) -> Bool {
+    private func decreasingSimilarity(_ airport1: Airport, _ airport2: Airport) -> Bool {
         if let match = checkExactMatch(airport1.lid, airport2.lid) { return match }
         if let match = checkExactMatch(airport1.icao, airport2.icao) { return match }
         if let match = checkContainsMatch(airport1.name, airport2.name) { return match }
@@ -73,10 +45,10 @@ struct AirportPickerResults: View {
     
     private func checkExactMatch(_ string1: String?, _ string2: String?) -> Bool? {
         if let string1 = string1 {
-            if caseInsensitiveEqual(string1, filterText) { return true } // airport1 exact match, has precedence
+            if caseInsensitiveEqual(string1, filter) { return true } // airport1 exact match, has precedence
         }
         if let string2 = string2 {
-            if caseInsensitiveEqual(string2, filterText) { return false } // airport2 exact match, has precedence
+            if caseInsensitiveEqual(string2, filter) { return false } // airport2 exact match, has precedence
         }
         return nil
     }
@@ -85,8 +57,8 @@ struct AirportPickerResults: View {
         if let string1 = string1 {
             if let string2 = string2 {
                 // both string1 and string2 present
-                if let index1 = caseInsensitiveContains(string: string1, substring: filterText) {
-                    if let index2 = caseInsensitiveContains(string: string2, substring: filterText) {
+                if let index1 = caseInsensitiveContains(string: string1, substring: filter) {
+                    if let index2 = caseInsensitiveContains(string: string2, substring: filter) {
                         // found in both airports, return the one that's closer to the start of the string
                         if index1 < index2 { return true } // airport1 has precedence
                         else if index1 > index2 { return false } // airport2 has precedence
@@ -95,7 +67,7 @@ struct AirportPickerResults: View {
                         // found only in airport1, it takes precedence
                         return true
                     }
-                } else if caseInsensitiveContains(string: string2, substring: filterText) != nil {
+                } else if caseInsensitiveContains(string: string2, substring: filter) != nil {
                     // found only in airport2, it takes precedence
                     return false
                 } else {
@@ -104,12 +76,12 @@ struct AirportPickerResults: View {
                 }
             } else {
                 // string1 only present
-                if caseInsensitiveContains(string: string1, substring: filterText) != nil { return true }
+                if caseInsensitiveContains(string: string1, substring: filter) != nil { return true }
                 else { return nil }
             }
         } else if let string2 = string2 {
             // string2 only present
-            if caseInsensitiveContains(string: string2, substring: filterText) != nil { return false }
+            if caseInsensitiveContains(string: string2, substring: filter) != nil { return false }
             else { return nil }
         } else {
             // neither string present
@@ -127,5 +99,24 @@ struct AirportPickerResults: View {
     private func caseInsensitiveContains(string: String, substring: String) -> String.Index? {
         guard let range = string.range(of: substring, options: [.caseInsensitive, .diacriticInsensitive]) else { return nil }
         return range.lowerBound
+    }
+}
+
+struct SearchView_Previews: PreviewProvider {
+    private static let OAK = { () -> Airport in
+        let a = Airport(entity: Airport.entity(), insertInto: nil)
+        a.lid = "OAK"
+        a.name = "Metro Oakland Intl"
+        return a
+    }()
+    private static let SQL = { () -> Airport in
+        let a = Airport(entity: Airport.entity(), insertInto: nil)
+        a.lid = "SQL"
+        a.name = "San Carlos"
+        return a
+    }()
+    
+    static var previews: some View {
+        SearchView() { _ in }
     }
 }

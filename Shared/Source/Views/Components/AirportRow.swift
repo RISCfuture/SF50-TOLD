@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreData
 import Defaults
 
 struct AirportRow: View {

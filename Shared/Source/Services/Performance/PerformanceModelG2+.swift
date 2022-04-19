@@ -365,10 +365,6 @@ struct PerformanceModelG2Plus: PerformanceModel {
     }
 }
 
-fileprivate func deg2rad(_ degrees: Double) -> Double {
-    return degrees * .pi/180
-}
-
 fileprivate func offscale(low: Bool, high: Bool) -> Offscale {
     if high { return .high }
     else if low { return .low }
