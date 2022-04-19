@@ -87,7 +87,7 @@ class AirportDataLoader: ObservableObject {
         record.latitude = Double(airport.referencePoint.latitude/3600)
         record.longitude = Double(airport.referencePoint.longitude/3600)
         record.elevation = airport.referencePoint.elevation ?? 0
-        record.longestRunway = Int16(airport.runways.max { $0.length ?? 0 < $1.length ?? 0 }?.length ?? 0)
+        record.longestRunway = Int16(airport.runways.filter { $0.isPaved }.max { $0.length ?? 0 < $1.length ?? 0 }?.length ?? 0)
     }
     
     private func configureRecord(_ record: inout Runway, from runway: SwiftNASR.Runway, end: SwiftNASR.RunwayEnd, airport: SwiftNASR.Airport) -> Bool {

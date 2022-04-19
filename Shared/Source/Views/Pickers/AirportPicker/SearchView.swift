@@ -6,8 +6,8 @@ struct SearchView: View {
     var onSelect: (Airport) -> Void
     
     private var predicate: NSPredicate {
-        .init(format: "lid ==[c] %@ OR icao ==[c] %@ OR name CONTAINS[cd] %@ OR city CONTAINS[cd] %@",
-              filter, filter, filter, filter)
+        .init(format: "lid ==[c] %@ OR icao ==[c] %@ OR ((name CONTAINS[cd] %@ OR city CONTAINS[cd] %@) AND longestRunway >= %d)",
+              filter, filter, filter, filter, minRunwayLength)
     }
     
     private var fetchAirports: FetchRequest<Airport> {
