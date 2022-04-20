@@ -18,6 +18,8 @@ struct TakeoffResultsView: View {
 
 struct TakeoffResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        TakeoffResultsView(state: PerformanceState(operation: .takeoff))
+        List {
+            TakeoffResultsView(state: PerformanceState(operation: .takeoff))
+        }
     }
 }

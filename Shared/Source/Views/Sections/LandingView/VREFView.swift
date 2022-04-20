@@ -14,6 +14,8 @@ struct VREFView: View {
 
 struct VREFView_Previews: PreviewProvider {
     static var previews: some View {
-        VREFView(state: PerformanceState(operation: .landing))
+        List {
+            VREFView(state: .init(operation: .landing))
+        }
     }
 }

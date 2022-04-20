@@ -103,19 +103,6 @@ struct SearchView: View {
 }
 
 struct SearchView_Previews: PreviewProvider {
-    private static let OAK = { () -> Airport in
-        let a = Airport(entity: Airport.entity(), insertInto: nil)
-        a.lid = "OAK"
-        a.name = "Metro Oakland Intl"
-        return a
-    }()
-    private static let SQL = { () -> Airport in
-        let a = Airport(entity: Airport.entity(), insertInto: nil)
-        a.lid = "SQL"
-        a.name = "San Carlos"
-        return a
-    }()
-    
     static var previews: some View {
         SearchView() { _ in }
     }

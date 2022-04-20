@@ -26,6 +26,8 @@ struct TakeoffDistanceView: View {
 
 struct TakeoffDistanceView_Previews: PreviewProvider {
     static var previews: some View {
-        TakeoffDistanceView(state: .init(operation: .takeoff))
+        List {
+            TakeoffDistanceView(state: .init(operation: .takeoff))
+        }
     }
 }

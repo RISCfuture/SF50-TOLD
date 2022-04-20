@@ -21,6 +21,8 @@ struct LandingDistanceView: View {
 
 struct LandingDistanceView_Previews: PreviewProvider {
     static var previews: some View {
-        LandingDistanceView(state: PerformanceState(operation: .landing))
+        List {
+            LandingDistanceView(state: PerformanceState(operation: .landing))
+        }
     }
 }

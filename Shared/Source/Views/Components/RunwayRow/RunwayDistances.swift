@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreData
 
 fileprivate func formatDistance(_ distance: Int16) -> String {
     return "\(integerFormatter.string(for: Int(distance))) ft."
@@ -40,8 +41,10 @@ struct RunwayDistances: View {
 }
 
 struct RunwayDistances_Previews: PreviewProvider {
+    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+    
     static var rwy30 = { () -> Runway in
-        let r = Runway(entity: Runway.entity(), insertInto: nil)
+        let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "30"
         r.takeoffRun = 2600
         r.takeoffDistance = 2800

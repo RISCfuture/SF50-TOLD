@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreData
 import CoreLocation
 import CoreLocationUI
 import MapKit

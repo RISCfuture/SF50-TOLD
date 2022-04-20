@@ -31,44 +31,9 @@ struct PerformanceView: View {
 }
 
 struct PerformanceView_Previews: PreviewProvider {
-    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    static var rwy12 = { () -> Runway in
-        let r = Runway(entity: Runway.entity(), insertInto: nil)
-        r.name = "12"
-        r.takeoffRun = 2600
-        r.takeoffDistance = 2800
-        r.heading = 122
-        r.elevation = 12
-        return r
-    }()
-    static var rwy30 = { () -> Runway in
-        let r = Runway(entity: Runway.entity(), insertInto: nil)
-        r.name = "30"
-        r.takeoffRun = 2600
-        r.takeoffDistance = 2800
-        r.heading = 302
-        r.elevation = 12
-        return r
-    }()
-    private static let SQL = { () -> Airport in
-        let a = Airport(entity: Airport.entity(), insertInto: nil)
-        a.lid = "SQL"
-        a.name = "San Carlos"
-        a.addToRunways(rwy12)
-        a.addToRunways(rwy30)
-        return a
-    }()
-    
-    static var state: PerformanceState {
-        let state = PerformanceState(operation: .takeoff)
-        state.airport = SQL
-        state.runway = rwy30
-        return state
-    }
-    
     static var previews: some View {
         Form {
-            PerformanceView(state: state,
+            PerformanceView(state: .init(operation: .takeoff),
                             operation: .takeoff,
                             title: "Takeoff",
                             moment: "Departure",

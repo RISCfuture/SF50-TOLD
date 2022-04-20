@@ -83,8 +83,10 @@ struct NOTAMView: View {
 }
 
 struct NOTAMView_Previews: PreviewProvider {
+    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+    
     private static let notam = { () -> NOTAM in
-        let n = NOTAM(entity: NOTAM.entity(), insertInto: nil)
+        let n = NOTAM(entity: model.entitiesByName["NOTAM"]!, insertInto: nil)
         n.takeoffDistanceShortening = 200
         n.landingDistanceShortening = 300
         n.obstacleHeight = 250

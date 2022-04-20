@@ -19,6 +19,8 @@ struct LandingResultsView: View {
 
 struct LandingResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        LandingResultsView(state: .init(operation: .landing))
+        List {
+            LandingResultsView(state: .init(operation: .landing))
+        }
     }
 }

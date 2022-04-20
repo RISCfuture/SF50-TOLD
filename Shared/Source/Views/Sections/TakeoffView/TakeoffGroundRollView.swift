@@ -21,6 +21,8 @@ struct TakeoffGroundRollView: View {
 
 struct TakeoffGroundRollView_Previews: PreviewProvider {
     static var previews: some View {
-        TakeoffGroundRollView(state: .init(operation: .takeoff))
+        List {
+            TakeoffGroundRollView(state: .init(operation: .takeoff))
+        }
     }
 }
