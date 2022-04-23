@@ -1,10 +1,3 @@
-//
-//  PerformanceModel.swift
-//  SF50 TOLD
-//
-//  Created by Tim Morgan on 4/5/22.
-//
-
 import Foundation
 
 
@@ -16,6 +9,7 @@ protocol PerformanceModel {
     
     var takeoffRoll: Interpolation? { get }
     var takeoffDistance: Interpolation? { get }
+    var takeoffPermitted: Bool? { get }
     var landingRoll: Interpolation? { get }
     var landingDistance: Interpolation? { get }
     var takeoffClimbGradient: Interpolation? { get }

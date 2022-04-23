@@ -33,6 +33,10 @@ struct PerformanceModelG2Plus: PerformanceModel {
             if temp < -20 { offscaleLow = true }
             if temp > 50 { offscaleHigh = true }
             
+            if let takeoffPermitted = takeoffPermitted {
+                if !takeoffPermitted { offscaleHigh = true }
+            }
+            
             return .value(distance, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
     }
@@ -60,7 +64,21 @@ struct PerformanceModelG2Plus: PerformanceModel {
             if temp < -20 { offscaleLow = true }
             if temp > 50 { offscaleHigh = true }
             
+            if let takeoffPermitted = takeoffPermitted {
+                if !takeoffPermitted { offscaleHigh = true }
+            }
+            
             return .value(distance, offscale: offscale(low: offscaleLow, high: offscaleHigh))
+        }
+    }
+    
+    var takeoffPermitted: Bool? {
+        return ifInitialized { runway, weather, weight in
+            let pa = weather.pressureAltitude(elevation: Double(runway.elevation))
+            let temp = weather.temperature(at: Double(runway.elevation))
+            
+            let maxPA = takeoffMaxPAModel(weight: weight, temp: temp)
+            return pa <= maxPA
         }
     }
     
@@ -94,6 +112,20 @@ struct PerformanceModelG2Plus: PerformanceModel {
             distance *= (1 + 0.046*tailwind) // 46% for every 10 knots of tailwind
             
             distance *= (1 + 10*downhillGradient) // 10% for every 1% of downhill gradient
+            distance *= (1 - 5*uphillGradient) // 5% for every 1% of uphill gradient
+            
+            if let contamination = runway.contamination {
+                switch contamination {
+                    case let .waterOrSlush(depth):
+                        distance += landingDistanceIncrease_waterSlush(distance, depth: Double(depth))
+                    case .slushOrWetSnow(let depth):
+                        distance += landingDistanceIncrease_slushWetSnow(distance, depth: Double(depth))
+                    case .drySnow:
+                        distance += landingDistanceIncrease_drySnow(distance)
+                    case .compactSnow:
+                        distance += landingDistanceIncrease_compactSnow(distance)
+                }
+            }
             
             distance *= Defaults[.safetyFactor]
             
@@ -138,6 +170,21 @@ struct PerformanceModelG2Plus: PerformanceModel {
             distance *= (1 + 0.041*tailwind) // 41% for every 10 knots of tailwind
             
             if runway.turf { distance *= 1.2 } // 20% for unpaved runway
+            
+            if let contamination = runway.contamination,
+               case let .value(roll, _) = landingRoll {
+                
+                switch contamination {
+                    case let .waterOrSlush(depth):
+                        distance += landingDistanceIncrease_waterSlush(roll, depth: Double(depth))
+                    case .slushOrWetSnow(let depth):
+                        distance += landingDistanceIncrease_slushWetSnow(roll, depth: Double(depth))
+                    case .drySnow:
+                        distance += landingDistanceIncrease_drySnow(roll)
+                    case .compactSnow:
+                        distance += landingDistanceIncrease_compactSnow(roll)
+                }
+            }
             
             distance *= Defaults[.safetyFactor]
             
@@ -227,27 +274,13 @@ struct PerformanceModelG2Plus: PerformanceModel {
             let temp = weather.temperature(at: Double(runway.elevation))
             let pressureAlt = weather.pressureAltitude(elevation: Double(runway.elevation))
             
-            if weight >= 5550 {
-                switch flaps {
-                    case .flaps100:
-                        if temp >= 20 && pressureAlt >= 10_000 { return false }
-                        if temp >= 30 && pressureAlt >= 7000 { return false }
-                        if temp >= 40 && pressureAlt >= 3000 { return false }
-                        if temp >= 50 { return false }
-                    case .flaps50, .flaps50Ice, .flapsUp, .flapsUpIce:
-                        if temp >= 40 && pressureAlt >= 10_000 { return false }
-                        if temp >= 50 && pressureAlt >= 5000 { return false }
-                    case .none: return nil
-                }
-            } else if weight >= 4500 {
-                switch flaps {
-                    case .flaps100:
-                        if temp >= 40 && pressureAlt >= 9000 { return false }
-                        if temp >= 50 && pressureAlt >= 7000 { return false }
-                    default: return true
-                }
+            switch flaps {
+                case.flaps100:
+                    return pressureAlt <= landingMaxPAModel_flaps100(weight: weight, temp: temp)
+                case .flaps50:
+                    return pressureAlt <= landingMaxPAModel_flaps50(weight: weight, temp: temp)
+                default: return nil
             }
-            return true
         }
     }
     
@@ -258,34 +291,33 @@ struct PerformanceModelG2Plus: PerformanceModel {
     }
     
     private func takeoffRollModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        -1382.43 - 0.210407*pressureAlt + 0.0000206701*pow(pressureAlt, 2)
-            - 34.6806*temp + 0.00403706*pressureAlt*temp + 0.790156*pow(temp, 2)
-            + 0.823508*weight + 0.0000293076*pressureAlt*weight
-            + 0.00496562*temp*weight + 2.46892e-7*pressureAlt*temp*weight
-            - 0.0000504959*pow(weight, 2)
+        -1344.43 - 0.22722*pressureAlt + 0.0000206482*pow(pressureAlt, 2)
+        - 41.1706*temp + 0.00538691*pressureAlt*temp + 0.789187*pow(temp, 2)
+        + 0.826*weight + 0.000032405*pressureAlt*weight
+        + 0.00615447*temp*weight - 0.0000521995*pow(weight, 2)
     }
     
     private func takeoffDistanceModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        -1501 - 0.425876*pressureAlt + 0.0000319546*pow(pressureAlt, 2)
-            - 67.906*temp + 0.00330889*pressureAlt*temp + 1.25352*pow(temp, 2)
-            + 0.857987*weight + 0.0000618535*pressureAlt*weight
-            + 0.00992476*temp*weight + 9.52756e-7*pressureAlt*temp*weight
-            - 0.0000305466*pow(weight, 2)
+        -1354.36 - 0.490758*pressureAlt + 0.00003187*pow(pressureAlt, 2)
+        - 92.9508*temp + 0.00851798*pressureAlt*temp + 1.24978*pow(temp, 2)
+        + 0.867605*weight + 0.0000738065*pressureAlt*weight
+        + 0.0145125*temp*weight - 0.000037121*pow(weight, 2)
     }
     
     private func landingRollModel_flaps100(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        489.494 - 0.0367061*pressureAlt + 3.59535e-6*pow(pressureAlt, 2)
-            - 0.437313*temp + 0.00018658*pressureAlt*temp - 0.00123224*pow(temp, 2)
-            + 0.0937324*weight + 0.0000142284*pressureAlt*weight + 0.00110728*temp*weight
-            + 6.97652e-9*pressureAlt*temp*weight + 0.0000173626*pow(weight, 2)
+        490.68 - 0.0371989*pressureAlt + 3.59292e-6*pow(pressureAlt, 2)
+        - 0.562332*temp + 0.000220394*pressureAlt*temp
+        - 0.00135126*pow(temp, 2) + 0.0937236*weight
+        + 0.0000143332*pressureAlt*weight + 0.0011338*temp*weight
+        + 0.0000173141*pow(weight, 2)
     }
     
     private func landingRollModel_flaps50(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        653.481 - 0.0534954*pressureAlt + 5.08827e-6*pow(pressureAlt, 2)
-            - 0.524595*temp + 0.000216905*pressureAlt*temp - 0.00386111*pow(temp, 2)
-            + 0.12391*weight + 0.0000190989*pressureAlt*weight
-            + 0.00145229*temp*weight + 2.06111e-8*pressureAlt*temp*weight
-            + 0.0000227563*pow(weight, 2)
+        659.367 - 0.0556462*pressureAlt + 5.08485e-6*pow(pressureAlt, 2)
+        - 1.04399*temp + 0.000319443*pressureAlt*temp
+        - 0.00400895*pow(temp, 2) + 0.123878*weight
+        + 0.0000195365*pressureAlt*weight + 0.00155772*temp*weight
+        + 0.0000225265*pow(weight, 2)
     }
     
     private func landingRollModel_flaps50Ice(weight: Double, pressureAlt: Double, temp: Double) -> Double {
@@ -297,18 +329,19 @@ struct PerformanceModelG2Plus: PerformanceModel {
     }
     
     private func landingDistanceModel_flaps100(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        164.713 - 0.0530245*pressureAlt + 4.94734e-6*pow(pressureAlt, 2)
-            - 0.646999*temp + 0.000314351*pressureAlt*temp - 0.0000877975*pow(temp, 2)
-            + 0.141972*weight + 0.0000184321*pressureAlt*weight + 0.00136939*temp*weight
-            - 4.22073e-9*pressureAlt*temp*weight + 0.0000482159*pow(weight, 2)
+        163.996 - 0.0527264*pressureAlt + 4.94881e-6*pow(pressureAlt, 2)
+        - 0.571363*temp + 0.000293894*pressureAlt*temp
+        - 0.000015794*pow(temp, 2) + 0.141978*weight
+        + 0.0000183687*pressureAlt*weight + 0.00135334*temp*weight
+        + 0.0000482451*pow(weight, 2)
     }
     
     private func landingDistanceModel_flaps50(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        259.201 - 0.0901406*pressureAlt + 6.91078e-6*pow(pressureAlt, 2)
-            - 1.61071*temp + 0.000219209*pressureAlt*temp - 0.00467595*pow(temp, 2)
-            + 0.18085*weight + 0.0000277562*pressureAlt*weight
-            + 0.00199616*temp*weight + 4.11752e-8*pressureAlt*temp*weight
-            + 0.0000588788*pow(weight, 2)
+        270.96 - 0.0944373*pressureAlt + 6.90394e-6*pow(pressureAlt, 2)
+        - 2.6483*temp + 0.000424051*pressureAlt*temp
+        - 0.00497128*pow(temp, 2) + 0.180785*weight
+        + 0.0000286303*pressureAlt*weight + 0.00220679*temp*weight
+        + 0.0000584197*pow(weight, 2)
     }
     
     private func landingDistanceModel_flaps50Ice(weight: Double, pressureAlt: Double, temp: Double) -> Double {
@@ -317,6 +350,26 @@ struct PerformanceModelG2Plus: PerformanceModel {
             + 0.0000117844*pow(pressureAlt, 2) + 3.60932*temp
             + 0.00229182*weight*temp - 0.0000174545*pressureAlt*temp
             + 1.73455e-7*weight*pressureAlt*temp + 0.00306818*pow(temp, 2)
+    }
+    
+    private func landingDistanceIncrease_waterSlush(_ dist: Double, depth: Double) -> Double {
+        -2.57617 + 83.3163*depth - 275.465*pow(depth, 2) + 280.945*pow(depth, 3)
+        + 1.64345*dist - 9.23756*depth*dist + 23.6016*pow(depth, 2)*dist
+        - 21.1688*pow(depth, 3)*dist
+    }
+    
+    private func landingDistanceIncrease_slushWetSnow(_ dist: Double, depth: Double) -> Double {
+        65.6394 - 478.829*depth + 765.179*pow(depth, 2) + 0.694343*dist
+        - 0.623682*depth*dist
+    }
+    
+    // 1 in
+    private func landingDistanceIncrease_drySnow(_ dist: Double) -> Double {
+        4.93233 + 0.329699*dist
+    }
+    
+    private func landingDistanceIncrease_compactSnow(_ dist: Double) -> Double {
+        3.72932 + 0.578797*dist
     }
     
     private func takeoffClimbGradientModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
@@ -352,21 +405,27 @@ struct PerformanceModelG2Plus: PerformanceModel {
         17.0545 + 0.016547*weight - 7.6355e-7*pow(weight, 2)
     }
     
+    private func takeoffMaxPAModel(weight: Double, temp: Double) -> Double {
+        75000 - 400*temp - 8*weight
+    }
+    
+    private func landingMaxPAModel_flaps100(weight: Double, temp: Double) -> Double {
+        43228.6 - 340*temp - 4.31746*weight
+    }
+    
+    private func landingMaxPAModel_flaps50(weight: Double, temp: Double) -> Double {
+        19285.7 - 100*temp - 0.952381*weight
+    }
+    
     private func tailwindTotalDistanceModel(weight: Double) -> Double {
-        0.0451667 - 1e-6*weight
+        0.451667 - 0.00001*weight
     }
     
     private func downhillGradientGroundRunFactorModel(weight: Double) -> Double {
-        -1.16667 + 0.001*weight
+        -0.0116667 + 0.00001*weight
     }
     
     private func uphillGradientGroundRunFactorModel(weight: Double) -> Double {
-        3 + 0.002*weight
+        0.03 + 0.00002*weight
     }
-}
-
-fileprivate func offscale(low: Bool, high: Bool) -> Offscale {
-    if high { return .high }
-    else if low { return .low }
-    else { return .none }
 }

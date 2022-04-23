@@ -11,6 +11,12 @@
 		01007B8425D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
 		01007B8525D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
 		01007B8625D5268700C8BFF2 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01007B8225D5268700C8BFF2 /* AboutView.swift */; };
+		0105D5C528123BD7003EA0AA /* RunwayShorteningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0105D5C428123BD7003EA0AA /* RunwayShorteningView.swift */; };
+		0105D5C628123BD7003EA0AA /* RunwayShorteningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0105D5C428123BD7003EA0AA /* RunwayShorteningView.swift */; };
+		0105D5C828123C5A003EA0AA /* ObstacleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0105D5C728123C5A003EA0AA /* ObstacleView.swift */; };
+		0105D5C928123C5A003EA0AA /* ObstacleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0105D5C728123C5A003EA0AA /* ObstacleView.swift */; };
+		0105D5CB28123F49003EA0AA /* ContaminationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0105D5CA28123F49003EA0AA /* ContaminationView.swift */; };
+		0105D5CC28123F49003EA0AA /* ContaminationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0105D5CA28123F49003EA0AA /* ContaminationView.swift */; };
 		010F674D27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */; };
 		010F674E27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */; };
 		010F674F27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */; };
@@ -329,6 +335,9 @@
 
 /* Begin PBXFileReference section */
 		01007B8225D5268700C8BFF2 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		0105D5C428123BD7003EA0AA /* RunwayShorteningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayShorteningView.swift; sourceTree = "<group>"; };
+		0105D5C728123C5A003EA0AA /* ObstacleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleView.swift; sourceTree = "<group>"; };
+		0105D5CA28123F49003EA0AA /* ContaminationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContaminationView.swift; sourceTree = "<group>"; };
 		010F674C27E6CD2400BDBDB0 /* TakeoffResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeoffResultsView.swift; sourceTree = "<group>"; };
 		010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingResultsView.swift; sourceTree = "<group>"; };
 		010F675727E9B99C00BDBDB0 /* Cycle+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cycle+Defaults.swift"; sourceTree = "<group>"; };
@@ -469,6 +478,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0105D5C328123BBE003EA0AA /* NOTAMView */ = {
+			isa = PBXGroup;
+			children = (
+				0105D5C428123BD7003EA0AA /* RunwayShorteningView.swift */,
+				0105D5C728123C5A003EA0AA /* ObstacleView.swift */,
+				0105D5CA28123F49003EA0AA /* ContaminationView.swift */,
+			);
+			path = NOTAMView;
+			sourceTree = "<group>";
+		};
 		010F674B27E68C1200BDBDB0 /* Records */ = {
 			isa = PBXGroup;
 			children = (
@@ -790,6 +809,7 @@
 				01F7EB9D25BBFA2A00CE5024 /* ConfigurationView.swift */,
 				01F18D2525B198B6007D76BA /* LoadoutView.swift */,
 				011A95A527E477D500F3A127 /* NOTAMView.swift */,
+				0105D5C328123BBE003EA0AA /* NOTAMView */,
 				01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */,
 				01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */,
 			);
@@ -1037,11 +1057,13 @@
 				0135A87D258748DF00892558 /* LandingView.swift in Sources */,
 				016A0B1427E5C62E00F16C21 /* SearchResults.swift in Sources */,
 				016A0AFF27E5358100F16C21 /* NOTAM.swift in Sources */,
+				0105D5C528123BD7003EA0AA /* RunwayShorteningView.swift in Sources */,
 				0179865A25C280B60031A453 /* WeatherSource.swift in Sources */,
 				016A0B3E27E5D60300F16C21 /* VxClimbView.swift in Sources */,
 				0191C06B25B2C02900C4B810 /* SectionState.swift in Sources */,
 				014F100B25AAAD410081EAC3 /* SearchField.swift in Sources */,
 				0135A874258748D400892558 /* TakeoffView.swift in Sources */,
+				0105D5C828123C5A003EA0AA /* ObstacleView.swift in Sources */,
 				01D265CC25AD99AF00322A45 /* WeatherRow.swift in Sources */,
 				016A0B0A27E5B98900F16C21 /* Runway.swift in Sources */,
 				01F18D2625B198B6007D76BA /* LoadoutView.swift in Sources */,
@@ -1052,6 +1074,7 @@
 				01F59A1F25AE63AC0055E81B /* PerformanceView.swift in Sources */,
 				01D265B625AD808600322A45 /* WindComponents.swift in Sources */,
 				015A392E25C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
+				0105D5CB28123F49003EA0AA /* ContaminationView.swift in Sources */,
 				019CC28425B91C0F00FEA895 /* DecimalField.swift in Sources */,
 				01F7EB9E25BBFA2A00CE5024 /* ConfigurationView.swift in Sources */,
 				0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */,
@@ -1088,11 +1111,13 @@
 				01D7DA6D25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				01FC1F42280E7F7E0066E374 /* NearestView.swift in Sources */,
 				01E83CEA27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
+				0105D5C928123C5A003EA0AA /* ObstacleView.swift in Sources */,
 				0179865B25C280B60031A453 /* WeatherSource.swift in Sources */,
 				01535DE325A2FD0800AC0F5F /* ValueFormatter.swift in Sources */,
 				0166FCBE25C00E1D006F7258 /* SelectAllOnFocus.swift in Sources */,
 				01641E962806677800BBD18C /* RecentsView.swift in Sources */,
 				01C133F225AD6BBA00AE33C5 /* RunwayPicker.swift in Sources */,
+				0105D5CC28123F49003EA0AA /* ContaminationView.swift in Sources */,
 				0135A8C02587599300892558 /* WeatherPicker.swift in Sources */,
 				0158291725BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				0135A83825872EDE00892558 /* WeatherService.swift in Sources */,
@@ -1154,6 +1179,7 @@
 				016A0B1527E5C62E00F16C21 /* SearchResults.swift in Sources */,
 				01D265CD25AD99AF00322A45 /* WeatherRow.swift in Sources */,
 				01F18D2725B198B6007D76BA /* LoadoutView.swift in Sources */,
+				0105D5C628123BD7003EA0AA /* RunwayShorteningView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,55 +18,17 @@ struct NOTAMView: View {
         ?? "An unknown error occurred."
     }
     
-    private let formatter = numberFormatter(precision: 0, minimum: 0)
-    
-    private var shortenPrompt: String {
-        switch operation {
-            case .takeoff: return "Shorten takeoff distance by:"
-            case .landing: return "Shorten landing distance by:"
-        }
-    }
-    
-    private var shortenBinding: Binding<Double> {
-        switch operation {
-            case .takeoff: return $notam.takeoffDistanceShortening
-            case .landing: return $notam.landingDistanceShortening
-        }
-    }
-    
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Runway Shortening")) {
-                    HStack {
-                        Text(shortenPrompt)
-                        Spacer()
-                        DecimalField("Distance", value: shortenBinding, formatter: formatter, suffix: "ft.")
-                    }
-                }
-                
-                if operation == .takeoff {
-                    Section(header: Text("Obstacle")) {
-                        HStack {
-                            Text("Obstacle Height")
-                            Spacer()
-                            DecimalField("Height", value: $notam.obstacleHeight, formatter: formatter, suffix: "ft.")
-                        }
-                        
-                        HStack {
-                            Text("Obstacle Distance")
-                            Spacer()
-                            DecimalField("Distance", value: $notam.obstacleDistance, formatter: formatter, suffix: "ft.")
-                        }
-                    }
-                }
-                
-                Button("Clear NOTAMs") {
-                    notam.clearFor(operation)
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }.navigationTitle("NOTAMs")
-        }.navigationViewStyle(navigationStyle)
+        Form {
+            RunwayShorteningView(operation: operation, notam: notam)
+            if operation == .takeoff { ObstacleView(notam: notam) }
+            if operation == .landing { ContaminationView(notam: notam) }
+            
+            Button("Clear NOTAMs") {
+                notam.clearFor(operation)
+                presentationMode.wrappedValue.dismiss()
+            }
+        }.navigationTitle("NOTAMs")
             .onDisappear {
                 do {
                     try notam.managedObjectContext?.save()

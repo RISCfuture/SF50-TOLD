@@ -32,4 +32,9 @@ extension Runway {
     var hasLandingDistanceNOTAM: Bool {
         notam?.landingDistanceShortening ?? 0 > 0
     }
+    
+    var contamination: Contamination? {
+        guard let contamination = notam?.contamination else { return nil }
+        return contamination
+    }
 }
