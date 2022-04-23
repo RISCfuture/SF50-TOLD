@@ -19,6 +19,7 @@ extension Defaults.Keys {
     static let landingAirport = Key<String?>("landingAirport") // site #
     
     static let lastCycleLoaded = Key<Cycle?>("lastCycleLoaded", suite: groupDefaults)
+    static let schemaVersion = Key<Int>("schemaVersion", default: 0, suite: groupDefaults)
 }
 
 enum Offscale {
@@ -62,3 +63,5 @@ let minRunwayLength = 1400 // ft
 let minTemperature = -40.0 // °C
 let maxTemperature = 50.0 // °C
 let tailwindLimit: UInt = 10 // kts
+
+let latestSchemaVersion = 2

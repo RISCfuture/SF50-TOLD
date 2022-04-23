@@ -24,6 +24,7 @@ class AirportLoaderTask {
             do {
                 let cycle = try await airportDataLoader.loadNASR(withProgress: { progress.addChild($0, withPendingUnitCount: 1) })
                 Defaults[.lastCycleLoaded] = cycle
+                Defaults[.schemaVersion] = latestSchemaVersion
                 task.setTaskCompleted(success: true)
             } catch (_) {
                 task.setTaskCompleted(success: false)

@@ -24,21 +24,23 @@ class AirportLoadingService: ObservableObject {
     private let airportDataLoader: AirportDataLoader
     
     var loading: Bool { !progress.isFinished }
-        
+    
     required init() {
         airportDataLoader = .init()
         airportDataLoader.$error.receive(on: DispatchQueue.main).assign(to: &$error)
         
-        needsLoad = outOfDate(cycle: Defaults[.lastCycleLoaded])
+        needsLoad = Defaults[.schemaVersion] != latestSchemaVersion
+            || outOfDate(cycle: Defaults[.lastCycleLoaded])
         canSkip = ((try? airportCount()) ?? 0) > 0
         
-        Publishers.CombineLatest(
+        Publishers.CombineLatest3(
             $skipLoadThisSession,
-            Defaults.publisher(.lastCycleLoaded).map { $0.newValue }
-        ).map { [weak self] skipLoadThisSession, cycle in
+            Defaults.publisher(.lastCycleLoaded).map { $0.newValue },
+            Defaults.publisher(.schemaVersion).map { $0.newValue }
+        ).map { [weak self] skipLoadThisSession, cycle, schemaVersion in
             guard let this = self else { return false }
             if skipLoadThisSession { return false }
-            return this.outOfDate(cycle: cycle)
+            return schemaVersion != latestSchemaVersion || this.outOfDate(cycle: cycle)
         }.receive(on: DispatchQueue.main)
         .assign(to: &$needsLoad)
         
@@ -53,6 +55,7 @@ class AirportLoadingService: ObservableObject {
                 guard let cycle = try await self.airportDataLoader.loadNASR(withProgress: { self.progress.addChild($0, withPendingUnitCount: 1) }) else { return }
                 DispatchQueue.main.async {
                     Defaults[.lastCycleLoaded] = cycle
+                    Defaults[.schemaVersion] = latestSchemaVersion
                     self.progress = resetProgress(finished: true)
                 }
             } catch (let error) {
