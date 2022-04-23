@@ -32,7 +32,7 @@ struct AboutView: View {
                     HStack {
                         Text("Serials")
                         Spacer()
-                        Text("Aircraft Serials with Cirrus Perspective Touch Avionics System and FL280 Maximum Operating Altitude")
+                        Text("with Cirrus Perspective Touch Avionics System and FL280 Maximum Operating Altitude")
                             .bold()
                             .font(.system(size: 14))
                     }
@@ -45,18 +45,18 @@ struct AboutView: View {
                     }
                     
                     HStack {
-                        Text("Reissue")
+                        Text("Revision")
                         Spacer()
-                        Text("A")
+                        Text("A1 (04 Feb 2022)")
                             .bold()
                     }
                 }
                 
-                Section(header: Text("SF50 G2 Data Source")) {
+                Section(header: Text("SF50 G2–G2+ Data Source")) {
                     HStack {
                         Text("Serials")
                         Spacer()
-                        Text("Aircraft Serials with Cirrus Perspective Touch+ Avionics System and FL310 Maximum Operating Altitude")
+                        Text("with Cirrus Perspective Touch+ Avionics System and FL310 Maximum Operating Altitude")
                             .bold()
                             .font(.system(size: 14))
                     }
@@ -69,9 +69,9 @@ struct AboutView: View {
                     }
                     
                     HStack {
-                        Text("Reissue")
+                        Text("Revision")
                         Spacer()
-                        Text("Original")
+                        Text("2 (04 Feb 2022)")
                             .bold()
                     }
                 }
