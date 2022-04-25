@@ -7,7 +7,7 @@ class AirportDataLoader: ObservableObject {
     @Published private(set) var error: Swift.Error? = nil
     
     private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "AirportDataLoader")
-    private let queue = DispatchQueue(label: "SF50-Told.AirportService", qos: .background)
+    private let queue = DispatchQueue(label: "SF50-TOLD.AirportService", qos: .background)
     
     private var loader = BackgroundDownloader()
     

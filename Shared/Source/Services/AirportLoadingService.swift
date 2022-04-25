@@ -26,7 +26,7 @@ class AirportLoadingService: ObservableObject {
     private let airportDataLoader: AirportDataLoader
     
     private let networkMonitor = NWPathMonitor()
-    private let networkMonitorQueue = DispatchQueue(label: "codes.tim.SF50-Told.networkMonitorQueue")
+    private let networkMonitorQueue = DispatchQueue(label: "codes.tim.SF50-TOLD.networkMonitorQueue")
     
     var loading: Bool { !progress.isFinished }
     
