@@ -87,6 +87,10 @@ class BackgroundDownloader: Downloader {
     override func load(withProgress progressHandler: @escaping (Progress) -> Void = { _ in }, callback: @escaping (_ result: Result<Distribution, Swift.Error>) -> Void) {
         let urlSessionConfiguration = URLSessionConfiguration.background(withIdentifier: "codes.tim.SF50-TOLD.AirportService")
         urlSessionConfiguration.isDiscretionary = true
+        urlSessionConfiguration.timeoutIntervalForRequest = 30
+        urlSessionConfiguration.timeoutIntervalForResource = 30
+        urlSessionConfiguration.waitsForConnectivity = false
+        
         let delegate = CallbackDelegate(callback: callback)
         let session = URLSession(configuration: urlSessionConfiguration, delegate: delegate, delegateQueue: nil)
         
