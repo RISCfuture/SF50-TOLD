@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var state: AppState
+    @ObservedObject var service: AirportLoadingService
     
     @State private var tab = 1
     
@@ -10,11 +11,11 @@ struct ContentView: View {
     var body: some View {
         if let error = state.error {
             ErrorView(error: error)
-        } else if state.loadingAirports {
+        } else if service.loading {
             LoadingView(progress: state.airportLoadingService.progress)
                 .padding(.all, 20)
-        } else if state.needsLoad {
-            LoadingConsentView(state: state)
+        } else if service.needsLoad {
+            LoadingConsentView(service: service)
         } else {
             TabView(selection: $tab) {
                 TakeoffView(state: state.takeoff).tabItem {
@@ -35,7 +36,9 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    private static let state = AppState()
+    
     static var previews: some View {
-        return ContentView(state: AppState())
+        return ContentView(state: state, service: state.airportLoadingService)
     }
 }

@@ -2,13 +2,13 @@ import SwiftUI
 import Defaults
 
 struct LoadingConsentView: View {
-    @ObservedObject var state: AppState
+    @ObservedObject var service: AirportLoadingService
     
     var titleString: String {
-        if Defaults[.lastCycleLoaded] == nil {
-            return "You need to download airport data before you can use this app."
-        } else {
+        if service.canSkip {
             return "Your airport database is out of date. Would you like to update it?"
+        } else {
+            return "You need to download airport data before you can use this app."
         }
     }
     
@@ -27,7 +27,7 @@ struct LoadingConsentView: View {
                 .padding(.horizontal, 20)
                 .multilineTextAlignment(.leading)
             
-            if state.networkIsExpensive {
+            if service.networkIsExpensive {
                 Text("Warning: You are on a slow or metered network.")
                     .foregroundColor(.red)
                     .font(.footnote)
@@ -38,11 +38,11 @@ struct LoadingConsentView: View {
             
             HStack(spacing: 20) {
                 Button("Download Airport Data") {
-                    self.state.airportLoadingService.loadNASR()
+                    self.service.loadNASR()
                 }
-                if state.canSkipLoad {
+                if service.canSkip {
                     Button("Defer Until Later") {
-                        self.state.airportLoadingService.loadNASRLater()
+                        self.service.loadNASRLater()
                     }
                 }
             }
@@ -52,6 +52,6 @@ struct LoadingConsentView: View {
 
 struct LoadingConsentView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingConsentView(state: AppState())
+        LoadingConsentView(service: AirportLoadingService())
     }
 }

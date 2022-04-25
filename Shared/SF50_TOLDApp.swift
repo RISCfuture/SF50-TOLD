@@ -36,7 +36,7 @@ struct SF50_TOLDApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(state: state)
+            ContentView(state: state, service: state.airportLoadingService)
                 .environment(\.managedObjectContext, PersistentContainer.shared.viewContext)
         }
     }

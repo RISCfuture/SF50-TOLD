@@ -4,6 +4,7 @@ import CoreData
 import BackgroundTasks
 import Defaults
 import SwiftNASR
+import Network
 
 fileprivate func resetProgress(finished: Bool = false) -> Progress {
     let progress = Progress(totalUnitCount: 1)
@@ -20,18 +21,24 @@ class AirportLoadingService: ObservableObject {
     @Published private(set) var needsLoad = true
     @Published private(set) var canSkip = false
     @Published var skipLoadThisSession = false
+    @Published private(set) var networkIsExpensive = false
     
     private let airportDataLoader: AirportDataLoader
     
+    private let networkMonitor = NWPathMonitor()
+    private let networkMonitorQueue = DispatchQueue(label: "codes.tim.SF50-Told.networkMonitorQueue")
+    
     var loading: Bool { !progress.isFinished }
+    
+    private var noData: Bool { ((try? airportCount()) ?? 0) == 0 }
     
     required init() {
         airportDataLoader = .init()
         airportDataLoader.$error.receive(on: DispatchQueue.main).assign(to: &$error)
         
-        needsLoad = Defaults[.schemaVersion] != latestSchemaVersion
+        needsLoad = outOfDate(schemaVersion: Defaults[.schemaVersion])
             || outOfDate(cycle: Defaults[.lastCycleLoaded])
-        canSkip = ((try? airportCount()) ?? 0) > 0
+        canSkip = !noData && !outOfDate(schemaVersion: Defaults[.schemaVersion])
         
         Publishers.CombineLatest3(
             $skipLoadThisSession,
@@ -40,11 +47,19 @@ class AirportLoadingService: ObservableObject {
         ).map { [weak self] skipLoadThisSession, cycle, schemaVersion in
             guard let this = self else { return false }
             if skipLoadThisSession { return false }
-            return schemaVersion != latestSchemaVersion || this.outOfDate(cycle: cycle)
+            return this.outOfDate(schemaVersion: schemaVersion)
+                || this.outOfDate(cycle: cycle)
         }.receive(on: DispatchQueue.main)
         .assign(to: &$needsLoad)
         
         progress.completedUnitCount = 1
+        
+        networkMonitor.pathUpdateHandler = { path in
+            DispatchQueue.main.async {
+                self.networkIsExpensive = (path.isConstrained || path.isExpensive)
+            }
+        }
+        networkMonitor.start(queue: networkMonitorQueue)
     }
     
     func loadNASR() {
@@ -80,5 +95,9 @@ class AirportLoadingService: ObservableObject {
         guard let count = try? airportCount() else { return true }
         if count == 0 { return true }
         return false
+    }
+    
+    private func outOfDate(schemaVersion: Int) -> Bool {
+        schemaVersion != latestSchemaVersion
     }
 }
