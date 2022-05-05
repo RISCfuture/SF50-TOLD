@@ -291,10 +291,10 @@ struct PerformanceModelG1: PerformanceModel {
     }
     
     private func takeoffRollModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        -1344.43 - 0.22722*pressureAlt + 0.0000206482*pow(pressureAlt, 2)
-            - 41.1706*temp + 0.00538691*pressureAlt*temp + 0.789187*pow(temp, 2)
-            + 0.826*weight + 0.000032405*pressureAlt*weight
-            + 0.00615447*temp*weight - 0.0000521995*pow(weight, 2)
+        -204.381 - 0.189643*pressureAlt + 0.0000217907*pow(pressureAlt, 2)
+            - 41.195*temp + 0.00653503*pressureAlt*temp + 0.953503*pow(temp, 2)
+            + 0.38054*weight + 0.0000284266*pressureAlt*weight
+            + 0.00692231*temp*weight - 5.82883e-6*pow(weight, 2)
     }
     
     private func takeoffDistanceModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
