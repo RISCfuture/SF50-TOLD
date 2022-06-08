@@ -6,6 +6,10 @@ import Alamofire
 import SWXMLHash
 import SwiftMETAR
 
+extension TAF {
+    var originDateOrToday: Date { originDate ?? Date() }
+}
+
 fileprivate let loadingQueue = DispatchQueue(label: "codes.tim.SF50-TOLD.ExpiringCache", qos: .utility, attributes: .concurrent)
 
 fileprivate class ExpiringCache<Key: Hashable, Value, Error: Swift.Error> {
@@ -135,7 +139,7 @@ class WeatherService: ObservableObject {
                     }
                 }.eraseToAnyPublisher()
         }
-        TAFCache = .init(expiryKey: \.originDate, timeout: TAFTimeout) { icao -> AnyPublisher<FetchResult<TAF>, Never> in
+        TAFCache = .init(expiryKey: \.originDateOrToday, timeout: TAFTimeout) { icao -> AnyPublisher<FetchResult<TAF>, Never> in
             return AF.request(Self.TAF_URL(icao))
                 .publishUnserialized(queue: loadingQueue)
                 .map { response in
