@@ -30,6 +30,8 @@ final class PersistentContainer: ObservableObject {
         if viewContext.hasChanges {
             do {
                 try viewContext.save()
+            } catch (let error as Error) {
+                self.error = error
             } catch {
                 self.error = Error.unknown(error: error)
             }

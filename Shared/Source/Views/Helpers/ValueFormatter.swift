@@ -24,8 +24,8 @@ class ValueFormatter {
     private var rounder: NSDecimalNumberHandler {
         .init(roundingMode: .plain, scale: Int16(precision), raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     }
-    private var numberFormatter: NumberFormatter {
-        SF50_TOLD.numberFormatter(precision: precision, minimum: minimum, maximum: maximum)
+    private var numberFormatter_: NumberFormatter {
+        numberFormatter(precision: precision, minimum: minimum, maximum: maximum)
     }
     
     required init(precision: UInt = 0, minimum: Double? = 0, maximum: Double? = nil) {
@@ -36,22 +36,22 @@ class ValueFormatter {
     
     func string(for num: Double) -> String {
         let rounded = NSDecimalNumber(value: num).rounding(accordingToBehavior: rounder)
-        return numberFormatter.string(for: rounded) ?? rounded.stringValue
+        return numberFormatter_.string(for: rounded) ?? rounded.stringValue
     }
     
     func string(for num: Int) -> String {
         let rounded = NSDecimalNumber(value: num).rounding(accordingToBehavior: rounder)
-        return numberFormatter.string(for: rounded) ?? rounded.stringValue
+        return numberFormatter_.string(for: rounded) ?? rounded.stringValue
     }
     
     func string(for num: UInt) -> String {
         let rounded = NSDecimalNumber(value: num).rounding(accordingToBehavior: rounder)
-        return numberFormatter.string(for: rounded) ?? rounded.stringValue
+        return numberFormatter_.string(for: rounded) ?? rounded.stringValue
     }
     
     func value(for string: String) -> Double? {
         if string.isEmpty { return nil }
-        guard let num = numberFormatter.number(from: string) else { return nil }
+        guard let num = numberFormatter_.number(from: string) else { return nil }
         let rounded = (num as! NSDecimalNumber).rounding(accordingToBehavior: rounder)
         return rounded.doubleValue
     }

@@ -178,7 +178,7 @@ class WeatherService: ObservableObject {
         else { return TAFCache[location] }
     }
 
-    func conditionsFor(airport: Airport, date: Date, force: Bool = false) -> AnyPublisher<(FetchState<(FetchResult<METAR>, FetchResult<TAF>)>), Never> {
+    func conditionsFor(airport: Airport, force: Bool = false) -> AnyPublisher<(FetchState<(FetchResult<METAR>, FetchResult<TAF>)>), Never> {
         let fakeICAO = airport.icao ?? "K\(airport.lid!)"
         return Publishers.CombineLatest(
             getMETAR(for: fakeICAO, force: force),

@@ -39,7 +39,7 @@ class SectionState: ObservableObject {
         }
         
         self.performance.weatherState.beginLoading()
-        WeatherService.instance.conditionsFor(airport: airport, date: date, force: force)
+        WeatherService.instance.conditionsFor(airport: airport, force: force)
             .sink { state in
                 if self.weatherLoadingCanceled { return }
                 switch state {

@@ -19,15 +19,6 @@
       }
     },
     {
-      "identity" : "numericannex",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/xwu/NumericAnnex.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "ff00a9ad3c7c9632a149ac3114936dbc9dabae01"
-      }
-    },
-    {
       "identity" : "regex",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sharplet/Regex.git",
@@ -41,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser.git",
       "state" : {
-        "revision" : "fddd1c00396eed152c45a46bea9f47b98e59301d",
-        "version" : "1.2.0"
+        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
+        "version" : "1.2.2"
       }
     },
     {
@@ -50,8 +41,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log.git",
       "state" : {
-        "revision" : "6fe203dc33195667ce1759bf0182975e4653ba1c",
-        "version" : "1.4.4"
+        "revision" : "32e8d724467f8fe623624570367e3d50c5638e46",
+        "version" : "1.5.2"
+      }
+    },
+    {
+      "identity" : "swift-numberkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/objecthub/swift-numberkit.git",
+      "state" : {
+        "revision" : "0f9c918dcea73f6ff4ff762b8e83a0991ca668d9",
+        "version" : "2.4.2"
       }
     },
     {
@@ -60,7 +60,7 @@
       "location" : "https://github.com/RISCfuture/SwiftMETAR.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3f503f656e78bb4140e877ba0a9896fdb470afed"
+        "revision" : "1506777f4d1276e1ce9fde3586fa5ca64126ea9d"
       }
     },
     {
@@ -69,7 +69,7 @@
       "location" : "https://github.com/RISCfuture/SwiftNASR.git",
       "state" : {
         "branch" : "master",
-        "revision" : "10ec2f3fa82c7d1bdff1a36c187b32c67910c9ab"
+        "revision" : "b7d60a0c8da3208ab8a3b6fa3c2dabffb56b86ea"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "revision" : "f2616860a41f9d9932da412a8978fec79c06fe24",
-        "version" : "0.1.4"
+        "revision" : "c18951c747ab62af7c15e17a81bd37d4fd5a9979",
+        "version" : "0.2.3"
       }
     },
     {

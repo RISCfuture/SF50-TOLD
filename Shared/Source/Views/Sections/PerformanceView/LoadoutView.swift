@@ -8,7 +8,12 @@ struct LoadoutView: View {
     var title: String
     var maxWeight: Double
     
-    var payload = Binding(get: { Defaults[.payload] }, set: { Defaults[.payload] = $0 })
+    var payload = Binding(get: { Defaults[.payload] },
+                          set: { Defaults[.payload] = $0 })
+    var fuel: Binding<Double> {
+        .init(get: { Defaults[state.fuelDefault] },
+              set: { Defaults[state.fuelDefault] = $0 })
+    }
     
     private let formatter = numberFormatter(precision: 0, minimum: 0)
     
@@ -23,7 +28,7 @@ struct LoadoutView: View {
                 Text("\(title) Fuel")
                 Spacer()
                 DecimalField("\(title) Fuel",
-                             value: $state.fuel,
+                             value: fuel,
                              formatter: numberFormatter(precision: 0, minimum: 0),
                              suffix: "gal",
                              maximum: maxFuel)

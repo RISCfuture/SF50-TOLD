@@ -1,1 +1,2 @@
 NSLocationWhenInUseUsageDescription = "Your location will be used to discover nearby airports.";
+NSLocationUsageDescription = "Your location will be used to discover nearby airports.";

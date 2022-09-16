@@ -1,11 +1,13 @@
 import CoreData
 import CoreLocation
+import Dispatch
 import MapKit
 import Dispatch
 
 // roll your own lazy vars
 fileprivate var coreLocations = Dictionary<String, CLLocationCoordinate2D>()
 fileprivate var mapPoints = Dictionary<String, MKMapPoint>()
+fileprivate var mapPointsMutex = DispatchSemaphore(value: 1)
 
 extension Airport {
     var coreLocation: CLLocationCoordinate2D {
@@ -16,9 +18,23 @@ extension Airport {
     }
     
     var mapPoint: MKMapPoint {
+        mapPointsMutex.wait()
+        defer { mapPointsMutex.signal() }
+        
         if let point = mapPoints[id!] { return point }
         let point =  MKMapPoint(coreLocation)
         mapPoints[id!] = point
         return point
+    }
+    
+    static func byIDRequest(id: String) -> NSFetchRequest<Airport> {
+        let request = NSFetchRequest<Airport>(entityName: "Airport")
+        request.fetchLimit = 1
+        request.includesPropertyValues = true
+        request.includesSubentities = true
+        request.returnsObjectsAsFaults = false
+        let predicate = NSPredicate(format: "id == %@", id)
+        request.predicate = predicate
+        return request
     }
 }

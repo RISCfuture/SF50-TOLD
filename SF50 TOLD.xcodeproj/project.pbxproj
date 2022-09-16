@@ -26,10 +26,24 @@
 		010F675427E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */; };
 		010F675527E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */; };
 		010F675827E9B99C00BDBDB0 /* Cycle+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675727E9B99C00BDBDB0 /* Cycle+Defaults.swift */; };
+		0112CCCE28D7D7AC00F2A3D1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Error.swift */; };
 		011A95A627E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
 		011A95A727E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
 		011A95A827E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
 		011A95A927E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
+		011F165029C13FCD00DB07C0 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 011F164F29C13FCD00DB07C0 /* Defaults */; };
+		011F165229C13FCD00DB07C0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 011F165129C13FCD00DB07C0 /* Alamofire */; };
+		011F165429C13FCD00DB07C0 /* SwiftMETAR in Frameworks */ = {isa = PBXBuildFile; productRef = 011F165329C13FCD00DB07C0 /* SwiftMETAR */; };
+		011F165629C13FD900DB07C0 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 011F165529C13FD900DB07C0 /* SwiftNASR */; };
+		011F165829C13FE100DB07C0 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 011F165729C13FE100DB07C0 /* SWXMLHash */; };
+		01335720285AFF1900321CD9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01335722285AFF1900321CD9 /* InfoPlist.strings */; };
+		01335724285B132300321CD9 /* PerformanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01335723285B132300321CD9 /* PerformanceCalculator.swift */; };
+		01335726285C15D600321CD9 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01335725285C15D600321CD9 /* NearestAirportPublisher.swift */; };
+		01335727285C15D600321CD9 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01335725285C15D600321CD9 /* NearestAirportPublisher.swift */; };
+		01335728285C15D600321CD9 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01335725285C15D600321CD9 /* NearestAirportPublisher.swift */; };
+		01335729285C20C400321CD9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F4F280E9AD90066E374 /* InfoPlist.strings */; };
+		0133572A285C20CA00321CD9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F5A280E9B080066E374 /* InfoPlist.strings */; };
+		0133572D285D79DB00321CD9 /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133572C285D79DB00321CD9 /* OffscaleWarningView.swift */; };
 		0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
 		0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
 		0135A7EE2587091800892558 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C42587091300892558 /* ContentView.swift */; };
@@ -58,11 +72,15 @@
 		014808EF25AAF4910041A90D /* AirportDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014808ED25AAF4910041A90D /* AirportDataLoader.swift */; };
 		014F100B25AAAD410081EAC3 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014F100A25AAAD410081EAC3 /* SearchField.swift */; };
 		014F100C25AAAD410081EAC3 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014F100A25AAAD410081EAC3 /* SearchField.swift */; };
+		0151149828B6F386002C6A31 /* SelectedAirportPerformanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151149728B6F386002C6A31 /* SelectedAirportPerformanceWidget.swift */; };
+		0151149A28B6F3BE002C6A31 /* SF50_Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151149928B6F3BE002C6A31 /* SF50_Widgets.swift */; };
 		01535DE225A2FD0800AC0F5F /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
 		01535DE325A2FD0800AC0F5F /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
 		015373F72610286D0098B529 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 015373F62610286D0098B529 /* Alamofire */; };
 		0153742026107AFF0098B529 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 0153741F26107AFF0098B529 /* SWXMLHash */; };
 		0153742A26107B0A0098B529 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 0153742926107B0A0098B529 /* SWXMLHash */; };
+		01551C5028B6EBAA002EE7EE /* AirportSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01551C4F28B6EBAA002EE7EE /* AirportSelection.swift */; };
+		01551C5228B6ED9D002EE7EE /* SelectedAirportWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01551C5128B6ED9D002EE7EE /* SelectedAirportWidgetEntryView.swift */; };
 		0158291625BC0F8100AA0CC4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158291525BC0F8100AA0CC4 /* SettingsState.swift */; };
 		0158291725BC0F8100AA0CC4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158291525BC0F8100AA0CC4 /* SettingsState.swift */; };
 		0158291825BC0F8100AA0CC4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158291525BC0F8100AA0CC4 /* SettingsState.swift */; };
@@ -243,12 +261,34 @@
 		01AEDAA728D6F33A00F38948 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 01AEDAA628D6F33A00F38948 /* ArgumentParser */; };
 		01B79FD725AC4BF70037C0C6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B79FD625AC4BF70037C0C6 /* ErrorView.swift */; };
 		01B79FD825AC4BF70037C0C6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B79FD625AC4BF70037C0C6 /* ErrorView.swift */; };
+		01BBDBCD2A298F6C004E7871 /* LocationNotAuthorizedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BBDBCC2A298F6C004E7871 /* LocationNotAuthorizedView.swift */; };
 		01C133F125AD6BBA00AE33C5 /* RunwayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C133F025AD6BBA00AE33C5 /* RunwayPicker.swift */; };
 		01C133F225AD6BBA00AE33C5 /* RunwayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C133F025AD6BBA00AE33C5 /* RunwayPicker.swift */; };
+		01C64D7F28B5BB7100061A69 /* WidgetNoAirportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C64D7E28B5BB7100061A69 /* WidgetNoAirportView.swift */; };
 		01C7EA7A25B1963600CCFBE1 /* InterpolationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7EA7925B1963600CCFBE1 /* InterpolationView.swift */; };
 		01C7EA7B25B1963600CCFBE1 /* InterpolationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7EA7925B1963600CCFBE1 /* InterpolationView.swift */; };
 		01C7EA7C25B1963600CCFBE1 /* InterpolationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7EA7925B1963600CCFBE1 /* InterpolationView.swift */; };
 		01C7EA7D25B1963600CCFBE1 /* InterpolationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7EA7925B1963600CCFBE1 /* InterpolationView.swift */; };
+		01D0607228592FDE00B411D2 /* NearestAirportPerformanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0607128592FDE00B411D2 /* NearestAirportPerformanceWidget.swift */; };
+		01D0607528592FDF00B411D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D0607428592FDF00B411D2 /* Assets.xcassets */; };
+		01D0607B28592FDF00B411D2 /* SF50 RunwaysExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 01D0606B28592FDE00B411D2 /* SF50 RunwaysExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		01D06080285946C600B411D2 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2C8EF25D126C10036B6FE /* Weather.swift */; };
+		01D060812859470300B411D2 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A83625872EDE00892558 /* WeatherService.swift */; };
+		01D060822859470300B411D2 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0AFE27E5358100F16C21 /* NOTAM.swift */; };
+		01D060832859470300B411D2 /* Runway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0927E5B98900F16C21 /* Runway.swift */; };
+		01D060842859470300B411D2 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F5B280F50CE0066E374 /* Airport.swift */; };
+		01D060852859471500B411D2 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8A425874C3B00892558 /* Global.swift */; };
+		01D060862859471500B411D2 /* PerformanceModelG1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModelG1.swift */; };
+		01D060872859471500B411D2 /* PerformanceModelG2+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CE827FD3969001342BF /* PerformanceModelG2+.swift */; };
+		01D060882859471500B411D2 /* PerformanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CEE27FD3B70001342BF /* PerformanceModel.swift */; };
+		01D060892859473E00B411D2 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */; };
+		01D0608A2859474A00B411D2 /* Cycle+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675727E9B99C00BDBDB0 /* Cycle+Defaults.swift */; };
+		01D0608B2859474A00B411D2 /* Array+Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E8E2806641300BBD18C /* Array+Unique.swift */; };
+		01D0608C2859475600B411D2 /* Airports.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 014808D925AAEEF10041A90D /* Airports.xcdatamodeld */; };
+		01D060982859969200B411D2 /* NearestAirportWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D060972859969200B411D2 /* NearestAirportWidgetEntryView.swift */; };
+		01D0609A285996C000B411D2 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D06099285996C000B411D2 /* Provider.swift */; };
+		01D060A02859997500B411D2 /* WidgetGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D0609F2859997500B411D2 /* WidgetGridView.swift */; };
+		01D060A22859997C00B411D2 /* WidgetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D060A12859997C00B411D2 /* WidgetListView.swift */; };
 		01D265B625AD808600322A45 /* WindComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D265B525AD808600322A45 /* WindComponents.swift */; };
 		01D265B725AD808600322A45 /* WindComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D265B525AD808600322A45 /* WindComponents.swift */; };
 		01D265C325AD821200322A45 /* RunwayDistances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D265C225AD821100322A45 /* RunwayDistances.swift */; };
@@ -294,6 +334,21 @@
 		01F18D3425B19990007D76BA /* TimeAndPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */; };
 		01F18D3525B19990007D76BA /* TimeAndPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */; };
 		01F18D3625B19990007D76BA /* TimeAndPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */; };
+		01F3840128599D4F007A7DF5 /* RunwayGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F3840028599D4F007A7DF5 /* RunwayGridItem.swift */; };
+		01F3840328599F63007A7DF5 /* RunwayPlaceholderGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F3840228599F63007A7DF5 /* RunwayPlaceholderGridItem.swift */; };
+		01F384062859A5CC007A7DF5 /* WidgetAirportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F384052859A5CC007A7DF5 /* WidgetAirportView.swift */; };
+		01F384082859AA3F007A7DF5 /* RunwayListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F384072859AA3F007A7DF5 /* RunwayListItem.swift */; };
+		01F3840A2859AA48007A7DF5 /* RunwayPlaceholderListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F384092859AA48007A7DF5 /* RunwayPlaceholderListItem.swift */; };
+		01F3840B2859AB17007A7DF5 /* WindComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D265B525AD808600322A45 /* WindComponents.swift */; };
+		01F3840C2859ABCA007A7DF5 /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
+		01F3840E2859AEB6007A7DF5 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F3840D2859AEB6007A7DF5 /* Entry.swift */; };
+		01F38410285AF253007A7DF5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F3840F285AF253007A7DF5 /* WeatherValues.swift */; };
+		01F38411285AF253007A7DF5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F3840F285AF253007A7DF5 /* WeatherValues.swift */; };
+		01F38412285AF253007A7DF5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F3840F285AF253007A7DF5 /* WeatherValues.swift */; };
+		01F38413285AF253007A7DF5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F3840F285AF253007A7DF5 /* WeatherValues.swift */; };
+		01F38414285AF253007A7DF5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F3840F285AF253007A7DF5 /* WeatherValues.swift */; };
+		01F3841A285AFE7D007A7DF5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01F38417285AFE7D007A7DF5 /* Info.plist */; };
+		01F3841B285AFE7D007A7DF5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01F38417285AFE7D007A7DF5 /* Info.plist */; };
 		01F59A1F25AE63AC0055E81B /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59A1E25AE63AC0055E81B /* PerformanceView.swift */; };
 		01F59A2025AE63AC0055E81B /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59A1E25AE63AC0055E81B /* PerformanceView.swift */; };
 		01F59A2125AE63AC0055E81B /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59A1E25AE63AC0055E81B /* PerformanceView.swift */; };
@@ -314,10 +369,8 @@
 		01FC1F42280E7F7E0066E374 /* NearestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F40280E7F7E0066E374 /* NearestView.swift */; };
 		01FC1F43280E7F7E0066E374 /* NearestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F40280E7F7E0066E374 /* NearestView.swift */; };
 		01FC1F44280E7F7E0066E374 /* NearestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F40280E7F7E0066E374 /* NearestView.swift */; };
-		01FC1F4A280E9AD90066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F4F280E9AD90066E374 /* InfoPlist.strings */; };
 		01FC1F4C280E9AD90066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F4F280E9AD90066E374 /* InfoPlist.strings */; };
 		01FC1F4D280E9AD90066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F4F280E9AD90066E374 /* InfoPlist.strings */; };
-		01FC1F56280E9B080066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F5A280E9B080066E374 /* InfoPlist.strings */; };
 		01FC1F57280E9B080066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F5A280E9B080066E374 /* InfoPlist.strings */; };
 		01FC1F58280E9B080066E374 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01FC1F5A280E9B080066E374 /* InfoPlist.strings */; };
 		01FC1F5C280F50CE0066E374 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F5B280F50CE0066E374 /* Airport.swift */; };
@@ -341,6 +394,13 @@
 			remoteGlobalIDString = 0135A7D12587091700892558;
 			remoteInfo = "SF50 TOLD (macOS)";
 		};
+		01D0607928592FDF00B411D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0135A7BE2587091300892558 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01D0606A28592FDE00B411D2;
+			remoteInfo = "SF50 RunwaysExtension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -353,6 +413,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		01D0607C28592FDF00B411D2 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				01D0607B28592FDF00B411D2 /* SF50 RunwaysExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -364,6 +435,10 @@
 		010F675127E6CDAA00BDBDB0 /* LandingResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingResultsView.swift; sourceTree = "<group>"; };
 		010F675727E9B99C00BDBDB0 /* Cycle+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cycle+Defaults.swift"; sourceTree = "<group>"; };
 		011A95A527E477D500F3A127 /* NOTAMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOTAMView.swift; sourceTree = "<group>"; };
+		01335721285AFF1900321CD9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		01335723285B132300321CD9 /* PerformanceCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceCalculator.swift; sourceTree = "<group>"; };
+		01335725285C15D600321CD9 /* NearestAirportPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestAirportPublisher.swift; sourceTree = "<group>"; };
+		0133572C285D79DB00321CD9 /* OffscaleWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffscaleWarningView.swift; sourceTree = "<group>"; };
 		0135A7C32587091300892558 /* SF50_TOLDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF50_TOLDApp.swift; sourceTree = "<group>"; };
 		0135A7C42587091300892558 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0135A7C52587091700892558 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -388,7 +463,11 @@
 		014808DA25AAEEF10041A90D /* Schema.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Schema.xcdatamodel; sourceTree = "<group>"; };
 		014808ED25AAF4910041A90D /* AirportDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportDataLoader.swift; sourceTree = "<group>"; };
 		014F100A25AAAD410081EAC3 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		0151149728B6F386002C6A31 /* SelectedAirportPerformanceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAirportPerformanceWidget.swift; sourceTree = "<group>"; };
+		0151149928B6F3BE002C6A31 /* SF50_Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF50_Widgets.swift; sourceTree = "<group>"; };
 		01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueFormatter.swift; sourceTree = "<group>"; };
+		01551C4F28B6EBAA002EE7EE /* AirportSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportSelection.swift; sourceTree = "<group>"; };
+		01551C5128B6ED9D002EE7EE /* SelectedAirportWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAirportWidgetEntryView.swift; sourceTree = "<group>"; };
 		0158291525BC0F8100AA0CC4 /* SettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsState.swift; sourceTree = "<group>"; };
 		015A392D25C3A64B00FEFDBF /* DecimalFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalFieldModifier.swift; sourceTree = "<group>"; };
 		01629C72294D56E2005A6DAC /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -429,14 +508,26 @@
 		01AEDA9C28D6F2D400F38948 /* DownloadNASR */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DownloadNASR; sourceTree = BUILT_PRODUCTS_DIR; };
 		01AEDA9E28D6F2D400F38948 /* DownloadNASR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadNASR.swift; sourceTree = "<group>"; };
 		01B79FD625AC4BF70037C0C6 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		01BBDBCC2A298F6C004E7871 /* LocationNotAuthorizedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNotAuthorizedView.swift; sourceTree = "<group>"; };
 		01C133F025AD6BBA00AE33C5 /* RunwayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayPicker.swift; sourceTree = "<group>"; };
+		01C64D7E28B5BB7100061A69 /* WidgetNoAirportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetNoAirportView.swift; sourceTree = "<group>"; };
 		01C7EA7925B1963600CCFBE1 /* InterpolationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpolationView.swift; sourceTree = "<group>"; };
+		01D0606B28592FDE00B411D2 /* SF50 RunwaysExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SF50 RunwaysExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01D0606C28592FDE00B411D2 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		01D0606E28592FDE00B411D2 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		01D0607128592FDE00B411D2 /* NearestAirportPerformanceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestAirportPerformanceWidget.swift; sourceTree = "<group>"; };
+		01D0607428592FDF00B411D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		01D060972859969200B411D2 /* NearestAirportWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestAirportWidgetEntryView.swift; sourceTree = "<group>"; };
+		01D06099285996C000B411D2 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		01D0609F2859997500B411D2 /* WidgetGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetGridView.swift; sourceTree = "<group>"; };
+		01D060A12859997C00B411D2 /* WidgetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetListView.swift; sourceTree = "<group>"; };
 		01D265B525AD808600322A45 /* WindComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindComponents.swift; sourceTree = "<group>"; };
 		01D265C225AD821100322A45 /* RunwayDistances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayDistances.swift; sourceTree = "<group>"; };
 		01D265CB25AD99AF00322A45 /* WeatherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRow.swift; sourceTree = "<group>"; };
 		01D2C8EF25D126C10036B6FE /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		01D4FA5428D7869300AC322B /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		01D4FA5928D7BFE000AC322B /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		01D61F6228B5A3A900D0608C /* SF50 RunwaysExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SF50 RunwaysExtension.entitlements"; sourceTree = "<group>"; };
 		01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffscaleWarningView.swift; sourceTree = "<group>"; };
 		01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportLoadingService.swift; sourceTree = "<group>"; };
 		01E2A1EA25ABA7D20076CC84 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -444,6 +535,14 @@
 		01E83CEE27FD3B70001342BF /* PerformanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceModel.swift; sourceTree = "<group>"; };
 		01F18D2525B198B6007D76BA /* LoadoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadoutView.swift; sourceTree = "<group>"; };
 		01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndPlaceView.swift; sourceTree = "<group>"; };
+		01F3840028599D4F007A7DF5 /* RunwayGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayGridItem.swift; sourceTree = "<group>"; };
+		01F3840228599F63007A7DF5 /* RunwayPlaceholderGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayPlaceholderGridItem.swift; sourceTree = "<group>"; };
+		01F384052859A5CC007A7DF5 /* WidgetAirportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetAirportView.swift; sourceTree = "<group>"; };
+		01F384072859AA3F007A7DF5 /* RunwayListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayListItem.swift; sourceTree = "<group>"; };
+		01F384092859AA48007A7DF5 /* RunwayPlaceholderListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayPlaceholderListItem.swift; sourceTree = "<group>"; };
+		01F3840D2859AEB6007A7DF5 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		01F3840F285AF253007A7DF5 /* WeatherValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherValues.swift; sourceTree = "<group>"; };
+		01F38417285AFE7D007A7DF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01F59A1E25AE63AC0055E81B /* PerformanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceView.swift; sourceTree = "<group>"; };
 		01F7EB9D25BBFA2A00CE5024 /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
 		01F7EBAA25BBFFCB00CE5024 /* CompactLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactLabelStyle.swift; sourceTree = "<group>"; };
@@ -506,6 +605,18 @@
 				018FFDA9295A551100626EB1 /* Logging in Frameworks */,
 				01AEDAA728D6F33A00F38948 /* ArgumentParser in Frameworks */,
 				01AEDAA428D6F2E200F38948 /* SwiftNASR in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01D0606828592FDE00B411D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				011F165829C13FE100DB07C0 /* SWXMLHash in Frameworks */,
+				011F165429C13FCD00DB07C0 /* SwiftMETAR in Frameworks */,
+				011F165229C13FCD00DB07C0 /* Alamofire in Frameworks */,
+				011F165029C13FCD00DB07C0 /* Defaults in Frameworks */,
+				011F165629C13FD900DB07C0 /* SwiftNASR in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,9 +705,18 @@
 			path = Pickers;
 			sourceTree = "<group>";
 		};
+		0133572B285D79CB00321CD9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0133572C285D79DB00321CD9 /* OffscaleWarningView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		0135A7BD2587091300892558 = {
 			isa = PBXGroup;
 			children = (
+				01D61F6228B5A3A900D0608C /* SF50 RunwaysExtension.entitlements */,
 				013E94D725D73E8300084C10 /* SF50 TOLD.entitlements */,
 				0135A7C22587091300892558 /* Shared */,
 				0135A7CC2587091700892558 /* iOS */,
@@ -605,6 +725,7 @@
 				0135A7DD2587091700892558 /* Tests iOS */,
 				0135A7E82587091800892558 /* Tests macOS */,
 				01AEDA9D28D6F2D400F38948 /* DownloadNASR */,
+				01D0607028592FDE00B411D2 /* SF50 Runways */,
 				0135A82A25872CB900892558 /* Frameworks */,
 				0135A7CB2587091700892558 /* Products */,
 			);
@@ -628,6 +749,7 @@
 				0135A7DA2587091700892558 /* Tests iOS.xctest */,
 				0135A7E52587091800892558 /* Tests macOS.xctest */,
 				01AEDA9C28D6F2D400F38948 /* DownloadNASR */,
+				01D0606B28592FDE00B411D2 /* SF50 RunwaysExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -700,6 +822,8 @@
 		0135A82A25872CB900892558 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01D0606C28592FDE00B411D2 /* WidgetKit.framework */,
+				01D0606E28592FDE00B411D2 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -712,6 +836,7 @@
 				01E83CED27FD3B4D001342BF /* Performance */,
 				0135A83625872EDE00892558 /* WeatherService.swift */,
 				01629C72294D56E2005A6DAC /* LocationManager.swift */,
+				01335725285C15D600321CD9 /* NearestAirportPublisher.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -783,6 +908,7 @@
 			isa = PBXGroup;
 			children = (
 				01D2C8EF25D126C10036B6FE /* Weather.swift */,
+				01F3840F285AF253007A7DF5 /* WeatherValues.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -813,6 +939,46 @@
 			path = DownloadNASR;
 			sourceTree = "<group>";
 		};
+		01D0607028592FDE00B411D2 /* SF50 Runways */ = {
+			isa = PBXGroup;
+			children = (
+				01D0607428592FDF00B411D2 /* Assets.xcassets */,
+				01F38417285AFE7D007A7DF5 /* Info.plist */,
+				01335722285AFF1900321CD9 /* InfoPlist.strings */,
+				01D0609B2859982F00B411D2 /* Source */,
+			);
+			path = "SF50 Runways";
+			sourceTree = "<group>";
+		};
+		01D0609B2859982F00B411D2 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				01D3782B28B9678F00B7AB0E /* Models */,
+				01D0607128592FDE00B411D2 /* NearestAirportPerformanceWidget.swift */,
+				01D06099285996C000B411D2 /* Provider.swift */,
+				0151149728B6F386002C6A31 /* SelectedAirportPerformanceWidget.swift */,
+				0151149928B6F3BE002C6A31 /* SF50_Widgets.swift */,
+				01D3782C28B9679D00B7AB0E /* Support */,
+				01D0609C2859995B00B411D2 /* Views */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		01D0609C2859995B00B411D2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0133572B285D79CB00321CD9 /* Components */,
+				01F383FE28599D28007A7DF5 /* Grid */,
+				01F383FF28599D2E007A7DF5 /* List */,
+				01D060972859969200B411D2 /* NearestAirportWidgetEntryView.swift */,
+				01551C5128B6ED9D002EE7EE /* SelectedAirportWidgetEntryView.swift */,
+				01F384052859A5CC007A7DF5 /* WidgetAirportView.swift */,
+				01C64D7E28B5BB7100061A69 /* WidgetNoAirportView.swift */,
+				01BBDBCC2A298F6C004E7871 /* LocationNotAuthorizedView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		01D265B425AD807100322A45 /* RunwayRow */ = {
 			isa = PBXGroup;
 			children = (
@@ -820,6 +986,23 @@
 				01D265B525AD808600322A45 /* WindComponents.swift */,
 			);
 			path = RunwayRow;
+			sourceTree = "<group>";
+		};
+		01D3782B28B9678F00B7AB0E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				01335723285B132300321CD9 /* PerformanceCalculator.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		01D3782C28B9679D00B7AB0E /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				01551C4F28B6EBAA002EE7EE /* AirportSelection.swift */,
+				01F3840D2859AEB6007A7DF5 /* Entry.swift */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		01D4FA4928D7825A00AC322B /* LoadingView */ = {
@@ -870,6 +1053,26 @@
 			path = PerformanceView;
 			sourceTree = "<group>";
 		};
+		01F383FE28599D28007A7DF5 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				01F3840028599D4F007A7DF5 /* RunwayGridItem.swift */,
+				01F3840228599F63007A7DF5 /* RunwayPlaceholderGridItem.swift */,
+				01D0609F2859997500B411D2 /* WidgetGridView.swift */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
+		01F383FF28599D2E007A7DF5 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				01F384072859AA3F007A7DF5 /* RunwayListItem.swift */,
+				01F384092859AA48007A7DF5 /* RunwayPlaceholderListItem.swift */,
+				01D060A12859997C00B411D2 /* WidgetListView.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		01F7EBBB25BC0C1600CE5024 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,10 +1091,12 @@
 				0135A7C62587091700892558 /* Sources */,
 				0135A7C72587091700892558 /* Frameworks */,
 				0135A7C82587091700892558 /* Resources */,
+				01D0607C28592FDF00B411D2 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				01D0607A28592FDF00B411D2 /* PBXTargetDependency */,
 			);
 			name = "SF50 TOLD (iOS)";
 			packageProductDependencies = (
@@ -997,6 +1202,30 @@
 			productReference = 01AEDA9C28D6F2D400F38948 /* DownloadNASR */;
 			productType = "com.apple.product-type.tool";
 		};
+		01D0606A28592FDE00B411D2 /* SF50 RunwaysExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01D0607F28592FDF00B411D2 /* Build configuration list for PBXNativeTarget "SF50 RunwaysExtension" */;
+			buildPhases = (
+				01D0606728592FDE00B411D2 /* Sources */,
+				01D0606828592FDE00B411D2 /* Frameworks */,
+				01D0606928592FDE00B411D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SF50 RunwaysExtension";
+			packageProductDependencies = (
+				011F164F29C13FCD00DB07C0 /* Defaults */,
+				011F165129C13FCD00DB07C0 /* Alamofire */,
+				011F165329C13FCD00DB07C0 /* SwiftMETAR */,
+				011F165529C13FD900DB07C0 /* SwiftNASR */,
+				011F165729C13FE100DB07C0 /* SWXMLHash */,
+			);
+			productName = "SF50 RunwaysExtension";
+			productReference = 01D0606B28592FDE00B411D2 /* SF50 RunwaysExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1054,6 +1283,7 @@
 				0135A7D92587091700892558 /* Tests iOS */,
 				0135A7E42587091800892558 /* Tests macOS */,
 				01AEDA9B28D6F2D400F38948 /* DownloadNASR */,
+				01D0606A28592FDE00B411D2 /* SF50 RunwaysExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1063,8 +1293,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01335729285C20C400321CD9 /* InfoPlist.strings in Resources */,
 				0135A7F02587091800892558 /* Assets.xcassets in Resources */,
-				01FC1F4A280E9AD90066E374 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1072,8 +1302,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0133572A285C20CA00321CD9 /* InfoPlist.strings in Resources */,
 				0135A7F12587091800892558 /* Assets.xcassets in Resources */,
-				01FC1F56280E9B080066E374 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1083,6 +1313,7 @@
 			files = (
 				01FC1F4C280E9AD90066E374 /* InfoPlist.strings in Resources */,
 				01FC1F57280E9B080066E374 /* InfoPlist.strings in Resources */,
+				01F3841A285AFE7D007A7DF5 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1092,6 +1323,16 @@
 			files = (
 				01FC1F4D280E9AD90066E374 /* InfoPlist.strings in Resources */,
 				01FC1F58280E9B080066E374 /* InfoPlist.strings in Resources */,
+				01F3841B285AFE7D007A7DF5 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01D0606928592FDE00B411D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01335720285AFF1900321CD9 /* InfoPlist.strings in Resources */,
+				01D0607528592FDF00B411D2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1122,6 +1363,7 @@
 				01E83CE927FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				016A0B3427E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
 				01DD6D9F25B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,
+				01335726285C15D600321CD9 /* NearestAirportPublisher.swift in Sources */,
 				01535DE225A2FD0800AC0F5F /* ValueFormatter.swift in Sources */,
 				016A0B2927E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
 				0135A8BF2587599300892558 /* WeatherPicker.swift in Sources */,
@@ -1166,6 +1408,7 @@
 				01C7EA7A25B1963600CCFBE1 /* InterpolationView.swift in Sources */,
 				01E2A1EB25ABA7D20076CC84 /* LoadingView.swift in Sources */,
 				01A6DB1425AD76BE00A3341F /* AirportRow.swift in Sources */,
+				01F38410285AF253007A7DF5 /* WeatherValues.swift in Sources */,
 				01641E952806677800BBD18C /* RecentsView.swift in Sources */,
 				0158291625BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				017B669A258898DA00AA2DE9 /* WeatherState.swift in Sources */,
@@ -1249,7 +1492,9 @@
 				016A0B1027E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				017B669B258898DA00AA2DE9 /* WeatherState.swift in Sources */,
 				0135A8A625874C3B00892558 /* Global.swift in Sources */,
+				01F38411285AF253007A7DF5 /* WeatherValues.swift in Sources */,
 				016A0B2F27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
+				01335727285C15D600321CD9 /* NearestAirportPublisher.swift in Sources */,
 				0166FC9725BFFDA7006F7258 /* View Functions.swift in Sources */,
 				01FC1F5D280F50CE0066E374 /* Airport.swift in Sources */,
 				01D2C8F125D126C10036B6FE /* Weather.swift in Sources */,
@@ -1322,6 +1567,7 @@
 				016C737125AE40120008455F /* AirportDataLoader.swift in Sources */,
 				016A0B1B27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
 				016A0B1127E5BE7200F16C21 /* Color+Assets.swift in Sources */,
+				01F38412285AF253007A7DF5 /* WeatherValues.swift in Sources */,
 				01007B8525D5268700C8BFF2 /* AboutView.swift in Sources */,
 				016A0B1627E5C62E00F16C21 /* SearchResults.swift in Sources */,
 				016C737325AE40120008455F /* PerformanceModelG1.swift in Sources */,
@@ -1396,6 +1642,7 @@
 				016C739625AE40200008455F /* AirportDataLoader.swift in Sources */,
 				016A0B1C27E5CD7B00F16C21 /* PersistentContainer.swift in Sources */,
 				016A0B1227E5BE7200F16C21 /* Color+Assets.swift in Sources */,
+				01F38413285AF253007A7DF5 /* WeatherValues.swift in Sources */,
 				01007B8625D5268700C8BFF2 /* AboutView.swift in Sources */,
 				016A0B1727E5C62E00F16C21 /* SearchResults.swift in Sources */,
 				016C739825AE40200008455F /* PerformanceModelG1.swift in Sources */,
@@ -1423,6 +1670,50 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		01D0606728592FDE00B411D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01F3840C2859ABCA007A7DF5 /* ValueFormatter.swift in Sources */,
+				01F3840B2859AB17007A7DF5 /* WindComponents.swift in Sources */,
+				01D0608C2859475600B411D2 /* Airports.xcdatamodeld in Sources */,
+				01D0608A2859474A00B411D2 /* Cycle+Defaults.swift in Sources */,
+				0151149A28B6F3BE002C6A31 /* SF50_Widgets.swift in Sources */,
+				01D0608B2859474A00B411D2 /* Array+Unique.swift in Sources */,
+				01BBDBCD2A298F6C004E7871 /* LocationNotAuthorizedView.swift in Sources */,
+				01F3840328599F63007A7DF5 /* RunwayPlaceholderGridItem.swift in Sources */,
+				01D0609A285996C000B411D2 /* Provider.swift in Sources */,
+				01F384082859AA3F007A7DF5 /* RunwayListItem.swift in Sources */,
+				01D060852859471500B411D2 /* Global.swift in Sources */,
+				01C64D7F28B5BB7100061A69 /* WidgetNoAirportView.swift in Sources */,
+				01F384062859A5CC007A7DF5 /* WidgetAirportView.swift in Sources */,
+				01D060862859471500B411D2 /* PerformanceModelG1.swift in Sources */,
+				01D060872859471500B411D2 /* PerformanceModelG2+.swift in Sources */,
+				01D060A22859997C00B411D2 /* WidgetListView.swift in Sources */,
+				01F3840A2859AA48007A7DF5 /* RunwayPlaceholderListItem.swift in Sources */,
+				0112CCCE28D7D7AC00F2A3D1 /* Error.swift in Sources */,
+				01D060892859473E00B411D2 /* PersistentContainer.swift in Sources */,
+				01335728285C15D600321CD9 /* NearestAirportPublisher.swift in Sources */,
+				01F3840128599D4F007A7DF5 /* RunwayGridItem.swift in Sources */,
+				01551C5228B6ED9D002EE7EE /* SelectedAirportWidgetEntryView.swift in Sources */,
+				0151149828B6F386002C6A31 /* SelectedAirportPerformanceWidget.swift in Sources */,
+				01D060982859969200B411D2 /* NearestAirportWidgetEntryView.swift in Sources */,
+				01D060882859471500B411D2 /* PerformanceModel.swift in Sources */,
+				01335724285B132300321CD9 /* PerformanceCalculator.swift in Sources */,
+				01F3840E2859AEB6007A7DF5 /* Entry.swift in Sources */,
+				01D060A02859997500B411D2 /* WidgetGridView.swift in Sources */,
+				01D060812859470300B411D2 /* WeatherService.swift in Sources */,
+				01551C5028B6EBAA002EE7EE /* AirportSelection.swift in Sources */,
+				01D060822859470300B411D2 /* NOTAM.swift in Sources */,
+				0133572D285D79DB00321CD9 /* OffscaleWarningView.swift in Sources */,
+				01D060832859470300B411D2 /* Runway.swift in Sources */,
+				01F38414285AF253007A7DF5 /* WeatherValues.swift in Sources */,
+				01D060842859470300B411D2 /* Airport.swift in Sources */,
+				01D06080285946C600B411D2 /* Weather.swift in Sources */,
+				01D0607228592FDE00B411D2 /* NearestAirportPerformanceWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1436,9 +1727,22 @@
 			target = 0135A7D12587091700892558 /* SF50 TOLD (macOS) */;
 			targetProxy = 0135A7E62587091800892558 /* PBXContainerItemProxy */;
 		};
+		01D0607A28592FDF00B411D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01D0606A28592FDE00B411D2 /* SF50 RunwaysExtension */;
+			targetProxy = 01D0607928592FDF00B411D2 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		01335722285AFF1900321CD9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01335721285AFF1900321CD9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		01FC1F4F280E9AD90066E374 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1578,6 +1882,7 @@
 		0135A7F52587091800892558 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SF50 TOLD.entitlements";
@@ -1603,6 +1908,7 @@
 		0135A7F62587091800892558 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SF50 TOLD.entitlements";
@@ -1809,6 +2115,73 @@
 			};
 			name = Release;
 		};
+		01D0607D28592FDF00B411D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "SF50 RunwaysExtension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20;
+				DEVELOPMENT_TEAM = 2NFSK2WB24;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SF50 Runways/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SF50 Runways";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.5.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.SF50-Runways";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		01D0607E28592FDF00B411D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "SF50 RunwaysExtension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20;
+				DEVELOPMENT_TEAM = 2NFSK2WB24;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SF50 Runways/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SF50 Runways";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.5.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.SF50-Runways";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1862,6 +2235,15 @@
 			buildConfigurations = (
 				01AEDAA028D6F2D400F38948 /* Debug */,
 				01AEDAA128D6F2D400F38948 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01D0607F28592FDF00B411D2 /* Build configuration list for PBXNativeTarget "SF50 RunwaysExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01D0607D28592FDF00B411D2 /* Debug */,
+				01D0607E28592FDF00B411D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1936,6 +2318,31 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		011F164F29C13FCD00DB07C0 /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0135A893258749F500892558 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
+		};
+		011F165129C13FCD00DB07C0 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017ED159261027A9002C69DE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		011F165329C13FCD00DB07C0 /* SwiftMETAR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01DB7BC228510FA0003CC8EF /* XCRemoteSwiftPackageReference "SwiftMETAR" */;
+			productName = SwiftMETAR;
+		};
+		011F165529C13FD900DB07C0 /* SwiftNASR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
+			productName = SwiftNASR;
+		};
+		011F165729C13FE100DB07C0 /* SWXMLHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0153741E26107AFF0098B529 /* XCRemoteSwiftPackageReference "SWXMLHash" */;
+			productName = SWXMLHash;
+		};
 		0135A84B25872F6700892558 /* SwiftNASR */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
