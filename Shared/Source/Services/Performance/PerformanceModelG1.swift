@@ -27,7 +27,7 @@ struct PerformanceModelG1: PerformanceModel {
             var offscaleLow = false
             var offscaleHigh = false
             if weight < 5000 { offscaleLow = true }
-            if weight > 6000 { offscaleHigh = true }
+            if weight > maxTakeoffWeight { offscaleHigh = true }
             if pa < -100 { offscaleLow = true } // add a little slop because the PA equation isn't exact
             if pa > 10000 { offscaleHigh = true }
             if temp < -20 { offscaleLow = true }
@@ -58,7 +58,7 @@ struct PerformanceModelG1: PerformanceModel {
             var offscaleLow = false
             var offscaleHigh = false
             if weight < 5000 { offscaleLow = true }
-            if weight > 6000 { offscaleHigh = true }
+            if weight > maxTakeoffWeight { offscaleHigh = true }
             if pa < -100 { offscaleLow = true } // add a little slop because the PA equation isn't exact
             if pa > 10000 { offscaleHigh = true }
             if temp < -20 { offscaleLow = true }
@@ -237,7 +237,7 @@ struct PerformanceModelG1: PerformanceModel {
             var offscaleLow = false
             var offscaleHigh = false
             if weight < 4500 { offscaleLow = true }
-            if weight > 6000 { offscaleHigh = true }
+            if weight > maxTakeoffWeight { offscaleHigh = true }
             if pa < -100 { offscaleLow = true } // add a little slop because the PA equation isn't exact
             if pa > 10000 { offscaleHigh = true }
             if temp < -40 { offscaleLow = true }
@@ -253,17 +253,17 @@ struct PerformanceModelG1: PerformanceModel {
             switch flaps {
                 case .flapsUp:
                     let speed = vrefModel_flapsUp(weight: weight)
-                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > 6000))
+                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > maxTakeoffWeight))
                 case .flapsUpIce: return .value(136)
                 case .flaps50:
                     let speed = vrefModel_flaps50(weight: weight)
-                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > 6000))
+                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > maxTakeoffWeight))
                 case .flaps50Ice:
                     let speed = vrefModel_flaps50Ice(weight: weight)
-                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > 6000))
+                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > maxTakeoffWeight))
                 case .flaps100:
                     let speed = vrefModel_flaps100(weight: weight)
-                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > 6000))
+                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > maxTakeoffWeight))
                 case .none: return nil
             }
         }
