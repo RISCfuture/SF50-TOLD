@@ -1,0 +1,86 @@
+{
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "8dd85aee02e39dd280c75eef88ffdb86eed4b07b",
+        "version" : "5.6.2"
+      }
+    },
+    {
+      "identity" : "defaults",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/Defaults",
+      "state" : {
+        "branch" : "main",
+        "revision" : "981ccb0a01c54abbe3c12ccb8226108527bbf115"
+      }
+    },
+    {
+      "identity" : "numericannex",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/xwu/NumericAnnex.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "ff00a9ad3c7c9632a149ac3114936dbc9dabae01"
+      }
+    },
+    {
+      "identity" : "regex",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sharplet/Regex.git",
+      "state" : {
+        "revision" : "76c2b73d4281d77fc3118391877efd1bf972f515",
+        "version" : "2.1.1"
+      }
+    },
+    {
+      "identity" : "swiftmetar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RISCfuture/SwiftMETAR.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "bb62f68919c6a7904b0633aefd2ed806dd1063c9"
+      }
+    },
+    {
+      "identity" : "swiftnasr",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RISCfuture/SwiftNASR.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "9775706c58277fabaf70a42ca26726d67117c74e"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
+      "state" : {
+        "revision" : "f2616860a41f9d9932da412a8978fec79c06fe24",
+        "version" : "0.1.4"
+      }
+    },
+    {
+      "identity" : "swxmlhash",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/drmohundro/SWXMLHash.git",
+      "state" : {
+        "revision" : "9183170d20857753d4f331b0ca63f73c60764bf3",
+        "version" : "5.0.2"
+      }
+    },
+    {
+      "identity" : "zipfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/weichsel/ZIPFoundation/",
+      "state" : {
+        "revision" : "7254c74b49cec2cb81520523ba993c671f71b066",
+        "version" : "0.9.14"
+      }
+    }
+  ],
+  "version" : 2
+}
