@@ -130,10 +130,10 @@ class WeatherService: ObservableObject {
                     Self.logger.info("Loaded METAR: \(rawText)")
                     do {
                         return .some(try METAR.from(string: rawText))
-                    } catch (let error as Error) {
+                    } catch (let error as SwiftMETAR.Error) {
                         Self.logger.error("Failed to parse METAR: \(error.localizedDescription)")
                         return .parseError(error, raw: rawText)
-                    } catch (let error) {
+                    } catch {
                         Self.logger.error("Failed to parse METAR: \(error.localizedDescription)")
                         return .none
                     }
@@ -154,10 +154,10 @@ class WeatherService: ObservableObject {
                     Self.logger.info("Loaded TAF: \(rawText)")
                     do {
                         return .some(try TAF.from(string: rawText))
-                    } catch (let error as Error) {
+                    } catch (let error as SwiftMETAR.Error) {
                         Self.logger.error("Failed to parse TAF: \(error.localizedDescription)")
                         return .parseError(error, raw: rawText)
-                    } catch (let error) {
+                    } catch {
                         Self.logger.error("Failed to parse TAF: \(error.localizedDescription)")
                         return .none
                     }

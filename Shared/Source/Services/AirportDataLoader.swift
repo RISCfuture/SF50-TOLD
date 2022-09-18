@@ -4,39 +4,68 @@ import OSLog
 import SwiftNASR
 
 class AirportDataLoader: ObservableObject {
-    @Published private(set) var error: Swift.Error? = nil
+    @Published private(set) var error: Error? = nil
+    
+    @Published private(set) var downloadProgress = StepProgress.pending
+    @Published private(set) var decompressProgress = StepProgress.pending
+    @Published private(set) var processingProgress = StepProgress.pending
     
     private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "AirportDataLoader")
     private let queue = DispatchQueue(label: "SF50-TOLD.AirportService", qos: .background)
     
-    private var loader = BackgroundDownloader()
+    private var dataURL: URL {
+        URL(string: "https://github.com/RISCfuture/SF50-TOLD-Airports/blob/main/\(Cycle.current).plist.lzma?raw=true")!
+    }
+    private let decoder = PropertyListDecoder()
     
-    init() {
-        NASR.progressQueue = DispatchQueue.main
+    func loadNASR() async throws -> Cycle? {
+        DispatchQueue.main.async {
+            self.downloadProgress = .indeterminate
+            self.decompressProgress = .pending
+            self.processingProgress = .pending
+        }
+        
+        let session = URLSession(configuration: .ephemeral)
+        let (bytes, response) = try await session.bytes(from: self.dataURL)
+        guard let response = response as? HTTPURLResponse else { throw Error.badResponse(response) }
+        guard response.statusCode == 200 else { throw Error.badResponse(response) }
+        DispatchQueue.main.async { self.downloadProgress = .inProgress(current: 0, total: UInt64(response.expectedContentLength)) }
+        
+        var compressedData = Data(capacity: Int(response.expectedContentLength))
+        for try await byte in bytes {
+            compressedData.append(byte)
+            let completed = compressedData.count
+            if completed % 8192 == 0 {
+                DispatchQueue.main.async {
+                    self.downloadProgress = .inProgress(current: UInt64(completed),
+                                                        total: UInt64(response.expectedContentLength))
+                }
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.downloadProgress = .complete
+            self.decompressProgress = .indeterminate
+        }
+        
+        let data = try (compressedData as NSData).decompressed(using: .lzma)
+        let nasr = try decoder.decode(NASRData.self, from: data as Data)
+        
+        DispatchQueue.main.async {
+            self.decompressProgress = .complete
+            self.processingProgress = .indeterminate
+        }
+        
+        try await loadAirports(nasr)
+        DispatchQueue.main.async { self.processingProgress = .complete }
+        
+        return nasr.cycle
     }
     
-    func loadNASR(withProgress progressHandler: (Progress) -> Void) async throws -> Cycle? {
-        let nasr = NASR(loader: loader)
-        let progress = Progress(totalUnitCount: 100)
-        
-        let _ = try await nasr.load(withProgress: { progress.addChild($0, withPendingUnitCount: 25) })
-        progressHandler(progress)
-        logger.info("NASR data loaded from remote")
-        
-        let _ = try await nasr.parseAirports(withProgress: {
-            progress.addChild($0, withPendingUnitCount: 25)
-        }, errorHandler: { error in
-            self.logger.error("Couldn't parse airport: \(error.localizedDescription)")
-            return true
-        })
-        try await loadAirports(nasr.data, progress: progress)
-        return nasr.data.cycle
-    }
-    
-    private func loadAirports(_ data: NASRData, progress: Progress) async throws {
+    private func loadAirports(_ data: NASRData) async throws {
         let context = PersistentContainer.shared.newBackgroundContext()
         try await deleteExistingAirports(context: context)
-        await addNewAirportsFrom(data, context: context, progress: progress)
+        await addNewAirportsFrom(data, context: context)
         try await context.perform { try context.save() }
     }
     
@@ -48,11 +77,13 @@ class AirportDataLoader: ObservableObject {
         }
     }
     
-    private func addNewAirportsFrom(_ data: NASRData, context: NSManagedObjectContext, progress: Progress) async {
-        let childProgress = Progress(totalUnitCount: Int64(data.airports!.count), parent: progress, pendingUnitCount: 50)
+    private func addNewAirportsFrom(_ data: NASRData, context: NSManagedObjectContext) async {
+        DispatchQueue.main.async {
+            self.processingProgress = .inProgress(current: 0, total: UInt64(data.airports!.count))
+        }
         
         await context.perform {
-            for airport in data.airports! {
+            for (index, airport) in data.airports!.enumerated() {
                 var airportRecord = Airport(context: context)
                 self.configureRecord(&airportRecord, from: airport)
                 
@@ -77,7 +108,10 @@ class AirportDataLoader: ObservableObject {
                 }
                 
                 if airportRecord.runways?.count == 0 { context.delete(airportRecord) }
-                DispatchQueue.main.async { childProgress.completedUnitCount += 1 }
+                
+                DispatchQueue.main.async {
+                    self.processingProgress = .inProgress(current: UInt64(index + 1), total: UInt64(data.airports!.count))
+                }
             }
         }
     }

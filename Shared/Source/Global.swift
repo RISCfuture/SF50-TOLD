@@ -48,6 +48,22 @@ enum FlapSetting: String, CaseIterable, Identifiable {
     case flaps100
 }
 
+enum StepProgress: Equatable {
+    case pending
+    case inProgress(current: UInt64, total: UInt64)
+    case indeterminate
+    case complete
+    
+    var isLoading: Bool {
+        switch self {
+            case .pending: return false
+            case .inProgress(_, _): return true
+            case .indeterminate: return true
+            case .complete: return false
+        }
+    }
+}
+
 func crosswindLimitForFlapSetting(_ flaps: FlapSetting?) -> UInt? {
     guard let flaps = flaps else { return nil }
     switch flaps {

@@ -6,20 +6,12 @@ import Defaults
 import SwiftNASR
 import Network
 
-fileprivate func resetProgress(finished: Bool = false) -> Progress {
-    let progress = Progress(totalUnitCount: 0)
-    if finished {
-        progress.totalUnitCount = 1
-        progress.completedUnitCount = 1
-    }
-    progress.localizedDescription = ""
-    progress.localizedAdditionalDescription = ""
-    return progress
-}
-
 class AirportLoadingService: ObservableObject {
-    @Published private(set) var progress = { resetProgress(finished: true) }()
-    @Published private(set) var error: Swift.Error? = nil
+    @Published private(set) var downloadProgress = StepProgress.pending
+    @Published private(set) var decompressProgress = StepProgress.pending
+    @Published private(set) var processingProgress = StepProgress.pending
+    @Published private(set) var error: Error? = nil
+    @Published private(set) var loading = false
     
     @Published private(set) var needsLoad = true
     @Published private(set) var canSkip = false
@@ -31,13 +23,20 @@ class AirportLoadingService: ObservableObject {
     private let networkMonitor = NWPathMonitor()
     private let networkMonitorQueue = DispatchQueue(label: "codes.tim.SF50-TOLD.networkMonitorQueue")
     
-    var loading: Bool { !progress.isFinished }
-    
     private var noData: Bool { ((try? airportCount()) ?? 0) == 0 }
     
     required init() {
         airportDataLoader = .init()
         airportDataLoader.$error.receive(on: DispatchQueue.main).assign(to: &$error)
+        airportDataLoader.$downloadProgress.receive(on: DispatchQueue.main).assign(to: &$downloadProgress)
+        airportDataLoader.$decompressProgress.receive(on: DispatchQueue.main).assign(to: &$decompressProgress)
+        airportDataLoader.$processingProgress.receive(on: DispatchQueue.main).assign(to: &$processingProgress)
+        
+        Publishers.CombineLatest3(airportDataLoader.$downloadProgress,
+                                  airportDataLoader.$decompressProgress,
+                                  airportDataLoader.$processingProgress).map { (download, decompress, processing) in
+            download.isLoading || decompress.isLoading || processing.isLoading
+        }.receive(on: DispatchQueue.main).assign(to: &$loading)
         
         needsLoad = outOfDate(schemaVersion: Defaults[.schemaVersion])
             || outOfDate(cycle: Defaults[.lastCycleLoaded])
@@ -50,12 +49,11 @@ class AirportLoadingService: ObservableObject {
         ).map { [weak self] skipLoadThisSession, cycle, schemaVersion in
             guard let this = self else { return false }
             if skipLoadThisSession { return false }
+            
             return this.outOfDate(schemaVersion: schemaVersion)
                 || this.outOfDate(cycle: cycle)
         }.receive(on: DispatchQueue.main)
         .assign(to: &$needsLoad)
-        
-        DispatchQueue.main.async { self.progress.completedUnitCount = 1 }
         
         networkMonitor.pathUpdateHandler = { path in
             DispatchQueue.main.async {
@@ -66,23 +64,17 @@ class AirportLoadingService: ObservableObject {
     }
     
     func loadNASR() {
-        progress = resetProgress()
-        
-        Task {
+        Task.detached(priority: .userInitiated) {
             do {
-                guard let cycle = try await self.airportDataLoader.loadNASR(
-                    withProgress: {
-                        self.progress.addChild($0, withPendingUnitCount: 1)
-                        self.progress.totalUnitCount = 1
-                    }
-                ) else { return }
+                guard let cycle = try await self.airportDataLoader.loadNASR() else { return }
                 DispatchQueue.main.async {
                     Defaults[.lastCycleLoaded] = cycle
                     Defaults[.schemaVersion] = latestSchemaVersion
-                    self.progress = resetProgress(finished: true)
                 }
-            } catch (let error) {
-                self.error = error
+            } catch (let error as Error) {
+                DispatchQueue.main.async { self.error = error }
+            } catch {
+                DispatchQueue.main.async { self.error = .unknown(error: error) }
             }
         }
     }

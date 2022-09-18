@@ -4,7 +4,7 @@ final class PersistentContainer: ObservableObject {
     static let shared = PersistentContainer.init()
     let container: NSPersistentContainer
     
-    @Published private(set) var error: Error?
+    @Published private(set) var error: Swift.Error?
     
     var viewContext: NSManagedObjectContext { container.viewContext }
     var persistentStoreCoordinator: NSPersistentStoreCoordinator { container.persistentStoreCoordinator }
@@ -30,8 +30,8 @@ final class PersistentContainer: ObservableObject {
         if viewContext.hasChanges {
             do {
                 try viewContext.save()
-            } catch (let error) {
-                self.error = error
+            } catch {
+                self.error = Error.unknown(error: error)
             }
         }
     }

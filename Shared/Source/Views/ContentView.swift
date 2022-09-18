@@ -12,8 +12,10 @@ struct ContentView: View {
         if let error = state.error {
             ErrorView(error: error)
         } else if service.loading {
-            LoadingView(progress: state.airportLoadingService.progress)
-                .padding(.all, 20)
+            LoadingView(downloadProgress: state.airportLoadingService.downloadProgress,
+                        decompressProgress: state.airportLoadingService.decompressProgress,
+                        processingProgress: state.airportLoadingService.processingProgress)
+            .padding(.all, 20)
         } else if service.needsLoad {
             LoadingConsentView(service: service)
         } else {

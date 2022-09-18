@@ -35,7 +35,7 @@ fileprivate class LocationManager: NSObject, ObservableObject, CLLocationManager
         loading = false
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
         location = nil
         errorText = error.localizedDescription
         loading = false

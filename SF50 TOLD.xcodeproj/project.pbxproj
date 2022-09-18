@@ -233,6 +233,9 @@
 		01A6DB1525AD76BE00A3341F /* AirportRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6DB1325AD76BE00A3341F /* AirportRow.swift */; };
 		01A6DB1B25AD776C00A3341F /* RunwayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6DB1A25AD776C00A3341F /* RunwayRow.swift */; };
 		01A6DB1C25AD776C00A3341F /* RunwayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6DB1A25AD776C00A3341F /* RunwayRow.swift */; };
+		01AEDA9F28D6F2D400F38948 /* DownloadNASR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AEDA9E28D6F2D400F38948 /* DownloadNASR.swift */; };
+		01AEDAA428D6F2E200F38948 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 01AEDAA328D6F2E200F38948 /* SwiftNASR */; };
+		01AEDAA728D6F33A00F38948 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 01AEDAA628D6F33A00F38948 /* ArgumentParser */; };
 		01B79FD725AC4BF70037C0C6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B79FD625AC4BF70037C0C6 /* ErrorView.swift */; };
 		01B79FD825AC4BF70037C0C6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B79FD625AC4BF70037C0C6 /* ErrorView.swift */; };
 		01C133F125AD6BBA00AE33C5 /* RunwayPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C133F025AD6BBA00AE33C5 /* RunwayPicker.swift */; };
@@ -251,6 +254,14 @@
 		01D2C8F125D126C10036B6FE /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2C8EF25D126C10036B6FE /* Weather.swift */; };
 		01D2C8F225D126C10036B6FE /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2C8EF25D126C10036B6FE /* Weather.swift */; };
 		01D2C8F325D126C10036B6FE /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2C8EF25D126C10036B6FE /* Weather.swift */; };
+		01D4FA5528D7869400AC322B /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5428D7869300AC322B /* CircularProgressView.swift */; };
+		01D4FA5628D7869400AC322B /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5428D7869300AC322B /* CircularProgressView.swift */; };
+		01D4FA5728D7869400AC322B /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5428D7869300AC322B /* CircularProgressView.swift */; };
+		01D4FA5828D7869400AC322B /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5428D7869300AC322B /* CircularProgressView.swift */; };
+		01D4FA5A28D7BFE000AC322B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Error.swift */; };
+		01D4FA5B28D7BFE000AC322B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Error.swift */; };
+		01D4FA5C28D7BFE000AC322B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Error.swift */; };
+		01D4FA5D28D7BFE000AC322B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Error.swift */; };
 		01D7DA6C25D5034D005938DD /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */; };
 		01D7DA6D25D5034D005938DD /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */; };
 		01D7DA6E25D5034D005938DD /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */; };
@@ -278,10 +289,6 @@
 		01F18D3425B19990007D76BA /* TimeAndPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */; };
 		01F18D3525B19990007D76BA /* TimeAndPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */; };
 		01F18D3625B19990007D76BA /* TimeAndPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */; };
-		01F4C9232681A3D100F2F705 /* BackgroundDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */; };
-		01F4C9242681A3D100F2F705 /* BackgroundDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */; };
-		01F4C9252681A3D100F2F705 /* BackgroundDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */; };
-		01F4C9262681A3D100F2F705 /* BackgroundDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */; };
 		01F59A1F25AE63AC0055E81B /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59A1E25AE63AC0055E81B /* PerformanceView.swift */; };
 		01F59A2025AE63AC0055E81B /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59A1E25AE63AC0055E81B /* PerformanceView.swift */; };
 		01F59A2125AE63AC0055E81B /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59A1E25AE63AC0055E81B /* PerformanceView.swift */; };
@@ -330,6 +337,18 @@
 			remoteInfo = "SF50 TOLD (macOS)";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		01AEDA9A28D6F2D400F38948 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		01007B8225D5268700C8BFF2 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -401,6 +420,8 @@
 		019CC28325B91C0F00FEA895 /* DecimalField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalField.swift; sourceTree = "<group>"; };
 		01A6DB1325AD76BE00A3341F /* AirportRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportRow.swift; sourceTree = "<group>"; };
 		01A6DB1A25AD776C00A3341F /* RunwayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayRow.swift; sourceTree = "<group>"; };
+		01AEDA9C28D6F2D400F38948 /* DownloadNASR */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DownloadNASR; sourceTree = BUILT_PRODUCTS_DIR; };
+		01AEDA9E28D6F2D400F38948 /* DownloadNASR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadNASR.swift; sourceTree = "<group>"; };
 		01B79FD625AC4BF70037C0C6 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		01C133F025AD6BBA00AE33C5 /* RunwayPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayPicker.swift; sourceTree = "<group>"; };
 		01C7EA7925B1963600CCFBE1 /* InterpolationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpolationView.swift; sourceTree = "<group>"; };
@@ -408,6 +429,8 @@
 		01D265C225AD821100322A45 /* RunwayDistances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayDistances.swift; sourceTree = "<group>"; };
 		01D265CB25AD99AF00322A45 /* WeatherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRow.swift; sourceTree = "<group>"; };
 		01D2C8EF25D126C10036B6FE /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		01D4FA5428D7869300AC322B /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		01D4FA5928D7BFE000AC322B /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffscaleWarningView.swift; sourceTree = "<group>"; };
 		01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportLoadingService.swift; sourceTree = "<group>"; };
 		01E2A1EA25ABA7D20076CC84 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -415,7 +438,6 @@
 		01E83CEE27FD3B70001342BF /* PerformanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceModel.swift; sourceTree = "<group>"; };
 		01F18D2525B198B6007D76BA /* LoadoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadoutView.swift; sourceTree = "<group>"; };
 		01F18D3225B19990007D76BA /* TimeAndPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndPlaceView.swift; sourceTree = "<group>"; };
-		01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundDownloader.swift; sourceTree = "<group>"; };
 		01F59A1E25AE63AC0055E81B /* PerformanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceView.swift; sourceTree = "<group>"; };
 		01F7EB9D25BBFA2A00CE5024 /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
 		01F7EBAA25BBFFCB00CE5024 /* CompactLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactLabelStyle.swift; sourceTree = "<group>"; };
@@ -471,6 +493,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		01AEDA9928D6F2D400F38948 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01AEDAA728D6F33A00F38948 /* ArgumentParser in Frameworks */,
+				01AEDAA428D6F2E200F38948 /* SwiftNASR in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -508,6 +539,7 @@
 			children = (
 				01B79FD625AC4BF70037C0C6 /* ErrorView.swift */,
 				01698D1425C148B8002D44A0 /* LoadingConsentView.swift */,
+				01D4FA4928D7825A00AC322B /* LoadingView */,
 				01E2A1EA25ABA7D20076CC84 /* LoadingView.swift */,
 			);
 			path = Overlays;
@@ -565,6 +597,7 @@
 				01E36B362589FEB2002F1337 /* Resources */,
 				0135A7DD2587091700892558 /* Tests iOS */,
 				0135A7E82587091800892558 /* Tests macOS */,
+				01AEDA9D28D6F2D400F38948 /* DownloadNASR */,
 				0135A82A25872CB900892558 /* Frameworks */,
 				0135A7CB2587091700892558 /* Products */,
 			);
@@ -587,6 +620,7 @@
 				0135A7D22587091700892558 /* SF50 TOLD.app */,
 				0135A7DA2587091700892558 /* Tests iOS.xctest */,
 				0135A7E52587091800892558 /* Tests macOS.xctest */,
+				01AEDA9C28D6F2D400F38948 /* DownloadNASR */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -631,6 +665,7 @@
 		0135A80725870E0A00892558 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				01D4FA5928D7BFE000AC322B /* Error.swift */,
 				010F675627E9B98D00BDBDB0 /* Extensions */,
 				0135A8A425874C3B00892558 /* Global.swift */,
 				01750AB625B27AA700555CDB /* Models */,
@@ -667,7 +702,6 @@
 			children = (
 				014808ED25AAF4910041A90D /* AirportDataLoader.swift */,
 				01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */,
-				01F4C9222681A3D100F2F705 /* BackgroundDownloader.swift */,
 				01E83CED27FD3B4D001342BF /* Performance */,
 				0135A83625872EDE00892558 /* WeatherService.swift */,
 			);
@@ -763,6 +797,14 @@
 			path = Tasks;
 			sourceTree = "<group>";
 		};
+		01AEDA9D28D6F2D400F38948 /* DownloadNASR */ = {
+			isa = PBXGroup;
+			children = (
+				01AEDA9E28D6F2D400F38948 /* DownloadNASR.swift */,
+			);
+			path = DownloadNASR;
+			sourceTree = "<group>";
+		};
 		01D265B425AD807100322A45 /* RunwayRow */ = {
 			isa = PBXGroup;
 			children = (
@@ -770,6 +812,14 @@
 				01D265B525AD808600322A45 /* WindComponents.swift */,
 			);
 			path = RunwayRow;
+			sourceTree = "<group>";
+		};
+		01D4FA4928D7825A00AC322B /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				01D4FA5428D7869300AC322B /* CircularProgressView.swift */,
+			);
+			path = LoadingView;
 			sourceTree = "<group>";
 		};
 		01DD6D7C25B3AC4E004A2CA8 /* Storage */ = {
@@ -917,6 +967,27 @@
 			productReference = 0135A7E52587091800892558 /* Tests macOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		01AEDA9B28D6F2D400F38948 /* DownloadNASR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01AEDAA228D6F2D400F38948 /* Build configuration list for PBXNativeTarget "DownloadNASR" */;
+			buildPhases = (
+				01AEDA9828D6F2D400F38948 /* Sources */,
+				01AEDA9928D6F2D400F38948 /* Frameworks */,
+				01AEDA9A28D6F2D400F38948 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DownloadNASR;
+			packageProductDependencies = (
+				01AEDAA328D6F2E200F38948 /* SwiftNASR */,
+				01AEDAA628D6F33A00F38948 /* ArgumentParser */,
+			);
+			productName = DownloadNASR;
+			productReference = 01AEDA9C28D6F2D400F38948 /* DownloadNASR */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -924,7 +995,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					0135A7C92587091700892558 = {
@@ -940,6 +1011,9 @@
 					0135A7E42587091800892558 = {
 						CreatedOnToolsVersion = 12.2;
 						TestTargetID = 0135A7D12587091700892558;
+					};
+					01AEDA9B28D6F2D400F38948 = {
+						CreatedOnToolsVersion = 14.0;
 					};
 				};
 			};
@@ -959,6 +1033,7 @@
 				017ED159261027A9002C69DE /* XCRemoteSwiftPackageReference "Alamofire" */,
 				0153741E26107AFF0098B529 /* XCRemoteSwiftPackageReference "SWXMLHash" */,
 				01DB7BC228510FA0003CC8EF /* XCRemoteSwiftPackageReference "SwiftMETAR" */,
+				01AEDAA528D6F33A00F38948 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 			);
 			productRefGroup = 0135A7CB2587091700892558 /* Products */;
 			projectDirPath = "";
@@ -968,6 +1043,7 @@
 				0135A7D12587091700892558 /* SF50 TOLD (macOS) */,
 				0135A7D92587091700892558 /* Tests iOS */,
 				0135A7E42587091800892558 /* Tests macOS */,
+				01AEDA9B28D6F2D400F38948 /* DownloadNASR */,
 			);
 		};
 /* End PBXProject section */
@@ -1018,7 +1094,6 @@
 			files = (
 				018CF99D2682A54100F52821 /* AirportLoaderTask.swift in Sources */,
 				01641E8F2806641300BBD18C /* Array+Unique.swift in Sources */,
-				01F4C9232681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				01FC1F5C280F50CE0066E374 /* Airport.swift in Sources */,
 				010F675827E9B99C00BDBDB0 /* Cycle+Defaults.swift in Sources */,
 				0179866725C280C40031A453 /* RawWeather.swift in Sources */,
@@ -1046,6 +1121,7 @@
 				01007B8325D5268700C8BFF2 /* AboutView.swift in Sources */,
 				01750AC825B27C2D00555CDB /* PerformanceState.swift in Sources */,
 				014808EE25AAF4910041A90D /* AirportDataLoader.swift in Sources */,
+				01D4FA5528D7869400AC322B /* CircularProgressView.swift in Sources */,
 				01A6DB1B25AD776C00A3341F /* RunwayRow.swift in Sources */,
 				010F674D27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
 				0135A87D258748DF00892558 /* LandingView.swift in Sources */,
@@ -1055,6 +1131,7 @@
 				0179865A25C280B60031A453 /* WeatherSource.swift in Sources */,
 				016A0B3E27E5D60300F16C21 /* VxClimbView.swift in Sources */,
 				0191C06B25B2C02900C4B810 /* SectionState.swift in Sources */,
+				01D4FA5A28D7BFE000AC322B /* Error.swift in Sources */,
 				014F100B25AAAD410081EAC3 /* SearchField.swift in Sources */,
 				0135A874258748D400892558 /* TakeoffView.swift in Sources */,
 				0105D5C828123C5A003EA0AA /* ObstacleView.swift in Sources */,
@@ -1100,9 +1177,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01F4C9242681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				016A0B0B27E5B98900F16C21 /* Runway.swift in Sources */,
 				01D7DA6D25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
+				01D4FA5628D7869400AC322B /* CircularProgressView.swift in Sources */,
 				01FC1F42280E7F7E0066E374 /* NearestView.swift in Sources */,
 				01E83CEA27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				0105D5C928123C5A003EA0AA /* ObstacleView.swift in Sources */,
@@ -1155,6 +1232,7 @@
 				01F18D3425B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
 				016A0B2527E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */,
 				0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */,
+				01D4FA5B28D7BFE000AC322B /* Error.swift in Sources */,
 				0135A8CD2587599D00892558 /* AirportPicker.swift in Sources */,
 				016A0B1027E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				017B669B258898DA00AA2DE9 /* WeatherState.swift in Sources */,
@@ -1188,6 +1266,7 @@
 				0166FCBF25C00E1D006F7258 /* SelectAllOnFocus.swift in Sources */,
 				016C735F25AE40120008455F /* AirportPicker.swift in Sources */,
 				016C736025AE40120008455F /* RunwayPicker.swift in Sources */,
+				01D4FA5728D7869400AC322B /* CircularProgressView.swift in Sources */,
 				016A0B4027E5D60300F16C21 /* VxClimbView.swift in Sources */,
 				016A0B3627E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
 				0158291825BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
@@ -1219,7 +1298,6 @@
 				016C736C25AE40120008455F /* LandingView.swift in Sources */,
 				016C736D25AE40120008455F /* SettingsView.swift in Sources */,
 				010F674F27E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
-				01F4C9252681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				01F18D3525B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
 				01F7EBAD25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */,
 				01DD6DA125B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,
@@ -1246,6 +1324,7 @@
 				01F18D2825B198B6007D76BA /* LoadoutView.swift in Sources */,
 				01E83CF127FD3B70001342BF /* PerformanceModel.swift in Sources */,
 				016A0B0C27E5B98900F16C21 /* Runway.swift in Sources */,
+				01D4FA5C28D7BFE000AC322B /* Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1260,6 +1339,7 @@
 				0166FCC025C00E1D006F7258 /* SelectAllOnFocus.swift in Sources */,
 				016C738425AE40200008455F /* AirportPicker.swift in Sources */,
 				016C738525AE40200008455F /* RunwayPicker.swift in Sources */,
+				01D4FA5828D7869400AC322B /* CircularProgressView.swift in Sources */,
 				016A0B4127E5D60300F16C21 /* VxClimbView.swift in Sources */,
 				016A0B3727E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
 				0158291925BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
@@ -1291,7 +1371,6 @@
 				016C739125AE40200008455F /* LandingView.swift in Sources */,
 				016C739225AE40200008455F /* SettingsView.swift in Sources */,
 				010F675027E6CD2400BDBDB0 /* TakeoffResultsView.swift in Sources */,
-				01F4C9262681A3D100F2F705 /* BackgroundDownloader.swift in Sources */,
 				01F18D3625B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
 				01F7EBAE25BBFFCB00CE5024 /* CompactLabelStyle.swift in Sources */,
 				01DD6DA225B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */,
@@ -1318,6 +1397,15 @@
 				01F18D2925B198B6007D76BA /* LoadoutView.swift in Sources */,
 				01E83CF227FD3B70001342BF /* PerformanceModel.swift in Sources */,
 				016A0B0D27E5B98900F16C21 /* Runway.swift in Sources */,
+				01D4FA5D28D7BFE000AC322B /* Error.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01AEDA9828D6F2D400F38948 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01AEDA9F28D6F2D400F38948 /* DownloadNASR.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1673,6 +1761,38 @@
 			};
 			name = Release;
 		};
+		01AEDAA028D6F2D400F38948 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2NFSK2WB24;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.DownloadNASR";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		01AEDAA128D6F2D400F38948 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2NFSK2WB24;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.DownloadNASR";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1721,6 +1841,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		01AEDAA228D6F2D400F38948 /* Build configuration list for PBXNativeTarget "DownloadNASR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01AEDAA028D6F2D400F38948 /* Debug */,
+				01AEDAA128D6F2D400F38948 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1762,6 +1891,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.4.1;
+			};
+		};
+		01AEDAA528D6F33A00F38948 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 		01DB7BC228510FA0003CC8EF /* XCRemoteSwiftPackageReference "SwiftMETAR" */ = {
@@ -1844,6 +1981,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 017ED159261027A9002C69DE /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		01AEDAA328D6F2E200F38948 /* SwiftNASR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
+			productName = SwiftNASR;
+		};
+		01AEDAA628D6F33A00F38948 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01AEDAA528D6F33A00F38948 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
 		};
 		01DB7BC328510FE0003CC8EF /* SwiftMETAR */ = {
 			isa = XCSwiftPackageProductDependency;
