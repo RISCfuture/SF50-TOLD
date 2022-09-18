@@ -118,7 +118,7 @@ struct PerformanceModelG2Plus: PerformanceModel {
                 switch contamination {
                     case let .waterOrSlush(depth):
                         distance += landingDistanceIncrease_waterSlush(distance, depth: Double(depth))
-                    case .slushOrWetSnow(let depth):
+                    case let .slushOrWetSnow(depth):
                         distance += landingDistanceIncrease_slushWetSnow(distance, depth: Double(depth))
                     case .drySnow:
                         distance += landingDistanceIncrease_drySnow(distance)
@@ -177,7 +177,7 @@ struct PerformanceModelG2Plus: PerformanceModel {
                 switch contamination {
                     case let .waterOrSlush(depth):
                         distance += landingDistanceIncrease_waterSlush(roll, depth: Double(depth))
-                    case .slushOrWetSnow(let depth):
+                    case let .slushOrWetSnow(depth):
                         distance += landingDistanceIncrease_slushWetSnow(roll, depth: Double(depth))
                     case .drySnow:
                         distance += landingDistanceIncrease_drySnow(roll)

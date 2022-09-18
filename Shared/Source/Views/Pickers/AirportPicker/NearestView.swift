@@ -107,8 +107,6 @@ struct NearestView: View {
         let dist1 = airport1.mapPoint.distance(to: myPoint)
         let dist2 = airport2.mapPoint.distance(to: myPoint)
         
-        print(myPoint, airport1.coreLocation, airport2.coreLocation, dist1, dist2)
-        
         return dist1 < dist2
     }
 }

@@ -56,13 +56,10 @@ class PerformanceState: ObservableObject {
         ]
 
         for field in fields {
-            switch field {
-                case .value(_, let offscale):
-                    switch offscale {
-                        case .high: return .high
-                        case .low: if cum == .none { cum = .low }
-                        default: break
-                    }
+            guard case let .value(_, offscale) = field else { continue }
+            switch offscale {
+                case .high: return .high
+                case .low: if cum == .none { cum = .low }
                 default: break
             }
         }

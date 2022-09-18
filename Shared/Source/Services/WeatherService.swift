@@ -70,24 +70,18 @@ fileprivate class ExpiringCache<Key: Hashable, Value, Error: Swift.Error> {
     }
 
     private func isExpired(_ state: ValueState) -> Bool {
-        switch state {
-            case .loading: return false
-            case.finished(let result):
-                switch result {
-                    case .some(let value):
-                        let date = value[keyPath: expiryKey]
-                        return date.timeIntervalSinceNow > 0 || date.timeIntervalSinceNow <= -timeout
-                    default:
-                        return false
-                }
-        }
+        guard case let .finished(result) = state else { return false }
+        guard case let .some(value) = result else { return false }
+        
+        let date = value[keyPath: expiryKey]
+        return date.timeIntervalSinceNow > 0 || date.timeIntervalSinceNow <= -timeout
     }
 
     private func touch(_ key: Key) {
         valueGenerator(key).sink(receiveCompletion: { completion in
             switch completion {
                 case .finished: break // keep our stream open for future requests
-                case .failure(let error):
+                case let .failure(error):
                     self.send(key: key, value: .finished(.error(error)))
             }
         }, receiveValue: { value in
@@ -192,10 +186,10 @@ class WeatherService: ObservableObject {
         ).map { METARState, TAFState -> FetchState<(FetchResult<METAR>, FetchResult<TAF>)> in
             switch METARState {
                 case .loading: return .loading
-                case .finished(let METAR):
+                case let .finished(METAR):
                     switch TAFState {
                         case .loading: return .loading
-                        case .finished(let TAF): return .finished((METAR, TAF))
+                        case let .finished(TAF): return .finished((METAR, TAF))
                     }
             }
         }.eraseToAnyPublisher()

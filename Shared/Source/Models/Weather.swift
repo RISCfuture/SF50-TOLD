@@ -45,7 +45,7 @@ struct Weather: CustomDebugStringConvertible {
     func temperature(at elevation: Double) -> Double {
         switch temperature {
             case .ISA: return ISATemperature(at: elevation)
-            case .value(let num): return num
+            case let .value(num): return num
         }
     }
     

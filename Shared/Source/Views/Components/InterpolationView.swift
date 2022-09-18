@@ -14,7 +14,7 @@ struct InterpolationView: View {
                         Text("Configuration not authorized")
                             .foregroundColor(.red)
                             .bold()
-                    case .value(let number, _):
+                    case let .value(number, _):
                         Text(NSNumber(value: number), formatter: integerFormatter.forView)
                             .bold()
                             .foregroundColor(color(for: number))

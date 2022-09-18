@@ -45,7 +45,7 @@ class SectionState: ObservableObject {
                 switch state {
                     case .loading:
                         DispatchQueue.main.async { self.performance.weatherState.loading = true }
-                    case .finished(let pair):
+                    case let .finished(pair):
                         self.performance.weatherState.updateFrom(date: date,
                                                                  observationResult: pair.0,
                                                                  forecastResult: pair.1)

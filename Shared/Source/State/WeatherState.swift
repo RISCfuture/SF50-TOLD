@@ -60,7 +60,7 @@ class WeatherState: ObservableObject {
         
         switch temperature {
             case .ISA: userEditedTemperature = 15
-            case .value(let num): userEditedTemperature = num
+            case let .value(num): userEditedTemperature = num
         }
         
         $userEditedTemperature.receive(on: DispatchQueue.main).sink { [weak self] temp in self?.temperature = .value(temp) }.store(in: &cancellables)
@@ -114,15 +114,15 @@ class WeatherState: ObservableObject {
         let forecastError: Swift.Error?
         
         switch observationResult {
-            case .some(let value):
+            case let .some(value):
                 observation = value
                 rawObservation = value.text
                 observationError = nil
-            case .parseError(let error, let raw):
+            case let .parseError(error, raw):
                 observation = nil
                 rawObservation = raw
                 observationError = error
-            case .error(let error):
+            case let .error(error):
                 observation = nil
                 rawObservation = nil
                 observationError = error
@@ -132,15 +132,15 @@ class WeatherState: ObservableObject {
                 observationError = nil
         }
         switch forecastResult {
-            case .some(let value):
+            case let .some(value):
                 forecast = value
                 rawForecast = value.text
                 forecastError = nil
-            case .parseError(let error, let raw):
+            case let .parseError(error, raw):
                 forecast = nil
                 rawForecast = raw
                 forecastError = error
-            case .error(let error):
+            case let .error(error):
                 forecast = nil
                 rawForecast = nil
                 forecastError = error
@@ -160,7 +160,7 @@ class WeatherState: ObservableObject {
             self.windSpeed = values.wind.speed
             self.temperature = values.temperature
             switch values.temperature {
-                case .value(let num): self.userEditedTemperature = num
+                case let .value(num): self.userEditedTemperature = num
                 case .ISA: self.userEditedTemperature = standardTemperature
             }
             self.altimeter = values.altimeter
