@@ -25,7 +25,7 @@ struct LoadingView_Previews: PreviewProvider {
         
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
             progress.completedUnitCount += 1
-            if progress.completedUnitCount == 101 { progress.completedUnitCount = 0}
+            if progress.completedUnitCount == 101 { progress.completedUnitCount = 0 }
         }
         
         return LoadingView(progress: progress)

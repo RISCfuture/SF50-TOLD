@@ -11,12 +11,16 @@ class AirportDataLoader: ObservableObject {
     
     private var loader = BackgroundDownloader()
     
+    init() {
+        NASR.progressQueue = DispatchQueue.main
+    }
+    
     func loadNASR(withProgress progressHandler: (Progress) -> Void) async throws -> Cycle? {
         let nasr = NASR(loader: loader)
         let progress = Progress(totalUnitCount: 100)
-        progressHandler(progress)
         
         let _ = try await nasr.load(withProgress: { progress.addChild($0, withPendingUnitCount: 25) })
+        progressHandler(progress)
         logger.info("NASR data loaded from remote")
         
         let _ = try await nasr.parseAirports(withProgress: {
@@ -73,7 +77,7 @@ class AirportDataLoader: ObservableObject {
                 }
                 
                 if airportRecord.runways?.count == 0 { context.delete(airportRecord) }
-                childProgress.completedUnitCount += 1
+                DispatchQueue.main.async { childProgress.completedUnitCount += 1 }
             }
         }
     }

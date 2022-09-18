@@ -7,8 +7,11 @@ import SwiftNASR
 import Network
 
 fileprivate func resetProgress(finished: Bool = false) -> Progress {
-    let progress = Progress(totalUnitCount: 1)
-    if finished { progress.completedUnitCount = 1 }
+    let progress = Progress(totalUnitCount: 0)
+    if finished {
+        progress.totalUnitCount = 1
+        progress.completedUnitCount = 1
+    }
     progress.localizedDescription = ""
     progress.localizedAdditionalDescription = ""
     return progress
@@ -52,7 +55,7 @@ class AirportLoadingService: ObservableObject {
         }.receive(on: DispatchQueue.main)
         .assign(to: &$needsLoad)
         
-        progress.completedUnitCount = 1
+        DispatchQueue.main.async { self.progress.completedUnitCount = 1 }
         
         networkMonitor.pathUpdateHandler = { path in
             DispatchQueue.main.async {
@@ -67,7 +70,12 @@ class AirportLoadingService: ObservableObject {
         
         Task {
             do {
-                guard let cycle = try await self.airportDataLoader.loadNASR(withProgress: { self.progress.addChild($0, withPendingUnitCount: 1) }) else { return }
+                guard let cycle = try await self.airportDataLoader.loadNASR(
+                    withProgress: {
+                        self.progress.addChild($0, withPendingUnitCount: 1)
+                        self.progress.totalUnitCount = 1
+                    }
+                ) else { return }
                 DispatchQueue.main.async {
                     Defaults[.lastCycleLoaded] = cycle
                     Defaults[.schemaVersion] = latestSchemaVersion

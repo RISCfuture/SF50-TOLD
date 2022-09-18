@@ -29,8 +29,10 @@ typealias BackgroundDownloaderCallback = (Result<Distribution, Swift.Error>) -> 
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        progress.completedUnitCount = totalBytesWritten
-        progress.totalUnitCount = totalBytesExpectedToWrite
+        DispatchQueue.main.async {
+            self.progress.completedUnitCount = totalBytesWritten
+            self.progress.totalUnitCount = totalBytesExpectedToWrite
+        }
     }
 }
 
