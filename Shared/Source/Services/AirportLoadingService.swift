@@ -32,28 +32,9 @@ class AirportLoadingService: ObservableObject {
         airportDataLoader.$decompressProgress.receive(on: DispatchQueue.main).assign(to: &$decompressProgress)
         airportDataLoader.$processingProgress.receive(on: DispatchQueue.main).assign(to: &$processingProgress)
         
-        Publishers.CombineLatest3(airportDataLoader.$downloadProgress,
-                                  airportDataLoader.$decompressProgress,
-                                  airportDataLoader.$processingProgress).map { (download, decompress, processing) in
-            download.isLoading || decompress.isLoading || processing.isLoading
-        }.receive(on: DispatchQueue.main).assign(to: &$loading)
-        
         needsLoad = outOfDate(schemaVersion: Defaults[.schemaVersion])
             || outOfDate(cycle: Defaults[.lastCycleLoaded])
         canSkip = !noData && !outOfDate(schemaVersion: Defaults[.schemaVersion])
-        
-        Publishers.CombineLatest3(
-            $skipLoadThisSession,
-            Defaults.publisher(.lastCycleLoaded).map { $0.newValue },
-            Defaults.publisher(.schemaVersion).map { $0.newValue }
-        ).map { [weak self] skipLoadThisSession, cycle, schemaVersion in
-            guard let this = self else { return false }
-            if skipLoadThisSession { return false }
-            
-            return this.outOfDate(schemaVersion: schemaVersion)
-                || this.outOfDate(cycle: cycle)
-        }.receive(on: DispatchQueue.main)
-        .assign(to: &$needsLoad)
         
         networkMonitor.pathUpdateHandler = { path in
             DispatchQueue.main.async {
@@ -66,10 +47,13 @@ class AirportLoadingService: ObservableObject {
     func loadNASR() {
         Task.detached(priority: .userInitiated) {
             do {
+                DispatchQueue.main.async { self.loading = true }
                 guard let cycle = try await self.airportDataLoader.loadNASR() else { return }
                 DispatchQueue.main.async {
                     Defaults[.lastCycleLoaded] = cycle
                     Defaults[.schemaVersion] = latestSchemaVersion
+                    self.needsLoad = self.outOfDate(cycle: cycle)
+                    self.loading = false
                 }
             } catch (let error as Error) {
                 DispatchQueue.main.async { self.error = error }
