@@ -418,7 +418,7 @@ struct PerformanceModelG1: PerformanceModel {
     }
     
     private func tailwindTotalDistanceFactorModel(weight: Double) -> Double {
-        0.411667 - 0.00001*weight
+        0.0411667 - 0.000001*weight
     }
     
     private func downhillGradientGroundRunFactorModel(weight: Double) -> Double {
