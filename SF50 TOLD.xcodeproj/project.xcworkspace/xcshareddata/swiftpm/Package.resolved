@@ -15,7 +15,7 @@
       "location" : "https://github.com/sindresorhus/Defaults",
       "state" : {
         "branch" : "main",
-        "revision" : "981ccb0a01c54abbe3c12ccb8226108527bbf115"
+        "revision" : "bc1af5d8728db4957ba3eac0f944362654247683"
       }
     },
     {
@@ -51,7 +51,7 @@
       "location" : "https://github.com/RISCfuture/SwiftMETAR.git",
       "state" : {
         "branch" : "main",
-        "revision" : "bb62f68919c6a7904b0633aefd2ed806dd1063c9"
+        "revision" : "de3ff507b9b948f810efc4b1c9669fd169d5ebb3"
       }
     },
     {
@@ -60,7 +60,7 @@
       "location" : "https://github.com/RISCfuture/SwiftNASR.git",
       "state" : {
         "branch" : "master",
-        "revision" : "ef12153954e4c541cdcf83453868e8bc0aaaffdb"
+        "revision" : "e35d6dfa59e9685730c88e8e58b88fb1d605d078"
       }
     },
     {
@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/weichsel/ZIPFoundation/",
       "state" : {
-        "revision" : "7254c74b49cec2cb81520523ba993c671f71b066",
-        "version" : "0.9.14"
+        "revision" : "f6a22e7da26314b38bf9befce34ae8e4b2543090",
+        "version" : "0.9.15"
       }
     }
   ],
