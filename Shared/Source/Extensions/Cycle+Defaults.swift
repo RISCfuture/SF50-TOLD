@@ -2,7 +2,7 @@ import Foundation
 import SwiftNASR
 import Defaults
 
-public class CycleBridge: DefaultsBridge {
+public class CycleBridge: _DefaultsBridge {
     public typealias Value = Cycle
     public typealias Serializable = String
     
@@ -26,7 +26,7 @@ public class CycleBridge: DefaultsBridge {
     }
 }
 
-extension Cycle: DefaultsSerializable {
+extension Cycle: _DefaultsSerializable {
     public typealias Bridge = CycleBridge
     
     public static var bridge: CycleBridge {
