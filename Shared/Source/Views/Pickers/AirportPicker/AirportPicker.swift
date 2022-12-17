@@ -1,7 +1,6 @@
 import SwiftUI
 import CoreData
 import Defaults
-import CoreLocation
 
 fileprivate enum AirportPickerTabs {
     case favorites
@@ -13,16 +12,16 @@ fileprivate enum AirportPickerTabs {
 struct AirportPicker: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @State fileprivate var tabIndex: AirportPickerTabs = .favorites
-    
+    @StateObject fileprivate var locationManager = LocationManager()
+
     var onSelect: (Airport) -> Void
     
-
     var body: some View {
         VStack(alignment: .leading) {
             Picker("Tab", selection: $tabIndex) {
                 Text("Favorites").tag(AirportPickerTabs.favorites)
                 Text("Recents").tag(AirportPickerTabs.recents)
-                if CLLocationManager.locationServicesEnabled() {
+                if locationManager.isAuthorized {
                     Text("Nearest").tag(AirportPickerTabs.nearest)
                 }
                 Text("Search").tag(AirportPickerTabs.search)
@@ -33,9 +32,11 @@ struct AirportPicker: View {
             switch (tabIndex) {
                 case .favorites: FavoritesView(onSelect: selectAndDismiss)
                 case .recents: RecentsView(onSelect: selectAndDismiss)
-                case .nearest: NearestView(onSelect: selectAndDismiss)
+                case .nearest: NearestView(locationManager: locationManager, onSelect: selectAndDismiss)
                 case .search: SearchView(onSelect: selectAndDismiss)
             }
+        }.onAppear {
+            
         }
     }
     

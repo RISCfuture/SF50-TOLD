@@ -1,46 +1,7 @@
 import SwiftUI
 import CoreData
-import CoreLocation
 import CoreLocationUI
 import MapKit
-
-fileprivate class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    let manager = CLLocationManager()
-    
-    @Published var location: CLLocationCoordinate2D?
-    @Published var errorText: String? = nil
-    @Published var loading = false
-    
-    override init() {
-        super.init()
-        manager.delegate = self
-        manager.requestWhenInUseAuthorization()
-        manager.startMonitoringSignificantLocationChanges()
-    }
-    
-    deinit {
-        manager.stopMonitoringSignificantLocationChanges()
-    }
-    
-    func requestLocation() {
-        loading = true
-        errorText = nil
-        location = nil
-        manager.requestLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.first?.coordinate
-        errorText = nil
-        loading = false
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
-        location = nil
-        errorText = error.localizedDescription
-        loading = false
-    }
-}
 
 fileprivate let earthRadius = 21638.0 // NM
 
@@ -49,8 +10,7 @@ fileprivate func degreeLonLen(lat: Double) -> Double {
 }
 
 struct NearestView: View {
-    @StateObject fileprivate var locationManager = LocationManager()
-    
+    var locationManager: LocationManager
     var onSelect: (Airport) -> Void
     
     private var predicate: NSPredicate {
@@ -126,6 +86,6 @@ struct NearestView_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        NearestView() { _ in }
+        NearestView(locationManager: LocationManager()) { _ in }
     }
 }
