@@ -12,7 +12,7 @@ class PerformanceState: ObservableObject {
     @Published var airportID: String? = nil
     @Published var airport: Airport? = nil
     @Published var runway: Runway? = nil
-    @Published var flaps: FlapSetting? = nil
+    @Published var flaps: FlapSetting!
     @Published private(set) var weatherState = WeatherState()
     @Published var fuel = 0.0
     @Published var weight = 0.0
@@ -89,6 +89,10 @@ class PerformanceState: ObservableObject {
 
     init(operation: Operation) {
         self.operation = operation
+        switch operation {
+            case .takeoff: self.flaps = .flaps50
+            case .landing: self.flaps = .flaps100
+        }
 
         airportID = Defaults[defaultKey]
         $airportID.receive(on: DispatchQueue.main).sink { Defaults[self.defaultKey] = $0 }.store(in: &cancellables)
