@@ -15,7 +15,7 @@
       "location" : "https://github.com/sindresorhus/Defaults",
       "state" : {
         "branch" : "main",
-        "revision" : "5cf1178d34291cac3c004aabcad23f11c40b856e"
+        "revision" : "d71bfd8ffbf944ef08eacbca5fb96d6f69bf7696"
       }
     },
     {
@@ -69,7 +69,7 @@
       "location" : "https://github.com/RISCfuture/SwiftNASR.git",
       "state" : {
         "branch" : "master",
-        "revision" : "f7a92592f479bd188e5cbd8e57ce11c2a66f3380"
+        "revision" : "10ec2f3fa82c7d1bdff1a36c187b32c67910c9ab"
       }
     },
     {
