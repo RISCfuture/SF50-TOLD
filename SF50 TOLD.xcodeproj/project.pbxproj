@@ -221,6 +221,7 @@
 		017B669B258898DA00AA2DE9 /* WeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B6699258898DA00AA2DE9 /* WeatherState.swift */; };
 		017ED15B261027A9002C69DE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 017ED15A261027A9002C69DE /* Alamofire */; };
 		018CF99D2682A54100F52821 /* AirportLoaderTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018CF99C2682A54000F52821 /* AirportLoaderTask.swift */; };
+		018FFDA9295A551100626EB1 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 018FFDA8295A551100626EB1 /* Logging */; };
 		0191C05E25B2BF7800C4B810 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0191C05D25B2BF7800C4B810 /* AppState.swift */; };
 		0191C05F25B2BF7800C4B810 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0191C05D25B2BF7800C4B810 /* AppState.swift */; };
 		0191C06025B2BF7800C4B810 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0191C05D25B2BF7800C4B810 /* AppState.swift */; };
@@ -502,6 +503,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				018FFDA9295A551100626EB1 /* Logging in Frameworks */,
 				01AEDAA728D6F33A00F38948 /* ArgumentParser in Frameworks */,
 				01AEDAA428D6F2E200F38948 /* SwiftNASR in Frameworks */,
 			);
@@ -989,6 +991,7 @@
 			packageProductDependencies = (
 				01AEDAA328D6F2E200F38948 /* SwiftNASR */,
 				01AEDAA628D6F33A00F38948 /* ArgumentParser */,
+				018FFDA8295A551100626EB1 /* Logging */,
 			);
 			productName = DownloadNASR;
 			productReference = 01AEDA9C28D6F2D400F38948 /* DownloadNASR */;
@@ -1040,6 +1043,7 @@
 				0153741E26107AFF0098B529 /* XCRemoteSwiftPackageReference "SWXMLHash" */,
 				01DB7BC228510FA0003CC8EF /* XCRemoteSwiftPackageReference "SwiftMETAR" */,
 				01AEDAA528D6F33A00F38948 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				018FFDA7295A551100626EB1 /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = 0135A7CB2587091700892558 /* Products */;
 			projectDirPath = "";
@@ -1905,6 +1909,14 @@
 				minimumVersion = 5.4.1;
 			};
 		};
+		018FFDA7295A551100626EB1 /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		01AEDAA528D6F33A00F38948 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
@@ -1993,6 +2005,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 017ED159261027A9002C69DE /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		018FFDA8295A551100626EB1 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 018FFDA7295A551100626EB1 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
 		};
 		01AEDAA328D6F2E200F38948 /* SwiftNASR */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,6 +1,6 @@
 import Foundation
 import ArgumentParser
-import OSLog
+import Logging
 import SwiftNASR
 
 @main
@@ -38,7 +38,7 @@ final class DownloadNASR: AsyncParsableCommand {
     }
     
     func run() async throws {
-        let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "DownloadNASR")
+        let logger = Logger(label: "codes.tim.SF50-TOLD")
         
         let nasr = NASR(loader: ArchiveDataDownloader(cycle: cycle))
         logger.info("Loading…")
