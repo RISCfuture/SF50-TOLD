@@ -44,16 +44,14 @@ class PerformanceState: ObservableObject {
 
     var offscale: Offscale {
         var cum: Offscale = .none
-
-        let fields = [
-            takeoffRoll,
-            takeoffDistance,
-            climbGradient,
-            climbRate,
-            landingRoll,
-            landingDistance,
-            vref
-        ]
+        let fields: Array<Interpolation?>
+        
+        switch operation {
+            case .takeoff:
+                fields = [takeoffRoll, takeoffDistance, climbGradient, climbRate]
+            case .landing:
+                fields = [landingRoll, landingDistance, vref]
+        }
 
         for field in fields {
             guard case let .value(_, offscale) = field else { continue }
