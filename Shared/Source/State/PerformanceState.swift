@@ -102,6 +102,16 @@ class PerformanceState: ObservableObject {
             return Just(nil).eraseToAnyPublisher()
         }.receive(on: DispatchQueue.main)
             .assign(to: &$airport)
+        
+        // refresh airport and runway when new cycle is loaded
+        Defaults.publisher(.lastCycleLoaded).tryMap { _ in
+            guard let ID = self.airportID else { return nil }
+            return try self.findAirport(id: ID)
+        }.catch { error -> AnyPublisher<Airport?, Never> in
+            self.error = error
+            return Just(nil).eraseToAnyPublisher()
+        }.receive(on: DispatchQueue.main)
+            .assign(to: &$airport)
 
         // update runway, weather, and performance when airport changes
         $airport.sink { airport in
