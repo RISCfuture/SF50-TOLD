@@ -13,7 +13,7 @@ struct TakeoffGroundRollView: View {
             Text("Ground Roll")
             Spacer()
             InterpolationView(interpolation: state.takeoffRoll,
-                              suffix: "ft.",
+                              suffix: "ft",
                               maximum: takeoffRun)
         }
     }

@@ -13,7 +13,7 @@ struct LandingGroundRollView: View {
             Text("Ground Roll")
             Spacer()
             InterpolationView(interpolation: state.landingRoll,
-                              suffix: "ft.",
+                              suffix: "ft",
                               maximum: landingDistance)
         }
     }

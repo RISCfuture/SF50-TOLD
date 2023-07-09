@@ -26,7 +26,7 @@ struct WeatherPicker: View {
                 WeatherSource(weather: state, downloadWeather: downloadWeather)
                 WeatherForm(weather: state)
                 if let densityAltitude = densityAltitude {
-                    Text("Density altitude: \(integerFormatter.string(for: densityAltitude)) ft.")
+                    Text("Density altitude: \(integerFormatter.string(for: densityAltitude)) ft")
                         .foregroundColor(.secondary)
                         .font(.system(size: 14))
                 }

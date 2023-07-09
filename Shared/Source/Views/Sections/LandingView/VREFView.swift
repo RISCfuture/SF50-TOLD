@@ -7,7 +7,7 @@ struct VREFView: View {
         HStack {
             Text("VREF")
             Spacer()
-            InterpolationView(interpolation: state.vref, suffix: "kts.")
+            InterpolationView(interpolation: state.vref, suffix: "kts")
         }
     }
 }

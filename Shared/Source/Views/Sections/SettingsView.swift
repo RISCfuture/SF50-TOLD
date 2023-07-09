@@ -19,7 +19,7 @@ struct SettingsView: View {
                     DecimalField("Weight",
                                  value: $state.emptyWeight,
                                  formatter: numberFormatter(precision: 0, minimum: 0, maximum: maxLandingWeight),
-                                 suffix: "lbs.")
+                                 suffix: "lbs")
                 }
                 
                 HStack {

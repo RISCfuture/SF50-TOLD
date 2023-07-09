@@ -18,7 +18,7 @@ struct TakeoffDistanceView: View {
                 }
                 Spacer()
                 InterpolationView(interpolation: state.takeoffDistance,
-                                  suffix: "ft.",
+                                  suffix: "ft",
                                   maximum: takeoffDistance)
             }
     }

@@ -24,7 +24,7 @@ struct WeatherForm: View {
                 DecimalField("Speed",
                              value: $weather.windSpeed,
                              formatter: speedFormatter,
-                             suffix: "kts.",
+                             suffix: "kts",
                              onEditingChanged: { editing in
                     if editing { weather.source = .entered }
                 })

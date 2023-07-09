@@ -25,7 +25,7 @@ struct LoadoutView: View {
                 DecimalField("\(title) Fuel",
                              value: $state.fuel,
                              formatter: numberFormatter(precision: 0, minimum: 0),
-                             suffix: "gal.",
+                             suffix: "gal",
                              maximum: maxFuel)
             }
             HStack(spacing: 0) {
@@ -35,7 +35,7 @@ struct LoadoutView: View {
                     .bold()
                     .multilineTextAlignment(.trailing)
                     .foregroundColor(state.weight > maxWeight ? .red : .primary)
-                Text(" lbs.").bold()
+                Text(" lbs").bold()
             }
         }
     }

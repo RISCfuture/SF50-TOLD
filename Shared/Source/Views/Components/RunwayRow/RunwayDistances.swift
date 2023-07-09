@@ -2,7 +2,7 @@ import SwiftUI
 import CoreData
 
 fileprivate func formatDistance(_ distance: Int16) -> String {
-    return "\(integerFormatter.string(for: Int(distance))) ft."
+    return "\(integerFormatter.string(for: Int(distance))) ft"
 }
 
 struct RunwayDistances: View {

@@ -13,7 +13,7 @@ struct LandingDistanceView: View {
             Text("Total Distance")
             Spacer()
             InterpolationView(interpolation: state.landingDistance,
-                              suffix: "ft.",
+                              suffix: "ft",
                               maximum: landingDistance)
         }
     }

@@ -26,7 +26,7 @@ struct RunwayShorteningView: View {
             HStack {
                 Text(shortenPrompt)
                 Spacer()
-                DecimalField("Distance", value: shortenBinding, formatter: formatter, suffix: "ft.")
+                DecimalField("Distance", value: shortenBinding, formatter: formatter, suffix: "ft")
             }
         }
     }
