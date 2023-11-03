@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,10 @@
 		011A95A727E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
 		011A95A827E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
 		011A95A927E477D500F3A127 /* NOTAMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A95A527E477D500F3A127 /* NOTAMView.swift */; };
+		012CBA1A2AF4B2BA0015270A /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 012CBA192AF4B2BA0015270A /* SwiftCSV */; };
+		012CBA1C2AF4B2C60015270A /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 012CBA1B2AF4B2C60015270A /* SwiftCSV */; };
+		012CBA1F2AF4B8410015270A /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 012CBA1E2AF4B8410015270A /* Gzip */; };
+		012CBA212AF4B8480015270A /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 012CBA202AF4B8480015270A /* Gzip */; };
 		0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
 		0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C32587091300892558 /* SF50_TOLDApp.swift */; };
 		0135A7EE2587091800892558 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7C42587091300892558 /* ContentView.swift */; };
@@ -61,8 +65,6 @@
 		01535DE225A2FD0800AC0F5F /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
 		01535DE325A2FD0800AC0F5F /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
 		015373F72610286D0098B529 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 015373F62610286D0098B529 /* Alamofire */; };
-		0153742026107AFF0098B529 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 0153741F26107AFF0098B529 /* SWXMLHash */; };
-		0153742A26107B0A0098B529 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 0153742926107B0A0098B529 /* SWXMLHash */; };
 		0158291625BC0F8100AA0CC4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158291525BC0F8100AA0CC4 /* SettingsState.swift */; };
 		0158291725BC0F8100AA0CC4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158291525BC0F8100AA0CC4 /* SettingsState.swift */; };
 		0158291825BC0F8100AA0CC4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158291525BC0F8100AA0CC4 /* SettingsState.swift */; };
@@ -460,9 +462,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0135A895258749F500892558 /* Defaults in Frameworks */,
-				0153742026107AFF0098B529 /* SWXMLHash in Frameworks */,
 				01DB7BC428510FE0003CC8EF /* SwiftMETAR in Frameworks */,
+				012CBA1F2AF4B8410015270A /* Gzip in Frameworks */,
 				0166FCB125C00DE1006F7258 /* Introspect in Frameworks */,
+				012CBA1A2AF4B2BA0015270A /* SwiftCSV in Frameworks */,
 				017ED15B261027A9002C69DE /* Alamofire in Frameworks */,
 				0135A84C25872F6700892558 /* SwiftNASR in Frameworks */,
 			);
@@ -472,10 +475,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0153742A26107B0A0098B529 /* SWXMLHash in Frameworks */,
 				0135A89B25874A0100892558 /* Defaults in Frameworks */,
 				01DB7BC628510FE6003CC8EF /* SwiftMETAR in Frameworks */,
+				012CBA212AF4B8480015270A /* Gzip in Frameworks */,
 				0166FCB725C00DEB006F7258 /* Introspect in Frameworks */,
+				012CBA1C2AF4B2C60015270A /* SwiftCSV in Frameworks */,
 				015373F72610286D0098B529 /* Alamofire in Frameworks */,
 				0135A85425872F7000892558 /* SwiftNASR in Frameworks */,
 			);
@@ -899,8 +903,9 @@
 				0135A894258749F500892558 /* Defaults */,
 				0166FCB025C00DE1006F7258 /* Introspect */,
 				017ED15A261027A9002C69DE /* Alamofire */,
-				0153741F26107AFF0098B529 /* SWXMLHash */,
 				01DB7BC328510FE0003CC8EF /* SwiftMETAR */,
+				012CBA192AF4B2BA0015270A /* SwiftCSV */,
+				012CBA1E2AF4B8410015270A /* Gzip */,
 			);
 			productName = "SF50 TOLD (iOS)";
 			productReference = 0135A7CA2587091700892558 /* SF50 TOLD.app */;
@@ -924,8 +929,9 @@
 				0135A89A25874A0100892558 /* Defaults */,
 				0166FCB625C00DEB006F7258 /* Introspect */,
 				015373F62610286D0098B529 /* Alamofire */,
-				0153742926107B0A0098B529 /* SWXMLHash */,
 				01DB7BC528510FE6003CC8EF /* SwiftMETAR */,
+				012CBA1B2AF4B2C60015270A /* SwiftCSV */,
+				012CBA202AF4B8480015270A /* Gzip */,
 			);
 			productName = "SF50 TOLD (macOS)";
 			productReference = 0135A7D22587091700892558 /* SF50 TOLD.app */;
@@ -1040,10 +1046,11 @@
 				0135A893258749F500892558 /* XCRemoteSwiftPackageReference "Defaults" */,
 				0166FCAF25C00DE1006F7258 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				017ED159261027A9002C69DE /* XCRemoteSwiftPackageReference "Alamofire" */,
-				0153741E26107AFF0098B529 /* XCRemoteSwiftPackageReference "SWXMLHash" */,
 				01DB7BC228510FA0003CC8EF /* XCRemoteSwiftPackageReference "SwiftMETAR" */,
 				01AEDAA528D6F33A00F38948 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				018FFDA7295A551100626EB1 /* XCRemoteSwiftPackageReference "swift-log" */,
+				012CBA182AF4B2BA0015270A /* XCRemoteSwiftPackageReference "SwiftCSV" */,
+				012CBA1D2AF4B8410015270A /* XCRemoteSwiftPackageReference "GzipSwift" */,
 			);
 			productRefGroup = 0135A7CB2587091700892558 /* Products */;
 			projectDirPath = "";
@@ -1869,6 +1876,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		012CBA182AF4B2BA0015270A /* XCRemoteSwiftPackageReference "SwiftCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swiftcsv/SwiftCSV.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.1;
+			};
+		};
+		012CBA1D2AF4B8410015270A /* XCRemoteSwiftPackageReference "GzipSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/1024jp/GzipSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.1;
+			};
+		};
 		0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RISCfuture/SwiftNASR.git";
@@ -1883,14 +1906,6 @@
 			requirement = {
 				branch = main;
 				kind = branch;
-			};
-		};
-		0153741E26107AFF0098B529 /* XCRemoteSwiftPackageReference "SWXMLHash" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/drmohundro/SWXMLHash.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.2;
 			};
 		};
 		0166FCAF25C00DE1006F7258 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
@@ -1936,6 +1951,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		012CBA192AF4B2BA0015270A /* SwiftCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 012CBA182AF4B2BA0015270A /* XCRemoteSwiftPackageReference "SwiftCSV" */;
+			productName = SwiftCSV;
+		};
+		012CBA1B2AF4B2C60015270A /* SwiftCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 012CBA182AF4B2BA0015270A /* XCRemoteSwiftPackageReference "SwiftCSV" */;
+			productName = SwiftCSV;
+		};
+		012CBA1E2AF4B8410015270A /* Gzip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 012CBA1D2AF4B8410015270A /* XCRemoteSwiftPackageReference "GzipSwift" */;
+			productName = Gzip;
+		};
+		012CBA202AF4B8480015270A /* Gzip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 012CBA1D2AF4B8410015270A /* XCRemoteSwiftPackageReference "GzipSwift" */;
+			productName = Gzip;
+		};
 		0135A84B25872F6700892558 /* SwiftNASR */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
@@ -1960,16 +1995,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 017ED159261027A9002C69DE /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		0153741F26107AFF0098B529 /* SWXMLHash */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0153741E26107AFF0098B529 /* XCRemoteSwiftPackageReference "SWXMLHash" */;
-			productName = SWXMLHash;
-		};
-		0153742926107B0A0098B529 /* SWXMLHash */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0153741E26107AFF0098B529 /* XCRemoteSwiftPackageReference "SWXMLHash" */;
-			productName = SWXMLHash;
 		};
 		0166FCB025C00DE1006F7258 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;

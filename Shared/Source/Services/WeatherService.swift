@@ -3,7 +3,8 @@ import Combine
 import Dispatch
 import OSLog
 import Alamofire
-import SWXMLHash
+import SwiftCSV
+import Gzip
 import SwiftMETAR
 
 extension TAF {
@@ -98,30 +99,25 @@ class WeatherService: ObservableObject {
     private let METARCache: ExpiringCache<String, METAR, Never>
     private let TAFCache: ExpiringCache<String, TAF, Never>
 
-    private static let METARPattern = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=%{icao}&hoursBeforeNow=2"
-    private static let TAFPattern = "https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=tafs&requestType=retrieve&format=xml&stationString=%{icao}&hoursBeforeNow=8"
+    private static let METAR_URL = URL(string: "https://aviationweather.gov/data/cache/metars.cache.csv.gz")!
+    private static let TAF_URL = URL(string: "https://aviationweather.gov/data/cache/tafs.cache.csv.gz")!
 
     private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "WeatherService")
     private let METARTimeout: TimeInterval = 5400 // METARs valid until 1.5 hours old
     private let TAFTimeout: TimeInterval = 43200 // TAFs valid until 12 hours old
     
     let reachable = CurrentValueSubject<NetworkReachabilityManager.NetworkReachabilityStatus, Never>(NetworkReachabilityManager.NetworkReachabilityStatus.unknown)
-    private var reachability: NetworkReachabilityManager { .init(host: Self.METAR_URL("ZZZZ").host!)! }
-
+    private var reachability: NetworkReachabilityManager { .init(host: Self.METAR_URL.host!)! }
+    
     init() {
         METARCache = .init(expiryKey: \.date, timeout: METARTimeout) { icao -> AnyPublisher<FetchResult<METAR>, Never> in
-            return AF.request(Self.METAR_URL(icao))
+            return AF.request(Self.METAR_URL)
                 .publishUnserialized(queue: loadingQueue)
                 .map { response in
                     if let error = response.error { return .error(error) }
                     guard let data = response.data else { return .none }
-
-                    let XML = SWXMLHash.parse(data)
-                    guard let rawText = XML["response"]["data"]["METAR"][0]["raw_text"].element?.text else {
-                        Self.logger.notice("No METAR in response for \(icao)")
-                        return .none
-                    }
-                    Self.logger.info("Loaded METAR: \(rawText)")
+                    guard let rawText = Self.processAWSFile(data: data, icao: icao, context: "METAR") else { return .none }
+                    
                     do {
                         return .some(try METAR.from(string: rawText))
                     } catch (let error as SwiftMETAR.Error) {
@@ -134,18 +130,13 @@ class WeatherService: ObservableObject {
                 }.eraseToAnyPublisher()
         }
         TAFCache = .init(expiryKey: \.originDateOrToday, timeout: TAFTimeout) { icao -> AnyPublisher<FetchResult<TAF>, Never> in
-            return AF.request(Self.TAF_URL(icao))
+            return AF.request(Self.TAF_URL)
                 .publishUnserialized(queue: loadingQueue)
                 .map { response in
                     if let error = response.error { return .error(error) }
                     guard let data = response.data else { return .none }
-
-                    let XML = SWXMLHash.parse(data)
-                    guard let rawText = XML["response"]["data"]["TAF"][0]["raw_text"].element?.text else {
-                        Self.logger.notice("No TAF in response for \(icao)")
-                        return .none
-                    }
-                    Self.logger.info("Loaded TAF: \(rawText)")
+                    guard let rawText = Self.processAWSFile(data: data, icao: icao, context: "TAF") else { return .none}
+                    
                     do {
                         return .some(try TAF.from(string: rawText))
                     } catch (let error as SwiftMETAR.Error) {
@@ -194,13 +185,30 @@ class WeatherService: ObservableObject {
             }
         }.eraseToAnyPublisher()
     }
-
-    private static func METAR_URL(_ icao: String) -> URL {
-        return URL(string: METARPattern.replacingOccurrences(of: "%{icao}", with: icao))!
-    }
-
-    private static func TAF_URL(_ icao: String) -> URL {
-        return URL(string: TAFPattern.replacingOccurrences(of: "%{icao}", with: icao))!
+    
+    private static func processAWSFile(data: Data, icao: String, context: String) -> String? {
+        guard let unzippedData = try? data.gunzipped() else {
+            logger.notice("\(context) data not gzipped")
+            return nil
+        }
+        
+        guard let str = String(data: unzippedData, encoding: .ascii) else {
+            logger.notice("\(context) CSV not ASCII-encoded")
+            return nil
+        }
+        
+        guard let csv = try? CSV<Enumerated>(string: str) else {
+            logger.notice("Failed to parse CSV for \(context)")
+            return nil
+        }
+        guard let row = csv.rows.first(where: { $0[1] == icao }) else {
+            logger.notice("No \(context) in response for \(icao)")
+            return nil
+        }
+        let rawText = row[0]
+        logger.info("Loaded \(context): \(rawText)")
+        
+        return rawText
     }
 
     enum FetchResult<Value> {
