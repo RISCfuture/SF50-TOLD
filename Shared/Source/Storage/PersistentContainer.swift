@@ -31,7 +31,7 @@ final class PersistentContainer: ObservableObject {
             do {
                 try viewContext.save()
             } catch {
-                self.error = Error.unknown(error: error)
+                self.error = DataDownloadError.unknown(error: error)
             }
         }
     }

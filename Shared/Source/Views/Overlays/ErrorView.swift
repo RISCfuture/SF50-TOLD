@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ErrorView: View {
-    var error: Error
+    var error: DataDownloadError
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -21,7 +21,7 @@ struct ErrorView: View {
 
 struct ErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        ErrorView(error: Error.cycleNotAvailable)
+        ErrorView(error: DataDownloadError.cycleNotAvailable)
     }
 }
 

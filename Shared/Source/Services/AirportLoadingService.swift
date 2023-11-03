@@ -10,7 +10,7 @@ class AirportLoadingService: ObservableObject {
     @Published private(set) var downloadProgress = StepProgress.pending
     @Published private(set) var decompressProgress = StepProgress.pending
     @Published private(set) var processingProgress = StepProgress.pending
-    @Published private(set) var error: Error? = nil
+    @Published private(set) var error: DataDownloadError? = nil
     @Published private(set) var loading = false
     
     @Published private(set) var needsLoad = true
@@ -55,7 +55,7 @@ class AirportLoadingService: ObservableObject {
                     self.needsLoad = self.outOfDate(cycle: cycle)
                     self.loading = false
                 }
-            } catch (let error as Error) {
+            } catch (let error as DataDownloadError) {
                 DispatchQueue.main.async { self.error = error }
             } catch {
                 DispatchQueue.main.async { self.error = .unknown(error: error) }

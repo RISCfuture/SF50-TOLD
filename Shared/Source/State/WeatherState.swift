@@ -70,7 +70,6 @@ class WeatherState: ObservableObject {
         guard let values = valuesFrom(date: date, observation: observation, forecast: forecast) else {
             self.init()
             return
-            
         }
         
         self.init(wind: values.wind,
@@ -105,7 +104,7 @@ class WeatherState: ObservableObject {
         forecastError = nil
     }
     
-    func updateFrom(date: Date, observationResult: WeatherService.FetchResult<METAR>, forecastResult: WeatherService.FetchResult<TAF>) {
+    func updateFrom(date: Date, observationResult: WeatherResult<METAR>, forecastResult: WeatherResult<TAF>) {
         let observation: METAR?
         let forecast: TAF?
         let rawObservation: String?
@@ -118,13 +117,9 @@ class WeatherState: ObservableObject {
                 observation = value
                 rawObservation = value.text
                 observationError = nil
-            case let .parseError(error, raw):
+            case let .error(error, raw):
                 observation = nil
                 rawObservation = raw
-                observationError = error
-            case let .error(error):
-                observation = nil
-                rawObservation = nil
                 observationError = error
             case .none:
                 observation = nil
@@ -136,13 +131,9 @@ class WeatherState: ObservableObject {
                 forecast = value
                 rawForecast = value.text
                 forecastError = nil
-            case let .parseError(error, raw):
+            case let .error(error, raw):
                 forecast = nil
                 rawForecast = raw
-                forecastError = error
-            case let .error(error):
-                forecast = nil
-                rawForecast = nil
                 forecastError = error
             case .none:
                 forecast = nil

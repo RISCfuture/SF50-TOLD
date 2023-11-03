@@ -265,10 +265,10 @@
 		01D4FA5628D7869400AC322B /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5428D7869300AC322B /* CircularProgressView.swift */; };
 		01D4FA5728D7869400AC322B /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5428D7869300AC322B /* CircularProgressView.swift */; };
 		01D4FA5828D7869400AC322B /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5428D7869300AC322B /* CircularProgressView.swift */; };
-		01D4FA5A28D7BFE000AC322B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Error.swift */; };
-		01D4FA5B28D7BFE000AC322B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Error.swift */; };
-		01D4FA5C28D7BFE000AC322B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Error.swift */; };
-		01D4FA5D28D7BFE000AC322B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Error.swift */; };
+		01D4FA5A28D7BFE000AC322B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Errors.swift */; };
+		01D4FA5B28D7BFE000AC322B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Errors.swift */; };
+		01D4FA5C28D7BFE000AC322B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Errors.swift */; };
+		01D4FA5D28D7BFE000AC322B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Errors.swift */; };
 		01D7DA6C25D5034D005938DD /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */; };
 		01D7DA6D25D5034D005938DD /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */; };
 		01D7DA6E25D5034D005938DD /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */; };
@@ -438,7 +438,7 @@
 		01D265CB25AD99AF00322A45 /* WeatherRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRow.swift; sourceTree = "<group>"; };
 		01D2C8EF25D126C10036B6FE /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		01D4FA5428D7869300AC322B /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
-		01D4FA5928D7BFE000AC322B /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		01D4FA5928D7BFE000AC322B /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffscaleWarningView.swift; sourceTree = "<group>"; };
 		01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportLoadingService.swift; sourceTree = "<group>"; };
 		01E2A1EA25ABA7D20076CC84 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -676,7 +676,7 @@
 		0135A80725870E0A00892558 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				01D4FA5928D7BFE000AC322B /* Error.swift */,
+				01D4FA5928D7BFE000AC322B /* Errors.swift */,
 				010F675627E9B98D00BDBDB0 /* Extensions */,
 				0135A8A425874C3B00892558 /* Global.swift */,
 				01750AB625B27AA700555CDB /* Models */,
@@ -1149,7 +1149,7 @@
 				0179865A25C280B60031A453 /* WeatherSource.swift in Sources */,
 				016A0B3E27E5D60300F16C21 /* VxClimbView.swift in Sources */,
 				0191C06B25B2C02900C4B810 /* SectionState.swift in Sources */,
-				01D4FA5A28D7BFE000AC322B /* Error.swift in Sources */,
+				01D4FA5A28D7BFE000AC322B /* Errors.swift in Sources */,
 				014F100B25AAAD410081EAC3 /* SearchField.swift in Sources */,
 				0135A874258748D400892558 /* TakeoffView.swift in Sources */,
 				0105D5C828123C5A003EA0AA /* ObstacleView.swift in Sources */,
@@ -1251,7 +1251,7 @@
 				01F18D3425B19990007D76BA /* TimeAndPlaceView.swift in Sources */,
 				016A0B2527E5D1F600F16C21 /* LandingGroundRollView.swift in Sources */,
 				0135A7ED2587091800892558 /* SF50_TOLDApp.swift in Sources */,
-				01D4FA5B28D7BFE000AC322B /* Error.swift in Sources */,
+				01D4FA5B28D7BFE000AC322B /* Errors.swift in Sources */,
 				0135A8CD2587599D00892558 /* AirportPicker.swift in Sources */,
 				016A0B1027E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				017B669B258898DA00AA2DE9 /* WeatherState.swift in Sources */,
@@ -1344,7 +1344,7 @@
 				01F18D2825B198B6007D76BA /* LoadoutView.swift in Sources */,
 				01E83CF127FD3B70001342BF /* PerformanceModel.swift in Sources */,
 				016A0B0C27E5B98900F16C21 /* Runway.swift in Sources */,
-				01D4FA5C28D7BFE000AC322B /* Error.swift in Sources */,
+				01D4FA5C28D7BFE000AC322B /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1418,7 +1418,7 @@
 				01F18D2925B198B6007D76BA /* LoadoutView.swift in Sources */,
 				01E83CF227FD3B70001342BF /* PerformanceModel.swift in Sources */,
 				016A0B0D27E5B98900F16C21 /* Runway.swift in Sources */,
-				01D4FA5D28D7BFE000AC322B /* Error.swift in Sources */,
+				01D4FA5D28D7BFE000AC322B /* Errors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

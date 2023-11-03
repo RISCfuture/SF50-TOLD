@@ -4,7 +4,7 @@ import OSLog
 import SwiftNASR
 
 class AirportDataLoader: ObservableObject {
-    @Published private(set) var error: Error? = nil
+    @Published private(set) var error: DataDownloadError? = nil
     
     @Published private(set) var downloadProgress = StepProgress.pending
     @Published private(set) var decompressProgress = StepProgress.pending
@@ -27,8 +27,8 @@ class AirportDataLoader: ObservableObject {
         
         let session = URLSession(configuration: .ephemeral)
         let (bytes, response) = try await session.bytes(from: self.dataURL)
-        guard let response = response as? HTTPURLResponse else { throw Error.badResponse(response) }
-        guard response.statusCode == 200 else { throw Error.badResponse(response) }
+        guard let response = response as? HTTPURLResponse else { throw DataDownloadError.badResponse(response) }
+        guard response.statusCode == 200 else { throw DataDownloadError.badResponse(response) }
         DispatchQueue.main.async { self.downloadProgress = .inProgress(current: 0, total: UInt64(response.expectedContentLength)) }
         
         var compressedData = Data(capacity: Int(response.expectedContentLength))
