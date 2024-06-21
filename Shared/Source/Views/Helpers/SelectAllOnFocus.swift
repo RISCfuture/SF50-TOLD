@@ -1,5 +1,4 @@
 import SwiftUI
-import Introspect
 
 #if canImport(UIKit)
 fileprivate class Delegate: NSObject, UITextFieldDelegate {
@@ -15,13 +14,10 @@ struct SelectAllOnFocus: ViewModifier {
     #endif
     
     func body(content: Content) -> some View {
-        #if canImport(UIKit)
-        return content.introspectTextField { textField in
-            textField.addTarget(self.delegate, action: #selector(Delegate.textFieldDidBeginEditing), for: .editingDidBegin)
+        return content.onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
+            guard let textField = obj.object as? UITextField else { return }
+            textField.selectAll(nil)
         }
-        #else
-        return content
-        #endif
     }
 }
 
