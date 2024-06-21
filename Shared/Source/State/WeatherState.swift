@@ -169,9 +169,9 @@ class WeatherState: ObservableObject {
 fileprivate func windFromEnum(_ wind: SwiftMETAR.Wind) -> Wind {
     switch wind {
         case let .direction(heading, speed, _):
-            return .init(direction: Double(heading), speed: Double(speed.knots))
+            return .init(direction: Double(heading), speed: Double(speed.measurement.converted(to: .knots).value))
         case let .directionRange(heading, _, speed, _):
-            return .init(direction: Double(heading), speed: Double(speed.knots))
+            return .init(direction: Double(heading), speed: Double(speed.measurement.converted(to: .knots).value))
         default: return .calm
     }
 }
@@ -209,7 +209,7 @@ fileprivate func valuesFrom(date: Date, observation: METAR?, forecast: TAF?) -> 
         }
         
         if let observedAlt = observation.altimeter {
-            altimeter = Double(observedAlt.inHg)
+            altimeter = Double(observedAlt.measurement.converted(to: .inchesOfMercury).value)
         }
         
         if sinceMETAR > METARUpdatePeriod {
@@ -219,7 +219,7 @@ fileprivate func valuesFrom(date: Date, observation: METAR?, forecast: TAF?) -> 
                         wind = windFromEnum(forecastWind)
                     }
                     if let forecastAlt = group.altimeter {
-                        altimeter = Double(forecastAlt.inHg)
+                        altimeter = Double(forecastAlt.measurement.converted(to: .inchesOfMercury).value)
                     }
                 }
             }

@@ -1,4 +1,5 @@
 {
+  "originHash" : "a2a8cde6ec4be4e1fc96ae58b81aa8a3c419e0bfbd1c726d95ad6a117824a5f4",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -14,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sindresorhus/Defaults",
       "state" : {
-        "branch" : "main",
-        "revision" : "d8a9f5105607c85b544558e7f5b51d6c360ba88b"
+        "revision" : "38925e3cfacf3fb89a81a35b1cd44fd5a5b7e0fa",
+        "version" : "8.2.0"
       }
     },
     {
@@ -77,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RISCfuture/SwiftMETAR.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "9d4937624bc8ece7f5310dd1def68083843181f0"
+        "revision" : "73106672f7633edd195d13d025935685f711f28d",
+        "version" : "1.0.0"
       }
     },
     {
@@ -86,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RISCfuture/SwiftNASR.git",
       "state" : {
-        "branch" : "master",
-        "revision" : "f784d6401460f42872a0b4322a69d053c088f1e6"
+        "revision" : "1b20f490aea658bb2a071616533fc94c2817fa71",
+        "version" : "0.2.0"
       }
     },
     {
@@ -109,5 +110,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
