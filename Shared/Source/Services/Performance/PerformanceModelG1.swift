@@ -254,7 +254,9 @@ struct PerformanceModelG1: PerformanceModel {
                 case .flapsUp:
                     let speed = vrefModel_flapsUp(weight: weight)
                     return .value(speed, offscale: offscale(low: weight < 4000, high: weight > maxTakeoffWeight))
-                case .flapsUpIce: return .value(136)
+                case .flapsUpIce:
+                    let speed = vrefModel_flapsUpIce(weight: weight)
+                    return .value(speed, offscale: offscale(low: weight < 4000, high: weight > maxTakeoffWeight))
                 case .flaps50:
                     let speed = vrefModel_flaps50(weight: weight)
                     return .value(speed, offscale: offscale(low: weight < 4000, high: weight > maxTakeoffWeight))
@@ -291,118 +293,120 @@ struct PerformanceModelG1: PerformanceModel {
     }
     
     private func takeoffRollModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        -204.381 - 0.189643*pressureAlt + 0.0000217907*pow(pressureAlt, 2)
-            - 41.195*temp + 0.00653503*pressureAlt*temp + 0.953503*pow(temp, 2)
-            + 0.38054*weight + 0.0000284266*pressureAlt*weight
-            + 0.00692231*temp*weight - 5.82883e-6*pow(weight, 2)
+        -2.0436e2 +
+        (3.8053e-1 * weight) + (-1.8965e-1 * pressureAlt) + (-4.1193e1 * temp) +
+        (-5.8280e-6 * pow(weight, 2)) + (2.8427e-5 * weight*pressureAlt) + (6.9222e-3 * weight*temp) +
+        (2.1791e-5 * pow(pressureAlt, 2)) + (6.5349e-3 * pressureAlt*temp) + (9.5348e-1 * pow(temp, 2))
+
     }
     
     private func takeoffDistanceModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        715.683 - 0.491808*pressureAlt + 0.0000358537*pow(pressureAlt, 2)
-            - 112.007*temp + 0.0110574*pressureAlt*temp + 1.62543*pow(temp, 2)
-            + 0.0422256*weight + 0.0000776885*pressureAlt*weight
-            + 0.0190447*temp*weight + 0.0000531893*pow(weight, 2)
+        7.1574e2 +
+        (4.2206e-2 * weight) + (-4.9182e-1 * pressureAlt) + (-1.1200e2 * temp) +
+        (5.3191e-5 * pow(weight, 2)) + (7.7690e-5 * weight*pressureAlt) + (1.9044e-2 * weight*temp) +
+        (3.5855e-5 * pow(pressureAlt, 2)) + (1.1057e-2 * pressureAlt*temp) + (1.6254 * pow(temp, 2))
+
     }
     
     private func landingRollModel_flaps100(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        490.68 - 0.0371989*pressureAlt + 3.59292e-6*pow(pressureAlt, 2)
-            - 0.562332*temp + 0.000220394*pressureAlt*temp
-            - 0.00135126*pow(temp, 2) + 0.0937236*weight
-            + 0.0000143332*pressureAlt*weight + 0.0011338*temp*weight
-            + 0.0000173141*pow(weight, 2)
+        7.2020e2 +
+        (2.6738e-9 * weight) + (-3.5169e-2 * pressureAlt) + (-5.6797e-1 * temp) +
+        (2.6761e-5 * pow(weight, 2)) + (1.4003e-5 * weight*pressureAlt) + (1.1366e-3 * weight*temp) +
+        (3.5464e-6 * pow(pressureAlt, 2)) + (2.1973e-4 * pressureAlt*temp) + (-1.8795e-3 * pow(temp, 2))
+
     }
     
     private func landingRollModel_flaps50(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        659.367 - 0.0556462*pressureAlt + 5.08485e-6*pow(pressureAlt, 2)
-            - 1.04399*temp + 0.000319443*pressureAlt*temp
-            - 0.00400895*pow(temp, 2) + 0.123878*weight
-            + 0.0000195365*pressureAlt*weight + 0.00155772*temp*weight
-            + 0.0000225265*pow(weight, 2)
+        9.6659e2 +
+        (3.4451e-9 * weight) + (-5.3996e-2 * pressureAlt) + (-1.3803 * temp) +
+        (3.4856e-5 * pow(weight, 2)) + (1.9392e-5 * weight*pressureAlt) + (1.5984e-3 * weight*temp) +
+        (4.9831e-6 * pow(pressureAlt, 2)) + (3.1874e-4 * pressureAlt*temp) + (-7.5959e-4 * pow(temp, 2))
     }
     
     private func landingRollModel_flaps50Ice(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        2470.86 + 0.191851*weight - 0.0000191851*pow(weight, 2)
-            + 0.0732799*pressureAlt + 5.72651e-20*weight*pressureAlt
-            + 7.4831e-6*pow(pressureAlt, 2) + 10.3618*temp
-            + 3.06076e-17*weight*temp + 0.000544*pressureAlt*temp
-            - 2.54158e-21*weight*pressureAlt*temp - 4.20536e-15*pow(temp, 2)
+        1.3444e3 +
+        (4.7428e-9 * weight) + (-6.4257e-2 * pressureAlt) + (-2.429 * temp) +
+        (5.0316e-5 * pow(weight, 2)) + (2.5805e-5 * weight*pressureAlt) + (2.3255e-3 * weight*temp) +
+        (6.6757e-6 * pow(pressureAlt, 2)) + (4.8327e-4 * pressureAlt*temp) + (-2.2727e-4 * pow(temp, 2))
     }
     
     private func landingDistanceModel_flaps100(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        163.996 - 0.0527264*pressureAlt + 4.94881e-6*pow(pressureAlt, 2)
-            - 0.571363*temp + 0.000293894*pressureAlt*temp
-            - 0.000015794*pow(temp, 2) + 0.141978*weight
-            + 0.0000183687*pressureAlt*weight + 0.00135334*temp*weight
-            + 0.0000482451*pow(weight, 2)
+        5.1171e2 +
+        (6.2355e-9 * weight) + (-4.9637e-2 * pressureAlt) + (-5.8964e-1 * temp) +
+        (6.2552e-5 * pow(weight, 2)) + (1.7868e-5 * weight*pressureAlt) + (1.3606e-3 * weight*temp) +
+        (4.8777e-6 * pow(pressureAlt, 2)) + (2.9182e-4 * pressureAlt*temp) + (-8.2664e-4 * pow(temp, 2))
+
     }
     
     private func landingDistanceModel_flaps50(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        270.96 - 0.0944373*pressureAlt + 6.90394e-6*pow(pressureAlt, 2)
-            - 2.6483*temp + 0.000424051*pressureAlt*temp
-            - 0.00497128*pow(temp, 2) + 0.180785*weight
-            + 0.0000286303*pressureAlt*weight + 0.00220679*temp*weight
-            + 0.0000584197*pow(weight, 2)
+        7.1788e2 +
+        (7.5566e-9 * weight) + (-9.1626e-2 * pressureAlt) + (-3.0478 * temp) +
+        (7.6459e-5 * pow(weight, 2)) + (2.8356e-5 * weight*pressureAlt) + (2.2528e-3 * weight*temp) +
+        (6.7495e-6 * pow(pressureAlt, 2)) + (4.2044e-4 * pressureAlt*temp) + (-5.8716e-4 * pow(temp, 2))
+
     }
     
     private func landingDistanceModel_flaps50Ice(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        1395.53 + 0.322528*weight + 0.0000707841*pow(weight, 2)
-            - 0.083997*pressureAlt + 0.0000372718*weight*pressureAlt
-            + 0.0000117844*pow(pressureAlt, 2) + 3.60932*temp
-            + 0.00229182*weight*temp - 0.0000174545*pressureAlt*temp
-            + 1.73455e-7*weight*pressureAlt*temp + 0.00306818*pow(temp, 2)
+        9.0058e2 +
+        (1.0586e-8 * weight) + (-1.6374e-1 * pressureAlt) + (-9.5898 * temp) +
+        (1.1685e-4 * pow(weight, 2)) + (4.9574e-5 * weight*pressureAlt) + (4.3879e-3 * weight*temp) +
+        (9.5954e-6 * pow(pressureAlt, 2)) + (6.9168e-4 * pressureAlt*temp) + (1.1364e-3 * pow(temp, 2))
+
     }
     
     private func landingDistanceIncrease_waterSlush(_ dist: Double, depth: Double) -> Double {
-        -2.57617 + 83.3163*depth - 275.465*pow(depth, 2) + 280.945*pow(depth, 3)
-            + 1.64345*dist - 9.23756*depth*dist + 23.6016*pow(depth, 2)*dist
-            - 21.1688*pow(depth, 3)*dist
+        9.1011e2 +
+        (-7.1383e3 * depth) + (1.8952 * dist) +
+        (1.1439e4 * pow(depth, 2)) + (-1.3195 * depth*dist) + (-9.6834e-8 * pow(dist, 2))
     }
     
     private func landingDistanceIncrease_slushWetSnow(_ dist: Double, depth: Double) -> Double {
-        65.6394 - 478.829*depth + 765.179*pow(depth, 2) + 0.694343*dist
-            - 0.623682*depth*dist
+        6.8375e1 +
+        (-4.7883e2 * depth) + (1.6923 * dist) +
+        (7.6518e2 * pow(depth, 2)) + (-6.2368e-1 * depth*dist) + (3.3037e-7 * pow(dist, 2))
     }
     
     // 1 in
     private func landingDistanceIncrease_drySnow(_ dist: Double) -> Double {
-        4.93233 + 0.329699*dist
+        4.4607 + (1.3301 * dist) + (-5.6961e-8 * pow(dist, 2))
     }
     
     private func landingDistanceIncrease_compactSnow(_ dist: Double) -> Double {
-        3.72932 + 0.578797*dist
+        5.6159 + (1.5774 * dist) + (2.2784e-7 * pow(dist, 2))
     }
     
     private func takeoffClimbGradientModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        5208.88 - 0.0889881*pressureAlt - 1.13082e-6*pow(pressureAlt, 2)
-            - 0.957868*weight + 8.73354e-6*pressureAlt*weight
-            + 0.0000505919*pow(weight, 2) - 14.4936*temp
-            - 0.00099401*pressureAlt*temp + 0.00165187*weight*temp
-            + 4.96139e-8*pressureAlt*weight*temp - 0.175661*pow(temp, 2)
-
+        5.2226e3 +
+        (-9.5451e-1 * weight) + (-1.0627e-1 * pressureAlt) + (-1.7494e1 * temp) +
+        (4.9366e-5 * pow(weight, 2)) + (1.1535e-5 * weight*pressureAlt) + (2.1734e-3 * weight*temp) +
+        (-7.4200e-7 * pow(pressureAlt, 2)) + (-6.5195e-4 * pressureAlt*temp) + (-1.6899e-1 * pow(temp, 2))
     }
     
     private func takeoffClimbRateModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {
-        8477.18 - 0.0770992*pressureAlt - 2.73029e-6*pow(pressureAlt, 2)
-            - 1.60472*weight + 7.16136e-6*pressureAlt*weight
-            + 0.0000880764*pow(weight, 2) - 32.1438*temp
-            - 0.00196259*pressureAlt*temp + 0.00368127*weight*temp
-            + 1.18543e-7*pressureAlt*weight*temp - 0.251046*pow(temp, 2)
+        8.4228e3 +
+        (-1.5693 * weight) + (-1.0703e-1 * pressureAlt) + (-3.8023e1 * temp) +
+        (8.3187e-5 * pow(weight, 2)) + (1.1791e-5 * weight*pressureAlt) + (4.7010e-3 * weight*temp) +
+        (-1.9026e-6 * pow(pressureAlt, 2)) + (-1.1778e-3 * pressureAlt*temp) + (-2.3833e-1 * pow(temp, 2))
     }
     
     private func vrefModel_flapsUp(weight: Double) -> Double {
-        31.7702 + 0.0174768*weight - 7.78149e-7*pow(weight, 2)
+        2.94e1 + (1.8371e-2 * weight) + (-8.5714e-7 * pow(weight, 2))
+    }
+    
+    private func vrefModel_flapsUpIce(weight: Double) -> Double {
+        4.4e1 + (2.1171e-2 * weight) + (-8.5714e-7 * pow(weight, 2))
     }
     
     private func vrefModel_flaps50(weight: Double) -> Double {
-        42.5451 + 0.0105481*weight - 1.6364e-7*pow(weight, 2)
+        3.92e1 + (1.1857e-2 * weight) + (-2.8571e-7 * pow(weight, 2))
     }
     
     private func vrefModel_flaps50Ice(weight: Double) -> Double {
-        36.7496 + 0.0182773*weight - 7.3871e-7*pow(weight, 2)
+        3.34e1 + (1.9571e-2 * weight) + (-8.5714e-7 * pow(weight, 2))
     }
     
     private func vrefModel_flaps100(weight: Double) -> Double {
-        17.0545 + 0.016547*weight - 7.6355e-7*pow(weight, 2)
+        1.4400e1 + (1.7571e-2 * weight) + (-8.5714e-7 * pow(weight, 2))
     }
     
     private func takeoffMaxPAModel(weight: Double, temp: Double) -> Double {
