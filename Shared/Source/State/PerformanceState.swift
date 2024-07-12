@@ -241,23 +241,12 @@ class PerformanceState: ObservableObject {
     }
 
     private func findAirport(id: String) throws -> Airport? {
-        let results = try PersistentContainer.shared.viewContext.fetch(byIDRequest(id: id))
+        let results = try PersistentContainer.shared.viewContext.fetch(Airport.byIDRequest(id: id))
         guard results.count == 1 else {
             Self.logger.error("Couldn't find exactly one airport with ID '\(id)'")
             return nil
         }
         return results[0]
-    }
-
-    private func byIDRequest(id: String) -> NSFetchRequest<Airport> {
-        let request = NSFetchRequest<Airport>(entityName: "Airport")
-        request.fetchLimit = 1
-        request.includesPropertyValues = true
-        request.includesSubentities = true
-        request.returnsObjectsAsFaults = false
-        let predicate = NSPredicate(format: "id == %@", id)
-        request.predicate = predicate
-        return request
     }
 }
 
