@@ -5,22 +5,24 @@ import SwiftNASR
 fileprivate let groupDefaults = UserDefaults(suiteName: "group.codes.tim.TOLD")!
 
 extension Defaults.Keys {
-    static let emptyWeight = Key<Double>("emptyWeight", default: 3550) // lbs
-    static let fuelDensity = Key<Double>("fuelDensity", default: 6.71) // lb/gal
-    static let safetyFactor = Key<Double>("safetyFactor", default: 1.0)
-    static let updatedThrustSchedule = Key<Bool>("updatedThrustSchedule", default: false)
+    static let emptyWeight = Key<Double>("SF50_emptyWeight", default: 3550, suite: groupDefaults) // lbs
+    static let fuelDensity = Key<Double>("SF50_fuelDensity", default: 6.71, suite: groupDefaults) // lb/gal
+    static let safetyFactor = Key<Double>("SF50_safetyFactor", default: 1.0, suite: groupDefaults)
+    static let updatedThrustSchedule = Key<Bool>("SF50_updatedThrustSchedule", default: false, suite: groupDefaults)
     
     static let favoriteAirports = Key<Set<String>>("favoriteAirports", default: [])
     static let recentAirports = Key<Array<String>>("recentAirports", default: [])
     
-    static let payload = Key<Double>("payload", default: 0.0) // lbs
+    static let payload = Key<Double>("SF50_payload", default: 0.0) // lbs
+    static let takeoffFuel = Key<Double>("SF50_takeoffFuel", default: 0.0, suite: groupDefaults) // gal
+    static let landingFuel = Key<Double>("SF50_landingFuel", default: 0.0, suite: groupDefaults) // gal
     
-    static let takeoffAirport = Key<String?>("takeoffAirport") // site #
-    static let landingAirport = Key<String?>("landingAirport") // site #
+    static let takeoffAirport = Key<String?>("SF50_takeoffAirport", suite: groupDefaults) // site #
+    static let landingAirport = Key<String?>("SF50_landingAirport", suite: groupDefaults) // site #
     
     static let lastCycleLoaded = Key<Cycle?>("lastCycleLoaded", suite: groupDefaults)
     static let schemaVersion = Key<Int>("schemaVersion", default: 0, suite: groupDefaults)
-    static let initialSetupComplete = Key<Bool>("initialSetupComplete", default: false, suite: groupDefaults)
+    static let initialSetupComplete = Key<Bool>("SF50_initialSetupComplete", default: false, suite: groupDefaults)
 }
 
 enum Offscale {
