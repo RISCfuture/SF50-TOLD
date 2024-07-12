@@ -65,10 +65,6 @@
 		01535DE225A2FD0800AC0F5F /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
 		01535DE325A2FD0800AC0F5F /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
 		015373F72610286D0098B529 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 015373F62610286D0098B529 /* Alamofire */; };
-		0158291625BC0F8100AA0CC4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158291525BC0F8100AA0CC4 /* SettingsState.swift */; };
-		0158291725BC0F8100AA0CC4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158291525BC0F8100AA0CC4 /* SettingsState.swift */; };
-		0158291825BC0F8100AA0CC4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158291525BC0F8100AA0CC4 /* SettingsState.swift */; };
-		0158291925BC0F8100AA0CC4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158291525BC0F8100AA0CC4 /* SettingsState.swift */; };
 		015A392E25C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A392D25C3A64B00FEFDBF /* DecimalFieldModifier.swift */; };
 		015A392F25C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A392D25C3A64B00FEFDBF /* DecimalFieldModifier.swift */; };
 		015A393025C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A392D25C3A64B00FEFDBF /* DecimalFieldModifier.swift */; };
@@ -393,7 +389,6 @@
 		014808ED25AAF4910041A90D /* AirportDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportDataLoader.swift; sourceTree = "<group>"; };
 		014F100A25AAAD410081EAC3 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueFormatter.swift; sourceTree = "<group>"; };
-		0158291525BC0F8100AA0CC4 /* SettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsState.swift; sourceTree = "<group>"; };
 		015A392D25C3A64B00FEFDBF /* DecimalFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalFieldModifier.swift; sourceTree = "<group>"; };
 		01629C72294D56E2005A6DAC /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		01641E8E2806641300BBD18C /* Array+Unique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Unique.swift"; sourceTree = "<group>"; };
@@ -697,7 +692,6 @@
 				0191C05D25B2BF7800C4B810 /* AppState.swift */,
 				01750AC725B27C2D00555CDB /* PerformanceState.swift */,
 				0191C06A25B2C02900C4B810 /* SectionState.swift */,
-				0158291525BC0F8100AA0CC4 /* SettingsState.swift */,
 				017B6699258898DA00AA2DE9 /* WeatherState.swift */,
 			);
 			path = State;
@@ -1174,7 +1168,6 @@
 				01E2A1EB25ABA7D20076CC84 /* LoadingView.swift in Sources */,
 				01A6DB1425AD76BE00A3341F /* AirportRow.swift in Sources */,
 				01641E952806677800BBD18C /* RecentsView.swift in Sources */,
-				0158291625BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				017B669A258898DA00AA2DE9 /* WeatherState.swift in Sources */,
 				011A95A627E477D500F3A127 /* NOTAMView.swift in Sources */,
 				0135A8A525874C3B00892558 /* Global.swift in Sources */,
@@ -1209,7 +1202,6 @@
 				01C133F225AD6BBA00AE33C5 /* RunwayPicker.swift in Sources */,
 				0105D5CC28123F49003EA0AA /* ContaminationView.swift in Sources */,
 				0135A8C02587599300892558 /* WeatherPicker.swift in Sources */,
-				0158291725BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				0135A83825872EDE00892558 /* WeatherService.swift in Sources */,
 				0135A7EF2587091800892558 /* ContentView.swift in Sources */,
 				01B79FD825AC4BF70037C0C6 /* ErrorView.swift in Sources */,
@@ -1289,7 +1281,6 @@
 				01D4FA5728D7869400AC322B /* CircularProgressView.swift in Sources */,
 				016A0B4027E5D60300F16C21 /* VxClimbView.swift in Sources */,
 				016A0B3627E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
-				0158291825BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				016C736225AE40120008455F /* SearchField.swift in Sources */,
 				01E83CEB27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				016C736325AE40120008455F /* WeatherRow.swift in Sources */,
@@ -1364,7 +1355,6 @@
 				01D4FA5828D7869400AC322B /* CircularProgressView.swift in Sources */,
 				016A0B4127E5D60300F16C21 /* VxClimbView.swift in Sources */,
 				016A0B3727E5D53700F16C21 /* TakeoffGroundRollView.swift in Sources */,
-				0158291925BC0F8100AA0CC4 /* SettingsState.swift in Sources */,
 				016C738725AE40200008455F /* SearchField.swift in Sources */,
 				01E83CEC27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				016C738825AE40200008455F /* WeatherRow.swift in Sources */,

@@ -1,7 +1,10 @@
 import Foundation
 import SwiftUI
+import Defaults
 
 struct ContentView: View {
+    @Default(.initialSetupComplete) var initialSetupComplete
+    
     @ObservedObject var state: AppState
     @ObservedObject var service: AirportLoadingService
     
@@ -16,8 +19,8 @@ struct ContentView: View {
                         decompressProgress: state.airportLoadingService.decompressProgress,
                         processingProgress: state.airportLoadingService.processingProgress)
             .padding(.all, 20)
-        } else if !state.settings.initialSetupComplete {
-            WelcomeView(state: state.settings)
+        } else if !initialSetupComplete {
+            WelcomeView()
         } else if service.needsLoad {
             LoadingConsentView(service: service)
         } else {
@@ -28,7 +31,7 @@ struct ContentView: View {
                 LandingView(state: state.landing).tabItem {
                     Label("Landing", image: "Landing")
                 }.tag(2)
-                SettingsView(state: state.settings).tabItem {
+                SettingsView().tabItem {
                     Label("Settings", systemImage: "gear")
                 }.tag(3)
                 AboutView().tabItem {

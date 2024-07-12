@@ -10,7 +10,6 @@ class AppState: ObservableObject {
 
     @Published private(set) var takeoff: SectionState
     @Published private(set) var landing: SectionState
-    @Published private(set) var settings = SettingsState()
 
     var airportLoadingService: AirportLoadingService
 

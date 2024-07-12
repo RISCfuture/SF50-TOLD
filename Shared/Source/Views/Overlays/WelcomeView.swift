@@ -1,16 +1,19 @@
 import SwiftUI
+import Defaults
 
 enum Model {
     case g1, g2, g2Plus
 }
 
 struct WelcomeView: View {
+    @Default(.updatedThrustSchedule) var updatedThrustSchedule
+    @Default(.initialSetupComplete) var initialSetupComplete
+    @Default(.emptyWeight) var emptyWeight
+    
     @State private var model: Model = .g2
-    @State private var updatedThrustSchedule = false
+    @State private var g2UseUpdatedThrustSchedule = false
     @State private var showForm = false
     @State private var formOpacity = 0.0
-    
-    @ObservedObject var state: SettingsState
     
     var body: some View {
         VStack {
@@ -45,7 +48,7 @@ struct WelcomeView: View {
                     
                     if model == .g2 {
                         VStack(alignment: .leading) {
-                            Toggle("Use Updated Thrust Schedule", isOn: $state.updatedThrustSchedule)
+                            Toggle("Use Updated Thrust Schedule", isOn: $g2UseUpdatedThrustSchedule)
                             Text("Turn this setting on if your Vision Jet has SB5X-72-01 completed (G2+ equivalent).")
                                 .font(.system(size: 11))
                                 .fixedSize(horizontal: false, vertical: true)
@@ -56,7 +59,7 @@ struct WelcomeView: View {
                         Text("Empty Weight")
                         Spacer()
                         DecimalField("Weight",
-                                     value: $state.emptyWeight,
+                                     value: $emptyWeight,
                                      formatter: numberFormatter(precision: 0, minimum: 0, maximum: maxLandingWeight),
                                      suffix: "lbs")
                     }
@@ -65,11 +68,11 @@ struct WelcomeView: View {
                 
                 Button("Continue") {
                     switch model {
-                        case .g1: state.updatedThrustSchedule = false
-                        case .g2: state.updatedThrustSchedule = updatedThrustSchedule
-                        case .g2Plus: state.updatedThrustSchedule = true
+                        case .g1: updatedThrustSchedule = false
+                        case .g2: updatedThrustSchedule = g2UseUpdatedThrustSchedule
+                        case .g2Plus: updatedThrustSchedule = true
                     }
-                    state.initialSetupComplete = true
+                initialSetupComplete = true
                 }.opacity(formOpacity)
             }
         }
@@ -85,5 +88,5 @@ struct WelcomeView: View {
 }
 
 #Preview {
-    WelcomeView(state: SettingsState())
+    WelcomeView()
 }
