@@ -62,6 +62,11 @@
 		014808EF25AAF4910041A90D /* AirportDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014808ED25AAF4910041A90D /* AirportDataLoader.swift */; };
 		014F100B25AAAD410081EAC3 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014F100A25AAAD410081EAC3 /* SearchField.swift */; };
 		014F100C25AAAD410081EAC3 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014F100A25AAAD410081EAC3 /* SearchField.swift */; };
+		0152FEA82C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */; };
+		0152FEA92C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */; };
+		0152FEAA2C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */; };
+		0152FEAB2C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */; };
+		0152FEAC2C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */; };
 		01535DE225A2FD0800AC0F5F /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
 		01535DE325A2FD0800AC0F5F /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
 		015373F72610286D0098B529 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 015373F62610286D0098B529 /* Alamofire */; };
@@ -71,10 +76,6 @@
 		015A393125C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015A392D25C3A64B00FEFDBF /* DecimalFieldModifier.swift */; };
 		015A393625C3A73100FEFDBF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E2A1EA25ABA7D20076CC84 /* LoadingView.swift */; };
 		015A393B25C3A73D00FEFDBF /* LoadingConsentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01698D1425C148B8002D44A0 /* LoadingConsentView.swift */; };
-		01629C73294D56E2005A6DAC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01629C72294D56E2005A6DAC /* LocationManager.swift */; };
-		01629C74294D56E2005A6DAC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01629C72294D56E2005A6DAC /* LocationManager.swift */; };
-		01629C75294D56E2005A6DAC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01629C72294D56E2005A6DAC /* LocationManager.swift */; };
-		01629C76294D56E2005A6DAC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01629C72294D56E2005A6DAC /* LocationManager.swift */; };
 		01641E8F2806641300BBD18C /* Array+Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E8E2806641300BBD18C /* Array+Unique.swift */; };
 		01641E922806668A00BBD18C /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E912806668A00BBD18C /* FavoritesView.swift */; };
 		01641E932806668A00BBD18C /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01641E912806668A00BBD18C /* FavoritesView.swift */; };
@@ -388,9 +389,9 @@
 		014808DA25AAEEF10041A90D /* Schema.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Schema.xcdatamodel; sourceTree = "<group>"; };
 		014808ED25AAF4910041A90D /* AirportDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportDataLoader.swift; sourceTree = "<group>"; };
 		014F100A25AAAD410081EAC3 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestAirportPublisher.swift; sourceTree = "<group>"; };
 		01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueFormatter.swift; sourceTree = "<group>"; };
 		015A392D25C3A64B00FEFDBF /* DecimalFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalFieldModifier.swift; sourceTree = "<group>"; };
-		01629C72294D56E2005A6DAC /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		01641E8E2806641300BBD18C /* Array+Unique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Unique.swift"; sourceTree = "<group>"; };
 		01641E912806668A00BBD18C /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		01641E942806677800BBD18C /* RecentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsView.swift; sourceTree = "<group>"; };
@@ -711,7 +712,7 @@
 				01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */,
 				01E83CED27FD3B4D001342BF /* Performance */,
 				0135A83625872EDE00892558 /* WeatherService.swift */,
-				01629C72294D56E2005A6DAC /* LocationManager.swift */,
+				0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1107,7 +1108,6 @@
 				01FC1F5C280F50CE0066E374 /* Airport.swift in Sources */,
 				010F675827E9B99C00BDBDB0 /* Cycle+Defaults.swift in Sources */,
 				0179866725C280C40031A453 /* RawWeather.swift in Sources */,
-				01629C73294D56E2005A6DAC /* LocationManager.swift in Sources */,
 				01D7DA6C25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				016A0B0F27E5BE7200F16C21 /* Color+Assets.swift in Sources */,
 				0166FC9625BFFDA7006F7258 /* View Functions.swift in Sources */,
@@ -1159,6 +1159,7 @@
 				015A392E25C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
 				0105D5CB28123F49003EA0AA /* ContaminationView.swift in Sources */,
 				019CC28425B91C0F00FEA895 /* DecimalField.swift in Sources */,
+				0152FEA82C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */,
 				01F7EB9E25BBFA2A00CE5024 /* ConfigurationView.swift in Sources */,
 				0135A7EC2587091800892558 /* SF50_TOLDApp.swift in Sources */,
 				01FC1F41280E7F7E0066E374 /* NearestView.swift in Sources */,
@@ -1224,7 +1225,6 @@
 				01641E9C28066C2F00BBD18C /* ListResults.swift in Sources */,
 				0135A87E258748DF00892558 /* LandingView.swift in Sources */,
 				0191C05F25B2BF7800C4B810 /* AppState.swift in Sources */,
-				01629C74294D56E2005A6DAC /* LocationManager.swift in Sources */,
 				015A393625C3A73100FEFDBF /* LoadingView.swift in Sources */,
 				016A0B0027E5358100F16C21 /* NOTAM.swift in Sources */,
 				015A392F25C3A64B00FEFDBF /* DecimalFieldModifier.swift in Sources */,
@@ -1251,6 +1251,7 @@
 				0135A8A625874C3B00892558 /* Global.swift in Sources */,
 				016A0B2F27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				0166FC9725BFFDA7006F7258 /* View Functions.swift in Sources */,
+				0152FEA92C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */,
 				01FC1F5D280F50CE0066E374 /* Airport.swift in Sources */,
 				01D2C8F125D126C10036B6FE /* Weather.swift in Sources */,
 				017B66912588980F00AA2DE9 /* PerformanceModelG1.swift in Sources */,
@@ -1284,6 +1285,7 @@
 				016C736225AE40120008455F /* SearchField.swift in Sources */,
 				01E83CEB27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				016C736325AE40120008455F /* WeatherRow.swift in Sources */,
+				0152FEAA2C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */,
 				016C736425AE40120008455F /* AirportRow.swift in Sources */,
 				01F59A2125AE63AC0055E81B /* PerformanceView.swift in Sources */,
 				0166FCA525C00C16006F7258 /* TapToDismiss.swift in Sources */,
@@ -1316,7 +1318,6 @@
 				016C736F25AE40120008455F /* WeatherService.swift in Sources */,
 				016A0B2B27E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
 				016A0B2127E5D15F00F16C21 /* VREFView.swift in Sources */,
-				01629C75294D56E2005A6DAC /* LocationManager.swift in Sources */,
 				01FC1F5E280F50CE0066E374 /* Airport.swift in Sources */,
 				016A0B0127E5358100F16C21 /* NOTAM.swift in Sources */,
 				016C737125AE40120008455F /* AirportDataLoader.swift in Sources */,
@@ -1358,6 +1359,7 @@
 				016C738725AE40200008455F /* SearchField.swift in Sources */,
 				01E83CEC27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				016C738825AE40200008455F /* WeatherRow.swift in Sources */,
+				0152FEAB2C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */,
 				016C738925AE40200008455F /* AirportRow.swift in Sources */,
 				01F59A2225AE63AC0055E81B /* PerformanceView.swift in Sources */,
 				0166FCA625C00C16006F7258 /* TapToDismiss.swift in Sources */,
@@ -1390,7 +1392,6 @@
 				016C739425AE40200008455F /* WeatherService.swift in Sources */,
 				016A0B2C27E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
 				016A0B2227E5D15F00F16C21 /* VREFView.swift in Sources */,
-				01629C76294D56E2005A6DAC /* LocationManager.swift in Sources */,
 				01FC1F5F280F50CE0066E374 /* Airport.swift in Sources */,
 				016A0B0227E5358100F16C21 /* NOTAM.swift in Sources */,
 				016C739625AE40200008455F /* AirportDataLoader.swift in Sources */,

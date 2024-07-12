@@ -12,7 +12,7 @@ fileprivate enum AirportPickerTabs {
 struct AirportPicker: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @State fileprivate var tabIndex: AirportPickerTabs = .favorites
-    @StateObject fileprivate var locationManager = LocationManager()
+    @StateObject fileprivate var nearestAirport = NearestAirportPublisher()
 
     var onSelect: (Airport) -> Void
     
@@ -21,8 +21,10 @@ struct AirportPicker: View {
             Picker("Tab", selection: $tabIndex) {
                 Text("Favorites").tag(AirportPickerTabs.favorites)
                 Text("Recents").tag(AirportPickerTabs.recents)
-                if locationManager.isAuthorized {
-                    Text("Nearest").tag(AirportPickerTabs.nearest)
+                if let authStatus = nearestAirport.authorizationStatus {
+                    if authStatus == .authorizedAlways || authStatus == .authorizedWhenInUse {
+                        Text("Nearest").tag(AirportPickerTabs.nearest)
+                    }
                 }
                 Text("Search").tag(AirportPickerTabs.search)
             }
@@ -32,7 +34,7 @@ struct AirportPicker: View {
             switch (tabIndex) {
                 case .favorites: FavoritesView(onSelect: selectAndDismiss)
                 case .recents: RecentsView(onSelect: selectAndDismiss)
-                case .nearest: NearestView(locationManager: locationManager, onSelect: selectAndDismiss)
+                case .nearest: NearestView(nearestAirport: nearestAirport, onSelect: selectAndDismiss)
                 case .search: SearchView(onSelect: selectAndDismiss)
             }
         }.onAppear {
