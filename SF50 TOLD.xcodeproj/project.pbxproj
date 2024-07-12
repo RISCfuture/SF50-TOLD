@@ -272,6 +272,11 @@
 		01D7DA6D25D5034D005938DD /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */; };
 		01D7DA6E25D5034D005938DD /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */; };
 		01D7DA6F25D5034D005938DD /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */; };
+		01D939D62C41124100D753A5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D939D52C41124100D753A5 /* WeatherValues.swift */; };
+		01D939D72C41124100D753A5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D939D52C41124100D753A5 /* WeatherValues.swift */; };
+		01D939D82C41124100D753A5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D939D52C41124100D753A5 /* WeatherValues.swift */; };
+		01D939D92C41124100D753A5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D939D52C41124100D753A5 /* WeatherValues.swift */; };
+		01D939DA2C41124100D753A5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D939D52C41124100D753A5 /* WeatherValues.swift */; };
 		01DB7BC428510FE0003CC8EF /* SwiftMETAR in Frameworks */ = {isa = PBXBuildFile; productRef = 01DB7BC328510FE0003CC8EF /* SwiftMETAR */; };
 		01DB7BC628510FE6003CC8EF /* SwiftMETAR in Frameworks */ = {isa = PBXBuildFile; productRef = 01DB7BC528510FE6003CC8EF /* SwiftMETAR */; };
 		01DD6D9F25B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */; };
@@ -439,6 +444,7 @@
 		01D4FA5428D7869300AC322B /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		01D4FA5928D7BFE000AC322B /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		01D7DA6B25D5034D005938DD /* OffscaleWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffscaleWarningView.swift; sourceTree = "<group>"; };
+		01D939D52C41124100D753A5 /* WeatherValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherValues.swift; sourceTree = "<group>"; };
 		01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportLoadingService.swift; sourceTree = "<group>"; };
 		01E2A1EA25ABA7D20076CC84 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		01E83CE827FD3969001342BF /* PerformanceModelG2+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PerformanceModelG2+.swift"; sourceTree = "<group>"; };
@@ -784,6 +790,7 @@
 			isa = PBXGroup;
 			children = (
 				01D2C8EF25D126C10036B6FE /* Weather.swift */,
+				01D939D52C41124100D753A5 /* WeatherValues.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1125,6 +1132,7 @@
 				01535DE225A2FD0800AC0F5F /* ValueFormatter.swift in Sources */,
 				016A0B2927E5D25500F16C21 /* LandingDistanceView.swift in Sources */,
 				0135A8BF2587599300892558 /* WeatherPicker.swift in Sources */,
+				01D939D62C41124100D753A5 /* WeatherValues.swift in Sources */,
 				0135A83725872EDE00892558 /* WeatherService.swift in Sources */,
 				0135A7EE2587091800892558 /* ContentView.swift in Sources */,
 				0179867025C280D30031A453 /* WeatherForm.swift in Sources */,
@@ -1250,6 +1258,7 @@
 				017B669B258898DA00AA2DE9 /* WeatherState.swift in Sources */,
 				0135A8A625874C3B00892558 /* Global.swift in Sources */,
 				016A0B2F27E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
+				01D939D72C41124100D753A5 /* WeatherValues.swift in Sources */,
 				0166FC9725BFFDA7006F7258 /* View Functions.swift in Sources */,
 				0152FEA92C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */,
 				01FC1F5D280F50CE0066E374 /* Airport.swift in Sources */,
@@ -1286,6 +1295,7 @@
 				01E83CEB27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				016C736325AE40120008455F /* WeatherRow.swift in Sources */,
 				0152FEAA2C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */,
+				01D939D82C41124100D753A5 /* WeatherValues.swift in Sources */,
 				016C736425AE40120008455F /* AirportRow.swift in Sources */,
 				01F59A2125AE63AC0055E81B /* PerformanceView.swift in Sources */,
 				0166FCA525C00C16006F7258 /* TapToDismiss.swift in Sources */,
@@ -1360,6 +1370,7 @@
 				01E83CEC27FD3969001342BF /* PerformanceModelG2+.swift in Sources */,
 				016C738825AE40200008455F /* WeatherRow.swift in Sources */,
 				0152FEAB2C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */,
+				01D939D92C41124100D753A5 /* WeatherValues.swift in Sources */,
 				016C738925AE40200008455F /* AirportRow.swift in Sources */,
 				01F59A2225AE63AC0055E81B /* PerformanceView.swift in Sources */,
 				0166FCA625C00C16006F7258 /* TapToDismiss.swift in Sources */,
