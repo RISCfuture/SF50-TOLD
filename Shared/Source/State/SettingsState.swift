@@ -7,6 +7,7 @@ class SettingsState: ObservableObject {
     @Published var fuelDensity = Defaults[.fuelDensity]
     @Published var safetyFactor = Defaults[.safetyFactor]
     @Published var updatedThrustSchedule = Defaults[.updatedThrustSchedule]
+    @Published var initialSetupComplete = Defaults[.initialSetupComplete]
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -15,5 +16,6 @@ class SettingsState: ObservableObject {
         $fuelDensity.sink { Defaults[.fuelDensity] = $0 }.store(in: &cancellables)
         $safetyFactor.sink { Defaults[.safetyFactor] = $0 }.store(in: &cancellables)
         $updatedThrustSchedule.sink { Defaults[.updatedThrustSchedule] = $0 }.store(in: &cancellables)
+        $initialSetupComplete.sink { Defaults[.initialSetupComplete] = $0 }.store(in: &cancellables)
     }
 }

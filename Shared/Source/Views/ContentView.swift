@@ -16,6 +16,8 @@ struct ContentView: View {
                         decompressProgress: state.airportLoadingService.decompressProgress,
                         processingProgress: state.airportLoadingService.processingProgress)
             .padding(.all, 20)
+        } else if !state.settings.initialSetupComplete {
+            WelcomeView(state: state.settings)
         } else if service.needsLoad {
             LoadingConsentView(service: service)
         } else {

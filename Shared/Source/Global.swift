@@ -20,6 +20,7 @@ extension Defaults.Keys {
     
     static let lastCycleLoaded = Key<Cycle?>("lastCycleLoaded", suite: groupDefaults)
     static let schemaVersion = Key<Int>("schemaVersion", default: 0, suite: groupDefaults)
+    static let initialSetupComplete = Key<Bool>("initialSetupComplete", default: false, suite: groupDefaults)
 }
 
 enum Offscale {
