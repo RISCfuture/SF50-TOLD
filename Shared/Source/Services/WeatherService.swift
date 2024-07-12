@@ -55,29 +55,36 @@ fileprivate class WeatherLoader<T> {
                         self.logger.notice("Loading \(self.url): status \(HTTPResponse.statusCode)")
                         throw WeatherDownloadError.badStatusCode(HTTPResponse.statusCode)
                     }
-                    
-                    self.logger.notice("Loading \(self.url): complete")
-                    guard let data = response.data else { throw WeatherDownloadError.noData }
-                    let unzippedData = try data.gunzipped()
-                    guard let str = String(data: unzippedData, encoding: .ascii) else {
-                        throw WeatherDownloadError.unexpectedEncoding
-                    }
-                    
-                    guard let csv = try? CSV<Enumerated>(string: str) else {
-                        throw WeatherDownloadError.badCSV
-                    }
-                    let wx: Dictionary<String, WeatherResult<T>> = csv.rows.filter { !$0[1].isEmpty && $0[1] != "station_id" }.reduce(Dictionary()) { dict, row in
-                        var dict = dict
-                        do {
-                            dict[row[1]] = .some(try self.parse(row[0]))
-                        } catch {
-                            dict[row[1]] = .error(error, raw: row[0])
-                        }
-                        return dict
-                    }
-                    self.subject.value = .finished(wx)
                 } catch {
                     self.subject.value = .error(error)
+                }
+                
+                loadingQueue.async {
+                    do {
+                        self.logger.notice("Loading \(self.url): complete")
+                        
+                        guard let data = response.data else { throw WeatherDownloadError.noData }
+                        let unzippedData = try data.gunzipped()
+                        guard let str = String(data: unzippedData, encoding: .ascii) else {
+                            throw WeatherDownloadError.unexpectedEncoding
+                        }
+                        
+                        guard let csv = try? CSV<Enumerated>(string: str) else {
+                            throw WeatherDownloadError.badCSV
+                        }
+                        let wx: Dictionary<String, WeatherResult<T>> = csv.rows.filter { !$0[1].isEmpty && $0[1] != "station_id" }.reduce(Dictionary()) { dict, row in
+                            var dict = dict
+                            do {
+                                dict[row[1]] = .some(try self.parse(row[0]))
+                            } catch {
+                                dict[row[1]] = .error(error, raw: row[0])
+                            }
+                            return dict
+                        }
+                        self.subject.value = .finished(wx)
+                    } catch {
+                        self.subject.value = .error(error)
+                    }
                 }
             }
         }
@@ -99,10 +106,10 @@ enum FetchState<Value> {
 
 class WeatherService: ObservableObject {
     static let instance = WeatherService()
-
+    
     private static let METAR_URL = URL(string: "https://aviationweather.gov/data/cache/metars.cache.csv.gz")!
     private static let TAF_URL = URL(string: "https://aviationweather.gov/data/cache/tafs.cache.csv.gz")!
-
+    
     private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "WeatherService")
     
     private let METARLoader: WeatherLoader<METAR>
@@ -127,7 +134,7 @@ class WeatherService: ObservableObject {
         reachability.stopListening()
         reachable.send(completion: .finished)
     }
-
+    
     func conditionsFor(airport: Airport, date: Date) -> AnyPublisher<(FetchState<(WeatherResult<METAR>, WeatherResult<TAF>)>), Never> {
         let fakeICAO = airport.icao ?? "K\(airport.lid!)"
         return Publishers.CombineLatest(
