@@ -3,8 +3,6 @@ import SwiftMETAR
 import Combine
 
 
-var standardTemperature = 15.04
-var standardSLP = 29.921
 fileprivate var METARUpdatePeriod: TimeInterval = 3600
 
 class WeatherState: ObservableObject {

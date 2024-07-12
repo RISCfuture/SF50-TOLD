@@ -83,4 +83,7 @@ let minTemperature = -40.0 // °C
 let maxTemperature = 50.0 // °C
 let tailwindLimit: UInt = 10 // kts
 
+var standardTemperature = 15.04
+var standardSLP = 29.921
+
 let latestSchemaVersion = 2
