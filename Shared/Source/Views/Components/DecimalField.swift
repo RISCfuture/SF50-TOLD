@@ -122,7 +122,7 @@ struct DecimalField : View {
                     
                     // Synchronize `textValue` with `value`; can't be done earlier
                     self.textValue = self.formatter.string(from: NSDecimalNumber(floatLiteral: value)) ?? ""
-                }.onChange(of: value) { value in
+                }.onChange(of: value) { (_, value) in
                     self.textValue = self.formatter.string(from: NSDecimalNumber(floatLiteral: value)) ?? ""
                 }
             .decimalField()
