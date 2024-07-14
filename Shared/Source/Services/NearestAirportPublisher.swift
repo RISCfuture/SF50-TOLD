@@ -41,7 +41,6 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations.debugDescription)
         Task.detached(priority: .background) {
             guard let coordinate = locations.first?.coordinate else { return }
             let nearestAirportID = await self.findNearestAirportID(to: coordinate)
@@ -55,7 +54,6 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
-        print(error)
         RunLoop.main.perform {
             self.location = nil
             self.errorText = error.localizedDescription
@@ -88,7 +86,6 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
     private func location() async -> CLLocationCoordinate2D {
         return await withCheckedContinuation { continuation in
             $location.sink { location in
-                print(location.debugDescription)
                 guard let location = location else { return }
                 continuation.resume(with: .success(location))
             }.store(in: &cancellables)
@@ -107,7 +104,6 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
                 request.predicate = self.predicate(coordinate: coordinate)
                 do {
                     let airports = try request.execute().sorted { self.compareDistances($0, $1, reference: reference) }
-                    print(airports.count)
                     continuation.resume(returning: airports.first?.id)
                 } catch (let error) {
                     Self.logger.error("Error loading airports: \(error.localizedDescription)")
