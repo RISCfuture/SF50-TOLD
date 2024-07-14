@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 import Dispatch
-import OSLog
+import Logging
 import Alamofire
 import SwiftCSV
 import Gzip
@@ -18,7 +18,7 @@ fileprivate class WeatherLoader<T> {
     private let url: URL
     private let parse: ((String) throws -> T)
     
-    private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "WeatherLoader")
+    private let logger = Logger(label: "codes.tim.SF50-TOLD.WeatherLoader")
     
     init(url: URL, parse: @escaping ((String) throws -> T)) {
         self.url = url
@@ -41,18 +41,24 @@ fileprivate class WeatherLoader<T> {
     func reload() {
         loadingQueue.async {
             self.subject.value = .loading
-            self.logger.notice("Loading \(self.url): starting")
+            self.logger.debug("reload(): starting")
             AF.request(self.url).response(queue: loadingQueue) { response in
                 do {
                     if let error = response.error {
-                        self.logger.notice("Loading \(self.url): error \(error)")
+                        self.logger.error("reload(): error", metadata: [
+                            "url": "\(self.url)",
+                            "error": "\(error.localizedDescription)"
+                        ])
                         throw error
                     }
                     guard let HTTPResponse = response.response else {
                         throw WeatherDownloadError.badResponse
                     }
                     guard HTTPResponse.statusCode == 200 else {
-                        self.logger.notice("Loading \(self.url): status \(HTTPResponse.statusCode)")
+                        self.logger.error("reload(): bad status", metadata: [
+                            "url": "\(self.url)",
+                            "status": "\(HTTPResponse.statusCode)"
+                        ])
                         throw WeatherDownloadError.badStatusCode(HTTPResponse.statusCode)
                     }
                 } catch {
@@ -61,7 +67,9 @@ fileprivate class WeatherLoader<T> {
                 
                 loadingQueue.async {
                     do {
-                        self.logger.notice("Loading \(self.url): complete")
+                        self.logger.debug("reload(): complete", metadata: [
+                            "url": "\(self.url)",
+                        ])
                         
                         guard let data = response.data else { throw WeatherDownloadError.noData }
                         let unzippedData = try data.gunzipped()
@@ -111,7 +119,7 @@ class WeatherService: ObservableObject {
     private static let allTAFsURL = URL(string: "https://aviationweather.gov/data/cache/tafs.cache.csv.gz")!
     private static let airportWeatherURLTemplate = "https://aviationweather.gov/api/data/metar?ids=%{icao}&format=raw&taf=true"
     
-    private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "WeatherService")
+    private static let logger = Logger(label: "codes.tim.SF50-TOLD.WeatherService")
     
     private let METARLoader: WeatherLoader<METAR>
     private let TAFLoader: WeatherLoader<TAF>
@@ -137,12 +145,17 @@ class WeatherService: ObservableObject {
     }
     
     func loadWeatherFor(airport: Airport) async -> (METAR?, TAF?) {
-        Self.logger.info("Loading weather for \(airport.lid!)…")
+        Self.logger.debug("loadWeatherFor(): starting", metadata: [
+            "airport": "\(airport.lid ?? airport.id ?? "<unknown>")"
+        ])
         
         let fakeICAO = airport.icao ?? "K\(airport.lid!)"
         let URL_String = Self.airportWeatherURLTemplate.replacingOccurrences(of: "%{icao}", with: fakeICAO)
         guard let url = URL(string: URL_String) else {
-            Self.logger.error("Invalid URL: \(URL_String))")
+            Self.logger.error("loadWeatherFor(): invalid URL", metadata: [
+                "airport": "\(airport.lid ?? airport.id ?? "<unknown>")",
+                "url": "\(URL_String)"
+            ])
             return (nil, nil)
         }
         
@@ -150,14 +163,20 @@ class WeatherService: ObservableObject {
             let (data, _) = try await URLSession.shared.data(from: url)
             
             guard let weatherStr = String(data: data, encoding: .ascii) else {
-                Self.logger.error("Response not ASCII-formatted")
+                Self.logger.error("loadWeatherFor(): bad ASCII response", metadata: [
+                    "airport": "\(airport.lid ?? airport.id ?? "<unknown>")",
+                    "url": "\(url.absoluteString)"
+                ])
                 return (nil, nil)
             }
-            Self.logger.info("Result: \(weatherStr)")
+            Self.logger.debug("loadWeatherFor(): loaded data", metadata: [
+                "airport": "\(airport.lid ?? airport.id ?? "<unknown>")",
+                "data": "\(weatherStr)"
+            ])
             
             let lines = weatherStr.components(separatedBy: .newlines)
             guard !lines.isEmpty else {
-                Self.logger.error("Empty response")
+                Self.logger.error("loadWeatherFor(): empty response")
                 return (nil, nil)
             }
             
@@ -166,7 +185,10 @@ class WeatherService: ObservableObject {
             
             return (metar, taf)
         } catch {
-            Self.logger.error("Error: \(error)")
+            Self.logger.error("loadWeatherFor(): error", metadata: [
+                "airport": "\(airport.lid ?? airport.id ?? "<unknown>")",
+                "error": "\(error.localizedDescription)"
+            ])
             return (nil, nil)
         }
     }

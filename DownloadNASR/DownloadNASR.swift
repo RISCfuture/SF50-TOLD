@@ -32,28 +32,29 @@ final class DownloadNASR: AsyncParsableCommand {
     }
     
     func run() async throws {
-        let logger = Logger(label: "codes.tim.SF50-TOLD")
+        let logger = Logger(label: "codes.tim.SF50-TOLD.DownloadNASR")
+        configureLogLevel()
         
         let nasr = NASR(loader: ArchiveDataDownloader(cycle: cycle))
-        logger.info("Loading…")
+        logger.notice("Loading…")
         try await _ = nasr.load()
-        logger.info("Parsing airports…")
+        logger.notice("Parsing airports…")
         try await _ = nasr.parseAirports(errorHandler: {
-            logger.error("Parse error: \($0.localizedDescription)")
+            logger.error("Parse error", metadata: ["error": "\($0.localizedDescription)"])
             return true
         })
         
-        logger.info("Writing to file…")
+        logger.notice("Writing to file…")
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .binary
         let data = try encoder.encode(nasr.data)
         try data.write(to: outputLocation.appendingPathComponent("\(cycle).plist"))
         
-        logger.info("Compressing…")
+        logger.notice("Compressing…")
         let compressedData = try (data as NSData).compressed(using: .lzma)
         try compressedData.write(to: outputLocation.appendingPathComponent("\(cycle).plist.lzma"))
         
-        logger.info("Complete")
+        logger.notice("Complete")
     }
 }
 

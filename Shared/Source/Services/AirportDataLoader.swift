@@ -1,6 +1,6 @@
 import Foundation
 import CoreData
-import OSLog
+import Logging
 import SwiftNASR
 
 class AirportDataLoader: ObservableObject {
@@ -10,7 +10,7 @@ class AirportDataLoader: ObservableObject {
     @Published private(set) var decompressProgress = StepProgress.pending
     @Published private(set) var processingProgress = StepProgress.pending
     
-    private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "AirportDataLoader")
+    private let logger = Logger(label: "codes.tim.SF50-TOLD.AirportDataLoader")
     private let queue = DispatchQueue(label: "SF50-TOLD.AirportService", qos: .background)
     
     private var dataURL: URL {
@@ -19,6 +19,7 @@ class AirportDataLoader: ObservableObject {
     private let decoder = PropertyListDecoder()
     
     func loadNASR() async throws -> Cycle? {
+        logger.debug("loadNASR(): starting")
         DispatchQueue.main.async {
             self.downloadProgress = .indeterminate
             self.decompressProgress = .pending
@@ -43,6 +44,7 @@ class AirportDataLoader: ObservableObject {
             }
         }
         
+        logger.debug("loadNASR(): decompressing")
         DispatchQueue.main.async {
             self.downloadProgress = .complete
             self.decompressProgress = .indeterminate
@@ -51,12 +53,15 @@ class AirportDataLoader: ObservableObject {
         let data = try (compressedData as NSData).decompressed(using: .lzma)
         let nasr = try decoder.decode(NASRData.self, from: data as Data)
         
+        logger.debug("loadNASR(): loading")
         DispatchQueue.main.async {
             self.decompressProgress = .complete
             self.processingProgress = .indeterminate
         }
         
         try await loadAirports(nasr)
+        
+        logger.debug("loadNASR(): complete")
         DispatchQueue.main.async { self.processingProgress = .complete }
         
         return nasr.cycle

@@ -2,7 +2,7 @@ import Foundation
 import Combine
 import Defaults
 import CoreData
-import OSLog
+import Logging
 import UIKit
 
 class PerformanceState: ObservableObject {
@@ -43,7 +43,7 @@ class PerformanceState: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "PerformanceState")
+    private static let logger = Logger(label: "codes.tim.SF50-TOLD.PerformanceState")
 
     var elevation: Double {
         Double(runway?.elevation ?? airport?.elevation ?? 0.0)
@@ -250,7 +250,7 @@ class PerformanceState: ObservableObject {
     private func findAirport(id: String) throws -> Airport? {
         let results = try PersistentContainer.shared.viewContext.fetch(Airport.byIDRequest(id: id))
         guard results.count == 1 else {
-            Self.logger.error("Couldn't find exactly one airport with ID '\(id)'")
+            Self.logger.error("findAirport(): couldn't find exactly one airport with ID", metadata: ["id": "\(id)"])
             return nil
         }
         return results[0]

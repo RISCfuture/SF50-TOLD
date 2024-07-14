@@ -3,7 +3,8 @@ import Combine
 import CoreData
 import CoreLocation
 import MapKit
-import OSLog
+import Logging
+
 fileprivate let earthRadius = 21638.0 // NM
 fileprivate func degreeLonLen(lat: Double) -> Double {
     cos(deg2rad(lat))*(earthRadius/360)
@@ -17,7 +18,7 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
     
     private let manager = CLLocationManager()
     private var cancellables = Set<AnyCancellable>()
-    private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "NearestAirportPublisher")
+    private static let logger = Logger(label: "codes.tim.SF50-TOLD.NearestAirportPublisher")
     
     var predicate: NSPredicate { predicate(coordinate: location) }
     
@@ -54,6 +55,7 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
+        Self.logger.error("CLLocationManager: error", metadata: ["error": "\(error.localizedDescription)"])
         RunLoop.main.perform {
             self.location = nil
             self.errorText = error.localizedDescription
@@ -106,7 +108,7 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
                     let airports = try request.execute().sorted { self.compareDistances($0, $1, reference: reference) }
                     continuation.resume(returning: airports.first?.id)
                 } catch (let error) {
-                    Self.logger.error("Error loading airports: \(error.localizedDescription)")
+                    Self.logger.error("findNearestAirportID(): error", metadata: ["error": "\(error.localizedDescription)"])
                     continuation.resume(returning: nil)
                 }
             }

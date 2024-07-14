@@ -1,7 +1,6 @@
 import Foundation
 import Combine
 import Defaults
-import OSLog
 import SwiftMETAR
 
 class SectionState: ObservableObject {
