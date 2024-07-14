@@ -10,7 +10,7 @@ fileprivate enum AirportPickerTabs {
 }
 
 struct AirportPicker: View {
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.presentationMode) var mode
     @State fileprivate var tabIndex: AirportPickerTabs = .favorites
     @StateObject fileprivate var nearestAirport = NearestAirportPublisher()
 

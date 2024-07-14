@@ -6,7 +6,7 @@ struct NOTAMView: View {
     var operation: Operation
     
     @ObservedObject var notam: NOTAM
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.presentationMode) var presentationMode
     
     @State var coreDataError: NSError? = nil
     private var hasCoreDataError: Binding<Bool> {
