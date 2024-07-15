@@ -4,7 +4,7 @@ import CoreData
 struct RunwayPicker: View {
     @ObservedObject var airport: Airport
     @ObservedObject var weather: WeatherState
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @Environment(\.presentationMode) var mode
     @Binding var flaps: FlapSetting?
     
     var operation: Operation

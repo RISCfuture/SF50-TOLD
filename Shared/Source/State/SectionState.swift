@@ -1,7 +1,6 @@
 import Foundation
 import Combine
 import Defaults
-import OSLog
 import SwiftMETAR
 
 class SectionState: ObservableObject {
@@ -51,7 +50,7 @@ class SectionState: ObservableObject {
         
         self.performance.weatherState.beginLoading()
         if force { reloadWeather() }
-        WeatherService.instance.conditionsFor(airport: airport, date: date)
+        WeatherService.instance.cachedConditionsFor(airport: airport, date: date)
             .receive(on: weatherQueue)
             .sink { state in
                 guard !self.weatherLoadingCanceled else { return }
@@ -76,7 +75,7 @@ class SectionState: ObservableObject {
             }
             .store(in: &airportChangeCancellables)
         
-        WeatherService.instance.conditionsFor(airport: airport, date: date)
+        WeatherService.instance.cachedConditionsFor(airport: airport, date: date)
             .receive(on: weatherQueue)
             .sink { state in
                 guard !self.weatherLoadingCanceled else { return }

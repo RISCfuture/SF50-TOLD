@@ -1,6 +1,7 @@
 import SwiftUI
 import BackgroundTasks
 import CoreData
+import Logging
 #if canImport(UIKit)
 import UIKit
 #endif
@@ -33,6 +34,11 @@ struct SF50_TOLDApp: App {
     #if canImport(UIKit)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #endif
+    
+    init() {
+        configureLogLevel()
+        reloadOnAirportChange()
+    }
     
     var body: some Scene {
         WindowGroup {

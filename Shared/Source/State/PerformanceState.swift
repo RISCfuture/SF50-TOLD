@@ -2,7 +2,7 @@ import Foundation
 import Combine
 import Defaults
 import CoreData
-import OSLog
+import Logging
 import UIKit
 
 class PerformanceState: ObservableObject {
@@ -14,7 +14,6 @@ class PerformanceState: ObservableObject {
     @Published var runway: Runway? = nil
     @Published var flaps: FlapSetting!
     @Published private(set) var weatherState = WeatherState()
-    @Published var fuel = 0.0
     @Published var weight = 0.0
 
     @Published private(set) var takeoffRoll: Interpolation? = nil
@@ -28,15 +27,23 @@ class PerformanceState: ObservableObject {
     @Published private(set) var notamCount = 0
 
     @Published private(set) var error: Swift.Error? = nil
+    
+    var fuelDefault: Defaults.Key<Double> {
+        switch operation {
+            case .takeoff: return .takeoffFuel
+            case .landing: return .landingFuel
+        }
+    }
 
     private var emptyWeight: Double { Defaults[.emptyWeight] }
     private var fuelDensity: Double { Defaults[.fuelDensity] }
     private var payload: Double { Defaults[.payload] }
+    private var fuel: Double { Defaults[fuelDefault] }
     private var updatedThrustSchedule: Bool { Defaults[.updatedThrustSchedule] }
 
     private var cancellables = Set<AnyCancellable>()
 
-    private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "PerformanceState")
+    private static let logger = Logger(label: "codes.tim.SF50-TOLD.PerformanceState")
 
     var elevation: Double {
         Double(runway?.elevation ?? airport?.elevation ?? 0.0)
@@ -163,7 +170,7 @@ class PerformanceState: ObservableObject {
         Publishers.CombineLatest4(Defaults.publisher(.emptyWeight).map(\.newValue),
                                   Defaults.publisher(.payload).map(\.newValue),
                                   Defaults.publisher(.fuelDensity).map(\.newValue),
-                                  $fuel)
+                                  Defaults.publisher(fuelDefault).map(\.newValue))
             .map { (emptyWeight: Double, payload: Double, fuelDensity: Double, fuel: Double) -> Double in
                 emptyWeight + payload + fuel*fuelDensity
             }.receive(on: DispatchQueue.main).assign(to: &$weight)
@@ -241,23 +248,12 @@ class PerformanceState: ObservableObject {
     }
 
     private func findAirport(id: String) throws -> Airport? {
-        let results = try PersistentContainer.shared.viewContext.fetch(byIDRequest(id: id))
+        let results = try PersistentContainer.shared.viewContext.fetch(Airport.byIDRequest(id: id))
         guard results.count == 1 else {
-            Self.logger.error("Couldn't find exactly one airport with ID '\(id)'")
+            Self.logger.error("findAirport(): couldn't find exactly one airport with ID", metadata: ["id": "\(id)"])
             return nil
         }
         return results[0]
-    }
-
-    private func byIDRequest(id: String) -> NSFetchRequest<Airport> {
-        let request = NSFetchRequest<Airport>(entityName: "Airport")
-        request.fetchLimit = 1
-        request.includesPropertyValues = true
-        request.includesSubentities = true
-        request.returnsObjectsAsFaults = false
-        let predicate = NSPredicate(format: "id == %@", id)
-        request.predicate = predicate
-        return request
     }
 }
 

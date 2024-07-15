@@ -21,4 +21,15 @@ extension Airport {
         mapPoints[id!] = point
         return point
     }
+    
+    static func byIDRequest(id: String) -> NSFetchRequest<Airport> {
+        let request = NSFetchRequest<Airport>(entityName: "Airport")
+        request.fetchLimit = 1
+        request.includesPropertyValues = true
+        request.includesSubentities = true
+        request.returnsObjectsAsFaults = false
+        let predicate = NSPredicate(format: "id == %@", id)
+        request.predicate = predicate
+        return request
+    }
 }
