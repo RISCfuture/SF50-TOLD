@@ -151,6 +151,8 @@ class PerformanceState: ObservableObject {
     deinit {
         for c in cancellables { c.cancel() }
     }
+    
+    func setDateToNow() { date = Date() }
 
     private func initializeModel() {
         let model: PerformanceModel = updatedThrustSchedule ?
