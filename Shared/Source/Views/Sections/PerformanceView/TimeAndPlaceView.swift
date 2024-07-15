@@ -26,7 +26,7 @@ struct TimeAndPlaceView: View {
     var body: some View {
         Section(header: Text(moment)) {
             HStack {
-                DatePicker("Date", selection: $state.date)
+                DatePicker("Date", selection: $state.date, in: Date()...)
                 if abs(state.date.timeIntervalSinceNow) >= 60 {
                     Button(action: { state.setDateToNow() }) { Text("Now") }
                 }
@@ -118,7 +118,7 @@ struct TimeAndPlaceView_Previews: PreviewProvider {
     
     private static var state: PerformanceState {
         let state = PerformanceState(operation: .takeoff)
-        state.date = Date(timeIntervalSinceNow: -3600)
+        state.date = Date(timeIntervalSinceNow: 3600)
         state.airport = SQL
         
         state.weatherState.temperature = .value(9)
