@@ -65,6 +65,7 @@ struct WidgetGridView_Previews: PreviewProvider {
     
     private static let OAK = { () -> Airport in
         let a = Airport(entity: model.entitiesByName["Airport"]!, insertInto: nil)
+        a.id = "OAK"
         a.lid = "OAK"
         a.name = "Metro Oakland Intl"
         a.runways = [rwy28L, rwy28R, rwy33, rwy30]

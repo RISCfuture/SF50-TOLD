@@ -53,6 +53,7 @@ struct RunwayPicker_Previews: PreviewProvider {
     
     private static let SQL = { () -> Airport in
         let a = Airport(entity: model.entitiesByName["Airport"]!, insertInto: nil)
+        a.id = "SQL"
         a.lid = "SQL"
         a.name = "San Carlos"
         a.runways = [rwy30, rwy12]
