@@ -37,6 +37,7 @@ struct SF50_TOLDApp: App {
     
     init() {
         configureLogLevel()
+        reloadOnAirportChange()
     }
     
     var body: some Scene {

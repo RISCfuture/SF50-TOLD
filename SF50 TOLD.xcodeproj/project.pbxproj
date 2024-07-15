@@ -60,14 +60,50 @@
 		014808DC25AAEEF10041A90D /* Airports.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 014808D925AAEEF10041A90D /* Airports.xcdatamodeld */; };
 		014808EE25AAF4910041A90D /* AirportDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014808ED25AAF4910041A90D /* AirportDataLoader.swift */; };
 		014808EF25AAF4910041A90D /* AirportDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014808ED25AAF4910041A90D /* AirportDataLoader.swift */; };
-		014A5FB72C43988500CF5543 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Logging.swift */; };
-		014A5FB82C43988500CF5543 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Logging.swift */; };
-		014A5FB92C43988500CF5543 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Logging.swift */; };
-		014A5FBA2C43988500CF5543 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Logging.swift */; };
-		014A5FBB2C43988500CF5543 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Logging.swift */; };
-		014A5FBC2C43988500CF5543 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Logging.swift */; };
+		014A5FB72C43988500CF5543 /* Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Bootstrap.swift */; };
+		014A5FB82C43988500CF5543 /* Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Bootstrap.swift */; };
+		014A5FB92C43988500CF5543 /* Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Bootstrap.swift */; };
+		014A5FBA2C43988500CF5543 /* Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Bootstrap.swift */; };
+		014A5FBB2C43988500CF5543 /* Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Bootstrap.swift */; };
+		014A5FBC2C43988500CF5543 /* Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014A5FB62C43988500CF5543 /* Bootstrap.swift */; };
 		014F100B25AAAD410081EAC3 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014F100A25AAAD410081EAC3 /* SearchField.swift */; };
 		014F100C25AAAD410081EAC3 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014F100A25AAAD410081EAC3 /* SearchField.swift */; };
+		0152FE3E2C40FEF5001E29D6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0152FE3D2C40FEF5001E29D6 /* WidgetKit.framework */; };
+		0152FE402C40FEF5001E29D6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0152FE3F2C40FEF5001E29D6 /* SwiftUI.framework */; };
+		0152FE432C40FEF5001E29D6 /* SF50_RunwaysBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE422C40FEF5001E29D6 /* SF50_RunwaysBundle.swift */; };
+		0152FE472C40FEF5001E29D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0152FE462C40FEF5001E29D6 /* Assets.xcassets */; };
+		0152FE4B2C40FEF5001E29D6 /* SF50 RunwaysExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0152FE3C2C40FEF5001E29D6 /* SF50 RunwaysExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0152FE6D2C40FFE8001E29D6 /* PerformanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE522C40FFE8001E29D6 /* PerformanceCalculator.swift */; };
+		0152FE712C40FFE8001E29D6 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE552C40FFE8001E29D6 /* Entry.swift */; };
+		0152FE732C40FFE8001E29D6 /* OffscaleWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE572C40FFE8001E29D6 /* OffscaleWarningView.swift */; };
+		0152FE752C40FFE8001E29D6 /* RunwayGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE592C40FFE8001E29D6 /* RunwayGridItem.swift */; };
+		0152FE772C40FFE8001E29D6 /* RunwayPlaceholderGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE5A2C40FFE8001E29D6 /* RunwayPlaceholderGridItem.swift */; };
+		0152FE792C40FFE8001E29D6 /* WidgetGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE5B2C40FFE8001E29D6 /* WidgetGridView.swift */; };
+		0152FE7B2C40FFE8001E29D6 /* RunwayListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE5D2C40FFE8001E29D6 /* RunwayListItem.swift */; };
+		0152FE7D2C40FFE8001E29D6 /* RunwayPlaceholderListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE5E2C40FFE8001E29D6 /* RunwayPlaceholderListItem.swift */; };
+		0152FE7F2C40FFE8001E29D6 /* WidgetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE5F2C40FFE8001E29D6 /* WidgetListView.swift */; };
+		0152FE852C40FFE8001E29D6 /* SelectedAirportWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE632C40FFE8001E29D6 /* SelectedAirportWidgetEntryView.swift */; };
+		0152FE872C40FFE8001E29D6 /* WidgetAirportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE642C40FFE8001E29D6 /* WidgetAirportView.swift */; };
+		0152FE892C40FFE8001E29D6 /* WidgetNoAirportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE652C40FFE8001E29D6 /* WidgetNoAirportView.swift */; };
+		0152FE8D2C40FFE8001E29D6 /* TOLDProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE682C40FFE8001E29D6 /* TOLDProvider.swift */; };
+		0152FE8F2C40FFE8001E29D6 /* SelectedAirportPerformanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FE692C40FFE8001E29D6 /* SelectedAirportPerformanceWidget.swift */; };
+		0152FE932C410035001E29D6 /* SwiftMETAR in Frameworks */ = {isa = PBXBuildFile; productRef = 0152FE922C410035001E29D6 /* SwiftMETAR */; };
+		0152FE942C410251001E29D6 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A83625872EDE00892558 /* WeatherService.swift */; };
+		0152FE952C410255001E29D6 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D2C8EF25D126C10036B6FE /* Weather.swift */; };
+		0152FE972C410295001E29D6 /* NOTAM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0AFE27E5358100F16C21 /* NOTAM.swift */; };
+		0152FE982C410297001E29D6 /* Runway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B0927E5B98900F16C21 /* Runway.swift */; };
+		0152FE992C410299001E29D6 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC1F5B280F50CE0066E374 /* Airport.swift */; };
+		0152FE9A2C41029D001E29D6 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4FA5928D7BFE000AC322B /* Errors.swift */; };
+		0152FE9B2C4102B7001E29D6 /* Airports.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 014808D925AAEEF10041A90D /* Airports.xcdatamodeld */; };
+		0152FE9C2C4102D5001E29D6 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8A425874C3B00892558 /* Global.swift */; };
+		0152FE9D2C410302001E29D6 /* WindComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D265B525AD808600322A45 /* WindComponents.swift */; };
+		0152FE9E2C410304001E29D6 /* Cycle+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010F675727E9B99C00BDBDB0 /* Cycle+Defaults.swift */; };
+		0152FE9F2C410349001E29D6 /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A0B1827E5CD7B00F16C21 /* PersistentContainer.swift */; };
+		0152FEA02C410365001E29D6 /* ValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */; };
+		0152FEA22C4105D3001E29D6 /* PerformanceModelG1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B668F2588980F00AA2DE9 /* PerformanceModelG1.swift */; };
+		0152FEA32C4105D5001E29D6 /* PerformanceModelG2+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CE827FD3969001342BF /* PerformanceModelG2+.swift */; };
+		0152FEA42C4105D6001E29D6 /* PerformanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CEE27FD3B70001342BF /* PerformanceModel.swift */; };
+		0152FEA62C4105EF001E29D6 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0152FEA52C4105EF001E29D6 /* Defaults */; };
 		0152FEA82C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */; };
 		0152FEA92C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */; };
 		0152FEAA2C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */; };
@@ -283,10 +319,15 @@
 		01D939D82C41124100D753A5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D939D52C41124100D753A5 /* WeatherValues.swift */; };
 		01D939D92C41124100D753A5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D939D52C41124100D753A5 /* WeatherValues.swift */; };
 		01D939DA2C41124100D753A5 /* WeatherValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D939D52C41124100D753A5 /* WeatherValues.swift */; };
+		01D939DC2C41142A00D753A5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 01D939DB2C41142A00D753A5 /* Alamofire */; };
+		01D939DE2C41143E00D753A5 /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 01D939DD2C41143E00D753A5 /* Gzip */; };
+		01D939E02C41144400D753A5 /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 01D939DF2C41144400D753A5 /* SwiftCSV */; };
+		01D939E22C41144700D753A5 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 01D939E12C41144700D753A5 /* SwiftNASR */; };
 		01DB7BC428510FE0003CC8EF /* SwiftMETAR in Frameworks */ = {isa = PBXBuildFile; productRef = 01DB7BC328510FE0003CC8EF /* SwiftMETAR */; };
 		01DB7BC628510FE6003CC8EF /* SwiftMETAR in Frameworks */ = {isa = PBXBuildFile; productRef = 01DB7BC528510FE6003CC8EF /* SwiftMETAR */; };
 		01DCB9C32C4372A2003A64E7 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 01DCB9C22C4372A2003A64E7 /* Logging */; };
 		01DCB9C52C4372A7003A64E7 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 01DCB9C42C4372A7003A64E7 /* Logging */; };
+		01DCB9C62C4372B5003A64E7 /* SF50 RunwaysExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0152FE3C2C40FEF5001E29D6 /* SF50 RunwaysExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		01DCB9CB2C4372C5003A64E7 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 01DCB9CA2C4372C5003A64E7 /* Logging */; };
 		01DD6D9F25B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */; };
 		01DD6DA025B3F8D9004A2CA8 /* AirportLoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DD6D9E25B3F8D9004A2CA8 /* AirportLoadingService.swift */; };
@@ -356,9 +397,34 @@
 			remoteGlobalIDString = 0135A7D12587091700892558;
 			remoteInfo = "SF50 TOLD (macOS)";
 		};
+		0152FE492C40FEF5001E29D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0135A7BE2587091300892558 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0152FE3B2C40FEF5001E29D6;
+			remoteInfo = "SF50 RunwaysExtension";
+		};
+		01DCB9C72C4372B5003A64E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0135A7BE2587091300892558 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0152FE3B2C40FEF5001E29D6;
+			remoteInfo = "SF50 RunwaysExtension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0152FE4C2C40FEF5001E29D6 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0152FE4B2C40FEF5001E29D6 /* SF50 RunwaysExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01AEDA9A28D6F2D400F38948 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -367,6 +433,17 @@
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
+		};
+		01DCB9C92C4372B5003A64E7 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				01DCB9C62C4372B5003A64E7 /* SF50 RunwaysExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -402,8 +479,29 @@
 		013E94D725D73E8300084C10 /* SF50 TOLD.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SF50 TOLD.entitlements"; sourceTree = "<group>"; };
 		014808DA25AAEEF10041A90D /* Schema.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Schema.xcdatamodel; sourceTree = "<group>"; };
 		014808ED25AAF4910041A90D /* AirportDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportDataLoader.swift; sourceTree = "<group>"; };
-		014A5FB62C43988500CF5543 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		014A5FB62C43988500CF5543 /* Bootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootstrap.swift; sourceTree = "<group>"; };
 		014F100A25AAAD410081EAC3 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		0152FE3C2C40FEF5001E29D6 /* SF50 RunwaysExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SF50 RunwaysExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0152FE3D2C40FEF5001E29D6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		0152FE3F2C40FEF5001E29D6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		0152FE422C40FEF5001E29D6 /* SF50_RunwaysBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SF50_RunwaysBundle.swift; sourceTree = "<group>"; };
+		0152FE462C40FEF5001E29D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0152FE482C40FEF5001E29D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0152FE522C40FFE8001E29D6 /* PerformanceCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformanceCalculator.swift; sourceTree = "<group>"; };
+		0152FE552C40FFE8001E29D6 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		0152FE572C40FFE8001E29D6 /* OffscaleWarningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffscaleWarningView.swift; sourceTree = "<group>"; };
+		0152FE592C40FFE8001E29D6 /* RunwayGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunwayGridItem.swift; sourceTree = "<group>"; };
+		0152FE5A2C40FFE8001E29D6 /* RunwayPlaceholderGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunwayPlaceholderGridItem.swift; sourceTree = "<group>"; };
+		0152FE5B2C40FFE8001E29D6 /* WidgetGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetGridView.swift; sourceTree = "<group>"; };
+		0152FE5D2C40FFE8001E29D6 /* RunwayListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunwayListItem.swift; sourceTree = "<group>"; };
+		0152FE5E2C40FFE8001E29D6 /* RunwayPlaceholderListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunwayPlaceholderListItem.swift; sourceTree = "<group>"; };
+		0152FE5F2C40FFE8001E29D6 /* WidgetListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetListView.swift; sourceTree = "<group>"; };
+		0152FE632C40FFE8001E29D6 /* SelectedAirportWidgetEntryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedAirportWidgetEntryView.swift; sourceTree = "<group>"; };
+		0152FE642C40FFE8001E29D6 /* WidgetAirportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetAirportView.swift; sourceTree = "<group>"; };
+		0152FE652C40FFE8001E29D6 /* WidgetNoAirportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetNoAirportView.swift; sourceTree = "<group>"; };
+		0152FE682C40FFE8001E29D6 /* TOLDProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TOLDProvider.swift; sourceTree = "<group>"; };
+		0152FE692C40FFE8001E29D6 /* SelectedAirportPerformanceWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedAirportPerformanceWidget.swift; sourceTree = "<group>"; };
+		0152FEA12C4103EA001E29D6 /* SF50 RunwaysExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SF50 RunwaysExtension.entitlements"; sourceTree = "<group>"; };
 		0152FEA72C4109B5001E29D6 /* NearestAirportPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestAirportPublisher.swift; sourceTree = "<group>"; };
 		01535DE125A2FD0800AC0F5F /* ValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueFormatter.swift; sourceTree = "<group>"; };
 		015A392D25C3A64B00FEFDBF /* DecimalFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalFieldModifier.swift; sourceTree = "<group>"; };
@@ -518,6 +616,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0152FE392C40FEF5001E29D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01DCB9CB2C4372C5003A64E7 /* Logging in Frameworks */,
+				01D939DC2C41142A00D753A5 /* Alamofire in Frameworks */,
+				0152FEA62C4105EF001E29D6 /* Defaults in Frameworks */,
+				01D939E22C41144700D753A5 /* SwiftNASR in Frameworks */,
+				01D939DE2C41143E00D753A5 /* Gzip in Frameworks */,
+				0152FE402C40FEF5001E29D6 /* SwiftUI.framework in Frameworks */,
+				0152FE3E2C40FEF5001E29D6 /* WidgetKit.framework in Frameworks */,
+				0152FE932C410035001E29D6 /* SwiftMETAR in Frameworks */,
+				01D939E02C41144400D753A5 /* SwiftCSV in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01AEDA9928D6F2D400F38948 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -617,6 +731,7 @@
 		0135A7BD2587091300892558 = {
 			isa = PBXGroup;
 			children = (
+				0152FEA12C4103EA001E29D6 /* SF50 RunwaysExtension.entitlements */,
 				013E94D725D73E8300084C10 /* SF50 TOLD.entitlements */,
 				0135A7C22587091300892558 /* Shared */,
 				0135A7CC2587091700892558 /* iOS */,
@@ -625,6 +740,7 @@
 				0135A7DD2587091700892558 /* Tests iOS */,
 				0135A7E82587091800892558 /* Tests macOS */,
 				01AEDA9D28D6F2D400F38948 /* DownloadNASR */,
+				0152FE412C40FEF5001E29D6 /* SF50 Runways */,
 				0135A82A25872CB900892558 /* Frameworks */,
 				0135A7CB2587091700892558 /* Products */,
 			);
@@ -648,6 +764,7 @@
 				0135A7DA2587091700892558 /* Tests iOS.xctest */,
 				0135A7E52587091800892558 /* Tests macOS.xctest */,
 				01AEDA9C28D6F2D400F38948 /* DownloadNASR */,
+				0152FE3C2C40FEF5001E29D6 /* SF50 RunwaysExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -701,7 +818,7 @@
 				01DD6D7C25B3AC4E004A2CA8 /* Storage */,
 				018CF99B2682A53300F52821 /* Tasks */,
 				0135A86E2587482600892558 /* Views */,
-				014A5FB62C43988500CF5543 /* Logging.swift */,
+				014A5FB62C43988500CF5543 /* Bootstrap.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -720,6 +837,8 @@
 		0135A82A25872CB900892558 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0152FE3D2C40FEF5001E29D6 /* WidgetKit.framework */,
+				0152FE3F2C40FEF5001E29D6 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -748,6 +867,86 @@
 				01F7EBBB25BC0C1600CE5024 /* Styles */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0152FE412C40FEF5001E29D6 /* SF50 Runways */ = {
+			isa = PBXGroup;
+			children = (
+				0152FE462C40FEF5001E29D6 /* Assets.xcassets */,
+				0152FE482C40FEF5001E29D6 /* Info.plist */,
+				0152FE422C40FEF5001E29D6 /* SF50_RunwaysBundle.swift */,
+				0152FE6B2C40FFE8001E29D6 /* Source */,
+			);
+			path = "SF50 Runways";
+			sourceTree = "<group>";
+		};
+		0152FE532C40FFE8001E29D6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0152FE522C40FFE8001E29D6 /* PerformanceCalculator.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0152FE562C40FFE8001E29D6 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				0152FE552C40FFE8001E29D6 /* Entry.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		0152FE582C40FFE8001E29D6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0152FE572C40FFE8001E29D6 /* OffscaleWarningView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0152FE5C2C40FFE8001E29D6 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				0152FE592C40FFE8001E29D6 /* RunwayGridItem.swift */,
+				0152FE5A2C40FFE8001E29D6 /* RunwayPlaceholderGridItem.swift */,
+				0152FE5B2C40FFE8001E29D6 /* WidgetGridView.swift */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
+		0152FE602C40FFE8001E29D6 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				0152FE5D2C40FFE8001E29D6 /* RunwayListItem.swift */,
+				0152FE5E2C40FFE8001E29D6 /* RunwayPlaceholderListItem.swift */,
+				0152FE5F2C40FFE8001E29D6 /* WidgetListView.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		0152FE662C40FFE8001E29D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0152FE582C40FFE8001E29D6 /* Components */,
+				0152FE5C2C40FFE8001E29D6 /* Grid */,
+				0152FE602C40FFE8001E29D6 /* List */,
+				0152FE632C40FFE8001E29D6 /* SelectedAirportWidgetEntryView.swift */,
+				0152FE642C40FFE8001E29D6 /* WidgetAirportView.swift */,
+				0152FE652C40FFE8001E29D6 /* WidgetNoAirportView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0152FE6B2C40FFE8001E29D6 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				0152FE532C40FFE8001E29D6 /* Models */,
+				0152FE692C40FFE8001E29D6 /* SelectedAirportPerformanceWidget.swift */,
+				0152FE562C40FFE8001E29D6 /* Support */,
+				0152FE662C40FFE8001E29D6 /* Views */,
+				0152FE682C40FFE8001E29D6 /* TOLDProvider.swift */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 		01535DE025A2FCD200AC0F5F /* Helpers */ = {
@@ -909,10 +1108,12 @@
 				0135A7C62587091700892558 /* Sources */,
 				0135A7C72587091700892558 /* Frameworks */,
 				0135A7C82587091700892558 /* Resources */,
+				0152FE4C2C40FEF5001E29D6 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0152FE4A2C40FEF5001E29D6 /* PBXTargetDependency */,
 			);
 			name = "SF50 TOLD (iOS)";
 			packageProductDependencies = (
@@ -935,10 +1136,12 @@
 				0135A7CE2587091700892558 /* Sources */,
 				0135A7CF2587091700892558 /* Frameworks */,
 				0135A7D02587091700892558 /* Resources */,
+				01DCB9C92C4372B5003A64E7 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				01DCB9C82C4372B5003A64E7 /* PBXTargetDependency */,
 			);
 			name = "SF50 TOLD (macOS)";
 			packageProductDependencies = (
@@ -998,6 +1201,32 @@
 			productReference = 0135A7E52587091800892558 /* Tests macOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		0152FE3B2C40FEF5001E29D6 /* SF50 RunwaysExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0152FE4F2C40FEF5001E29D6 /* Build configuration list for PBXNativeTarget "SF50 RunwaysExtension" */;
+			buildPhases = (
+				0152FE382C40FEF5001E29D6 /* Sources */,
+				0152FE392C40FEF5001E29D6 /* Frameworks */,
+				0152FE3A2C40FEF5001E29D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SF50 RunwaysExtension";
+			packageProductDependencies = (
+				0152FE922C410035001E29D6 /* SwiftMETAR */,
+				0152FEA52C4105EF001E29D6 /* Defaults */,
+				01D939DB2C41142A00D753A5 /* Alamofire */,
+				01D939DD2C41143E00D753A5 /* Gzip */,
+				01D939DF2C41144400D753A5 /* SwiftCSV */,
+				01D939E12C41144700D753A5 /* SwiftNASR */,
+				01DCB9CA2C4372C5003A64E7 /* Logging */,
+			);
+			productName = "SF50 RunwaysExtension";
+			productReference = 0152FE3C2C40FEF5001E29D6 /* SF50 RunwaysExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		01AEDA9B28D6F2D400F38948 /* DownloadNASR */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01AEDAA228D6F2D400F38948 /* Build configuration list for PBXNativeTarget "DownloadNASR" */;
@@ -1027,7 +1256,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					0135A7C92587091700892558 = {
@@ -1043,6 +1272,9 @@
 					0135A7E42587091800892558 = {
 						CreatedOnToolsVersion = 12.2;
 						TestTargetID = 0135A7D12587091700892558;
+					};
+					0152FE3B2C40FEF5001E29D6 = {
+						CreatedOnToolsVersion = 15.4;
 					};
 					01AEDA9B28D6F2D400F38948 = {
 						CreatedOnToolsVersion = 14.0;
@@ -1077,6 +1309,7 @@
 				0135A7D92587091700892558 /* Tests iOS */,
 				0135A7E42587091800892558 /* Tests macOS */,
 				01AEDA9B28D6F2D400F38948 /* DownloadNASR */,
+				0152FE3B2C40FEF5001E29D6 /* SF50 RunwaysExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1115,6 +1348,14 @@
 			files = (
 				01FC1F4D280E9AD90066E374 /* InfoPlist.strings in Resources */,
 				01FC1F58280E9B080066E374 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0152FE3A2C40FEF5001E29D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0152FE472C40FEF5001E29D6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,7 +1412,7 @@
 				0135A874258748D400892558 /* TakeoffView.swift in Sources */,
 				0105D5C828123C5A003EA0AA /* ObstacleView.swift in Sources */,
 				01D265CC25AD99AF00322A45 /* WeatherRow.swift in Sources */,
-				014A5FB72C43988500CF5543 /* Logging.swift in Sources */,
+				014A5FB72C43988500CF5543 /* Bootstrap.swift in Sources */,
 				016A0B0A27E5B98900F16C21 /* Runway.swift in Sources */,
 				01F18D2625B198B6007D76BA /* LoadoutView.swift in Sources */,
 				010F675227E6CDAA00BDBDB0 /* LandingResultsView.swift in Sources */,
@@ -1277,7 +1518,7 @@
 				01D939D72C41124100D753A5 /* WeatherValues.swift in Sources */,
 				0166FC9725BFFDA7006F7258 /* View Functions.swift in Sources */,
 				0152FEA92C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */,
-				014A5FB82C43988500CF5543 /* Logging.swift in Sources */,
+				014A5FB82C43988500CF5543 /* Bootstrap.swift in Sources */,
 				01FC1F5D280F50CE0066E374 /* Airport.swift in Sources */,
 				01D2C8F125D126C10036B6FE /* Weather.swift in Sources */,
 				017B66912588980F00AA2DE9 /* PerformanceModelG1.swift in Sources */,
@@ -1329,7 +1570,7 @@
 				016C736925AE40120008455F /* LoadingView.swift in Sources */,
 				0191C06025B2BF7800C4B810 /* AppState.swift in Sources */,
 				0179866925C280C40031A453 /* RawWeather.swift in Sources */,
-				014A5FB92C43988500CF5543 /* Logging.swift in Sources */,
+				014A5FB92C43988500CF5543 /* Bootstrap.swift in Sources */,
 				016A0B3027E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				01D7DA6E25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				016C736A25AE40120008455F /* ErrorView.swift in Sources */,
@@ -1405,7 +1646,7 @@
 				016C738E25AE40200008455F /* LoadingView.swift in Sources */,
 				0191C06125B2BF7800C4B810 /* AppState.swift in Sources */,
 				0179866A25C280C40031A453 /* RawWeather.swift in Sources */,
-				014A5FBA2C43988500CF5543 /* Logging.swift in Sources */,
+				014A5FBA2C43988500CF5543 /* Bootstrap.swift in Sources */,
 				016A0B3127E5D2CA00F16C21 /* GoAroundClimbGradientView.swift in Sources */,
 				01D7DA6F25D5034D005938DD /* OffscaleWarningView.swift in Sources */,
 				016C738F25AE40200008455F /* ErrorView.swift in Sources */,
@@ -1446,12 +1687,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0152FE382C40FEF5001E29D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0152FE9C2C4102D5001E29D6 /* Global.swift in Sources */,
+				0152FE772C40FFE8001E29D6 /* RunwayPlaceholderGridItem.swift in Sources */,
+				0152FE732C40FFE8001E29D6 /* OffscaleWarningView.swift in Sources */,
+				014A5FBC2C43988500CF5543 /* Bootstrap.swift in Sources */,
+				0152FE872C40FFE8001E29D6 /* WidgetAirportView.swift in Sources */,
+				0152FE9F2C410349001E29D6 /* PersistentContainer.swift in Sources */,
+				0152FEA02C410365001E29D6 /* ValueFormatter.swift in Sources */,
+				0152FE9A2C41029D001E29D6 /* Errors.swift in Sources */,
+				0152FEA32C4105D5001E29D6 /* PerformanceModelG2+.swift in Sources */,
+				0152FEA22C4105D3001E29D6 /* PerformanceModelG1.swift in Sources */,
+				0152FEA42C4105D6001E29D6 /* PerformanceModel.swift in Sources */,
+				0152FE7F2C40FFE8001E29D6 /* WidgetListView.swift in Sources */,
+				0152FE9E2C410304001E29D6 /* Cycle+Defaults.swift in Sources */,
+				01D939DA2C41124100D753A5 /* WeatherValues.swift in Sources */,
+				0152FE712C40FFE8001E29D6 /* Entry.swift in Sources */,
+				0152FE752C40FFE8001E29D6 /* RunwayGridItem.swift in Sources */,
+				0152FE7B2C40FFE8001E29D6 /* RunwayListItem.swift in Sources */,
+				0152FE8D2C40FFE8001E29D6 /* TOLDProvider.swift in Sources */,
+				0152FE432C40FEF5001E29D6 /* SF50_RunwaysBundle.swift in Sources */,
+				0152FE7D2C40FFE8001E29D6 /* RunwayPlaceholderListItem.swift in Sources */,
+				0152FE992C410299001E29D6 /* Airport.swift in Sources */,
+				0152FE982C410297001E29D6 /* Runway.swift in Sources */,
+				0152FE9B2C4102B7001E29D6 /* Airports.xcdatamodeld in Sources */,
+				0152FE852C40FFE8001E29D6 /* SelectedAirportWidgetEntryView.swift in Sources */,
+				0152FE792C40FFE8001E29D6 /* WidgetGridView.swift in Sources */,
+				0152FE8F2C40FFE8001E29D6 /* SelectedAirportPerformanceWidget.swift in Sources */,
+				0152FEAC2C4109B5001E29D6 /* NearestAirportPublisher.swift in Sources */,
+				0152FE972C410295001E29D6 /* NOTAM.swift in Sources */,
+				0152FE6D2C40FFE8001E29D6 /* PerformanceCalculator.swift in Sources */,
+				0152FE892C40FFE8001E29D6 /* WidgetNoAirportView.swift in Sources */,
+				0152FE952C410255001E29D6 /* Weather.swift in Sources */,
+				0152FE942C410251001E29D6 /* WeatherService.swift in Sources */,
+				0152FE9D2C410302001E29D6 /* WindComponents.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01AEDA9828D6F2D400F38948 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				01AEDA9F28D6F2D400F38948 /* DownloadNASR.swift in Sources */,
-				014A5FBB2C43988500CF5543 /* Logging.swift in Sources */,
+				014A5FBB2C43988500CF5543 /* Bootstrap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1467,6 +1748,16 @@
 			isa = PBXTargetDependency;
 			target = 0135A7D12587091700892558 /* SF50 TOLD (macOS) */;
 			targetProxy = 0135A7E62587091800892558 /* PBXContainerItemProxy */;
+		};
+		0152FE4A2C40FEF5001E29D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0152FE3B2C40FEF5001E29D6 /* SF50 RunwaysExtension */;
+			targetProxy = 0152FE492C40FEF5001E29D6 /* PBXContainerItemProxy */;
+		};
+		01DCB9C82C4372B5003A64E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0152FE3B2C40FEF5001E29D6 /* SF50 RunwaysExtension */;
+			targetProxy = 01DCB9C72C4372B5003A64E7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1544,8 +1835,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1602,8 +1893,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1614,9 +1905,11 @@
 		0135A7F52587091800892558 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SF50 TOLD.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
@@ -1624,7 +1917,7 @@
 				INFOPLIST_FILE = iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "SF50 TOLD";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1632,6 +1925,7 @@
 				MARKETING_VERSION = 1.5.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
 				PRODUCT_NAME = "SF50 TOLD";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1641,9 +1935,11 @@
 		0135A7F62587091800892558 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SF50 TOLD.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
@@ -1651,7 +1947,7 @@
 				INFOPLIST_FILE = iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "SF50 TOLD";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1659,6 +1955,7 @@
 				MARKETING_VERSION = 1.5.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
 				PRODUCT_NAME = "SF50 TOLD";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1687,7 +1984,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.5.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
 				PRODUCT_NAME = "SF50 TOLD";
@@ -1718,7 +2015,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.5.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD";
 				PRODUCT_NAME = "SF50 TOLD";
@@ -1735,7 +2032,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1757,7 +2054,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1787,7 +2084,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "info.timothymorgan.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1810,12 +2107,84 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "info.timothymorgan.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = "SF50 TOLD (macOS)";
+			};
+			name = Release;
+		};
+		0152FE4D2C40FEF5001E29D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "SF50 RunwaysExtension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 22;
+				DEVELOPMENT_TEAM = 2NFSK2WB24;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SF50 Runways/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SF50 Runways";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.5.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.SF50-Runways";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0152FE4E2C40FEF5001E29D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "SF50 RunwaysExtension.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 22;
+				DEVELOPMENT_TEAM = 2NFSK2WB24;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SF50 Runways/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SF50 Runways";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.5.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.SF50-Runways";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -1828,7 +2197,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.DownloadNASR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1845,7 +2214,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.DownloadNASR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1897,6 +2266,15 @@
 			buildConfigurations = (
 				0135A7FE2587091800892558 /* Debug */,
 				0135A7FF2587091800892558 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0152FE4F2C40FEF5001E29D6 /* Build configuration list for PBXNativeTarget "SF50 RunwaysExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0152FE4D2C40FEF5001E29D6 /* Debug */,
+				0152FE4E2C40FEF5001E29D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2020,6 +2398,16 @@
 			package = 0135A893258749F500892558 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
 		};
+		0152FE922C410035001E29D6 /* SwiftMETAR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01DB7BC228510FA0003CC8EF /* XCRemoteSwiftPackageReference "SwiftMETAR" */;
+			productName = SwiftMETAR;
+		};
+		0152FEA52C4105EF001E29D6 /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0135A893258749F500892558 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
+		};
 		015373F62610286D0098B529 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 017ED159261027A9002C69DE /* XCRemoteSwiftPackageReference "Alamofire" */;
@@ -2064,6 +2452,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 01AEDAA528D6F33A00F38948 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
 			productName = ArgumentParser;
+		};
+		01D939DB2C41142A00D753A5 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 017ED159261027A9002C69DE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		01D939DD2C41143E00D753A5 /* Gzip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 012CBA1D2AF4B8410015270A /* XCRemoteSwiftPackageReference "GzipSwift" */;
+			productName = Gzip;
+		};
+		01D939DF2C41144400D753A5 /* SwiftCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 012CBA182AF4B2BA0015270A /* XCRemoteSwiftPackageReference "SwiftCSV" */;
+			productName = SwiftCSV;
+		};
+		01D939E12C41144700D753A5 /* SwiftNASR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
+			productName = SwiftNASR;
 		};
 		01DB7BC328510FE0003CC8EF /* SwiftMETAR */ = {
 			isa = XCSwiftPackageProductDependency;
