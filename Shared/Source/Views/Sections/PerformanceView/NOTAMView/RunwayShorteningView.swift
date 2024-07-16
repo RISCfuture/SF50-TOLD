@@ -27,6 +27,7 @@ struct RunwayShorteningView: View {
                 Text(shortenPrompt)
                 Spacer()
                 DecimalField("Distance", value: shortenBinding, formatter: formatter, suffix: "ft")
+                    .accessibilityIdentifier("distanceField")
             }
         }
     }

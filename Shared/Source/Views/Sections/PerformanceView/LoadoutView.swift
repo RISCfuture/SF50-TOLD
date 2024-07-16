@@ -22,6 +22,7 @@ struct LoadoutView: View {
                 Text("Payload")
                 Spacer()
                 DecimalField("Payload", value: payload, formatter: formatter, suffix: "lbs.")
+                    .accessibilityIdentifier("payloadField")
             }
             HStack {
                 Text("\(title) Fuel")
@@ -31,6 +32,7 @@ struct LoadoutView: View {
                              formatter: numberFormatter(precision: 0, minimum: 0),
                              suffix: "gal",
                              maximum: maxFuel)
+                .accessibilityIdentifier("fuelField")
             }
             HStack(spacing: 0) {
                 Text("\(title) Weight")

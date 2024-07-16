@@ -5,9 +5,9 @@ struct SearchField: View {
     @Binding var text: String
     @State private var isEditing = false
     
-    #if canImport(UIKit)
+#if canImport(UIKit)
     var backgroundColor = Color(.secondarySystemFill)
-    #endif
+#endif
     
     var body: some View {
         HStack {
@@ -15,9 +15,9 @@ struct SearchField: View {
                 .disableAutocorrection(true)
                 .padding(7)
                 .padding(.horizontal, 25)
-            #if canImport(UIKit)
+#if canImport(UIKit)
                 .background(backgroundColor)
-            #endif
+#endif
                 .cornerRadius(100)
                 .overlay(
                     HStack {
@@ -25,7 +25,7 @@ struct SearchField: View {
                             .foregroundColor(.gray)
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 8)
-
+                        
                         if isEditing {
                             Button(action: {
                                 self.text = ""
@@ -41,6 +41,7 @@ struct SearchField: View {
                 .onTapGesture {
                     self.isEditing = true
                 }
+                .accessibilityAddTraits(.isSearchField)
         }
     }
 }

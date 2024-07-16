@@ -33,6 +33,8 @@ struct AirportRow: View {
                         Defaults[.favoriteAirports].insert(airport.id!)
                     }
                 }
+                .accessibilityAddTraits(.isButton)
+                .accessibilityIdentifier("airportFaveButton")
             }
         }.contentShape(Rectangle())
             .onReceive(Defaults.publisher(.favoriteAirports), perform: { faves in

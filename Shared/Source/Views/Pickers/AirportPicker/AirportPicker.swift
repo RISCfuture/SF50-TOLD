@@ -30,6 +30,7 @@ struct AirportPicker: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal)
+            .accessibilityIdentifier("airportListPicker")
             
             switch (tabIndex) {
                 case .favorites: FavoritesView(onSelect: selectAndDismiss)

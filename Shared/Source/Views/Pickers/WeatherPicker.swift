@@ -20,7 +20,7 @@ struct WeatherPicker: View {
                     ProgressView().progressViewStyle(CircularProgressViewStyle())
                     Text("Loading weather…").foregroundColor(.secondary)
                     Spacer()
-                    Button("Cancel") { cancelDownload() }
+                    Button("Cancel") { cancelDownload() }.accessibilityIdentifier("cancelWeatherUpdateButton")
                 }
             } else {
                 WeatherSource(weather: state, downloadWeather: downloadWeather)

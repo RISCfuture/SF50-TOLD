@@ -20,9 +20,12 @@ struct ListResults: View {
             }
         } else {
             List(sortedAiports) { (airport: Airport) in
-                AirportRow(airport: airport, showFavoriteButton: true).onTapGesture {
-                    onSelect(airport)
-                }
+                AirportRow(airport: airport, showFavoriteButton: true)
+                    .onTapGesture {
+                        onSelect(airport)
+                    }
+                    .accessibility(addTraits: .isButton)
+                    .accessibilityIdentifier("airportRow-\(airport.id!)")
             }
         }
     }

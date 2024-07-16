@@ -32,7 +32,7 @@ struct ContaminationView: View {
                     Text("Slush/Wet Snow").tag("slushOrWetSnow")
                     Text("Dry Snow").tag("drySnow")
                     Text("Compact Snow").tag("compactSnow")
-                }
+                }.accessibilityIdentifier("contaminationTypePicker")
             }
             
             if notam.contaminationType == "waterOrSlush" || notam.contaminationType == "slushOrWetSnow" {
@@ -46,6 +46,7 @@ struct ContaminationView: View {
                     HStack {
                         Text(formatDepth(0)).foregroundColor(.secondary)
                         Slider(value: depthBinding, in: 0.0...0.5, step: 0.1)
+                            .accessibilityIdentifier("contaminationDepthSlider")
                         Text(formatDepth(0.5)).foregroundColor(.secondary)
                     }
                 }

@@ -38,6 +38,7 @@ struct ContentView: View {
                     Label("About", systemImage: "info.circle")
                 }.tag(4)
             }.tapToDismissKeyboard()
+                .accessibilityIdentifier("mainTabView")
         }
     }
 }

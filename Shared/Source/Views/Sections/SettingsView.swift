@@ -15,6 +15,7 @@ struct SettingsView: View {
                     Text("Turn this setting on when flying a G2+ Vision Jet or one with SB5X-72-01 completed.")
                         .font(.system(size: 11))
                         .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("updatedThrustScheduleToggle")
                 }
                 
                 HStack {
@@ -24,6 +25,7 @@ struct SettingsView: View {
                                  value: $emptyWeight,
                                  formatter: numberFormatter(precision: 0, minimum: 0, maximum: maxLandingWeight),
                                  suffix: "lbs")
+                    .accessibilityIdentifier("weightField")
                 }
                 
                 HStack {
@@ -33,6 +35,7 @@ struct SettingsView: View {
                                  value: $fuelDensity,
                                  formatter: numberFormatter(precision: 2, minimum: 0),
                                  suffix: "lbs/gal")
+                    .accessibilityIdentifier("fuelDensityField")
                 }
                 
                 HStack {
@@ -41,6 +44,7 @@ struct SettingsView: View {
                     DecimalField("Factor",
                                  value: $safetyFactor,
                                  formatter: numberFormatter(precision: 1, minimum: 1.0))
+                    .accessibilityIdentifier("safetyFactorField")
                 }
             }.navigationTitle("Settings")
         }.navigationViewStyle(navigationStyle)
