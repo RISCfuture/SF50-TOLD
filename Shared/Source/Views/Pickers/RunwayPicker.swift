@@ -22,10 +22,13 @@ struct RunwayPicker: View {
                           operation: operation,
                           wind: weather.wind,
                           crosswindLimit: crosswindLimitForFlapSetting(flaps),
-                          tailwindLimit: tailwindLimit).onTapGesture {
+                          tailwindLimit: tailwindLimit)
+                .onTapGesture {
                     onSelect(runway)
                     self.mode.wrappedValue.dismiss()
                 }
+                .accessibility(addTraits: .isButton)
+                .accessibilityIdentifier("runwayRow-\(runway.name ?? "unk")")
             }
         }
         .navigationTitle("Runway")

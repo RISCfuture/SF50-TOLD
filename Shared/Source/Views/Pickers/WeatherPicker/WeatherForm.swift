@@ -19,7 +19,7 @@ struct WeatherForm: View {
                              suffix: "°T",
                              onEditingChanged: { editing in
                     if editing { weather.source = .entered }
-                })
+                }).accessibilityIdentifier("windDirectionField")
                 Text("@").foregroundColor(.secondary)
                 DecimalField("Speed",
                              value: $weather.windSpeed,
@@ -29,6 +29,7 @@ struct WeatherForm: View {
                     if editing { weather.source = .entered }
                 })
                 .frame(maxWidth: 70)
+                .accessibilityIdentifier("windSpeedField")
             }
             
             HStack {
@@ -41,6 +42,7 @@ struct WeatherForm: View {
                     if editing { weather.source = .entered }
                 })
                 .multilineTextAlignment(.trailing)
+                .accessibilityIdentifier("tempField")
             }
             
             HStack {
@@ -53,6 +55,7 @@ struct WeatherForm: View {
                              onEditingChanged: { editing in
                     if editing { weather.source = .entered }
                 })
+                .accessibilityIdentifier("altimeterField")
             }
         }
     }

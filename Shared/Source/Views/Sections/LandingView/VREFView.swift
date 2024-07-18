@@ -5,7 +5,10 @@ struct VREFView: View {
     
     var body: some View {
         HStack {
-            Text("VREF")
+            Text("V")
+            + Text("REF")
+                .font(.system(size: 8.0))
+                .baselineOffset(-3.0)
             Spacer()
             InterpolationView(interpolation: state.vref, suffix: "kts")
         }

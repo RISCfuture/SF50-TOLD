@@ -4,7 +4,7 @@ import CoreData
 
 struct LandingView: View {
     @ObservedObject var state: SectionState
-        
+    
     var body: some View {
         NavigationView {
             Form {

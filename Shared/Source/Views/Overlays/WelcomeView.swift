@@ -44,11 +44,13 @@ struct WelcomeView: View {
                             Text("G2").tag(Model.g2)
                             Text("G2+").tag(Model.g2Plus)
                         }.pickerStyle(.segmented).frame(maxWidth: 200)
+                            .accessibilityIdentifier("modelPicker")
                     }
                     
                     if model == .g2 {
                         VStack(alignment: .leading) {
                             Toggle("Use Updated Thrust Schedule", isOn: $g2UseUpdatedThrustSchedule)
+                                .accessibilityIdentifier("updatedThrustScheduleToggle")
                             Text("Turn this setting on if your Vision Jet has SB5X-72-01 completed (G2+ equivalent).")
                                 .font(.system(size: 11))
                                 .fixedSize(horizontal: false, vertical: true)
@@ -62,6 +64,7 @@ struct WelcomeView: View {
                                      value: $emptyWeight,
                                      formatter: numberFormatter(precision: 0, minimum: 0, maximum: maxLandingWeight),
                                      suffix: "lbs")
+                        .accessibilityIdentifier("emptyWeightField")
                     }
                 }.opacity(formOpacity)
                 Spacer()
@@ -72,8 +75,9 @@ struct WelcomeView: View {
                         case .g2: updatedThrustSchedule = g2UseUpdatedThrustSchedule
                         case .g2Plus: updatedThrustSchedule = true
                     }
-                initialSetupComplete = true
+                    initialSetupComplete = true
                 }.opacity(formOpacity)
+                    .accessibilityIdentifier("continueButton")
             }
         }
         .onAppear {

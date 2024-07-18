@@ -27,8 +27,10 @@ struct TimeAndPlaceView: View {
         Section(header: Text(moment)) {
             HStack {
                 DatePicker("Date", selection: $state.date, in: Date()...)
+                    .accessibilityIdentifier("dateSelector")
                 if abs(state.date.timeIntervalSinceNow) >= 60 {
                     Button(action: { state.setDateToNow() }) { Text("Now") }
+                        .accessibilityIdentifier("dateNowButton")
                 }
             }
             
@@ -40,7 +42,7 @@ struct TimeAndPlaceView: View {
                         Text("Choose Airport").foregroundColor(.accentColor)
                     }
                 } icon: {}
-            }
+            }.accessibilityIdentifier("airportSelector")
             
             if let airport = state.airport {
                 NavigationLink(destination: RunwayPicker(airport: airport,
@@ -57,13 +59,13 @@ struct TimeAndPlaceView: View {
                             Text("Choose Runway").foregroundColor(.accentColor)
                         }
                     } icon: {}
-                }
+                }.accessibilityIdentifier("runwaySelector")
                 NavigationLink(destination: WeatherPicker(state: state.weatherState,
                                                           downloadWeather: downloadWeather,
                                                           cancelDownload: cancelDownload,
                                                           elevation: elevation)) {
                     WeatherRow(conditions: state.weatherState, elevation: state.elevation)
-                }
+                }.accessibilityIdentifier("weatherSelector")
             }
             
             if state.runway != nil {
@@ -71,7 +73,7 @@ struct TimeAndPlaceView: View {
                     Label {
                         Text(NOTAMTitle).foregroundColor(.primary)
                     } icon: {}
-                }
+                }.accessibilityIdentifier("NOTAMsSelector")
             }
         }
     }

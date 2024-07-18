@@ -39,11 +39,11 @@ struct LoadingConsentView: View {
             HStack(spacing: 20) {
                 Button("Download Airport Data") {
                     self.service.loadNASR()
-                }
+                }.accessibilityIdentifier("downloadDataButton")
                 if service.canSkip {
                     Button("Defer Until Later") {
                         self.service.loadNASRLater()
-                    }
+                    }.accessibilityIdentifier("deferDataButton")
                 }
             }
         }.padding()

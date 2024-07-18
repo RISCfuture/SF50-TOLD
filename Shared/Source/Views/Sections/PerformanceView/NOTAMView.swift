@@ -27,7 +27,7 @@ struct NOTAMView: View {
             Button("Clear NOTAMs") {
                 notam.clearFor(operation)
                 presentationMode.wrappedValue.dismiss()
-            }
+            }.accessibilityIdentifier("clearNOTAMsButton")
         }.navigationTitle("NOTAMs")
             .onDisappear {
                 do {

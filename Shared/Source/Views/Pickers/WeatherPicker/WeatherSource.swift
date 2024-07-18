@@ -61,7 +61,7 @@ struct WeatherSource: View {
                 } label: {
                     Text(downloadButtonTitle)
                         .foregroundColor(.accentColor).bold()
-                }
+                }.accessibilityIdentifier("updateWeatherButton")
             }
             
             if let observation = weather.observation {

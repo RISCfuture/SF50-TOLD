@@ -12,12 +12,14 @@ struct ObstacleView: View {
                 Text("Obstacle Height")
                 Spacer()
                 DecimalField("Height", value: $notam.obstacleHeight, formatter: formatter, suffix: "ft")
+                    .accessibilityIdentifier("obstacleHeightField")
             }
             
             HStack {
                 Text("Obstacle Distance")
                 Spacer()
                 DecimalField("Distance", value: $notam.obstacleDistance, formatter: formatter, suffix: "ft")
+                    .accessibilityIdentifier("obstacleDistanceField")
             }
         }
     }

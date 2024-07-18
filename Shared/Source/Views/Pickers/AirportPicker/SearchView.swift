@@ -20,6 +20,7 @@ struct SearchView: View {
     var body: some View {
         VStack(alignment: .leading) {
             SearchField(placeholder: "Find Airport", text: $filter)
+                .accessibilityIdentifier("searchAirportsField")
             SearchResults(airports: fetchAirports,
                           filterText: $filter,
                           sort: decreasingSimilarity,

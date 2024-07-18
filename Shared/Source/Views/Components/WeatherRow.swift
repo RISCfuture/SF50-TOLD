@@ -40,25 +40,30 @@ struct WeatherRow: View {
             HStack(spacing: 10) {
                 ProgressView().progressViewStyle(CircularProgressViewStyle())
                 Text("Loading weather…").foregroundColor(.secondary)
+                    .accessibilityIdentifier("loadingWeatherLabel")
             }
         } else if conditions.source == .ISA {
             if conditions.observationError != nil || conditions.forecastError != nil {
                 Text("Couldn’t load weather — using ISA").foregroundColor(.red)
+                    .accessibilityIdentifier("loadingWeatherFailedLabel")
             } else {
                 Text("No weather — using ISA").foregroundColor(.secondary)
+                    .accessibilityIdentifier("noWeatherLabel")
             }
         } else {
             HStack(spacing: 15) {
                 Label(windString(conditions.weather), systemImage: "wind")
-//                    .labelStyle(CompactLabelStyle(compact: windString(conditions.weather, compact: true)))
+                //                    .labelStyle(CompactLabelStyle(compact: windString(conditions.weather, compact: true)))
                     .foregroundColor(windColor)
                 Label(tempString(conditions.weather, elevation: elevation), systemImage: "thermometer")
-//                    .labelStyle(CompactLabelStyle(compact: tempString(conditions.weather, elevation: elevation, compact: true)))
+                //                    .labelStyle(CompactLabelStyle(compact: tempString(conditions.weather, elevation: elevation, compact: true)))
                     .foregroundColor(tempColor)
                 Label(densityAltString(conditions.weather, elevation: elevation), image: "Mountain")
-//                    .labelStyle(CompactLabelStyle(compact: densityAltString(conditions.weather, elevation: elevation, compact: true)))
+                //                    .labelStyle(CompactLabelStyle(compact: densityAltString(conditions.weather, elevation: elevation, compact: true)))
                     .foregroundColor(daColor)
-            }.font(.system(size: 14))
+            }
+            .font(.system(size: 14))
+            .accessibilityIdentifier("weatherSummary")
         }
         
         

@@ -32,6 +32,8 @@ struct SearchResults: View {
                 AirportRow(airport: airport, showFavoriteButton: true).onTapGesture {
                     onSelect(airport)
                 }
+                .accessibilityAddTraits(.isButton)
+                .accessibilityIdentifier("airportRow-\(airport.id!)")
             }
         }
     }
