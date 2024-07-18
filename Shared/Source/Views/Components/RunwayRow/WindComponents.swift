@@ -44,6 +44,7 @@ struct WindComponents: View {
                     Image(systemName: "arrowtriangle.down.fill").foregroundColor(.green)
                     Text(headwindNum, formatter: Self.formatter)
                         .fixedSize(horizontal: true, vertical: false)
+                        .accessibilityIdentifier("headwind")
                 }
             } else if headwind < 0 {
                 HStack(spacing: 0) {
@@ -51,6 +52,7 @@ struct WindComponents: View {
                     Text(headwindNum, formatter: Self.formatter)
                         .foregroundColor(exceedsTailwindLimits ? .red : .primary)
                         .fixedSize(horizontal: true, vertical: false)
+                        .accessibilityIdentifier("headwind")
                 }
             }
             if crosswind > 0 {
@@ -59,6 +61,7 @@ struct WindComponents: View {
                     Text(crosswindNum, formatter: Self.formatter)
                         .foregroundColor(exceedsCrosswindLimits ? .red : .primary)
                         .fixedSize(horizontal: true, vertical: false)
+                        .accessibilityIdentifier("crosswind")
                 }
             } else if crosswind < 0 {
                 HStack(spacing: 0) {
@@ -66,6 +69,7 @@ struct WindComponents: View {
                     Text(crosswindNum, formatter: Self.formatter)
                         .foregroundColor(exceedsCrosswindLimits ? .red : .primary)
                         .fixedSize(horizontal: true, vertical: false)
+                        .accessibilityIdentifier("crosswind")
                 }
             }
         }

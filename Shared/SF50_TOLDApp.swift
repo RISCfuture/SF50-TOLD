@@ -21,7 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? =
-                        nil) -> Bool {
+                     nil) -> Bool {
         //AirportLoaderTask.register()
         return true
     }
@@ -31,11 +31,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct SF50_TOLDApp: App {
     @StateObject private var state = AppState()
-    #if canImport(UIKit)
+#if canImport(UIKit)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    #endif
+#endif
     
     init() {
+#if canImport(UIKit)
+        if CommandLine.arguments.contains("--disable-animations") {
+            UIView.setAnimationsEnabled(false)
+        }
+#endif
+        
         configureLogLevel()
         reloadOnAirportChange()
     }
