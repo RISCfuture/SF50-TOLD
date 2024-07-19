@@ -20,10 +20,8 @@ struct GoAroundClimbGradientView: View {
     }
 }
 
-struct GoAroundClimbGradientView_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            GoAroundClimbGradientView(state: .init(operation: .landing))
-        }
+#Preview {
+    List {
+        GoAroundClimbGradientView(state: .init(operation: .landing))
     }
 }

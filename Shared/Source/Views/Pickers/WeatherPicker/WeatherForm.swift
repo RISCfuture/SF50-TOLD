@@ -61,8 +61,6 @@ struct WeatherForm: View {
     }
 }
 
-struct WeatherForm_Previews: PreviewProvider {
-    static var previews: some View {
-        Form { WeatherForm(weather: WeatherState()) }
-    }
+#Preview {
+    Form { WeatherForm(weather: WeatherState()) }
 }

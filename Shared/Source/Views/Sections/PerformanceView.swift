@@ -30,16 +30,14 @@ struct PerformanceView: View {
     }
 }
 
-struct PerformanceView_Previews: PreviewProvider {
-    static var previews: some View {
-        Form {
-            PerformanceView(state: .init(operation: .takeoff),
-                            operation: .takeoff,
-                            title: "Takeoff",
-                            moment: "Departure",
-                            maxWeight: maxTakeoffWeight,
-                            downloadWeather: {},
-                            cancelDownload: {})
-        }
+#Preview {
+    Form {
+        PerformanceView(state: .init(operation: .takeoff),
+                        operation: .takeoff,
+                        title: "Takeoff",
+                        moment: "Departure",
+                        maxWeight: maxTakeoffWeight,
+                        downloadWeather: {},
+                        cancelDownload: {})
     }
 }

@@ -43,10 +43,9 @@ struct AirportRow: View {
     }
 }
 
-struct AirportRow_Previews: PreviewProvider {
-    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    
-    private static let SQL = { () -> Airport in
+#Preview {
+    let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+    let SQL = { () -> Airport in
         let a = Airport(entity: model.entitiesByName["Airport"]!, insertInto: nil)
         a.id = "SQL"
         a.lid = "SQL"
@@ -54,9 +53,7 @@ struct AirportRow_Previews: PreviewProvider {
         return a
     }()
     
-    static var previews: some View {
-        List {
-            AirportRow(airport: SQL, showFavoriteButton: true)
-        }
+    return List {
+        AirportRow(airport: SQL, showFavoriteButton: true)
     }
 }

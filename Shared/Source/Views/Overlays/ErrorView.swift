@@ -1,5 +1,6 @@
 import SwiftUI
 
+
 struct ErrorView: View {
     var error: DataDownloadError
     
@@ -19,16 +20,6 @@ struct ErrorView: View {
     }
 }
 
-struct ErrorView_Previews: PreviewProvider {
-    static var previews: some View {
-        ErrorView(error: DataDownloadError.cycleNotAvailable)
-    }
-}
-
-fileprivate enum BogusError: Swift.Error, LocalizedError {
-    case bogus
-    
-    var errorDescription: String? {
-        return NSLocalizedString("Bogus error", comment: "bogus error")
-    }
+#Preview {
+    ErrorView(error: DataDownloadError.cycleNotAvailable)
 }

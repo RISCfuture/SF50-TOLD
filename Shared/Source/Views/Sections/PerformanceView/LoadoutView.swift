@@ -47,12 +47,10 @@ struct LoadoutView: View {
     }
 }
 
-struct LoadoutView_Previews: PreviewProvider {
-    static var previews: some View {
-        Form {
-            LoadoutView(state: PerformanceState(operation: .takeoff),
-                        title: "Takeoff",
-                        maxWeight: maxTakeoffWeight)
-        }
+#Preview {
+    Form {
+        LoadoutView(state: PerformanceState(operation: .takeoff),
+                    title: "Takeoff",
+                    maxWeight: maxTakeoffWeight)
     }
 }

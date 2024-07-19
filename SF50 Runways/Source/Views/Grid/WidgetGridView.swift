@@ -72,10 +72,13 @@ struct WidgetGridView_Previews: PreviewProvider {
         return a
     }()
     
+    private static let wind = Wind(direction: 260, speed: 10)
+    private static let weather = Weather(wind: wind, temperature: .ISA, altimeter: standardSLP, source: .downloaded)
+    
     static var previews: some View {
         WidgetGridView(entry: .init(date: Date(),
                                     airport: OAK,
-                                    weather: nil,
+                                    weather: weather,
                                     takeoffDistances: [:]))
         .containerBackground(for: .widget) { Color("WidgetBackground") }
         .previewContext(WidgetPreviewContext(family: .systemSmall))

@@ -64,14 +64,11 @@ struct ContaminationView: View {
     }
 }
 
-struct ContaminationView_Previews: PreviewProvider {
-    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+#Preview {
+    let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+    let notam = NOTAM(entity: model.entitiesByName["NOTAM"]!, insertInto: nil)
     
-    private static let notam = NOTAM(entity: model.entitiesByName["NOTAM"]!, insertInto: nil)
-    
-    static var previews: some View {
-        List {
-            ContaminationView(notam: notam)
-        }
+    return List {
+        ContaminationView(notam: notam)
     }
 }

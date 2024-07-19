@@ -87,10 +87,9 @@ struct TimeAndPlaceView: View {
     }
 }
 
-struct TimeAndPlaceView_Previews: PreviewProvider {
-    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    
-    static var rwy12 = { () -> Runway in
+#Preview {
+    let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+    var rwy12 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "12"
         r.takeoffRun = 2600
@@ -99,7 +98,7 @@ struct TimeAndPlaceView_Previews: PreviewProvider {
         r.elevation = 12
         return r
     }()
-    static var rwy30 = { () -> Runway in
+    var rwy30 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "30"
         r.takeoffRun = 2600
@@ -108,7 +107,7 @@ struct TimeAndPlaceView_Previews: PreviewProvider {
         r.elevation = 12
         return r
     }()
-    private static let SQL = { () -> Airport in
+    let SQL = { () -> Airport in
         let a = Airport(entity: model.entitiesByName["Airport"]!, insertInto: nil)
         a.id = "SQL"
         a.lid = "SQL"
@@ -117,8 +116,7 @@ struct TimeAndPlaceView_Previews: PreviewProvider {
         a.addToRunways(rwy30)
         return a
     }()
-    
-    private static var state: PerformanceState {
+    var state: PerformanceState {
         let state = PerformanceState(operation: .takeoff)
         state.date = Date(timeIntervalSinceNow: 3600)
         state.airport = SQL
@@ -130,14 +128,12 @@ struct TimeAndPlaceView_Previews: PreviewProvider {
         return state
     }
     
-    static var previews: some View {
-        Form {
-            TimeAndPlaceView(state: state,
-                             moment: "Takeoff",
-                             operation: .takeoff,
-                             downloadWeather: {},
-                             cancelDownload: {},
-                             onChangeAirport: { _ in })
-        }
+    return Form {
+        TimeAndPlaceView(state: state,
+                         moment: "Takeoff",
+                         operation: .takeoff,
+                         downloadWeather: {},
+                         cancelDownload: {},
+                         onChangeAirport: { _ in })
     }
 }

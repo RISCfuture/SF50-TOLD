@@ -43,10 +43,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    private static let state = AppState()
+#Preview {
+    let state = AppState()
     
-    static var previews: some View {
-        return ContentView(state: state, service: state.airportLoadingService)
-    }
+    return ContentView(state: state, service: state.airportLoadingService)
 }

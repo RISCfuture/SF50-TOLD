@@ -13,7 +13,7 @@ struct AirportPicker: View {
     @Environment(\.presentationMode) var mode
     @State fileprivate var tabIndex: AirportPickerTabs = .favorites
     @StateObject fileprivate var nearestAirport = NearestAirportPublisher()
-
+    
     var onSelect: (Airport) -> Void
     
     var body: some View {
@@ -49,21 +49,19 @@ struct AirportPicker: View {
     }
 }
 
-struct AirportPicker_Previews: PreviewProvider {
-    private static let OAK = { () -> Airport in
+#Preview {
+    let OAK = { () -> Airport in
         let a = Airport(entity: Airport.entity(), insertInto: nil)
         a.lid = "OAK"
         a.name = "Metro Oakland Intl"
         return a
     }()
-    private static let SQL = { () -> Airport in
+    let SQL = { () -> Airport in
         let a = Airport(entity: Airport.entity(), insertInto: nil)
         a.lid = "SQL"
         a.name = "San Carlos"
         return a
     }()
     
-    static var previews: some View {
-        AirportPicker() { _ in }
-    }
+    return AirportPicker() { _ in }
 }

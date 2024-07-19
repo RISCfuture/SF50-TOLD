@@ -19,10 +19,8 @@ struct LandingGroundRollView: View {
     }
 }
 
-struct LandingGroundRollView_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            LandingGroundRollView(state: PerformanceState(operation: .landing))
-        }
+#Preview {
+    List {
+        LandingGroundRollView(state: PerformanceState(operation: .landing))
     }
 }

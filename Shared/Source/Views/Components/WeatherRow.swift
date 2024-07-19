@@ -70,12 +70,10 @@ struct WeatherRow: View {
     }
 }
 
-struct WeatherRow_Previews: PreviewProvider {
-    static var previews: some View {
-        WeatherRow(conditions: WeatherState.init(wind: .calm,
-                                                 temperature: .value(9),
-                                                 altimeter: 29.97,
-                                                 source: .downloaded),
-                   elevation: 0.0)
-    }
+#Preview {
+    WeatherRow(conditions: WeatherState.init(wind: .calm,
+                                             temperature: .value(9),
+                                             altimeter: 29.97,
+                                             source: .downloaded),
+               elevation: 0.0)
 }

@@ -17,10 +17,8 @@ struct LandingResultsView: View {
     }
 }
 
-struct LandingResultsView_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            LandingResultsView(state: .init(operation: .landing))
-        }
+#Preview {
+    List {
+        LandingResultsView(state: .init(operation: .landing))
     }
 }

@@ -29,8 +29,6 @@ struct LandingView: View {
     }
 }
 
-struct LandingView_Previews: PreviewProvider {
-    static var previews: some View {
-        LandingView(state: .init(operation: .landing))
-    }
+#Preview {
+    LandingView(state: .init(operation: .landing))
 }

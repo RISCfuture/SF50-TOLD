@@ -35,26 +35,23 @@ struct RunwayPicker: View {
     }
 }
 
-struct RunwayPicker_Previews: PreviewProvider {
-    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    
-    static var rwy30 = { () -> Runway in
+#Preview {
+    let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+    var rwy30 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "30"
         r.takeoffRun = 2600
         r.takeoffDistance = 2800
         return r
     }()
-    
-    static var rwy12 = { () -> Runway in
+    var rwy12 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "12"
         r.takeoffRun = 2600
         r.takeoffDistance = 2800
         return r
     }()
-    
-    private static let SQL = { () -> Airport in
+    let SQL = { () -> Airport in
         let a = Airport(entity: model.entitiesByName["Airport"]!, insertInto: nil)
         a.id = "SQL"
         a.lid = "SQL"
@@ -63,11 +60,10 @@ struct RunwayPicker_Previews: PreviewProvider {
         return a
     }()
     
-    static var previews: some View {
-        RunwayPicker(airport: SQL,
-                     weather: WeatherState(),
-                     flaps: .constant(.flaps100),
-                     operation: .landing,
-                     onSelect: { _ in })
-    }
+    return RunwayPicker(airport: SQL,
+                        weather: WeatherState(),
+                        flaps: .constant(.flaps100),
+                        operation: .landing,
+                        onSelect: { _ in })
 }
+

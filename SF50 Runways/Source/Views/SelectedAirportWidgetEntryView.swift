@@ -4,7 +4,7 @@ import CoreData
 
 struct SelectedAirportWidgetEntryView : View {
     @Environment(\.widgetFamily) var family
-
+    
     var entry: TOLDProvider.Entry
     
     @ViewBuilder

@@ -9,25 +9,23 @@ struct TakeoffDistanceView: View {
     }
     
     var body: some View {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Total Distance")
-                    Text("over a 50-foot obstacle")
-                        .font(.system(size: 11))
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                Spacer()
-                InterpolationView(interpolation: state.takeoffDistance,
-                                  suffix: "ft",
-                                  maximum: takeoffDistance)
+        HStack {
+            VStack(alignment: .leading) {
+                Text("Total Distance")
+                Text("over a 50-foot obstacle")
+                    .font(.system(size: 11))
+                    .fixedSize(horizontal: false, vertical: true)
             }
+            Spacer()
+            InterpolationView(interpolation: state.takeoffDistance,
+                              suffix: "ft",
+                              maximum: takeoffDistance)
+        }
     }
 }
 
-struct TakeoffDistanceView_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            TakeoffDistanceView(state: .init(operation: .takeoff))
-        }
+#Preview {
+    List {
+        TakeoffDistanceView(state: .init(operation: .takeoff))
     }
 }

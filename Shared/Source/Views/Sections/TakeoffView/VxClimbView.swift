@@ -51,10 +51,8 @@ struct VxClimbView: View {
     }
 }
 
-struct VxClimbView_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            VxClimbView(state: .init(operation: .takeoff))
-        }
+#Preview {
+    List {
+        VxClimbView(state: .init(operation: .takeoff))
     }
 }

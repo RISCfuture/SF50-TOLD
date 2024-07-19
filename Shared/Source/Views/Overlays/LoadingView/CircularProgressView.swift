@@ -27,13 +27,11 @@ struct CircularProgressView: View {
     }
 }
 
-struct CircularProgressView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            CircularProgressView(progress: .pending)
-            CircularProgressView(progress: .indeterminate)
-            CircularProgressView(progress: .inProgress(current: 1, total: 3))
-            CircularProgressView(progress: .complete)
-        }
+#Preview {
+    VStack {
+        CircularProgressView(progress: .pending)
+        CircularProgressView(progress: .indeterminate)
+        CircularProgressView(progress: .inProgress(current: 1, total: 3))
+        CircularProgressView(progress: .complete)
     }
 }

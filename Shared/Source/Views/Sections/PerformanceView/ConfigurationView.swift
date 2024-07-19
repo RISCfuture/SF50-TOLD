@@ -3,7 +3,7 @@ import SwiftUI
 struct ConfigurationView: View {
     @ObservedObject var state: PerformanceState
     var operation: Operation
-        
+    
     var body: some View {
         Section(header: Text("Configuration")) {
             switch operation {
@@ -35,11 +35,9 @@ struct ConfigurationView: View {
     }
 }
 
-struct LandingConfigurationView_Previews: PreviewProvider {
-    static var previews: some View {
-        Form {
-            ConfigurationView(state: PerformanceState(operation: .landing),
-                              operation: .takeoff)
-        }
+#Preview {
+    Form {
+        ConfigurationView(state: PerformanceState(operation: .landing),
+                          operation: .takeoff)
     }
 }

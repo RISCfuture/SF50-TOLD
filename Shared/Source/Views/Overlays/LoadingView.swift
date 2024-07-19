@@ -61,14 +61,8 @@ struct LoadingView: View {
     }
 }
 
-struct LoadingView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoadingView(downloadProgress: .complete,
-                    decompressProgress: .indeterminate,
-                    processingProgress: .pending)
-    }
-}
-
-fileprivate enum ExampleError: Swift.Error {
-    case example
+#Preview {
+    LoadingView(downloadProgress: .complete,
+                decompressProgress: .indeterminate,
+                processingProgress: .pending)
 }

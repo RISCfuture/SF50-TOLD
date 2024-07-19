@@ -22,8 +22,6 @@ struct RecentsView: View {
     }
 }
 
-struct RecentsView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecentsView() { _ in }
-    }
+#Preview {
+    RecentsView() { _ in }
 }

@@ -18,7 +18,7 @@ struct NearestView: View {
                      sortDescriptors: [.init(keyPath: \Airport.id, ascending: true)],
                      predicate: nearestAirport.predicate)
     }
-
+    
     var body: some View {
         if nearestAirport.loading {
             List {
@@ -47,21 +47,19 @@ struct NearestView: View {
     }
 }
 
-struct NearestView_Previews: PreviewProvider {
-    private static let OAK = { () -> Airport in
+#Preview {
+    let OAK = { () -> Airport in
         let a = Airport(entity: Airport.entity(), insertInto: nil)
         a.lid = "OAK"
         a.name = "Metro Oakland Intl"
         return a
     }()
-    private static let SQL = { () -> Airport in
+    let SQL = { () -> Airport in
         let a = Airport(entity: Airport.entity(), insertInto: nil)
         a.lid = "SQL"
         a.name = "San Carlos"
         return a
     }()
     
-    static var previews: some View {
-        NearestView(nearestAirport: NearestAirportPublisher()) { _ in }
-    }
+    return NearestView(nearestAirport: NearestAirportPublisher()) { _ in }
 }

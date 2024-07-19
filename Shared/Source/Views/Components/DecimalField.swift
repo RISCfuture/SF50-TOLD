@@ -146,11 +146,7 @@ struct DecimalField : View {
     }
 }
 
-struct DecimalField_Previews: PreviewProvider {
-    static var previews: some View {
-        TipCalculator()
-    }
-    
+#Preview {
     struct TipCalculator: View {
         @State var amount = 50.0
         @State var tipRate = 0.1
@@ -198,4 +194,6 @@ struct DecimalField_Previews: PreviewProvider {
             }
         }
     }
+    
+    return TipCalculator()
 }

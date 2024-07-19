@@ -39,11 +39,9 @@ struct SearchResults: View {
     }
 }
 
-struct SearchResults_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchResults(airports: FetchRequest<Airport>(entity: Airport.entity(),
-                                                      sortDescriptors: []),
-                      filterText: .constant("Filter"),
-                      onSelect: { _ in })
-    }
+#Preview {
+    SearchResults(airports: FetchRequest<Airport>(entity: Airport.entity(),
+                                                  sortDescriptors: []),
+                  filterText: .constant("Filter"),
+                  onSelect: { _ in })
 }

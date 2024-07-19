@@ -33,7 +33,6 @@ struct LoadingConsentView: View {
                     .font(.footnote)
                     .padding(.horizontal, 20)
                     .multilineTextAlignment(.center)
-                    
             }
             
             HStack(spacing: 20) {
@@ -50,8 +49,6 @@ struct LoadingConsentView: View {
     }
 }
 
-struct LoadingConsentView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoadingConsentView(service: AirportLoadingService())
-    }
+#Preview {
+    LoadingConsentView(service: AirportLoadingService())
 }

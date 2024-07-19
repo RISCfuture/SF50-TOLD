@@ -40,10 +40,9 @@ struct RunwayDistances: View {
     }
 }
 
-struct RunwayDistances_Previews: PreviewProvider {
-    static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    
-    static var rwy30 = { () -> Runway in
+#Preview {
+    let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
+    var rwy30 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "30"
         r.takeoffRun = 2600
@@ -51,7 +50,5 @@ struct RunwayDistances_Previews: PreviewProvider {
         return r
     }()
     
-    static var previews: some View {
-        RunwayDistances(runway: rwy30, operation: .takeoff)
-    }
+    return RunwayDistances(runway: rwy30, operation: .takeoff)
 }

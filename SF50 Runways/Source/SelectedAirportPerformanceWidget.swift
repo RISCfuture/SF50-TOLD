@@ -14,3 +14,15 @@ struct SelectedAirportPerformanceWidget: Widget {
          .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
+
+#Preview("Small", as: .systemSmall) {
+    SelectedAirportPerformanceWidget()
+} timeline: {
+    RunwayWidgetEntry.empty()
+}
+
+#Preview("Medium", as: .systemMedium) {
+    SelectedAirportPerformanceWidget()
+} timeline: {
+    RunwayWidgetEntry.empty()
+}

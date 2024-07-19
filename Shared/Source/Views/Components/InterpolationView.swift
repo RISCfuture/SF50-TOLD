@@ -41,8 +41,6 @@ struct InterpolationView: View {
     }
 }
 
-struct InterpolationView_Previews: PreviewProvider {
-    static var previews: some View {
-        InterpolationView(interpolation: .value(5), suffix: "ft")
-    }
+#Preview {
+    return InterpolationView(interpolation: .value(5), suffix: "ft")
 }

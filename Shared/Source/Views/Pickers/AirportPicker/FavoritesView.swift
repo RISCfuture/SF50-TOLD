@@ -12,7 +12,7 @@ struct FavoritesView: View {
         .init(entity: Airport.entity(), sortDescriptors: [
             .init(keyPath: \Airport.id, ascending: true)
         ],
-        predicate: predicate)
+              predicate: predicate)
     }
     
     var body: some View {
@@ -22,8 +22,6 @@ struct FavoritesView: View {
     }
 }
 
-struct FavoritesView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoritesView() { _ in }
-    }
+#Preview {
+    FavoritesView() { _ in }
 }

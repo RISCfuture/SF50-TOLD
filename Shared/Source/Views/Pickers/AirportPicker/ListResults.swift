@@ -31,10 +31,8 @@ struct ListResults: View {
     }
 }
 
-struct ListResults_Previews: PreviewProvider {
-    static var previews: some View {
-        ListResults(airports: FetchRequest<Airport>(entity: Airport.entity(),
-                                                    sortDescriptors: []),
-                    onSelect: { _ in })
-    }
+#Preview {
+    ListResults(airports: FetchRequest<Airport>(entity: Airport.entity(),
+                                                sortDescriptors: []),
+                onSelect: { _ in })
 }

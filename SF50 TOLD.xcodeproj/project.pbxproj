@@ -966,8 +966,8 @@
 				0152FE532C40FFE8001E29D6 /* Models */,
 				0152FE692C40FFE8001E29D6 /* SelectedAirportPerformanceWidget.swift */,
 				0152FE562C40FFE8001E29D6 /* Support */,
-				0152FE662C40FFE8001E29D6 /* Views */,
 				0152FE682C40FFE8001E29D6 /* TOLDProvider.swift */,
+				0152FE662C40FFE8001E29D6 /* Views */,
 			);
 			path = Source;
 			sourceTree = "<group>";
