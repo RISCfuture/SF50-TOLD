@@ -37,4 +37,15 @@ extension Runway {
         guard let contamination = notam?.contamination else { return nil }
         return contamination
     }
+    
+    static var sortedList: (Runway, Runway) -> Bool { { a, b in
+        if a.takeoffRun == b.takeoffRun {
+            if let aName = a.name, let bName = b.name {
+                return aName.localizedCaseInsensitiveCompare(bName) == .orderedAscending
+            } else {
+                return true
+            }
+        }
+        return a.takeoffRun > b.takeoffRun
+    } }
 }

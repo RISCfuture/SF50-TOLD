@@ -8,7 +8,7 @@ struct WidgetListView: View {
         guard let airport = entry.airport,
               let runwaySet = airport.runways as? Set<Runway> else { return nil }
         
-        let sortedRunways = runwaySet.sorted { ($0.takeoffRun) > ($1.takeoffRun) }
+        let sortedRunways = runwaySet.sorted(by: Runway.sortedList)
         return Array(sortedRunways.prefix(4))
     }
     
