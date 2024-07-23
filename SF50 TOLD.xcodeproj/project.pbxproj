@@ -2120,7 +2120,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "info.timothymorgan.Tests-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -2142,7 +2142,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "info.timothymorgan.Tests-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.Tests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -2167,7 +2167,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "info.timothymorgan.Tests-macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -2190,7 +2190,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "info.timothymorgan.Tests-macOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -2282,7 +2282,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.Generate-Screenshots";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.Generate-Screenshots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -2305,7 +2305,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.Generate-Screenshots";
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.Generate-Screenshots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
