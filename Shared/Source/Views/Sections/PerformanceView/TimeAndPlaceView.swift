@@ -3,6 +3,7 @@ import CoreData
 
 struct TimeAndPlaceView: View {
     @ObservedObject var state: PerformanceState
+    @State private var showNowButton = false
     
     var moment: String
     var operation: Operation
@@ -10,6 +11,8 @@ struct TimeAndPlaceView: View {
     var downloadWeather: () -> Void
     var cancelDownload: () -> Void
     var onChangeAirport: (Airport) -> Void
+    
+    private let nowVisibilityTimer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
     
     private static let numberFormatter = NumberFormatter()
     
@@ -28,7 +31,7 @@ struct TimeAndPlaceView: View {
             HStack {
                 DatePicker("Date", selection: $state.date, in: Date()...)
                     .accessibilityIdentifier("dateSelector")
-                if abs(state.date.timeIntervalSinceNow) >= 60 {
+                if showNowButton {
                     Button(action: { state.setDateToNow() }) { Text("Now") }
                         .accessibilityIdentifier("dateNowButton")
                 }
@@ -76,6 +79,12 @@ struct TimeAndPlaceView: View {
                 }.accessibilityIdentifier("NOTAMsSelector")
             }
         }
+        .onReceive(nowVisibilityTimer) { _ in self.setShowNowButton() }
+        .onAppear { self.setShowNowButton() }
+    }
+    
+    private func setShowNowButton() {
+        showNowButton = abs(state.date.timeIntervalSinceNow) >= 120
     }
     
     private var runwayNOTAM: NOTAM {
