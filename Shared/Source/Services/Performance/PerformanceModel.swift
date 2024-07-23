@@ -62,3 +62,36 @@ extension PerformanceModel {
 func deg2rad(_ degrees: Double) -> Double {
     return degrees * .pi/180
 }
+
+func interpolation(weights: [Double], values: [Double]) -> ((Double) -> Double) {
+    // Ensure the weights and values arrays have the same length
+    guard weights.count == values.count, weights.count > 1 else {
+        fatalError("Weights and values must have the same number of elements and at least two elements.")
+    }
+    guard weights == weights.sorted() else {
+        fatalError("Weights must be in increasing order")
+    }
+    
+    return { weight in
+        // Handle weight below the minimum weight
+        if weight <= weights.first! { return values.first! }
+        // Handle weight above the maximum weight
+        if weight >= weights.last! { return values.last! }
+        
+        // Find the interval that contains the weight
+        for i in 0..<weights.count - 1 {
+            if (weight >= weights[i] && weight <= weights[i + 1]) || (weight >= weights[i + 1] && weight <= weights[i]) {
+                let lowerWeight = weights[i]
+                let upperWeight = weights[i + 1]
+                let lowerValue = values[i]
+                let upperValue = values[i + 1]
+                
+                // Perform linear interpolation
+                let interpolationFactor = (weight - lowerWeight) / (upperWeight - lowerWeight)
+                return lowerValue + interpolationFactor * (upperValue - lowerValue)
+            }
+        }
+        
+        fatalError("Couldn't interpolate \(weight) in \(weights)")
+    }
+}
