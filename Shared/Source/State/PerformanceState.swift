@@ -3,7 +3,9 @@ import Combine
 import Defaults
 import CoreData
 import Logging
+#if canImport(UIKit)
 import UIKit
+#endif
 
 class PerformanceState: ObservableObject {
     var operation: Operation

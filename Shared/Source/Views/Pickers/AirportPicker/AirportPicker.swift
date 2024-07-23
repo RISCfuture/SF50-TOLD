@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreData
 import Defaults
+import CoreLocation
 
 fileprivate enum AirportPickerTabs {
     case favorites
@@ -16,13 +17,19 @@ struct AirportPicker: View {
     
     var onSelect: (Airport) -> Void
     
+#if os(macOS)
+    let isAuthorized = { (status: CLAuthorizationStatus) in status == .authorizedAlways }
+#else
+    let isAuthorized = { (status: CLAuthorizationStatus) in status == .authorizedAlways || status == .authorizedWhenInUse }
+#endif
+    
     var body: some View {
         VStack(alignment: .leading) {
             Picker("Tab", selection: $tabIndex) {
                 Text("Favorites").tag(AirportPickerTabs.favorites)
                 Text("Recents").tag(AirportPickerTabs.recents)
                 if let authStatus = nearestAirport.authorizationStatus {
-                    if authStatus == .authorizedAlways || authStatus == .authorizedWhenInUse {
+                    if isAuthorized(authStatus) {
                         Text("Nearest").tag(AirportPickerTabs.nearest)
                     }
                 }

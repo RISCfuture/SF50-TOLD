@@ -1,6 +1,8 @@
 import SwiftUI
 import CoreData
+#if canImport(CoreLocationUI)
 import CoreLocationUI
+#endif
 import MapKit
 
 fileprivate let earthRadius = 21638.0 // NM
@@ -38,11 +40,19 @@ struct NearestView: View {
         } else if nearestAirport.location != nil {
             ListResults(airports: fetchAirports, sort: nearestAirport.airportDistance, onSelect: onSelect)
         } else {
+#if canImport(CoreLocationUI)
             LocationButton { nearestAirport.request() }
                 .clipShape(Capsule())
                 .symbolVariant(.fill)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .foregroundColor(.white)
+#else
+            Button("Current Location") { nearestAirport.request() }
+                .clipShape(Capsule())
+                .symbolVariant(.fill)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .foregroundColor(.white)
+#endif
         }
     }
 }

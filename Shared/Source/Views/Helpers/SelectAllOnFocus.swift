@@ -9,9 +9,8 @@ fileprivate class Delegate: NSObject, UITextFieldDelegate {
 #endif
 
 struct SelectAllOnFocus: ViewModifier {
-    #if canImport(UIKit)
+#if canImport(UIKit)
     fileprivate var delegate = Delegate()
-    #endif
     
     func body(content: Content) -> some View {
         return content.onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
@@ -19,6 +18,9 @@ struct SelectAllOnFocus: ViewModifier {
             textField.selectAll(nil)
         }
     }
+#else
+    func body(content: Content) -> some View { content }
+#endif
 }
 
 extension View {

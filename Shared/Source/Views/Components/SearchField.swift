@@ -17,8 +17,8 @@ struct SearchField: View {
                 .padding(.horizontal, 25)
 #if canImport(UIKit)
                 .background(backgroundColor)
-#endif
                 .cornerRadius(100)
+#endif
                 .overlay(
                     HStack {
                         Image(systemName: "magnifyingglass")
