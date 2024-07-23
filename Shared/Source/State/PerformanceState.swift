@@ -179,11 +179,11 @@ class PerformanceState: ObservableObject {
     }
 
     private func updatePerformanceWhenConditionsChange() {
-        Publishers.CombineLatest3($runway, $weatherState, $weight)
+        Publishers.CombineLatest3($runway, weatherState.publisher, $weight)
             .sink { runway, weatherState, weight in
                 self.updatePerformanceData(runway: runway, weather: weatherState.weather, weight: weight, flaps: self.flaps, takeoff: true, landing: false)
             }.store(in: &cancellables)
-        Publishers.CombineLatest4($runway, $weatherState, $weight, $flaps)
+        Publishers.CombineLatest4($runway, weatherState.publisher, $weight, $flaps)
             .sink { runway, weatherState, weight, flaps in
                 self.updatePerformanceData(runway: runway, weather: weatherState.weather, weight: weight, flaps: flaps, takeoff: false, landing: true)
             }.store(in: &cancellables)

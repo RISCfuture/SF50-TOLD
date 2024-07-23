@@ -42,6 +42,10 @@ class WeatherState: ObservableObject {
                 source: source)
     }
     
+    var publisher: AnyPublisher<WeatherState, Never> {
+        Publishers.CombineLatest4($windDirection, $windSpeed, $temperature, $altimeter).map { _ in self }.eraseToAnyPublisher()
+    }
+    
     convenience init() {
         self.init(wind: .calm, temperature: .ISA, altimeter: standardSLP, source: .ISA)
     }
