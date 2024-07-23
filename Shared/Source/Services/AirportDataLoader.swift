@@ -140,11 +140,16 @@ class AirportDataLoader: ObservableObject {
         guard let TODA = end.TODA ?? runway.length else { return false }
         guard let TORA = end.TORA ?? runway.length else { return false }
         
+        var gradient = end.gradient ?? {
+            guard let estimatedGradient = runway.estimatedGradient else { return nil }
+            return (runway.baseEnd.ID == end.ID) ? estimatedGradient : -estimatedGradient
+        }() ?? 0
+        
         record.name = end.ID
         record.elevation = elevation
         record.heading = Int16(heading)
         record.landingDistance = Int16(LDA)
-        record.slope = NSDecimalNumber(floatLiteral: Double(end.gradient ?? 0))
+        record.slope = NSDecimalNumber(floatLiteral: Double(gradient))
         record.takeoffDistance = Int16(TODA)
         record.takeoffRun = Int16(TORA)
         record.turf = !runway.isPaved

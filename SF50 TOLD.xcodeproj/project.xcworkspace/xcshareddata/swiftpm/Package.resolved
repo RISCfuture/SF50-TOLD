@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RISCfuture/SwiftNASR.git",
       "state" : {
-        "revision" : "1b20f490aea658bb2a071616533fc94c2817fa71",
-        "version" : "0.2.0"
+        "branch" : "master",
+        "revision" : "03873717ced96346b23800ecb79e6ce7cc837d9a"
       }
     },
     {
