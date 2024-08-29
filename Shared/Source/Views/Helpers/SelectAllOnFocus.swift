@@ -10,7 +10,7 @@ fileprivate class Delegate: NSObject, UITextFieldDelegate {
 
 struct SelectAllOnFocus: ViewModifier {
 #if canImport(UIKit)
-    fileprivate var delegate = Delegate()
+    fileprivate var locationDelegate = Delegate()
     
     func body(content: Content) -> some View {
         return content.onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in

@@ -1,10 +1,6 @@
 import SwiftUI
 import Defaults
 
-enum Model {
-    case g1, g2, g2Plus
-}
-
 struct WelcomeView: View {
     @Default(.updatedThrustSchedule) var updatedThrustSchedule
     @Default(.initialSetupComplete) var initialSetupComplete
@@ -88,6 +84,10 @@ struct WelcomeView: View {
                 formOpacity = 1.0
             }
         }
+    }
+    
+    enum Model {
+        case g1, g2, g2Plus
     }
 }
 

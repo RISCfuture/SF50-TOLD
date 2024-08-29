@@ -2,7 +2,7 @@ import SwiftUI
 import Defaults
 
 struct LoadingConsentView: View {
-    @ObservedObject var service: AirportLoadingService
+    @ObservedObject var service: AirportDataLoaderViewModel
     
     var titleString: String {
         if service.canSkip {
@@ -50,5 +50,5 @@ struct LoadingConsentView: View {
 }
 
 #Preview {
-    LoadingConsentView(service: AirportLoadingService())
+    LoadingConsentView(service: AirportDataLoaderViewModel())
 }

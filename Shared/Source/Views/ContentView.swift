@@ -6,7 +6,7 @@ struct ContentView: View {
     @Default(.initialSetupComplete) var initialSetupComplete
     
     @ObservedObject var state: AppState
-    @ObservedObject var service: AirportLoadingService
+    @ObservedObject var service: AirportDataLoaderViewModel
     
     @State private var tab = 1
     
