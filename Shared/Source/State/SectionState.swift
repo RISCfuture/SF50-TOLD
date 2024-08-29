@@ -3,18 +3,18 @@ import Combine
 import Defaults
 import SwiftMETAR
 
-class SectionState: ObservableObject {
+@Observable class SectionState {
     fileprivate static let weatherLoadDebounce: TimeInterval = 60 // once per minute, tops
     
-    @Published private(set) var performance: PerformanceState
+    private(set) var performance: PerformanceState
     
     let operation: Operation
     
-    private var cancellables = Set<AnyCancellable>()
-    private var airportChangeCancellables = Set<AnyCancellable>()
+    @ObservationIgnored private var cancellables = Set<AnyCancellable>()
+    @ObservationIgnored private var airportChangeCancellables = Set<AnyCancellable>()
     
-    private var weatherLoadingCanceled = false
-    private var lastWeatherLoad: Date? = nil
+    @ObservationIgnored private var weatherLoadingCanceled = false
+    @ObservationIgnored private var lastWeatherLoad: Date? = nil
     
     private let weatherQueue = DispatchQueue(label: "weatherQueue", qos: .utility, attributes: .concurrent)
     

@@ -1,19 +1,19 @@
 import Foundation
 import BackgroundTasks
-import CoreData
 import Defaults
+import SwiftData
 
 class AirportLoaderTask {
     private static let identifier = "codes.tim.TOLD.AirportDataLoader.task"
-    private let persistentContainer: NSPersistentContainer
+    private let modelContainer: ModelContainer
     
-    init(persistentContainer: NSPersistentContainer) {
-        self.persistentContainer = persistentContainer
+    init(modelContainer: ModelContainer) {
+        self.modelContainer = modelContainer
     }
     
-    static func register(persistentContainer: NSPersistentContainer) {
+    static func register(modelContainer: ModelContainer) {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: identifier, using: nil) { task in
-            AirportLoaderTask(persistentContainer: persistentContainer).run(task: task)
+            AirportLoaderTask(modelContainer: modelContainer).run(task: task)
         }
     }
     

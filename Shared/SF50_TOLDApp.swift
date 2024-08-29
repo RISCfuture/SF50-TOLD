@@ -1,6 +1,6 @@
 import SwiftUI
 import BackgroundTasks
-import CoreData
+import SwiftData
 import Logging
 #if canImport(UIKit)
 import UIKit
@@ -30,7 +30,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct SF50_TOLDApp: App {
-    @StateObject private var state = AppState()
+    @Environment(\.modelContext) var modelContext
 #if canImport(UIKit)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 #endif
@@ -49,7 +49,8 @@ struct SF50_TOLDApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(state: state, service: state.airportLoadingService)
-                .environment(\.managedObjectContext, PersistentContainer.shared.viewContext)
+                .modelContainer(for: [Airport.self, Runway.self, NOTAM.self])
+                .environmentObject(<#T##T#>)
         }
     }
 }

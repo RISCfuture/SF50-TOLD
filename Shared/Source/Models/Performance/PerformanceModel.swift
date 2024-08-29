@@ -41,7 +41,7 @@ extension PerformanceModel {
     }
     
     var gradient: Double {
-        runway?.slope?.doubleValue ?? 0
+        Double(runway?.slope ?? 0)
     }
     
     var uphillGradient: Double {

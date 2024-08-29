@@ -23,7 +23,7 @@ struct TapToDismissKeyboard: ViewModifier {
                 let tapGesture = UITapGestureRecognizer(target: window, action: #selector(UIView.endEditing))
                 tapGesture.requiresExclusiveTouchType = false
                 tapGesture.cancelsTouchesInView = false
-                tapGesture.delegate = tapDelegate
+                tapGesture.locationDelegate = tapDelegate
                 window.addGestureRecognizer(tapGesture)
             }
         }

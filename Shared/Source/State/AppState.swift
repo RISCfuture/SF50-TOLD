@@ -1,17 +1,16 @@
 import Foundation
 import Combine
-import CoreData
 import Dispatch
 
-class AppState: ObservableObject {
-    @Published private(set) var payload = 0.0
+@Observable class AppState {
+    private(set) var payload = 0.0
 
-    @Published var error: DataDownloadError? = nil
+    var error: DataDownloadError? = nil
 
-    @Published private(set) var takeoff: SectionState
-    @Published private(set) var landing: SectionState
+    private(set) var takeoff: SectionState
+    private(set) var landing: SectionState
 
-    var airportLoadingService: AirportLoadingService
+    @ObservationIgnored var airportLoadingService: AirportDataLoaderViewModel
 
     private let weightFormatter = ValueFormatter(precision: 0)
 
@@ -19,7 +18,7 @@ class AppState: ObservableObject {
         takeoff = SectionState(operation: .takeoff)
         landing = SectionState(operation: .landing)
         
-        airportLoadingService = AirportLoadingService()
+        airportLoadingService = AirportDataLoaderViewModel()
         airportLoadingService.$error.assign(to: &$error)
     }
 }

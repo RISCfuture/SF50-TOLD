@@ -112,7 +112,7 @@ enum FetchState<Value> {
     case error(_ error: Swift.Error)
 }
 
-class WeatherService: ObservableObject {
+class WeatherService {
     static let instance = WeatherService()
     
     private static let allMETARsURL = URL(string: "https://aviationweather.gov/data/cache/metars.cache.csv.gz")!

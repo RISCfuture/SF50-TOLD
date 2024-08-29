@@ -5,25 +5,25 @@ import Combine
 
 fileprivate var METARUpdatePeriod: TimeInterval = 3600
 
-class WeatherState: ObservableObject {
-    @Published private(set) var observation: String?
-    @Published private(set) var forecast: String?
+@Observable class WeatherState {
+    private(set) var observation: String?
+    private(set) var forecast: String?
     
-    @Published var windDirection: Double
-    @Published var windSpeed: Double
-    @Published var temperature: Temperature
-    @Published var altimeter: Double
+    var windDirection: Double
+    var windSpeed: Double
+    var temperature: Temperature
+    var altimeter: Double
     
-    @Published var userEditedTemperature: Double
+    var userEditedTemperature: Double
     
-    @Published var source: Source
-    @Published var loading = false
-    var draft: Bool
+    var source: Source
+    var loading = false
+    @ObservationIgnored var draft: Bool
     
-    var observationError: Swift.Error? = nil
-    var forecastError: Swift.Error? = nil
+    @ObservationIgnored var observationError: Swift.Error? = nil
+    @ObservationIgnored var forecastError: Swift.Error? = nil
     
-    private var cancellables = Set<AnyCancellable>()
+    @ObservationIgnored private var cancellables = Set<AnyCancellable>()
     
     var wind: Wind {
         return Wind(direction: windDirection, speed: windSpeed)
