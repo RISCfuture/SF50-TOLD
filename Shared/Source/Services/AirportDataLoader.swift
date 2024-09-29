@@ -140,7 +140,7 @@ class AirportDataLoader: ObservableObject {
         guard let TODA = end.TODA ?? runway.length else { return false }
         guard let TORA = end.TORA ?? runway.length else { return false }
         
-        var gradient = end.gradient ?? {
+        let gradient = end.gradient ?? {
             guard let estimatedGradient = runway.estimatedGradient else { return nil }
             return (runway.baseEnd.ID == end.ID) ? estimatedGradient : -estimatedGradient
         }() ?? 0

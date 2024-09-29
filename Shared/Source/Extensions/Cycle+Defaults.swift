@@ -26,7 +26,7 @@ public class CycleBridge: _DefaultsBridge {
     }
 }
 
-extension Cycle: _DefaultsSerializable {
+extension Cycle: @retroactive _DefaultsSerializable {
     public typealias Bridge = CycleBridge
     
     public static var bridge: CycleBridge {

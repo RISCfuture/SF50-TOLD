@@ -42,8 +42,6 @@
 		0135A7F12587091800892558 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0135A7C52587091700892558 /* Assets.xcassets */; };
 		0135A83725872EDE00892558 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A83625872EDE00892558 /* WeatherService.swift */; };
 		0135A83825872EDE00892558 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A83625872EDE00892558 /* WeatherService.swift */; };
-		0135A84C25872F6700892558 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 0135A84B25872F6700892558 /* SwiftNASR */; };
-		0135A85425872F7000892558 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 0135A85325872F7000892558 /* SwiftNASR */; };
 		0135A874258748D400892558 /* TakeoffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A873258748D400892558 /* TakeoffView.swift */; };
 		0135A875258748D400892558 /* TakeoffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A873258748D400892558 /* TakeoffView.swift */; };
 		0135A87D258748DF00892558 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A87C258748DF00892558 /* LandingView.swift */; };
@@ -236,9 +234,7 @@
 		016C739A25AE40200008455F /* WeatherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017B6699258898DA00AA2DE9 /* WeatherState.swift */; };
 		016C739C25AE40200008455F /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A8A425874C3B00892558 /* Global.swift */; };
 		016C739D25AE40200008455F /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0135A7E92587091800892558 /* Tests_macOS.swift */; };
-		016C73A725AE403C0008455F /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 016C73A625AE403C0008455F /* SwiftNASR */; };
 		016C73A925AE403C0008455F /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 016C73A825AE403C0008455F /* Defaults */; };
-		016C73AF25AE40410008455F /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 016C73AE25AE40410008455F /* SwiftNASR */; };
 		016C73B125AE40410008455F /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 016C73B025AE40410008455F /* Defaults */; };
 		016FA02025AC230C006C807F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FA01F25AC230C006C807F /* SettingsView.swift */; };
 		016FA02125AC230C006C807F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016FA01F25AC230C006C807F /* SettingsView.swift */; };
@@ -287,7 +283,6 @@
 		01A6DB1B25AD776C00A3341F /* RunwayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6DB1A25AD776C00A3341F /* RunwayRow.swift */; };
 		01A6DB1C25AD776C00A3341F /* RunwayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6DB1A25AD776C00A3341F /* RunwayRow.swift */; };
 		01AEDA9F28D6F2D400F38948 /* DownloadNASR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AEDA9E28D6F2D400F38948 /* DownloadNASR.swift */; };
-		01AEDAA428D6F2E200F38948 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 01AEDAA328D6F2E200F38948 /* SwiftNASR */; };
 		01AEDAA728D6F33A00F38948 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 01AEDAA628D6F33A00F38948 /* ArgumentParser */; };
 		01B79FD725AC4BF70037C0C6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B79FD625AC4BF70037C0C6 /* ErrorView.swift */; };
 		01B79FD825AC4BF70037C0C6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B79FD625AC4BF70037C0C6 /* ErrorView.swift */; };
@@ -327,7 +322,6 @@
 		01D939DC2C41142A00D753A5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 01D939DB2C41142A00D753A5 /* Alamofire */; };
 		01D939DE2C41143E00D753A5 /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 01D939DD2C41143E00D753A5 /* Gzip */; };
 		01D939E02C41144400D753A5 /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 01D939DF2C41144400D753A5 /* SwiftCSV */; };
-		01D939E22C41144700D753A5 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 01D939E12C41144700D753A5 /* SwiftNASR */; };
 		01DB7BC428510FE0003CC8EF /* SwiftMETAR in Frameworks */ = {isa = PBXBuildFile; productRef = 01DB7BC328510FE0003CC8EF /* SwiftMETAR */; };
 		01DB7BC628510FE6003CC8EF /* SwiftMETAR in Frameworks */ = {isa = PBXBuildFile; productRef = 01DB7BC528510FE6003CC8EF /* SwiftMETAR */; };
 		01DCB9C32C4372A2003A64E7 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 01DCB9C22C4372A2003A64E7 /* Logging */; };
@@ -347,6 +341,10 @@
 		01E83CF027FD3B70001342BF /* PerformanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CEE27FD3B70001342BF /* PerformanceModel.swift */; };
 		01E83CF127FD3B70001342BF /* PerformanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CEE27FD3B70001342BF /* PerformanceModel.swift */; };
 		01E83CF227FD3B70001342BF /* PerformanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E83CEE27FD3B70001342BF /* PerformanceModel.swift */; };
+		01ECF5632CA880BF00204538 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 01ECF5622CA880BF00204538 /* SwiftNASR */; };
+		01ECF5652CA8810B00204538 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 01ECF5642CA8810B00204538 /* SwiftNASR */; };
+		01ECF5672CA8811200204538 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 01ECF5662CA8811200204538 /* SwiftNASR */; };
+		01ECF5692CA9038600204538 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 01ECF5682CA9038600204538 /* SwiftNASR */; };
 		01F18D2625B198B6007D76BA /* LoadoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D2525B198B6007D76BA /* LoadoutView.swift */; };
 		01F18D2725B198B6007D76BA /* LoadoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D2525B198B6007D76BA /* LoadoutView.swift */; };
 		01F18D2825B198B6007D76BA /* LoadoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F18D2525B198B6007D76BA /* LoadoutView.swift */; };
@@ -594,9 +592,9 @@
 				01DB7BC428510FE0003CC8EF /* SwiftMETAR in Frameworks */,
 				01DCB9C32C4372A2003A64E7 /* Logging in Frameworks */,
 				012CBA1F2AF4B8410015270A /* Gzip in Frameworks */,
+				01ECF5652CA8810B00204538 /* SwiftNASR in Frameworks */,
 				012CBA1A2AF4B2BA0015270A /* SwiftCSV in Frameworks */,
 				017ED15B261027A9002C69DE /* Alamofire in Frameworks */,
-				0135A84C25872F6700892558 /* SwiftNASR in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,9 +606,9 @@
 				01DB7BC628510FE6003CC8EF /* SwiftMETAR in Frameworks */,
 				01DCB9C52C4372A7003A64E7 /* Logging in Frameworks */,
 				012CBA212AF4B8480015270A /* Gzip in Frameworks */,
+				01ECF5672CA8811200204538 /* SwiftNASR in Frameworks */,
 				012CBA1C2AF4B2C60015270A /* SwiftCSV in Frameworks */,
 				015373F72610286D0098B529 /* Alamofire in Frameworks */,
-				0135A85425872F7000892558 /* SwiftNASR in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,7 +617,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				016C73A925AE403C0008455F /* Defaults in Frameworks */,
-				016C73A725AE403C0008455F /* SwiftNASR in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,7 +625,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				016C73B125AE40410008455F /* Defaults in Frameworks */,
-				016C73AF25AE40410008455F /* SwiftNASR in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,12 +635,12 @@
 				01DCB9CB2C4372C5003A64E7 /* Logging in Frameworks */,
 				01D939DC2C41142A00D753A5 /* Alamofire in Frameworks */,
 				0152FEA62C4105EF001E29D6 /* Defaults in Frameworks */,
-				01D939E22C41144700D753A5 /* SwiftNASR in Frameworks */,
 				01D939DE2C41143E00D753A5 /* Gzip in Frameworks */,
 				0152FE402C40FEF5001E29D6 /* SwiftUI.framework in Frameworks */,
 				0152FE3E2C40FEF5001E29D6 /* WidgetKit.framework in Frameworks */,
 				0152FE932C410035001E29D6 /* SwiftMETAR in Frameworks */,
 				01D939E02C41144400D753A5 /* SwiftCSV in Frameworks */,
+				01ECF5692CA9038600204538 /* SwiftNASR in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +657,7 @@
 			files = (
 				018FFDA9295A551100626EB1 /* Logging in Frameworks */,
 				01AEDAA728D6F33A00F38948 /* ArgumentParser in Frameworks */,
-				01AEDAA428D6F2E200F38948 /* SwiftNASR in Frameworks */,
+				01ECF5632CA880BF00204538 /* SwiftNASR in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1152,13 +1148,13 @@
 			);
 			name = "SF50 TOLD (iOS)";
 			packageProductDependencies = (
-				0135A84B25872F6700892558 /* SwiftNASR */,
 				0135A894258749F500892558 /* Defaults */,
 				017ED15A261027A9002C69DE /* Alamofire */,
 				01DB7BC328510FE0003CC8EF /* SwiftMETAR */,
 				012CBA192AF4B2BA0015270A /* SwiftCSV */,
 				012CBA1E2AF4B8410015270A /* Gzip */,
 				01DCB9C22C4372A2003A64E7 /* Logging */,
+				01ECF5642CA8810B00204538 /* SwiftNASR */,
 			);
 			productName = "SF50 TOLD (iOS)";
 			productReference = 0135A7CA2587091700892558 /* SF50 TOLD.app */;
@@ -1180,13 +1176,13 @@
 			);
 			name = "SF50 TOLD (macOS)";
 			packageProductDependencies = (
-				0135A85325872F7000892558 /* SwiftNASR */,
 				0135A89A25874A0100892558 /* Defaults */,
 				015373F62610286D0098B529 /* Alamofire */,
 				01DB7BC528510FE6003CC8EF /* SwiftMETAR */,
 				012CBA1B2AF4B2C60015270A /* SwiftCSV */,
 				012CBA202AF4B8480015270A /* Gzip */,
 				01DCB9C42C4372A7003A64E7 /* Logging */,
+				01ECF5662CA8811200204538 /* SwiftNASR */,
 			);
 			productName = "SF50 TOLD (macOS)";
 			productReference = 0135A7D22587091700892558 /* SF50 TOLD.app */;
@@ -1207,7 +1203,6 @@
 			);
 			name = "Tests iOS";
 			packageProductDependencies = (
-				016C73A625AE403C0008455F /* SwiftNASR */,
 				016C73A825AE403C0008455F /* Defaults */,
 			);
 			productName = "Tests iOS";
@@ -1229,7 +1224,6 @@
 			);
 			name = "Tests macOS";
 			packageProductDependencies = (
-				016C73AE25AE40410008455F /* SwiftNASR */,
 				016C73B025AE40410008455F /* Defaults */,
 			);
 			productName = "Tests macOS";
@@ -1255,8 +1249,8 @@
 				01D939DB2C41142A00D753A5 /* Alamofire */,
 				01D939DD2C41143E00D753A5 /* Gzip */,
 				01D939DF2C41144400D753A5 /* SwiftCSV */,
-				01D939E12C41144700D753A5 /* SwiftNASR */,
 				01DCB9CA2C4372C5003A64E7 /* Logging */,
+				01ECF5682CA9038600204538 /* SwiftNASR */,
 			);
 			productName = "SF50 RunwaysExtension";
 			productReference = 0152FE3C2C40FEF5001E29D6 /* SF50 RunwaysExtension.appex */;
@@ -1294,9 +1288,9 @@
 			);
 			name = DownloadNASR;
 			packageProductDependencies = (
-				01AEDAA328D6F2E200F38948 /* SwiftNASR */,
 				01AEDAA628D6F33A00F38948 /* ArgumentParser */,
 				018FFDA8295A551100626EB1 /* Logging */,
+				01ECF5622CA880BF00204538 /* SwiftNASR */,
 			);
 			productName = DownloadNASR;
 			productReference = 01AEDA9C28D6F2D400F38948 /* DownloadNASR */;
@@ -1310,7 +1304,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					0135A7C92587091700892558 = {
 						CreatedOnToolsVersion = 12.2;
@@ -1348,7 +1342,6 @@
 			);
 			mainGroup = 0135A7BD2587091300892558;
 			packageReferences = (
-				0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */,
 				0135A893258749F500892558 /* XCRemoteSwiftPackageReference "Defaults" */,
 				017ED159261027A9002C69DE /* XCRemoteSwiftPackageReference "Alamofire" */,
 				01DB7BC228510FA0003CC8EF /* XCRemoteSwiftPackageReference "SwiftMETAR" */,
@@ -1356,6 +1349,7 @@
 				018FFDA7295A551100626EB1 /* XCRemoteSwiftPackageReference "swift-log" */,
 				012CBA182AF4B2BA0015270A /* XCRemoteSwiftPackageReference "SwiftCSV" */,
 				012CBA1D2AF4B8410015270A /* XCRemoteSwiftPackageReference "GzipSwift" */,
+				01ECF5612CA880BF00204538 /* XCRemoteSwiftPackageReference "SwiftNASR" */,
 			);
 			productRefGroup = 0135A7CB2587091700892558 /* Products */;
 			projectDirPath = "";
@@ -1989,7 +1983,6 @@
 		0135A7F52587091800892558 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SF50 TOLD.entitlements";
@@ -2019,7 +2012,6 @@
 		0135A7F62587091800892558 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "SF50 TOLD.entitlements";
@@ -2114,7 +2106,6 @@
 		0135A7FB2587091800892558 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
@@ -2136,7 +2127,6 @@
 		0135A7FC2587091800892558 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
@@ -2159,7 +2149,6 @@
 		0135A7FE2587091800892558 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -2182,7 +2171,6 @@
 		0135A7FF2587091800892558 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -2336,7 +2324,10 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.DownloadNASR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -2353,7 +2344,10 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.DownloadNASR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -2441,22 +2435,14 @@
 			repositoryURL = "https://github.com/swiftcsv/SwiftCSV.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.1;
+				minimumVersion = 0.10.0;
 			};
 		};
 		012CBA1D2AF4B8410015270A /* XCRemoteSwiftPackageReference "GzipSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/1024jp/GzipSwift.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.1;
-			};
-		};
-		0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RISCfuture/SwiftNASR.git";
-			requirement = {
-				branch = master;
+				branch = main;
 				kind = branch;
 			};
 		};
@@ -2473,7 +2459,7 @@
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.1;
+				minimumVersion = 5.9.1;
 			};
 		};
 		018FFDA7295A551100626EB1 /* XCRemoteSwiftPackageReference "swift-log" */ = {
@@ -2481,7 +2467,7 @@
 			repositoryURL = "https://github.com/apple/swift-log.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.6.1;
 			};
 		};
 		01AEDAA528D6F33A00F38948 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
@@ -2489,7 +2475,7 @@
 			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.5.0;
 			};
 		};
 		01DB7BC228510FA0003CC8EF /* XCRemoteSwiftPackageReference "SwiftMETAR" */ = {
@@ -2498,6 +2484,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
+			};
+		};
+		01ECF5612CA880BF00204538 /* XCRemoteSwiftPackageReference "SwiftNASR" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RISCfuture/SwiftNASR.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2522,16 +2516,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 012CBA1D2AF4B8410015270A /* XCRemoteSwiftPackageReference "GzipSwift" */;
 			productName = Gzip;
-		};
-		0135A84B25872F6700892558 /* SwiftNASR */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
-			productName = SwiftNASR;
-		};
-		0135A85325872F7000892558 /* SwiftNASR */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
-			productName = SwiftNASR;
 		};
 		0135A894258749F500892558 /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2558,20 +2542,10 @@
 			package = 017ED159261027A9002C69DE /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		016C73A625AE403C0008455F /* SwiftNASR */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
-			productName = SwiftNASR;
-		};
 		016C73A825AE403C0008455F /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0135A893258749F500892558 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
-		};
-		016C73AE25AE40410008455F /* SwiftNASR */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
-			productName = SwiftNASR;
 		};
 		016C73B025AE40410008455F /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2587,11 +2561,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 018FFDA7295A551100626EB1 /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
-		};
-		01AEDAA328D6F2E200F38948 /* SwiftNASR */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
-			productName = SwiftNASR;
 		};
 		01AEDAA628D6F33A00F38948 /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2612,11 +2581,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 012CBA182AF4B2BA0015270A /* XCRemoteSwiftPackageReference "SwiftCSV" */;
 			productName = SwiftCSV;
-		};
-		01D939E12C41144700D753A5 /* SwiftNASR */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0135A84A25872F6700892558 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
-			productName = SwiftNASR;
 		};
 		01DB7BC328510FE0003CC8EF /* SwiftMETAR */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2642,6 +2606,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 018FFDA7295A551100626EB1 /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
+		};
+		01ECF5622CA880BF00204538 /* SwiftNASR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01ECF5612CA880BF00204538 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
+			productName = SwiftNASR;
+		};
+		01ECF5642CA8810B00204538 /* SwiftNASR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01ECF5612CA880BF00204538 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
+			productName = SwiftNASR;
+		};
+		01ECF5662CA8811200204538 /* SwiftNASR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01ECF5612CA880BF00204538 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
+			productName = SwiftNASR;
+		};
+		01ECF5682CA9038600204538 /* SwiftNASR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01ECF5612CA880BF00204538 /* XCRemoteSwiftPackageReference "SwiftNASR" */;
+			productName = SwiftNASR;
 		};
 /* End XCSwiftPackageProductDependency section */
 
