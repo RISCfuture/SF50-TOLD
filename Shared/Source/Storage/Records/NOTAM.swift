@@ -1,6 +1,9 @@
 import Foundation
 import CoreData
 import Combine
+import OSLog
+
+fileprivate let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "NOTAM")
 
 enum Contamination {
     case waterOrSlush(depth: Float)
@@ -24,7 +27,7 @@ extension NOTAM {
             case "compactSnow": return .compactSnow
             case .none: return nil
             default:
-                NSLog("Ignoring unknown contamination type %@", type)
+                logger.info("Ignoring unknown contamination type \(self.contaminationType!, privacy: .public)")
                 return nil
         }
     }

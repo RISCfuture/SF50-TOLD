@@ -14,6 +14,7 @@
 
 import Foundation
 import XCTest
+import OSLog
 
 @MainActor
 func setupSnapshot(_ app: XCUIApplication, waitForAnimations: Bool = true) {
@@ -63,6 +64,8 @@ open class Snapshot: NSObject {
     static var deviceLanguage = ""
     static var currentLocale = ""
 
+    private static let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "SnapshotHelper")
+
     open class func setupSnapshot(_ app: XCUIApplication, waitForAnimations: Bool = true) {
 
         Snapshot.app = app
@@ -75,13 +78,13 @@ open class Snapshot: NSObject {
             setLocale(app)
             setLaunchArguments(app)
         } catch let error {
-            NSLog(error.localizedDescription)
+            logger.error("Error: \(error.localizedDescription)")
         }
     }
 
     class func setLanguage(_ app: XCUIApplication) {
         guard let cacheDirectory else {
-            NSLog("CacheDirectory is not set - probably running on a physical device?")
+            logger.warning("CacheDirectory is not set - probably running on a physical device?")
             return
         }
 
@@ -92,13 +95,13 @@ open class Snapshot: NSObject {
             deviceLanguage = try String(contentsOf: path, encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
             app.launchArguments += ["-AppleLanguages", "(\(deviceLanguage))"]
         } catch {
-            NSLog("Couldn't detect/set language...")
+            logger.error("Couldn't detect/set language...")
         }
     }
 
     class func setLocale(_ app: XCUIApplication) {
         guard let cacheDirectory else {
-            NSLog("CacheDirectory is not set - probably running on a physical device?")
+            logger.warning("CacheDirectory is not set - probably running on a physical device?")
             return
         }
 
@@ -108,7 +111,7 @@ open class Snapshot: NSObject {
             let trimCharacterSet = CharacterSet.whitespacesAndNewlines
             currentLocale = try String(contentsOf: path, encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
         } catch {
-            NSLog("Couldn't detect/set locale...")
+            logger.warning("Couldn't detect/set locale...")
         }
 
         if currentLocale.isEmpty && !deviceLanguage.isEmpty {
@@ -122,7 +125,7 @@ open class Snapshot: NSObject {
 
     class func setLaunchArguments(_ app: XCUIApplication) {
         guard let cacheDirectory else {
-            NSLog("CacheDirectory is not set - probably running on a physical device?")
+            logger.warning("CacheDirectory is not set - probably running on a physical device?")
             return
         }
 
@@ -138,7 +141,7 @@ open class Snapshot: NSObject {
             }
             app.launchArguments += results
         } catch {
-            NSLog("Couldn't detect/set launch_arguments...")
+            logger.warning("Couldn't detect/set launch_arguments...")
         }
     }
 
@@ -147,7 +150,7 @@ open class Snapshot: NSObject {
             waitForLoadingIndicatorToDisappear(within: timeout)
         }
 
-        NSLog("snapshot: \(name)") // more information about this, check out https://docs.fastlane.tools/actions/snapshot/#how-does-it-work
+        logger.info("snapshot: \(name)") // more information about this, check out https://docs.fastlane.tools/actions/snapshot/#how-does-it-work
 
         if Snapshot.waitForAnimations {
             sleep(1) // Waiting for the animation to be finished (kind of)
@@ -155,7 +158,7 @@ open class Snapshot: NSObject {
 
         #if os(OSX)
             guard let app else {
-                NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
+                logger.error("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
                 return
             }
 
@@ -163,7 +166,7 @@ open class Snapshot: NSObject {
         #else
 
             guard self.app != nil else {
-                NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
+                logger.error("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
                 return
             }
 
@@ -189,8 +192,7 @@ open class Snapshot: NSObject {
                     try image.pngData()?.write(to: path, options: .atomic)
                 #endif
             } catch let error {
-                NSLog("Problem writing screenshot: \(name) to \(screenshotsDir)/\(simulator)-\(name).png")
-                NSLog(error.localizedDescription)
+                logger.error("Problem writing screenshot: \(name) to \(screenshotsDir)/\(simulator)-\(name).png: \(error.localizedDescription)")
             }
         #endif
     }
@@ -218,7 +220,7 @@ open class Snapshot: NSObject {
         #endif
 
         guard let app else {
-            NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
+            logger.error("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
             return
         }
 
