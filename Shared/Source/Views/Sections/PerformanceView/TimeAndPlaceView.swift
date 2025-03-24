@@ -98,7 +98,7 @@ struct TimeAndPlaceView: View {
 
 #Preview {
     let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    var rwy12 = { () -> Runway in
+    let rwy12 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "12"
         r.takeoffRun = 2600
@@ -107,7 +107,7 @@ struct TimeAndPlaceView: View {
         r.elevation = 12
         return r
     }()
-    var rwy30 = { () -> Runway in
+    let rwy30 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "30"
         r.takeoffRun = 2600

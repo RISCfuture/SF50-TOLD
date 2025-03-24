@@ -37,14 +37,14 @@ struct RunwayPicker: View {
 
 #Preview {
     let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    var rwy30 = { () -> Runway in
+    let rwy30 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "30"
         r.takeoffRun = 2600
         r.takeoffDistance = 2800
         return r
     }()
-    var rwy12 = { () -> Runway in
+    let rwy12 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "12"
         r.takeoffRun = 2600
