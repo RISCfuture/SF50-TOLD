@@ -79,14 +79,12 @@ fileprivate class WeatherLoader<T> {
                         guard let csv = try? CSV<Enumerated>(string: str) else {
                             throw WeatherDownloadError.badCSV
                         }
-                        let wx: Dictionary<String, WeatherResult<T>> = csv.rows.filter { !$0[1].isEmpty && $0[1] != "station_id" }.reduce(Dictionary()) { dict, row in
-                            var dict = dict
+                        let wx: Dictionary<String, WeatherResult<T>> = csv.rows.filter { !$0[1].isEmpty && $0[1] != "station_id" }.reduce(into: Dictionary()) { dict, row in
                             do {
                                 dict[row[1]] = .some(try self.parse(row[0]))
                             } catch {
                                 dict[row[1]] = .error(error, raw: row[0])
                             }
-                            return dict
                         }
                         self.subject.value = .finished(wx)
                     } catch {

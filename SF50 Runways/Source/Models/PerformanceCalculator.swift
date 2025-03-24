@@ -94,12 +94,10 @@ class PerformanceCalculator {
     }
     
     private func runwayResults(airport: Airport, weather: Weather) -> Dictionary<String, Interpolation> {
-        airport.runways!.reduce(Dictionary<String, Interpolation>()) { dict, runway in
+        airport.runways!.reduce(into: Dictionary<String, Interpolation>()) { dict, runway in
             let runway = runway as! Runway
-            var dict = dict
             let model = self.performanceModel(runway: runway, weather: weather)
             dict[runway.name!] = model.takeoffDistance
-            return dict
         }
     }
     
