@@ -69,7 +69,7 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
     }
     
     func airportDistance(_ airport1: Airport, _ airport2: Airport) -> Bool {
-        guard let location = location else { return false }
+        guard let location else { return false }
         
         let point = MKMapPoint(location)
         let dist1 = airport1.mapPoint.distance(to: point)
@@ -88,7 +88,7 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
     private func location() async -> CLLocationCoordinate2D {
         return await withCheckedContinuation { continuation in
             $location.sink { location in
-                guard let location = location else { return }
+                guard let location else { return }
                 continuation.resume(with: .success(location))
             }.store(in: &cancellables)
         }
@@ -116,7 +116,7 @@ class NearestAirportPublisher: NSObject, ObservableObject, CLLocationManagerDele
     }
     
     private func predicate(coordinate: CLLocationCoordinate2D?) -> NSPredicate {
-        guard let coordinate = coordinate else { return .init(value: false) }
+        guard let coordinate else { return .init(value: false) }
         
         let lowerLat = (coordinate.latitude - 0.8332) // - 50 NM
         let upperLat = (coordinate.latitude + 0.8332) // + 50 NM

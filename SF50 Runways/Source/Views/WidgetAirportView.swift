@@ -4,7 +4,7 @@ import WidgetKit
 struct WidgetAirportView: View {
     var name: String?
     var body: some View {
-        if let name = name {
+        if let name {
             Text(name)
                 .font(.system(size: 11))
                 .bold()

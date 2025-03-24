@@ -104,8 +104,7 @@ class PerformanceState: ObservableObject {
         airportID = Defaults[defaultKey]
         $airportID.receive(on: DispatchQueue.main).sink { Defaults[self.defaultKey] = $0 }.store(in: &cancellables)
         $airportID.tryMap { ID -> Airport? in
-            guard let ID = ID else { return nil }
-            return try self.findAirport(id: ID)
+            return try ID.flatMap { try self.findAirport(id: $0) }
         }.catch { error -> AnyPublisher<Airport?, Never> in
             self.error = error
             return Just(nil).eraseToAnyPublisher()
@@ -114,8 +113,7 @@ class PerformanceState: ObservableObject {
         
         // refresh airport and runway when new cycle is loaded
         Defaults.publisher(.lastCycleLoaded).tryMap { _ in
-            guard let ID = self.airportID else { return nil }
-            return try self.findAirport(id: ID)
+            return try self.airportID.flatMap { try self.findAirport(id: $0) }
         }.catch { error -> AnyPublisher<Airport?, Never> in
             self.error = error
             return Just(nil).eraseToAnyPublisher()
@@ -134,7 +132,7 @@ class PerformanceState: ObservableObject {
         }.store(in: &cancellables)
 
         $runway.sink { runway in
-            guard let runway = runway, let notam = runway.notam else {
+            guard let notam = runway?.notam else {
                 self.notamCount = 0
                 return
             }

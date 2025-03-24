@@ -68,10 +68,10 @@ enum StepProgress: Equatable {
 }
 
 func crosswindLimitForFlapSetting(_ flaps: FlapSetting?) -> UInt? {
-    guard let flaps = flaps else { return nil }
     switch flaps {
-        case .flapsUp, .flapsUpIce, .flaps50, .flaps50Ice: return 18
-        case .flaps100: return 16
+        case .flapsUp, .flapsUpIce, .flaps50, .flaps50Ice: 18
+        case .flaps100: 16
+        case .none: nil
     }
 }
 

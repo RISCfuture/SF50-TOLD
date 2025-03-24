@@ -10,20 +10,19 @@ struct WeatherValues {
     
     init?(date: Date, observation: METAR?, forecast: TAF?) {
         if observation == nil && forecast == nil { return nil }
-        
-        if let observation = observation {
+
+        if let observation {
             let sinceMETAR = date.timeIntervalSince(observation.date)
             if sinceMETAR > METARUpdatePeriod {
-                guard let forecast = forecast else { return nil }
-                if !forecast.covers(date) { return nil }
+                guard let forecast, forecast.covers(date) else { return nil }
             }
         }
-        
+
         var wind = Wind.calm
         var temperature = Temperature.ISA
         var altimeter = standardSLP
         
-        if let observation = observation {
+        if let observation {
             let sinceMETAR = date.timeIntervalSince(observation.date)
             
             if let observedWind = observation.wind {
@@ -39,14 +38,12 @@ struct WeatherValues {
             }
             
             if sinceMETAR > METARUpdatePeriod {
-                if let forecast = forecast {
-                    if let group = forecast.during(date) {
-                        if let forecastWind = group.wind {
-                            wind = windFromEnum(forecastWind)
-                        }
-                        if let forecastAlt = group.altimeter {
-                            altimeter = Double(forecastAlt.measurement.converted(to: .inchesOfMercury).value)
-                        }
+                if let group = forecast?.during(date) {
+                    if let forecastWind = group.wind {
+                        wind = windFromEnum(forecastWind)
+                    }
+                    if let forecastAlt = group.altimeter {
+                        altimeter = Double(forecastAlt.measurement.converted(to: .inchesOfMercury).value)
                     }
                 }
             }

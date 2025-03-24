@@ -7,7 +7,7 @@ struct InterpolationView: View {
     var maximum: Double? = nil
     
     var body: some View {
-        if let interpolation = interpolation {
+        if let interpolation {
             HStack(spacing: 0) {
                 switch interpolation {
                     case .configNotAuthorized:
@@ -19,7 +19,7 @@ struct InterpolationView: View {
                             .bold()
                             .foregroundColor(color(for: number))
                             .multilineTextAlignment(.trailing)
-                        if let suffix = suffix {
+                        if let suffix {
                             Text(" \(suffix)")
                                 .foregroundColor(color(for: number))
                         }
@@ -31,11 +31,11 @@ struct InterpolationView: View {
     }
     
     private func color(for number: Double) -> Color {
-        if let min = minimum {
-            if number < min { return .red }
+        if let minimum {
+            if number < minimum { return .red }
         }
-        if let max = maximum {
-            if number > max { return .red }
+        if let maximum {
+            if number > maximum { return .red }
         }
         return .primary
     }

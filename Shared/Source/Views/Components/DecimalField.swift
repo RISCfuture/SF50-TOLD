@@ -128,7 +128,7 @@ struct DecimalField : View {
             .decimalField()
             .foregroundColor(valid ? .primary : .red)
             
-            if let suffix = suffix {
+            if let suffix {
                 Text(verbatim: " \(suffix)").foregroundColor(.secondary)
             }
         }
@@ -136,11 +136,11 @@ struct DecimalField : View {
     
     private func isValid(number: NSNumber?) -> Bool {
         guard let num = number?.doubleValue else { return false }
-        if let min = minimum {
-            if num < min { return false }
+        if let minimum {
+            if num < minimum { return false }
         }
-        if let max = maximum {
-            if num > max { return false }
+        if let maximum {
+            if num > maximum { return false }
         }
         return true
     }

@@ -40,9 +40,7 @@ struct PerformanceModelG1: PerformanceModel {
             if temp < -20 { offscaleLow = true }
             if temp > 50 { offscaleHigh = true }
             
-            if let takeoffPermitted = takeoffPermitted {
-                if !takeoffPermitted { offscaleHigh = true }
-            }
+            if let takeoffPermitted, !takeoffPermitted { offscaleHigh = true }
             
             return .value(distance, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
@@ -71,9 +69,7 @@ struct PerformanceModelG1: PerformanceModel {
             if temp < -20 { offscaleLow = true }
             if temp > 50 { offscaleHigh = true }
             
-            if let takeoffPermitted = takeoffPermitted {
-                if !takeoffPermitted { offscaleHigh = true }
-            }
+            if let takeoffPermitted, !takeoffPermitted { offscaleHigh = true }
             
             return .value(distance, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
@@ -138,17 +134,16 @@ struct PerformanceModelG1: PerformanceModel {
                 case .none: return nil
             }
             
-            if let contamination = runway.contamination {
-                switch contamination {
-                    case let .waterOrSlush(depth):
-                        distance += landingDistanceIncrease_waterSlush(distance, depth: Double(depth))
-                    case let .slushOrWetSnow(depth):
-                        distance += landingDistanceIncrease_slushWetSnow(distance, depth: Double(depth))
-                    case .drySnow:
-                        distance += landingDistanceIncrease_drySnow(distance)
-                    case .compactSnow:
-                        distance += landingDistanceIncrease_compactSnow(distance)
-                }
+            switch runway.contamination {
+                case let .waterOrSlush(depth):
+                    distance += landingDistanceIncrease_waterSlush(distance, depth: Double(depth))
+                case let .slushOrWetSnow(depth):
+                    distance += landingDistanceIncrease_slushWetSnow(distance, depth: Double(depth))
+                case .drySnow:
+                    distance += landingDistanceIncrease_drySnow(distance)
+                case .compactSnow:
+                    distance += landingDistanceIncrease_compactSnow(distance)
+                case .none: break
             }
             
             distance *= Defaults[.safetyFactor]
@@ -204,10 +199,10 @@ struct PerformanceModelG1: PerformanceModel {
             }
             
             if runway.turf { distance *= 1.2 } // 20% for unpaved runway
-            
+
             if let contamination = runway.contamination,
                case let .value(roll, _) = landingRoll {
-                
+
                 switch contamination {
                     case let .waterOrSlush(depth):
                         distance += landingDistanceIncrease_waterSlush(roll, depth: Double(depth))
@@ -219,7 +214,7 @@ struct PerformanceModelG1: PerformanceModel {
                         distance += landingDistanceIncrease_compactSnow(roll)
                 }
             }
-            
+
             distance *= Defaults[.safetyFactor]
             
             var offscaleLow = false
@@ -321,9 +316,7 @@ struct PerformanceModelG1: PerformanceModel {
     }
     
     private func ifInitialized<T>(_ block: (_ runway: Runway, _ weather: Weather, _ weight: Double) -> T?) -> T? {
-        guard let runway = runway else { return nil }
-        
-        return block(runway, weather, weight)
+        runway.flatMap { block($0, weather, weight) }
     }
     
     private func takeoffRollModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {

@@ -32,9 +32,9 @@ struct VxClimbView: View {
             }
         }
         
-        if let requiredClimbGradient = requiredClimbGradientIfNotMet {
+        if let requiredClimbGradientIfNotMet {
             HStack {
-                Label("A climb gradient of \(integerFormatter.string(for: requiredClimbGradient)) ft/NM is required.",
+                Label("A climb gradient of \(integerFormatter.string(for: requiredClimbGradientIfNotMet)) ft/NM is required.",
                       systemImage: "exclamationmark.triangle")
                 .font(.system(size: 14))
                 .foregroundColor(.red)

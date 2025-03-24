@@ -68,7 +68,7 @@ class PerformanceCalculator {
     
     private func entriesFor(airport: Airport, metar: METAR?, taf: TAF?) -> Array<RunwayWidgetEntry> {
         var dates = [Date()]
-        if let taf = taf {
+        if let taf {
             dates.append(contentsOf: self.datesFrom(taf: taf))
         }
         

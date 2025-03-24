@@ -9,8 +9,7 @@ struct WeatherPicker: View {
     var elevation: Float? = nil
     
     private var densityAltitude: Double? {
-        guard let elevation = self.elevation else { return nil }
-        return state.weather.densityAltitude(elevation: Double(elevation))
+        elevation.map { state.weather.densityAltitude(elevation: Double($0)) }
     }
     
     var body: some View {
@@ -25,7 +24,7 @@ struct WeatherPicker: View {
             } else {
                 WeatherSource(weather: state, downloadWeather: downloadWeather)
                 WeatherForm(weather: state)
-                if let densityAltitude = densityAltitude {
+                if let densityAltitude {
                     Text("Density altitude: \(integerFormatter.string(for: densityAltitude)) ft")
                         .foregroundColor(.secondary)
                         .font(.system(size: 14))

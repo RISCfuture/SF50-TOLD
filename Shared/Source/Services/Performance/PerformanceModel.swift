@@ -28,7 +28,6 @@ extension PerformanceModel {
     
     var windComponent: Double {
         guard let runwayHeading = runway?.heading else { return weather.wind.speed }
-        
         return Double(weather.wind.speed) * cos(deg2rad(weather.wind.direction - Double(runwayHeading)))
     }
     

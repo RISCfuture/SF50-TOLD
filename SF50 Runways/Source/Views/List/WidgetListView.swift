@@ -15,7 +15,7 @@ struct WidgetListView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            if let runways = runways {
+            if let runways {
                 ForEach(runways, id: \.name) { runway in
                     RunwayListItem(runway: runway,
                                    takeoffDistance: entry.takeoffDistances?[runway.name!],

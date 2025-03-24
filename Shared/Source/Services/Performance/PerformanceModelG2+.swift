@@ -42,9 +42,7 @@ struct PerformanceModelG2Plus: PerformanceModel {
             if temp < -20 { offscaleLow = true }
             if temp > 50 { offscaleHigh = true }
             
-            if let takeoffPermitted = takeoffPermitted {
-                if !takeoffPermitted { offscaleHigh = true }
-            }
+            if let takeoffPermitted, !takeoffPermitted { offscaleHigh = true }
             
             return .value(distance, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
@@ -73,9 +71,7 @@ struct PerformanceModelG2Plus: PerformanceModel {
             if temp < -20 { offscaleLow = true }
             if temp > 50 { offscaleHigh = true }
             
-            if let takeoffPermitted = takeoffPermitted {
-                if !takeoffPermitted { offscaleHigh = true }
-            }
+            if let takeoffPermitted, !takeoffPermitted { offscaleHigh = true }
             
             return .value(distance, offscale: offscale(low: offscaleLow, high: offscaleHigh))
         }
@@ -140,17 +136,16 @@ struct PerformanceModelG2Plus: PerformanceModel {
                 case .none: return nil
             }
             
-            if let contamination = runway.contamination {
-                switch contamination {
-                    case let .waterOrSlush(depth):
-                        distance += landingDistanceIncrease_waterSlush(distance, depth: Double(depth))
-                    case let .slushOrWetSnow(depth):
-                        distance += landingDistanceIncrease_slushWetSnow(distance, depth: Double(depth))
-                    case .drySnow:
-                        distance += landingDistanceIncrease_drySnow(distance)
-                    case .compactSnow:
-                        distance += landingDistanceIncrease_compactSnow(distance)
-                }
+            switch runway.contamination {
+                case let .waterOrSlush(depth):
+                    distance += landingDistanceIncrease_waterSlush(distance, depth: Double(depth))
+                case let .slushOrWetSnow(depth):
+                    distance += landingDistanceIncrease_slushWetSnow(distance, depth: Double(depth))
+                case .drySnow:
+                    distance += landingDistanceIncrease_drySnow(distance)
+                case .compactSnow:
+                    distance += landingDistanceIncrease_compactSnow(distance)
+                default: break
             }
             
             distance *= Defaults[.safetyFactor]
@@ -323,9 +318,7 @@ struct PerformanceModelG2Plus: PerformanceModel {
     }
     
     private func ifInitialized<T>(_ block: (_ runway: Runway, _ weather: Weather, _ weight: Double) -> T?) -> T? {
-        guard let runway = runway else { return nil }
-        
-        return block(runway, weather, weight)
+        runway.flatMap { block($0, weather, weight) }
     }
     
     private func takeoffRollModel(weight: Double, pressureAlt: Double, temp: Double) -> Double {

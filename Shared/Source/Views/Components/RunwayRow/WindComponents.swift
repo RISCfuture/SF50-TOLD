@@ -28,13 +28,13 @@ struct WindComponents: View {
     private var crosswindNum: NSNumber { NSNumber(value: abs(crosswind)) }
     
     private var exceedsTailwindLimits: Bool {
-        guard let limit = tailwindLimit else { return false }
-        return headwind < -Int(limit)
+        guard let tailwindLimit else { return false }
+        return headwind < -Int(tailwindLimit)
     }
     
     private var exceedsCrosswindLimits: Bool {
-        guard let limit = crosswindLimit else { return false }
-        return abs(crosswind) > limit
+        guard let crosswindLimit else { return false }
+        return abs(crosswind) > crosswindLimit
     }
     
     var body: some View {

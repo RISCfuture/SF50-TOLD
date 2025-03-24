@@ -134,16 +134,15 @@ class AirportDataLoader: ObservableObject {
     }
     
     private func configureRecord(_ record: inout Runway, from runway: SwiftNASR.Runway, end: SwiftNASR.RunwayEnd, airport: SwiftNASR.Airport) -> Bool {
-        guard let elevation = end.touchdownZoneElevation ?? airport.referencePoint.elevation else { return false }
-        guard let heading = bestGuessTrueHeading(end: end, airport: airport) else { return false }
-        guard let LDA = end.LDA ?? runway.length else { return false }
-        guard let TODA = end.TODA ?? runway.length else { return false }
-        guard let TORA = end.TORA ?? runway.length else { return false }
-        
-        let gradient = end.gradient ?? {
-            guard let estimatedGradient = runway.estimatedGradient else { return nil }
-            return (runway.baseEnd.ID == end.ID) ? estimatedGradient : -estimatedGradient
-        }() ?? 0
+        guard let elevation = end.touchdownZoneElevation ?? airport.referencePoint.elevation,
+              let heading = bestGuessTrueHeading(end: end, airport: airport),
+              let LDA = end.LDA ?? runway.length,
+              let TODA = end.TODA ?? runway.length,
+              let TORA = end.TORA ?? runway.length else { return false }
+
+        let gradient = end.gradient
+            ?? runway.estimatedGradient.map { runway.baseEnd.ID == end.ID ? $0 : -$0 }
+            ?? 0
         
         record.name = end.ID
         record.elevation = elevation
@@ -159,8 +158,8 @@ class AirportDataLoader: ObservableObject {
     
     private func bestGuessTrueHeading(end: SwiftNASR.RunwayEnd, airport: SwiftNASR.Airport) -> UInt? {
         if let th = end.trueHeading { return th }
-        guard let mv = airport.magneticVariation else { return nil }
-        guard let IDNum = Int(end.ID) else { return nil }
+        guard let mv = airport.magneticVariation,
+              let IDNum = Int(end.ID) else { return nil }
         
         var dir = IDNum*10 + mv
         while (dir < 0)  { dir += 360 }

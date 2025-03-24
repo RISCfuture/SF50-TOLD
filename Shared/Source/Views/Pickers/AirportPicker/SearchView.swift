@@ -45,48 +45,20 @@ struct SearchView: View {
     }
     
     private func checkExactMatch(_ string1: String?, _ string2: String?) -> Bool? {
-        if let string1 = string1 {
-            if caseInsensitiveEqual(string1, filter) { return true } // airport1 exact match, has precedence
-        }
-        if let string2 = string2 {
-            if caseInsensitiveEqual(string2, filter) { return false } // airport2 exact match, has precedence
-        }
+        if let string1, caseInsensitiveEqual(string1, filter) { return true } // airport1 exact match, has precedence
+        if let string2, caseInsensitiveEqual(string2, filter) { return false } // airport2 exact match, has precedence
         return nil
     }
     
     private func checkContainsMatch(_ string1: String?, _ string2: String?) -> Bool? {
-        if let string1 = string1 {
-            if let string2 = string2 {
-                // both string1 and string2 present
-                if let index1 = caseInsensitiveContains(string: string1, substring: filter) {
-                    if let index2 = caseInsensitiveContains(string: string2, substring: filter) {
-                        // found in both airports, return the one that's closer to the start of the string
-                        if index1 < index2 { return true } // airport1 has precedence
-                        else if index1 > index2 { return false } // airport2 has precedence
-                        else { return nil } // equal precedence
-                    } else {
-                        // found only in airport1, it takes precedence
-                        return true
-                    }
-                } else if caseInsensitiveContains(string: string2, substring: filter) != nil {
-                    // found only in airport2, it takes precedence
-                    return false
-                } else {
-                    // not found in either airport, equal precedence
-                    return nil
-                }
-            } else {
-                // string1 only present
-                if caseInsensitiveContains(string: string1, substring: filter) != nil { return true }
-                else { return nil }
-            }
-        } else if let string2 = string2 {
-            // string2 only present
-            if caseInsensitiveContains(string: string2, substring: filter) != nil { return false }
-            else { return nil }
-        } else {
-            // neither string present
-            return nil
+        let index1 = string1.flatMap { caseInsensitiveContains(string: $0, substring: filter) }
+        let index2 = string2.flatMap { caseInsensitiveContains(string: $0, substring: filter) }
+
+        switch (index1, index2) {
+            case let (i1?, i2?): return i1 < i2 ? true : (i1 > i2 ? false : nil)
+            case (_?, nil): return true
+            case (nil, _?): return false
+            default: return nil
         }
     }
     

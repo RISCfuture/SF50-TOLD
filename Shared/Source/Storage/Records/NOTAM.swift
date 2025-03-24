@@ -13,19 +13,16 @@ extension NOTAM {
     var isContaminated: Bool { contamination != nil }
     
     var contamination: Contamination? {
-        guard let type = contaminationType else { return nil }
-        
-        switch type {
+        switch contaminationType {
             case "waterOrSlush":
-                guard let depth = contaminationDepth?.floatValue else { return nil }
-                if depth == 0 { return nil }
+                guard let depth = contaminationDepth?.floatValue, depth != 0 else { return nil }
                 return .waterOrSlush(depth: depth)
             case "slushOrWetSnow":
-                guard let depth = contaminationDepth?.floatValue else { return nil }
-                if depth == 0 { return nil }
+                guard let depth = contaminationDepth?.floatValue, depth != 0 else { return nil }
                 return .slushOrWetSnow(depth: depth)
             case "drySnow": return .drySnow
             case "compactSnow": return .compactSnow
+            case .none: return nil
             default:
                 NSLog("Ignoring unknown contamination type %@", type)
                 return nil

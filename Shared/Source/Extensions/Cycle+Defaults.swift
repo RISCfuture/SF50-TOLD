@@ -7,17 +7,16 @@ public class CycleBridge: _DefaultsBridge {
     public typealias Serializable = String
     
     public func serialize(_ value: Cycle?) -> String? {
-        guard let value = value else { return nil }
-        return "\(value.year)-\(value.month)-\(value.day)"
+        value.map { "\($0.year)-\($0.month)-\($0.day)" }
     }
     
     public func deserialize(_ object: String?) -> Cycle? {
-        guard let object = object else { return nil }
+        guard let object else { return nil }
 
         let parts = object.components(separatedBy: "-")
-        guard let year = Int(parts[0]) else { return nil }
-        guard let mon = Int(parts[1]) else { return nil }
-        guard let day = Int(parts[2]) else { return nil }
+        guard let year = Int(parts[0]),
+              let mon = Int(parts[1]),
+              let day = Int(parts[2]) else { return nil }
         
         let dateComp = DateComponents(calendar: Calendar(identifier: .gregorian), year: year, month: mon, day: day)
         guard let date = dateComp.date else { return nil}

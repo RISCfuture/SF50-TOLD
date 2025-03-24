@@ -7,7 +7,7 @@ struct ListResults: View {
     let onSelect: (Airport) -> Void
     
     private var sortedAiports: Array<Airport> {
-        guard let sort = sort else { return Array(airports.prefix(10)) }
+        guard let sort else { return Array(airports.prefix(10)) }
         return Array(airports.sorted(by: { sort($0, $1) }).prefix(10))
     }
     

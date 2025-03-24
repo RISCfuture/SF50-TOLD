@@ -40,7 +40,7 @@ class SectionState: ObservableObject {
         airportChangeCancellables.removeAll()
         
         weatherLoadingCanceled = false
-        guard let airport = airport else {
+        guard let airport else {
             DispatchQueue.main.async {
                 self.performance.weatherState.resetToISA()
                 self.performance.weatherState.loading = false
@@ -108,7 +108,7 @@ class SectionState: ObservableObject {
     }
     
     private func reloadWeather(debounce: Bool = false) {
-        guard let lastWeatherLoad = lastWeatherLoad else {
+        guard let lastWeatherLoad else {
             WeatherService.instance.reload()
             self.lastWeatherLoad = Date()
             return

@@ -29,8 +29,7 @@ fileprivate class WeatherLoader<T> {
         subject.map { state in
             switch state {
                 case let .finished(value):
-                    guard let result = value[icao] else { return .finished(.none) }
-                    return .finished(result)
+                    return .finished(value[icao] ?? .none)
                 case .notLoaded: return .notLoaded
                 case .loading: return .loading
                 case let .error(error): return .error(error)

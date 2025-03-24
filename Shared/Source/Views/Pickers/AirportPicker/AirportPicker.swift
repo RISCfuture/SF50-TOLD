@@ -28,10 +28,8 @@ struct AirportPicker: View {
             Picker("Tab", selection: $tabIndex) {
                 Text("Favorites").tag(AirportPickerTabs.favorites)
                 Text("Recents").tag(AirportPickerTabs.recents)
-                if let authStatus = nearestAirport.authorizationStatus {
-                    if isAuthorized(authStatus) {
-                        Text("Nearest").tag(AirportPickerTabs.nearest)
-                    }
+                if let authStatus = nearestAirport.authorizationStatus, isAuthorized(authStatus) {
+                    Text("Nearest").tag(AirportPickerTabs.nearest)
                 }
                 Text("Search").tag(AirportPickerTabs.search)
             }

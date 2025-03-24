@@ -74,11 +74,9 @@ class AirportLoadingService: ObservableObject {
     }
     
     private func outOfDate(cycle: Cycle?) -> Bool {
-        guard let cycle = cycle else { return true }
-        if !cycle.isEffective { return true }
-        guard let count = try? airportCount() else { return true }
-        if count == 0 { return true }
-        return false
+        if let cycle, cycle.isEffective,
+           let count = try? airportCount(), count > 0 { return false }
+        return true
     }
     
     private func outOfDate(schemaVersion: Int) -> Bool {

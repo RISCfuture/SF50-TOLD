@@ -18,7 +18,7 @@ struct WidgetGridView: View {
 
     var body: some View {
         LazyVGrid(columns: columns, alignment: .leading, spacing: 10) {
-            if let runways = runways {
+            if let runways {
                 ForEach(runways, id: \.name) { runway in
                     RunwayGridItem(runway: runway, takeoffDistance: entry.takeoffDistances?[runway.name!])
                 }

@@ -10,7 +10,7 @@ struct SearchResults: View {
     let onSelect: (Airport) -> Void
     
     private var sortedAiports: Array<Airport> {
-        guard let sort = sort else { return Array(airports) }
+        guard let sort else { return Array(airports) }
         return airports.sorted(by: { sort($0, $1) })
     }
     

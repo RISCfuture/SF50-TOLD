@@ -11,7 +11,7 @@ struct RawWeather: View {
                     .font(.system(size: 14, weight: .regular, design: .monospaced))
                     .multilineTextAlignment(.leading)
             }
-            if let error = error {
+            if let error {
                 Text(error.localizedDescription).foregroundColor(.red)
                     .font(.system(size: 14))
                     .multilineTextAlignment(.leading)
