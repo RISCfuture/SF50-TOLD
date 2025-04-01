@@ -1,9 +1,9 @@
-import SwiftUI
 import CoreData
-import Defaults
 import CoreLocation
+import Defaults
+import SwiftUI
 
-fileprivate enum AirportPickerTabs {
+private enum AirportPickerTabs {
     case favorites
     case recents
     case nearest
@@ -11,18 +11,20 @@ fileprivate enum AirportPickerTabs {
 }
 
 struct AirportPicker: View {
-    @Environment(\.presentationMode) var mode
-    @State fileprivate var tabIndex: AirportPickerTabs = .favorites
-    @StateObject fileprivate var nearestAirport = NearestAirportPublisher()
-    
+    @Environment(\.presentationMode)
+    var mode
+
+    @State private var tabIndex: AirportPickerTabs = .favorites
+    @StateObject private var nearestAirport = NearestAirportPublisher()
+
     var onSelect: (Airport) -> Void
-    
+
 #if os(macOS)
     let isAuthorized = { (status: CLAuthorizationStatus) in status == .authorizedAlways }
 #else
     let isAuthorized = { (status: CLAuthorizationStatus) in status == .authorizedAlways || status == .authorizedWhenInUse }
 #endif
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Picker("Tab", selection: $tabIndex) {
@@ -36,18 +38,17 @@ struct AirportPicker: View {
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal)
             .accessibilityIdentifier("airportListPicker")
-            
-            switch (tabIndex) {
+
+            switch tabIndex {
                 case .favorites: FavoritesView(onSelect: selectAndDismiss)
                 case .recents: RecentsView(onSelect: selectAndDismiss)
                 case .nearest: NearestView(nearestAirport: nearestAirport, onSelect: selectAndDismiss)
                 case .search: SearchView(onSelect: selectAndDismiss)
             }
         }.onAppear {
-            
         }
     }
-    
+
     private func selectAndDismiss(airport: Airport) {
         onSelect(airport)
         mode.wrappedValue.dismiss()
@@ -67,6 +68,6 @@ struct AirportPicker: View {
         a.name = "San Carlos"
         return a
     }()
-    
-    return AirportPicker() { _ in }
+
+    return AirportPicker { _ in }
 }

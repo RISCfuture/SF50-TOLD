@@ -1,30 +1,24 @@
-import SwiftUI
 import CoreData
 import Defaults
+import SwiftUI
 
 struct AirportRow: View {
     @ObservedObject var airport: Airport
-    
+
     var showFavoriteButton: Bool
-    @State var isFavorite: Bool = false
-    
+    @State private var isFavorite: Bool = false
+
     private var favoriteIcon: String {
         isFavorite ? "heart.fill" : "heart"
     }
-    
-    init(airport: Airport, showFavoriteButton: Bool) {
-        self.airport = airport
-        self.showFavoriteButton = showFavoriteButton
-        isFavorite = Defaults[.favoriteAirports].contains(airport.id!)
-    }
-    
+
     var body: some View {
         HStack {
             Text(airport.lid ?? "<UNK>").bold()
             Text(airport.name?.localizedCapitalized ?? "<unknown>")
-            
+
             Spacer()
-            
+
             if showFavoriteButton {
                 Label("", systemImage: favoriteIcon).onTapGesture {
                     if Defaults[.favoriteAirports].contains(airport.id!) {
@@ -38,8 +32,14 @@ struct AirportRow: View {
             }
         }.contentShape(Rectangle())
             .onReceive(Defaults.publisher(.favoriteAirports), perform: { faves in
-                self.isFavorite = faves.newValue.contains(airport.id!)
+                isFavorite = faves.newValue.contains(airport.id!)
             })
+    }
+
+    init(airport: Airport, showFavoriteButton: Bool) {
+        self.airport = airport
+        self.showFavoriteButton = showFavoriteButton
+        isFavorite = Defaults[.favoriteAirports].contains(airport.id!)
     }
 }
 
@@ -52,7 +52,7 @@ struct AirportRow: View {
         a.name = "San Carlos"
         return a
     }()
-    
+
     return List {
         AirportRow(airport: SQL, showFavoriteButton: true)
     }

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct VREFView: View {
     @ObservedObject var state: PerformanceState
-    
+
     var body: some View {
         HStack {
             Text("V")

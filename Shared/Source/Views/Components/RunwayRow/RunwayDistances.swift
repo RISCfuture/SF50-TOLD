@@ -1,14 +1,14 @@
-import SwiftUI
 import CoreData
+import SwiftUI
 
-fileprivate func formatDistance(_ distance: Int16) -> String {
+private func formatDistance(_ distance: Int16) -> String {
     return "\(integerFormatter.string(for: Int(distance))) ft"
 }
 
 struct RunwayDistances: View {
     @ObservedObject var runway: Runway
     var operation: Operation
-    
+
     var body: some View {
         switch operation {
             case .takeoff:
@@ -30,13 +30,12 @@ struct RunwayDistances: View {
                 distanceText(runway.notamedLandingDistance, notamed: runway.hasLandingDistanceNOTAM)
         }
     }
-    
+
     private func distanceText(_ distance: Int16, notamed: Bool) -> some View {
         if notamed {
             return Text(formatDistance(distance)).foregroundColor(.ui.warning)
-        } else {
-            return Text(formatDistance(distance))
         }
+        return Text(formatDistance(distance))
     }
 }
 
@@ -49,6 +48,6 @@ struct RunwayDistances: View {
         r.takeoffDistance = 2800
         return r
     }()
-    
+
     return RunwayDistances(runway: rwy30, operation: .takeoff)
 }

@@ -2,8 +2,8 @@ import Foundation
 import SwiftUI
 
 #if canImport(UIKit)
-fileprivate class TapDelegate: NSObject, UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+private class TapDelegate: NSObject, UIGestureRecognizerDelegate {
+    func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
         false
     }
 }
@@ -13,7 +13,7 @@ struct TapToDismissKeyboard: ViewModifier {
     #if canImport(UIKit)
     private var tapDelegate = TapDelegate()
     #endif
-    
+
     func body(content: Content) -> some View {
         #if canImport(UIKit)
         return content.onAppear {

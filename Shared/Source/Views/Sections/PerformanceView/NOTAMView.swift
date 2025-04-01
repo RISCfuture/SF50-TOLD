@@ -1,29 +1,31 @@
-import SwiftUI
 import CoreData
 import Defaults
+import SwiftUI
 
 struct NOTAMView: View {
     var operation: Operation
-    
+
     @ObservedObject var notam: NOTAM
-    @Environment(\.presentationMode) var presentationMode
-    
-    @State var coreDataError: NSError? = nil
+
+    @Environment(\.presentationMode)
+    var presentationMode
+
+    @State private var coreDataError: NSError?
     private var hasCoreDataError: Binding<Bool> {
-        .init(get: { self.coreDataError != nil }, set: {_ in })
+        .init(get: { coreDataError != nil }, set: { _ in })
     }
     private var coreDataErrorText: String {
         coreDataError?.localizedFailureReason
         ?? coreDataError?.localizedDescription
         ?? "An unknown error occurred."
     }
-    
+
     var body: some View {
         Form {
             RunwayShorteningView(operation: operation, notam: notam)
             if operation == .takeoff { ObstacleView(notam: notam) }
             if operation == .landing { ContaminationView(notam: notam) }
-            
+
             Button("Clear NOTAMs") {
                 notam.clearFor(operation)
                 presentationMode.wrappedValue.dismiss()
@@ -32,7 +34,7 @@ struct NOTAMView: View {
             .onDisappear {
                 do {
                     try notam.managedObjectContext?.save()
-                } catch (let error as NSError) {
+                } catch let error as NSError {
                     coreDataError = error
                 }
             }
@@ -54,6 +56,6 @@ struct NOTAMView: View {
         n.obstacleDistance = 1500
         return n
     }()
-    
+
     return NOTAMView(operation: .takeoff, notam: notam)
 }

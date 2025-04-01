@@ -61,6 +61,13 @@
             ReferencedContainer = "container:SF50 TOLD.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "SWIFTUI_SHOW_ATTRIBUTEGRAPH_CYCLES"
+            value = "1"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

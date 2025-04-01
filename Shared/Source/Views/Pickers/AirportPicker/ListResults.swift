@@ -2,15 +2,15 @@ import SwiftUI
 
 struct ListResults: View {
     @FetchRequest var airports: FetchedResults<Airport>
-    var sort: ((Airport, Airport) -> Bool)? = nil
-    
+    var sort: ((Airport, Airport) -> Bool)?
+
     let onSelect: (Airport) -> Void
-    
-    private var sortedAiports: Array<Airport> {
+
+    private var sortedAiports: [Airport] {
         guard let sort else { return Array(airports.prefix(10)) }
         return Array(airports.sorted(by: { sort($0, $1) }).prefix(10))
     }
-    
+
     var body: some View {
         if airports.isEmpty {
             List {

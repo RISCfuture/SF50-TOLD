@@ -1,12 +1,19 @@
-import SwiftUI
 import Defaults
+import SwiftUI
 
 struct SettingsView: View {
-    @Default(.updatedThrustSchedule) var updatedThrustSchedule
-    @Default(.emptyWeight) var emptyWeight
-    @Default(.fuelDensity) var fuelDensity
-    @Default(.safetyFactor) var safetyFactor
-    
+    @Default(.updatedThrustSchedule)
+    var updatedThrustSchedule
+
+    @Default(.emptyWeight)
+    var emptyWeight
+
+    @Default(.fuelDensity)
+    var fuelDensity
+
+    @Default(.safetyFactor)
+    var safetyFactor
+
     var body: some View {
         NavigationView {
             Form {
@@ -17,7 +24,7 @@ struct SettingsView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityIdentifier("updatedThrustScheduleToggle")
                 }
-                
+
                 HStack {
                     Text("Empty Weight")
                     Spacer()
@@ -27,7 +34,7 @@ struct SettingsView: View {
                                  suffix: "lbs")
                     .accessibilityIdentifier("weightField")
                 }
-                
+
                 HStack {
                     Text("Fuel Density")
                     Spacer()
@@ -37,7 +44,7 @@ struct SettingsView: View {
                                  suffix: "lbs/gal")
                     .accessibilityIdentifier("fuelDensityField")
                 }
-                
+
                 HStack {
                     Text("Safety Factor")
                     Spacer()

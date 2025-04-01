@@ -1,17 +1,13 @@
-import SwiftUI
 import CoreData
+import SwiftUI
 import WidgetKit
 
 struct RunwayListItem: View {
     var runway: Runway
     var takeoffDistance: Interpolation?
     var wind: Wind?
-    var crosswindLimit: UInt? = nil
-    var tailwindLimit: UInt? = nil
-
-    fileprivate func formatDistance(_ distance: Int16) -> String {
-        return "\(integerFormatter.string(for: Int(distance)))′"
-    }
+    var crosswindLimit: UInt?
+    var tailwindLimit: UInt?
 
     var body: some View {
         HStack {
@@ -46,8 +42,11 @@ struct RunwayListItem: View {
                     Text("10,000' / 10,000'")
                         .redacted(reason: .placeholder)
             }
-
         }
+    }
+
+    private func formatDistance(_ distance: Int16) -> String {
+        return "\(integerFormatter.string(for: Int(distance)))′"
     }
 }
 
@@ -61,7 +60,7 @@ struct RunwayListItem_Previews: PreviewProvider {
         r.takeoffDistance = 2800
         return r
     }()
-    
+
     static var previews: some View {
         RunwayListItem(runway: rwy33,
                        takeoffDistance: .value(2300, offscale: .high),

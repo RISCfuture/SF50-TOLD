@@ -2,15 +2,16 @@ import SwiftUI
 import WidgetKit
 
 struct LocationNotAuthorizedView: View {
-    @Environment(\.widgetFamily) var family
-    
+    @Environment(\.widgetFamily)
+    var family
+
     private var fontSize: CGFloat {
         switch family {
             case .systemSmall: return 12
             default: return 14
         }
     }
-    
+
     var body: some View {
         Text("Couldn’t find your closest airport.")
             .foregroundColor(.secondary)
@@ -24,7 +25,7 @@ struct LocationNotAuthorizedView_Previews: PreviewProvider {
         Group {
             LocationNotAuthorizedView()
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            
+
             LocationNotAuthorizedView()
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
         }

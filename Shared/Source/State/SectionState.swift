@@ -1,44 +1,41 @@
-import Foundation
 import Combine
 import Defaults
+import Foundation
 import SwiftMETAR
 
 class SectionState: ObservableObject {
-    fileprivate static let weatherLoadDebounce: TimeInterval = 60 // once per minute, tops
-    
+    private static let weatherLoadDebounce: TimeInterval = 60 // once per minute, tops
+
     @Published private(set) var performance: PerformanceState
-    
+
     let operation: Operation
-    
+
     private var cancellables = Set<AnyCancellable>()
     private var airportChangeCancellables = Set<AnyCancellable>()
-    
+
     private var weatherLoadingCanceled = false
-    private var lastWeatherLoad: Date? = nil
-    
+    private var lastWeatherLoad: Date?
+
     private let weatherQueue = DispatchQueue(label: "weatherQueue", qos: .utility, attributes: .concurrent)
-    
+
     init(operation: Operation) {
         self.operation = operation
         self.performance = PerformanceState(operation: operation)
-        
+
         Publishers.CombineLatest(
             performance.$airport,
             performance.$date
-        ).sink { airport, date in
+        )
+        .sink { airport, date in
             self.downloadWeather(airport: airport, date: date, force: false)
-        }.store(in: &cancellables)
+        }
+        .store(in: &cancellables)
     }
-    
-    deinit {
-        for c in cancellables { c.cancel() }
-        for c in airportChangeCancellables { c.cancel() }
-    }
-    
+
     func downloadWeather(airport: Airport? = nil, date: Date = Date(), force: Bool = false) {
         for c in airportChangeCancellables { c.cancel() }
         airportChangeCancellables.removeAll()
-        
+
         weatherLoadingCanceled = false
         guard let airport else {
             DispatchQueue.main.async {
@@ -47,18 +44,18 @@ class SectionState: ObservableObject {
             }
             return
         }
-        
+
         self.performance.weatherState.beginLoading()
         if force { reloadWeather() }
         WeatherService.instance.cachedConditionsFor(airport: airport, date: date)
             .receive(on: weatherQueue)
             .sink { state in
                 guard !self.weatherLoadingCanceled else { return }
-                
+
                 switch state {
                     case .notLoaded:
                         self.reloadWeather()
-                        fallthrough
+                        DispatchQueue.main.async { self.performance.weatherState.loading = true }
                     case .loading:
                         DispatchQueue.main.async { self.performance.weatherState.loading = true }
                     case let .error(error):
@@ -74,12 +71,12 @@ class SectionState: ObservableObject {
                 }
             }
             .store(in: &airportChangeCancellables)
-        
+
         WeatherService.instance.cachedConditionsFor(airport: airport, date: date)
             .receive(on: weatherQueue)
             .sink { state in
                 guard !self.weatherLoadingCanceled else { return }
-                
+
                 switch state {
                     case let .finished((metarResult, tafResult)):
                         if case let .some(metar) = metarResult {
@@ -92,13 +89,13 @@ class SectionState: ObservableObject {
                                 self.reloadWeather(debounce: true)
                             }
                         }
-                        
+
                     default: break
                 }
             }
             .store(in: &airportChangeCancellables)
     }
-    
+
     func cancelWeatherDownload() {
         weatherLoadingCanceled = true
         DispatchQueue.main.async {
@@ -106,7 +103,7 @@ class SectionState: ObservableObject {
             self.performance.weatherState.loading = false
         }
     }
-    
+
     private func reloadWeather(debounce: Bool = false) {
         guard let lastWeatherLoad else {
             WeatherService.instance.reload()
@@ -114,14 +111,19 @@ class SectionState: ObservableObject {
             return
         }
         guard !debounce || -lastWeatherLoad.timeIntervalSinceNow > Self.weatherLoadDebounce else { return }
-        
+
         WeatherService.instance.reload()
         self.lastWeatherLoad = Date()
     }
+
+    deinit {
+        for c in cancellables { c.cancel() }
+        for c in airportChangeCancellables { c.cancel() }
+    }
 }
 
-fileprivate let METARTimeout: TimeInterval = 5400 // METARs valid until 1.5 hours old
-fileprivate let TAFTimeout: TimeInterval = 43200 // TAFs valid until 12 hours old
+private let METARTimeout: TimeInterval = 5400 // METARs valid until 1.5 hours old
+private let TAFTimeout: TimeInterval = 43200 // TAFs valid until 12 hours old
 
 func isExpired(metar: METAR) -> Bool {
     -metar.date.timeIntervalSinceNow > METARTimeout

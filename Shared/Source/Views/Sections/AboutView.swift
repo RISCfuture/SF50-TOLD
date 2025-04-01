@@ -4,11 +4,11 @@ struct AboutView: View {
     private var releaseVersionNumber: String {
         return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
     }
-    
+
     private var buildVersionNumber: String {
         return Bundle.main.infoDictionary!["CFBundleVersion"] as! String
     }
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -19,7 +19,7 @@ struct AboutView: View {
                         Text("Cirrus SF50 Vision (G1 through G2+)")
                             .bold()
                     }
-                    
+
                     HStack {
                         Text("App Version")
                         Spacer()
@@ -27,7 +27,7 @@ struct AboutView: View {
                             .bold()
                     }
                 }
-                
+
                 Section(header: Text("SF50 G1 Data Source")) {
                     HStack {
                         Text("Serials")
@@ -36,14 +36,14 @@ struct AboutView: View {
                             .bold()
                             .font(.system(size: 14))
                     }
-                    
+
                     HStack {
                         Text("P/N")
                         Spacer()
                         Text("31452-001")
                             .bold()
                     }
-                    
+
                     HStack {
                         Text("Revision")
                         Spacer()
@@ -51,7 +51,7 @@ struct AboutView: View {
                             .bold()
                     }
                 }
-                
+
                 Section(header: Text("SF50 G2–G2+ Data Source")) {
                     HStack {
                         Text("Serials")
@@ -60,14 +60,14 @@ struct AboutView: View {
                             .bold()
                             .font(.system(size: 14))
                     }
-                    
+
                     HStack {
                         Text("P/N")
                         Spacer()
                         Text("31452-002")
                             .bold()
                     }
-                    
+
                     HStack {
                         Text("Revision")
                         Spacer()
@@ -75,7 +75,7 @@ struct AboutView: View {
                             .bold()
                     }
                 }
-                
+
                 Section(header: Text("Updated Thrust Schedule Data Source")) {
                     HStack {
                         Text("Serials")
@@ -84,14 +84,14 @@ struct AboutView: View {
                             .bold()
                             .font(.system(size: 14))
                     }
-                    
+
                     HStack {
                         Text("P/N")
                         Spacer()
                         Text("31452-111")
                             .bold()
                     }
-                    
+
                     HStack {
                         Text("Revision")
                         Spacer()
@@ -99,7 +99,7 @@ struct AboutView: View {
                             .bold()
                     }
                 }
-                
+
                 Label("This app has not been approved by the FAA or by Cirrus Aircraft as an official source of performance information. Always verify performance information with official sources when using this app.", systemImage: "exclamationmark.triangle")
                     .font(.system(size: 14))
                     .foregroundColor(.secondary)

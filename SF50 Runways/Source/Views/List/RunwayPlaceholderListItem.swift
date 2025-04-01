@@ -6,12 +6,12 @@ struct RunwayPlaceholderListItem: View {
         HStack {
             Text("RWY").bold()
                 .redacted(reason: .placeholder)
-            
+
             Text("2 H / 3 L").bold()
                 .redacted(reason: .placeholder)
-            
+
             Spacer()
-            
+
             Text("10,000 / 10,000")
                 .redacted(reason: .placeholder)
         }

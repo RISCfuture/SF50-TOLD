@@ -1,21 +1,20 @@
-import SwiftUI
 import CoreData
 import Defaults
-
+import SwiftUI
 
 struct LoadoutView: View {
     @ObservedObject var state: PerformanceState
     var title: String
     var maxWeight: Double
-    
+
     var payload = Binding(get: { Defaults[.payload] }, set: { Defaults[.payload] = $0 })
     var fuel: Binding<Double> {
         .init(get: { Defaults[state.fuelDefault] },
               set: { Defaults[state.fuelDefault] = $0 })
     }
-    
+
     private let formatter = numberFormatter(precision: 0, minimum: 0)
-    
+
     var body: some View {
         Section(header: Text("Loading")) {
             HStack {

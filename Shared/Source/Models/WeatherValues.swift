@@ -1,13 +1,13 @@
 import Foundation
 import SwiftMETAR
 
-fileprivate var METARUpdatePeriod: TimeInterval = 3600
+private var METARUpdatePeriod: TimeInterval = 3600
 
 struct WeatherValues {
     var wind: Wind
     var temperature: Temperature
     var altimeter: Double
-    
+
     init?(date: Date, observation: METAR?, forecast: TAF?) {
         if observation == nil && forecast == nil { return nil }
 
@@ -21,22 +21,22 @@ struct WeatherValues {
         var wind = Wind.calm
         var temperature = Temperature.ISA
         var altimeter = standardSLP
-        
+
         if let observation {
             let sinceMETAR = date.timeIntervalSince(observation.date)
-            
+
             if let observedWind = observation.wind {
                 wind = windFromEnum(observedWind)
             }
-            
+
             if let observedTemp = observation.temperature {
                 temperature = .value(Double(observedTemp))
             }
-            
+
             if let observedAlt = observation.altimeter {
                 altimeter = Double(observedAlt.measurement.converted(to: .inchesOfMercury).value)
             }
-            
+
             if sinceMETAR > METARUpdatePeriod {
                 if let group = forecast?.during(date) {
                     if let forecastWind = group.wind {
@@ -48,14 +48,14 @@ struct WeatherValues {
                 }
             }
         }
-        
+
         self.wind = wind
         self.temperature = temperature
         self.altimeter = altimeter
     }
 }
 
-fileprivate func windFromEnum(_ wind: SwiftMETAR.Wind) -> Wind {
+private func windFromEnum(_ wind: SwiftMETAR.Wind) -> Wind {
     switch wind {
         case let .direction(heading, speed, _):
             return .init(direction: Double(heading), speed: Double(speed.measurement.converted(to: .knots).value))

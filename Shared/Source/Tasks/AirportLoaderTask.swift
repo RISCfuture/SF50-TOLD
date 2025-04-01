@@ -1,22 +1,27 @@
-import Foundation
 import BackgroundTasks
 import CoreData
 import Defaults
+import Foundation
 
 class AirportLoaderTask {
     private static let identifier = "codes.tim.TOLD.AirportDataLoader.task"
     private let persistentContainer: NSPersistentContainer
-    
+
     init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
     }
-    
+
     static func register(persistentContainer: NSPersistentContainer) {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: identifier, using: nil) { task in
             AirportLoaderTask(persistentContainer: persistentContainer).run(task: task)
         }
     }
-    
+
+    static func submit() {
+        let request = BGProcessingTaskRequest(identifier: identifier)
+        try? BGTaskScheduler.shared.submit(request)
+    }
+
     func run(task: BGTask) {
         Task(priority: .background) {
             let airportDataLoader = AirportDataLoader()
@@ -25,14 +30,9 @@ class AirportLoaderTask {
                 Defaults[.lastCycleLoaded] = cycle
                 Defaults[.schemaVersion] = latestSchemaVersion
                 task.setTaskCompleted(success: true)
-            } catch (_) {
+            } catch _ {
                 task.setTaskCompleted(success: false)
             }
         }
-    }
-    
-    static func submit() {
-        let request = BGProcessingTaskRequest(identifier: identifier)
-        try? BGTaskScheduler.shared.submit(request)
     }
 }

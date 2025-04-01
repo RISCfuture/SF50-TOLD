@@ -1,20 +1,22 @@
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct RunwayPicker: View {
     @ObservedObject var airport: Airport
     @ObservedObject var weather: WeatherState
-    @Environment(\.presentationMode) var mode
+    @Environment(\.presentationMode)
+    var mode
+
     @Binding var flaps: FlapSetting?
-    
+
     var operation: Operation
     var onSelect: (Runway) -> Void
-    
-    var runways: Array<Runway> {
-        return (airport.runways!.allObjects as! Array<Runway>)
+
+    var runways: [Runway] {
+        return (airport.runways!.allObjects as! [Runway])
             .sorted { $0.name!.localizedCompare($1.name!) == .orderedAscending }
     }
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             List(runways, id: \.name) { runway in
@@ -25,7 +27,7 @@ struct RunwayPicker: View {
                           tailwindLimit: tailwindLimit)
                 .onTapGesture {
                     onSelect(runway)
-                    self.mode.wrappedValue.dismiss()
+                    mode.wrappedValue.dismiss()
                 }
                 .accessibility(addTraits: .isButton)
                 .accessibilityIdentifier("runwayRow-\(runway.name ?? "unk")")
@@ -59,11 +61,10 @@ struct RunwayPicker: View {
         a.runways = [rwy30, rwy12]
         return a
     }()
-    
+
     return RunwayPicker(airport: SQL,
                         weather: WeatherState(),
                         flaps: .constant(.flaps100),
                         operation: .landing,
                         onSelect: { _ in })
 }
-

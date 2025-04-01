@@ -1,19 +1,19 @@
-import SwiftUI
 import CoreData
 import Defaults
+import SwiftUI
 
 struct SearchResults: View {
     @FetchRequest var airports: FetchedResults<Airport>
     @Binding var filterText: String
-    var sort: ((Airport, Airport) -> Bool)? = nil
-    
+    var sort: ((Airport, Airport) -> Bool)?
+
     let onSelect: (Airport) -> Void
-    
-    private var sortedAiports: Array<Airport> {
+
+    private var sortedAiports: [Airport] {
         guard let sort else { return Array(airports) }
         return airports.sorted(by: { sort($0, $1) })
     }
-    
+
     var body: some View {
         if (1...2).contains(filterText.count) {
             List {

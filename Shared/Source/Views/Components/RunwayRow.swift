@@ -1,19 +1,19 @@
-import SwiftUI
 import Combine
 import CoreData
+import SwiftUI
 
 struct RunwayRow: View {
     @ObservedObject var runway: Runway
-    
+
     var operation: Operation
     var wind: Wind
-    var crosswindLimit: UInt? = nil
-    var tailwindLimit: UInt? = nil
-    
+    var crosswindLimit: UInt?
+    var tailwindLimit: UInt?
+
     private var notamWillChange: ObservableObjectPublisher {
         runway.notam?.objectWillChange ?? ObservableObjectPublisher()
     }
-    
+
     var body: some View {
         HStack {
             Text(runway.name!).bold()
@@ -21,9 +21,9 @@ struct RunwayRow: View {
             if runway.turf {
                 Text("(turf)")
             }
-            
+
             Spacer()
-            
+
             WindComponents(runway: runway,
                            wind: wind,
                            crosswindLimit: crosswindLimit,
@@ -37,7 +37,7 @@ struct RunwayRow: View {
 
 #Preview {
     let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    
+
     let rwy30 = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "30"
@@ -47,7 +47,7 @@ struct RunwayRow: View {
         r.turf = true
         return r
     }()
-    
+
     return List {
         RunwayRow(runway: rwy30, operation: .takeoff, wind: Wind(direction: 280, speed: 15))
     }

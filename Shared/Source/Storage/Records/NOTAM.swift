@@ -1,9 +1,9 @@
-import Foundation
-import CoreData
 import Combine
+import CoreData
+import Foundation
 import OSLog
 
-fileprivate let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "NOTAM")
+private let logger = Logger(subsystem: "codes.tim.SF50-TOLD", category: "NOTAM")
 
 enum Contamination {
     case waterOrSlush(depth: Float)
@@ -14,7 +14,7 @@ enum Contamination {
 
 extension NOTAM {
     var isContaminated: Bool { contamination != nil }
-    
+
     var contamination: Contamination? {
         switch contaminationType {
             case "waterOrSlush":
@@ -31,10 +31,10 @@ extension NOTAM {
                 return nil
         }
     }
-    
+
     func notamCountFor(_ operation: Operation) -> Int {
         var count = 0
-        
+
         switch operation {
             case .takeoff: if takeoffDistanceShortening > 0 { count += 1 }
             case .landing:
@@ -42,10 +42,10 @@ extension NOTAM {
                 if isContaminated { count += 1 }
         }
         if obstacleHeight > 0 { count += 1 }
-        
+
         return count
     }
-    
+
     func clearFor(_ operation: Operation) {
         switch operation {
             case .takeoff: takeoffDistanceShortening = 0
@@ -53,11 +53,11 @@ extension NOTAM {
                 landingDistanceShortening = 0
                 clearContamination()
         }
-        
+
         obstacleHeight = 0
         obstacleDistance = 0
     }
-    
+
     func clearContamination() {
         contaminationType = nil
         contaminationDepth = 0

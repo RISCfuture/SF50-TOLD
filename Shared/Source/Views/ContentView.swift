@@ -1,17 +1,17 @@
+import Defaults
 import Foundation
 import SwiftUI
-import Defaults
 
 struct ContentView: View {
-    @Default(.initialSetupComplete) var initialSetupComplete
-    
+    @Default(.initialSetupComplete)
+    var initialSetupComplete
+
     @ObservedObject var state: AppState
     @ObservedObject var service: AirportLoadingService
-    
+
     @State private var tab = 1
-    
-    @ViewBuilder
-    var body: some View {
+
+    @ViewBuilder var body: some View {
         if let error = state.error {
             ErrorView(error: error)
         } else if service.loading {
@@ -27,24 +27,32 @@ struct ContentView: View {
             TabView(selection: $tab) {
                 TakeoffView(state: state.takeoff).tabItem {
                     Label("Takeoff", image: "Takeoff")
-                }.tag(1)
+                }
+                .tag(1)
+
                 LandingView(state: state.landing).tabItem {
                     Label("Landing", image: "Landing")
-                }.tag(2)
+                }
+                .tag(2)
+
                 SettingsView().tabItem {
                     Label("Settings", systemImage: "gear")
-                }.tag(3)
+                }
+                .tag(3)
+
                 AboutView().tabItem {
                     Label("About", systemImage: "info.circle")
-                }.tag(4)
-            }.tapToDismissKeyboard()
-                .accessibilityIdentifier("mainTabView")
+                }
+                .tag(4)
+            }
+            .tapToDismissKeyboard()
+            .accessibilityIdentifier("mainTabView")
         }
     }
 }
 
 #Preview {
     let state = AppState()
-    
+
     return ContentView(state: state, service: state.airportLoadingService)
 }

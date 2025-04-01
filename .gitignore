@@ -2,3 +2,7 @@ fastlane/screenshots
 fastlane/report.xml
 fastlane/metadata
 build
+
+
+# SwiftLint Remote Config Cache
+.swiftlint/RemoteConfigCache

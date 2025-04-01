@@ -1,27 +1,26 @@
-import Foundation
 import Combine
 import CoreData
+import Defaults
+import Foundation
 import Logging
 import SwiftMETAR
-import Defaults
 
-fileprivate let ISA = Weather(wind: .calm,
-                              temperature: .ISA,
-                              altimeter: standardSLP,
-                              source: .ISA)
+private let ISA = Weather(wind: .calm,
+                          temperature: .ISA,
+                          altimeter: standardSLP,
+                          source: .ISA)
 
 class PerformanceCalculator {
-    private lazy var nearestAirportPublisher = NearestAirportPublisher() // don't initialize it until we need location info
     private static let logger = Logger(label: "codes.tim.SF50-TOLD.PerformanceCalculator")
-    
+
+    private lazy var nearestAirportPublisher = NearestAirportPublisher() // don't initialize it until we need location info
     private var cancellables = Set<AnyCancellable>()
-    
     private var takeoffWeight: Double {
         Defaults[.emptyWeight]
         + Defaults[.payload]
-        + Defaults[.fuelDensity]*Defaults[.takeoffFuel]
+        + Defaults[.fuelDensity] * Defaults[.takeoffFuel]
     }
-    
+
     private var selectedAirport: Airport? {
         guard let airportID = Defaults[.takeoffAirport] else { return nil }
         do {
@@ -31,18 +30,12 @@ class PerformanceCalculator {
                 return nil
             }
             return results[0]
-        } catch (let error) {
+        } catch {
             Self.logger.error("selectedAirport: error", metadata: ["error": "\(error.localizedDescription)"])
             return nil
         }
     }
-    
-    deinit {
-        for cancellable in cancellables {
-            cancellable.cancel()
-        }
-    }
-    
+
     func generateEntries(completion: @escaping ((Array<RunwayWidgetEntry>) -> Void)) {
         Task.detached {
             guard let airport = self.selectedAirport else {
@@ -51,28 +44,27 @@ class PerformanceCalculator {
             }
             let (metar, taf) = await WeatherService.instance.loadWeatherFor(airport: airport)
             completion(self.entriesFor(airport: airport, metar: metar, taf: taf))
-            
         }
     }
-    
+
     private func loadNearestAirport(in context: NSManagedObjectContext) async throws -> Airport? {
         nearestAirportPublisher.request()
-        
+
         guard let airportID = await nearestAirportPublisher.findNearestAirportID() else { return nil }
-        
+
         let fetchRequest = Airport.fetchRequest()
         fetchRequest.predicate = .init(format: "id == ?", airportID)
         fetchRequest.fetchLimit = 1
         return try context.fetch(fetchRequest).first
     }
-    
-    private func entriesFor(airport: Airport, metar: METAR?, taf: TAF?) -> Array<RunwayWidgetEntry> {
+
+    private func entriesFor(airport: Airport, metar: METAR?, taf: TAF?) -> [RunwayWidgetEntry] {
         var dates = [Date()]
         if let taf {
             dates.append(contentsOf: self.datesFrom(taf: taf))
         }
-        
-        let datapoints = dates.map { date -> RunwayWidgetEntry in
+
+        return dates.map { date -> RunwayWidgetEntry in
             if let weatherValues = WeatherValues(date: date, observation: metar, forecast: taf) {
                 let weather = Weather(wind: weatherValues.wind,
                                       temperature: weatherValues.temperature,
@@ -82,26 +74,23 @@ class PerformanceCalculator {
                                          airport: airport,
                                          weather: weather,
                                          takeoffDistances: self.runwayResults(airport: airport, weather: weather))
-            } else {
-                return RunwayWidgetEntry(date: date,
-                                         airport: airport,
-                                         weather: ISA,
-                                         takeoffDistances: self.runwayResults(airport: airport, weather: ISA))
             }
+            return RunwayWidgetEntry(date: date,
+                                     airport: airport,
+                                     weather: ISA,
+                                     takeoffDistances: self.runwayResults(airport: airport, weather: ISA))
         }
-        
-        return datapoints
     }
-    
-    private func runwayResults(airport: Airport, weather: Weather) -> Dictionary<String, Interpolation> {
-        airport.runways!.reduce(into: Dictionary<String, Interpolation>()) { dict, runway in
+
+    private func runwayResults(airport: Airport, weather: Weather) -> [String: Interpolation] {
+        airport.runways!.reduce(into: [String: Interpolation]()) { dict, runway in
             let runway = runway as! Runway
             let model = self.performanceModel(runway: runway, weather: weather)
             dict[runway.name!] = model.takeoffDistance
         }
     }
-    
-    private func datesFrom(taf: TAF) -> Array<Date> {
+
+    private func datesFrom(taf: TAF) -> [Date] {
         taf.groups.compactMap { group in
             switch group.period {
                 case let .becoming(period): return period.start.date
@@ -112,10 +101,16 @@ class PerformanceCalculator {
             }
         }
     }
-    
+
     private func performanceModel(runway: Runway, weather: Weather) -> PerformanceModel {
         Defaults[.updatedThrustSchedule]
         ? PerformanceModelG2Plus(runway: runway, weather: weather, weight: takeoffWeight, flaps: .flaps50)
         : PerformanceModelG1(runway: runway, weather: weather, weight: takeoffWeight, flaps: .flaps50)
+    }
+
+    deinit {
+        for cancellable in cancellables {
+            cancellable.cancel()
+        }
     }
 }

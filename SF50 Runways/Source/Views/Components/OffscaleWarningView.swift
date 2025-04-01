@@ -3,7 +3,7 @@ import WidgetKit
 
 struct OffscaleWarningView: View {
     var offscale: Offscale
-    
+
     var body: some View {
         switch offscale {
             case .none, .low:
@@ -11,6 +11,7 @@ struct OffscaleWarningView: View {
             case .high:
                 Image(systemName: "exclamationmark.triangle")
                     .foregroundColor(.red)
+                    .accessibilityHidden(true)
         }
     }
 }

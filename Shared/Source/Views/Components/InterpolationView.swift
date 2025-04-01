@@ -2,10 +2,10 @@ import SwiftUI
 
 struct InterpolationView: View {
     var interpolation: Interpolation?
-    var suffix: String? = nil
-    var minimum: Double? = nil
-    var maximum: Double? = nil
-    
+    var suffix: String?
+    var minimum: Double?
+    var maximum: Double?
+
     var body: some View {
         if let interpolation {
             HStack(spacing: 0) {
@@ -29,7 +29,7 @@ struct InterpolationView: View {
             Spacer()
         }
     }
-    
+
     private func color(for number: Double) -> Color {
         if let minimum {
             if number < minimum { return .red }

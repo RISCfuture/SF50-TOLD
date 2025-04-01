@@ -1,14 +1,14 @@
+import CoreData
 import SwiftUI
 import WidgetKit
-import CoreData
 
 struct SelectedAirportWidgetEntryView : View {
-    @Environment(\.widgetFamily) var family
-    
+    @Environment(\.widgetFamily)
+    var family
+
     var entry: TOLDProvider.Entry
-    
-    @ViewBuilder
-    var body: some View {
+
+    @ViewBuilder var body: some View {
         if let airport = entry.airport {
             VStack(alignment: .leading, spacing: 10) {
                 WidgetAirportView(name: airport.name!)
@@ -28,7 +28,7 @@ struct SelectedAirportWidgetEntryView : View {
 
 struct SelectedAirportWidgetEntryView_Previews: PreviewProvider {
     static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    
+
     static var rwy28L = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "28L"
@@ -61,7 +61,7 @@ struct SelectedAirportWidgetEntryView_Previews: PreviewProvider {
         r.heading = 296
         return r
     }()
-    
+
     private static let OAK = { () -> Airport in
         let a = Airport(entity: model.entitiesByName["Airport"]!, insertInto: nil)
         a.id = "OAK"
@@ -70,17 +70,17 @@ struct SelectedAirportWidgetEntryView_Previews: PreviewProvider {
         a.runways = [rwy28L, rwy28R, rwy33, rwy30]
         return a
     }()
-    
-    private static let takeoffDistances: Dictionary<String, Interpolation> = [
+
+    private static let takeoffDistances: [String: Interpolation] = [
         "28L": .value(3400, offscale: .none),
         "28R": .value(3400, offscale: .none),
         "33": .value(3400, offscale: .none),
         "30": .value(3400, offscale: .high)
     ]
-    
+
     private static let wind = Wind(direction: 260, speed: 10)
     private static let weather = Weather(wind: wind, temperature: .ISA, altimeter: standardSLP, source: .downloaded)
-    
+
     static var previews: some View {
         Group {
             SelectedAirportWidgetEntryView(entry: .init(date: Date(),
@@ -88,7 +88,7 @@ struct SelectedAirportWidgetEntryView_Previews: PreviewProvider {
                                                         weather: weather,
                                                         takeoffDistances: takeoffDistances))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
-            
+
             SelectedAirportWidgetEntryView(entry: .init(date: Date(),
                                                         airport: OAK,
                                                         weather: weather,

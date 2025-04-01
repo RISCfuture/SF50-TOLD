@@ -14,8 +14,11 @@ func configureLogLevel() {
     }
 }
 
-func reloadOnAirportChange() {
-    NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main) { _ in
+// swiftlint:disable discarded_notification_center_observer
+@discardableResult
+func reloadOnAirportChange() -> any NSObjectProtocol {
+    return NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main) { _ in
         WidgetCenter.shared.reloadTimelines(ofKind: "SF50_SelectedAirport")
     }
 }
+// swiftlint:enable discarded_notification_center_observer

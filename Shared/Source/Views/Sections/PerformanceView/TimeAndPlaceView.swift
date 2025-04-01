@@ -1,42 +1,50 @@
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct TimeAndPlaceView: View {
+    private static let numberFormatter = NumberFormatter()
+
     @ObservedObject var state: PerformanceState
     @State private var showNowButton = false
-    
+
     var moment: String
     var operation: Operation
-    
+
     var downloadWeather: () -> Void
     var cancelDownload: () -> Void
     var onChangeAirport: (Airport) -> Void
-    
+
     private let nowVisibilityTimer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
-    
-    private static let numberFormatter = NumberFormatter()
-    
+
     private var elevation: Float? { state.runway?.elevation ?? state.airport?.elevation }
-    
+
     private var formattedNOTAMCount: String {
         Self.numberFormatter.string(from: NSNumber(value: state.notamCount))!
     }
-    
+
     private var NOTAMTitle: String {
         state.notamCount == 0 ? "NOTAMs" : "NOTAMs (\(formattedNOTAMCount))"
     }
-    
+
+    private var runwayNOTAM: NOTAM {
+        guard let runway = state.runway else { fatalError("Runway is nil") }
+        if let notam = runway.notam { return notam }
+        let notam = NOTAM(entity: NOTAM.entity(), insertInto: PersistentContainer.shared.viewContext)
+        notam.runway = runway
+        return notam
+    }
+
     var body: some View {
         Section(header: Text(moment)) {
             HStack {
                 DatePicker("Date", selection: $state.date, in: Date()...)
                     .accessibilityIdentifier("dateSelector")
                 if showNowButton {
-                    Button(action: { state.setDateToNow() }) { Text("Now") }
+                    Button(action: { state.setDateToNow() }, label: { Text("Now") })
                         .accessibilityIdentifier("dateNowButton")
                 }
             }
-            
+
             NavigationLink(destination: AirportPicker(onSelect: onChangeAirport)) {
                 Label {
                     if let airport = state.airport {
@@ -46,7 +54,7 @@ struct TimeAndPlaceView: View {
                     }
                 } icon: {}
             }.accessibilityIdentifier("airportSelector")
-            
+
             if let airport = state.airport {
                 NavigationLink(destination: RunwayPicker(airport: airport,
                                                          weather: state.weatherState,
@@ -70,7 +78,7 @@ struct TimeAndPlaceView: View {
                     WeatherRow(conditions: state.weatherState, elevation: state.elevation)
                 }.accessibilityIdentifier("weatherSelector")
             }
-            
+
             if state.runway != nil {
                 NavigationLink(destination: NOTAMView(operation: state.operation, notam: runwayNOTAM)) {
                     Label {
@@ -79,20 +87,12 @@ struct TimeAndPlaceView: View {
                 }.accessibilityIdentifier("NOTAMsSelector")
             }
         }
-        .onReceive(nowVisibilityTimer) { _ in self.setShowNowButton() }
-        .onAppear { self.setShowNowButton() }
+        .onReceive(nowVisibilityTimer) { _ in setShowNowButton() }
+        .onAppear { setShowNowButton() }
     }
-    
+
     private func setShowNowButton() {
         showNowButton = abs(state.date.timeIntervalSinceNow) >= 120
-    }
-    
-    private var runwayNOTAM: NOTAM {
-        guard let runway = state.runway else { fatalError("Runway is nil") }
-        if let notam = runway.notam { return notam }
-        let notam = NOTAM(entity: NOTAM.entity(), insertInto: PersistentContainer.shared.viewContext)
-        notam.runway = runway
-        return notam
     }
 }
 
@@ -129,14 +129,14 @@ struct TimeAndPlaceView: View {
         let state = PerformanceState(operation: .takeoff)
         state.date = Date(timeIntervalSinceNow: 3600)
         state.airport = SQL
-        
+
         state.weatherState.temperature = .value(9)
         state.weatherState.altimeter = 29.97
         state.weatherState.source = .downloaded
-        
+
         return state
     }
-    
+
     return Form {
         TimeAndPlaceView(state: state,
                          moment: "Takeoff",

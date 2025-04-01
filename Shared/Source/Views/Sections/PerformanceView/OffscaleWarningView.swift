@@ -2,7 +2,7 @@ import SwiftUI
 
 struct OffscaleWarningView: View {
     var offscale: Offscale
-    
+
     var body: some View {
         switch offscale {
             case .none: Spacer()

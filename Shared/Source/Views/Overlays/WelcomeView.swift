@@ -1,20 +1,25 @@
-import SwiftUI
 import Defaults
+import SwiftUI
 
 enum Model {
     case g1, g2, g2Plus
 }
 
 struct WelcomeView: View {
-    @Default(.updatedThrustSchedule) var updatedThrustSchedule
-    @Default(.initialSetupComplete) var initialSetupComplete
-    @Default(.emptyWeight) var emptyWeight
-    
+    @Default(.updatedThrustSchedule)
+    var updatedThrustSchedule
+
+    @Default(.initialSetupComplete)
+    var initialSetupComplete
+
+    @Default(.emptyWeight)
+    var emptyWeight
+
     @State private var model: Model = .g2
     @State private var g2UseUpdatedThrustSchedule = false
     @State private var showForm = false
     @State private var formOpacity = 0.0
-    
+
     var body: some View {
         VStack {
             VStack {
@@ -22,6 +27,7 @@ struct WelcomeView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .accessibilityHidden(true)
                 Text("Welcome to SF50 TOLD")
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
@@ -32,7 +38,7 @@ struct WelcomeView: View {
                         .opacity(formOpacity)
                 }
             }.padding()
-            
+
             if showForm {
                 Spacer()
                 Form {
@@ -43,10 +49,12 @@ struct WelcomeView: View {
                             Text("G1").tag(Model.g1)
                             Text("G2").tag(Model.g2)
                             Text("G2+").tag(Model.g2Plus)
-                        }.pickerStyle(.segmented).frame(maxWidth: 200)
-                            .accessibilityIdentifier("modelPicker")
+                        }
+                        .pickerStyle(.segmented)
+                        .frame(maxWidth: 200)
+                        .accessibilityIdentifier("modelPicker")
                     }
-                    
+
                     if model == .g2 {
                         VStack(alignment: .leading) {
                             Toggle("Use Updated Thrust Schedule", isOn: $g2UseUpdatedThrustSchedule)
@@ -56,7 +64,7 @@ struct WelcomeView: View {
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                     }
-                    
+
                     HStack {
                         Text("Empty Weight")
                         Spacer()
@@ -68,7 +76,7 @@ struct WelcomeView: View {
                     }
                 }.opacity(formOpacity)
                 Spacer()
-                
+
                 Button("Continue") {
                     switch model {
                         case .g1: updatedThrustSchedule = false

@@ -1,5 +1,5 @@
-import SwiftUI
 import CoreData
+import SwiftUI
 import WidgetKit
 
 struct RunwayGridItem: View {
@@ -13,16 +13,20 @@ struct RunwayGridItem: View {
                     if Int16(value) > runway.takeoffDistance {
                         Image(systemName: "x.circle.fill")
                             .foregroundColor(.red)
+                            .accessibilityLabel("Available takeoff distance insufficient")
                     } else {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
+                            .accessibilityLabel("Available takeoff distance sufficient")
                     }
                 case .configNotAuthorized:
                     Image(systemName: "x.circle.fill")
                         .foregroundColor(.red)
+                        .accessibilityLabel("Configuration not authorized")
                 case .none:
                     Image(systemName: "questionmark.circle.fill")
                         .foregroundColor(.gray)
+                        .accessibilityLabel("Unknown")
             }
 
             Text(runway.name!)

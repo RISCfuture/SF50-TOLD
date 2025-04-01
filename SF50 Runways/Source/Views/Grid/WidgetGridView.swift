@@ -1,17 +1,17 @@
-import SwiftUI
 import CoreData
+import SwiftUI
 import WidgetKit
 
 struct WidgetGridView: View {
     var entry: RunwayWidgetEntry
-    
+
     private let columns = [GridItem(.flexible()),
                            GridItem(.flexible())]
-    
+
     private var runways: [Runway]? {
         guard let airport = entry.airport,
               let runwaySet = airport.runways as? Set<Runway> else { return nil }
-        
+
         let sortedRunways = runwaySet.sorted(by: Runway.sortedList)
         return Array(sortedRunways.prefix(8))
     }
@@ -33,7 +33,7 @@ struct WidgetGridView: View {
 
 struct WidgetGridView_Previews: PreviewProvider {
     static let model = NSManagedObjectModel(contentsOf: Bundle.main.url(forResource: "Airports", withExtension: "momd")!)!
-    
+
     static var rwy28L = { () -> Runway in
         let r = Runway(entity: model.entitiesByName["Runway"]!, insertInto: nil)
         r.name = "28L"
@@ -62,7 +62,7 @@ struct WidgetGridView_Previews: PreviewProvider {
         r.takeoffDistance = 10520
         return r
     }()
-    
+
     private static let OAK = { () -> Airport in
         let a = Airport(entity: model.entitiesByName["Airport"]!, insertInto: nil)
         a.id = "OAK"
@@ -71,10 +71,10 @@ struct WidgetGridView_Previews: PreviewProvider {
         a.runways = [rwy28L, rwy28R, rwy33, rwy30]
         return a
     }()
-    
+
     private static let wind = Wind(direction: 260, speed: 10)
     private static let weather = Weather(wind: wind, temperature: .ISA, altimeter: standardSLP, source: .downloaded)
-    
+
     static var previews: some View {
         WidgetGridView(entry: .init(date: Date(),
                                     airport: OAK,

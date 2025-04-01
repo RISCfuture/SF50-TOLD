@@ -1,26 +1,26 @@
-import SwiftUI
 import CoreData
+import SwiftUI
 #if canImport(CoreLocationUI)
 import CoreLocationUI
 #endif
 import MapKit
 
-fileprivate let earthRadius = 21638.0 // NM
+private let earthRadius = 21638.0 // NM
 
-fileprivate func degreeLonLen(lat: Double) -> Double {
-    cos(deg2rad(lat))*(earthRadius/360)
+private func degreeLonLen(lat: Double) -> Double {
+    cos(deg2rad(lat)) * (earthRadius / 360)
 }
 
 struct NearestView: View {
     @ObservedObject var nearestAirport: NearestAirportPublisher
     var onSelect: (Airport) -> Void
-    
+
     private var fetchAirports: FetchRequest<Airport> {
         return .init(entity: Airport.entity(),
                      sortDescriptors: [.init(keyPath: \Airport.id, ascending: true)],
                      predicate: nearestAirport.predicate)
     }
-    
+
     var body: some View {
         if nearestAirport.loading {
             List {
@@ -70,6 +70,6 @@ struct NearestView: View {
         a.name = "San Carlos"
         return a
     }()
-    
+
     return NearestView(nearestAirport: NearestAirportPublisher()) { _ in }
 }

@@ -3,7 +3,7 @@ import WidgetKit
 
 struct SelectedAirportPerformanceWidget: Widget {
     let kind: String = "SF50_SelectedAirport"
-    
+
     var body: some WidgetConfiguration {
         return StaticConfiguration(kind: kind,
                                    provider: TOLDProvider(managedObjectContext: PersistentContainer.shared.viewContext)) { entry in

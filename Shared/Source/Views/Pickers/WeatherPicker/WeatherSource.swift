@@ -1,11 +1,11 @@
-import SwiftUI
 import SwiftMETAR
+import SwiftUI
 
 struct WeatherSource: View {
     @ObservedObject var weather: WeatherState
-    
+
     var downloadWeather: () -> Void
-    
+
     private var downloadButtonTitle: String {
         if weather.resetDueToError { return "Try Again" }
         switch weather.source {
@@ -14,12 +14,12 @@ struct WeatherSource: View {
             case .entered: return "Use Downloaded Weather"
         }
     }
-    
+
     private var formattedForecast: String? {
         guard let forecast = weather.forecast else { return nil }
         let words = forecast.split(separator: " ")
-        var formatted = Array<Array<String>>()
-        
+        var formatted = [[String]]()
+
         formatted.append([])
         for word in words {
             if word.starts(with: "FM") || word == "BECMG" {
@@ -27,10 +27,10 @@ struct WeatherSource: View {
             }
             formatted[formatted.count - 1].append(String(word))
         }
-        
+
         return formatted.map { $0.joined(separator: " ") }.joined(separator: "\n  ")
     }
-    
+
     var body: some View {
         Section(header: Text("Source")) {
             HStack {
@@ -54,7 +54,7 @@ struct WeatherSource: View {
                                 .foregroundColor(.secondary)
                     }
                 }
-                
+
                 Spacer()
                 Button {
                     downloadWeather()
@@ -63,11 +63,11 @@ struct WeatherSource: View {
                         .foregroundColor(.accentColor).bold()
                 }.accessibilityIdentifier("updateWeatherButton")
             }
-            
+
             if let observation = weather.observation {
                 RawWeather(rawText: observation, error: weather.observationError)
             }
-            
+
             if let forecast = formattedForecast {
                 RawWeather(rawText: forecast, error: weather.forecastError)
             }
@@ -75,16 +75,17 @@ struct WeatherSource: View {
     }
 }
 
+// swiftlint:disable force_try
 #Preview {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "ddHHmm'Z'"
     dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-    
+
     let utcDate = dateFormatter.string(from: Date())
-    
+
     let metar = "KSFO \(utcDate) 00000KT 10SM BKN180 18/13 A3010 RMK AO2 SLP192 T01830128 VISNO $"
     let taf = "KSFO \(utcDate) 1721/1824 VRB04KT P6SM SKC WS020/02025KT FM172200 31008KT P6SM SKC FM180100 28013KT P6SM FEW200 FM180800 28006KT P6SM FEW200 FM181000 VRB05KT P6SM SKC WS020/02030KT FM181500 36008KT P6SM SKC WS015/03030KT FM182000 36012KT P6SM SKC WS015/03035KT"
-    
+
     return Form {
         WeatherSource(weather: WeatherState(date: Date(),
                                             observation: try! METAR.from(string: metar),
@@ -92,3 +93,4 @@ struct WeatherSource: View {
                       downloadWeather: {})
     }
 }
+// swiftlint:enable force_try

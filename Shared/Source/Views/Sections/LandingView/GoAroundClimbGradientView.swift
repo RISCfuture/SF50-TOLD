@@ -1,11 +1,11 @@
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct GoAroundClimbGradientView: View {
     @ObservedObject var state: PerformanceState
-    
+
     var body: some View {
-        
+
         HStack {
             Text("Meets Go-Around Climb Gradient")
             Spacer()

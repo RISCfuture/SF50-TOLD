@@ -1,10 +1,10 @@
-import SwiftUI
 import Combine
 import CoreData
+import SwiftUI
 
 struct TakeoffView: View {
     @ObservedObject var state: SectionState
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -21,7 +21,7 @@ struct TakeoffView: View {
                                           force: force)
                 },
                                 cancelDownload: { state.cancelWeatherDownload() })
-                
+
                 TakeoffResultsView(state: state.performance)
             }.navigationTitle("Takeoff")
         }.navigationViewStyle(navigationStyle)
@@ -63,6 +63,6 @@ struct TakeoffView: View {
         state.performance.runway = rwy30
         return state
     }
-    
+
     return TakeoffView(state: state)
 }

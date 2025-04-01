@@ -1,38 +1,37 @@
+import Combine
 import Foundation
 import SwiftMETAR
-import Combine
 
-
-fileprivate var METARUpdatePeriod: TimeInterval = 3600
+private var METARUpdatePeriod: TimeInterval = 3600
 
 class WeatherState: ObservableObject {
     @Published private(set) var observation: String?
     @Published private(set) var forecast: String?
-    
+
     @Published var windDirection: Double
     @Published var windSpeed: Double
     @Published var temperature: Temperature
     @Published var altimeter: Double
-    
+
     @Published var userEditedTemperature: Double
-    
+
     @Published var source: Source
     @Published var loading = false
     var draft: Bool
-    
-    var observationError: Swift.Error? = nil
-    var forecastError: Swift.Error? = nil
-    
+
+    var observationError: Swift.Error?
+    var forecastError: Swift.Error?
+
     private var cancellables = Set<AnyCancellable>()
-    
+
     var wind: Wind {
         return Wind(direction: windDirection, speed: windSpeed)
     }
-    
+
     var resetDueToError: Bool {
         source == .ISA && (observationError != nil || forecastError != nil)
     }
-    
+
     var weather: Weather {
         Weather(observation: observation,
                 forecast: forecast,
@@ -41,15 +40,15 @@ class WeatherState: ObservableObject {
                 altimeter: altimeter,
                 source: source)
     }
-    
+
     var publisher: AnyPublisher<WeatherState, Never> {
         Publishers.CombineLatest4($windDirection, $windSpeed, $temperature, $altimeter).map { _ in self }.eraseToAnyPublisher()
     }
-    
+
     convenience init() {
         self.init(wind: .calm, temperature: .ISA, altimeter: standardSLP, source: .ISA)
     }
-    
+
     required init(wind: Wind = .calm, temperature: Temperature = .ISA, altimeter: Double = standardSLP, source: Source, observation: String? = nil, forecast: String? = nil, draft: Bool = false) {
         windDirection = wind.direction
         windSpeed = wind.speed
@@ -59,21 +58,21 @@ class WeatherState: ObservableObject {
         self.forecast = forecast
         self.draft = draft
         self.source = source
-        
+
         switch temperature {
             case .ISA: userEditedTemperature = 15
             case let .value(num): userEditedTemperature = num
         }
-        
+
         $userEditedTemperature.receive(on: DispatchQueue.main).sink { [weak self] temp in self?.temperature = .value(temp) }.store(in: &cancellables)
     }
-    
+
     convenience init(date: Date, observation: METAR?, forecast: TAF?) {
         guard let values = WeatherValues(date: date, observation: observation, forecast: forecast) else {
             self.init()
             return
         }
-        
+
         self.init(wind: values.wind,
                   temperature: values.temperature,
                   altimeter: values.altimeter,
@@ -81,11 +80,7 @@ class WeatherState: ObservableObject {
                   observation: observation?.text,
                   forecast: forecast?.text)
     }
-    
-    deinit {
-        for c in cancellables { c.cancel() }
-    }
-    
+
     func resetToISA(observationError: Swift.Error? = nil, forecastError: Swift.Error? = nil) {
         windDirection = 0
         windSpeed = 0
@@ -98,14 +93,14 @@ class WeatherState: ObservableObject {
         forecast = nil
         self.forecastError = forecastError
     }
-    
+
     func beginLoading() {
         observation = nil
         forecast = nil
         observationError = nil
         forecastError = nil
     }
-    
+
     func updateFrom(date: Date, observationResult: WeatherResult<METAR>, forecastResult: WeatherResult<TAF>) {
         let observation: METAR?
         let forecast: TAF?
@@ -113,7 +108,7 @@ class WeatherState: ObservableObject {
         let rawForecast: String?
         let observationError: Swift.Error?
         let forecastError: Swift.Error?
-        
+
         switch observationResult {
             case let .some(value):
                 observation = value
@@ -147,7 +142,7 @@ class WeatherState: ObservableObject {
             DispatchQueue.main.async { self.resetToISA(observationError: observationError, forecastError: forecastError) }
             return
         }
-        
+
         DispatchQueue.main.async {
             self.windDirection = values.wind.direction
             self.windSpeed = values.wind.speed
@@ -158,12 +153,15 @@ class WeatherState: ObservableObject {
             }
             self.altimeter = values.altimeter
             self.source = .downloaded
-            
+
             self.observation = rawObservation
             self.forecast = rawForecast
             self.observationError = observationError
             self.forecastError = forecastError
-
         }
+    }
+
+    deinit {
+        for c in cancellables { c.cancel() }
     }
 }

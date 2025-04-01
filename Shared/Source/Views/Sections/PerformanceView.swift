@@ -1,24 +1,23 @@
-import SwiftUI
 import Combine
 import CoreData
+import SwiftUI
 
 struct PerformanceView: View {
     @ObservedObject var state: PerformanceState
-    
-    
+
     var operation: Operation
     var title: String
     var moment: String
     var maxWeight: Double
-    
+
     var downloadWeather: () -> Void
     var cancelDownload: () -> Void
-    
+
     var body: some View {
         LoadoutView(state: state, title: title, maxWeight: maxWeight)
-        
+
         ConfigurationView(state: state, operation: operation)
-        
+
         TimeAndPlaceView(state: state,
                          moment: moment,
                          operation: operation,

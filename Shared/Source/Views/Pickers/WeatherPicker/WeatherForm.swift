@@ -2,12 +2,12 @@ import SwiftUI
 
 struct WeatherForm: View {
     @ObservedObject var weather: WeatherState
-    
+
     private let headingFormatter = numberFormatter(precision: 0, minimum: 0, maximum: 360)
     private let speedFormatter = numberFormatter(precision: 0, minimum: 0)
     private let tempFormatter = numberFormatter(precision: 0, minimum: nil)
     private let altimeterFormatter = numberFormatter(precision: 2, minimum: 0)
-    
+
     var body: some View {
         Section(header: Text("Customize Weather")) {
             HStack {
@@ -31,7 +31,7 @@ struct WeatherForm: View {
                 .frame(maxWidth: 70)
                 .accessibilityIdentifier("windSpeedField")
             }
-            
+
             HStack {
                 Text("Temperature")
                 DecimalField("Temperature",
@@ -44,7 +44,7 @@ struct WeatherForm: View {
                 .multilineTextAlignment(.trailing)
                 .accessibilityIdentifier("tempField")
             }
-            
+
             HStack {
                 Text("Altimeter")
                 Spacer()

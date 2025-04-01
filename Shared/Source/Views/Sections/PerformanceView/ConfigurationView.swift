@@ -3,7 +3,7 @@ import SwiftUI
 struct ConfigurationView: View {
     @ObservedObject var state: PerformanceState
     var operation: Operation
-    
+
     var body: some View {
         Section(header: Text("Configuration")) {
             switch operation {

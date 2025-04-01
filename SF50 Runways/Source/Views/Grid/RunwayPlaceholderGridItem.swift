@@ -9,6 +9,7 @@ struct RunwayPlaceholderGridItem: View {
             Image(systemName: "questionmark.circle.fill")
                 .foregroundColor(.gray)
                 .redacted(reason: .placeholder)
+                .accessibilityHidden(true)
         }
     }
 }

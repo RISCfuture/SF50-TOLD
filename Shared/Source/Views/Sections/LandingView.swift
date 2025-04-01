@@ -1,10 +1,10 @@
-import SwiftUI
 import Combine
 import CoreData
+import SwiftUI
 
 struct LandingView: View {
     @ObservedObject var state: SectionState
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -19,10 +19,9 @@ struct LandingView: View {
                     state.downloadWeather(airport: state.performance.airport,
                                           date: state.performance.date,
                                           force: force)
-                    
                 },
                                 cancelDownload: { state.cancelWeatherDownload() })
-                
+
                 LandingResultsView(state: state.performance)
             }.navigationTitle("Landing")
         }.navigationViewStyle(navigationStyle)
