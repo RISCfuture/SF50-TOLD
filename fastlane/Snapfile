@@ -11,7 +11,7 @@ devices([
 #   "iPhone SE (1st generation)",
 #   "iPhone 4s",
    "iPad Pro 13-inch (M4)",
-   "iPad Pro (12.9-inch) (2nd generation)",
+#   "iPad Pro (12.9-inch) (2nd generation)",
    "iPad Pro 11-inch (M4)",
    "iPad (9th generation)",
    "iPad mini (6th generation)"
