@@ -1,0 +1,3 @@
+disabled_rules:
+  - prefer_nimble  # UI test target uses XCTAssert, not Nimble
+  - empty_xctest_method  # Screenshot generation tests may have empty setup methods

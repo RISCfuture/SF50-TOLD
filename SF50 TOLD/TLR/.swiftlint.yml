@@ -1,0 +1,2 @@
+disabled_rules:
+  - unavailable_function  # Template method pattern uses fatalError for abstract methods

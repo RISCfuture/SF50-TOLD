@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1600"
+   LastUpgradeVersion = "2600"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -16,7 +16,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0152FE3B2C40FEF5001E29D6"
+               BlueprintIdentifier = "012837492E5B8BB8002195A0"
                BuildableName = "SF50 RunwaysExtension.appex"
                BlueprintName = "SF50 RunwaysExtension"
                ReferencedContainer = "container:SF50 TOLD.xcodeproj">
@@ -30,9 +30,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0135A7C92587091700892558"
+               BlueprintIdentifier = "0163BC692DDEE9D3008FEE8F"
                BuildableName = "SF50 TOLD.app"
-               BlueprintName = "SF50 TOLD (iOS)"
+               BlueprintName = "SF50 TOLD"
                ReferencedContainer = "container:SF50 TOLD.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,7 +50,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0195EB812C44E4A40091BAD9"
+               BlueprintIdentifier = "0191DC0B2E9322C20099FB0E"
                BuildableName = "Generate Screenshots.xctest"
                BlueprintName = "Generate Screenshots"
                ReferencedContainer = "container:SF50 TOLD.xcodeproj">
@@ -70,30 +70,20 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.springboard">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0152FE3B2C40FEF5001E29D6"
-            BuildableName = "SF50 RunwaysExtension.appex"
-            BlueprintName = "SF50 RunwaysExtension"
-            ReferencedContainer = "container:SF50 TOLD.xcodeproj">
-         </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0135A7C92587091700892558"
+            BlueprintIdentifier = "0163BC692DDEE9D3008FEE8F"
             BuildableName = "SF50 TOLD.app"
-            BlueprintName = "SF50 TOLD (iOS)"
+            BlueprintName = "SF50 TOLD"
             ReferencedContainer = "container:SF50 TOLD.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCWidgetKind"
-            value = "SF50_SelectedAirport"
+            value = ""
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
@@ -103,7 +93,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "_XCWidgetFamily"
-            value = "systemSmall"
+            value = "systemMedium"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
@@ -120,9 +110,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0135A7C92587091700892558"
+            BlueprintIdentifier = "0163BC692DDEE9D3008FEE8F"
             BuildableName = "SF50 TOLD.app"
-            BlueprintName = "SF50 TOLD (iOS)"
+            BlueprintName = "SF50 TOLD"
             ReferencedContainer = "container:SF50 TOLD.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

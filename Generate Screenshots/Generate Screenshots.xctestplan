@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "CF02B342-0793-4F26-9CF7-405A4A816D26",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SF50 TOLD.xcodeproj",
+        "identifier" : "0191DC0B2E9322C20099FB0E",
+        "name" : "Generate Screenshots"
+      }
+    }
+  ],
+  "version" : 1
+}

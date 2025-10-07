@@ -23,6 +23,38 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Generate new localized screenshots
 
+### ios upload_screenshots
+
+```sh
+[bundle exec] fastlane ios upload_screenshots
+```
+
+Upload screenshots to App Store Connect
+
+### ios screenshots_and_upload
+
+```sh
+[bundle exec] fastlane ios screenshots_and_upload
+```
+
+Generate screenshots and upload them
+
+### ios beta
+
+```sh
+[bundle exec] fastlane ios beta
+```
+
+Build and upload to TestFlight
+
+### ios release
+
+```sh
+[bundle exec] fastlane ios release
+```
+
+Build and upload to App Store
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

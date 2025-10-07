@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file contains the fastlane.tools configuration
 # You can find the documentation at https://docs.fastlane.tools
 #
@@ -10,13 +12,67 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
-update_fastlane
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
 
-default_platform(:ios)
+default_platform :ios
 
 platform :ios do
+  before_all do
+    app_store_connect_api_key(
+      key_id:       "5HJ4894LJ5",
+      issuer_id:    "69a6de7f-1ffd-47e3-e053-5b8c7c11a4d1",
+      key_filepath: "./fastlane/AuthKey_5HJ4894LJ5.p8"
+    )
+  end
+
   desc "Generate new localized screenshots"
   lane :screenshots do
-    capture_screenshots(scheme: "Generate Screenshots")
+    capture_screenshots scheme:           "Generate Screenshots",
+                        output_directory: "./fastlane/screenshots"
+  end
+
+  desc "Upload screenshots to App Store Connect"
+  lane :upload_screenshots do
+    # Use the actual screenshots directory directly
+    screenshots_dir = "./fastlane/screenshots"
+
+    upload_to_app_store(
+      app_identifier:                       "codes.tim.SF50-TOLD",
+      screenshots_path:                     screenshots_dir,
+      overwrite_screenshots:                true,
+      skip_binary_upload:                   true,
+      skip_metadata:                        true,
+      languages:                            %w[en-US],
+      force:                                true,
+      run_precheck_before_submit:           false,
+      ignore_language_directory_validation: true
+    )
+  end
+
+  desc "Generate screenshots and upload them"
+  lane :screenshots_and_upload do
+    screenshots
+    upload_screenshots
+  end
+
+  desc "Build and upload to TestFlight"
+  lane :beta do
+    increment_build_number xcodeproj: "SF50 TOLD.xcodeproj"
+    build_app(
+      scheme:        "SF50 TOLD",
+      export_method: "app-store"
+    )
+    upload_to_testflight
+  end
+
+  desc "Build and upload to App Store"
+  lane :release do
+    increment_build_number xcodeproj: "SF50 TOLD.xcodeproj"
+    build_app scheme:        "SF50 TOLD",
+              export_method: "app-store"
+    upload_to_app_store skip_metadata:     false,
+                        skip_screenshots:  false,
+                        submit_for_review: false
   end
 end

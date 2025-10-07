@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="473px" height="773px" viewBox="0 0 473 773" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Runway</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#000000" offset="19.1242351%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="49.9992092%" y1="-100%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="App-Icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-Dark" transform="translate(-427, -0.5)">
+            <g id="Runway" transform="translate(426.5, 0)">
+                <polygon fill="url(#linearGradient-1)" points="473.5 773.5 239 1.5 0.5 773.5"></polygon>
+                <path d="M240.7003,0.5 L238.5,52.5 L243.5,52.5 L241.2997,0.5 L240.7003,0.5 Z M237.405614,90.5 L235.5,142.5 L246.5,142.5 L244.594386,90.5 L237.405614,90.5 Z M233.441241,180.5 L231.5,232.5 L249.5,232.5 L247.558759,180.5 L233.441241,180.5 Z M230.457343,270.5 L228.5,322.5 L253.5,322.5 L251.542657,270.5 L230.457343,270.5 Z M226.466518,360.5 L224.5,412.5 L256.5,412.5 L254.533482,360.5 L226.466518,360.5 Z M223.472445,451.5 L221.5,503.5 L260.5,503.5 L258.527555,451.5 L223.472445,451.5 Z M219.476589,541.5 L217.5,593.5 L263.5,593.5 L261.523411,541.5 L219.476589,541.5 Z M216.479649,631.5 L214.5,683.5 L267.5,683.5 L265.520351,631.5 L216.479649,631.5 Z M212.482002,721.5 L210.5,773.5 L270.5,773.5 L268.517998,721.5 L212.482002,721.5 Z" id="Centerline" fill="url(#linearGradient-2)" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

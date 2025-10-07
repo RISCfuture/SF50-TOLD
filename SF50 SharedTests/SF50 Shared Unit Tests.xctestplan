@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "B578CAF3-EE96-4889-94D7-30C36BF2451F",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SF50 TOLD.xcodeproj",
+        "identifier" : "012B1E442DE2F272000D9ADC",
+        "name" : "SF50 SharedTests"
+      }
+    }
+  ],
+  "version" : 1
+}

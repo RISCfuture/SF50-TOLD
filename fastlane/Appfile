@@ -1,6 +1,5 @@
-app_identifier("codes.tim.SF50-TOLD") # The bundle identifier of your app
-apple_id("apple@timothymorgan.info") # Your Apple Developer Portal username
-
+app_identifier "codes.tim.SF50-TOLD"
+apple_id "apple@timothymorgan.info"
 
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile

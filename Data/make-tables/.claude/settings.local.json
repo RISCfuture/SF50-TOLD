@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdftotext:*)",
+      "Bash(pyenv virtualenv:*)",
+      "Bash(pyenv:*)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(cat:*)",
+      "Bash(diff:*)",
+      "Bash(java:*)",
+      "Bash(cut:*)"
+    ],
+    "deny": []
+  }
+}

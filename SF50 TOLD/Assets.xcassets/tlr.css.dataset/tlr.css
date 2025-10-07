@@ -1,0 +1,221 @@
+:root {
+    --color-bg: #ffffff;
+    --color-text: #000000;
+    --color-section-title: #2c3e50;
+    --color-border: #999999;
+    --color-row-alt: #f7f7f7;
+    --color-valid-bg: #e6f4ea;
+    --color-invalid-bg: #fdecea;
+    --color-valid-text: #137333;
+    --color-invalid-text: #b3261e;
+    --color-na-text: #666666;
+    --space-body-margin: 1rem;
+    --space-cell-padding: 0.25rem;
+}
+
+* {
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    margin: var(--space-body-margin);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0.25rem 0;
+    color: var(--color-section-title);
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem 0;
+    color: var(--color-section-title);
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin: 1.5rem 0 0.5rem 0;
+    color: var(--color-section-title);
+}
+
+h3.scenario-invalid {
+    color: var(--color-invalid-text);
+}
+
+p.h1-subtitle {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+    color: #666;
+}
+
+p.h1-subtitle-small {
+    font-size: 0.875rem;
+    margin: 0.25rem 0;
+    color: #999;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-collapse: collapse;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    margin: 1rem 0;
+}
+
+table td,
+table th {
+    border: 1px solid var(--color-border);
+    padding: 0.5rem;
+}
+
+table thead {
+    border-bottom: 2px solid var(--color-border);
+    background-color: #f8f9fa;
+}
+
+table thead th {
+    font-weight: bold;
+    text-align: left;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: var(--color-row-alt);
+}
+
+/* Remove outer borders */
+table tr:first-child td,
+table tr:first-child th {
+    border-top: none;
+}
+table tr:last-child td,
+table tr:last-child th {
+    border-bottom: none;
+}
+table tr td:first-child,
+table tr th:first-child {
+    border-left: none;
+}
+table tr td:last-child,
+table tr th:last-child {
+    border-right: none;
+}
+
+/* Validation styling */
+table tr.invalid td {
+    background-color: var(--color-invalid-bg);
+}
+
+table td.not-available {
+    font-weight: bold;
+    color: var(--color-na-text);
+}
+
+table td.invalid {
+    color: var(--color-invalid-text);
+    font-weight: bold;
+}
+
+span.invalid {
+    font-weight: bold;
+    color: var(--color-invalid-text);
+}
+
+span.margin-positive {
+    font-weight: bold;
+    color: var(--color-valid-text);
+}
+
+span.margin-negative {
+    font-weight: bold;
+    color: var(--color-invalid-text);
+}
+
+/* Accordion styles */
+.accordion-item .accordion-toggle {
+    display: none;
+}
+
+.accordion-item .accordion-header {
+    cursor: pointer;
+    display: block;
+    user-select: none;
+}
+
+.accordion-item .accordion-header h3 {
+    display: inline-block;
+}
+
+.accordion-item .accordion-header h3::before {
+    content: '▶ ';
+    display: inline-block;
+    transition: transform 0.2s;
+    margin-right: 0.5rem;
+}
+
+.accordion-item .accordion-toggle:checked ~ .accordion-header h3::before {
+    transform: rotate(90deg);
+}
+
+.accordion-item .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.accordion-item .accordion-toggle:checked ~ .accordion-content {
+    max-height: 10000px;
+    transition: max-height 0.5s ease-in;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #121212;
+        --color-text: #ffffff;
+        --color-section-title: #9db2ce;
+        --color-border: #444444;
+        --color-row-alt: #1e1e1e;
+        --color-valid-bg: #153e28;
+        --color-invalid-bg: #3b1a1a;
+        --color-valid-text: #4ade80;
+        --color-invalid-text: #f87171;
+        --color-na-text: #aaaaaa;
+    }
+
+    table thead {
+        background-color: #2a2a2a;
+    }
+}
+
+/* Print optimization */
+@media print {
+    body {
+        margin: 0;
+        padding: 10px;
+    }
+
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+    h3 { font-size: 1rem; }
+
+    table { page-break-inside: avoid; }
+
+    /* Expand all accordions for print */
+    .accordion-content {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .accordion-header h3::before {
+        content: '';
+        display: none;
+    }
+}

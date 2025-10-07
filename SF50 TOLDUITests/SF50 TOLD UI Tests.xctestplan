@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "B833B42B-D860-4163-9465-399F2FE1E1EF",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SF50 TOLD.xcodeproj",
+        "identifier" : "0163BC822DDEE9D4008FEE8F",
+        "name" : "SF50 TOLDUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

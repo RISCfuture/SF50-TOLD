@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "0A0CDC89-4A74-4D0C-9888-B9E1361132F4",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SF50 TOLD.xcodeproj",
+        "identifier" : "0163BC782DDEE9D4008FEE8F",
+        "name" : "SF50 TOLDTests"
+      }
+    }
+  ],
+  "version" : 1
+}

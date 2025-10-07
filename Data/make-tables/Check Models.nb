@@ -1,0 +1,356 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     14006,        348]
+NotebookOptionsPosition[     13123,        326]
+NotebookOutlinePosition[     13541,        343]
+CellTagsIndexPosition[     13498,        340]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"Rest", "[", 
+    RowBox[{
+    "Import", 
+     "[", "\"\</Users/tmorgan/Dropbox/SF50 TOLD/SF50 \
+Shared/Data/g2+/landing/50/total distance.csv\>\"", "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQBmIQPWdLzlf2treO//a0gekjt6YXcADpgqTEEhD9qG9m
+JYg22P2yCUSzWKu1g2i3DlMw7VfZ2QOi7008DKZPRc2cAKK3ySwF01fyL00F
+0TN0ZaaB6G8Xns0F0RH/P4PpTdGxK0H0i/uTN4DoXeeObwHRax7t2Q6inWJe
+7AbRbaw/wbTZ+ft7uEHm7CjbC6JXv572CkSHnVoKplv+LrIsANI+lhOtQXTl
+Dd7FnzrfOuqqqC4B0Rse/9wDotuCBfaC6Brtn69BdIVZxRsQzRMnnfYZSK+a
+VQqmT02+y/kFSL/bmscFogF+2qUs
+  "],
+ CellLabel->"In[63]:=",ExpressionUUID->"96f6c751-2299-47c3-823b-9557766dc5c6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"extractFittedFunction", "[", "result_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"model", ",", "vars"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"model", "=", 
+       RowBox[{"result", "[", "\"\<BestModel\>\"", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"vars", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Symbol", "[", 
+          RowBox[{"\"\<x\>\"", "<>", 
+           RowBox[{"ToString", "[", "i", "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", 
+           RowBox[{"result", "[", "\"\<Dimensions\>\"", "]"}]}], "}"}]}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Function", "[", 
+       RowBox[{
+        RowBox[{"Evaluate", "[", "vars", "]"}], ",", 
+        RowBox[{"Evaluate", "[", 
+         RowBox[{"Normal", "[", "model", "]"}], "]"}]}], "]"}]}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.9625850313874598`*^9, 3.962585032411846*^9}},
+ CellLabel->"In[64]:=",ExpressionUUID->"d97dd8e2-8cb4-4a87-93a0-9f30a63a9342"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"xRange", "=", 
+    RowBox[{"MinMax", "[", 
+     RowBox[{"data", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";"}], "  ", 
+  RowBox[{"(*", "altitude", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"yRange", "=", 
+    RowBox[{"MinMax", "[", 
+     RowBox[{"data", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "3"}], "]"}], "]"}], "]"}]}], ";"}], "  ", 
+  RowBox[{"(*", "temperature", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"zRange", "=", 
+    RowBox[{"MinMax", "[", 
+     RowBox[{"data", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "4"}], "]"}], "]"}], "]"}]}], ";"}], "  ", 
+  RowBox[{"(*", "distance", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"wValues", "=", 
+    RowBox[{"Union", "[", 
+     RowBox[{"data", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], ";"}], "  ", 
+  RowBox[{"(*", "weights", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.962585055000339*^9, 3.962585056042097*^9}},
+ CellLabel->"In[65]:=",ExpressionUUID->"77744f3c-b74e-4ac3-921c-5eeb15db1117"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"fittedModel", "[", 
+    RowBox[{"weight_", ",", "altitude_", ",", "temperature_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"+", "7.530012"}], "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"-", "09"}]}], "*", "weight"}], "-", 
+    RowBox[{"8.875695", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"-", "02"}]}], "*", "altitude"}], "-", 
+    RowBox[{"1.846481", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"-", "03"}]}], "*", "temperature"}], "+", 
+    RowBox[{"7.776802", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"-", "05"}]}], "*", 
+     RowBox[{"weight", "^", "2"}]}], "+", 
+    RowBox[{"2.776196", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"-", "05"}]}], "*", "weight", "*", "altitude"}], "+", 
+    RowBox[{"1.769375", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"-", "03"}]}], "*", "weight", "*", "temperature"}], "+", 
+    RowBox[{"6.832825", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"-", "06"}]}], "*", 
+     RowBox[{"altitude", "^", "2"}]}], "+", 
+    RowBox[{"3.974697", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"-", "04"}]}], "*", "altitude", "*", "temperature"}], "-", 
+    RowBox[{"1.127533", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"-", "02"}]}], "*", 
+     RowBox[{"temperature", "^", "2"}]}], "+", 
+    RowBox[{"6.791733", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"+", "02"}]}]}]}]}], "\n"}]], "Input",
+ CellChangeTimes->{{3.962585893616934*^9, 3.9625859354901247`*^9}, 
+   3.962585994004105*^9, {3.962586055837818*^9, 3.962586107722497*^9}, 
+   3.962586142606536*^9, 3.962586176537612*^9, {3.962586222247407*^9, 
+   3.962586265692479*^9}, {3.9625862996520147`*^9, 3.962586317611487*^9}, {
+   3.962586356836447*^9, 3.9625863665538063`*^9}, {3.962586456248476*^9, 
+   3.962586506565979*^9}, {3.962586537462503*^9, 3.962586605752606*^9}, {
+   3.9625930776502943`*^9, 3.9625931241063547`*^9}, {3.962798568817833*^9, 
+   3.9627985899277763`*^9}, 3.962798689576734*^9, 3.962799036246208*^9, 
+   3.964146220186583*^9, 3.964146719429653*^9, {3.964146761363433*^9, 
+   3.9641467998445044`*^9}, {3.964638452915057*^9, 3.9646384850945168`*^9}, {
+   3.964638525303384*^9, 3.964638538743435*^9}, {3.964638636130949*^9, 
+   3.964638688179016*^9}, {3.964639083176635*^9, 3.964639155186648*^9}, {
+   3.9646394497661133`*^9, 3.964639485034398*^9}, {3.9646400556548777`*^9, 
+   3.964640174918873*^9}, {3.964641355828211*^9, 3.964641414417191*^9}},
+ CellLabel->"In[69]:=",ExpressionUUID->"8f2ad496-73fd-48fd-be8a-fc143cdd26a5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"filteredData", ",", "surface"}], "}"}], ",", 
+     RowBox[{"(*", 
+      RowBox[{
+      "Filter", " ", "data", " ", "by", " ", "selected", " ", "weight"}], 
+      "*)"}], 
+     RowBox[{
+      RowBox[{"filteredData", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{"data", ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "==", "selectedW"}], "&"}]}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"Create", " ", "surface"}], "*)"}], 
+      RowBox[{"surface", "=", 
+       RowBox[{"Plot3D", "[", 
+        RowBox[{
+         RowBox[{"fittedModel", "[", 
+          RowBox[{"selectedW", ",", "x", ",", "y"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", 
+           RowBox[{"xRange", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", 
+           RowBox[{"xRange", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"y", ",", 
+           RowBox[{"yRange", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", 
+           RowBox[{"yRange", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", 
+         RowBox[{"Mesh", "->", "None"}], ",", 
+         RowBox[{"PlotStyle", "->", 
+          RowBox[{"Directive", "[", 
+           RowBox[{
+            RowBox[{"Opacity", "[", "0.4", "]"}], ",", "Blue"}], "]"}]}], ",", 
+         RowBox[{"BoundaryStyle", "->", "None"}], ",", 
+         RowBox[{"PlotPoints", "->", "25"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "Combine", " ", "surface", " ", "and", " ", "data", " ", "points"}], 
+       "*)"}], 
+      RowBox[{"Show", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"surface", ",", 
+          RowBox[{"ListPointPlot3D", "[", 
+           RowBox[{
+            RowBox[{"filteredData", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", 
+               RowBox[{"{", 
+                RowBox[{"2", ",", "3", ",", "4"}], "}"}]}], "]"}], "]"}], ",", 
+            RowBox[{"PlotStyle", "->", 
+             RowBox[{"{", 
+              RowBox[{"Red", ",", 
+               RowBox[{"PointSize", "[", "0.015", "]"}]}], "}"}]}]}], "]"}]}],
+          "}"}], ",", 
+        RowBox[{"AxesLabel", "->", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<Altitude\>\"", ",", "\"\<Temperature\>\"", 
+           ",", "\"\<Distance\>\""}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "->", 
+         RowBox[{"{", 
+          RowBox[{"xRange", ",", "yRange", ",", "zRange"}], "}"}]}], ",", 
+        RowBox[{"BoxRatios", "->", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1", ",", "0.5"}], "}"}]}]}], "]"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"selectedW", ",", 
+       RowBox[{"First", "[", "wValues", "]"}], ",", "\"\<Weight\>\""}], "}"}],
+      ",", "wValues", ",", 
+     RowBox[{"ControlType", "->", "Slider"}], ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.9625850660390673`*^9, 3.962585066954811*^9}},
+ CellLabel->"In[70]:=",ExpressionUUID->"a2a12db5-c451-4257-94d4-0a0e93bc7b72"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`selectedW$$ = 5550, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`selectedW$$], 4500, "Weight"}, {4500, 5550}, 
+      ControlType -> Slider}}, Typeset`size$$ = {
+    360., {120.13215991311336`, 125.86409350686336`}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`selectedW$$ = 4500}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      Module[{$CellContext`filteredData$, $CellContext`surface$}, \
+$CellContext`filteredData$ = 
+         Select[$CellContext`data, 
+           Part[#, 1] == $CellContext`selectedW$$& ]; $CellContext`surface$ = 
+         Plot3D[
+           $CellContext`fittedModel[$CellContext`selectedW$$, $CellContext`x, \
+$CellContext`y], {$CellContext`x, 
+            Part[$CellContext`xRange, 1], 
+            Part[$CellContext`xRange, 2]}, {$CellContext`y, 
+            Part[$CellContext`yRange, 1], 
+            Part[$CellContext`yRange, 2]}, Mesh -> None, PlotStyle -> 
+           Directive[
+             Opacity[0.4], Blue], BoundaryStyle -> None, PlotPoints -> 25]; 
+        Show[{$CellContext`surface$, 
+           ListPointPlot3D[
+            Part[$CellContext`filteredData$, All, {2, 3, 4}], 
+            PlotStyle -> {Red, 
+              PointSize[0.015]}]}, 
+          AxesLabel -> {"Altitude", "Temperature", "Distance"}, 
+          PlotRange -> {$CellContext`xRange, $CellContext`yRange, \
+$CellContext`zRange}, BoxRatios -> {1, 1, 0.5}]], 
+      "Specifications" :> {{{$CellContext`selectedW$$, 4500, "Weight"}, {4500,
+          5550}, ControlType -> Slider, Appearance -> "Labeled"}}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{409.1, {167.80258532815242`, 173.53451892190242`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.962585067474267*^9, 3.9625851750157843`*^9, 3.962585474471459*^9, 
+   3.962585577267407*^9, 3.962585889495714*^9, 3.962585967803748*^9, {
+   3.962585998255878*^9, 3.962586021353945*^9}, {3.962586065235036*^9, 
+   3.962586112475141*^9}, 3.962586146824543*^9, 3.962586177990518*^9, 
+   3.962586230525091*^9, 3.962586267127293*^9, {3.962586301236018*^9, 
+   3.962586321918887*^9}, 3.962586368265894*^9, {3.962586461840658*^9, 
+   3.962586482164133*^9}, {3.962586521081801*^9, 3.962586540870974*^9}, 
+   3.96258657699079*^9, 3.9625866092698298`*^9, 3.962593093207036*^9, 
+   3.9625931254838133`*^9, 3.962798696281412*^9, {3.9641462734886007`*^9, 
+   3.9641463003161783`*^9}, 3.964146780232876*^9, 3.964638500746737*^9, 
+   3.96463854171215*^9, 3.964638699151375*^9, 3.964639487349427*^9, 
+   3.964640178465588*^9, 3.964641417790609*^9},
+ CellLabel->"Out[70]=",ExpressionUUID->"340f1679-af40-4674-901c-3d178d5aed77"]
+}, Open  ]]
+},
+WindowSize->{1323, 1088},
+WindowMargins->{{618, Automatic}, {Automatic, 107}},
+WindowStatusArea->"",
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"508ae5e1-caa0-4ae1-b9e8-f5adcfa69435"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 699, 17, 29, "Input",ExpressionUUID->"96f6c751-2299-47c3-823b-9557766dc5c6"],
+Cell[1256, 39, 1111, 29, 70, "Input",ExpressionUUID->"d97dd8e2-8cb4-4a87-93a0-9f30a63a9342"],
+Cell[2370, 70, 1121, 34, 111, "Input",ExpressionUUID->"77744f3c-b74e-4ac3-921c-5eeb15db1117"],
+Cell[3494, 106, 2506, 54, 90, "Input",ExpressionUUID->"8f2ad496-73fd-48fd-be8a-fc143cdd26a5"],
+Cell[CellGroupData[{
+Cell[6025, 164, 3332, 88, 131, "Input",ExpressionUUID->"a2a12db5-c451-4257-94d4-0a0e93bc7b72"],
+Cell[9360, 254, 3747, 69, 377, "Output",ExpressionUUID->"340f1679-af40-4674-901c-3d178d5aed77"]
+}, Open  ]]
+}
+]
+*)
+

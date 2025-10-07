@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    name: Unit Tests
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - macos: macos-latest
+            ios: "18.4"
+            xcode: "26"
+            device: "iPhone 16 Pro"
+          - macos: macos-latest
+            ios: "26.0"
+            xcode: "26"
+            device: "iPhone 17 Pro"
+    runs-on: ${{ matrix.macos }}
+    steps:
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ matrix.xcode }}
+      - uses: actions/checkout@v4
+      - name: Enable macros
+        run: defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
+      - name: Run unit tests
+        run: xcodebuild test -scheme "SF50 Shared" -destination "platform=iOS Simulator,name=${{ matrix.device }},OS=${{ matrix.ios }}" | xcpretty && exit ${PIPESTATUS[0]}
+
+  ui:
+    name: UI Tests
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - macos: macos-latest
+            ios: "18.4"
+            xcode: "26"
+            device: "iPhone 16 Pro"
+          - macos: macos-latest
+            ios: "26.0"
+            xcode: "26"
+            device: "iPhone 17 Pro"
+    runs-on: ${{ matrix.macos }}
+    steps:
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ matrix.xcode }}
+      - uses: actions/checkout@v4
+      - name: Enable macros
+        run: defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
+      - name: Configure simulator
+        run: |
+          # Boot simulator
+          xcrun simctl boot "${{ matrix.device }}" || true
+          # Wait for simulator to boot
+          xcrun simctl bootstatus "${{ matrix.device }}" || true
+      - name: Run UI tests
+        run: xcodebuild test -scheme "SF50 TOLD" -testPlan "SF50 TOLD UI Tests" -destination "platform=iOS Simulator,name=${{ matrix.device }},OS=${{ matrix.ios }}" | xcpretty && exit ${PIPESTATUS[0]}

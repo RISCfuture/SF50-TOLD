@@ -1,0 +1,12 @@
+# Fastlane
+screenshots/
+test_output/
+*.ipa
+*.dSYM.zip
+*.mobileprovision
+
+# App Store Connect API Key
+AuthKey_*.p8
+
+# Fastlane reports
+report.xml
