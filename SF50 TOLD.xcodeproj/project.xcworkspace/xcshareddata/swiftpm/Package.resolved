@@ -1,24 +1,6 @@
 {
-  "originHash" : "a42af0a7ce3d02dae1d4882423f061c9b39504b016f159c728ca9ec36a6f22df",
+  "originHash" : "c54ac3176825c2dfba7c797593dae41cfb49fe97a4fd19716a08e7ba3b41bc63",
   "pins" : [
-    {
-      "identity" : "bugsnag-cocoa",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/bugsnag/bugsnag-cocoa",
-      "state" : {
-        "revision" : "1f991e92a6e3993c2763d071781d895ca4075a90",
-        "version" : "6.34.0"
-      }
-    },
-    {
-      "identity" : "bugsnag-cocoa-performance",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/bugsnag/bugsnag-cocoa-performance",
-      "state" : {
-        "revision" : "f85c05d474a4901c0a3f941862c6a17d5ced69d7",
-        "version" : "1.15.0"
-      }
-    },
     {
       "identity" : "defaults",
       "kind" : "remoteSourceControl",
@@ -35,6 +17,15 @@
       "state" : {
         "revision" : "56bf51fdd2fe4b2cf254b2cf34aede3d7caccc6c",
         "version" : "6.1.0"
+      }
+    },
+    {
+      "identity" : "sentry-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/getsentry/sentry-cocoa/",
+      "state" : {
+        "revision" : "9e193ac0b71760603aa666bad7e9e303dd7031a8",
+        "version" : "8.56.2"
       }
     },
     {
