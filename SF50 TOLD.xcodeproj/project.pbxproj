@@ -21,17 +21,23 @@
 		0179DF402DE2F7A9002EC77C /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 01D1E3122DDF890100C1CAC8 /* Logging */; };
 		0179DF412DE2F7A9002EC77C /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 0163BDEF2DE05260008FEE8F /* AsyncAlgorithms */; };
 		0179DFC02DE3CDD3002EC77C /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0179DFBF2DE3CDD3002EC77C /* Defaults */; };
-		01832B302E940E6C004788DA /* Bugsnag in Frameworks */ = {isa = PBXBuildFile; productRef = 01832B2F2E940E6C004788DA /* Bugsnag */; };
-		01832B322E940E6C004788DA /* BugsnagPerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 01832B312E940E6C004788DA /* BugsnagPerformance */; };
-		01832B342E940E6C004788DA /* BugsnagPerformanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 01832B332E940E6C004788DA /* BugsnagPerformanceSwift */; };
-		01832B362E940E6C004788DA /* BugsnagPerformanceSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 01832B352E940E6C004788DA /* BugsnagPerformanceSwiftUI */; };
 		018B8F0C2E331989003A0DAF /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 018B8F0B2E331989003A0DAF /* RealModule */; };
+		0198B44C2E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		0198B44D2E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		0198B44E2E986226003CB126 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 602F51ECCC3348DE83D26B3E /* Sentry */; };
+		0198B44F2E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		0198B4502E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		0198B4512E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		0198B4522E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		0198B4532E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		01A1014F2E93C12E0032AB29 /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 01A1014E2E93C12E0032AB29 /* Gzip */; };
 		01A150A02E93BAA700D3180A /* SwiftTimeZoneLookup in Frameworks */ = {isa = PBXBuildFile; productRef = 01A1509F2E93BAA700D3180A /* SwiftTimeZoneLookup */; };
 		01A506982E55A78800F8EC4F /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 01A506972E55A78800F8EC4F /* SwiftNASR */; };
 		01A5069A2E55A78800F8EC4F /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 01A506992E55A78800F8EC4F /* Logging */; };
 		01A5069D2E55A79C00F8EC4F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 01A5069C2E55A79C00F8EC4F /* ArgumentParser */; };
+		01BEA32B2E986B10005ABCD8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 01BEA32A2E986B10005ABCD8 /* PrivacyInfo.xcprivacy */; };
 		01BEBCB82E8A401100631DE6 /* SwiftHtml in Frameworks */ = {isa = PBXBuildFile; productRef = 01BEBCB72E8A401100631DE6 /* SwiftHtml */; };
+		AB352BDD14B44A2CA78F9D44 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 602F51ECCC3348DE83D26B3E /* Sentry */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +149,7 @@
 		0191DC212E9323950099FB0E /* SF50 TOLD UI Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SF50 TOLD UI Tests.xctestplan"; path = "SF50 TOLDUITests/SF50 TOLD UI Tests.xctestplan"; sourceTree = "<group>"; };
 		01A506902E55A73500F8EC4F /* DownloadNASR */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DownloadNASR; sourceTree = BUILT_PRODUCTS_DIR; };
 		01AB24552E948B89005D8996 /* SF50 RunwaysExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SF50 RunwaysExtension.entitlements"; sourceTree = "<group>"; };
+		01BEA32A2E986B10005ABCD8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -249,6 +256,7 @@
 			files = (
 				0128374E2E5B8BB8002195A0 /* SwiftUI.framework in Frameworks */,
 				0128374C2E5B8BB8002195A0 /* WidgetKit.framework in Frameworks */,
+				0198B4502E986226003CB126 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +270,7 @@
 				012B1E682DE2F463000D9ADC /* SwiftNASR in Frameworks */,
 				012B1E6E2DE2F463000D9ADC /* AsyncAlgorithms in Frameworks */,
 				0179DFC02DE3CDD3002EC77C /* Defaults in Frameworks */,
+				AB352BDD14B44A2CA78F9D44 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				012B1E462DE2F272000D9ADC /* SF50_Shared.framework in Frameworks */,
+				0198B4532E986226003CB126 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,15 +287,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01832B302E940E6C004788DA /* Bugsnag in Frameworks */,
+				0198B44E2E986226003CB126 /* Sentry in Frameworks */,
 				0179DF412DE2F7A9002EC77C /* AsyncAlgorithms in Frameworks */,
 				0179DF402DE2F7A9002EC77C /* Logging in Frameworks */,
 				0179DF3E2DE2F7A9002EC77C /* SwiftNASR in Frameworks */,
 				012B1E502DE2F272000D9ADC /* SF50_Shared.framework in Frameworks */,
-				01832B342E940E6C004788DA /* BugsnagPerformanceSwift in Frameworks */,
 				01BEBCB82E8A401100631DE6 /* SwiftHtml in Frameworks */,
-				01832B362E940E6C004788DA /* BugsnagPerformanceSwiftUI in Frameworks */,
-				01832B322E940E6C004788DA /* BugsnagPerformance in Frameworks */,
+				0198B44D2E986226003CB126 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +301,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0198B4512E986226003CB126 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +309,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0198B4522E986226003CB126 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0198B44C2E986226003CB126 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +329,7 @@
 				01A150A02E93BAA700D3180A /* SwiftTimeZoneLookup in Frameworks */,
 				01A5069A2E55A78800F8EC4F /* Logging in Frameworks */,
 				01A506982E55A78800F8EC4F /* SwiftNASR in Frameworks */,
+				0198B44F2E986226003CB126 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +339,7 @@
 		0163BC612DDEE9D3008FEE8F = {
 			isa = PBXGroup;
 			children = (
+				01BEA32A2E986B10005ABCD8 /* PrivacyInfo.xcprivacy */,
 				01AB24552E948B89005D8996 /* SF50 RunwaysExtension.entitlements */,
 				0191DC212E9323950099FB0E /* SF50 TOLD UI Tests.xctestplan */,
 				0191DC1E2E9323590099FB0E /* SF50 Shared Unit Tests.xctestplan */,
@@ -467,6 +480,8 @@
 				0163BC682DDEE9D3008FEE8F /* Resources */,
 				012B1E552DE2F272000D9ADC /* Embed Frameworks */,
 				012837602E5B8BB9002195A0 /* Embed Foundation Extensions */,
+				A1B2C3D4E5F6789012345678 /* Generate Sentry Framework dSYM */,
+				CC70812E05EB4C6A9C28744E /* Upload Debug Symbols to Sentry */,
 			);
 			buildRules = (
 			);
@@ -483,10 +498,7 @@
 				01D1E3122DDF890100C1CAC8 /* Logging */,
 				0163BDEF2DE05260008FEE8F /* AsyncAlgorithms */,
 				01BEBCB72E8A401100631DE6 /* SwiftHtml */,
-				01832B2F2E940E6C004788DA /* Bugsnag */,
-				01832B312E940E6C004788DA /* BugsnagPerformance */,
-				01832B332E940E6C004788DA /* BugsnagPerformanceSwift */,
-				01832B352E940E6C004788DA /* BugsnagPerformanceSwiftUI */,
+				602F51ECCC3348DE83D26B3E /* Sentry */,
 			);
 			productName = "SF50 TOLD";
 			productReference = 0163BC6A2DDEE9D3008FEE8F /* SF50 TOLD.app */;
@@ -647,8 +659,7 @@
 				01BEBCB62E8A401100631DE6 /* XCRemoteSwiftPackageReference "swift-html" */,
 				01A1509E2E93B93900D3180A /* XCRemoteSwiftPackageReference "SwiftTimeZoneLookup" */,
 				01A1014D2E93BF240032AB29 /* XCRemoteSwiftPackageReference "GzipSwift" */,
-				01FEC26C2E940DA2000327D0 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */,
-				01FEC26D2E940DAF000327D0 /* XCRemoteSwiftPackageReference "bugsnag-cocoa-performance" */,
+				A0265BD12B874F4A917707F3 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0163BC6B2DDEE9D3008FEE8F /* Products */;
@@ -693,6 +704,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01BEA32B2E986B10005ABCD8 /* PrivacyInfo.xcprivacy in Resources */,
 				01442FC62E1D901900A0BD40 /* InfoPlist.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,6 +731,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A1B2C3D4E5F6789012345678 /* Generate Sentry Framework dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Sentry Framework dSYM";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Generate dSYM for Sentry framework after it's been embedded and stripped\nif [ \"$CONFIGURATION\" = \"Release\" ] || [ \"$EFFECTIVE_PLATFORM_NAME\" = \"-iphoneos\" ]; then\n    SENTRY_FRAMEWORK=\"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework/Sentry\"\n    \n    if [ -f \"$SENTRY_FRAMEWORK\" ]; then\n        echo \"Generating dSYM for Sentry.framework...\"\n        echo \"Framework path: $SENTRY_FRAMEWORK\"\n        \n        # Generate dSYM from the embedded framework binary\n        dsymutil \"$SENTRY_FRAMEWORK\" -o \"${DWARF_DSYM_FOLDER_PATH}/Sentry.framework.dSYM\"\n        \n        if [ -d \"${DWARF_DSYM_FOLDER_PATH}/Sentry.framework.dSYM\" ]; then\n            echo \"Successfully generated Sentry.framework.dSYM\"\n            dwarfdump --uuid \"${DWARF_DSYM_FOLDER_PATH}/Sentry.framework.dSYM\" || true\n        else\n            echo \"warning: Failed to generate Sentry.framework.dSYM\"\n        fi\n    else\n        echo \"warning: Sentry.framework not found at $SENTRY_FRAMEWORK\"\n    fi\nfi\n";
+		};
+		CC70812E05EB4C6A9C28744E /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			name = "Upload Debug Symbols to Sentry";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# This script is responsible for uploading debug symbols and source context for Sentry.\nif which sentry-cli >/dev/null; then\n  export SENTRY_ORG=timcodes\n  export SENTRY_PROJECT=sf50-told\n  ERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\n  if [ ! $? -eq 0 ]; then\n    echo \"warning: sentry-cli - $ERROR\"\n  fi\nelse\n  echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		012837462E5B8BB8002195A0 /* Sources */ = {
@@ -1123,8 +1169,10 @@
 				CODE_SIGN_ENTITLEMENTS = "SF50 TOLD/SF50 TOLD.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 27;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SF50-TOLD-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "SF50 TOLD";
@@ -1156,8 +1204,10 @@
 				CODE_SIGN_ENTITLEMENTS = "SF50 TOLD/SF50 TOLD.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 27;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SF50-TOLD-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "SF50 TOLD";
@@ -1484,20 +1534,12 @@
 				minimumVersion = 1.6.3;
 			};
 		};
-		01FEC26C2E940DA2000327D0 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */ = {
+		A0265BD12B874F4A917707F3 /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/bugsnag/bugsnag-cocoa";
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa/";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.34.0;
-			};
-		};
-		01FEC26D2E940DAF000327D0 /* XCRemoteSwiftPackageReference "bugsnag-cocoa-performance" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/bugsnag/bugsnag-cocoa-performance";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.15.0;
+				minimumVersion = 8.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1532,26 +1574,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0179DFBE2DE3CDD3002EC77C /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
-		};
-		01832B2F2E940E6C004788DA /* Bugsnag */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 01FEC26C2E940DA2000327D0 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */;
-			productName = Bugsnag;
-		};
-		01832B312E940E6C004788DA /* BugsnagPerformance */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 01FEC26D2E940DAF000327D0 /* XCRemoteSwiftPackageReference "bugsnag-cocoa-performance" */;
-			productName = BugsnagPerformance;
-		};
-		01832B332E940E6C004788DA /* BugsnagPerformanceSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 01FEC26D2E940DAF000327D0 /* XCRemoteSwiftPackageReference "bugsnag-cocoa-performance" */;
-			productName = BugsnagPerformanceSwift;
-		};
-		01832B352E940E6C004788DA /* BugsnagPerformanceSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 01FEC26D2E940DAF000327D0 /* XCRemoteSwiftPackageReference "bugsnag-cocoa-performance" */;
-			productName = BugsnagPerformanceSwiftUI;
 		};
 		018B8F0B2E331989003A0DAF /* RealModule */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1592,6 +1614,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 01D1E3112DDF890100C1CAC8 /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
+		};
+		602F51ECCC3348DE83D26B3E /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0265BD12B874F4A917707F3 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

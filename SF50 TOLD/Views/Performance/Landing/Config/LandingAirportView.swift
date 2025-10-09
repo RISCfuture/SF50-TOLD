@@ -24,7 +24,8 @@ struct LandingAirportView: View {
   private let nowVisibilityTimer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 
   private var elevation: Measurement<UnitLength> {
-    performance.runway?.elevationOrAirportElevation ?? performance.airport?.elevation ?? .init(value: 0, unit: .feet)
+    performance.runway?.elevationOrAirportElevation ?? performance.airport?.elevation
+      ?? .init(value: 0, unit: .feet)
   }
 
   private var NOTAMTitle: String {
