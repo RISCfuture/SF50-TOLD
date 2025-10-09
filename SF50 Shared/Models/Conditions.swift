@@ -226,10 +226,13 @@ public struct Conditions: Sendable, Equatable {
   }
 
   public func densityAltitude(elevation: Measurement<UnitLength>) -> Measurement<UnitLength> {
-    let absolutePressInHg = absolutePressure(elevation: elevation).converted(to: .inchesOfMercury)
-      .value
+    // NWS formula uses station pressure (actual pressure at the elevation), not altimeter setting
+    let stationPressureInHg = absolutePressure(elevation: elevation)
+      .converted(to: .inchesOfMercury).value
     let tempDegF = temperature(at: elevation).converted(to: .fahrenheit).value
-    let DA = 145442.16 * (1.0 - pow((17.326 * absolutePressInHg) / (459.67 + tempDegF), 0.235))
+
+    // NWS dry-air density altitude approximation
+    let DA = 145442.16 * (1.0 - pow((17.326 * stationPressureInHg) / (459.67 + tempDegF), 0.235))
 
     return .init(value: DA, unit: .feet)
   }
