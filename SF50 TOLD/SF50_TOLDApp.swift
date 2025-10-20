@@ -112,6 +112,12 @@ struct SF50_TOLDApp: App {
     // Set minimal configuration for testing - let tests go through setup flow
     Defaults[.updatedThrustSchedule] = false  // G1 model
     Defaults[.schemaVersion] = latestSchemaVersion
+    Defaults[.lastCycleLoaded] = Cycle.current  // Prevent database loader from appearing
+
+    // Seed test data for airports used in UI tests
+    Task { @MainActor in
+      seedTestData()
+    }
   }
 
   @MainActor
