@@ -101,6 +101,7 @@ func waitForNavigation() {
 }
 
 // Helper to tap element and ensure navigation occurred
+@MainActor
 func tapAndEnsureNavigation(
   element: XCUIElement,
   expectedElement: XCUIElement,

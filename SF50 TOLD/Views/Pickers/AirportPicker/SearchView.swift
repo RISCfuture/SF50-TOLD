@@ -19,7 +19,11 @@ private struct SearchResults: View {
   var searchText: String
   var onSelect: (Airport) -> Void
 
-  @Query private var airports: [Airport]
+  @Environment(\.modelContext)
+  private var modelContext
+
+  @State private var airports: [Airport] = []
+  @State private var isLoading = false
 
   private var sortedAirports: [Airport] {
     return airports.sorted { airport1, airport2 in
@@ -37,40 +41,32 @@ private struct SearchResults: View {
     }
   }
 
-  private var predicate: Predicate<Airport> {
-    let uppercaseText = searchText.uppercased()
-
-    return #Predicate { airport in
-      searchText.count > 2
-        && (airport.locationID == uppercaseText
-          || airport.name.localizedStandardContains(searchText)
-          || (airport.ICAO_ID?.localizedStandardContains(searchText) ?? false))
-    }
-  }
-
   var body: some View {
-    if sortedAirports.isEmpty {
-      List {
-        Text("No results.")
-          .foregroundStyle(.secondary)
-          .multilineTextAlignment(.leading)
-      }
-    } else {
-      List(sortedAirports) { (airport: Airport) in
-        AirportRow(airport: airport, showFavoriteButton: true)
-          .onTapGesture {
-            onSelect(airport)
-          }
-          .accessibility(addTraits: .isButton)
-          .accessibilityIdentifier("airportRow-\(airport.displayID)")
+    Group {
+      if sortedAirports.isEmpty {
+        List {
+          Text("No results.")
+            .foregroundStyle(.secondary)
+            .multilineTextAlignment(.leading)
+        }
+      } else {
+        List(sortedAirports) { (airport: Airport) in
+          AirportRow(airport: airport, showFavoriteButton: true)
+            .onTapGesture {
+              onSelect(airport)
+            }
+            .accessibility(addTraits: .isButton)
+            .accessibilityIdentifier("airportRow-\(airport.displayID)")
+        }
       }
     }
+    .onChange(of: searchText) { performSearch() }
+    .task { performSearch() }
   }
 
   init(searchText: String, onSelect: @escaping (Airport) -> Void) {
     self.searchText = searchText
     self.onSelect = onSelect
-    _airports = Query(FetchDescriptor(predicate: predicate))
   }
 
   private func relevanceScore(for airport: Airport, searchText: String) -> Int {
@@ -92,6 +88,46 @@ private struct SearchResults: View {
       .count
     let totalChars = max(name.count, searchText.count)
     return Double(commonChars) / Double(totalChars) * 0.4
+  }
+
+  private func performSearch() {
+    guard searchText.count > 2 else {
+      airports = []
+      return
+    }
+
+    isLoading = true
+    let searchTextCopy = searchText
+    let container = modelContext.container
+
+    Task.detached {
+      let context = ModelContext(container)
+      let uppercaseText = searchTextCopy.uppercased()
+
+      let predicate = #Predicate<Airport> { airport in
+        searchTextCopy.count > 2
+          && (airport.locationID == uppercaseText
+            || airport.name.localizedStandardContains(searchTextCopy)
+            || (airport.ICAO_ID?.localizedStandardContains(searchTextCopy) ?? false))
+      }
+      let descriptor = FetchDescriptor(predicate: predicate)
+
+      do {
+        let results = try context.fetch(descriptor)
+        await MainActor.run {
+          // Only update if search text hasn't changed
+          if searchTextCopy == searchText {
+            airports = results
+            isLoading = false
+          }
+        }
+      } catch {
+        await MainActor.run {
+          airports = []
+          isLoading = false
+        }
+      }
+    }
   }
 }
 
