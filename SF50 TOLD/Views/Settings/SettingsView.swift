@@ -74,6 +74,11 @@ struct SettingsView: View {
           }
           .accessibilityIdentifier("timeZoneDisplayPicker")
         }
+
+        Section {
+          NavigationLink("Takeoff/Landing Scenarios…", destination: ScenariosSettingsView())
+            .accessibilityIdentifier("scenariosNavigationLink")
+        }
       }.navigationTitle("Settings")
     }.navigationViewStyle(navigationStyle)
   }

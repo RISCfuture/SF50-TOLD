@@ -1,8 +1,10 @@
 import Defaults
 import SF50_Shared
 
-func generateTakeoffReport(input: PerformanceInput) throws -> String {
-  let reportData = TakeoffReportData(input: input)
+func generateTakeoffReport(input: PerformanceInput, scenarios: [PerformanceScenario]) throws
+  -> String
+{
+  let reportData = TakeoffReportData(input: input, scenarios: scenarios)
   let output = try reportData.generate()
 
   let useAirportLocalTime = Defaults[.useAirportLocalTime]
@@ -10,8 +12,10 @@ func generateTakeoffReport(input: PerformanceInput) throws -> String {
   return template.render(runways: output.runwayInfo, scenarios: output.scenarios)
 }
 
-func generateLandingReport(input: PerformanceInput) throws -> String {
-  let reportData = LandingReportData(input: input)
+func generateLandingReport(input: PerformanceInput, scenarios: [PerformanceScenario]) throws
+  -> String
+{
+  let reportData = LandingReportData(input: input, scenarios: scenarios)
   let output = try reportData.generate()
 
   let useAirportLocalTime = Defaults[.useAirportLocalTime]

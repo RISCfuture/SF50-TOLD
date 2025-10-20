@@ -6,7 +6,7 @@ import SwiftNASR
 // MARK: - Defaults
 
 nonisolated(unsafe) private let groupDefaults = UserDefaults(suiteName: "group.codes.tim.TOLD")!
-public let latestSchemaVersion = 3
+public let latestSchemaVersion = 4
 
 extension Defaults.Keys {
   public static let emptyWeight = Key<Measurement<UnitMass>>(
@@ -26,6 +26,11 @@ extension Defaults.Keys {
   )
   public static let updatedThrustSchedule = Key<Bool>(
     "SF50/3/updatedThrustSchedule",
+    default: false,
+    suite: groupDefaults
+  )
+  public static let defaultScenariosSeeded = Key<Bool>(
+    "SF50/3/defaultScenariosSeeded",
     default: false,
     suite: groupDefaults
   )

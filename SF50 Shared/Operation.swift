@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// The type of performance operation being calculated.
-public enum Operation: Sendable {
+public enum Operation: String, Codable, Sendable {
   /// Takeoff performance calculation
   case takeoff
   /// Landing performance calculation

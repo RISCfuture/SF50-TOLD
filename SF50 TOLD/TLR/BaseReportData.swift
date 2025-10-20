@@ -6,9 +6,15 @@ import SF50_Shared
 class BaseReportData<PerformanceType, ScenarioType> {
   let input: PerformanceInput
   let performance: DefaultPerformanceCalculationService
+  let scenarios: [PerformanceScenario]
 
-  init(input: PerformanceInput, performance: DefaultPerformanceCalculationService = .shared) {
+  init(
+    input: PerformanceInput,
+    scenarios: [PerformanceScenario],
+    performance: DefaultPerformanceCalculationService = .shared
+  ) {
     self.input = input
+    self.scenarios = scenarios
     self.performance = performance
   }
 
@@ -62,7 +68,7 @@ class BaseReportData<PerformanceType, ScenarioType> {
   }
 
   func generateScenarios() throws -> [ScenarioType] {
-    try PerformanceScenario.scenarios(for: input, operation: operation()).map { scenarioDef in
+    try scenarios.map { scenarioDef in
       let runways = try calculatePerformanceForAllRunways(scenario: scenarioDef)
       return createScenario(name: scenarioDef.name, runways: runways)
     }

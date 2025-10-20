@@ -82,6 +82,7 @@ public final class PreviewHelper: Sendable {
       for: Airport.self,
       Runway.self,
       NOTAM.self,
+      Scenario.self,
       configurations: .init(isStoredInMemoryOnly: true)
     )
   }
@@ -93,6 +94,7 @@ public final class PreviewHelper: Sendable {
     try mainContext.delete(model: Runway.self)
     try mainContext.delete(model: Airport.self)
     try mainContext.delete(model: NOTAM.self)
+    try mainContext.delete(model: Scenario.self)
     try mainContext.save()
   }
 
@@ -101,6 +103,63 @@ public final class PreviewHelper: Sendable {
     mainContext.insert(airport.airport)
     for runway in airport.runways {
       mainContext.insert(runway)
+    }
+    try mainContext.save()
+  }
+
+  @MainActor
+  public func insertBasicScenarios() throws {
+    // Takeoff scenarios
+    let takeoffScenarios = [
+      Scenario(
+        name: "OAT +10°C",
+        operation: .takeoff,
+        deltaTemperature: .init(value: 10, unit: .celsius)
+      ),
+      Scenario(
+        name: "OAT -10°C",
+        operation: .takeoff,
+        deltaTemperature: .init(value: -10, unit: .celsius)
+      ),
+      Scenario(
+        name: "Wind Speed +10 kts",
+        operation: .takeoff,
+        deltaWindSpeed: .init(value: 10, unit: .knots)
+      ),
+      Scenario(
+        name: "Weight +200 lbs",
+        operation: .takeoff,
+        deltaWeight: .init(value: 200, unit: .pounds)
+      )
+    ]
+
+    // Landing scenarios
+    let landingScenarios = [
+      Scenario(
+        name: "OAT +10°C",
+        operation: .landing,
+        deltaTemperature: .init(value: 10, unit: .celsius)
+      ),
+      Scenario(
+        name: "Flaps 50",
+        operation: .landing,
+        flapSettingOverride: "flaps50"
+      ),
+      Scenario(
+        name: "Water/Slush 0.5\"",
+        operation: .landing,
+        contaminationOverride: "waterOrSlush",
+        contaminationDepth: .init(value: 0.5, unit: .inches)
+      ),
+      Scenario(
+        name: "Dry Snow",
+        operation: .landing,
+        contaminationOverride: "drySnow"
+      )
+    ]
+
+    for scenario in takeoffScenarios + landingScenarios {
+      mainContext.insert(scenario)
     }
     try mainContext.save()
   }

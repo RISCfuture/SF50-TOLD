@@ -42,7 +42,8 @@ struct SF50_TOLDApp: App {
     let schema = Schema([
       Airport.self,
       Runway.self,
-      NOTAM.self
+      NOTAM.self,
+      Scenario.self
     ])
     let modelConfiguration = ModelConfiguration(
       schema: schema,
@@ -63,6 +64,9 @@ struct SF50_TOLDApp: App {
     WindowGroup {
       ContentView()
         .modelContainer(sharedModelContainer)
+        .task {
+          ScenarioSeeder(container: sharedModelContainer).seedDefaultScenariosIfNeeded()
+        }
     }
   }
 
@@ -71,7 +75,7 @@ struct SF50_TOLDApp: App {
     let isUITesting = ProcessInfo.processInfo.arguments.contains("UI-TESTING")
 
     if isUITesting {
-      setupUITestingEnvironment()
+      UITestingHelper.setupUITestingEnvironment(container: sharedModelContainer)
     }
 
     // Only initialize Sentry if not running UI tests
@@ -102,47 +106,6 @@ struct SF50_TOLDApp: App {
         // Enable experimental logging features
         options.experimental.enableLogs = true
       }
-    }
-  }
-
-  private func setupUITestingEnvironment() {
-    // Reset all defaults
-    Defaults.removeAll(suite: UserDefaults(suiteName: "group.codes.tim.TOLD")!)
-
-    // Set minimal configuration for testing - let tests go through setup flow
-    Defaults[.updatedThrustSchedule] = false  // G1 model
-    Defaults[.schemaVersion] = latestSchemaVersion
-    Defaults[.lastCycleLoaded] = Cycle.current  // Prevent database loader from appearing
-
-    // Seed test data for airports used in UI tests
-    Task { @MainActor in
-      seedTestData()
-    }
-  }
-
-  @MainActor
-  private func seedTestData() {
-    let context = sharedModelContainer.mainContext
-
-    // Delete existing data
-    try? context.delete(model: Runway.self)
-    try? context.delete(model: Airport.self)
-    try? context.delete(model: NOTAM.self)
-
-    // Insert test airports
-    try? insertAirport(.KOAK, context: context)
-    try? insertAirport(.KSQL, context: context)
-    try? insertAirport(.K1C9, context: context)
-
-    try? context.save()
-  }
-
-  @MainActor
-  private func insertAirport(_ builder: AirportBuilder, context: ModelContext) throws {
-    let airport = builder.unsaved()
-    context.insert(airport)
-    for runway in airport.runways {
-      context.insert(runway)
     }
   }
 }

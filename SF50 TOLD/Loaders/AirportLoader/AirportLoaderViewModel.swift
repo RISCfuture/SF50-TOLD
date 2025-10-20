@@ -78,6 +78,7 @@ final class AirportLoaderViewModel: WithIdentifiableError {
           Defaults[.lastCycleLoaded] = nil
           Defaults[.ourAirportsLastUpdated] = nil
           let (cycle, lastUpdated) = try await loader.load()
+
           await MainActor.run {
             Defaults[.lastCycleLoaded] = cycle
             Defaults[.ourAirportsLastUpdated] = lastUpdated

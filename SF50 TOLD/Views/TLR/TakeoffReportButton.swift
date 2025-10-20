@@ -1,5 +1,6 @@
 import Defaults
 import SF50_Shared
+import SwiftData
 import SwiftUI
 
 private struct HTMLReport: Identifiable {
@@ -12,6 +13,8 @@ struct TakeoffReportButton: View {
   private var performance
   @Environment(WeatherViewModel.self)
   private var weather
+  @Environment(\.modelContext)
+  private var modelContext
 
   @State private var reportToShow: HTMLReport?
   @State private var isGenerating = false
@@ -64,22 +67,34 @@ struct TakeoffReportButton: View {
     isGenerating = true
 
     Task {
-      // Allow UI to update with loading state
-      try? await Task.sleep(nanoseconds: 100_000_000)
-
-      // Capture snapshots and settings on main actor
-      let airportSnapshot = AirportInput(from: airport)
-      let runwaySnapshot = RunwayInput(from: runway, airport: airport)
-      let conditions = performance.conditions
-      let weight = performance.weight
-      let flapSetting = performance.flapSetting
-      let safetyFactor = Defaults[.safetyFactor]
-      let useRegressionModel = Defaults[.useRegressionModel]
-      let updatedThrustSchedule = Defaults[.updatedThrustSchedule]
-      let emptyWeight = Defaults[.emptyWeight]
-      let date = weather.time
-
       do {
+        // Allow UI to update with loading state
+        try await Task.sleep(nanoseconds: 100_000_000)
+
+        // Capture snapshots and settings on main actor
+        let airportSnapshot = AirportInput(from: airport)
+        let runwaySnapshot = RunwayInput(from: runway, airport: airport)
+        let conditions = performance.conditions
+        let weight = performance.weight
+        let flapSetting = performance.flapSetting
+        let safetyFactor = Defaults[.safetyFactor]
+        let useRegressionModel = Defaults[.useRegressionModel]
+        let updatedThrustSchedule = Defaults[.updatedThrustSchedule]
+        let emptyWeight = Defaults[.emptyWeight]
+        let date = weather.time
+
+        // Fetch and convert scenarios from SwiftData
+        let descriptor = FetchDescriptor<Scenario>(
+          predicate: #Predicate { $0._operation == "takeoff" },
+          sortBy: [SortDescriptor(\.name)]
+        )
+        let scenarioModels = try modelContext.fetch(descriptor)
+        let userScenarios = scenarioModels.map { PerformanceScenario.from($0) }
+
+        // Always prepend "Forecast Conditions" scenario (base conditions with no adjustments)
+        let forecastScenario = PerformanceScenario(name: "Forecast Conditions")
+        let scenarios = [forecastScenario] + userScenarios
+
         // Now run the report generation in the background
         let input = PerformanceInput(
           airport: airportSnapshot,
@@ -93,7 +108,7 @@ struct TakeoffReportButton: View {
           emptyWeight: emptyWeight,
           date: date
         )
-        let generatedHTML = try generateTakeoffReport(input: input)
+        let generatedHTML = try generateTakeoffReport(input: input, scenarios: scenarios)
 
         await MainActor.run {
           reportToShow = HTMLReport(html: generatedHTML)
