@@ -81,7 +81,44 @@ final class RegressionPerformanceModelG1: BaseRegressionPerformanceModel {
   }
 
   override var landingDistanceFt: Value<Double> {
-    var distance = landingDistanceBaseFt
+    // Calculate the increase in landing run due to contamination
+    let baseLandingRun = landingRunBaseFt
+    let contaminatedLandingRun = landingRun_contaminationAddition(distance: baseLandingRun)
+
+    // Compute the run increase by extracting values
+    let runIncrease: Value<Double> =
+      switch (baseLandingRun, contaminatedLandingRun) {
+        case (.value(let base), .value(let contaminated)):
+          .value(contaminated - base)
+        case (.valueWithUncertainty(let base, _), .value(let contaminated)):
+          .value(contaminated - base)
+        case (.value(let base), .valueWithUncertainty(let contaminated, let unc)):
+          .valueWithUncertainty(contaminated - base, uncertainty: unc)
+        case (.valueWithUncertainty(let base, _), .valueWithUncertainty(let contaminated, let unc)):
+          .valueWithUncertainty(contaminated - base, uncertainty: unc)
+        default:
+          .value(0)  // No contamination or error state
+      }
+
+    // Start with base landing distance and add the contamination-induced run increase
+    var distance = landingDistanceBaseFt.map { distValue, distUnc in
+      switch runIncrease {
+        case .value(let inc):
+          return (distValue + inc, distUnc)
+        case .valueWithUncertainty(let inc, let incUnc):
+          let newDist = distValue + inc
+          let newUnc =
+            if let distUnc {
+              sqrt(pow(distUnc, 2) + pow(incUnc, 2))
+            } else {
+              incUnc
+            }
+          return (newDist, newUnc)
+        default:
+          return (distValue, distUnc)
+      }
+    }
+
     distance *= landingDistance_headwindAdjustment
     distance *= landingDistance_tailwindAdjustment
     if runway.isTurf { distance *= landingDistance_unpavedAdjustment }
