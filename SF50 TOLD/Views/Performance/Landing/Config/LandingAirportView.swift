@@ -5,12 +5,16 @@ import SwiftUI
 
 struct LandingAirportView: View {
   @State private var showNowButton = false
+  @State private var showNOTAMView = false
 
   @Environment(LandingPerformanceViewModel.self)
   private var performance
 
   @Environment(WeatherViewModel.self)
   private var weather
+
+  @Environment(\.modelContext)
+  private var modelContext
 
   @Default(.landingAirport)
   private var airportID
@@ -39,6 +43,15 @@ struct LandingAirportView: View {
       return performance.airport?.timeZone ?? .current
     }
     return TimeZone(identifier: "UTC") ?? .current
+  }
+
+  private var runwayNOTAM: NOTAM {
+    guard let runway = performance.runway else { fatalError("Runway is nil") }
+    if let notam = runway.notam { return notam }
+    let notam = NOTAM(runway: runway)
+    runway.notam = notam
+    modelContext.insert(notam)
+    return notam
   }
 
   var body: some View {
@@ -100,9 +113,9 @@ struct LandingAirportView: View {
         }.accessibilityIdentifier("weatherSelector")
       }
 
-      if let notam = performance.notam {
+      if performance.runway != nil {
         NavigationLink(
-          destination: NOTAMView(notam: notam)
+          destination: NOTAMView(notam: runwayNOTAM)
         ) {
           Label {
             Text(NOTAMTitle).foregroundStyle(.primary)

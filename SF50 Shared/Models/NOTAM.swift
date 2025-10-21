@@ -50,6 +50,15 @@ public final class NOTAM {
     set { _obstacleDistance = newValue.converted(to: .meters).value }
   }
 
+  /// Returns true if the NOTAM has no restrictions set.
+  public var isEmpty: Bool {
+    return contamination == nil
+      && takeoffDistanceShortening.value == 0
+      && landingDistanceShortening.value == 0
+      && obstacleHeight.value == 0
+      && obstacleDistance.value == 0
+  }
+
   /// Creates a new NOTAM for a runway.
   public init(
     runway: Runway,
