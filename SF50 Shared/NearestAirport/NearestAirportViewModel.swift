@@ -1,4 +1,5 @@
 import CoreLocation
+import Sentry
 import SwiftData
 
 @Observable
@@ -51,6 +52,7 @@ public class NearestAirportViewModel {
 
       airports = sort(airports: unsortedAirports)
     } catch {
+      SentrySDK.capture(error: error)
       self.error = error
     }
   }

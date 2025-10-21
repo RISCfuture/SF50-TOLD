@@ -1,6 +1,7 @@
 import Defaults
 import Observation
 import SF50_Shared
+import Sentry
 import SwiftData
 import SwiftNASR
 
@@ -28,6 +29,7 @@ final class AirportLoaderViewModel: WithIdentifiableError {
     do {
       try recalculate()
     } catch {
+      SentrySDK.capture(error: error)
       self.error = error
     }
 
@@ -42,6 +44,7 @@ final class AirportLoaderViewModel: WithIdentifiableError {
           do {
             try recalculate()
           } catch {
+            SentrySDK.capture(error: error)
             self.error = error
           }
         }
@@ -58,6 +61,7 @@ final class AirportLoaderViewModel: WithIdentifiableError {
             try? await Task.sleep(for: .seconds(0.5))
           }
         } catch {
+          SentrySDK.capture(error: error)
           self.error = error
         }
       }
@@ -85,6 +89,7 @@ final class AirportLoaderViewModel: WithIdentifiableError {
             Defaults[.schemaVersion] = latestSchemaVersion
           }
         } catch {
+          SentrySDK.capture(error: error)
           self.error = error
         }
       }

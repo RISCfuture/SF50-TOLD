@@ -1,6 +1,7 @@
 import Defaults
 import Foundation
 import Observation
+import Sentry
 import SwiftData
 
 @Observable
@@ -101,6 +102,7 @@ public final class WeatherViewModel: WithIdentifiableError {
         do {
           airport = try findAirport(for: airportID, in: context)
         } catch {
+          SentrySDK.capture(error: error)
           self.error = error
         }
       }
@@ -151,6 +153,7 @@ public final class WeatherViewModel: WithIdentifiableError {
                   }
                 case .error(let error):
                   if !self.isManualMode {
+                    SentrySDK.capture(error: error)
                     self.isLoading = false
                     self.conditions = .init()
                     self.error = error

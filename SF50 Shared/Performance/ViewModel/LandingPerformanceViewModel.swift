@@ -1,6 +1,7 @@
 import Defaults
 import Foundation
 import Observation
+import Sentry
 import SwiftData
 
 @Observable
@@ -129,6 +130,7 @@ public final class LandingPerformanceViewModel: WithIdentifiableError {
             self.airport = airport
             self.runway = runway
           } catch {
+            SentrySDK.capture(error: error)
             self.error = error
           }
         }

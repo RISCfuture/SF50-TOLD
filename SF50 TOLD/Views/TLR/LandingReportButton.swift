@@ -1,5 +1,6 @@
 import Defaults
 import SF50_Shared
+import Sentry
 import SwiftData
 import SwiftUI
 
@@ -115,6 +116,7 @@ struct LandingReportButton: View {
           isGenerating = false
         }
       } catch {
+        SentrySDK.capture(error: error)
         await MainActor.run {
           self.error = error
           isGenerating = false

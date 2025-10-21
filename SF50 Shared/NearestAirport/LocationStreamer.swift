@@ -1,4 +1,5 @@
 import CoreLocation
+import Sentry
 import SwiftUI
 
 public enum LocationError: Error {
@@ -79,6 +80,7 @@ public final class CoreLocationStreamer: NSObject, LocationStreamer {
           }
         }
       } catch {
+        SentrySDK.capture(error: error)
         await MainActor.run {
           self.error = error
         }

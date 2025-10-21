@@ -1,4 +1,5 @@
 import SF50_Shared
+import Sentry
 import SwiftUI
 
 struct NOTAMView: View {
@@ -32,6 +33,7 @@ struct NOTAMView: View {
         do {
           try modelContext.save()
         } catch {
+          SentrySDK.capture(error: error)
           self.error = error
           errorSheetPresented = true
         }
