@@ -99,6 +99,20 @@ struct SF50_TOLDApp: App {
           $0.lifecycle = .trace
         }
 
+        // Filter out all errors from simulators to reduce CI noise
+        options.beforeSend = { event in
+          // Check if this event is from a simulator
+          if let contexts = event.context,
+            let device = contexts["device"],
+            let simulator = device["simulator"] as? Bool,
+            simulator == true
+          {
+            // Drop all simulator errors
+            return nil
+          }
+          return event
+        }
+
         // Uncomment the following lines to add more data to your events
         // options.attachScreenshot = true // This adds a screenshot to the error events
         // options.attachViewHierarchy = true // This adds the view hierarchy to the error events
