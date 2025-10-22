@@ -22,6 +22,10 @@ struct LandingResultsView: View {
           offscaleHigh: performance.offscaleHigh
         )
       }
+
+      if performance.notam?.contamination != nil {
+        ContaminationWarningView()
+      }
     }
   }
 }
