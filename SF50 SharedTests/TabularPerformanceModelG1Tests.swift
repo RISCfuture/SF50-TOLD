@@ -672,8 +672,9 @@ struct TabularPerformanceModelG1Tests {
       return
     }
 
-    // Tailwind should increase takeoff run
-    #expect(tailwindValue > noWindValue)
+    // Tailwind takeoff run should have specific values
+    #expect(noWindValue.isApproximatelyEqual(to: 2231.0, relativeTolerance: 0.01))
+    #expect(tailwindValue.isApproximatelyEqual(to: 3123.40, relativeTolerance: 0.01))
   }
 
   // MARK: - Slope Adjustment Tests
@@ -707,8 +708,9 @@ struct TabularPerformanceModelG1Tests {
       return
     }
 
-    // Uphill should increase takeoff run
-    #expect(uphillValue > flatValue)
+    // Uphill takeoff run should have specific values
+    #expect(flatValue.isApproximatelyEqual(to: 2231.0, relativeTolerance: 0.01))
+    #expect(uphillValue.isApproximatelyEqual(to: 2855.68, relativeTolerance: 0.01))
   }
 
   @Test
@@ -740,8 +742,9 @@ struct TabularPerformanceModelG1Tests {
       return
     }
 
-    // Downhill should decrease takeoff run
-    #expect(downhillValue < flatValue)
+    // Downhill takeoff run should have specific values
+    #expect(flatValue.isApproximatelyEqual(to: 2231.0, relativeTolerance: 0.01))
+    #expect(downhillValue.isApproximatelyEqual(to: 2141.76, relativeTolerance: 0.01))
   }
 
   // MARK: - Surface Adjustment Tests
@@ -775,7 +778,8 @@ struct TabularPerformanceModelG1Tests {
       return
     }
 
-    // Unpaved should increase takeoff distance
-    #expect(unpavedValue > pavedValue)
+    // Unpaved takeoff distance should have specific values
+    #expect(pavedValue.isApproximatelyEqual(to: 3519.0, relativeTolerance: 0.01))
+    #expect(unpavedValue.isApproximatelyEqual(to: 4257.99, relativeTolerance: 0.01))
   }
 }

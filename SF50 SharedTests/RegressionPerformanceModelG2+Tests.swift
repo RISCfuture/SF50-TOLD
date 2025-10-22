@@ -417,8 +417,9 @@ struct RegressionPerformanceModelG2PlusTests {
         return
     }
 
-    // Tailwind should increase takeoff distance
-    #expect(tailwindValue > noWindValue)
+    // Tailwind takeoff distance should have specific values
+    #expect(noWindValue.isApproximatelyEqual(to: 3006.06, relativeTolerance: 0.01))
+    #expect(tailwindValue.isApproximatelyEqual(to: 4178.43, relativeTolerance: 0.01))
   }
 
   @Test
@@ -527,9 +528,10 @@ struct RegressionPerformanceModelG2PlusTests {
         return
     }
 
-    // Uphill should increase takeoff run, downhill should decrease (or stay the same if no adjustment)
-    #expect(uphillValue > flatValue)
-    #expect(downhillValue <= flatValue)
+    // Slope adjustments should have specific values
+    #expect(flatValue.isApproximatelyEqual(to: 2022.08, relativeTolerance: 0.01))
+    #expect(uphillValue.isApproximatelyEqual(to: 2628.70, relativeTolerance: 0.01))
+    #expect(downhillValue.isApproximatelyEqual(to: 1819.87, relativeTolerance: 0.01))
   }
 
   // MARK: - Go-Around Climb Gradient Tests

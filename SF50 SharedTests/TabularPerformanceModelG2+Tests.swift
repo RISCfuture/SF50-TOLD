@@ -465,8 +465,9 @@ struct TabularPerformanceModelG2PlusTests {
       return
     }
 
-    // Tailwind should increase landing run
-    #expect(tailwindValue > noWindValue)
+    // Tailwind landing run should have specific values
+    #expect(noWindValue.isApproximatelyEqual(to: 2177.0, relativeTolerance: 0.01))
+    #expect(tailwindValue.isApproximatelyEqual(to: 3091.34, relativeTolerance: 0.01))
   }
 
   // MARK: - Slope Adjustment Tests
@@ -502,8 +503,9 @@ struct TabularPerformanceModelG2PlusTests {
       return
     }
 
-    // Downhill should increase landing run
-    #expect(downhillValue > flatValue)
+    // Downhill landing run should have specific values
+    #expect(flatValue.isApproximatelyEqual(to: 2177.0, relativeTolerance: 0.01))
+    #expect(downhillValue.isApproximatelyEqual(to: 2438.24, relativeTolerance: 0.01))
   }
 
   // MARK: - Surface Adjustment Tests
@@ -539,7 +541,8 @@ struct TabularPerformanceModelG2PlusTests {
       return
     }
 
-    // Unpaved should increase landing distance
-    #expect(unpavedValue > pavedValue)
+    // Unpaved landing distance should have specific values
+    #expect(pavedValue.isApproximatelyEqual(to: 3247.0, relativeTolerance: 0.01))
+    #expect(unpavedValue.isApproximatelyEqual(to: 3896.40, relativeTolerance: 0.01))
   }
 }

@@ -13,6 +13,7 @@ enum UITestingHelper {
     Defaults[.updatedThrustSchedule] = false  // G1 model
     Defaults[.schemaVersion] = latestSchemaVersion
     Defaults[.lastCycleLoaded] = Cycle.current  // Prevent database loader from appearing
+    Defaults[.favoriteAirports] = []  // Ensure no favorites at start
 
     // Seed test data for airports used in UI tests
     Task { @MainActor in
@@ -28,6 +29,7 @@ enum UITestingHelper {
     try? context.delete(model: Runway.self)
     try? context.delete(model: Airport.self)
     try? context.delete(model: NOTAM.self)
+    try? context.delete(model: Scenario.self)
 
     // Insert test airports
     try? insertAirport(.KOAK, context: context)
