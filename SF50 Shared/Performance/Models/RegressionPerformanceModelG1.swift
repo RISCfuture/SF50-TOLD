@@ -461,4 +461,21 @@ final class RegressionPerformanceModelG1: BaseRegressionPerformanceModel {
     let factor = 0.2
     return PerformanceAdjustments.landingDistanceUnpavedAdjustment(factor: factor)
   }
+
+  // MARK: - Initializer
+
+  init(
+    conditions: Conditions,
+    configuration: Configuration,
+    runway: RunwayInput,
+    notam: NOTAMSnapshot?
+  ) {
+    super.init(
+      conditions: conditions,
+      configuration: configuration,
+      runway: runway,
+      notam: notam,
+      modelType: .g1
+    )
+  }
 }

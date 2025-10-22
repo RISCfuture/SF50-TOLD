@@ -39,13 +39,31 @@ public final class TakeoffPerformanceViewModel: BasePerformanceViewModel {
   }
 
   public var offscaleLow: Bool {
-    return takeoffRun == .offscaleLow || takeoffDistance == .offscaleLow
+    // Check if any values are offscale low
+    let valuesOffscaleLow =
+      takeoffRun == .offscaleLow || takeoffDistance == .offscaleLow
       || takeoffClimbRate == .offscaleLow || takeoffClimbRate == .offscaleLow
+
+    // For regression models, also check if inputs are outside AFM bounds
+    if let regressionModel = model as? BaseRegressionPerformanceModel {
+      return valuesOffscaleLow || regressionModel.takeoffInputsOffscaleLow
+    }
+
+    return valuesOffscaleLow
   }
 
   public var offscaleHigh: Bool {
-    return takeoffRun == .offscaleHigh || takeoffDistance == .offscaleHigh
+    // Check if any values are offscale high
+    let valuesOffscaleHigh =
+      takeoffRun == .offscaleHigh || takeoffDistance == .offscaleHigh
       || takeoffClimbRate == .offscaleHigh || takeoffClimbRate == .offscaleHigh
+
+    // For regression models, also check if inputs are outside AFM bounds
+    if let regressionModel = model as? BaseRegressionPerformanceModel {
+      return valuesOffscaleHigh || regressionModel.takeoffInputsOffscaleHigh
+    }
+
+    return valuesOffscaleHigh
   }
 
   public var availableTakeoffRun: Measurement<UnitLength>? { runway?.notamedTakeoffRun }

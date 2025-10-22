@@ -36,11 +36,29 @@ public final class LandingPerformanceViewModel: BasePerformanceViewModel {
   }
 
   public var offscaleLow: Bool {
-    return Vref == .offscaleLow || landingRun == .offscaleLow || landingDistance == .offscaleLow
+    // Check if any values are offscale low
+    let valuesOffscaleLow =
+      Vref == .offscaleLow || landingRun == .offscaleLow || landingDistance == .offscaleLow
+
+    // For regression models, also check if inputs are outside AFM bounds
+    if let regressionModel = model as? BaseRegressionPerformanceModel {
+      return valuesOffscaleLow || regressionModel.landingInputsOffscaleLow
+    }
+
+    return valuesOffscaleLow
   }
 
   public var offscaleHigh: Bool {
-    return Vref == .offscaleHigh || landingRun == .offscaleHigh || landingDistance == .offscaleHigh
+    // Check if any values are offscale high
+    let valuesOffscaleHigh =
+      Vref == .offscaleHigh || landingRun == .offscaleHigh || landingDistance == .offscaleHigh
+
+    // For regression models, also check if inputs are outside AFM bounds
+    if let regressionModel = model as? BaseRegressionPerformanceModel {
+      return valuesOffscaleHigh || regressionModel.landingInputsOffscaleHigh
+    }
+
+    return valuesOffscaleHigh
   }
 
   public var availableLandingRun: Measurement<UnitLength>? { runway?.notamedLandingDistance }
