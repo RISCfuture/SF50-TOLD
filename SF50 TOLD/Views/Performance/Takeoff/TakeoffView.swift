@@ -25,6 +25,8 @@ struct TakeoffView: View {
     .environment(performance)
     .environment(weather)
     .environment(\.operation, .takeoff)
+    .withErrorSheet(state: performance)
+    .withErrorSheet(state: weather)
     .onAppear {
       if performance == nil {
         performance = .init(container: modelContext.container)
