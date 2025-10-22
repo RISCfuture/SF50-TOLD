@@ -100,7 +100,8 @@ public final class LandingPerformanceViewModel: BasePerformanceViewModel {
     }
 
     do {
-      let safetyFactor = Defaults[.safetyFactor]
+      let safetyFactor =
+        notam?.contamination != nil ? Defaults[.safetyFactorWet] : Defaults[.safetyFactorDry]
       let results = try calculationService.calculateLanding(
         for: model,
         safetyFactor: safetyFactor

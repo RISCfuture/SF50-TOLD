@@ -12,8 +12,11 @@ struct SettingsView: View {
   @Default(.fuelDensity)
   private var fuelDensity
 
-  @Default(.safetyFactor)
-  private var safetyFactor
+  @Default(.safetyFactorDry)
+  private var safetyFactorDry
+
+  @Default(.safetyFactorWet)
+  private var safetyFactorWet
 
   @Default(.useAirportLocalTime)
   private var useAirportLocalTime
@@ -29,15 +32,25 @@ struct SettingsView: View {
       Form {
         Section {
           ModelToggleView()
-          LabeledContent("Safety Factor") {
+          LabeledContent("Safety Factor (Dry)") {
             NumberField(
               "Factor",
-              value: $safetyFactor,
+              value: $safetyFactorDry,
               format: .number.rounded(increment: 0.1),
               minimum: 1.0
             )
             .multilineTextAlignment(.trailing)
-            .accessibilityIdentifier("safetyFactorField")
+            .accessibilityIdentifier("safetyFactorDryField")
+          }
+          LabeledContent("Safety Factor (Wet)") {
+            NumberField(
+              "Factor",
+              value: $safetyFactorWet,
+              format: .number.rounded(increment: 0.1),
+              minimum: 1.0
+            )
+            .multilineTextAlignment(.trailing)
+            .accessibilityIdentifier("safetyFactorWetField")
           }
         }
 

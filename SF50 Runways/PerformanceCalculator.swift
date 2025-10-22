@@ -127,12 +127,14 @@ class PerformanceCalculator {
 
     let configuration = Configuration(weight: takeoffWeight, flapSetting: .flaps50)
     let calculationService = DefaultPerformanceCalculationService.shared
-    let safetyFactor = Defaults[.safetyFactor]
     let useRegressionModel = Defaults[.useRegressionModel]
     let updatedThrustSchedule = Defaults[.updatedThrustSchedule]
 
     for runway in airport.runways {
       let runwaySnapshot = RunwayInput(from: runway, airport: airport)
+      let safetyFactor =
+        runwaySnapshot.notam?.contamination != nil
+        ? Defaults[.safetyFactorWet] : Defaults[.safetyFactorDry]
       let model = calculationService.createPerformanceModel(
         conditions: conditions,
         configuration: configuration,

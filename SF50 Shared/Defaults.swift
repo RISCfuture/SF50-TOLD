@@ -19,8 +19,13 @@ extension Defaults.Keys {
     default: .init(value: 6.71, unit: .poundsPerGallon),
     suite: groupDefaults
   )
-  public static let safetyFactor = Key<Double>(
-    "SF50/3/safetyFactor",
+  public static let safetyFactorDry = Key<Double>(
+    "SF50/3/safetyFactorDry",
+    default: 1.0,
+    suite: groupDefaults
+  )
+  public static let safetyFactorWet = Key<Double>(
+    "SF50/3/safetyFactorWet",
     default: 1.0,
     suite: groupDefaults
   )

@@ -1213,12 +1213,12 @@ final class SF50_TOLDUITests: XCTestCase {
     waitForNavigation()
 
     // Change safety factor to 1.1
-    let safetyFactorField = app.textFields["safetyFactorField"]
+    let safetyFactorDryField = app.textFields["safetyFactorDryField"]
     XCTAssertTrue(
-      safetyFactorField.waitForExistence(timeout: 2),
-      "Safety factor field should exist"
+      safetyFactorDryField.waitForExistence(timeout: 2),
+      "Safety factor dry field should exist"
     )
-    safetyFactorField.clearAndType("1.1", app: app)
+    safetyFactorDryField.clearAndType("1.1", app: app)
 
     // Dismiss keyboard if it's up
     app.tap()
@@ -1266,7 +1266,7 @@ final class SF50_TOLDUITests: XCTestCase {
     app.tapTab("Settings")
     waitForNavigation()
 
-    safetyFactorField.clearAndType("1.0", app: app)
+    safetyFactorDryField.clearAndType("1.0", app: app)
   }
 
   // MARK: - Landing Flap Configuration Tests
