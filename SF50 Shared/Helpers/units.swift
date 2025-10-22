@@ -1,52 +1,44 @@
+import Defaults
 import Foundation
 
-public let defaultWeightUnit = UnitMass.pounds
-public let defaultFuelVolumeUnit = UnitVolume.gallons
-public let defaultFuelDensityUnit = UnitDensity.poundsPerGallon
-public let defaultLengthUnit = UnitLength.feet
-public let defaultDistanceUnit = UnitLength.nauticalMiles
-public let defaultHeightUnit = UnitLength.feet
-public let defaultDepthUnit = UnitLength.inches
-public let defaultRateOfClimbUnit = UnitSpeed.feetPerMinute
-public let defaultSpeedUnit = UnitSpeed.knots
-public let defaultTemperatureUnit = UnitTemperature.celsius
-public let defaultAirPressureUnit = UnitPressure.inchesOfMercury
-public let defaultHeadingUnit = UnitAngle.degrees
-
+// Convenience extension methods for converting measurements to user-preferred units
 extension Measurement where UnitType == UnitMass {
-  public var asWeight: Self { converted(to: defaultWeightUnit) }
+  public var asWeight: Self { converted(to: Defaults[.weightUnit]) }
 }
 
 extension Measurement where UnitType == UnitVolume {
-  public var asFuel: Self { converted(to: defaultFuelVolumeUnit) }
+  public var asFuel: Self { converted(to: Defaults[.fuelVolumeUnit]) }
 }
 
 extension Measurement where UnitType == UnitDensity {
-  public var asFuelDensity: Self { converted(to: defaultFuelDensityUnit) }
+  public var asFuelDensity: Self { converted(to: Defaults[.fuelDensityUnit]) }
 }
 
 extension Measurement where UnitType == UnitLength {
-  public var asLength: Self { converted(to: defaultLengthUnit) }
-  public var asDistance: Self { converted(to: defaultDistanceUnit) }
-  public var asHeight: Self { converted(to: defaultHeightUnit) }
-  public var asDepth: Self { converted(to: defaultDepthUnit) }
+  public var asLength: Self { converted(to: Defaults[.runwayLengthUnit]) }
+  public var asDistance: Self { converted(to: Defaults[.distanceUnit]) }
+  public var asHeight: Self { converted(to: Defaults[.heightUnit]) }
+  // Depth always uses inches regardless of user preference
+  public var asDepth: Self { converted(to: .inches) }
 }
 
 extension Measurement where UnitType == UnitSpeed {
-  public var asRateOfClimb: Self { converted(to: defaultRateOfClimbUnit) }
-  public var asSpeed: Self { converted(to: defaultSpeedUnit) }
+  // Rate of climb always uses feet per minute regardless of user preference
+  public var asRateOfClimb: Self { converted(to: .feetPerMinute) }
+  public var asSpeed: Self { converted(to: Defaults[.speedUnit]) }
 }
 
 extension Measurement where UnitType == UnitTemperature {
-  public var asTemperature: Self { converted(to: defaultTemperatureUnit) }
+  public var asTemperature: Self { converted(to: Defaults[.temperatureUnit]) }
 }
 
 extension Measurement where UnitType == UnitPressure {
-  public var asAirPressure: Self { converted(to: defaultAirPressureUnit) }
+  public var asAirPressure: Self { converted(to: Defaults[.pressureUnit]) }
 }
 
 extension Measurement where UnitType == UnitAngle {
-  public var asHeading: Self { converted(to: defaultHeadingUnit) }
+  // Heading always uses degrees regardless of user preference
+  public var asHeading: Self { converted(to: .degrees) }
 }
 
 extension Measurement where UnitType == UnitSlope {

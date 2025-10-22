@@ -1,9 +1,13 @@
+import Defaults
 import SF50_Shared
 import SwiftUI
 
 struct VREFView: View {
   @Environment(LandingPerformanceViewModel.self)
   private var performance
+
+  @Default(.speedUnit)
+  private var speedUnit
 
   private var vrefText: AttributedString {
     let v = AttributedString("V")
@@ -19,8 +23,8 @@ struct VREFView: View {
       content: {
         InterpolationView(
           value: performance.Vref,
-          displayValue: { Text($0, format: .speed) },
-          displayUncertainty: { Text("±\($0, format: .speed)") }
+          displayValue: { Text($0.converted(to: speedUnit), format: .speed) },
+          displayUncertainty: { Text("±\($0.converted(to: speedUnit), format: .speed)") }
         )
       },
       label: {

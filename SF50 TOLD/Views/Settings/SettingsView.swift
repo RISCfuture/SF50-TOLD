@@ -18,6 +18,12 @@ struct SettingsView: View {
   @Default(.useAirportLocalTime)
   private var useAirportLocalTime
 
+  @Default(.weightUnit)
+  private var weightUnit
+
+  @Default(.fuelDensityUnit)
+  private var fuelDensityUnit
+
   var body: some View {
     NavigationView {
       Form {
@@ -49,9 +55,9 @@ struct SettingsView: View {
             MeasurementField(
               "Weight",
               value: $emptyWeight,
-              unit: .pounds,
+              unit: weightUnit,
               format: .weight,
-              minimum: .init(value: 0, unit: .pounds)
+              minimum: .init(value: 0, unit: weightUnit)
             )
             .accessibilityIdentifier("weightField")
           }
@@ -59,15 +65,17 @@ struct SettingsView: View {
             MeasurementField(
               "Density",
               value: $fuelDensity,
-              unit: .poundsPerGallon,
+              unit: fuelDensityUnit,
               format: .fuelDensity,
-              minimum: .init(value: 0, unit: .poundsPerGallon)
+              minimum: .init(value: 0, unit: fuelDensityUnit)
             )
             .accessibilityIdentifier("fuelDensityField")
           }
         }
 
         Section {
+          NavigationLink("Units…", destination: UnitsSettingsView())
+            .accessibilityIdentifier("unitsNavigationLink")
           Picker("Time Zone Display", selection: $useAirportLocalTime) {
             Text("UTC").tag(false)
             Text("Airport Local").tag(true)

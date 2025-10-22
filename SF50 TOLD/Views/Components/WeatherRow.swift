@@ -48,6 +48,12 @@ private struct LoadedWeatherRow: View {
   var minTemperature: Measurement<UnitTemperature>?
   var maxTemperature: Measurement<UnitTemperature>?
 
+  @Default(.temperatureUnit)
+  private var temperatureUnit
+
+  @Default(.heightUnit)
+  private var heightUnit
+
   var windColor: Color { conditions.source == .ISA ? .secondary : .primary }
   var tempColor: Color {
     if let maxTemperature,
@@ -79,14 +85,20 @@ private struct LoadedWeatherRow: View {
       .foregroundStyle(windColor)
 
       IconWithLabel {
-        Text(conditions.temperature(at: elevation).asTemperature, format: .temperature)
+        Text(
+          conditions.temperature(at: elevation).converted(to: temperatureUnit),
+          format: .temperature
+        )
       } icon: {
         Image(systemName: "thermometer").accessibilityLabel("Temperature")
       }
       .foregroundStyle(tempColor)
 
       IconWithLabel {
-        Text(conditions.densityAltitude(elevation: elevation).asHeight, format: .height)
+        Text(
+          conditions.densityAltitude(elevation: elevation).converted(to: heightUnit),
+          format: .height
+        )
       } icon: {
         Image(systemName: "mountain.2").accessibilityLabel("Density Altitude")
       }
@@ -112,6 +124,9 @@ private struct IconWithLabel<VI: View, VL: View>: View {
 private struct WindText: View {
   var conditions: Conditions
 
+  @Default(.speedUnit)
+  private var speedUnit
+
   var body: some View {
     if conditions.windsCalm {
       Text("calm", comment: "wind speed")
@@ -119,7 +134,7 @@ private struct WindText: View {
       let windSpeed = conditions.windSpeed
     {
       Text(
-        "\(windDirection.asHeading, format: .heading) @ \(windSpeed.asSpeed, format: .speed)",
+        "\(windDirection.asHeading, format: .heading) @ \(windSpeed.converted(to: speedUnit), format: .speed)",
         comment: "wind direction @ speed"
       )
     } else {

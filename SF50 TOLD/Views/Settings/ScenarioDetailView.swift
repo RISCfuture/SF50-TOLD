@@ -1,9 +1,19 @@
+import Defaults
 import SF50_Shared
 import SwiftData
 import SwiftUI
 
 struct ScenarioDetailView: View {
   @Bindable var scenario: Scenario
+
+  @Default(.temperatureUnit)
+  private var temperatureUnit
+
+  @Default(.speedUnit)
+  private var speedUnit
+
+  @Default(.weightUnit)
+  private var weightUnit
 
   var body: some View {
     Form {
@@ -17,7 +27,7 @@ struct ScenarioDetailView: View {
           MeasurementField(
             "Temperature",
             value: $scenario.deltaTemperature,
-            unit: .celsius,
+            unit: temperatureUnit,
             format: .temperature(plusSign: true)
           )
           .accessibilityIdentifier("oatDeltaField")
@@ -27,7 +37,7 @@ struct ScenarioDetailView: View {
           MeasurementField(
             "Speed",
             value: $scenario.deltaWindSpeed,
-            unit: .knots,
+            unit: speedUnit,
             format: .speed(plusSign: true)
           )
           .accessibilityIdentifier("windSpeedDeltaField")
@@ -37,7 +47,7 @@ struct ScenarioDetailView: View {
           MeasurementField(
             "Weight",
             value: $scenario.deltaWeight,
-            unit: .pounds,
+            unit: weightUnit,
             format: .weight(plusSign: true)
           )
           .accessibilityIdentifier("weightDeltaField")

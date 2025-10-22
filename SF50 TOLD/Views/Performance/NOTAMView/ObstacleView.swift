@@ -1,8 +1,15 @@
+import Defaults
 import SF50_Shared
 import SwiftUI
 
 struct ObstacleView: View {
   @Bindable var notam: NOTAM
+
+  @Default(.heightUnit)
+  private var heightUnit
+
+  @Default(.distanceUnit)
+  private var distanceUnit
 
   var body: some View {
     Section("Obstacle") {
@@ -10,7 +17,7 @@ struct ObstacleView: View {
         MeasurementField(
           "Height",
           value: $notam.obstacleHeight,
-          unit: .feet,
+          unit: heightUnit,
           format: .height
         )
         .accessibilityIdentifier("obstacleHeightField")
@@ -20,7 +27,7 @@ struct ObstacleView: View {
         MeasurementField(
           "Distance",
           value: $notam.obstacleDistance,
-          unit: .nauticalMiles,
+          unit: distanceUnit,
           format: .distance
         )
         .accessibilityIdentifier("obstacleDistanceField")

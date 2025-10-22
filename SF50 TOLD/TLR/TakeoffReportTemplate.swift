@@ -50,19 +50,20 @@ class TakeoffReportTemplate: BaseReportTemplate<
           Td(input.airport.locationID)
           Td(input.runway.name)
           Td(
-            (input.conditions.temperature ?? standardTemperature).asTemperature.formatted(
-              .temperature
-            )
+            (input.conditions.temperature ?? standardTemperature).converted(to: temperatureUnit)
+              .formatted(
+                .temperature
+              )
           )
           Td(
             format(windDirection: input.conditions.windDirection, speed: input.conditions.windSpeed)
           )
           Td(
-            (input.conditions.seaLevelPressure ?? standardSeaLevelPressure).asAirPressure.formatted(
-              .airPressure
-            )
+            (input.conditions.seaLevelPressure ?? standardSeaLevelPressure)
+              .converted(to: pressureUnit)
+              .formatted(.airPressure)
           )
-          Td(input.weight.asWeight.formatted(.weight))
+          Td(input.weight.converted(to: weightUnit).formatted(.weight))
         }
       }
     }
@@ -82,8 +83,8 @@ class TakeoffReportTemplate: BaseReportTemplate<
         for (runwayInput, info) in runways.sorted(by: { $0.key < $1.key }) {
           Tr {
             Th(runwayInput.name)
-            Td(runwayInput.length.asLength.formatted(.length))
-            Td(info.maxWeight.asWeight.formatted(.weight))
+            Td(runwayInput.length.converted(to: runwayLengthUnit).formatted(.length))
+            Td(info.maxWeight.converted(to: weightUnit).formatted(.weight))
             Td(info.limitingFactor.rawValue)
           }
         }

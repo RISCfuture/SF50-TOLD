@@ -1,3 +1,4 @@
+import Defaults
 import SF50_Shared
 import SwiftUI
 
@@ -46,12 +47,15 @@ private struct RunwayDistance: View {
   var distance: Measurement<UnitLength>
   var NOTAMed: Bool
 
+  @Default(.runwayLengthUnit)
+  private var runwayLengthUnit
+
   var body: some View {
     if NOTAMed {
-      Text(distance.asLength, format: .length)
+      Text(distance.converted(to: runwayLengthUnit), format: .length)
         .foregroundStyle(Color.ui.warning)
     } else {
-      Text(distance.asLength, format: .length)
+      Text(distance.converted(to: runwayLengthUnit), format: .length)
     }
   }
 }

@@ -1,3 +1,4 @@
+import Defaults
 import Foundation
 import SF50_Shared
 import SwiftUI
@@ -11,6 +12,15 @@ struct WeatherForm: View {
   @Environment(WeatherViewModel.self)
   private var weather
 
+  @Default(.speedUnit)
+  private var speedUnit
+
+  @Default(.temperatureUnit)
+  private var temperatureUnit
+
+  @Default(.pressureUnit)
+  private var pressureUnit
+
   var body: some View {
     Section("Customize Weather") {
       LabeledContent("Winds") {
@@ -18,7 +28,7 @@ struct WeatherForm: View {
           MeasurementField(
             "Direction",
             value: $windDirection,
-            unit: defaultHeadingUnit,
+            unit: .degrees,
             format: .heading
           )
           .accessibilityIdentifier("windDirectionField")
@@ -27,7 +37,7 @@ struct WeatherForm: View {
           MeasurementField(
             "Speed",
             value: $windSpeed,
-            unit: defaultSpeedUnit,
+            unit: speedUnit,
             format: .speed
           )
           .frame(maxWidth: 70)
@@ -40,7 +50,7 @@ struct WeatherForm: View {
         MeasurementField(
           "Temperature",
           value: $temperature,
-          unit: defaultTemperatureUnit,
+          unit: temperatureUnit,
           format: .temperature
         )
         .multilineTextAlignment(.trailing)
@@ -52,7 +62,7 @@ struct WeatherForm: View {
         MeasurementField(
           "Altimeter",
           value: $altimeter,
-          unit: defaultAirPressureUnit,
+          unit: pressureUnit,
           format: .airPressure
         )
         .accessibilityIdentifier("altimeterField")

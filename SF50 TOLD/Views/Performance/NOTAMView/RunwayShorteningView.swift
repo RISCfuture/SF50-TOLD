@@ -1,3 +1,4 @@
+import Defaults
 import SF50_Shared
 import SwiftUI
 
@@ -6,6 +7,9 @@ struct RunwayShorteningView: View {
 
   @Environment(\.operation)
   private var operation
+
+  @Default(.runwayLengthUnit)
+  private var runwayLengthUnit
 
   private var shortenPrompt: String {
     switch operation {
@@ -29,7 +33,7 @@ struct RunwayShorteningView: View {
         MeasurementField(
           "Distance",
           value: shortenBinding,
-          unit: .feet,
+          unit: runwayLengthUnit,
           format: .length
         )
         .accessibilityIdentifier("distanceField")

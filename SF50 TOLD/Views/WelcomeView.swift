@@ -17,6 +17,9 @@ struct WelcomeView: View {
   @State private var showForm = false
   @State private var formOpacity = 0.0
 
+  @Default(.weightUnit)
+  private var weightUnit
+
   var body: some View {
     VStack {
       VStack {
@@ -67,7 +70,7 @@ struct WelcomeView: View {
               MeasurementField(
                 "Weight",
                 value: $emptyWeight,
-                unit: defaultWeightUnit,
+                unit: weightUnit,
                 format: .weight
               )
               .accessibilityIdentifier("emptyWeightField")

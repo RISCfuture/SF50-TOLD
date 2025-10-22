@@ -18,6 +18,12 @@ struct LandingLoadoutView: View {
   @Default(.landingFuel)
   private var landingFuel
 
+  @Default(.weightUnit)
+  private var weightUnit
+
+  @Default(.fuelVolumeUnit)
+  private var fuelVolumeUnit
+
   private var limitations: Limitations.Type {
     updatedThrustSchedule ? LimitationsG2Plus.self : LimitationsG1.self
   }
@@ -25,20 +31,20 @@ struct LandingLoadoutView: View {
   var body: some View {
     Section("Loading") {
       LabeledContent("Payload") {
-        MeasurementField("Payload", value: $payload, unit: defaultWeightUnit, format: .weight)
+        MeasurementField("Payload", value: $payload, unit: weightUnit, format: .weight)
           .accessibilityIdentifier("payloadField")
       }
       LabeledContent("Landing Fuel") {
         MeasurementField(
           "Landing Fuel",
           value: $landingFuel,
-          unit: defaultFuelVolumeUnit,
+          unit: fuelVolumeUnit,
           format: .fuel
         )
         .accessibilityIdentifier("fuelField")
       }
       LabeledContent("Landing Weight") {
-        Text(performance.weight.asWeight, format: .weight)
+        Text(performance.weight.converted(to: weightUnit), format: .weight)
           .bold()
           .multilineTextAlignment(.trailing)
           .foregroundStyle(performance.weight > limitations.maxLandingWeight ? .red : .primary)

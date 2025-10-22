@@ -1,4 +1,5 @@
 import CoreData
+import Defaults
 import SF50_Shared
 import SwiftUI
 
@@ -7,6 +8,9 @@ struct WeatherPicker: View {
 
   @Environment(WeatherViewModel.self)
   private var weather
+
+  @Default(.heightUnit)
+  private var heightUnit
 
   private var densityAltitude: Measurement<UnitLength>? {
     elevation.map { weather.conditions.densityAltitude(elevation: $0) }
@@ -26,7 +30,7 @@ struct WeatherPicker: View {
         WeatherSource()
         WeatherForm()
         if let densityAltitude {
-          Text("Density altitude: \(densityAltitude, format: .height)")
+          Text("Density altitude: \(densityAltitude.converted(to: heightUnit), format: .height)")
             .foregroundStyle(.secondary)
             .font(.system(size: 14))
         }

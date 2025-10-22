@@ -15,6 +15,12 @@ class BaseReportTemplate<PerformanceType, ScenarioType> {
   let input: PerformanceInput
   let useAirportLocalTime: Bool
 
+  let weightUnit: UnitMass
+  let runwayLengthUnit: UnitLength
+  let speedUnit: UnitSpeed
+  let temperatureUnit: UnitTemperature
+  let pressureUnit: UnitPressure
+
   var reportDateFormat: Date.FormatStyle {
     let displayTimeZone = TimeZone.displayTimeZone(
       for: nil,  // We'll use the actual Airport object when available
@@ -40,6 +46,13 @@ class BaseReportTemplate<PerformanceType, ScenarioType> {
   init(input: PerformanceInput, useAirportLocalTime: Bool = false) {
     self.input = input
     self.useAirportLocalTime = useAirportLocalTime
+
+    // Read unit preferences once during initialization
+    self.weightUnit = Defaults[.weightUnit]
+    self.runwayLengthUnit = Defaults[.runwayLengthUnit]
+    self.speedUnit = Defaults[.speedUnit]
+    self.temperatureUnit = Defaults[.temperatureUnit]
+    self.pressureUnit = Defaults[.pressureUnit]
   }
 
   // MARK: - Instance Methods
@@ -154,7 +167,8 @@ class BaseReportTemplate<PerformanceType, ScenarioType> {
       .class("h1-subtitle")
     P(
       String(
-        localized: "\(aircraft.model) • BEW \(aircraft.emptyWeight.asWeight.formatted(.weight))"
+        localized:
+          "\(aircraft.model) • BEW \(aircraft.emptyWeight.converted(to: weightUnit).formatted(.weight))"
       )
     )
     .class("h1-subtitle")
@@ -241,11 +255,12 @@ class BaseReportTemplate<PerformanceType, ScenarioType> {
   {
     if let direction, let speed {
       return String(
-        localized: "\(direction.asHeading, format: .heading)/\(speed.asSpeed, format: .speed)"
+        localized:
+          "\(direction.asHeading, format: .heading)/\(speed.converted(to: speedUnit), format: .speed)"
       )
     }
     if let speed {
-      return String(localized: "VRB/\(speed.asSpeed, format: .speed)")
+      return String(localized: "VRB/\(speed.converted(to: speedUnit), format: .speed)")
     }
     return String(localized: "calm")
   }
@@ -253,9 +268,9 @@ class BaseReportTemplate<PerformanceType, ScenarioType> {
   func format(contamination: Contamination?) -> String {
     switch contamination {
       case .waterOrSlush(let depth):
-        String(localized: "Water/Slush \(depth.asDepth, format: .depth)")
+        String(localized: "Water/Slush \(depth.converted(to: .inches), format: .depth)")
       case .slushOrWetSnow(let depth):
-        String(localized: "Slush/Wet Snow \(depth.asDepth, format: .depth)")
+        String(localized: "Slush/Wet Snow \(depth.converted(to: .inches), format: .depth)")
       case .drySnow:
         String(localized: "Dry Snow")
       case .compactSnow:
@@ -271,12 +286,15 @@ class BaseReportTemplate<PerformanceType, ScenarioType> {
 
       return [
         Text(
-          perfDist.distance.formatted(
+          perfDist.distance.converted(to: runwayLengthUnit).formatted(
             .measurement(width: .narrow, usage: .asProvided, numberFormatStyle: .length)
           )
         ),
         Span(
-          String(localized: " (\(perfDist.margin, format: .length(plusSign: true)))")
+          String(
+            localized:
+              " (\(perfDist.margin.converted(to: runwayLengthUnit), format: .length(plusSign: true)))"
+          )
         ).class(marginClass)
       ]
     }
@@ -308,7 +326,7 @@ class BaseReportTemplate<PerformanceType, ScenarioType> {
   }
 
   func format(speed value: Value<Measurement<UnitSpeed>>?) -> [Tag] {
-    format(value: value) { [Text($0.asSpeed.formatted(.speed))] }
+    format(value: value) { [Text($0.converted(to: speedUnit).formatted(.speed))] }
   }
 
   func format(slope value: Value<Measurement<UnitSlope>>?) -> [Tag] {

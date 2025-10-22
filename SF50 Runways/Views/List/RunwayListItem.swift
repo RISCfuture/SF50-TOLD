@@ -1,3 +1,4 @@
+import Defaults
 import SF50_Shared
 import SwiftUI
 import WidgetKit
@@ -6,6 +7,9 @@ struct RunwayListItem: View {
   var runway: Runway
   var takeoffDistance: Value<Measurement<UnitLength>>?
   var conditions: Conditions?
+
+  @Default(.runwayLengthUnit)
+  private var runwayLengthUnit
 
   private let integerFormatter: NumberFormatter = {
     let formatter = NumberFormatter()
@@ -28,15 +32,15 @@ struct RunwayListItem: View {
       switch takeoffDistance {
         case .value(let measurement), .valueWithUncertainty(let measurement, _):
           if measurement > runway.takeoffDistanceOrLength {
-            Text(measurement.asLength, format: .length)
+            Text(measurement.converted(to: runwayLengthUnit), format: .length)
               .foregroundColor(.red)
           } else {
-            Text(measurement.asLength, format: .length)
+            Text(measurement.converted(to: runwayLengthUnit), format: .length)
               .foregroundColor(.green)
           }
           Text("/")
           Text(
-            runway.takeoffDistanceOrLength.asLength,
+            runway.takeoffDistanceOrLength.converted(to: runwayLengthUnit),
             format: .length
           )
         case .offscaleHigh:

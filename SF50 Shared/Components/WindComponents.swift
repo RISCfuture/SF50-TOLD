@@ -1,3 +1,4 @@
+import Defaults
 import SwiftUI
 
 public struct WindComponents: View {
@@ -5,6 +6,9 @@ public struct WindComponents: View {
   var conditions: Conditions
   var crosswindLimit: Measurement<UnitSpeed>?
   var tailwindLimit: Measurement<UnitSpeed>?
+
+  @Default(.speedUnit)
+  private var speedUnit
 
   var headwind: Measurement<UnitSpeed> { runway.headwind(conditions: conditions) }
   var crosswind: Measurement<UnitSpeed> { runway.crosswind(conditions: conditions) }
@@ -26,7 +30,7 @@ public struct WindComponents: View {
           Image(systemName: "arrowtriangle.down.fill")
             .foregroundStyle(.green)
             .accessibilityLabel("headwind")
-          Text(headwind.asSpeed.value.magnitude, format: .speed)
+          Text(headwind.converted(to: speedUnit).value.magnitude, format: .speed)
             .fixedSize(horizontal: true, vertical: false)
             .foregroundStyle(.primary)
             .accessibilityIdentifier("headwind")
@@ -36,7 +40,7 @@ public struct WindComponents: View {
           Image(systemName: "arrowtriangle.up.fill")
             .foregroundStyle(.red)
             .accessibilityLabel("tailwind")
-          Text(headwind.asSpeed.value.magnitude, format: .speed)
+          Text(headwind.converted(to: speedUnit).value.magnitude, format: .speed)
             .foregroundStyle(exceedsTailwindLimits ? .red : .primary)
             .fixedSize(horizontal: true, vertical: false)
             .accessibilityIdentifier("headwind")
@@ -47,7 +51,7 @@ public struct WindComponents: View {
           Image(systemName: "arrowtriangle.left.fill")
             .foregroundStyle(.gray)
             .accessibilityLabel("left crosswind")
-          Text(crosswind.asSpeed.value.magnitude, format: .speed)
+          Text(crosswind.converted(to: speedUnit).value.magnitude, format: .speed)
             .foregroundStyle(exceedsCrosswindLimits ? .red : .primary)
             .fixedSize(horizontal: true, vertical: false)
             .accessibilityIdentifier("crosswind")
@@ -57,7 +61,7 @@ public struct WindComponents: View {
           Image(systemName: "arrowtriangle.right.fill")
             .foregroundStyle(.gray)
             .accessibilityLabel("right crosswind")
-          Text(crosswind.asSpeed.value.magnitude, format: .speed)
+          Text(crosswind.converted(to: speedUnit).value.magnitude, format: .speed)
             .foregroundStyle(exceedsCrosswindLimits ? .red : .primary)
             .fixedSize(horizontal: true, vertical: false)
             .accessibilityIdentifier("crosswind")

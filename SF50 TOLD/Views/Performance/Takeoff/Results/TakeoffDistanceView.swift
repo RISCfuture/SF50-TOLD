@@ -6,14 +6,19 @@ struct TakeoffDistanceView: View {
   @Environment(TakeoffPerformanceViewModel.self)
   private var performance
 
+  @Default(.runwayLengthUnit)
+  private var runwayLengthUnit
+
   var body: some View {
     LabeledContent(
       content: {
         InterpolationView(
           value: performance.takeoffDistance,
           maximum: performance.availableTakeoffDistance,
-          displayValue: { Text($0, format: .length).fontWeight(.semibold) },
-          displayUncertainty: { Text("±\($0, format: .length)") }
+          displayValue: {
+            Text($0.converted(to: runwayLengthUnit), format: .length).fontWeight(.semibold)
+          },
+          displayUncertainty: { Text("±\($0.converted(to: runwayLengthUnit), format: .length)") }
         )
         .accessibilityIdentifier("takeoffDistanceValue")
       },
