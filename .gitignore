@@ -1,3 +1,6 @@
 # SwiftLint Remote Config Cache
 .swiftlint/RemoteConfigCache
 .sentryclirc
+
+# swift-format config (downloaded in CI)
+.swift-format
