@@ -33,6 +33,17 @@ final class TabularPerformanceModelG2Plus: BasePerformanceModel {
   private let contamination_slushData: DataTable
   private let contamination_waterData: DataTable
 
+  private let enrouteClimb_gradientNormalData: DataTable
+  private let enrouteClimb_rateNormalData: DataTable
+  private let enrouteClimb_speedNormalData: DataTable
+  private let enrouteClimb_gradientIceContaminatedData: DataTable
+  private let enrouteClimb_rateIceContaminatedData: DataTable
+  private let enrouteClimb_speedIceContaminatedData: DataTable
+
+  private let timeFuelDistanceToClimb_timeData: DataTable
+  private let timeFuelDistanceToClimb_fuelData: DataTable
+  private let timeFuelDistanceToClimb_distanceData: DataTable
+
   // MARK: - Outputs
 
   override var takeoffRunFt: Value<Double> {
@@ -58,6 +69,38 @@ final class TabularPerformanceModelG2Plus: BasePerformanceModel {
 
   override var takeoffClimbRateFtMin: Value<Double> {
     takeoffClimbRateData.value(for: [weight, altitude, temperature])
+  }
+
+  var enrouteClimbGradientFtNmi: Value<Double> {
+    let iceContaminated = configuration.iceProtection
+    let data =
+      iceContaminated ? enrouteClimb_gradientIceContaminatedData : enrouteClimb_gradientNormalData
+    return data.value(for: [altitude, temperature, weight])
+  }
+
+  var enrouteClimbRateFtMin: Value<Double> {
+    let iceContaminated = configuration.iceProtection
+    let data = iceContaminated ? enrouteClimb_rateIceContaminatedData : enrouteClimb_rateNormalData
+    return data.value(for: [altitude, temperature, weight])
+  }
+
+  var enrouteClimbSpeedKIAS: Value<Double> {
+    let iceContaminated = configuration.iceProtection
+    let data =
+      iceContaminated ? enrouteClimb_speedIceContaminatedData : enrouteClimb_speedNormalData
+    return data.value(for: [altitude, temperature, weight])
+  }
+
+  var timeToClimbMin: Value<Double> {
+    timeFuelDistanceToClimb_timeData.value(for: [altitude, temperature, weight])
+  }
+
+  var fuelToClimbUsGal: Value<Double> {
+    timeFuelDistanceToClimb_fuelData.value(for: [altitude, temperature, weight])
+  }
+
+  var distanceToClimbNm: Value<Double> {
+    timeFuelDistanceToClimb_distanceData.value(for: [altitude, temperature, weight])
   }
 
   override var VrefKts: Value<Double> {
@@ -323,6 +366,25 @@ final class TabularPerformanceModelG2Plus: BasePerformanceModel {
     contamination_drySnowData = try! loader.loadContaminationDrySnowData()
     contamination_slushData = try! loader.loadContaminationSlushData()
     contamination_waterData = try! loader.loadContaminationWaterData()
+
+    enrouteClimb_gradientNormalData = try! loader.loadEnrouteClimbGradientData(
+      iceContaminated: false
+    )
+    enrouteClimb_rateNormalData = try! loader.loadEnrouteClimbRateData(iceContaminated: false)
+    enrouteClimb_speedNormalData = try! loader.loadEnrouteClimbSpeedData(iceContaminated: false)
+    enrouteClimb_gradientIceContaminatedData = try! loader.loadEnrouteClimbGradientData(
+      iceContaminated: true
+    )
+    enrouteClimb_rateIceContaminatedData = try! loader.loadEnrouteClimbRateData(
+      iceContaminated: true
+    )
+    enrouteClimb_speedIceContaminatedData = try! loader.loadEnrouteClimbSpeedData(
+      iceContaminated: true
+    )
+
+    timeFuelDistanceToClimb_timeData = try! loader.loadTimeFuelDistanceTimeData()
+    timeFuelDistanceToClimb_fuelData = try! loader.loadTimeFuelDistanceFuelData()
+    timeFuelDistanceToClimb_distanceData = try! loader.loadTimeFuelDistanceDistanceData()
 
     super.init(conditions: conditions, configuration: configuration, runway: runway, notam: notam)
   }

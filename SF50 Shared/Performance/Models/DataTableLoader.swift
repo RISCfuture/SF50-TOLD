@@ -59,6 +59,37 @@ struct DataTableLoader {
     try loadDataTable(path: "landing/go around gradient.csv")
   }
 
+  // MARK: - Enroute Climb Data Tables
+
+  func loadEnrouteClimbGradientData(iceContaminated: Bool) throws -> DataTable {
+    let subdir = iceContaminated ? "ice contaminated" : "normal"
+    return try loadDataTable(path: "enroute climb/\(subdir)/gradient.csv", fromG1: true)
+  }
+
+  func loadEnrouteClimbRateData(iceContaminated: Bool) throws -> DataTable {
+    let subdir = iceContaminated ? "ice contaminated" : "normal"
+    return try loadDataTable(path: "enroute climb/\(subdir)/rate.csv", fromG1: true)
+  }
+
+  func loadEnrouteClimbSpeedData(iceContaminated: Bool) throws -> DataTable {
+    let subdir = iceContaminated ? "ice contaminated" : "normal"
+    return try loadDataTable(path: "enroute climb/\(subdir)/speed.csv", fromG1: true)
+  }
+
+  // MARK: - Time Fuel Distance to Climb Data Tables
+
+  func loadTimeFuelDistanceTimeData() throws -> DataTable {
+    try loadDataTable(path: "time fuel distance to climb/time.csv", fromG1: true)
+  }
+
+  func loadTimeFuelDistanceFuelData() throws -> DataTable {
+    try loadDataTable(path: "time fuel distance to climb/fuel.csv", fromG1: true)
+  }
+
+  func loadTimeFuelDistanceDistanceData() throws -> DataTable {
+    try loadDataTable(path: "time fuel distance to climb/distance.csv", fromG1: true)
+  }
+
   // MARK: - Adjustment Factor Data Tables
 
   func loadTakeoffRunHeadwindData() throws -> DataTable {

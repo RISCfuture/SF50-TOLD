@@ -22,11 +22,13 @@ enum Helper {
 
   static func createTestConfiguration(
     weight: Double = 6000,
-    flapSetting: FlapSetting = .flaps50
+    flapSetting: FlapSetting = .flaps50,
+    iceProtection: Bool = false
   ) -> Configuration {
     Configuration(
       weight: Measurement(value: weight, unit: UnitMass.pounds),
-      flapSetting: flapSetting
+      flapSetting: flapSetting,
+      iceProtection: iceProtection
     )
   }
 

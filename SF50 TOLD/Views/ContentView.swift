@@ -34,20 +34,25 @@ struct ContentView: View {
         }
         .tag(1)
 
+        ClimbView().tabItem {
+          Label("Climb", systemImage: "arrow.up.right")
+        }
+        .tag(2)
+
         LandingView().tabItem {
           Label("Landing", systemImage: "airplane.arrival")
         }
-        .tag(2)
+        .tag(3)
 
         SettingsView().tabItem {
           Label("Settings", systemImage: "gear")
         }
-        .tag(3)
+        .tag(4)
 
         AboutView().tabItem {
           Label("About", systemImage: "info.circle")
         }
-        .tag(4)
+        .tag(5)
       }
       .tapToDismissKeyboard()
       .accessibilityIdentifier("mainTabView")

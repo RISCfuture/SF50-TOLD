@@ -426,6 +426,417 @@ struct RegressionPerformanceModelG1Tests {
     }
   }
 
+  // MARK: - Enroute Climb Tests - Normal
+
+  @Test
+  func enrouteClimbGradient_normal_withinTolerance() {
+    // Test regression model against tabular values using uncertainty bounds
+    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
+      (6000, 0, -20, 726),
+      (6000, 0, 0, 726),
+      (6000, 0, 10, 691),
+      (5500, 0, -20, 819),
+      (5500, 0, 0, 814),
+      (5500, 0, 10, 781),
+      (5000, 0, 0, 919),
+      (5000, 0, 10, 883),
+      (4500, 0, 0, 1050),
+      (4500, 0, 10, 1005),
+      // Add altitude variation tests - gradient should DECREASE with altitude
+      (6000, 6000, -30, 660),  // From tabular: 6000ft, -30C, 6000lb = 660 ft/NM
+      (6000, 10000, -30, 557),  // From tabular: 10000ft, -30C, 6000lb = 557 ft/NM
+      (6000, 14000, -30, 469)  // From tabular: 14000ft, -30C, 6000lb = 469 ft/NM
+    ]
+
+    for testCase in testCases {
+      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
+      let config = Helper.createTestConfiguration(weight: testCase.weight, iceProtection: false)
+      let runway = Helper.createTestRunway(elevation: testCase.altitude)
+
+      let model = RegressionPerformanceModelG1(
+        conditions: conditions,
+        configuration: config,
+        runway: RunwayInput(from: runway, airport: runway.airport),
+        notam: nil
+      )
+
+      let result = model.enrouteClimbGradientFtNmi
+      guard case .valueWithUncertainty = result else {
+        Issue.record(
+          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+        )
+        continue
+      }
+
+      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
+    }
+  }
+
+  @Test
+  func enrouteClimbRate_normal_withinTolerance() {
+    // Test regression model against tabular values using uncertainty bounds
+    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
+      // Sea level tests
+      (6000, 0, -20, 2409),
+      (6000, 0, 0, 2311),
+      (6000, 0, 10, 2120),
+      (5500, 0, -20, 2701),
+      (5500, 0, 0, 2586),
+      (5500, 0, 10, 2382),
+      (5000, 0, 0, 2910),
+      (5000, 0, 10, 2686),
+      (4500, 0, 0, 3307),
+      (4500, 0, 10, 3051),
+      // Add altitude variation tests - rate should DECREASE with altitude
+      (6000, 6000, -30, 2430),  // From tabular: 6000ft, -30C, 6000lb = 2430 ft/min
+      (6000, 10000, -30, 2038),  // From tabular: 10000ft, -30C, 6000lb = 2038 ft/min
+      (6000, 14000, -30, 1707)  // From tabular: 14000ft, -30C, 6000lb = 1707 ft/min
+    ]
+
+    for testCase in testCases {
+      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
+      let config = Helper.createTestConfiguration(weight: testCase.weight, iceProtection: false)
+      let runway = Helper.createTestRunway(elevation: testCase.altitude)
+
+      let model = RegressionPerformanceModelG1(
+        conditions: conditions,
+        configuration: config,
+        runway: RunwayInput(from: runway, airport: runway.airport),
+        notam: nil
+      )
+
+      let result = model.enrouteClimbRateFtMin
+      guard case .valueWithUncertainty = result else {
+        Issue.record(
+          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+        )
+        continue
+      }
+
+      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
+    }
+  }
+
+  @Test
+  func enrouteClimbSpeed_normal_withinTolerance() {
+    // Test regression model against tabular values using uncertainty bounds
+    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
+      (6000, 0, -20, 187),
+      (6000, 0, 0, 186),
+      (6000, 0, 10, 183),
+      (5500, 0, -20, 186),
+      (5500, 0, 0, 186),
+      (5500, 0, 10, 182),
+      (5000, 0, 0, 185),
+      (5000, 0, 10, 181),
+      (4500, 0, 0, 184),
+      (4500, 0, 10, 181),
+      // Add altitude variation tests - speed should DECREASE with altitude (from tabular data)
+      (6000, 6000, 0, 181),  // From line 167: 6000ft, 0C, 6000lb = 181 KIAS
+      (6000, 10000, 0, 163),  // From line 255: 10000ft, 0C, 6000lb = 163 KIAS
+      (6000, 14000, 0, 148),  // From line 335: 14000ft, 0C, 6000lb = 148 KIAS
+      (5500, 6000, 0, 180),  // From line 168: 6000ft, 0C, 5500lb = 180 KIAS
+      (5500, 10000, 0, 162)  // From line 256: 10000ft, 0C, 5500lb = 162 KIAS
+    ]
+
+    for testCase in testCases {
+      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
+      let config = Helper.createTestConfiguration(weight: testCase.weight, iceProtection: false)
+      let runway = Helper.createTestRunway(elevation: testCase.altitude)
+
+      let model = RegressionPerformanceModelG1(
+        conditions: conditions,
+        configuration: config,
+        runway: RunwayInput(from: runway, airport: runway.airport),
+        notam: nil
+      )
+
+      let result = model.enrouteClimbSpeedKIAS
+      guard case .valueWithUncertainty = result else {
+        Issue.record(
+          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+        )
+        continue
+      }
+
+      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
+    }
+  }
+
+  // MARK: - Enroute Climb Tests - Ice Contaminated
+
+  @Test
+  func enrouteClimbGradient_iceContaminated_withinTolerance() {
+    // Test regression model against tabular values using uncertainty bounds
+    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
+      (6000, 0, -20, 714),
+      (6000, 0, 0, 711),
+      (6000, 0, 10, 656),
+      (5500, 0, -20, 814),
+      (5500, 0, 0, 811),
+      (5500, 0, 10, 759),
+      (5000, 0, 0, 931),
+      (5000, 0, 10, 872),
+      (4500, 0, 0, 1072),
+      (4500, 0, 10, 1003),
+      (6000, 6000, -30, 651),  // From line 111: 6000ft, -30C, 6000lb = 651 ft/NM
+      (6000, 10000, -30, 553),  // From line 175: 10000ft, -30C, 6000lb = 553 ft/NM
+      (6000, 14000, -30, 469),  // From line 239: 14000ft, -30C, 6000lb = 469 ft/NM
+      (5500, 6000, -30, 748),  // From line 112: 6000ft, -30C, 5500lb = 748 ft/NM
+      (5500, 10000, -30, 639),  // From line 176: 10000ft, -30C, 5500lb = 639 ft/NM
+      (5500, 14000, -30, 548)  // From line 240: 14000ft, -30C, 5500lb = 548 ft/NM
+    ]
+
+    for testCase in testCases {
+      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
+      let config = Helper.createTestConfiguration(weight: testCase.weight, iceProtection: true)
+      let runway = Helper.createTestRunway(elevation: testCase.altitude)
+
+      let model = RegressionPerformanceModelG1(
+        conditions: conditions,
+        configuration: config,
+        runway: RunwayInput(from: runway, airport: runway.airport),
+        notam: nil
+      )
+
+      let result = model.enrouteClimbGradientFtNmi
+      guard case .valueWithUncertainty = result else {
+        Issue.record(
+          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+        )
+        continue
+      }
+
+      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
+    }
+  }
+
+  @Test
+  func enrouteClimbRate_iceContaminated_withinTolerance() {
+    // Test regression model against tabular values using uncertainty bounds
+    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
+      (6000, 0, -20, 1802),
+      (6000, 0, 0, 1727),
+      (6000, 0, 10, 1560),
+      (5500, 0, -20, 2049),
+      (5500, 0, 0, 1964),
+      (5500, 0, 10, 1781),
+      (5000, 0, 0, 2240),
+      (5000, 0, 10, 2038),
+      (4500, 0, 0, 2569),
+      (4500, 0, 10, 2345),
+      (6000, 6000, -30, 1741),  // From line 111: 6000ft, -30C, 6000lb = 1741 ft/min
+      (6000, 10000, -30, 1406),  // From line 175: 10000ft, -30C, 6000lb = 1406 ft/min
+      (6000, 14000, -30, 1049),  // From line 239: 14000ft, -30C, 6000lb = 1049 ft/min
+      (5500, 6000, -30, 1988),  // From line 112: 6000ft, -30C, 5500lb = 1988 ft/min
+      (5500, 10000, -30, 1630),  // From line 176: 10000ft, -30C, 5500lb = 1630 ft/min
+      (5500, 14000, -30, 1258),  // From line 240: 14000ft, -30C, 5500lb = 1258 ft/min
+      (5000, 6000, -30, 2277),  // From line 113: 6000ft, -30C, 5000lb = 2277 ft/min
+      (5000, 10000, -30, 1890),  // From line 177: 10000ft, -30C, 5000lb = 1890 ft/min
+      (5000, 14000, -30, 1488)  // From line 241: 14000ft, -30C, 5000lb = 1488 ft/min
+    ]
+
+    for testCase in testCases {
+      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
+      let config = Helper.createTestConfiguration(weight: testCase.weight, iceProtection: true)
+      let runway = Helper.createTestRunway(elevation: testCase.altitude)
+
+      let model = RegressionPerformanceModelG1(
+        conditions: conditions,
+        configuration: config,
+        runway: RunwayInput(from: runway, airport: runway.airport),
+        notam: nil
+      )
+
+      let result = model.enrouteClimbRateFtMin
+      guard case .valueWithUncertainty = result else {
+        Issue.record(
+          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+        )
+        continue
+      }
+
+      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
+    }
+  }
+
+  @Test
+  func enrouteClimbSpeed_iceContaminated_withinTolerance() {
+    // Test regression model against tabular values using uncertainty bounds
+    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
+      (6000, 0, -20, 140),
+      (6000, 0, 0, 140),
+      (6000, 0, 10, 139),
+      (5500, 0, -20, 139),
+      (5500, 0, 0, 139),
+      (5500, 0, 10, 137),
+      (5000, 0, 0, 138),
+      (5000, 0, 10, 137),
+      (4500, 0, 0, 138),
+      (4500, 0, 10, 137),
+      (6000, 6000, -30, 140),  // From speed.csv: 6000ft, -30C, 6000lb = 140 KIAS
+      (6000, 10000, -30, 137),  // From speed.csv: 10000ft, -30C, 6000lb = 137 KIAS
+      (6000, 14000, -30, 138),  // From speed.csv: 14000ft, -30C, 6000lb = 138 KIAS
+      (5500, 6000, -30, 139),  // From speed.csv: 6000ft, -30C, 5500lb = 139 KIAS
+      (5500, 10000, -30, 137),  // From speed.csv: 10000ft, -30C, 5500lb = 137 KIAS
+      (5500, 14000, -30, 132)  // From speed.csv: 14000ft, -30C, 5500lb = 132 KIAS
+    ]
+
+    for testCase in testCases {
+      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
+      let config = Helper.createTestConfiguration(weight: testCase.weight, iceProtection: true)
+      let runway = Helper.createTestRunway(elevation: testCase.altitude)
+
+      let model = RegressionPerformanceModelG1(
+        conditions: conditions,
+        configuration: config,
+        runway: RunwayInput(from: runway, airport: runway.airport),
+        notam: nil
+      )
+
+      let result = model.enrouteClimbSpeedKIAS
+      guard case .valueWithUncertainty = result else {
+        Issue.record(
+          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+        )
+        continue
+      }
+
+      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
+    }
+  }
+
+  // MARK: - Time/Fuel/Distance to Climb Tests
+
+  @Test
+  func timeToClimb_withinTolerance() {
+    // Test regression model against tabular values using uncertainty bounds
+    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
+      (6000, 0, 5, 0),
+      (6000, 2000, 1, 1),
+      (6000, 4000, -3, 2),
+      (6000, 6000, -7, 3),
+      (6000, 8000, -11, 3),
+      (6000, 10000, -15, 4),
+      (6000, 12000, -19, 6),
+      (6000, 14000, -23, 7),
+      (6000, 16000, -27, 8),
+      (6000, 20000, -35, 11),
+      (5500, 10000, -15, 4),
+      (5000, 10000, -15, 4),
+      (4500, 10000, -15, 3)
+    ]
+
+    for testCase in testCases {
+      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
+      let config = Helper.createTestConfiguration(weight: testCase.weight)
+      let runway = Helper.createTestRunway(elevation: testCase.altitude)
+
+      let model = RegressionPerformanceModelG1(
+        conditions: conditions,
+        configuration: config,
+        runway: RunwayInput(from: runway, airport: runway.airport),
+        notam: nil
+      )
+
+      let result = model.timeToClimbMin
+      guard case .valueWithUncertainty = result else {
+        Issue.record(
+          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+        )
+        continue
+      }
+
+      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
+    }
+  }
+
+  @Test
+  func fuelToClimb_withinTolerance() {
+    // Test regression model against tabular values using uncertainty bounds
+    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
+      (6000, 0, 5, 0),
+      (6000, 2000, 1, 2),
+      (6000, 4000, -3, 4),
+      (6000, 6000, -7, 6),
+      (6000, 8000, -11, 8),
+      (6000, 10000, -15, 9),
+      (6000, 12000, -19, 11),
+      (6000, 14000, -23, 13),
+      (6000, 16000, -27, 15),
+      (6000, 20000, -35, 19),
+      (5500, 10000, -15, 8),
+      (5000, 10000, -15, 7),
+      (4500, 10000, -15, 7)
+    ]
+
+    for testCase in testCases {
+      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
+      let config = Helper.createTestConfiguration(weight: testCase.weight)
+      let runway = Helper.createTestRunway(elevation: testCase.altitude)
+
+      let model = RegressionPerformanceModelG1(
+        conditions: conditions,
+        configuration: config,
+        runway: RunwayInput(from: runway, airport: runway.airport),
+        notam: nil
+      )
+
+      let result = model.fuelToClimbUsGal
+      guard case .valueWithUncertainty = result else {
+        Issue.record(
+          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+        )
+        continue
+      }
+
+      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
+    }
+  }
+
+  @Test
+  func distanceToClimb_withinTolerance() {
+    // Test regression model against tabular values using uncertainty bounds
+    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
+      (6000, 0, 5, 0),
+      (6000, 2000, 1, 2),
+      (6000, 4000, -3, 5),
+      (6000, 6000, -7, 7),
+      (6000, 8000, -11, 10),
+      (6000, 10000, -15, 13),
+      (6000, 12000, -19, 16),
+      (6000, 14000, -23, 19),
+      (6000, 16000, -27, 23),
+      (6000, 20000, -35, 32),
+      (5500, 10000, -15, 11),
+      (5000, 10000, -15, 10),
+      (4500, 10000, -15, 9)
+    ]
+
+    for testCase in testCases {
+      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
+      let config = Helper.createTestConfiguration(weight: testCase.weight)
+      let runway = Helper.createTestRunway(elevation: testCase.altitude)
+
+      let model = RegressionPerformanceModelG1(
+        conditions: conditions,
+        configuration: config,
+        runway: RunwayInput(from: runway, airport: runway.airport),
+        notam: nil
+      )
+
+      let result = model.distanceToClimbNm
+      guard case .valueWithUncertainty = result else {
+        Issue.record(
+          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+        )
+        continue
+      }
+
+      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
+    }
+  }
+
   // MARK: - Wind Adjustment Tests
 
   @Test

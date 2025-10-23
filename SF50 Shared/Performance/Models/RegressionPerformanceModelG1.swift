@@ -1,8 +1,8 @@
 import Foundation
 
-final class RegressionPerformanceModelG1: BaseRegressionPerformanceModel {
+final class RegressionPerformanceModelG1: BaseSF50RegressionPerformanceModel {
 
-  // MARK: - Outputs
+  // MARK: - Takeoff
 
   override var takeoffRunFt: Value<Double> {
     var run = takeoffRunBaseFt
@@ -53,22 +53,98 @@ final class RegressionPerformanceModelG1: BaseRegressionPerformanceModel {
     return .valueWithUncertainty(value, uncertainty: uncertainty(for: "g1/takeoff climb/rate"))
   }
 
-  override var VrefKts: Value<Double> {
+  private var takeoffRunBaseFt: Value<Double> {
     let value =
-      switch configuration.flapSetting {
-        case .flapsUp:
-          1.000000e-02 * weight + 4.900000e+01
-        case .flapsUpIce:
-          1.250000e-02 * weight + 6.500000e+01
-        case .flaps50:
-          9.000000e-03 * weight + 4.600000e+01
-        case .flaps50Ice:
-          1.100000e-02 * weight + 5.400000e+01
-        case .flaps100:
-          9.000000e-03 * weight + 3.500000e+01
-      }
-    return .value(value)
+      1.103418e-01 * weight
+      - 1.486829e-01 * altitude
+      - 1.410806e-01 * temperature
+      + 2.924272e-05 * pow(weight, 2)
+      + 2.173964e-05 * weight * altitude
+      - 1.841685e-04 * weight * temperature
+      + 2.150097e-05 * pow(altitude, 2)
+      + 6.299339e-03 * altitude * temperature
+      + 9.185721e-01 * pow(temperature, 2)
+      + 2.096770e+02
+
+    return .valueWithUncertainty(value, uncertainty: uncertainty(for: "g1/takeoff/ground run"))
   }
+
+  private var takeoffDistanceBaseFt: Value<Double> {
+    let value =
+      -9.981555e-09 * weight
+      + 4.097431e-06 * altitude
+      - 1.927710e-06 * temperature
+      + 6.375723e-05 * pow(weight, 2)
+      + 5.704139e-05 * weight * altitude
+      - 4.862208e-03 * weight * temperature
+      - 6.427629e-05 * pow(altitude, 2)
+      - 1.045557e-02 * altitude * temperature
+      - 6.477677e-04 * pow(temperature, 2)
+      - 1.712046e-10 * pow(weight, 3)
+      - 3.763884e-09 * pow(weight, 2) * altitude
+      + 1.331791e-06 * pow(weight, 2) * temperature
+      + 6.451272e-09 * weight * pow(altitude, 2)
+      + 2.005913e-06 * weight * altitude * temperature
+      + 1.411999e-04 * weight * pow(temperature, 2)
+      + 3.801160e-09 * pow(altitude, 3)
+      + 7.857283e-07 * pow(altitude, 2) * temperature
+      + 1.203680e-04 * altitude * pow(temperature, 2)
+      + 8.687972e-03 * pow(temperature, 3)
+      + 5.995362e+02
+
+    return .valueWithUncertainty(value, uncertainty: uncertainty(for: "g1/takeoff/total distance"))
+  }
+
+  private var takeoffRun_headwindAdjustment: Double {
+    let factor = 0.07
+    return PerformanceAdjustments.takeoffRunHeadwindAdjustment(factor: factor, headwind: headwind)
+  }
+
+  private var takeoffDistance_headwindAdjustment: Double {
+    let factor = 0.06
+    return PerformanceAdjustments.takeoffDistanceHeadwindAdjustment(
+      factor: factor,
+      headwind: headwind
+    )
+  }
+
+  private var takeoffRun_tailwindAdjustment: Double {
+    let factor = 0.4
+    return PerformanceAdjustments.takeoffRunTailwindAdjustment(factor: factor, tailwind: tailwind)
+  }
+
+  private var takeoffDistance_tailwindAdjustment: Double {
+    let factor =
+      switch weight {
+        case ...5500: 0.36
+        default: max(0.470000 + -2.000000e-05 * weight, 0.1)  // Ensure factor stays positive, min 0.1
+      }
+    return PerformanceAdjustments.takeoffDistanceTailwindAdjustment(
+      factor: factor,
+      tailwind: tailwind
+    )
+  }
+
+  private var takeoffRun_uphillAdjustment: Double {
+    let factor = 0.02 + 2.000000e-05 * weight
+    return PerformanceAdjustments.takeoffRunUphillAdjustment(factor: factor, uphill: uphill)
+  }
+
+  private var takeoffRun_downhillAdjustment: Double {
+    let factor =
+      switch weight {
+        case ...5500: 0.01
+        default: max(min(-0.1 + 2.000000e-05 * weight, 0.1), -0.1)  // Clamp between -0.1 and 0.1
+      }
+    return PerformanceAdjustments.takeoffRunDownhillAdjustment(factor: factor, downhill: downhill)
+  }
+
+  private var takeoffDistance_unpavedAdjustment: Double {
+    let factor = 0.21
+    return PerformanceAdjustments.takeoffDistanceUnpavedAdjustment(factor: factor)
+  }
+
+  // MARK: Landing
 
   override var landingRunFt: Value<Double> {
     var run = landingRun_contaminationAddition(distance: landingRunBaseFt)
@@ -76,54 +152,7 @@ final class RegressionPerformanceModelG1: BaseRegressionPerformanceModel {
     run *= landingRun_tailwindAdjustment
     run *= landingRun_uphillAdjustment
     run *= landingRun_downhillAdjustment
-
     return run
-  }
-
-  override var landingDistanceFt: Value<Double> {
-    // Calculate the increase in landing run due to contamination
-    let baseLandingRun = landingRunBaseFt
-    let contaminatedLandingRun = landingRun_contaminationAddition(distance: baseLandingRun)
-
-    // Compute the run increase by extracting values
-    let runIncrease: Value<Double> =
-      switch (baseLandingRun, contaminatedLandingRun) {
-        case (.value(let base), .value(let contaminated)):
-          .value(contaminated - base)
-        case (.valueWithUncertainty(let base, _), .value(let contaminated)):
-          .value(contaminated - base)
-        case (.value(let base), .valueWithUncertainty(let contaminated, let unc)):
-          .valueWithUncertainty(contaminated - base, uncertainty: unc)
-        case (.valueWithUncertainty(let base, _), .valueWithUncertainty(let contaminated, let unc)):
-          .valueWithUncertainty(contaminated - base, uncertainty: unc)
-        default:
-          .value(0)  // No contamination or error state
-      }
-
-    // Start with base landing distance and add the contamination-induced run increase
-    var distance = landingDistanceBaseFt.map { distValue, distUnc in
-      switch runIncrease {
-        case .value(let inc):
-          return (distValue + inc, distUnc)
-        case .valueWithUncertainty(let inc, let incUnc):
-          let newDist = distValue + inc
-          let newUnc =
-            if let distUnc {
-              sqrt(pow(distUnc, 2) + pow(incUnc, 2))
-            } else {
-              incUnc
-            }
-          return (newDist, newUnc)
-        default:
-          return (distValue, distUnc)
-      }
-    }
-
-    distance *= landingDistance_headwindAdjustment
-    distance *= landingDistance_tailwindAdjustment
-    if runway.isTurf { distance *= landingDistance_unpavedAdjustment }
-
-    return distance
   }
 
   override var meetsGoAroundClimbGradient: Value<Bool> {
@@ -171,51 +200,7 @@ final class RegressionPerformanceModelG1: BaseRegressionPerformanceModel {
     return .value(probability > 0.5)
   }
 
-  // MARK: - Base Values
-
-  private var takeoffRunBaseFt: Value<Double> {
-    let value =
-      1.103418e-01 * weight
-      - 1.486829e-01 * altitude
-      - 1.410806e-01 * temperature
-      + 2.924272e-05 * pow(weight, 2)
-      + 2.173964e-05 * weight * altitude
-      - 1.841685e-04 * weight * temperature
-      + 2.150097e-05 * pow(altitude, 2)
-      + 6.299339e-03 * altitude * temperature
-      + 9.185721e-01 * pow(temperature, 2)
-      + 2.096770e+02
-
-    return .valueWithUncertainty(value, uncertainty: uncertainty(for: "g1/takeoff/ground run"))
-  }
-
-  private var takeoffDistanceBaseFt: Value<Double> {
-    let value =
-      -9.981555e-09 * weight
-      + 4.097431e-06 * altitude
-      - 1.927710e-06 * temperature
-      + 6.375723e-05 * pow(weight, 2)
-      + 5.704139e-05 * weight * altitude
-      - 4.862208e-03 * weight * temperature
-      - 6.427629e-05 * pow(altitude, 2)
-      - 1.045557e-02 * altitude * temperature
-      - 6.477677e-04 * pow(temperature, 2)
-      - 1.712046e-10 * pow(weight, 3)
-      - 3.763884e-09 * pow(weight, 2) * altitude
-      + 1.331791e-06 * pow(weight, 2) * temperature
-      + 6.451272e-09 * weight * pow(altitude, 2)
-      + 2.005913e-06 * weight * altitude * temperature
-      + 1.411999e-04 * weight * pow(temperature, 2)
-      + 3.801160e-09 * pow(altitude, 3)
-      + 7.857283e-07 * pow(altitude, 2) * temperature
-      + 1.203680e-04 * altitude * pow(temperature, 2)
-      + 8.687972e-03 * pow(temperature, 3)
-      + 5.995362e+02
-
-    return .valueWithUncertainty(value, uncertainty: uncertainty(for: "g1/takeoff/total distance"))
-  }
-
-  private var landingRunBaseFt: Value<Double> {
+  override var landingRunBaseFt: Value<Double> {
     switch configuration.flapSetting {
       case .flaps100: landingRunBaseFt_flaps100
       case .flaps50, .flapsUp: landingRunBaseFt_flaps50
@@ -276,7 +261,7 @@ final class RegressionPerformanceModelG1: BaseRegressionPerformanceModel {
     )
   }
 
-  private var landingDistanceBaseFt: Value<Double> {
+  override var landingDistanceBaseFt: Value<Double> {
     switch configuration.flapSetting {
       case .flaps100: landingDistanceBaseFt_flaps100
       case .flaps50: landingDistanceBaseFt_flaps50
@@ -343,91 +328,7 @@ final class RegressionPerformanceModelG1: BaseRegressionPerformanceModel {
     )
   }
 
-  // MARK: - Adjustments
-
-  private var takeoffRun_headwindAdjustment: Double {
-    let factor = 0.07
-    return PerformanceAdjustments.takeoffRunHeadwindAdjustment(factor: factor, headwind: headwind)
-  }
-
-  private var takeoffDistance_headwindAdjustment: Double {
-    let factor = 0.06
-    return PerformanceAdjustments.takeoffDistanceHeadwindAdjustment(
-      factor: factor,
-      headwind: headwind
-    )
-  }
-
-  private var takeoffRun_tailwindAdjustment: Double {
-    let factor = 0.4
-    return PerformanceAdjustments.takeoffRunTailwindAdjustment(factor: factor, tailwind: tailwind)
-  }
-
-  private var takeoffDistance_tailwindAdjustment: Double {
-    let factor =
-      switch weight {
-        case ...5500: 0.36
-        default: max(0.470000 + -2.000000e-05 * weight, 0.1)  // Ensure factor stays positive, min 0.1
-      }
-    return PerformanceAdjustments.takeoffDistanceTailwindAdjustment(
-      factor: factor,
-      tailwind: tailwind
-    )
-  }
-
-  private var takeoffRun_uphillAdjustment: Double {
-    let factor = 0.02 + 2.000000e-05 * weight
-    return PerformanceAdjustments.takeoffRunUphillAdjustment(factor: factor, uphill: uphill)
-  }
-
-  private var takeoffRun_downhillAdjustment: Double {
-    let factor =
-      switch weight {
-        case ...5500: 0.01
-        default: max(min(-0.1 + 2.000000e-05 * weight, 0.1), -0.1)  // Clamp between -0.1 and 0.1
-      }
-    return PerformanceAdjustments.takeoffRunDownhillAdjustment(factor: factor, downhill: downhill)
-  }
-
-  private var takeoffDistance_unpavedAdjustment: Double {
-    let factor = 0.21
-    return PerformanceAdjustments.takeoffDistanceUnpavedAdjustment(factor: factor)
-  }
-
-  private var landingRun_headwindAdjustment: Double {
-    let factor =
-      switch configuration.flapSetting {
-        case .flaps100: 0.08
-        default: 0.07
-      }
-    return PerformanceAdjustments.landingRunHeadwindAdjustment(factor: factor, headwind: headwind)
-  }
-
-  private var landingDistance_headwindAdjustment: Double {
-    let factor =
-      switch configuration.flapSetting {
-        case .flaps50, .flapsUp:
-          max(0.112857 + -9.523810e-06 * weight, 0.01)  // Ensure positive, min 0.01
-        case .flaps50Ice, .flapsUpIce: 0.06
-        case .flaps100: 0.07
-      }
-    return PerformanceAdjustments.landingDistanceHeadwindAdjustment(
-      factor: factor,
-      headwind: headwind
-    )
-  }
-
-  private var landingRun_tailwindAdjustment: Double {
-    let factor =
-      switch configuration.flapSetting {
-        case .flaps100: 0.49
-        case .flaps50Ice, .flapsUpIce: 0.37
-        case .flaps50, .flapsUp: 0.42
-      }
-    return PerformanceAdjustments.landingRunTailwindAdjustment(factor: factor, tailwind: tailwind)
-  }
-
-  private var landingDistance_tailwindAdjustment: Double {
+  override var landingDistance_tailwindAdjustment: Double {
     let factor =
       switch configuration.flapSetting {
         case .flaps50, .flapsUp:
@@ -441,25 +342,6 @@ final class RegressionPerformanceModelG1: BaseRegressionPerformanceModel {
       factor: factor,
       tailwind: tailwind
     )
-  }
-
-  private var landingRun_uphillAdjustment: Double {
-    let factor =
-      switch configuration.flapSetting {
-        case .flaps50Ice, .flapsUpIce: 0.06
-        default: 0.05
-      }
-    return PerformanceAdjustments.landingRunUphillAdjustment(factor: factor, uphill: uphill)
-  }
-
-  private var landingRun_downhillAdjustment: Double {
-    let factor = 0.06
-    return PerformanceAdjustments.landingRunDownhillAdjustment(factor: factor, downhill: downhill)
-  }
-
-  private var landingDistance_unpavedAdjustment: Double {
-    let factor = 0.2
-    return PerformanceAdjustments.landingDistanceUnpavedAdjustment(factor: factor)
   }
 
   // MARK: - Initializer

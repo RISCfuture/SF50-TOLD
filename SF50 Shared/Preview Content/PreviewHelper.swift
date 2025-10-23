@@ -99,6 +99,14 @@ public final class PreviewHelper: Sendable {
   }
 
   @MainActor
+  public func useMetricUnits() {
+    Defaults[.fuelVolumeUnit] = .liters
+    Defaults[.heightUnit] = .meters
+    Defaults[.speedUnit] = .kilometersPerHour
+    Defaults[.temperatureUnit] = .celsius
+  }
+
+  @MainActor
   public func insert(airport: AirportBuilder) throws {
     mainContext.insert(airport.airport)
     for runway in airport.runways {

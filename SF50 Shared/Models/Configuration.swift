@@ -25,13 +25,19 @@ public struct Configuration {
   /// Flap deflection setting
   public let flapSetting: FlapSetting
 
+  /// Ice protection system (IPS) enabled for takeoff/enroute climb
+  public let iceProtection: Bool
+
   /// Creates a new aircraft configuration.
   /// - Parameters:
   ///   - weight: Aircraft gross weight
   ///   - flapSetting: Flap deflection setting
-  public init(weight: Measurement<UnitMass>, flapSetting: FlapSetting) {
+  ///   - iceProtection: Ice protection system enabled (default: false)
+  public init(weight: Measurement<UnitMass>, flapSetting: FlapSetting, iceProtection: Bool = false)
+  {
     self.weight = weight
     self.flapSetting = flapSetting
+    self.iceProtection = iceProtection
   }
 
   func clampWeight(min: Measurement<UnitMass>? = nil, max: Measurement<UnitMass>? = nil) -> Self {
@@ -39,7 +45,7 @@ public struct Configuration {
     if let min, min > weight { weight = min }
     if let max, max < weight { weight = max }
 
-    return .init(weight: weight, flapSetting: flapSetting)
+    return .init(weight: weight, flapSetting: flapSetting, iceProtection: iceProtection)
   }
 }
 

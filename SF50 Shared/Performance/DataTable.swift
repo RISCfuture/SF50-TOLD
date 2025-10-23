@@ -238,28 +238,39 @@ class DataTable {
 
   private func interpolate3D(inputs: [Double]) -> Value<Double> {
     // Find the eight corner points
-    // First, find x and y bounds from all data
+    // First, find x bounds from all data
     var xValues = Set<Double>()
-    var yValues = Set<Double>()
 
     for row in data {
       xValues.insert(row[0])
-      yValues.insert(row[1])
     }
 
-    // Sort and find x,y bounds
+    // Sort and find x bounds
     let xSorted = xValues.sorted()
-    let ySorted = yValues.sorted()
 
     var x0 = -Double.infinity
     var x1 = Double.infinity
-    var y0 = -Double.infinity
-    var y1 = Double.infinity
 
     for val in xSorted {
       if val <= inputs[0] && val > x0 { x0 = val }
       if val >= inputs[0] && val < x1 { x1 = val }
     }
+
+    // Now find y values ONLY at the x bounds we found
+    var yValues = Set<Double>()
+    for row in data {
+      let xMatch = abs(row[0] - x0) < 1e-10 || abs(row[0] - x1) < 1e-10
+      if xMatch {
+        yValues.insert(row[1])
+      }
+    }
+
+    // Sort and find y bounds
+    let ySorted = yValues.sorted()
+
+    var y0 = -Double.infinity
+    var y1 = Double.infinity
+
     for val in ySorted {
       if val <= inputs[1] && val > y0 { y0 = val }
       if val >= inputs[1] && val < y1 { y1 = val }

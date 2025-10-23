@@ -1436,6 +1436,109 @@ final class SF50_TOLDUITests: XCTestCase {
     }
   }
 
+  // MARK: - Climb Tests
+
+  @MainActor
+  func testClimbViewInteraction() throws {
+    let app = XCUIApplication()
+    app.launchArguments = ["UI-TESTING"]
+    app.launch()
+
+    // Complete initial setup with realistic weight
+    completeInitialSetup(app: app, emptyWeight: "3550")
+
+    // Navigate to Climb tab
+    app.tapTab("Climb")
+    waitForNavigation()
+
+    // Verify we're on Climb tab
+    XCTAssertTrue(
+      app.staticTexts["Climb"].exists,
+      "Should be on Climb tab"
+    )
+
+    // Test fuel slider interaction
+    let fuelSlider = app.sliders["climbFuelSlider"]
+    XCTAssertTrue(
+      fuelSlider.waitForExistence(timeout: 2),
+      "Fuel slider should exist"
+    )
+    fuelSlider.adjust(toNormalizedSliderPosition: 0.5)
+    Thread.sleep(forTimeInterval: 0.5)
+
+    // Test altitude slider interaction
+    let altitudeSlider = app.sliders["climbAltitudeSlider"]
+    XCTAssertTrue(
+      altitudeSlider.exists,
+      "Altitude slider should exist"
+    )
+    altitudeSlider.adjust(toNormalizedSliderPosition: 0.3)
+    Thread.sleep(forTimeInterval: 0.5)
+
+    // Test ISA deviation slider interaction
+    let ISADeviationSlider = app.sliders["climbISADeviationSlider"]
+    XCTAssertTrue(
+      ISADeviationSlider.exists,
+      "ISA Deviation slider should exist"
+    )
+    ISADeviationSlider.adjust(toNormalizedSliderPosition: 0.6)
+    Thread.sleep(forTimeInterval: 0.5)
+
+    // Test Ice Protection toggle
+    let iceProtectionToggle = app.switches["climbIceProtectionToggle"]
+    XCTAssertTrue(
+      iceProtectionToggle.exists,
+      "Ice Protection toggle should exist"
+    )
+    iceProtectionToggle.tap()
+    Thread.sleep(forTimeInterval: 0.5)
+
+    // Verify results are displayed
+    let climbSpeedValue = app.staticTexts["climbSpeedValue"]
+    let climbRateValue = app.staticTexts["climbRateValue"]
+    let climbGradientValue = app.staticTexts["climbGradientValue"]
+
+    XCTAssertTrue(
+      climbSpeedValue.waitForExistence(timeout: 2),
+      "Climb speed value should be displayed"
+    )
+    XCTAssertTrue(
+      climbRateValue.exists,
+      "Climb rate value should be displayed"
+    )
+    XCTAssertTrue(
+      climbGradientValue.exists,
+      "Climb gradient value should be displayed"
+    )
+
+    // Verify results are not empty (basic sanity check)
+    XCTAssertFalse(
+      climbSpeedValue.label.isEmpty,
+      "Climb speed should have a value"
+    )
+    XCTAssertFalse(
+      climbRateValue.label.isEmpty,
+      "Climb rate should have a value"
+    )
+    XCTAssertFalse(
+      climbGradientValue.label.isEmpty,
+      "Climb gradient should have a value"
+    )
+
+    // Test changing a value triggers recalculation by adjusting slider again
+    let initialSpeedLabel = climbSpeedValue.label
+    altitudeSlider.adjust(toNormalizedSliderPosition: 0.7)
+    Thread.sleep(forTimeInterval: 0.5)
+
+    // Verify the value changed (results should update)
+    let updatedSpeedLabel = climbSpeedValue.label
+    XCTAssertNotEqual(
+      initialSpeedLabel,
+      updatedSpeedLabel,
+      "Climb speed should update when altitude changes"
+    )
+  }
+
   // MARK: - Welcome Flow Variations Tests
 
   @MainActor

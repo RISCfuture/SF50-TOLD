@@ -5,6 +5,7 @@ public protocol Limitations {
   static var maxLandingWeight: Measurement<UnitMass> { get }
   static var maxZeroFuelWeight: Measurement<UnitMass> { get }
   static var maxTakeoffAltitude: Measurement<UnitLength> { get }
+  static var maxEnrouteAltitude: Measurement<UnitLength> { get }
   static var maxTailwind: Measurement<UnitSpeed> { get }
   static var maxCrosswind_flaps50: Measurement<UnitSpeed> { get }
   static var maxCrosswind_flaps100: Measurement<UnitSpeed> { get }
@@ -19,6 +20,7 @@ public struct LimitationsG1: Limitations {
   public static let maxLandingWeight = Measurement(value: 5550, unit: UnitMass.pounds)
   public static let maxZeroFuelWeight = Measurement(value: 4900, unit: UnitMass.pounds)
   public static let maxTakeoffAltitude = Measurement(value: 10_000, unit: UnitLength.feet)
+  public static let maxEnrouteAltitude = Measurement(value: 28_000, unit: UnitLength.feet)
   public static let maxTailwind = Measurement(value: 10, unit: UnitSpeed.knots)  // takeoff and landing
   public static let maxCrosswind_flaps50 = Measurement(value: 18, unit: UnitSpeed.knots)
   public static let maxCrosswind_flaps100 = Measurement(value: 16, unit: UnitSpeed.knots)
@@ -35,6 +37,7 @@ public struct LimitationsG2Plus: Limitations {
   public static let maxLandingWeight = Measurement(value: 5550, unit: UnitMass.pounds)
   public static let maxZeroFuelWeight = Measurement(value: 4900, unit: UnitMass.pounds)
   public static let maxTakeoffAltitude = Measurement(value: 10_000, unit: UnitLength.feet)
+  public static let maxEnrouteAltitude = Measurement(value: 31_000, unit: UnitLength.feet)
   public static let maxTailwind = Measurement(value: 10, unit: UnitSpeed.knots)  // takeoff and landing
   public static let maxCrosswind_flaps50 = Measurement(value: 18, unit: UnitSpeed.knots)
   public static let maxCrosswind_flaps100 = Measurement(value: 16, unit: UnitSpeed.knots)
