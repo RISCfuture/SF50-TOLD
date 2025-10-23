@@ -30,7 +30,7 @@ struct ScenarioDetailView: View {
             unit: temperatureUnit,
             format: .temperature(plusSign: true)
           )
-          .accessibilityIdentifier("oatDeltaField")
+          .accessibilityIdentifier("OATDeltaField")
         }
 
         LabeledContent("Wind Speed Delta") {

@@ -686,9 +686,9 @@ final class SF50_TOLDUITests: XCTestCase {
     nameField.clearAndType("Hot Day Test", app: app)
 
     // Set OAT Delta
-    let oatDeltaField = app.textFields["oatDeltaField"]
-    XCTAssertTrue(oatDeltaField.exists, "OAT delta field should exist")
-    oatDeltaField.clearAndType("10", app: app)
+    let OATDeltaField = app.textFields["OATDeltaField"]
+    XCTAssertTrue(OATDeltaField.exists, "OAT delta field should exist")
+    OATDeltaField.clearAndType("10", app: app)
 
     // Set Weight Delta
     let weightDeltaField = app.textFields["weightDeltaField"]

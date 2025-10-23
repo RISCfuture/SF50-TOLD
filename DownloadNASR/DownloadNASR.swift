@@ -46,7 +46,7 @@ final class DownloadNASR: AsyncParsableCommand {
 
     // Load NASR data
     logger.notice("Loading NASR data for cycle \(cycle)…")
-    let nasrAirports = try await loadNASRData(logger: logger, timezoneLookup: timezoneLookup)
+    let NASRAirports = try await loadNASRData(logger: logger, timezoneLookup: timezoneLookup)
 
     // Load OurAirports data
     logger.notice("Loading OurAirports data…")
@@ -56,7 +56,7 @@ final class DownloadNASR: AsyncParsableCommand {
     // Merge and de-duplicate
     logger.notice("Merging and de-duplicating airport data…")
     let mergedAirports = mergeAirports(
-      nasrAirports: nasrAirports,
+      NASRAirports: NASRAirports,
       ourAirports: ourAirports,
       logger: logger,
       timezoneLookup: timezoneLookup
@@ -95,8 +95,8 @@ final class DownloadNASR: AsyncParsableCommand {
       return true
     }
 
-    let nasrData = await nasr.data
-    guard let airports = await nasrData.airports else {
+    let NASRData = await nasr.data
+    guard let airports = await NASRData.airports else {
       return []
     }
 
@@ -221,25 +221,25 @@ final class DownloadNASR: AsyncParsableCommand {
   }
 
   private func mergeAirports(
-    nasrAirports: [AirportDataCodable.AirportCodable],
+    NASRAirports: [AirportDataCodable.AirportCodable],
     ourAirports: [OurAirportData],
     logger: Logger,
     timezoneLookup: SwiftTimeZoneLookup
   ) -> [AirportDataCodable.AirportCodable] {
     var mergedAirports = [AirportDataCodable.AirportCodable]()
-    var nasrLocationIds = Set<String>()
+    var NASRLocationIds = Set<String>()
 
     // Add all NASR airports first (they have priority)
-    for airport in nasrAirports {
+    for airport in NASRAirports {
       mergedAirports.append(airport)
-      nasrLocationIds.insert(airport.locationID)
+      NASRLocationIds.insert(airport.locationID)
     }
 
     // Add OurAirports data that doesn't exist in NASR
     var ourAirportsAdded = 0
     for ourAirport in ourAirports {
       // Skip if this airport's local_id matches a NASR locationID
-      if !ourAirport.localId.isEmpty && nasrLocationIds.contains(ourAirport.localId) {
+      if !ourAirport.localId.isEmpty && NASRLocationIds.contains(ourAirport.localId) {
         continue
       }
 
@@ -278,7 +278,7 @@ final class DownloadNASR: AsyncParsableCommand {
       let codableAirport = AirportDataCodable.AirportCodable(
         recordID: ourAirport.id,
         locationID: ourAirport.localId,
-        ICAO_ID: ourAirport.icaoId,
+        ICAO_ID: ourAirport.ICAO_ID,
         name: ourAirport.name,
         city: ourAirport.municipality,
         dataSource: "ourAirports",

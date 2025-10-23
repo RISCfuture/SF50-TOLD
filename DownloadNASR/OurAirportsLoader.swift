@@ -56,7 +56,7 @@ struct OurAirportsLoader {
 
       let localId = row["local_code", String.self] ?? ""
       let locationId = localId.isEmpty ? ident : localId
-      let icaoId = row["icao_code", String.self]
+      let ICAO_ID = row["icao_code", String.self]
       let elevation = Double(row["elevation_ft", Int.self] ?? 0)
       let municipality = row["municipality", String.self]
 
@@ -64,7 +64,7 @@ struct OurAirportsLoader {
       let airport = OurAirportData(
         id: String(id),
         localId: locationId,
-        icaoId: icaoId,
+        ICAO_ID: ICAO_ID,
         name: name,
         municipality: municipality,
         latitude: latitude,
@@ -179,7 +179,7 @@ struct OurAirportsLoader {
 struct OurAirportData {
   let id: String  // The unique id from OurAirports database (used as recordID)
   let localId: String  // This maps to FAA location ID (local_code)
-  let icaoId: String?  // The ICAO code (icao_code)
+  let ICAO_ID: String?  // The ICAO code (icao_code)
   let name: String
   let municipality: String?
   let latitude: Double  // decimal degrees

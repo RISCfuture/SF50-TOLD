@@ -71,7 +71,7 @@ private struct SearchResults: View {
 
   private func relevanceScore(for airport: Airport, searchText: String) -> Int {
     if airport.displayID == searchText.uppercased() { return 3 }
-    if let icaoID = airport.ICAO_ID, icaoID == searchText.uppercased() { return 2 }
+    if let ICAO_ID = airport.ICAO_ID, ICAO_ID == searchText.uppercased() { return 2 }
     if airport.name.localizedStandardContains(searchText) {
       return 1
     }
