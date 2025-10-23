@@ -20,7 +20,7 @@ final class Generate_Screenshots: XCTestCase {
   @MainActor
   func testGenerateScreenshots() throws {
     let app = XCUIApplication()
-    app.launchArguments = ["UI-TESTING"]
+    app.launchArguments = ["UI-TESTING", "GENERATE-SCREENSHOTS"]
     setupSnapshot(app)
     app.launch()
 
@@ -33,8 +33,7 @@ final class Generate_Screenshots: XCTestCase {
     // wait for Apple Intelligence banner to self-dismiss
     Thread.sleep(forTimeInterval: 30)
 
-    // Wait for either welcome screen or main view to appear
-    // (welcome screen appears on first run, skipped on subsequent runs)
+    // Wait for welcome screen to appear (should always appear on first test run)
     if app.buttons["continueButton"].waitForExistence(timeout: 5) {
       // Welcome screen appeared - go through setup flow
 
@@ -61,30 +60,30 @@ final class Generate_Screenshots: XCTestCase {
 
       app.buttons["continueButton"].tap()
 
-      // Wait for download consent screen and tap download button
+      // Check if download consent screen appears and tap download button to download live airport data
       if app.buttons["downloadDataButton"].waitForExistence(timeout: 5) {
         app.buttons["downloadDataButton"].tap()
-      }
 
-      // Wait for loader to complete and main view to appear (may take longer on first run)
-      XCTAssertTrue(
-        app.textFields["Payload"].waitForExistence(timeout: 300),
-        "Payload field should appear after data download"
-      )
-    } else {
-      // Welcome screen skipped - wait for main view to appear (should be quick)
-      XCTAssertTrue(
-        app.textFields["Payload"].waitForExistence(timeout: 10),
-        "Payload field should appear"
-      )
+        // Wait for loader to complete and main view to appear (may take 30+ minutes)
+        XCTAssertTrue(
+          app.textFields["payloadField"].waitForExistence(timeout: 3600),
+          "Payload field should appear after airport data download completes"
+        )
+      } else {
+        // Download button didn't appear - data may already be downloaded, just wait for main view
+        XCTAssertTrue(
+          app.textFields["payloadField"].waitForExistence(timeout: 10),
+          "Payload field should appear"
+        )
+      }
     }
 
     // Configure takeoff parameters
-    let payloadField = app.textFields["Payload"].firstMatch
+    let payloadField = app.textFields["payloadField"].firstMatch
     XCTAssertTrue(payloadField.waitForExistence(timeout: 5), "Payload field should be accessible")
     payloadField.clearAndType("530", app: app)
 
-    let fuelField = app.textFields["Takeoff Fuel"].firstMatch
+    let fuelField = app.textFields["fuelField"].firstMatch
     XCTAssertTrue(fuelField.waitForExistence(timeout: 5), "Fuel field should be accessible")
     fuelField.clearAndType("212", app: app)
 
@@ -142,7 +141,6 @@ final class Generate_Screenshots: XCTestCase {
 
     // Scroll to top to show all configured parameters
     app.scrollToTop()
-    Thread.sleep(forTimeInterval: 0.5)
 
     snapshot("02-takeoff-params")
 
@@ -183,7 +181,6 @@ final class Generate_Screenshots: XCTestCase {
       "Takeoff distance should be displayed"
     )
 
-    Thread.sleep(forTimeInterval: 0.5)
     snapshot("05-takeoff-results")
 
     // Generate takeoff report
@@ -193,7 +190,6 @@ final class Generate_Screenshots: XCTestCase {
     XCTAssertNotNil(takeoffReportButton, "Generate takeoff report button should be accessible")
     takeoffReportButton!.tap()
 
-    Thread.sleep(forTimeInterval: 1.0)
     snapshot("06-takeoff-report")
 
     // Close the report sheet by swiping down from top
@@ -213,14 +209,14 @@ final class Generate_Screenshots: XCTestCase {
     waitForNavigation()
 
     // Configure landing parameters
-    let landingPayloadField = app.textFields["Payload"].firstMatch
+    let landingPayloadField = app.textFields["payloadField"].firstMatch
     XCTAssertTrue(
       landingPayloadField.waitForExistence(timeout: 5),
       "Payload field should be accessible"
     )
     landingPayloadField.clearAndType("530", app: app)
 
-    let landingFuelField = app.textFields["Landing Fuel"].firstMatch
+    let landingFuelField = app.textFields["fuelField"].firstMatch
     XCTAssertTrue(landingFuelField.waitForExistence(timeout: 5), "Fuel field should be accessible")
     landingFuelField.clearAndType("75", app: app)
 
@@ -295,7 +291,6 @@ final class Generate_Screenshots: XCTestCase {
       "Landing distance should be displayed"
     )
 
-    Thread.sleep(forTimeInterval: 0.5)
     snapshot("08-landing-results")
 
     // Generate landing report
@@ -317,14 +312,16 @@ final class Generate_Screenshots: XCTestCase {
       start.press(forDuration: 0.1, thenDragTo: end)
     }
 
-    // Wait for sheet to fully dismiss
-    Thread.sleep(forTimeInterval: 1.0)
+    // Navigate to Climb tab
+    app.tapTab("Climb")
+    waitForNavigation()
+
+    snapshot("10-climb")
 
     // Navigate to Settings tab
     app.tapTab("Settings")
     waitForNavigation()
 
-    Thread.sleep(forTimeInterval: 0.5)
-    snapshot("10-settings")
+    snapshot("11-settings")
   }
 }

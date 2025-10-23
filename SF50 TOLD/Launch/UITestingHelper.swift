@@ -9,15 +9,22 @@ enum UITestingHelper {
     // Reset all defaults
     Defaults.removeAll(suite: UserDefaults(suiteName: "group.codes.tim.TOLD")!)
 
+    // Check if we're generating screenshots (should use live data)
+    let isGeneratingScreenshots = ProcessInfo.processInfo.arguments.contains("GENERATE-SCREENSHOTS")
+
     // Set minimal configuration for testing - let tests go through setup flow
     Defaults[.updatedThrustSchedule] = false  // G1 model
     Defaults[.schemaVersion] = latestSchemaVersion
-    Defaults[.lastCycleLoaded] = Cycle.current  // Prevent database loader from appearing
     Defaults[.favoriteAirports] = []  // Ensure no favorites at start
 
-    // Seed test data for airports used in UI tests
-    Task { @MainActor in
-      seedTestData(container: container)
+    // Only seed test data for regular UI tests, not screenshot generation
+    if !isGeneratingScreenshots {
+      Defaults[.lastCycleLoaded] = Cycle.current  // Prevent database loader from appearing
+
+      // Seed test data for airports used in UI tests
+      Task { @MainActor in
+        seedTestData(container: container)
+      }
     }
   }
 
