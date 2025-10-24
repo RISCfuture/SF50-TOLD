@@ -21,6 +21,10 @@ struct TakeoffReportButton: View {
   @State private var isGenerating = false
   @State private var error: Error?
 
+  private var container: ModelContainer {
+    modelContext.container
+  }
+
   var body: some View {
     Button {
       generateReport()
@@ -69,6 +73,10 @@ struct TakeoffReportButton: View {
 
     Task {
       do {
+        // Fetch scenarios using ModelActor in background context
+        let fetcher = ScenarioFetcher(modelContainer: container)
+        let scenarios = try await fetcher.fetchTakeoffScenarios()
+
         // Allow UI to update with loading state
         try await Task.sleep(nanoseconds: 100_000_000)
 
@@ -85,18 +93,6 @@ struct TakeoffReportButton: View {
         let updatedThrustSchedule = Defaults[.updatedThrustSchedule]
         let emptyWeight = Defaults[.emptyWeight]
         let date = weather.time
-
-        // Fetch and convert scenarios from SwiftData
-        let descriptor = FetchDescriptor<Scenario>(
-          predicate: #Predicate { $0._operation == "takeoff" },
-          sortBy: [SortDescriptor(\.name)]
-        )
-        let scenarioModels = try modelContext.fetch(descriptor)
-        let userScenarios = scenarioModels.map { PerformanceScenario.from($0) }
-
-        // Always prepend "Forecast Conditions" scenario (base conditions with no adjustments)
-        let forecastScenario = PerformanceScenario(name: "Forecast Conditions")
-        let scenarios = [forecastScenario] + userScenarios
 
         // Now run the report generation in the background
         let input = PerformanceInput(
