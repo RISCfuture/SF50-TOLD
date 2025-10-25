@@ -45,11 +45,22 @@ struct SF50_TOLDApp: App {
       NOTAM.self,
       Scenario.self
     ])
-    let modelConfiguration = ModelConfiguration(
-      schema: schema,
-      isStoredInMemoryOnly: false,
-      groupContainer: .identifier("group.codes.tim.TOLD")
-    )
+
+    // Use in-memory storage for screenshot generation to avoid file access issues
+    let isGeneratingScreenshots = ProcessInfo.processInfo.arguments.contains("GENERATE-SCREENSHOTS")
+    let modelConfiguration =
+      if isGeneratingScreenshots {
+        ModelConfiguration(
+          schema: schema,
+          isStoredInMemoryOnly: true
+        )
+      } else {
+        ModelConfiguration(
+          schema: schema,
+          isStoredInMemoryOnly: false,
+          groupContainer: .identifier("group.codes.tim.TOLD")
+        )
+      }
 
     do {
       return try ModelContainer(for: schema, configurations: [modelConfiguration])
