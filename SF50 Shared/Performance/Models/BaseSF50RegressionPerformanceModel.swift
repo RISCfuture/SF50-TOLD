@@ -157,16 +157,16 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
 
   private var enrouteClimbRateFtMin_iceContaminated: Value<Double> {
     let value =
-    -1.519474e-01 * altitude
-    - 3.828843e+01 * temperature
-    - 9.878698e-01 * weight
-    - 1.219831e-06 * pow(altitude, 2)
-    - 8.122230e-04 * altitude * temperature
-    + 1.247279e-05 * altitude * weight
-    - 4.009787e-01 * pow(temperature, 2)
-    + 2.547891e-03 * temperature * weight
-    + 4.126357e-05 * pow(weight, 2)
-    + 6.212608e+03
+      -1.519474e-01 * altitude
+      - 3.828843e+01 * temperature
+      - 9.878698e-01 * weight
+      - 1.219831e-06 * pow(altitude, 2)
+      - 8.122230e-04 * altitude * temperature
+      + 1.247279e-05 * altitude * weight
+      - 4.009787e-01 * pow(temperature, 2)
+      + 2.547891e-03 * temperature * weight
+      + 4.126357e-05 * pow(weight, 2)
+      + 6.212608e+03
 
     return .valueWithUncertainty(
       value,

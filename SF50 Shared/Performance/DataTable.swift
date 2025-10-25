@@ -7,6 +7,18 @@ class DataTable {
   private var data: [Row] = []
   private var nInputs: Int = 0
 
+  /// Number of input columns
+  var inputCount: Int { nInputs }
+
+  /// Returns all data rows for iteration
+  var rows: [[Double]] {
+    return data
+  }
+
+  /// Creates a data table by loading CSV data from a file URL.
+  ///
+  /// - Parameter fileURL: The URL of the CSV file to load.
+  /// - Throws: `Errors.badEncoding` if the file cannot be decoded as UTF-8.
   convenience init(fileURL: URL) throws {
     let data = try Data(contentsOf: fileURL)
     guard let string = String(data: data, encoding: .utf8) else {
@@ -15,6 +27,12 @@ class DataTable {
     self.init(csv: string)
   }
 
+  /// Creates a data table from a CSV string.
+  ///
+  /// The CSV format should have N input columns followed by 1 output column.
+  /// Each row is parsed as comma-separated floating-point values.
+  ///
+  /// - Parameter csv: A string containing CSV data with numeric values.
   init(csv: String) {
     let lines = csv.split(whereSeparator: \.isNewline)
     for line in lines {
@@ -29,7 +47,12 @@ class DataTable {
     }
   }
 
-  // Constructor for testing
+  /// Creates a data table from raw data arrays.
+  ///
+  /// Each inner array should contain N input values followed by 1 output value.
+  /// This initializer is primarily intended for testing purposes.
+  ///
+  /// - Parameter data: A 2D array where each row contains input values followed by an output value.
   init(data: [[Double]]) {
     self.data = data
     if let first = data.first {
@@ -37,7 +60,20 @@ class DataTable {
     }
   }
 
-  /// Linear interpolation for multiple inputs (returns Double output)
+  /// Performs multi-dimensional linear interpolation to compute an output value for the given inputs.
+  ///
+  /// This method supports 1D, 2D, and 3D interpolation. For exact matches in the data table,
+  /// the exact value is returned. Otherwise, linear interpolation is performed between
+  /// surrounding data points.
+  ///
+  /// - Parameters:
+  ///   - inputs: An array of input values with length matching ``inputCount``.
+  ///   - clamping: Optional array of clamping modes for each input dimension. If nil, no clamping is applied.
+  ///
+  /// - Returns: A `Value<Double>` which may be:
+  ///   - `.value(_)` for successful interpolation
+  ///   - `.offscaleLow` if inputs are below the table's range
+  ///   - `.offscaleHigh` if inputs are above the table's range or interpolation fails
   func value(for inputs: [Double], clamping: [Clamping]? = nil) -> Value<Double> {
     precondition(inputs.count == nInputs, "Input dimension mismatch")
 
@@ -423,24 +459,59 @@ class DataTable {
     return .value(nearestValue)
   }
 
+  /// Returns the minimum value in the specified input dimension.
+  ///
+  /// - Parameter dimension: The zero-based index of the input dimension (must be less than ``inputCount``).
+  /// - Returns: The minimum value found in that dimension across all data rows.
   func min(dimension: Int) -> Double {
     precondition((0..<nInputs).contains(dimension), "Invalid dimension")
     return data.map { $0[dimension] }.min()!
   }
 
+  /// Returns the maximum value in the specified input dimension.
+  ///
+  /// - Parameter dimension: The zero-based index of the input dimension (must be less than ``inputCount``).
+  /// - Returns: The maximum value found in that dimension across all data rows.
   func max(dimension: Int) -> Double {
     precondition((0..<nInputs).contains(dimension), "Invalid dimension")
     return data.map { $0[dimension] }.max()!
   }
 
+  /// Extracts the input values from a data row.
+  ///
+  /// - Parameter row: A data row containing N input values followed by 1 output value.
+  /// - Returns: An array containing only the input values (all values except the last).
+  func inputs(from row: [Double]) -> [Double] {
+    precondition(row.count == nInputs + 1, "Invalid row format")
+    return Array(row.prefix(nInputs))
+  }
+
+  /// Extracts the output value from a data row.
+  ///
+  /// - Parameter row: A data row containing N input values followed by 1 output value.
+  /// - Returns: The output value (the last value in the row).
+  func output(from row: [Double]) -> Double {
+    precondition(row.count == nInputs + 1, "Invalid row format")
+    return row.last!
+  }
+
+  /// Errors that can occur during data table operations.
   enum Errors: Error {
+    /// The file data could not be decoded as UTF-8.
     case badEncoding
   }
 
+  /// Clamping modes for input dimensions during interpolation.
+  ///
+  /// Clamping controls how out-of-bounds input values are handled.
   enum Clamping {
+    /// No clamping - return offscale values if inputs are outside the table's range.
     case none
+    /// Clamp only the lower bound - inputs below minimum are clamped to minimum.
     case clampLow
+    /// Clamp only the upper bound - inputs above maximum are clamped to maximum.
     case clampHigh
+    /// Clamp both bounds - inputs are constrained to [min, max] range.
     case clampBoth
   }
 }

@@ -8,183 +8,91 @@ struct RegressionPerformanceModelG2PlusTests {
   // MARK: - Takeoff Ground Run Tests
 
   @Test
-  func takeoffGroundRun_withinTolerance() {
-    // Test regression model against book values - expected values should fall within error intervals
-    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
-      (6000, 0, -20, 1670),
-      (6000, 0, -10, 1736),
-      (6000, 0, 0, 1804),
-      (6000, 0, 10, 1875),
-      (6000, 0, 20, 1963),
-      (6000, 0, 30, 2279),
-      (6000, 0, 40, 2797),
-      (6000, 0, 50, 3475),
-      (6000, 0, 15.0, 1910),
-      (6000, 1000, 20, 2058),
-      (6000, 2000, 20, 2166),
-      (6000, 3000, 20, 2322),
-      (6000, 4000, 20, 2523),
-      (6000, 5000, 20, 2726),
-      (6000, 6000, 20, 2973),
-      (6000, 7000, 20, 3283),
-      (6000, 8000, 20, 3674),
-      (5500, 0, 20, 1800),
-      (5000, 0, 20, 1636)
-    ]
+  func takeoffGroundRun_withinTolerance() throws {
+    let csvURL = Bundle(for: BasePerformanceModel.self).resourceURL!
+      .appending(component: "Data/g2+/takeoff/ground run.csv")
+    let dataTable = try DataTable(fileURL: csvURL)
 
-    for testCase in testCases {
-      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
-      let config = Helper.createTestConfiguration(weight: testCase.weight)
-      let runway = Helper.createTestRunway(elevation: testCase.altitude)
-
-      let model = RegressionPerformanceModelG2Plus(
-        conditions: conditions,
-        configuration: config,
-        runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
-      )
-
-      let result = model.takeoffRunFt
-      guard case .valueWithUncertainty = result else {
-        Issue.record(
-          "Expected value for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+    validateRegressionPredictions(
+      dataTable,
+      modelBuilder: { conditions, config, runway in
+        RegressionPerformanceModelG2Plus(
+          conditions: conditions,
+          configuration: config,
+          runway: runway,
+          notam: nil
         )
-        continue
-      }
-
-      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
-    }
+      },
+      valueExtractor: { $0.takeoffRunFt },
+      testName: "takeoffGroundRun"
+    )
   }
 
   // MARK: - Takeoff Distance Tests
 
   @Test
-  func takeoffDistance_withinTolerance() {
-    // Test regression model against book values - expected values should fall within error intervals
-    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
-      (6000, 0, -20, 2460),
-      (6000, 0, -10, 2558),
-      (6000, 0, 0, 2658),
-      (6000, 0, 10, 2764),
-      (6000, 0, 20, 2896),
-      (6000, 0, 30, 3390),
-      (6000, 0, 40, 4217),
-      (6000, 0, 50, 5315),
-      (6000, 0, 15.0, 2815),
-      (6000, 1000, 20, 3037),
-      (6000, 2000, 20, 3201),
-      (6000, 3000, 20, 3439),
-      (6000, 4000, 20, 3751),
-      (6000, 5000, 20, 4065),
-      (6000, 6000, 20, 4449),
-      (6000, 7000, 20, 4937),
-      (6000, 8000, 20, 5552)
-    ]
+  func takeoffDistance_withinTolerance() throws {
+    let csvURL = Bundle(for: BasePerformanceModel.self).resourceURL!
+      .appending(component: "Data/g2+/takeoff/total distance.csv")
+    let dataTable = try DataTable(fileURL: csvURL)
 
-    for testCase in testCases {
-      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
-      let config = Helper.createTestConfiguration(weight: testCase.weight)
-      let runway = Helper.createTestRunway(elevation: testCase.altitude)
-
-      let model = RegressionPerformanceModelG2Plus(
-        conditions: conditions,
-        configuration: config,
-        runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
-      )
-
-      let result = model.takeoffDistanceFt
-      guard case .valueWithUncertainty = result else {
-        Issue.record(
-          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+    validateRegressionPredictions(
+      dataTable,
+      modelBuilder: { conditions, config, runway in
+        RegressionPerformanceModelG2Plus(
+          conditions: conditions,
+          configuration: config,
+          runway: runway,
+          notam: nil
         )
-        continue
-      }
-
-      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
-    }
+      },
+      valueExtractor: { $0.takeoffDistanceFt },
+      testName: "takeoffDistance"
+    )
   }
 
   // MARK: - Takeoff Climb Tests
 
   @Test
-  func takeoffClimbGradient_withinTolerance() {
-    // Test regression model against book values - expected values should fall within error intervals
-    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
-      (6000, 0, -20, 1230),
-      (6000, 0, -10, 1229),
-      (6000, 0, 0, 1227),
-      (6000, 0, 10, 1223),
-      (6000, 0, 20, 1209),
-      (6000, 0, 30, 1062),
-      (6000, 0, 40, 876),
-      (6000, 0, 50, 702),
-      (5500, 0, 20, 1395),
-      (5000, 0, 20, 1612)
-    ]
+  func takeoffClimbGradient_withinTolerance() throws {
+    let csvURL = Bundle(for: BasePerformanceModel.self).resourceURL!
+      .appending(component: "Data/g2+/takeoff climb/gradient.csv")
+    let dataTable = try DataTable(fileURL: csvURL)
 
-    for testCase in testCases {
-      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
-      let config = Helper.createTestConfiguration(weight: testCase.weight)
-      let runway = Helper.createTestRunway(elevation: testCase.altitude)
-
-      let model = RegressionPerformanceModelG2Plus(
-        conditions: conditions,
-        configuration: config,
-        runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
-      )
-
-      let result = model.takeoffClimbGradientFtNmi
-      guard case .valueWithUncertainty = result else {
-        Issue.record(
-          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+    validateRegressionPredictions(
+      dataTable,
+      modelBuilder: { conditions, config, runway in
+        RegressionPerformanceModelG2Plus(
+          conditions: conditions,
+          configuration: config,
+          runway: runway,
+          notam: nil
         )
-        continue
-      }
-
-      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
-    }
+      },
+      valueExtractor: { $0.takeoffClimbGradientFtNmi },
+      testName: "takeoffClimbGradient"
+    )
   }
 
   @Test
-  func takeoffClimbRate_withinTolerance() {
-    // Test regression model against book values - expected values should fall within error intervals
-    let testCases: [(weight: Double, altitude: Double, temperature: Double, expected: Double)] = [
-      (6000, 0, -20, 2012),
-      (6000, 0, -10, 1972),
-      (6000, 0, 0, 1933),
-      (6000, 0, 10, 1892),
-      (6000, 0, 20, 1838),
-      (6000, 0, 30, 1589),
-      (6000, 0, 40, 1289),
-      (6000, 0, 50, 1017),
-      (5500, 0, 20, 2122),
-      (5000, 0, 20, 2451)
-    ]
+  func takeoffClimbRate_withinTolerance() throws {
+    let csvURL = Bundle(for: BasePerformanceModel.self).resourceURL!
+      .appending(component: "Data/g2+/takeoff climb/rate.csv")
+    let dataTable = try DataTable(fileURL: csvURL)
 
-    for testCase in testCases {
-      let conditions = Helper.createTestConditions(temperature: testCase.temperature)
-      let config = Helper.createTestConfiguration(weight: testCase.weight)
-      let runway = Helper.createTestRunway(elevation: testCase.altitude)
-
-      let model = RegressionPerformanceModelG2Plus(
-        conditions: conditions,
-        configuration: config,
-        runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
-      )
-
-      let result = model.takeoffClimbRateFtMin
-      guard case .valueWithUncertainty = result else {
-        Issue.record(
-          "Expected valueWithUncertainty for weight: \(testCase.weight), altitude: \(testCase.altitude), temp: \(testCase.temperature), got \(result)"
+    validateRegressionPredictions(
+      dataTable,
+      modelBuilder: { conditions, config, runway in
+        RegressionPerformanceModelG2Plus(
+          conditions: conditions,
+          configuration: config,
+          runway: runway,
+          notam: nil
         )
-        continue
-      }
-
-      #expect(result.contains(testCase.expected, confidenceLevel: 0.95))
-    }
+      },
+      valueExtractor: { $0.takeoffClimbRateFtMin },
+      testName: "takeoffClimbRate"
+    )
   }
 
   // MARK: - Wind Adjustment Tests
