@@ -195,7 +195,7 @@ struct ClimbConfigView: View {
       }
 
       // IPS toggle
-      Toggle("Ice Protection System", isOn: $performance.iceProtection)
+      Toggle("Engine IPS", isOn: $performance.iceProtection)
         .accessibilityIdentifier("climbIceProtectionToggle")
     }
   }
