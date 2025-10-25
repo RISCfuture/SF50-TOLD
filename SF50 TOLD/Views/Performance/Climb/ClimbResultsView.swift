@@ -13,7 +13,7 @@ struct ClimbResultsView: View {
     Section {
       // Prominent climb speed display
       VStack {
-        Text("Enroute Climb Speed")
+        Text("En Route Climb Speed")
           .font(.headline)
           .foregroundStyle(.secondary)
 
