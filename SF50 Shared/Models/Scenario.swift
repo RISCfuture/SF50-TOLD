@@ -81,6 +81,84 @@ public final class Scenario {
     self.isDryOverride = isDryOverride
   }
 
+  /// Creates the default set of scenarios for the app
+  public static func defaultScenarios() -> [Scenario] {
+    // Default takeoff scenarios (hypotheticals only)
+    let takeoffScenarios: [Scenario] = [
+      Scenario(
+        name: "OAT +10°C",
+        operation: .takeoff,
+        deltaTemperature: .init(value: 10, unit: .celsius)
+      ),
+      Scenario(
+        name: "OAT -10°C",
+        operation: .takeoff,
+        deltaTemperature: .init(value: -10, unit: .celsius)
+      ),
+      Scenario(
+        name: "Wind Speed +10 kn",
+        operation: .takeoff,
+        deltaWindSpeed: .init(value: 10, unit: .knots)
+      ),
+      Scenario(
+        name: "Wind Speed -10 kn",
+        operation: .takeoff,
+        deltaWindSpeed: .init(value: -10, unit: .knots)
+      ),
+      Scenario(
+        name: "Weight +200 lbs",
+        operation: .takeoff,
+        deltaWeight: .init(value: 200, unit: .pounds)
+      ),
+      Scenario(
+        name: "Weight -200 lbs",
+        operation: .takeoff,
+        deltaWeight: .init(value: -200, unit: .pounds)
+      )
+    ]
+
+    // Default landing scenarios (hypotheticals only)
+    let landingScenarios: [Scenario] = [
+      Scenario(
+        name: "OAT +10°C",
+        operation: .landing,
+        deltaTemperature: .init(value: 10, unit: .celsius)
+      ),
+      Scenario(
+        name: "OAT -10°C",
+        operation: .landing,
+        deltaTemperature: .init(value: -10, unit: .celsius)
+      ),
+      Scenario(
+        name: "Wind Speed +10 kn",
+        operation: .landing,
+        deltaWindSpeed: .init(value: 10, unit: .knots)
+      ),
+      Scenario(
+        name: "Wind Speed -10 kn",
+        operation: .landing,
+        deltaWindSpeed: .init(value: -10, unit: .knots)
+      ),
+      Scenario(
+        name: "Weight +200 lbs",
+        operation: .landing,
+        deltaWeight: .init(value: 200, unit: .pounds)
+      ),
+      Scenario(
+        name: "Weight -200 lbs",
+        operation: .landing,
+        deltaWeight: .init(value: -200, unit: .pounds)
+      ),
+      Scenario(
+        name: "Flaps 50",
+        operation: .landing,
+        flapSettingOverride: "flaps50"
+      )
+    ]
+
+    return takeoffScenarios + landingScenarios
+  }
+
   /// Converts the contamination override to the Contamination enum type
   public func getContaminationOverride() -> Contamination? {
     guard let contaminationType = contaminationOverride else { return nil }

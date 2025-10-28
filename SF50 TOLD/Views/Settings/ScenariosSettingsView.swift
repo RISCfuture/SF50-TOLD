@@ -12,6 +12,8 @@ struct ScenariosSettingsView: View {
   @Query(filter: #Predicate<Scenario> { $0._operation == "landing" }, sort: \Scenario.name)
   private var landingScenarios: [Scenario]
 
+  @State private var errorState = ErrorState()
+
   var body: some View {
     Form {
       Section("Takeoff Scenarios") {
@@ -43,13 +45,34 @@ struct ScenariosSettingsView: View {
           Label("Add Scenario", systemImage: "plus.circle.fill")
         }
       }
+
+      if takeoffScenarios.isEmpty && landingScenarios.isEmpty {
+        Section {
+          Button("Restore Default Scenarios") { restoreDefaultScenarios() }
+        }
+      }
     }
     .navigationTitle("Scenarios")
+    .withErrorSheet(state: errorState)
   }
 
   private func deleteScenarios(at offsets: IndexSet, from scenarios: [Scenario]) {
     for index in offsets {
       modelContext.delete(scenarios[index])
+    }
+  }
+
+  private func restoreDefaultScenarios() {
+    withAnimation {
+      for scenario in Scenario.defaultScenarios() {
+        modelContext.insert(scenario)
+      }
+
+      do {
+        try modelContext.save()
+      } catch {
+        errorState.error = error
+      }
     }
   }
 }
@@ -83,11 +106,25 @@ private struct NewScenarioView: View {
   }
 }
 
-#Preview {
+@MainActor
+@Observable
+private final class ErrorState: WithIdentifiableError {
+  var error: Error?
+}
+
+#Preview("With Scenarios") {
   PreviewView { helper in
     try helper.insertBasicScenarios()
 
     return NavigationStack {
+      ScenariosSettingsView()
+    }
+  }
+}
+
+#Preview("No Scenarios") {
+  PreviewView { _ in
+    NavigationStack {
       ScenariosSettingsView()
     }
   }
