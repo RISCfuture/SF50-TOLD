@@ -24,6 +24,7 @@ private struct SearchResults: View {
 
   @State private var airports: [Airport] = []
   @State private var isLoading = false
+  @State private var searchTask: Task<Void, Never>?
 
   private var sortedAirports: [Airport] {
     return airports.sorted { airport1, airport2 in
@@ -60,8 +61,9 @@ private struct SearchResults: View {
         }
       }
     }
-    .onChange(of: searchText) { performSearch() }
+    .onChange(of: searchText) { debouncedSearch() }
     .task { performSearch() }
+    .onDisappear { searchTask?.cancel() }
   }
 
   init(searchText: String, onSelect: @escaping (Airport) -> Void) {
@@ -88,6 +90,15 @@ private struct SearchResults: View {
       .count
     let totalChars = max(name.count, searchText.count)
     return Double(commonChars) / Double(totalChars) * 0.4
+  }
+
+  private func debouncedSearch() {
+    searchTask?.cancel()
+    searchTask = Task {
+      // Wait 300ms before executing the search
+      try? await Task.sleep(nanoseconds: 300_000_000)
+      if !Task.isCancelled { performSearch() }
+    }
   }
 
   private func performSearch() {

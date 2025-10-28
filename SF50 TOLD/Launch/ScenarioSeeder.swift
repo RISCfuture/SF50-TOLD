@@ -1,6 +1,6 @@
 import Defaults
-import Sentry
 import SF50_Shared
+import Sentry
 import SwiftData
 
 @MainActor
