@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -102,31 +102,26 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		012837602E5B8BB9002195A0 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstSubfolder = PlugIns;
 			files = (
 				0128375F2E5B8BB9002195A0 /* SF50 RunwaysExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		012B1E552DE2F272000D9ADC /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolder = Frameworks;
 			files = (
 				012B1E512DE2F272000D9ADC /* SF50_Shared.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		01A5068E2E55A73500F8EC4F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstSubfolder = None;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
@@ -252,17 +247,14 @@
 /* Begin PBXFrameworksBuildPhase section */
 		012837472E5B8BB8002195A0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				0128374E2E5B8BB8002195A0 /* SwiftUI.framework in Frameworks */,
 				0128374C2E5B8BB8002195A0 /* WidgetKit.framework in Frameworks */,
 				0198B4502E986226003CB126 /* (null) in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		012B1E382DE2F272000D9ADC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				012B1E6C2DE2F463000D9ADC /* Logging in Frameworks */,
 				018B8F0C2E331989003A0DAF /* RealModule in Frameworks */,
@@ -272,20 +264,16 @@
 				0179DFC02DE3CDD3002EC77C /* Defaults in Frameworks */,
 				AB352BDD14B44A2CA78F9D44 /* Sentry in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		012B1E422DE2F272000D9ADC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				012B1E462DE2F272000D9ADC /* SF50_Shared.framework in Frameworks */,
 				0198B4532E986226003CB126 /* (null) in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0163BC672DDEE9D3008FEE8F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				0198B44E2E986226003CB126 /* Sentry in Frameworks */,
 				0179DF412DE2F7A9002EC77C /* AsyncAlgorithms in Frameworks */,
@@ -295,35 +283,27 @@
 				01BEBCB82E8A401100631DE6 /* SwiftHtml in Frameworks */,
 				0198B44D2E986226003CB126 /* (null) in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0163BC762DDEE9D4008FEE8F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				0198B4512E986226003CB126 /* (null) in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0163BC802DDEE9D4008FEE8F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				0198B4522E986226003CB126 /* (null) in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0191DC092E9322C20099FB0E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				0198B44C2E986226003CB126 /* (null) in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		01A5068D2E55A73500F8EC4F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				01A5069D2E55A79C00F8EC4F /* ArgumentParser in Frameworks */,
 				01A150A02E93BAA700D3180A /* SwiftTimeZoneLookup in Frameworks */,
@@ -331,7 +311,6 @@
 				01A506982E55A78800F8EC4F /* SwiftNASR in Frameworks */,
 				0198B44F2E986226003CB126 /* (null) in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -387,10 +366,8 @@
 /* Begin PBXHeadersBuildPhase section */
 		012B1E362DE2F272000D9ADC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
@@ -412,8 +389,6 @@
 				0128374F2E5B8BB8002195A0 /* SF50 Runways */,
 			);
 			name = "SF50 RunwaysExtension";
-			packageProductDependencies = (
-			);
 			productName = "SF50 RunwaysExtension";
 			productReference = 0128374A2E5B8BB8002195A0 /* SF50 RunwaysExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -428,8 +403,6 @@
 				012B1E392DE2F272000D9ADC /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
 				012B1E3C2DE2F272000D9ADC /* SF50 Shared */,
@@ -465,8 +438,6 @@
 				012B1E4B2DE2F272000D9ADC /* SF50 SharedTests */,
 			);
 			name = "SF50 SharedTests";
-			packageProductDependencies = (
-			);
 			productName = "SF50 SharedTests";
 			productReference = 012B1E452DE2F272000D9ADC /* SF50 SharedTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -480,7 +451,6 @@
 				0163BC682DDEE9D3008FEE8F /* Resources */,
 				012B1E552DE2F272000D9ADC /* Embed Frameworks */,
 				012837602E5B8BB9002195A0 /* Embed Foundation Extensions */,
-				A1B2C3D4E5F6789012345678 /* Generate Sentry Framework dSYM */,
 				CC70812E05EB4C6A9C28744E /* Upload Debug Symbols to Sentry */,
 			);
 			buildRules = (
@@ -521,8 +491,6 @@
 				0163BC7C2DDEE9D4008FEE8F /* SF50 TOLDTests */,
 			);
 			name = "SF50 TOLDTests";
-			packageProductDependencies = (
-			);
 			productName = "SF50 TOLDTests";
 			productReference = 0163BC792DDEE9D4008FEE8F /* SF50 TOLDTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -544,8 +512,6 @@
 				0163BC862DDEE9D4008FEE8F /* SF50 TOLDUITests */,
 			);
 			name = "SF50 TOLDUITests";
-			packageProductDependencies = (
-			);
 			productName = "SF50 TOLDUITests";
 			productReference = 0163BC832DDEE9D4008FEE8F /* SF50 TOLDUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -567,8 +533,6 @@
 				0191DC0D2E9322C20099FB0E /* Generate Screenshots */,
 			);
 			name = "Generate Screenshots";
-			packageProductDependencies = (
-			);
 			productName = "Generate Screenshots";
 			productReference = 0191DC0C2E9322C20099FB0E /* Generate Screenshots.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -582,8 +546,6 @@
 				01A5068E2E55A73500F8EC4F /* CopyFiles */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
 				01A506912E55A73500F8EC4F /* DownloadNASR */,
@@ -661,7 +623,7 @@
 				01A1014D2E93BF240032AB29 /* XCRemoteSwiftPackageReference "GzipSwift" */,
 				A0265BD12B874F4A917707F3 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 0163BC6B2DDEE9D3008FEE8F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -681,147 +643,115 @@
 /* Begin PBXResourcesBuildPhase section */
 		012837482E5B8BB8002195A0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		012B1E392DE2F272000D9ADC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		012B1E432DE2F272000D9ADC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0163BC682DDEE9D3008FEE8F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				01BEA32B2E986B10005ABCD8 /* PrivacyInfo.xcprivacy in Resources */,
 				01442FC62E1D901900A0BD40 /* InfoPlist.xcstrings in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0163BC772DDEE9D4008FEE8F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0163BC812DDEE9D4008FEE8F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0191DC0A2E9322C20099FB0E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A1B2C3D4E5F6789012345678 /* Generate Sentry Framework dSYM */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Generate Sentry Framework dSYM";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Generate dSYM for Sentry framework after it's been embedded and stripped\nif [ \"$CONFIGURATION\" = \"Release\" ] || [ \"$EFFECTIVE_PLATFORM_NAME\" = \"-iphoneos\" ]; then\n    SENTRY_FRAMEWORK=\"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework/Sentry\"\n    \n    if [ -f \"$SENTRY_FRAMEWORK\" ]; then\n        echo \"Generating dSYM for Sentry.framework...\"\n        echo \"Framework path: $SENTRY_FRAMEWORK\"\n        \n        # Generate dSYM from the embedded framework binary\n        dsymutil \"$SENTRY_FRAMEWORK\" -o \"${DWARF_DSYM_FOLDER_PATH}/Sentry.framework.dSYM\"\n        \n        if [ -d \"${DWARF_DSYM_FOLDER_PATH}/Sentry.framework.dSYM\" ]; then\n            echo \"Successfully generated Sentry.framework.dSYM\"\n            dwarfdump --uuid \"${DWARF_DSYM_FOLDER_PATH}/Sentry.framework.dSYM\" || true\n        else\n            echo \"warning: Failed to generate Sentry.framework.dSYM\"\n        fi\n    else\n        echo \"warning: Sentry.framework not found at $SENTRY_FRAMEWORK\"\n    fi\nfi\n";
-		};
 		CC70812E05EB4C6A9C28744E /* Upload Debug Symbols to Sentry */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 8;
-			files = (
-			);
 			inputPaths = (
 				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 			);
 			name = "Upload Debug Symbols to Sentry";
-			outputPaths = (
-			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "# This script is responsible for uploading debug symbols and source context for Sentry.\nif which sentry-cli >/dev/null; then\n  export SENTRY_ORG=timcodes\n  export SENTRY_PROJECT=sf50-told\n  ERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\n  if [ ! $? -eq 0 ]; then\n    echo \"warning: sentry-cli - $ERROR\"\n  fi\nelse\n  echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
+			shellScript = (
+				"# This script is responsible for uploading debug symbols and source context for Sentry.",
+				"if [[ \"$(uname -m)\" == arm64 ]]; then",
+				"  export PATH=\"/opt/homebrew/bin:$PATH\"",
+				"fi",
+				"",
+				"if which sentry-cli >/dev/null; then",
+				"  export SENTRY_ORG=timcodes",
+				"  export SENTRY_PROJECT=sf50-told",
+				"  ERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)",
+				"  if [ ! $? -eq 0 ]; then",
+				"    echo \"warning: sentry-cli - $ERROR\"",
+				"  fi",
+				"else",
+				"  echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"",
+				"fi",
+				"",
+				"",
+			);
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		012837462E5B8BB8002195A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		012B1E372DE2F272000D9ADC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		012B1E412DE2F272000D9ADC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0163BC662DDEE9D3008FEE8F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0163BC752DDEE9D4008FEE8F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0163BC7F2DDEE9D4008FEE8F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0191DC082E9322C20099FB0E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		01A5068C2E55A73500F8EC4F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -869,7 +799,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		012837612E5B8BB9002195A0 /* Debug */ = {
+		012837612E5B8BB9002195A0 /* Debug configuration for PBXNativeTarget "SF50 RunwaysExtension" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -898,7 +828,7 @@
 			};
 			name = Debug;
 		};
-		012837622E5B8BB9002195A0 /* Release */ = {
+		012837622E5B8BB9002195A0 /* Release configuration for PBXNativeTarget "SF50 RunwaysExtension" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -927,7 +857,7 @@
 			};
 			name = Release;
 		};
-		012B1E532DE2F272000D9ADC /* Debug */ = {
+		012B1E532DE2F272000D9ADC /* Debug configuration for PBXNativeTarget "SF50 Shared" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
@@ -963,7 +893,7 @@
 			};
 			name = Debug;
 		};
-		012B1E542DE2F272000D9ADC /* Release */ = {
+		012B1E542DE2F272000D9ADC /* Release configuration for PBXNativeTarget "SF50 Shared" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
@@ -999,7 +929,7 @@
 			};
 			name = Release;
 		};
-		012B1E572DE2F272000D9ADC /* Debug */ = {
+		012B1E572DE2F272000D9ADC /* Debug configuration for PBXNativeTarget "SF50 SharedTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1016,7 +946,7 @@
 			};
 			name = Debug;
 		};
-		012B1E582DE2F272000D9ADC /* Release */ = {
+		012B1E582DE2F272000D9ADC /* Release configuration for PBXNativeTarget "SF50 SharedTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1033,7 +963,7 @@
 			};
 			name = Release;
 		};
-		0163BC8B2DDEE9D4008FEE8F /* Debug */ = {
+		0163BC8B2DDEE9D4008FEE8F /* Debug configuration for PBXProject "SF50 TOLD" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1071,7 +1001,7 @@
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1100,7 +1030,7 @@
 			};
 			name = Debug;
 		};
-		0163BC8C2DDEE9D4008FEE8F /* Release */ = {
+		0163BC8C2DDEE9D4008FEE8F /* Release configuration for PBXProject "SF50 TOLD" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1138,7 +1068,7 @@
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1160,7 +1090,7 @@
 			};
 			name = Release;
 		};
-		0163BC8E2DDEE9D4008FEE8F /* Debug */ = {
+		0163BC8E2DDEE9D4008FEE8F /* Debug configuration for PBXNativeTarget "SF50 TOLD" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
@@ -1195,7 +1125,7 @@
 			};
 			name = Debug;
 		};
-		0163BC8F2DDEE9D4008FEE8F /* Release */ = {
+		0163BC8F2DDEE9D4008FEE8F /* Release configuration for PBXNativeTarget "SF50 TOLD" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
@@ -1230,7 +1160,7 @@
 			};
 			name = Release;
 		};
-		0163BC912DDEE9D4008FEE8F /* Debug */ = {
+		0163BC912DDEE9D4008FEE8F /* Debug configuration for PBXNativeTarget "SF50 TOLDTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1248,7 +1178,7 @@
 			};
 			name = Debug;
 		};
-		0163BC922DDEE9D4008FEE8F /* Release */ = {
+		0163BC922DDEE9D4008FEE8F /* Release configuration for PBXNativeTarget "SF50 TOLDTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1266,7 +1196,7 @@
 			};
 			name = Release;
 		};
-		0163BC942DDEE9D4008FEE8F /* Debug */ = {
+		0163BC942DDEE9D4008FEE8F /* Debug configuration for PBXNativeTarget "SF50 TOLDUITests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1283,7 +1213,7 @@
 			};
 			name = Debug;
 		};
-		0163BC952DDEE9D4008FEE8F /* Release */ = {
+		0163BC952DDEE9D4008FEE8F /* Release configuration for PBXNativeTarget "SF50 TOLDUITests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1300,7 +1230,7 @@
 			};
 			name = Release;
 		};
-		0191DC142E9322C20099FB0E /* Debug */ = {
+		0191DC142E9322C20099FB0E /* Debug configuration for PBXNativeTarget "Generate Screenshots" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1321,7 +1251,7 @@
 			};
 			name = Debug;
 		};
-		0191DC152E9322C20099FB0E /* Release */ = {
+		0191DC152E9322C20099FB0E /* Release configuration for PBXNativeTarget "Generate Screenshots" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -1342,7 +1272,7 @@
 			};
 			name = Release;
 		};
-		01A506942E55A73500F8EC4F /* Debug */ = {
+		01A506942E55A73500F8EC4F /* Debug configuration for PBXNativeTarget "DownloadNASR" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -1359,7 +1289,7 @@
 			};
 			name = Debug;
 		};
-		01A506952E55A73500F8EC4F /* Release */ = {
+		01A506952E55A73500F8EC4F /* Release configuration for PBXNativeTarget "DownloadNASR" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -1381,82 +1311,73 @@
 		012837642E5B8BB9002195A0 /* Build configuration list for PBXNativeTarget "SF50 RunwaysExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				012837612E5B8BB9002195A0 /* Debug */,
-				012837622E5B8BB9002195A0 /* Release */,
+				012837612E5B8BB9002195A0 /* Debug configuration for PBXNativeTarget "SF50 RunwaysExtension" */,
+				012837622E5B8BB9002195A0 /* Release configuration for PBXNativeTarget "SF50 RunwaysExtension" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		012B1E522DE2F272000D9ADC /* Build configuration list for PBXNativeTarget "SF50 Shared" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				012B1E532DE2F272000D9ADC /* Debug */,
-				012B1E542DE2F272000D9ADC /* Release */,
+				012B1E532DE2F272000D9ADC /* Debug configuration for PBXNativeTarget "SF50 Shared" */,
+				012B1E542DE2F272000D9ADC /* Release configuration for PBXNativeTarget "SF50 Shared" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		012B1E562DE2F272000D9ADC /* Build configuration list for PBXNativeTarget "SF50 SharedTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				012B1E572DE2F272000D9ADC /* Debug */,
-				012B1E582DE2F272000D9ADC /* Release */,
+				012B1E572DE2F272000D9ADC /* Debug configuration for PBXNativeTarget "SF50 SharedTests" */,
+				012B1E582DE2F272000D9ADC /* Release configuration for PBXNativeTarget "SF50 SharedTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		0163BC652DDEE9D3008FEE8F /* Build configuration list for PBXProject "SF50 TOLD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0163BC8B2DDEE9D4008FEE8F /* Debug */,
-				0163BC8C2DDEE9D4008FEE8F /* Release */,
+				0163BC8B2DDEE9D4008FEE8F /* Debug configuration for PBXProject "SF50 TOLD" */,
+				0163BC8C2DDEE9D4008FEE8F /* Release configuration for PBXProject "SF50 TOLD" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		0163BC8D2DDEE9D4008FEE8F /* Build configuration list for PBXNativeTarget "SF50 TOLD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0163BC8E2DDEE9D4008FEE8F /* Debug */,
-				0163BC8F2DDEE9D4008FEE8F /* Release */,
+				0163BC8E2DDEE9D4008FEE8F /* Debug configuration for PBXNativeTarget "SF50 TOLD" */,
+				0163BC8F2DDEE9D4008FEE8F /* Release configuration for PBXNativeTarget "SF50 TOLD" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		0163BC902DDEE9D4008FEE8F /* Build configuration list for PBXNativeTarget "SF50 TOLDTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0163BC912DDEE9D4008FEE8F /* Debug */,
-				0163BC922DDEE9D4008FEE8F /* Release */,
+				0163BC912DDEE9D4008FEE8F /* Debug configuration for PBXNativeTarget "SF50 TOLDTests" */,
+				0163BC922DDEE9D4008FEE8F /* Release configuration for PBXNativeTarget "SF50 TOLDTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		0163BC932DDEE9D4008FEE8F /* Build configuration list for PBXNativeTarget "SF50 TOLDUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0163BC942DDEE9D4008FEE8F /* Debug */,
-				0163BC952DDEE9D4008FEE8F /* Release */,
+				0163BC942DDEE9D4008FEE8F /* Debug configuration for PBXNativeTarget "SF50 TOLDUITests" */,
+				0163BC952DDEE9D4008FEE8F /* Release configuration for PBXNativeTarget "SF50 TOLDUITests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		0191DC162E9322C20099FB0E /* Build configuration list for PBXNativeTarget "Generate Screenshots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0191DC142E9322C20099FB0E /* Debug */,
-				0191DC152E9322C20099FB0E /* Release */,
+				0191DC142E9322C20099FB0E /* Debug configuration for PBXNativeTarget "Generate Screenshots" */,
+				0191DC152E9322C20099FB0E /* Release configuration for PBXNativeTarget "Generate Screenshots" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		01A506962E55A73500F8EC4F /* Build configuration list for PBXNativeTarget "DownloadNASR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				01A506942E55A73500F8EC4F /* Debug */,
-				01A506952E55A73500F8EC4F /* Release */,
+				01A506942E55A73500F8EC4F /* Debug configuration for PBXNativeTarget "DownloadNASR" */,
+				01A506952E55A73500F8EC4F /* Release configuration for PBXNativeTarget "DownloadNASR" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
