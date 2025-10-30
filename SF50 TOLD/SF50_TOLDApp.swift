@@ -30,8 +30,8 @@ private class WidgetReloadObserver: ObservableObject {
   }
 
   deinit {
-    if let observer = notificationObserver {
-      NotificationCenter.default.removeObserver(observer)
+    if let notificationObserver {
+      NotificationCenter.default.removeObserver(notificationObserver)
     }
   }
 }

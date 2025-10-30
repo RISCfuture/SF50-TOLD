@@ -17,6 +17,10 @@
 		012B1E6C2DE2F463000D9ADC /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 012B1E6B2DE2F463000D9ADC /* Logging */; };
 		012B1E6E2DE2F463000D9ADC /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 012B1E6D2DE2F463000D9ADC /* AsyncAlgorithms */; };
 		01442FC62E1D901900A0BD40 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 01442FC52E1D901900A0BD40 /* InfoPlist.xcstrings */; };
+		016945BC2EB30889001602E6 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 016945BB2EB30889001602E6 /* SwiftNASR */; };
+		016945BE2EB30889001602E6 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 016945BD2EB30889001602E6 /* Logging */; };
+		016945C22EB30889001602E6 /* SwiftTimeZoneLookup in Frameworks */ = {isa = PBXBuildFile; productRef = 016945C12EB30889001602E6 /* SwiftTimeZoneLookup */; };
+		0169495C2EB314C9001602E6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0169495B2EB314C9001602E6 /* SwiftUI.framework */; };
 		0179DF3E2DE2F7A9002EC77C /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 0163BCA82DDEF40D008FEE8F /* SwiftNASR */; };
 		0179DF402DE2F7A9002EC77C /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 01D1E3122DDF890100C1CAC8 /* Logging */; };
 		0179DF412DE2F7A9002EC77C /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 0163BDEF2DE05260008FEE8F /* AsyncAlgorithms */; };
@@ -25,18 +29,14 @@
 		0198B44C2E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		0198B44D2E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		0198B44E2E986226003CB126 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 602F51ECCC3348DE83D26B3E /* Sentry */; };
-		0198B44F2E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		0198B4502E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		0198B4512E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		0198B4522E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		0198B4532E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		01A1014F2E93C12E0032AB29 /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = 01A1014E2E93C12E0032AB29 /* Gzip */; };
-		01A150A02E93BAA700D3180A /* SwiftTimeZoneLookup in Frameworks */ = {isa = PBXBuildFile; productRef = 01A1509F2E93BAA700D3180A /* SwiftTimeZoneLookup */; };
-		01A506982E55A78800F8EC4F /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 01A506972E55A78800F8EC4F /* SwiftNASR */; };
-		01A5069A2E55A78800F8EC4F /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 01A506992E55A78800F8EC4F /* Logging */; };
-		01A5069D2E55A79C00F8EC4F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 01A5069C2E55A79C00F8EC4F /* ArgumentParser */; };
 		01BEA32B2E986B10005ABCD8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 01BEA32A2E986B10005ABCD8 /* PrivacyInfo.xcprivacy */; };
 		01BEBCB82E8A401100631DE6 /* SwiftHtml in Frameworks */ = {isa = PBXBuildFile; productRef = 01BEBCB72E8A401100631DE6 /* SwiftHtml */; };
+		01EA44392EB327D7008FEB64 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EA44382EB327D7008FEB64 /* Security.framework */; };
 		AB352BDD14B44A2CA78F9D44 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 602F51ECCC3348DE83D26B3E /* Sentry */; };
 /* End PBXBuildFile section */
 
@@ -118,14 +118,6 @@
 			);
 			name = "Embed Frameworks";
 		};
-		01A5068E2E55A73500F8EC4F /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolder = None;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -138,16 +130,32 @@
 		0163BC6A2DDEE9D3008FEE8F /* SF50 TOLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SF50 TOLD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0163BC792DDEE9D4008FEE8F /* SF50 TOLDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF50 TOLDTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0163BC832DDEE9D4008FEE8F /* SF50 TOLDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF50 TOLDUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		016945992EB30848001602E6 /* DownloadNASR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DownloadNASR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0169495B2EB314C9001602E6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
 		0191DC0C2E9322C20099FB0E /* Generate Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Generate Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0191DC1B2E93232C0099FB0E /* Generate Screenshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Generate Screenshots.xctestplan"; path = "Generate Screenshots/Generate Screenshots.xctestplan"; sourceTree = "<group>"; };
 		0191DC1E2E9323590099FB0E /* SF50 Shared Unit Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SF50 Shared Unit Tests.xctestplan"; path = "SF50 SharedTests/SF50 Shared Unit Tests.xctestplan"; sourceTree = "<group>"; };
 		0191DC212E9323950099FB0E /* SF50 TOLD UI Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SF50 TOLD UI Tests.xctestplan"; path = "SF50 TOLDUITests/SF50 TOLD UI Tests.xctestplan"; sourceTree = "<group>"; };
-		01A506902E55A73500F8EC4F /* DownloadNASR */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DownloadNASR; sourceTree = BUILT_PRODUCTS_DIR; };
 		01AB24552E948B89005D8996 /* SF50 RunwaysExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SF50 RunwaysExtension.entitlements"; sourceTree = "<group>"; };
 		01BEA32A2E986B10005ABCD8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		01EA44382EB327D7008FEB64 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		01162DCE2EB3414600E40422 /* Exceptions for "SF50 TOLD" folder in "DownloadNASR" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Icon.icon,
+			);
+			target = 016945982EB30848001602E6 /* DownloadNASR */;
+		};
+		016945C42EB308A2001602E6 /* Exceptions for "SF50 Shared" folder in "DownloadNASR" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Bootstrap.swift,
+			);
+			target = 016945982EB30848001602E6 /* DownloadNASR */;
+		};
 		01A506A22E55A8BA00F8EC4F /* Exceptions for "SF50 Shared" folder in "SF50 Shared" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -155,26 +163,12 @@
 			);
 			target = 012B1E3A2DE2F272000D9ADC /* SF50 Shared */;
 		};
-		01A506A52E55A99200F8EC4F /* Exceptions for "SF50 Shared" folder in "DownloadNASR" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Bootstrap.swift,
-			);
-			target = 01A5068F2E55A73500F8EC4F /* DownloadNASR */;
-		};
 		01B887122E5E2C3500702E95 /* Exceptions for "SF50 Runways" folder in "SF50 RunwaysExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
 			target = 012837492E5B8BB8002195A0 /* SF50 RunwaysExtension */;
-		};
-		01B887142E5E805E00702E95 /* Exceptions for "DownloadNASR" folder in "SF50 TOLD" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				AirportDataCodable.swift,
-			);
-			target = 0163BC692DDEE9D3008FEE8F /* SF50 TOLD */;
 		};
 		01DB6C0E2E93875E00814F35 /* Exceptions for "SF50 TOLDUITests" folder in "Generate Screenshots" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -198,7 +192,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				01A506A22E55A8BA00F8EC4F /* Exceptions for "SF50 Shared" folder in "SF50 Shared" target */,
-				01A506A52E55A99200F8EC4F /* Exceptions for "SF50 Shared" folder in "DownloadNASR" target */,
+				016945C42EB308A2001602E6 /* Exceptions for "SF50 Shared" folder in "DownloadNASR" target */,
 			);
 			explicitFolders = (
 				Data,
@@ -213,6 +207,9 @@
 		};
 		0163BC6C2DDEE9D3008FEE8F /* SF50 TOLD */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				01162DCE2EB3414600E40422 /* Exceptions for "SF50 TOLD" folder in "DownloadNASR" target */,
+			);
 			path = "SF50 TOLD";
 			sourceTree = "<group>";
 		};
@@ -229,17 +226,14 @@
 			path = "SF50 TOLDUITests";
 			sourceTree = "<group>";
 		};
+		0169459A2EB30848001602E6 /* DownloadNASR */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DownloadNASR;
+			sourceTree = "<group>";
+		};
 		0191DC0D2E9322C20099FB0E /* Generate Screenshots */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Generate Screenshots";
-			sourceTree = "<group>";
-		};
-		01A506912E55A73500F8EC4F /* DownloadNASR */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				01B887142E5E805E00702E95 /* Exceptions for "DownloadNASR" folder in "SF50 TOLD" target */,
-			);
-			path = DownloadNASR;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -296,20 +290,20 @@
 				0198B4522E986226003CB126 /* (null) in Frameworks */,
 			);
 		};
+		016945962EB30848001602E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				01EA44392EB327D7008FEB64 /* Security.framework in Frameworks */,
+				0169495C2EB314C9001602E6 /* SwiftUI.framework in Frameworks */,
+				016945C22EB30889001602E6 /* SwiftTimeZoneLookup in Frameworks */,
+				016945BE2EB30889001602E6 /* Logging in Frameworks */,
+				016945BC2EB30889001602E6 /* SwiftNASR in Frameworks */,
+			);
+		};
 		0191DC092E9322C20099FB0E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
 				0198B44C2E986226003CB126 /* (null) in Frameworks */,
-			);
-		};
-		01A5068D2E55A73500F8EC4F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			files = (
-				01A5069D2E55A79C00F8EC4F /* ArgumentParser in Frameworks */,
-				01A150A02E93BAA700D3180A /* SwiftTimeZoneLookup in Frameworks */,
-				01A5069A2E55A78800F8EC4F /* Logging in Frameworks */,
-				01A506982E55A78800F8EC4F /* SwiftNASR in Frameworks */,
-				0198B44F2E986226003CB126 /* (null) in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -329,9 +323,9 @@
 				0163BC862DDEE9D4008FEE8F /* SF50 TOLDUITests */,
 				012B1E3C2DE2F272000D9ADC /* SF50 Shared */,
 				012B1E4B2DE2F272000D9ADC /* SF50 SharedTests */,
-				01A506912E55A73500F8EC4F /* DownloadNASR */,
 				0128374F2E5B8BB8002195A0 /* SF50 Runways */,
 				0191DC0D2E9322C20099FB0E /* Generate Screenshots */,
+				0169459A2EB30848001602E6 /* DownloadNASR */,
 				01D1E30E2DDF865100C1CAC8 /* Frameworks */,
 				0163BC6B2DDEE9D3008FEE8F /* Products */,
 			);
@@ -345,9 +339,9 @@
 				0163BC832DDEE9D4008FEE8F /* SF50 TOLDUITests.xctest */,
 				012B1E3B2DE2F272000D9ADC /* SF50_Shared.framework */,
 				012B1E452DE2F272000D9ADC /* SF50 SharedTests.xctest */,
-				01A506902E55A73500F8EC4F /* DownloadNASR */,
 				0128374A2E5B8BB8002195A0 /* SF50 RunwaysExtension.appex */,
 				0191DC0C2E9322C20099FB0E /* Generate Screenshots.xctest */,
+				016945992EB30848001602E6 /* DownloadNASR.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -355,6 +349,8 @@
 		01D1E30E2DDF865100C1CAC8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01EA44382EB327D7008FEB64 /* Security.framework */,
+				0169495B2EB314C9001602E6 /* SwiftUI.framework */,
 				0128374B2E5B8BB8002195A0 /* WidgetKit.framework */,
 				0128374D2E5B8BB8002195A0 /* SwiftUI.framework */,
 			);
@@ -516,6 +512,29 @@
 			productReference = 0163BC832DDEE9D4008FEE8F /* SF50 TOLDUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		016945982EB30848001602E6 /* DownloadNASR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 016945A12EB30848001602E6 /* Build configuration list for PBXNativeTarget "DownloadNASR" */;
+			buildPhases = (
+				016945952EB30848001602E6 /* Sources */,
+				016945962EB30848001602E6 /* Frameworks */,
+				016945972EB30848001602E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				0169459A2EB30848001602E6 /* DownloadNASR */,
+			);
+			name = DownloadNASR;
+			packageProductDependencies = (
+				016945BB2EB30889001602E6 /* SwiftNASR */,
+				016945BD2EB30889001602E6 /* Logging */,
+				016945C12EB30889001602E6 /* SwiftTimeZoneLookup */,
+			);
+			productName = DownloadNASR;
+			productReference = 016945992EB30848001602E6 /* DownloadNASR.app */;
+			productType = "com.apple.product-type.application";
+		};
 		0191DC0B2E9322C20099FB0E /* Generate Screenshots */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0191DC162E9322C20099FB0E /* Build configuration list for PBXNativeTarget "Generate Screenshots" */;
@@ -536,30 +555,6 @@
 			productName = "Generate Screenshots";
 			productReference = 0191DC0C2E9322C20099FB0E /* Generate Screenshots.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		01A5068F2E55A73500F8EC4F /* DownloadNASR */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 01A506962E55A73500F8EC4F /* Build configuration list for PBXNativeTarget "DownloadNASR" */;
-			buildPhases = (
-				01A5068C2E55A73500F8EC4F /* Sources */,
-				01A5068D2E55A73500F8EC4F /* Frameworks */,
-				01A5068E2E55A73500F8EC4F /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			fileSystemSynchronizedGroups = (
-				01A506912E55A73500F8EC4F /* DownloadNASR */,
-			);
-			name = DownloadNASR;
-			packageProductDependencies = (
-				01A506972E55A78800F8EC4F /* SwiftNASR */,
-				01A506992E55A78800F8EC4F /* Logging */,
-				01A5069C2E55A79C00F8EC4F /* ArgumentParser */,
-				01A1509F2E93BAA700D3180A /* SwiftTimeZoneLookup */,
-			);
-			productName = DownloadNASR;
-			productReference = 01A506902E55A73500F8EC4F /* DownloadNASR */;
-			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -592,13 +587,12 @@
 						CreatedOnToolsVersion = 16.3;
 						TestTargetID = 0163BC692DDEE9D3008FEE8F;
 					};
+					016945982EB30848001602E6 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
 					0191DC0B2E9322C20099FB0E = {
 						CreatedOnToolsVersion = 26.0.1;
 						TestTargetID = 0163BC692DDEE9D3008FEE8F;
-					};
-					01A5068F2E55A73500F8EC4F = {
-						CreatedOnToolsVersion = 16.4;
-						LastSwiftMigration = 1640;
 					};
 				};
 			};
@@ -617,7 +611,6 @@
 				0163BDEE2DE05260008FEE8F /* XCRemoteSwiftPackageReference "swift-async-algorithms" */,
 				0179DFBE2DE3CDD3002EC77C /* XCRemoteSwiftPackageReference "Defaults" */,
 				0116B3A72E331916001FC453 /* XCRemoteSwiftPackageReference "swift-numerics" */,
-				01A5069B2E55A79C00F8EC4F /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				01BEBCB62E8A401100631DE6 /* XCRemoteSwiftPackageReference "swift-html" */,
 				01A1509E2E93B93900D3180A /* XCRemoteSwiftPackageReference "SwiftTimeZoneLookup" */,
 				01A1014D2E93BF240032AB29 /* XCRemoteSwiftPackageReference "GzipSwift" */,
@@ -633,9 +626,9 @@
 				0163BC822DDEE9D4008FEE8F /* SF50 TOLDUITests */,
 				012B1E3A2DE2F272000D9ADC /* SF50 Shared */,
 				012B1E442DE2F272000D9ADC /* SF50 SharedTests */,
-				01A5068F2E55A73500F8EC4F /* DownloadNASR */,
 				012837492E5B8BB8002195A0 /* SF50 RunwaysExtension */,
 				0191DC0B2E9322C20099FB0E /* Generate Screenshots */,
+				016945982EB30848001602E6 /* DownloadNASR */,
 			);
 		};
 /* End PBXProject section */
@@ -669,6 +662,11 @@
 			);
 		};
 		0163BC812DDEE9D4008FEE8F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		016945972EB30848001602E6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -708,6 +706,10 @@
 				"fi",
 				"",
 				"",
+				"",
+				"",
+				"",
+				"",
 			);
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -743,12 +745,12 @@
 			files = (
 			);
 		};
-		0191DC082E9322C20099FB0E /* Sources */ = {
+		016945952EB30848001602E6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
 			);
 		};
-		01A5068C2E55A73500F8EC4F /* Sources */ = {
+		0191DC082E9322C20099FB0E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
 			);
@@ -823,7 +825,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -852,7 +853,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1230,6 +1230,98 @@
 			};
 			name = Release;
 		};
+		016945A22EB30848001602E6 /* Debug configuration for PBXNativeTarget "DownloadNASR" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = DownloadNASR/DownloadNASR.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2NFSK2WB24;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.DownloadNASR";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+			};
+			name = Debug;
+		};
+		016945A32EB30848001602E6 /* Release configuration for PBXNativeTarget "DownloadNASR" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = DownloadNASR/DownloadNASR.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2NFSK2WB24;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SELECTED_FILES = readwrite;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.DownloadNASR";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+			};
+			name = Release;
+		};
 		0191DC142E9322C20099FB0E /* Debug configuration for PBXNativeTarget "Generate Screenshots" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1245,7 +1337,6 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "SF50 TOLD";
 			};
@@ -1266,42 +1357,8 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "SF50 TOLD";
-			};
-			name = Release;
-		};
-		01A506942E55A73500F8EC4F /* Debug configuration for PBXNativeTarget "DownloadNASR" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 2NFSK2WB24;
-				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_BUNDLE_IDENTIFIER = codes.tim;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 6.0;
-			};
-			name = Debug;
-		};
-		01A506952E55A73500F8EC4F /* Release configuration for PBXNativeTarget "DownloadNASR" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 2NFSK2WB24;
-				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_BUNDLE_IDENTIFIER = codes.tim;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -1364,19 +1421,19 @@
 			);
 			defaultConfigurationName = Release;
 		};
+		016945A12EB30848001602E6 /* Build configuration list for PBXNativeTarget "DownloadNASR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				016945A22EB30848001602E6 /* Debug configuration for PBXNativeTarget "DownloadNASR" */,
+				016945A32EB30848001602E6 /* Release configuration for PBXNativeTarget "DownloadNASR" */,
+			);
+			defaultConfigurationName = Release;
+		};
 		0191DC162E9322C20099FB0E /* Build configuration list for PBXNativeTarget "Generate Screenshots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0191DC142E9322C20099FB0E /* Debug configuration for PBXNativeTarget "Generate Screenshots" */,
 				0191DC152E9322C20099FB0E /* Release configuration for PBXNativeTarget "Generate Screenshots" */,
-			);
-			defaultConfigurationName = Release;
-		};
-		01A506962E55A73500F8EC4F /* Build configuration list for PBXNativeTarget "DownloadNASR" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				01A506942E55A73500F8EC4F /* Debug configuration for PBXNativeTarget "DownloadNASR" */,
-				01A506952E55A73500F8EC4F /* Release configuration for PBXNativeTarget "DownloadNASR" */,
 			);
 			defaultConfigurationName = Release;
 		};
@@ -1431,14 +1488,6 @@
 				minimumVersion = 1.0.7;
 			};
 		};
-		01A5069B2E55A79C00F8EC4F /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.1;
-			};
-		};
 		01BEBCB62E8A401100631DE6 /* XCRemoteSwiftPackageReference "swift-html" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BinaryBirds/swift-html";
@@ -1491,6 +1540,21 @@
 			package = 0163BDEE2DE05260008FEE8F /* XCRemoteSwiftPackageReference "swift-async-algorithms" */;
 			productName = AsyncAlgorithms;
 		};
+		016945BB2EB30889001602E6 /* SwiftNASR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0163BCA72DDEF40D008FEE8F /* XCRemoteSwiftPackageReference "SwiftNASR" */;
+			productName = SwiftNASR;
+		};
+		016945BD2EB30889001602E6 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01D1E3112DDF890100C1CAC8 /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+		016945C12EB30889001602E6 /* SwiftTimeZoneLookup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01A1509E2E93B93900D3180A /* XCRemoteSwiftPackageReference "SwiftTimeZoneLookup" */;
+			productName = SwiftTimeZoneLookup;
+		};
 		0179DFBF2DE3CDD3002EC77C /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0179DFBE2DE3CDD3002EC77C /* XCRemoteSwiftPackageReference "Defaults" */;
@@ -1505,26 +1569,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 01A1014D2E93BF240032AB29 /* XCRemoteSwiftPackageReference "GzipSwift" */;
 			productName = Gzip;
-		};
-		01A1509F2E93BAA700D3180A /* SwiftTimeZoneLookup */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 01A1509E2E93B93900D3180A /* XCRemoteSwiftPackageReference "SwiftTimeZoneLookup" */;
-			productName = SwiftTimeZoneLookup;
-		};
-		01A506972E55A78800F8EC4F /* SwiftNASR */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0163BCA72DDEF40D008FEE8F /* XCRemoteSwiftPackageReference "SwiftNASR" */;
-			productName = SwiftNASR;
-		};
-		01A506992E55A78800F8EC4F /* Logging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 01D1E3112DDF890100C1CAC8 /* XCRemoteSwiftPackageReference "swift-log" */;
-			productName = Logging;
-		};
-		01A5069C2E55A79C00F8EC4F /* ArgumentParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 01A5069B2E55A79C00F8EC4F /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
-			productName = ArgumentParser;
 		};
 		01BEBCB72E8A401100631DE6 /* SwiftHtml */ = {
 			isa = XCSwiftPackageProductDependency;

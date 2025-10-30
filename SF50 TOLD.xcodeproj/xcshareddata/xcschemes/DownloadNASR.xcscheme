@@ -15,8 +15,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "01A5068F2E55A73500F8EC4F"
-               BuildableName = "DownloadNASR"
+               BlueprintIdentifier = "016945982EB30848001602E6"
+               BuildableName = "DownloadNASR.app"
                BlueprintName = "DownloadNASR"
                ReferencedContainer = "container:SF50 TOLD.xcodeproj">
             </BuildableReference>
@@ -46,8 +46,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "01A5068F2E55A73500F8EC4F"
-            BuildableName = "DownloadNASR"
+            BlueprintIdentifier = "016945982EB30848001602E6"
+            BuildableName = "DownloadNASR.app"
             BlueprintName = "DownloadNASR"
             ReferencedContainer = "container:SF50 TOLD.xcodeproj">
          </BuildableReference>
@@ -63,8 +63,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "01A5068F2E55A73500F8EC4F"
-            BuildableName = "DownloadNASR"
+            BlueprintIdentifier = "016945982EB30848001602E6"
+            BuildableName = "DownloadNASR.app"
             BlueprintName = "DownloadNASR"
             ReferencedContainer = "container:SF50 TOLD.xcodeproj">
          </BuildableReference>

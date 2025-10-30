@@ -107,26 +107,26 @@ extension InterpolationView where ValueType: Numeric & Comparable {
       maximum: maximum,
       maxCritical: maxCritical,
       rangeValidator: { value, min, max in
-        if let minimum = min, value < minimum {
+        if let min, value < min {
           return maxCritical ? .secondary : .red
         }
-        if let maximum = max, value > maximum {
+        if let max, value > max {
           return maxCritical ? .red : .secondary
         }
         return .primary
       },
       uncertaintyValidator: { value, uncertainty, min, max in
         // Check if value ± uncertainty would be outside bounds
-        if let minimum = min {
+        if let min {
           let lowerBound = value - uncertainty
-          if lowerBound < minimum {
+          if lowerBound < min {
             return .red
           }
         }
 
-        if let maximum = max {
+        if let max {
           let upperBound = value + uncertainty
-          if upperBound > maximum {
+          if upperBound > max {
             return .red
           }
         }
@@ -156,26 +156,26 @@ extension InterpolationView where ValueType: Comparable {
       maximum: maximum,
       maxCritical: maxCritical,
       rangeValidator: { value, min, max in
-        if let minimum = min, value < minimum {
+        if let min, value < min {
           return maxCritical ? .secondary : .red
         }
-        if let maximum = max, value > maximum {
+        if let max, value > max {
           return maxCritical ? .red : .secondary
         }
         return .primary
       },
       uncertaintyValidator: { value, uncertainty, min, max in
         // Check if value ± uncertainty would be outside bounds
-        if let minimum = min {
+        if let min {
           let lowerBound = value - uncertainty
-          if lowerBound < minimum {
+          if lowerBound < min {
             return .red
           }
         }
 
-        if let maximum = max {
+        if let max {
           let upperBound = value + uncertainty
-          if upperBound > maximum {
+          if upperBound > max {
             return .red
           }
         }

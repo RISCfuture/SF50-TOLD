@@ -223,21 +223,21 @@ final class SF50_TOLDUITests: XCTestCase {
       "Should be able to extract distance value from: \(takeoffDistance.label)"
     )
 
-    if let groundRun = groundRunValue {
+    if let groundRunValue {
       XCTAssertEqual(
-        groundRun,
+        groundRunValue,
         1798,
         accuracy: 1,
-        "Ground run should be exactly 1798 ft (±1), got: \(groundRun)"
+        "Ground run should be exactly 1798 ft (±1), got: \(groundRunValue)"
       )
     }
 
-    if let distance = distanceValue {
+    if let distanceValue {
       XCTAssertEqual(
-        distance,
+        distanceValue,
         2643,
         accuracy: 1,
-        "Takeoff distance should be exactly 2643 ft (±1), got: \(distance)"
+        "Takeoff distance should be exactly 2643 ft (±1), got: \(distanceValue)"
       )
     }
   }
@@ -381,12 +381,12 @@ final class SF50_TOLDUITests: XCTestCase {
       "Should be able to extract landing distance value from: \(landingDistance.label)"
     )
 
-    if let distance = distanceValue {
+    if let distanceValue {
       XCTAssertEqual(
-        distance,
+        distanceValue,
         1769,
         accuracy: 1,
-        "Landing distance should be exactly 1769 ft (±1), got: \(distance)"
+        "Landing distance should be exactly 1769 ft (±1), got: \(distanceValue)"
       )
     }
   }
@@ -543,22 +543,22 @@ final class SF50_TOLDUITests: XCTestCase {
       "Should be able to extract distance value from: \(takeoffDistance.label)"
     )
 
-    if let groundRun = groundRunValue {
+    if let groundRunValue {
       // Exact value expected: 2231 ft
       XCTAssertEqual(
-        groundRun,
+        groundRunValue,
         2081,
         accuracy: 1,
-        "Ground run should be exactly 2081 ft (±1), got: \(groundRun)"
+        "Ground run should be exactly 2081 ft (±1), got: \(groundRunValue)"
       )
     }
 
-    if let distance = distanceValue {
+    if let distanceValue {
       XCTAssertEqual(
-        distance,
+        distanceValue,
         3334,
         accuracy: 1,
-        "Takeoff distance should be exactly 3334 ft (±1), got: \(distance)"
+        "Takeoff distance should be exactly 3334 ft (±1), got: \(distanceValue)"
       )
     }
   }
@@ -1039,10 +1039,15 @@ final class SF50_TOLDUITests: XCTestCase {
     Thread.sleep(forTimeInterval: 0.5)
     let contaminatedDistance = extractNumericValue(from: landingDistance.label)
 
-    if let baseline = baselineDistance, let contaminated = contaminatedDistance {
-      XCTAssertEqual(baseline, 1769.0, accuracy: 1.0, "Baseline landing distance should be 1769.0")
+    if let baselineDistance, let contaminatedDistance {
       XCTAssertEqual(
-        contaminated,
+        baselineDistance,
+        1769.0,
+        accuracy: 1.0,
+        "Baseline landing distance should be 1769.0"
+      )
+      XCTAssertEqual(
+        contaminatedDistance,
         2432.0,
         accuracy: 10.0,
         "Contaminated landing distance should be approximately 2432.0 (±10 ft due to slider precision)"
@@ -1093,10 +1098,10 @@ final class SF50_TOLDUITests: XCTestCase {
     }
     let clearedDistance = extractNumericValue(from: landingDistance.label)
 
-    if let baseline = baselineDistance, let cleared = clearedDistance {
+    if let baselineDistance, let clearedDistance {
       XCTAssertEqual(
-        cleared,
-        baseline,
+        clearedDistance,
+        baselineDistance,
         accuracy: 1,
         "Landing distance should return to baseline after clearing NOTAMs"
       )
@@ -1257,9 +1262,19 @@ final class SF50_TOLDUITests: XCTestCase {
     )
     let adjustedDistance = extractNumericValue(from: takeoffDistance.label)
 
-    if let baseline = baselineDistance, let adjusted = adjustedDistance {
-      XCTAssertEqual(baseline, 2643.0, accuracy: 1.0, "Baseline takeoff distance should be 2643.0")
-      XCTAssertEqual(adjusted, 2907.0, accuracy: 1.0, "Adjusted takeoff distance should be 2907.0")
+    if let baselineDistance, let adjustedDistance {
+      XCTAssertEqual(
+        baselineDistance,
+        2643.0,
+        accuracy: 1.0,
+        "Baseline takeoff distance should be 2643.0"
+      )
+      XCTAssertEqual(
+        adjustedDistance,
+        2907.0,
+        accuracy: 1.0,
+        "Adjusted takeoff distance should be 2907.0"
+      )
     }
 
     // Reset safety factor
@@ -1390,10 +1405,10 @@ final class SF50_TOLDUITests: XCTestCase {
     }
     let flaps50Distance = extractNumericValue(from: landingDistance.label)
 
-    if let distance100 = flaps100Distance, let distance50 = flaps50Distance {
+    if let flaps100Distance, let flaps50Distance {
       XCTAssertNotEqual(
-        distance100,
-        distance50,
+        flaps100Distance,
+        flaps50Distance,
         accuracy: 1,
         "Landing distance should differ between flap settings"
       )
@@ -1420,15 +1435,15 @@ final class SF50_TOLDUITests: XCTestCase {
     }
     let flapsUpDistance = extractNumericValue(from: landingDistance.label)
 
-    if let distance100 = flaps100Distance, let distanceUp = flapsUpDistance {
+    if let flaps100Distance, let flapsUpDistance {
       XCTAssertEqual(
-        distance100,
+        flaps100Distance,
         1769.0,
         accuracy: 1.0,
         "Flaps 100% landing distance should be 1769.0"
       )
       XCTAssertEqual(
-        distanceUp,
+        flapsUpDistance,
         2248.0,
         accuracy: 1.0,
         "Flaps Up landing distance should be 2248.0"

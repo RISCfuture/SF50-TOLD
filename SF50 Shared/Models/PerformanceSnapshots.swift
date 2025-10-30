@@ -150,15 +150,15 @@ public struct RunwayInput: Identifiable, Hashable, Sendable, Comparable {
   /// Creates a copy of this runway with contamination override applied
   public func withContamination(_ contamination: Contamination?) -> Self {
     let newNotam: NOTAMSnapshot?
-    if let existingNotam = notam {
+    if let notam {
       // Create a new NOTAM with the contamination override but keep other values
       newNotam = NOTAMSnapshot(
         contaminationType: contamination?.type,
         contaminationDepth: .init(value: contamination?.depth ?? 0, unit: .meters),
-        takeoffDistanceShortening: existingNotam.takeoffDistanceShortening,
-        landingDistanceShortening: existingNotam.landingDistanceShortening,
-        obstacleHeight: existingNotam.obstacleHeight,
-        obstacleDistance: existingNotam.obstacleDistance
+        takeoffDistanceShortening: notam.takeoffDistanceShortening,
+        landingDistanceShortening: notam.landingDistanceShortening,
+        obstacleHeight: notam.obstacleHeight,
+        obstacleDistance: notam.obstacleDistance
       )
     } else if let contamination {
       // Create a new NOTAM with just the contamination

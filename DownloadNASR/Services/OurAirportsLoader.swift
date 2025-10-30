@@ -4,6 +4,7 @@ import TabularData
 
 struct OurAirportsLoader {
   private let logger: Logger
+  private let progress: Progress
 
   private let airportsURL = URL(
     string: "https://davidmegginson.github.io/ourairports-data/airports.csv"
@@ -12,71 +13,83 @@ struct OurAirportsLoader {
     string: "https://davidmegginson.github.io/ourairports-data/runways.csv"
   )!
 
-  init(logger: Logger) {
+  init(logger: Logger, progress: Progress) {
     self.logger = logger
+    self.progress = progress
   }
 
   func loadAirports() async throws -> ([OurAirportData], Date) {
+    progress.totalUnitCount = 2
+
     logger.notice("Downloading OurAirports data…")
+    progress.localizedDescription = "Downloading OurAirports data…"
 
     // Download CSV files
     let (airportsData, _) = try await URLSession.shared.data(from: airportsURL)
     let (runwaysData, _) = try await URLSession.shared.data(from: runwaysURL)
+    progress.completedUnitCount = 1
 
     logger.notice("Parsing OurAirports CSVs…")
+    progress.localizedDescription = "Parsing OurAirports CSVs…"
 
-    // Parse airports CSV
-    let airportsDataFrame = try DataFrame(
-      csvData: airportsData,
-      options: CSVReadingOptions(hasHeaderRow: true)
-    )
+    // Parse and process data on background thread to avoid blocking UI
+    let airports = try await Task.detached {
+      // Parse airports CSV
+      let airportsDataFrame = try DataFrame(
+        csvData: airportsData,
+        options: CSVReadingOptions(hasHeaderRow: true)
+      )
 
-    // Parse runways CSV
-    let runwaysDataFrame = try DataFrame(
-      csvData: runwaysData,
-      options: CSVReadingOptions(hasHeaderRow: true)
-    )
+      // Parse runways CSV
+      let runwaysDataFrame = try DataFrame(
+        csvData: runwaysData,
+        options: CSVReadingOptions(hasHeaderRow: true)
+      )
 
-    // Convert to our data structures
-    var airports = [OurAirportData]()
-    let runwaysByAirport = groupRunwaysByAirport(runwaysDataFrame)
+      // Convert to our data structures
+      var airports = [OurAirportData]()
+      let runwaysByAirport = await groupRunwaysByAirport(runwaysDataFrame)
 
-    for row in airportsDataFrame.rows {
-      guard let id = row["id", Int.self],
-        let ident = row["ident", String.self],
-        let type = row["type", String.self],
-        // Only include airports (not heliports, seaplane bases, etc.)
-        ["small_airport", "medium_airport", "large_airport"].contains(type),
-        let name = row["name", String.self],
-        let latitude = row["latitude_deg", Double.self],
-        let longitude = row["longitude_deg", Double.self]
-      else {
-        continue
+      for row in airportsDataFrame.rows {
+        guard let id = row["id", Int.self],
+          let ident = row["ident", String.self],
+          let type = row["type", String.self],
+          // Only include airports (not heliports, seaplane bases, etc.)
+          ["small_airport", "medium_airport", "large_airport"].contains(type),
+          let name = row["name", String.self],
+          let latitude = row["latitude_deg", Double.self],
+          let longitude = row["longitude_deg", Double.self]
+        else {
+          continue
+        }
+
+        let localId = row["local_code", String.self] ?? ""
+        let locationId = localId.isEmpty ? ident : localId
+        let ICAO_ID = row["icao_code", String.self]
+        let elevation = Double(row["elevation_ft", Int.self] ?? 0)
+        let municipality = row["municipality", String.self]
+
+        let runways = runwaysByAirport[ident] ?? []
+        let airport = OurAirportData(
+          id: String(id),
+          localId: locationId,
+          ICAO_ID: ICAO_ID,
+          name: name,
+          municipality: municipality,
+          latitude: latitude,
+          longitude: longitude,
+          elevationFt: elevation,
+          runways: runways
+        )
+        airports.append(airport)
       }
 
-      let localId = row["local_code", String.self] ?? ""
-      let locationId = localId.isEmpty ? ident : localId
-      let ICAO_ID = row["icao_code", String.self]
-      let elevation = Double(row["elevation_ft", Int.self] ?? 0)
-      let municipality = row["municipality", String.self]
-
-      let runways = runwaysByAirport[ident] ?? []
-      let airport = OurAirportData(
-        id: String(id),
-        localId: locationId,
-        ICAO_ID: ICAO_ID,
-        name: name,
-        municipality: municipality,
-        latitude: latitude,
-        longitude: longitude,
-        elevationFt: elevation,
-        runways: runways
-      )
-      airports.append(airport)
-    }
+      return airports
+    }.value
 
     // Use current date as last updated
     let lastUpdated = Date()
+    progress.completedUnitCount = 2
 
     logger.notice("Loaded \(airports.count) airports from OurAirports")
     return (airports, lastUpdated)
@@ -161,9 +174,7 @@ struct OurAirportsLoader {
     }
 
     // CON by itself (not part of "concrete") is also hard surface
-    if surface == "CON" {
-      return true
-    }
+    if surface == "CON" { return true }
 
     return false
   }
