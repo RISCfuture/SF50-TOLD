@@ -24,13 +24,12 @@ struct ContentView: View {
       set: { _ in }
     )
 
-    VStack(spacing: 20) {
-      // Title
+    VStack(alignment: .leading) {
       Text("SF50 TOLD Data Downloader")
         .font(.title)
         .fontWeight(.bold)
+        .padding(.bottom)
 
-      Spacer()
       Form {
         HStack {
           Picker("Cycle", selection: $selectedCycleOption) {
@@ -49,16 +48,18 @@ struct ContentView: View {
                 isCustomCycleInvalid ? Color.red : Color.primary
               )
           }
+
+          Button(buttonTitle, action: downloadAndProcess)
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .disabled(viewModel.isProcessing || cycle == nil)
         }
       }
-
-      Divider()
-
-      // Download button
-      Button(buttonTitle, action: downloadAndProcess)
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
-        .disabled(viewModel.isProcessing || cycle == nil)
+      if let cycle, let date = cycle.date, let endDate = cycle.endDate {
+        Text(date..<endDate, format: .interval.year().month().day())
+          .foregroundStyle(.secondary)
+          .font(.system(size: 12))
+      }
 
       Spacer()
 
