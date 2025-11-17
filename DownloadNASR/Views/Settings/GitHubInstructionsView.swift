@@ -40,7 +40,7 @@ struct GitHubInstructionsView: View {
 
       Link(destination: URL(string: "https://github.com/settings/personal-access-tokens/new")!) {
         Label("Open GitHub Token Settings", systemImage: "arrow.up.right.square")
-        .font(.caption)
+          .font(.caption)
       }
       .padding(.top, 4)
     }

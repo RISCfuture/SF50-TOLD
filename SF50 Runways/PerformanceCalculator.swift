@@ -59,20 +59,32 @@ class PerformanceCalculator {
     }
 
     let conditions = await loadWeatherFor(airport: airport)
+    let runwaySnapshots = createRunwaySnapshots(from: airport)
 
     // If we couldn't load weather, show the airport but with unknown performance values
     if conditions == nil {
       return [
         RunwayWidgetEntry(
           date: Date(),
-          airport: airport,
+          airportName: airport.name,
+          runways: runwaySnapshots,
           conditions: nil,
           takeoffDistances: nil
         )
       ]
     }
 
-    return entriesFor(airport: airport, conditions: conditions)
+    return entriesFor(airport: airport, runwaySnapshots: runwaySnapshots, conditions: conditions)
+  }
+
+  private func createRunwaySnapshots(from airport: Airport) -> [RunwaySnapshot] {
+    airport.runways.map { runway in
+      RunwaySnapshot(
+        name: runway.name,
+        takeoffDistanceOrLength: runway.takeoffDistanceOrLength,
+        trueHeading: runway.trueHeading
+      )
+    }
   }
 
   private func loadWeatherFor(airport: Airport) async -> Conditions? {
@@ -94,7 +106,11 @@ class PerformanceCalculator {
     return nil
   }
 
-  private func entriesFor(airport: Airport, conditions: Conditions?) -> [RunwayWidgetEntry] {
+  private func entriesFor(
+    airport: Airport,
+    runwaySnapshots: [RunwaySnapshot],
+    conditions: Conditions?
+  ) -> [RunwayWidgetEntry] {
     let date = Date()
 
     // Only calculate takeoff distances if we have valid conditions
@@ -102,7 +118,8 @@ class PerformanceCalculator {
       return [
         RunwayWidgetEntry(
           date: date,
-          airport: airport,
+          airportName: airport.name,
+          runways: runwaySnapshots,
           conditions: nil,
           takeoffDistances: nil
         )
@@ -113,7 +130,8 @@ class PerformanceCalculator {
     return [
       RunwayWidgetEntry(
         date: date,
-        airport: airport,
+        airportName: airport.name,
+        runways: runwaySnapshots,
         conditions: conditions,
         takeoffDistances: takeoffDistances
       )

@@ -14,19 +14,24 @@ struct TOLDProvider: TimelineProvider {
 
   func placeholder(in _: Context) -> RunwayWidgetEntry { .empty() }
 
-  func getSnapshot(in context: Context, completion: @escaping (RunwayWidgetEntry) -> Void) {
-    Task {
+  func getSnapshot(in context: Context, completion: @escaping @Sendable (RunwayWidgetEntry) -> Void)
+  {
+    let placeholderEntry = placeholder(in: context)
+    Task { @MainActor in
       let entries = await performanceCalculator.generateEntries()
       guard let entry = entries.first else {
-        completion(placeholder(in: context))
+        completion(placeholderEntry)
         return
       }
       completion(entry)
     }
   }
 
-  func getTimeline(in _: Context, completion: @escaping (Timeline<RunwayWidgetEntry>) -> Void) {
-    Task {
+  func getTimeline(
+    in _: Context,
+    completion: @escaping @Sendable (Timeline<RunwayWidgetEntry>) -> Void
+  ) {
+    Task { @MainActor in
       let entries = await performanceCalculator.generateEntries()
       // Refresh every 15 minutes for weather updates
       // Settings changes will trigger immediate refresh via WidgetCenter.reloadTimelines

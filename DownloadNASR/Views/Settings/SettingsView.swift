@@ -43,9 +43,12 @@ struct SettingsView: View {
             .buttonStyle(.borderedProminent)
 
             if hasStoredToken {
-              Button(action: { showingDeleteConfirmation = true }, label: {
-                Label("Delete", systemImage: "trash")
-              })
+              Button(
+                action: { showingDeleteConfirmation = true },
+                label: {
+                  Label("Delete", systemImage: "trash")
+                }
+              )
               .buttonStyle(.bordered)
               .tint(.red)
             }

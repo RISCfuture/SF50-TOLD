@@ -9,9 +9,9 @@ struct SelectedAirportWidgetEntryView: View {
   var entry: TOLDProvider.Entry
 
   @ViewBuilder var body: some View {
-    if let airport = entry.airport {
+    if let airportName = entry.airportName {
       VStack(alignment: .leading, spacing: 10) {
-        WidgetAirportView(name: airport.name)
+        WidgetAirportView(name: airportName)
         switch family {
           case .systemSmall:
             WidgetGridView(entry: entry)

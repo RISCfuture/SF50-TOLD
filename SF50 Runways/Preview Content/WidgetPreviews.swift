@@ -6,6 +6,16 @@ import WidgetKit
 // Helper to create sample entries for widget previews
 @MainActor
 enum PreviewEntries {
+  private static func createRunwaySnapshots(from airport: Airport) -> [RunwaySnapshot] {
+    airport.runways.map { runway in
+      RunwaySnapshot(
+        name: runway.name,
+        takeoffDistanceOrLength: runway.takeoffDistanceOrLength,
+        trueHeading: runway.trueHeading
+      )
+    }
+  }
+
   static func airportWithPerformance() -> RunwayWidgetEntry {
     // We can't use PreviewView in timeline closures, so we create sample data directly
     // Use the unsaved() airports which don't require database context
@@ -24,7 +34,8 @@ enum PreviewEntries {
 
     return RunwayWidgetEntry(
       date: Date(),
-      airport: airport,
+      airportName: airport.name,
+      runways: createRunwaySnapshots(from: airport),
       conditions: conditions,
       takeoffDistances: takeoffDistances
     )
@@ -48,7 +59,8 @@ enum PreviewEntries {
 
     return RunwayWidgetEntry(
       date: Date(),
-      airport: airport,
+      airportName: airport.name,
+      runways: createRunwaySnapshots(from: airport),
       conditions: conditions,
       takeoffDistances: takeoffDistances
     )
@@ -70,7 +82,8 @@ enum PreviewEntries {
 
     return RunwayWidgetEntry(
       date: Date(),
-      airport: airport,
+      airportName: airport.name,
+      runways: createRunwaySnapshots(from: airport),
       conditions: conditions,
       takeoffDistances: takeoffDistances
     )

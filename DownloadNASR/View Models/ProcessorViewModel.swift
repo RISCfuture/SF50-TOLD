@@ -122,11 +122,6 @@ private struct UILogHandler: LogHandler {
   var logLevel: Logger.Level = .notice
   var metadata: Logger.Metadata = [:]
 
-  subscript(metadataKey key: String) -> Logger.Metadata.Value? {
-    get { metadata[key] }
-    set { metadata[key] = newValue }
-  }
-
   func log(
     level: Logger.Level,
     message: Logger.Message,
@@ -154,5 +149,10 @@ private struct UILogHandler: LogHandler {
     Task { @MainActor in
       viewModel?.addLogEntry(entry)
     }
+  }
+
+  subscript(metadataKey key: String) -> Logger.Metadata.Value? {
+    get { metadata[key] }
+    set { metadata[key] = newValue }
   }
 }

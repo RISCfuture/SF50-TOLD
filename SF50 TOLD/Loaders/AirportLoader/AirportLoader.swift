@@ -75,8 +75,9 @@ actor AirportLoader {
     for (batchIndex, batch) in batches.enumerated() {
       try await withThrowingDiscardingTaskGroup { group in
         for airport in batch {
+          let airportCopy = airport
           group.addTask {
-            await self.addAirport(airport)
+            await self.addAirport(airportCopy)
           }
         }
       }

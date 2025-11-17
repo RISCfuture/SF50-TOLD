@@ -4,7 +4,7 @@ import SwiftUI
 import WidgetKit
 
 struct RunwayListItem: View {
-  var runway: Runway
+  var runway: RunwaySnapshot
   var takeoffDistance: Value<Measurement<UnitLength>>?
   var conditions: Conditions?
 
@@ -24,7 +24,7 @@ struct RunwayListItem: View {
         .fixedSize(horizontal: true, vertical: false)
 
       if let conditions {
-        WindComponents(runway: runway, conditions: conditions)
+        SnapshotWindComponents(runway: runway, conditions: conditions)
       }
 
       Spacer()
@@ -60,4 +60,68 @@ struct RunwayListItem: View {
       }
     }
   }
+}
+
+/// Wind components view for RunwaySnapshot (widget-specific version)
+private struct SnapshotWindComponents: View {
+  var runway: RunwaySnapshot
+  var conditions: Conditions
+
+  @Default(.speedUnit)
+  private var speedUnit
+
+  var headwind: Measurement<UnitSpeed> { runway.headwind(conditions: conditions) }
+  var crosswind: Measurement<UnitSpeed> { runway.crosswind(conditions: conditions) }
+
+  var body: some View {
+    HStack {
+      if headwind.isPositive {
+        HStack(spacing: 0) {
+          Image(systemName: "arrowtriangle.down.fill")
+            .foregroundStyle(.green)
+            .accessibilityLabel("headwind")
+          Text(headwind.converted(to: speedUnit).value.magnitude, format: .speed)
+            .fixedSize(horizontal: true, vertical: false)
+            .foregroundStyle(.primary)
+            .accessibilityIdentifier("headwind")
+        }
+      } else if headwind.isNegative {
+        HStack(spacing: 0) {
+          Image(systemName: "arrowtriangle.up.fill")
+            .foregroundStyle(.red)
+            .accessibilityLabel("tailwind")
+          Text(headwind.converted(to: speedUnit).value.magnitude, format: .speed)
+            .foregroundStyle(.primary)
+            .fixedSize(horizontal: true, vertical: false)
+            .accessibilityIdentifier("headwind")
+        }
+      }
+      if crosswind.isPositive {
+        HStack(spacing: 0) {
+          Image(systemName: "arrowtriangle.left.fill")
+            .foregroundStyle(.gray)
+            .accessibilityLabel("left crosswind")
+          Text(crosswind.converted(to: speedUnit).value.magnitude, format: .speed)
+            .foregroundStyle(.primary)
+            .fixedSize(horizontal: true, vertical: false)
+            .accessibilityIdentifier("crosswind")
+        }
+      } else if crosswind.isNegative {
+        HStack(spacing: 0) {
+          Image(systemName: "arrowtriangle.right.fill")
+            .foregroundStyle(.gray)
+            .accessibilityLabel("right crosswind")
+          Text(crosswind.converted(to: speedUnit).value.magnitude, format: .speed)
+            .foregroundStyle(.primary)
+            .fixedSize(horizontal: true, vertical: false)
+            .accessibilityIdentifier("crosswind")
+        }
+      }
+    }
+  }
+}
+
+extension Measurement where UnitType == UnitSpeed {
+  fileprivate var isPositive: Bool { asSpeed.value.rounded() >= 1 }
+  fileprivate var isNegative: Bool { asSpeed.value.rounded() <= -1 }
 }

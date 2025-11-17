@@ -81,8 +81,8 @@ struct ContentView: View {
       // Error message
       if let errorMessage = viewModel.errorMessage {
         Label(errorMessage, systemImage: "exclamationmark.triangle.fill")
-        .padding()
-        .foregroundStyle(Color.red)
+          .padding()
+          .foregroundStyle(Color.red)
       }
     }
     .padding(30)

@@ -10,10 +10,10 @@ struct WidgetGridView: View {
     GridItem(.flexible())
   ]
 
-  private var runways: [Runway]? {
-    guard let airport = entry.airport else { return nil }
+  private var runways: [RunwaySnapshot]? {
+    guard let entryRunways = entry.runways else { return nil }
 
-    let sortedRunways = airport.runways.sorted(using: Runway.NameComparator())
+    let sortedRunways = entryRunways.sorted(using: RunwaySnapshot.NameComparator())
     return Array(sortedRunways.prefix(8))
   }
 

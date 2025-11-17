@@ -3,7 +3,7 @@ import SwiftUI
 import WidgetKit
 
 struct RunwayGridItem: View {
-  var runway: Runway
+  var runway: RunwaySnapshot
   var takeoffDistance: Value<Measurement<UnitLength>>?
 
   var body: some View {
