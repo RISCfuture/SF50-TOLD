@@ -32,9 +32,13 @@ private struct SearchResults: View {
       let score2 = relevanceScore(for: airport2, searchText: searchText)
       if score1 != score2 { return score1 > score2 }
 
-      // If same relevance score, sort by name similarity
-      let similarity1 = nameSimilarity(airport1.name, to: searchText)
-      let similarity2 = nameSimilarity(airport2.name, to: searchText)
+      // If same relevance score, sort by name similarity (primary) + city similarity (secondary)
+      let nameSim1 = nameSimilarity(airport1.name, to: searchText)
+      let nameSim2 = nameSimilarity(airport2.name, to: searchText)
+      let citySim1 = citySimilarity(airport1.city, to: searchText)
+      let citySim2 = citySimilarity(airport2.city, to: searchText)
+      let similarity1 = max(nameSim1, citySim1)
+      let similarity2 = max(nameSim2, citySim2)
       if similarity1 != similarity2 { return similarity1 > similarity2 }
 
       // Final tie-breaker: alphabetical by name
@@ -72,11 +76,10 @@ private struct SearchResults: View {
   }
 
   private func relevanceScore(for airport: Airport, searchText: String) -> Int {
-    if airport.displayID == searchText.uppercased() { return 3 }
-    if let ICAO_ID = airport.ICAO_ID, ICAO_ID == searchText.uppercased() { return 2 }
-    if airport.name.localizedStandardContains(searchText) {
-      return 1
-    }
+    if airport.locationID == searchText.uppercased() { return 3 }
+    if let ICAO_ID = airport.ICAO_ID, ICAO_ID == searchText.uppercased() { return 3 }
+    if airport.name.localizedStandardContains(searchText) { return 2 }
+    if let city = airport.city, city.localizedStandardContains(searchText) { return 1 }
     return 0
   }
 
@@ -90,6 +93,14 @@ private struct SearchResults: View {
       .count
     let totalChars = max(name.count, searchText.count)
     return Double(commonChars) / Double(totalChars) * 0.4
+  }
+
+  private func citySimilarity(_ city: String?, to searchText: String) -> Double {
+    guard let city else { return 0.0 }
+    if city.localizedStandardEquals(searchText) { return 0.5 }
+    if city.localizedStandardHasPrefix(searchText) { return 0.4 }
+    if city.localizedStandardContains(searchText) { return 0.3 }
+    return 0.0
   }
 
   private func debouncedSearch() {
@@ -119,7 +130,8 @@ private struct SearchResults: View {
         searchTextCopy.count > 2
           && (airport.locationID == uppercaseText
             || airport.name.localizedStandardContains(searchTextCopy)
-            || (airport.ICAO_ID?.localizedStandardContains(searchTextCopy) ?? false))
+            || airport.ICAO_ID == uppercaseText
+            || airport.city?.localizedStandardContains(searchTextCopy) == true)
       }
       let descriptor = FetchDescriptor(predicate: predicate)
 
