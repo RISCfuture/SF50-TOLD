@@ -54,22 +54,22 @@ struct ClimbConfigView: View {
 
   private var fuelBinding: Binding<Double> {
     Binding(
-      get: { performance.fuel.converted(to: .gallons).value },
-      set: { performance.fuel = Measurement(value: $0, unit: .gallons) }
+      get: { performance.fuel.converted(to: UnitVolume.baseUnit()).value },
+      set: { performance.fuel = Measurement(value: $0, unit: UnitVolume.baseUnit()) }
     )
   }
 
   private var altitudeBinding: Binding<Double> {
     Binding(
-      get: { performance.altitude.converted(to: .feet).value },
-      set: { performance.altitude = Measurement(value: $0, unit: .feet) }
+      get: { performance.altitude.converted(to: UnitLength.baseUnit()).value },
+      set: { performance.altitude = Measurement(value: $0, unit: UnitLength.baseUnit()) }
     )
   }
 
   private var ISADeviationBinding: Binding<Double> {
     Binding(
-      get: { performance.ISADeviation.converted(to: .celsius).value },
-      set: { performance.ISADeviation = Measurement(value: $0, unit: .celsius) }
+      get: { performance.ISADeviation.converted(to: UnitTemperature.baseUnit()).value },
+      set: { performance.ISADeviation = Measurement(value: $0, unit: UnitTemperature.baseUnit()) }
     )
   }
 
@@ -125,10 +125,15 @@ struct ClimbConfigView: View {
             .id(fuelVolumeUnit)
         }
 
+        let fuelParams = validatedSliderRange(
+          min: minFuel,
+          max: maxFuel,
+          step: fuelStep
+        )
         Slider(
           value: fuelBinding,
-          in: minFuel.value...maxFuel.value,
-          step: fuelStep.converted(to: .gallons).value
+          in: fuelParams.range,
+          step: fuelParams.step
         ) {
           Text("Fuel Remaining")
         } minimumValueLabel: {
@@ -149,10 +154,15 @@ struct ClimbConfigView: View {
             .id(heightUnit)
         }
 
+        let altitudeParams = validatedSliderRange(
+          min: minAltitude,
+          max: maxAltitude,
+          step: altitudeStep
+        )
         Slider(
           value: altitudeBinding,
-          in: minAltitude.value...maxAltitude.value,
-          step: altitudeStep.converted(to: .feet).value
+          in: altitudeParams.range,
+          step: altitudeParams.step
         ) {
           Text("Altitude")
         } minimumValueLabel: {
@@ -178,10 +188,15 @@ struct ClimbConfigView: View {
           .id(temperatureUnit)
         }
 
+        let ISAParams = validatedSliderRange(
+          min: minISADeviation,
+          max: maxISADeviation,
+          step: temperatureStep
+        )
         Slider(
           value: ISADeviationBinding,
-          in: minISADeviation.value...maxISADeviation.value,
-          step: temperatureStep.converted(to: .celsius).value
+          in: ISAParams.range,
+          step: ISAParams.step
         ) {
           Text("ISA Deviation")
         } minimumValueLabel: {
@@ -198,6 +213,39 @@ struct ClimbConfigView: View {
       Toggle("Engine IPS", isOn: $performance.iceProtection)
         .accessibilityIdentifier("climbIceProtectionToggle")
     }
+  }
+
+  private func validatedSliderRange<UnitType: Dimension>(
+    min: Measurement<UnitType>,
+    max: Measurement<UnitType>,
+    step: Measurement<UnitType>
+  ) -> (range: ClosedRange<Double>, step: Double) {
+    let baseUnit = UnitType.baseUnit()
+    let minValue = min.converted(to: baseUnit).value
+    let maxValue = max.converted(to: baseUnit).value
+
+    // For temperature, convert the step as a difference, not an absolute value
+    let stepValue: Double =
+      if step.unit is UnitTemperature {
+        abs(
+          step.unit.converter.baseUnitValue(fromValue: step.value)
+            - step.unit.converter.baseUnitValue(fromValue: 0)
+        )
+      } else {
+        step.converted(to: baseUnit).value
+      }
+
+    // Ensure step is positive (SwiftUI requirement)
+    guard stepValue > 0 else {
+      return (minValue...minValue, 0.01)
+    }
+
+    // Ensure max > min (SwiftUI requirement)
+    guard maxValue > minValue else {
+      return (minValue...(minValue + stepValue), stepValue)
+    }
+
+    return (minValue...maxValue, stepValue)
   }
 }
 
