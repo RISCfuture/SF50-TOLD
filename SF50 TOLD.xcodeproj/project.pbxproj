@@ -714,6 +714,8 @@
 				"",
 				"",
 				"",
+				"",
+				"",
 			);
 		};
 /* End PBXShellScriptBuildPhase section */
