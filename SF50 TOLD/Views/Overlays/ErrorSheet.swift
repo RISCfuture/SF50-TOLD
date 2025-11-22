@@ -36,7 +36,8 @@ struct ErrorSheet: View {
           }
         }
       }
-    }.padding()
+      Spacer()
+    }.padding(30)
   }
 }
 
