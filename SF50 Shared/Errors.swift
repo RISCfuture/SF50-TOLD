@@ -9,6 +9,8 @@ extension WeatherLoader.Errors: LocalizedError {
     switch self {
       case .badResponse(let response):
         String(localized: "Received HTTP response \(response.statusCode).")
+      case .gzipDecompressionFailed:
+        String(localized: "Downloaded weather data was corrupted or incomplete.")
     }
   }
 

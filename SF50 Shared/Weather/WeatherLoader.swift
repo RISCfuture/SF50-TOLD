@@ -202,7 +202,26 @@ public actor WeatherLoader: WeatherLoaderProtocol {
       try Task.checkCancellation()
 
       let newMETARs = try await withThrowingTaskGroup(of: (String, Observation)?.self) { group in
-        let xmlData = try data.gunzipped()
+        let xmlData: Data
+        do {
+          xmlData = try data.gunzipped()
+        } catch {
+          let prefix = data.prefix(20).map { String(format: "%02x", $0) }.joined(separator: " ")
+          Self.logger.error(
+            "Failed to decompress METAR data",
+            metadata: [
+              "error": "\(error)",
+              "dataSize": "\(data.count)",
+              "dataPrefix": "\(prefix)"
+            ]
+          )
+          throw Errors.gzipDecompressionFailed(
+            url: Self.METARsURL,
+            dataSize: data.count,
+            dataPrefix: prefix,
+            underlyingError: error
+          )
+        }
 
         // Parse XML and stream observations
         for try await (stationID, observation) in METARXMLParser.parse(data: xmlData) {
@@ -237,7 +256,26 @@ public actor WeatherLoader: WeatherLoaderProtocol {
       try Task.checkCancellation()
 
       let newTAFs = try await withThrowingTaskGroup(of: (String, Forecast)?.self) { group in
-        let xmlData = try data.gunzipped()
+        let xmlData: Data
+        do {
+          xmlData = try data.gunzipped()
+        } catch {
+          let prefix = data.prefix(20).map { String(format: "%02x", $0) }.joined(separator: " ")
+          Self.logger.error(
+            "Failed to decompress TAF data",
+            metadata: [
+              "error": "\(error)",
+              "dataSize": "\(data.count)",
+              "dataPrefix": "\(prefix)"
+            ]
+          )
+          throw Errors.gzipDecompressionFailed(
+            url: Self.TAFsURL,
+            dataSize: data.count,
+            dataPrefix: prefix,
+            underlyingError: error
+          )
+        }
 
         // Parse XML and stream TAFs
         for try await (stationID, tafData) in TAFXMLParser.parse(data: xmlData) {
@@ -291,6 +329,12 @@ public actor WeatherLoader: WeatherLoaderProtocol {
 
   public enum Errors: Swift.Error {
     case badResponse(_ response: HTTPURLResponse)
+    case gzipDecompressionFailed(
+      url: URL,
+      dataSize: Int,
+      dataPrefix: String,
+      underlyingError: Error
+    )
   }
 
   public struct Key: Hashable, Sendable {
