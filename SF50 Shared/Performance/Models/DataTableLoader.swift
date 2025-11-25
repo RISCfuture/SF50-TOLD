@@ -1,6 +1,6 @@
 import Foundation
 
-struct DataTableLoader {
+public struct DataTableLoader {
 
   private let bundle: Bundle
   private let modelType: ModelType
@@ -218,7 +218,7 @@ struct DataTableLoader {
     return try DataTable(fileURL: url)
   }
 
-  enum ModelType {
+  public enum ModelType {
     case g1
     case g2Plus
   }

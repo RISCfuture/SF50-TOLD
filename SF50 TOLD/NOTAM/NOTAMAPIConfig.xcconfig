@@ -1,0 +1,13 @@
+//
+// NOTAMAPIConfig.xcconfig
+// SF50-TOLD
+//
+// NOTAM API Configuration
+// This file is git-ignored to protect the API token from exposure
+//
+
+// NOTAM API Token for https://notams.fly.dev
+NOTAM_API_TOKEN = e7zuavK0dW+KiJVNl4Xd0SDw+GSiyPm26k2cg/yRKGI=
+
+// NOTAM API Base URL
+NOTAM_API_BASE_URL = https:/$()/notams.fly.dev

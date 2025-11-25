@@ -1,3 +1,4 @@
+import SF50_Shared
 import Defaults
 import Foundation
 import Observation
@@ -15,12 +16,23 @@ public final class LandingPerformanceViewModel: BasePerformanceViewModel {
 
   // MARK: Computed Properties
 
-  public var NOTAMCount: Int {
+  /// Number of configured NOTAM restrictions
+  public var configuredNOTAMCount: Int {
     guard let notam, !notam.isEmpty else { return 0 }
     var count = 0
     if notam.contamination != nil { count += 1 }
     if notam.landingDistanceShortening.value > 0 { count += 1 }
     return count
+  }
+
+  /// Legacy compatibility - maps to configuredNOTAMCount
+  public var NOTAMCount: Int {
+    configuredNOTAMCount
+  }
+
+  /// Number of NOTAMs available from API
+  public var downloadedNOTAMCount: Int {
+    downloadedNOTAMs.count
   }
 
   public var requiredClimbGradient: Measurement<UnitSlope>? {
@@ -65,6 +77,7 @@ public final class LandingPerformanceViewModel: BasePerformanceViewModel {
 
   // MARK: Overrides
 
+  override public var operation: SF50_Shared.Operation { .landing }
   override public var airportDefaultsKey: Defaults.Key<String?> { .landingAirport }
   override public var runwayDefaultsKey: Defaults.Key<String?> { .landingRunway }
   override public var fuelDefaultsKey: Defaults.Key<Measurement<UnitVolume>> { .landingFuel }

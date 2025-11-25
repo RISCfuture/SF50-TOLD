@@ -45,39 +45,39 @@ open class BasePerformanceModel: PerformanceModel {
 
   // MARK: - Common Input Properties
 
-  var weight: Double {
+  public var weight: Double {
     configuration.weight.converted(to: .pounds).value
   }
 
-  var temperature: Double {
+  public var temperature: Double {
     conditions.temperature?.converted(to: .celsius).value ?? ISAdegC(altitudeFt: altitude)
   }
 
-  var altitude: Double {
+  public var altitude: Double {
     runway.elevation.converted(to: .feet).value
   }
 
-  var headwindComponent: Double {
+  public var headwindComponent: Double {
     runway.headwind(conditions: conditions).converted(to: .knots).value
   }
 
-  var headwind: Double {
+  public var headwind: Double {
     headwindComponent > 0 ? headwindComponent : 0
   }
 
-  var tailwind: Double {
+  public var tailwind: Double {
     headwindComponent < 0 ? -headwindComponent : 0
   }
 
-  var gradient: Double {
+  public var gradient: Double {
     Double(runway.gradient)
   }
 
-  var uphill: Double {
+  public var uphill: Double {
     gradient > 0 ? gradient : 0
   }
 
-  var downhill: Double {
+  public var downhill: Double {
     gradient < 0 ? -gradient : 0
   }
 

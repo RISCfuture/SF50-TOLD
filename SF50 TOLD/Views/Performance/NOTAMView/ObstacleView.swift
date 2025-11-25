@@ -33,6 +33,20 @@ struct ObstacleView: View {
         .accessibilityIdentifier("obstacleDistanceField")
       }
     }
+    .onChange(of: notam.obstacleHeight) { _, _ in
+      // Clear auto-created flag when user manually edits
+      if notam.automaticallyCreated {
+        notam.automaticallyCreated = false
+        notam.isManuallyEdited = true
+      }
+    }
+    .onChange(of: notam.obstacleDistance) { _, _ in
+      // Clear auto-created flag when user manually edits
+      if notam.automaticallyCreated {
+        notam.automaticallyCreated = false
+        notam.isManuallyEdited = true
+      }
+    }
   }
 }
 

@@ -16,6 +16,7 @@
 		012B1E682DE2F463000D9ADC /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 012B1E672DE2F463000D9ADC /* SwiftNASR */; };
 		012B1E6C2DE2F463000D9ADC /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 012B1E6B2DE2F463000D9ADC /* Logging */; };
 		012B1E6E2DE2F463000D9ADC /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 012B1E6D2DE2F463000D9ADC /* AsyncAlgorithms */; };
+		01392BD52ED28A5700D0C9E2 /* FoundationModels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01392BD42ED28A5700D0C9E2 /* FoundationModels.framework */; };
 		01442FC62E1D901900A0BD40 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 01442FC52E1D901900A0BD40 /* InfoPlist.xcstrings */; };
 		016945BC2EB30889001602E6 /* SwiftNASR in Frameworks */ = {isa = PBXBuildFile; productRef = 016945BB2EB30889001602E6 /* SwiftNASR */; };
 		016945BE2EB30889001602E6 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 016945BD2EB30889001602E6 /* Logging */; };
@@ -27,7 +28,6 @@
 		0179DFC02DE3CDD3002EC77C /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 0179DFBF2DE3CDD3002EC77C /* Defaults */; };
 		018B8F0C2E331989003A0DAF /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 018B8F0B2E331989003A0DAF /* RealModule */; };
 		0198B44C2E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		0198B44D2E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		0198B44E2E986226003CB126 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 602F51ECCC3348DE83D26B3E /* Sentry */; };
 		0198B4502E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		0198B4512E986226003CB126 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -126,6 +126,7 @@
 		0128374D2E5B8BB8002195A0 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		012B1E3B2DE2F272000D9ADC /* SF50_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SF50_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		012B1E452DE2F272000D9ADC /* SF50 SharedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF50 SharedTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01392BD42ED28A5700D0C9E2 /* FoundationModels.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoundationModels.framework; path = System/Library/Frameworks/FoundationModels.framework; sourceTree = SDKROOT; };
 		01442FC52E1D901900A0BD40 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		0163BC6A2DDEE9D3008FEE8F /* SF50 TOLD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SF50 TOLD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0163BC792DDEE9D4008FEE8F /* SF50 TOLDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF50 TOLDTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +140,7 @@
 		01AB24552E948B89005D8996 /* SF50 RunwaysExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SF50 RunwaysExtension.entitlements"; sourceTree = "<group>"; };
 		01BEA32A2E986B10005ABCD8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		01EA44382EB327D7008FEB64 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		01NOTAM01NOTAM01NOTAM /* NOTAMAPIConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = NOTAMAPIConfig.xcconfig; path = "SF50 TOLD/NOTAM/NOTAMAPIConfig.xcconfig"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -270,13 +272,13 @@
 		0163BC672DDEE9D3008FEE8F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				01392BD52ED28A5700D0C9E2 /* FoundationModels.framework in Frameworks */,
 				0198B44E2E986226003CB126 /* Sentry in Frameworks */,
 				0179DF412DE2F7A9002EC77C /* AsyncAlgorithms in Frameworks */,
 				0179DF402DE2F7A9002EC77C /* Logging in Frameworks */,
 				0179DF3E2DE2F7A9002EC77C /* SwiftNASR in Frameworks */,
 				012B1E502DE2F272000D9ADC /* SF50_Shared.framework in Frameworks */,
 				01BEBCB82E8A401100631DE6 /* SwiftHtml in Frameworks */,
-				0198B44D2E986226003CB126 /* (null) in Frameworks */,
 			);
 		};
 		0163BC762DDEE9D4008FEE8F /* Frameworks */ = {
@@ -310,6 +312,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		013931802ED28C3E00D0C9E2 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				01NOTAM01NOTAM01NOTAM /* NOTAMAPIConfig.xcconfig */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		0163BC612DDEE9D3008FEE8F = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +339,7 @@
 				0169459A2EB30848001602E6 /* DownloadNASR */,
 				01D1E30E2DDF865100C1CAC8 /* Frameworks */,
 				0163BC6B2DDEE9D3008FEE8F /* Products */,
+				013931802ED28C3E00D0C9E2 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -350,6 +361,7 @@
 		01D1E30E2DDF865100C1CAC8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01392BD42ED28A5700D0C9E2 /* FoundationModels.framework */,
 				01EA44382EB327D7008FEB64 /* Security.framework */,
 				0169495B2EB314C9001602E6 /* SwiftUI.framework */,
 				0128374B2E5B8BB8002195A0 /* WidgetKit.framework */,
@@ -716,6 +728,11 @@
 				"",
 				"",
 				"",
+				"",
+				"",
+				"",
+				"",
+				"",
 			);
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -820,7 +837,7 @@
 				INFOPLIST_FILE = "SF50 Runways/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "SF50 Runways";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -848,7 +865,7 @@
 				INFOPLIST_FILE = "SF50 Runways/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "SF50 Runways";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -878,7 +895,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -914,7 +931,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -942,7 +959,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-SharedTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -959,7 +976,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-SharedTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1022,7 +1039,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1083,7 +1100,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1098,6 +1115,7 @@
 		};
 		0163BC8E2DDEE9D4008FEE8F /* Debug configuration for PBXNativeTarget "SF50 TOLD" */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01NOTAM01NOTAM01NOTAM /* NOTAMAPIConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1118,7 +1136,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1133,6 +1151,7 @@
 		};
 		0163BC8F2DDEE9D4008FEE8F /* Release configuration for PBXNativeTarget "SF50 TOLD" */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01NOTAM01NOTAM01NOTAM /* NOTAMAPIConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1153,7 +1172,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1174,7 +1193,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLDTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1192,7 +1211,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLDTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1209,7 +1228,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLDUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1226,7 +1245,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2NFSK2WB24;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLDUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

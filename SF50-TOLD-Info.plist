@@ -7,5 +7,9 @@
 		<key>apiKey</key>
 		<string>9081bd08ae6f938685e26e83495bf96c</string>
 	</dict>
+	<key>NOTAM_API_TOKEN</key>
+	<string>$(NOTAM_API_TOKEN)</string>
+	<key>NOTAM_API_BASE_URL</key>
+	<string>$(NOTAM_API_BASE_URL)</string>
 </dict>
 </plist>

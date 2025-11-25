@@ -1,5 +1,6 @@
 import Defaults
 import Foundation
+import SF50_Shared
 import SwiftData
 import SwiftNASR
 import WeatherKit
@@ -79,10 +80,10 @@ public final class PreviewHelper: Sendable {
 
   public init() throws {
     container = try .init(
-      for: Airport.self,
-      Runway.self,
-      NOTAM.self,
-      Scenario.self,
+      for: SF50_Shared.Airport.self,
+      SF50_Shared.Runway.self,
+      SF50_Shared.NOTAM.self,
+      SF50_Shared.Scenario.self,
       configurations: .init(isStoredInMemoryOnly: true)
     )
   }
@@ -91,10 +92,10 @@ public final class PreviewHelper: Sendable {
   public func reset() throws {
     Defaults.removeAll(suite: .init(suiteName: "group.codes.tim.TOLD")!)
 
-    try mainContext.delete(model: Runway.self)
-    try mainContext.delete(model: Airport.self)
-    try mainContext.delete(model: NOTAM.self)
-    try mainContext.delete(model: Scenario.self)
+    try mainContext.delete(model: SF50_Shared.Runway.self)
+    try mainContext.delete(model: SF50_Shared.Airport.self)
+    try mainContext.delete(model: SF50_Shared.NOTAM.self)
+    try mainContext.delete(model: SF50_Shared.Scenario.self)
     try mainContext.save()
   }
 
@@ -108,8 +109,12 @@ public final class PreviewHelper: Sendable {
 
   @MainActor
   public func insert(airport: AirportBuilder) throws {
-    mainContext.insert(airport.airport)
-    for runway in airport.runways {
+    // Create fresh instances from the builder factories
+    let airportInstance = airport.airport
+    let runwayInstances = airport.runwaysFactory(airportInstance)
+
+    mainContext.insert(airportInstance)
+    for runway in runwayInstances {
       mainContext.insert(runway)
     }
     try mainContext.save()
@@ -173,18 +178,18 @@ public final class PreviewHelper: Sendable {
   }
 
   @MainActor
-  public func load(locationID: String) throws -> Airport? {
-    let predicate = #Predicate<Airport> { $0.locationID == locationID }
+  public func load(locationID: String) throws -> SF50_Shared.Airport? {
+    let predicate = #Predicate<SF50_Shared.Airport> { $0.locationID == locationID }
     var descriptor = FetchDescriptor(predicate: predicate)
     descriptor.fetchLimit = 1
     return try mainContext.fetch(descriptor).first
   }
 
   @MainActor
-  public func load(airportID: String, runway: String) throws -> Runway? {
+  public func load(airportID: String, runway: String) throws -> SF50_Shared.Runway? {
     guard let airport = try load(locationID: airportID) else { return nil }
     let airportID = airport.persistentModelID
-    let predicate = #Predicate<Runway> {
+    let predicate = #Predicate<SF50_Shared.Runway> {
       $0.airport.persistentModelID == airportID && $0.name == runway
     }
     var descriptor = FetchDescriptor(predicate: predicate)
@@ -195,7 +200,7 @@ public final class PreviewHelper: Sendable {
   @MainActor
   @discardableResult
   public func addNOTAM(
-    to runway: Runway,
+    to runway: SF50_Shared.Runway,
     shortenTakeoff: Double? = nil,
     shortenLanding: Double? = nil,
     contamination: Contamination? = nil,
@@ -226,14 +231,14 @@ public final class PreviewHelper: Sendable {
     Defaults[.lastCycleLoaded] = .current.previous
   }
 
-  public func setTakeoff(runway: Runway) {
+  public func setTakeoff(runway: SF50_Shared.Runway) {
     Defaults[.payload] = .init(value: 400, unit: .pounds)
     Defaults[.takeoffFuel] = .init(value: 220, unit: .gallons)
     Defaults[.takeoffAirport] = runway.airport.recordID
     Defaults[.takeoffRunway] = runway.name
   }
 
-  public func setLanding(runway: Runway) {
+  public func setLanding(runway: SF50_Shared.Runway) {
     Defaults[.payload] = .init(value: 400, unit: .pounds)
     Defaults[.landingFuel] = .init(value: 70, unit: .gallons)
     Defaults[.landingAirport] = runway.airport.recordID
@@ -241,20 +246,119 @@ public final class PreviewHelper: Sendable {
   }
 
   public func newBackgroundContext() -> ModelContext { .init(container) }
+
+  /// Generates sample NOTAMResponse objects for preview purposes
+  /// - Parameters:
+  ///   - count: Number of NOTAMs to generate
+  ///   - icaoLocation: ICAO code for the airport (default: "KOAK")
+  ///   - baseTime: Reference time for generating effective dates (default: now)
+  /// - Returns: Array of NOTAMResponse objects with varied statuses and lengths
+  public func generateNOTAMs(
+    count: Int,
+    icaoLocation: String = "KOAK",
+    baseTime: Date = .now
+  ) -> [NOTAMResponse] {
+    let loremTexts = [
+      "RWY CLSD",
+      "THR DISPLACED 320M. EFFECTIVE OPR LENGTH 1420M",
+      "THR RWY 30 DISPLACED 320M. RWY 12/30 EFFECTIVE OPR LENGTH 1420M.\nDISPLACED THR LIGHT OPR",
+      "RWY 12/30 CLSD DUE WIP. AVBL FOR HOSP FLIGHTS WITH 60 MIN PN",
+      "PAPI U/S",
+      "LIGHTING SYSTEM UPGRADE IN PROGRESS. EXPECT REDUCED VISIBILITY OF THR LIGHTS",
+      "OBST CRANE 1200FT AMSL 0.3NM E OF THR RWY 30",
+      "NAVAID VOR OUT OF SERVICE. USE GPS APPROACH ONLY",
+      "TWY A CLSD BTN TWY B AND TWY C. USE ALT ROUTING VIA TWY D",
+      "BIRD ACTIVITY REPORTED IN VICINITY OF AIRPORT. EXERCISE CAUTION",
+      "FUEL AVBL H24",
+      "PPR FOR ACF WINGSPAN GREATER THAN 80FT. CONTACT AIRPORT OPS 48HR IN ADVANCE",
+      "RWY SURFACE TREATMENT IN PROGRESS 0800-1600 LOCAL. EXPECT DELAYS",
+      "APRON REPAINTING. TAXI WITH CAUTION. FOLLOW MARSHALLER INSTRUCTIONS",
+      "ILS RWY 30 GLIDESLOPE U/S. LOC ONLY APPROACH AVAILABLE"
+    ]
+
+    let purposes = ["N", "B", "M", "O"]
+    let scopes = ["A", "E", "W", nil]
+    let trafficTypes = ["I", "IV", "K", nil]
+
+    return (0..<count).map { index in
+      let id = index + 1
+      let letter = String(UnicodeScalar(65 + index % 26)!)
+      let notamId = "\(letter)\(String(format: "%04d", 8000 + index))/2025"
+
+      // Vary the effective times for different statuses
+      let hourOffset: TimeInterval
+      switch index % 5 {
+        case 0:  // Active - started 1 hour ago, ends in 2 hours
+          hourOffset = -3600
+        case 1:  // Warning - starts in 2 hours
+          hourOffset = 7200
+        case 2:  // Expired - started 1 day ago, ended 2 hours ago
+          hourOffset = -86400
+        case 3:  // Future - starts in 1 day
+          hourOffset = 86400
+        default:  // Active - started 30 min ago, ends in 4 hours
+          hourOffset = -1800
+      }
+
+      let effectiveStart = baseTime.addingTimeInterval(hourOffset)
+
+      // Vary end times
+      let effectiveEnd: Date?
+      switch index % 5 {
+        case 2:  // Expired
+          effectiveEnd = baseTime.addingTimeInterval(-7200)
+        case 3, 4:  // Some have end times
+          effectiveEnd = effectiveStart.addingTimeInterval(14400)
+        default:  // Some are permanent
+          effectiveEnd = index % 3 == 0 ? nil : effectiveStart.addingTimeInterval(10800)
+      }
+
+      // Vary NOTAM text lengths
+      let textIndex = index % loremTexts.count
+      let notamText = loremTexts[textIndex]
+
+      // Some NOTAMs have schedules
+      let schedule = index % 7 == 0 ? "0800-1800" : nil
+
+      return NOTAMResponse(
+        id: id,
+        notamId: notamId,
+        icaoLocation: icaoLocation,
+        effectiveStart: effectiveStart,
+        effectiveEnd: effectiveEnd,
+        schedule: schedule,
+        notamText: notamText,
+        qLine: nil,
+        purpose: purposes[index % purposes.count],
+        scope: scopes[index % scopes.count],
+        trafficType: trafficTypes[index % trafficTypes.count]
+      )
+    }
+  }
 }
 
 @MainActor
 public struct AirportBuilder {
-  let airport: Airport
-  let runways: [Runway]
+  let airportFactory: () -> SF50_Shared.Airport
+  let runwaysFactory: (SF50_Shared.Airport) -> [SF50_Shared.Runway]
 
-  init(airport: Airport, runways: (Airport) -> [Runway]) {
-    self.airport = airport
-    self.runways = runways(airport)
+  init(airport: @escaping @autoclosure () -> SF50_Shared.Airport, runways: @escaping (SF50_Shared.Airport) -> [SF50_Shared.Runway]) {
+    self.airportFactory = airport
+    self.runwaysFactory = runways
   }
 
-  public func unsaved() -> Airport {
-    airport.runways = runways
+  var airport: SF50_Shared.Airport {
+    airportFactory()
+  }
+
+  var runways: [SF50_Shared.Runway] {
+    let airport = airportFactory()
+    return runwaysFactory(airport)
+  }
+
+  public func unsaved() -> SF50_Shared.Airport {
+    let airport = airportFactory()
+    airport.runways = runwaysFactory(airport)
     return airport
   }
 }

@@ -1,10 +1,10 @@
 import Foundation
 
-final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel {
+public final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel {
 
   // MARK: - Takeoff
 
-  override var takeoffRunFt: Value<Double> {
+  public override var takeoffRunFt: Value<Double> {
     var run = takeoffRunBaseFt
     run *= takeoffRun_headwindAdjustment
     run *= takeoffRun_tailwindAdjustment
@@ -13,7 +13,7 @@ final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel
     return run
   }
 
-  override var takeoffDistanceFt: Value<Double> {
+  public override var takeoffDistanceFt: Value<Double> {
     var distance = takeoffDistanceBaseFt
     distance *= takeoffDistance_headwindAdjustment
     distance *= takeoffDistance_tailwindAdjustment
@@ -21,7 +21,7 @@ final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel
     return distance
   }
 
-  override var takeoffClimbGradientFtNmi: Value<Double> {
+  public override var takeoffClimbGradientFtNmi: Value<Double> {
     let value =
       -1.059609e+00 * weight
       - 8.985792e-02 * altitude
@@ -37,7 +37,7 @@ final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel
     return .valueWithUncertainty(value, uncertainty: uncertainty(for: "g2+/takeoff climb/gradient"))
   }
 
-  override var takeoffClimbRateFtMin: Value<Double> {
+  public override var takeoffClimbRateFtMin: Value<Double> {
     let value =
       -1.734136e+00 * weight
       - 7.843993e-02 * altitude
@@ -156,7 +156,7 @@ final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel
 
   // MARK: Landing
 
-  override var landingRunFt: Value<Double> {
+  public override var landingRunFt: Value<Double> {
     var run = landingRun_contaminationAddition(distance: landingRunBaseFt)
     run *= landingRun_headwindAdjustment
     run *= landingRun_tailwindAdjustment
@@ -165,7 +165,7 @@ final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel
     return run
   }
 
-  override var meetsGoAroundClimbGradient: Value<Bool> {
+  public override var meetsGoAroundClimbGradient: Value<Bool> {
     // Logistic regression with polynomial features
     let w = (weight - 5000) / 500
     let a = altitude / 10000
@@ -210,7 +210,7 @@ final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel
     return .value(probability > 0.5)
   }
 
-  override var landingRunBaseFt: Value<Double> {
+  public override var landingRunBaseFt: Value<Double> {
     switch configuration.flapSetting {
       case .flaps100: landingRunBaseFt_flaps100
       case .flaps50, .flapsUp: landingRunBaseFt_flaps50
@@ -271,7 +271,7 @@ final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel
     )
   }
 
-  override var landingDistanceBaseFt: Value<Double> {
+  public override var landingDistanceBaseFt: Value<Double> {
     switch configuration.flapSetting {
       case .flaps100: landingDistanceBaseFt_flaps100
       case .flaps50: landingDistanceBaseFt_flaps50
@@ -338,7 +338,7 @@ final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel
     )
   }
 
-  override var landingDistance_tailwindAdjustment: Double {
+  public override var landingDistance_tailwindAdjustment: Double {
     let factor =
       switch configuration.flapSetting {
         case .flaps50, .flapsUp:
@@ -356,7 +356,7 @@ final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel
 
   // MARK: - Initializer
 
-  init(
+  public init(
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,

@@ -2,27 +2,27 @@ import Foundation
 
 /// Shared SF50-specific performance calculations used by both G1 and G2+ models.
 /// Contains identical regression formulas and adjustment factors that are common across SF50 variants.
-class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
+public class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
 
   // MARK: - En Route Climb
 
-  var enrouteClimbGradientFtNmi: Value<Double> {
+  public var enrouteClimbGradientFtNmi: Value<Double> {
     let iceContaminated = configuration.iceProtection
     return iceContaminated
       ? enrouteClimbGradientFtNmi_iceContaminated : enrouteClimbGradientFtNmi_normal
   }
 
-  var enrouteClimbRateFtMin: Value<Double> {
+  public var enrouteClimbRateFtMin: Value<Double> {
     let iceContaminated = configuration.iceProtection
     return iceContaminated ? enrouteClimbRateFtMin_iceContaminated : enrouteClimbRateFtMin_normal
   }
 
-  var enrouteClimbSpeedKIAS: Value<Double> {
+  public var enrouteClimbSpeedKIAS: Value<Double> {
     let iceContaminated = configuration.iceProtection
     return iceContaminated ? enrouteClimbSpeedKIAS_iceContaminated : enrouteClimbSpeedKIAS_normal
   }
 
-  var timeToClimbMin: Value<Double> {
+  public var timeToClimbMin: Value<Double> {
     let value =
       -2.243463e-03 * altitude
       - 6.566427e-01 * temperature
@@ -41,7 +41,7 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     )
   }
 
-  var fuelToClimbUsGal: Value<Double> {
+  public var fuelToClimbUsGal: Value<Double> {
     let value =
       -2.053557e-03 * altitude
       - 6.401662e-01 * temperature
@@ -60,7 +60,7 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     )
   }
 
-  var distanceToClimbNm: Value<Double> {
+  public var distanceToClimbNm: Value<Double> {
     let value =
       -6.301291e-03 * altitude
       - 1.697859e+00 * temperature
@@ -195,7 +195,7 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
 
   // MARK: Landing
 
-  override var VrefKts: Value<Double> {
+  public override var VrefKts: Value<Double> {
     let value =
       switch configuration.flapSetting {
         case .flapsUp:
@@ -212,7 +212,7 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     return .value(value)
   }
 
-  override var landingDistanceFt: Value<Double> {
+  public override var landingDistanceFt: Value<Double> {
     // Calculate the increase in landing run due to contamination
     let baseLandingRun = landingRunBaseFt
     let contaminatedLandingRun = landingRun_contaminationAddition(distance: baseLandingRun)
@@ -257,7 +257,7 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     return distance
   }
 
-  var landingRun_headwindAdjustment: Double {
+  public var landingRun_headwindAdjustment: Double {
     let factor =
       switch configuration.flapSetting {
         case .flaps100: 0.08
@@ -266,7 +266,7 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     return PerformanceAdjustments.landingRunHeadwindAdjustment(factor: factor, headwind: headwind)
   }
 
-  var landingDistance_headwindAdjustment: Double {
+  public var landingDistance_headwindAdjustment: Double {
     let factor =
       switch configuration.flapSetting {
         case .flaps50, .flapsUp:
@@ -280,7 +280,7 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     )
   }
 
-  var landingRun_tailwindAdjustment: Double {
+  public var landingRun_tailwindAdjustment: Double {
     let factor =
       switch configuration.flapSetting {
         case .flaps100: 0.49
@@ -290,7 +290,7 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     return PerformanceAdjustments.landingRunTailwindAdjustment(factor: factor, tailwind: tailwind)
   }
 
-  var landingDistance_tailwindAdjustment: Double {
+  public var landingDistance_tailwindAdjustment: Double {
     let factor =
       switch configuration.flapSetting {
         case .flaps50, .flapsUp:
@@ -306,7 +306,7 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     )
   }
 
-  var landingRun_uphillAdjustment: Double {
+  public var landingRun_uphillAdjustment: Double {
     let factor =
       switch configuration.flapSetting {
         case .flaps50Ice, .flapsUpIce: 0.06
@@ -315,12 +315,12 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     return PerformanceAdjustments.landingRunUphillAdjustment(factor: factor, uphill: uphill)
   }
 
-  var landingRun_downhillAdjustment: Double {
+  public var landingRun_downhillAdjustment: Double {
     let factor = 0.06
     return PerformanceAdjustments.landingRunDownhillAdjustment(factor: factor, downhill: downhill)
   }
 
-  var landingDistance_unpavedAdjustment: Double {
+  public var landingDistance_unpavedAdjustment: Double {
     let factor = 0.2
     return PerformanceAdjustments.landingDistanceUnpavedAdjustment(factor: factor)
   }
@@ -328,12 +328,12 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
   // MARK: - Abstract Properties (to be implemented by subclasses)
 
   /// Landing run base distance before adjustments (contamination is applied in landingRunFt)
-  var landingRunBaseFt: Value<Double> {
+  public var landingRunBaseFt: Value<Double> {
     fatalError("Subclasses must implement landingRunBaseFt")
   }
 
   /// Landing distance base before adjustments and contamination
-  var landingDistanceBaseFt: Value<Double> {
+  public var landingDistanceBaseFt: Value<Double> {
     fatalError("Subclasses must implement landingDistanceBaseFt")
   }
 }

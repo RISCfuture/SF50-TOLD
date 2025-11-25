@@ -39,6 +39,13 @@ struct RunwayShorteningView: View {
         .accessibilityIdentifier("distanceField")
       }
     }
+    .onChange(of: shortenBinding.wrappedValue) { _, _ in
+      // Clear auto-created flag when user manually edits
+      if notam.automaticallyCreated {
+        notam.automaticallyCreated = false
+        notam.isManuallyEdited = true
+      }
+    }
   }
 }
 

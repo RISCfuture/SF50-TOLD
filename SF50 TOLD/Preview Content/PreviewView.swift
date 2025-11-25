@@ -42,7 +42,8 @@ public struct PreviewView<Content: View>: View {
   public init(insert airports: AirportBuilder..., builder: (PreviewHelper) throws -> Content) {
     do {
       let helper = try PreviewHelper()
-      try helper.reset()
+      // Don't call reset() when inserting airports - the container is already fresh,
+      // and reset() would invalidate the airport instances being inserted
       for airport in airports { try helper.insert(airport: airport) }
       result = .success(try builder(helper))
       container = helper.container

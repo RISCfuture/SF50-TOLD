@@ -2,7 +2,7 @@ import Foundation
 
 extension WeatherLoader.Errors: LocalizedError {
   public var errorDescription: String? {
-    String(localized: "Weather information couldn’t be read")
+    String(localized: "Weather information couldn't be read")
   }
 
   public var failureReason: String? {

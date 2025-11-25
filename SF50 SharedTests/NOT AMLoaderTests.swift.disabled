@@ -1,0 +1,297 @@
+import Foundation
+import Testing
+
+@testable import SF50_Shared
+
+@Suite("NOTAM Loader Tests")
+struct NOTAMLoaderTests {
+
+  @Test("Parse NOTAM list response with multiple NOTAMs")
+  func parseNOTAMListResponse() throws {
+    let json = """
+      {
+        "data": [
+          {
+            "id": 1,
+            "notam_id": "FDC 2/1234",
+            "icao_location": "KJFK",
+            "effective_start": "2025-01-15T14:00:00.000Z",
+            "effective_end": "2025-01-20T23:59:00.000Z",
+            "schedule": "0800-1800",
+            "notam_text": "RWY 04L/22R CLSD",
+            "q_line": {
+              "purpose": "N",
+              "scope": "A",
+              "traffic_type": "I",
+              "lower_altitude": "000",
+              "upper_altitude": "999",
+              "coordinates": "4040N07346W005"
+            },
+            "purpose": "N",
+            "scope": "A",
+            "traffic_type": "I",
+            "created_at": "2025-01-15T12:00:00.000Z",
+            "updated_at": "2025-01-15T12:00:00.000Z"
+          },
+          {
+            "id": 2,
+            "notam_id": "FDC 3/5678",
+            "icao_location": "KJFK",
+            "effective_start": "2025-01-16T00:00:00.000Z",
+            "effective_end": null,
+            "schedule": null,
+            "notam_text": "TWY B CLSD BTN TWY A AND TWY C",
+            "q_line": null,
+            "purpose": "N",
+            "scope": "A",
+            "traffic_type": null,
+            "created_at": "2025-01-16T08:00:00.000Z",
+            "updated_at": "2025-01-16T08:00:00.000Z"
+          }
+        ],
+        "pagination": {
+          "total": 42,
+          "limit": 100,
+          "offset": 0
+        }
+      }
+      """
+
+    let data = json.data(using: .utf8)!
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+
+    let response = try decoder.decode(NOTAMListResponse.self, from: data)
+
+    #expect(response.data.count == 2)
+    #expect(response.pagination.total == 42)
+    #expect(response.pagination.limit == 100)
+    #expect(response.pagination.offset == 0)
+
+    let notam1 = response.data[0]
+    #expect(notam1.id == 1)
+    #expect(notam1.notamId == "FDC 2/1234")
+    #expect(notam1.icaoLocation == "KJFK")
+    #expect(notam1.notamText == "RWY 04L/22R CLSD")
+    #expect(notam1.schedule == "0800-1800")
+    #expect(notam1.purpose == "N")
+    #expect(notam1.scope == "A")
+    #expect(notam1.qLine != nil)
+    #expect(notam1.qLine?.purpose == "N")
+    #expect(notam1.qLine?.scope == "A")
+    #expect(notam1.effectiveEnd != nil)
+
+    let notam2 = response.data[1]
+    #expect(notam2.id == 2)
+    #expect(notam2.notamId == "FDC 3/5678")
+    #expect(notam2.effectiveEnd == nil)
+    #expect(notam2.schedule == nil)
+    #expect(notam2.qLine == nil)
+  }
+
+  @Test("Parse NOTAM error response")
+  func parseErrorResponse() throws {
+    let json = """
+      {
+        "error": {
+          "message": "Invalid or inactive API token",
+          "code": "UNAUTHORIZED"
+        }
+      }
+      """
+
+    let data = json.data(using: .utf8)!
+    let decoder = JSONDecoder()
+
+    let response = try decoder.decode(NOTAMErrorResponse.self, from: data)
+
+    #expect(response.error.message == "Invalid or inactive API token")
+    #expect(response.error.code == "UNAUTHORIZED")
+  }
+
+  @Test("NOTAM isEffectiveNow returns true for current NOTAMs")
+  func testIsEffectiveNow() {
+    let now = Date()
+    let past = now.addingTimeInterval(-3600)  // 1 hour ago
+    let future = now.addingTimeInterval(3600)  // 1 hour from now
+
+    let effectiveNOTAM = NOTAMResponse(
+      id: 1,
+      notamId: "TEST 1",
+      icaoLocation: "KJFK",
+      effectiveStart: past,
+      effectiveEnd: future,
+      schedule: nil as String?,
+      notamText: "TEST",
+      qLine: nil as QLine?,
+      purpose: nil as String?,
+      scope: nil as String?,
+      trafficType: nil as String?,
+      createdAt: now,
+      updatedAt: now,
+      rawMessage: nil as String?
+    )
+
+    #expect(effectiveNOTAM.isEffectiveNow)
+  }
+
+  @Test("NOTAM isEffectiveNow returns false for expired NOTAMs")
+  func testIsEffectiveExpired() {
+    let now = Date()
+    let past = now.addingTimeInterval(-7200)  // 2 hours ago
+    let expired = now.addingTimeInterval(-3600)  // 1 hour ago
+
+    let expiredNOTAM = NOTAMResponse(
+      id: 1,
+      notamId: "TEST 1",
+      icaoLocation: "KJFK",
+      effectiveStart: past,
+      effectiveEnd: expired,
+      schedule: nil as String?,
+      notamText: "TEST",
+      qLine: nil as QLine?,
+      purpose: nil as String?,
+      scope: nil as String?,
+      trafficType: nil as String?,
+      createdAt: now,
+      updatedAt: now,
+      rawMessage: nil as String?
+    )
+
+    #expect(!expiredNOTAM.isEffectiveNow)
+  }
+
+  @Test("NOTAM isEffectiveNow returns false for future NOTAMs")
+  func testIsEffectiveFuture() {
+    let now = Date()
+    let futureStart = now.addingTimeInterval(3600)  // 1 hour from now
+    let futureEnd = now.addingTimeInterval(7200)  // 2 hours from now
+
+    let futureNOTAM = NOTAMResponse(
+      id: 1,
+      notamId: "TEST 1",
+      icaoLocation: "KJFK",
+      effectiveStart: futureStart,
+      effectiveEnd: futureEnd,
+      schedule: nil as String?,
+      notamText: "TEST",
+      qLine: nil as QLine?,
+      purpose: nil as String?,
+      scope: nil as String?,
+      trafficType: nil as String?,
+      createdAt: now,
+      updatedAt: now,
+      rawMessage: nil as String?
+    )
+
+    #expect(!futureNOTAM.isEffectiveNow)
+  }
+
+  @Test("NOTAM isEffectiveNow returns true for permanent NOTAMs")
+  func testIsEffectivePermanent() {
+    let now = Date()
+    let past = now.addingTimeInterval(-3600)
+
+    let permanentNOTAM = NOTAMResponse(
+      id: 1,
+      notamId: "TEST 1",
+      icaoLocation: "KJFK",
+      effectiveStart: past,
+      effectiveEnd: nil,  // No end date = permanent
+      schedule: nil as String?,
+      notamText: "TEST",
+      qLine: nil as QLine?,
+      purpose: nil as String?,
+      scope: nil as String?,
+      trafficType: nil as String?,
+      createdAt: now,
+      updatedAt: now,
+      rawMessage: nil as String?
+    )
+
+    #expect(permanentNOTAM.isEffectiveNow)
+  }
+
+  @Test("NOTAM isAerodromeRelated detects aerodrome scope")
+  func testIsAerodromeRelated() {
+    let now = Date()
+
+    let aerodromeNOTAM = NOTAMResponse(
+      id: 1,
+      notamId: "TEST 1",
+      icaoLocation: "KJFK",
+      effectiveStart: now,
+      effectiveEnd: nil,
+      schedule: nil,
+      notamText: "RWY CLOSED",
+      qLine: QLine(
+        purpose: "N",
+        scope: "A",
+        trafficType: "I",
+        lowerAltitude: "000",
+        upperAltitude: "999",
+        coordinates: nil
+      ),
+      purpose: "N",
+      scope: "A",
+      trafficType: "I",
+      createdAt: now,
+      updatedAt: now,
+      rawMessage: nil
+    )
+
+    #expect(aerodromeNOTAM.isAerodromeRelated)
+  }
+
+  @Test("NOTAM summary truncates long text")
+  func testSummaryTruncation() {
+    let now = Date()
+    let longText =
+      "THIS IS A VERY LONG NOTAM TEXT THAT EXCEEDS 60 CHARACTERS AND SHOULD BE TRUNCATED FOR DISPLAY PURPOSES"
+
+    let notam = NOTAMResponse(
+      id: 1,
+      notamId: "TEST 1",
+      icaoLocation: "KJFK",
+      effectiveStart: now,
+      effectiveEnd: nil as Date?,
+      schedule: nil as String?,
+      notamText: longText,
+      qLine: nil as QLine?,
+      purpose: nil as String?,
+      scope: nil as String?,
+      trafficType: nil as String?,
+      createdAt: now,
+      updatedAt: now,
+      rawMessage: nil as String?
+    )
+
+    #expect(notam.summary.count <= 60)
+    #expect(notam.summary.hasSuffix("..."))
+  }
+
+  @Test("NOTAM summary preserves short text")
+  func testSummaryShortText() {
+    let now = Date()
+    let shortText = "RWY 04L CLSD"
+
+    let notam = NOTAMResponse(
+      id: 1,
+      notamId: "TEST 1",
+      icaoLocation: "KJFK",
+      effectiveStart: now,
+      effectiveEnd: nil as Date?,
+      schedule: nil as String?,
+      notamText: shortText,
+      qLine: nil as QLine?,
+      purpose: nil as String?,
+      scope: nil as String?,
+      trafficType: nil as String?,
+      createdAt: now,
+      updatedAt: now,
+      rawMessage: nil as String?
+    )
+
+    #expect(notam.summary == shortText)
+  }
+}

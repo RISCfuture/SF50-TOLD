@@ -1,4 +1,5 @@
 import CoreLocation
+import SF50_Shared
 import SwiftUI
 
 @MainActor

@@ -32,10 +32,9 @@ struct LandingAirportView: View {
       ?? .init(value: 0, unit: .feet)
   }
 
-  private var NOTAMTitle: String {
-    return performance.NOTAMCount == 0
-      ? String(localized: "NOTAMs")
-      : String(localized: "NOTAMs (\(performance.NOTAMCount, format: .count))")
+  private var hasNOTAMs: Bool {
+    performance.configuredNOTAMCount > 0 || performance.downloadedNOTAMCount > 0
+      || performance.isLoadingNOTAMs
   }
 
   private var displayTimeZone: TimeZone {
@@ -115,19 +114,39 @@ struct LandingAirportView: View {
 
       if performance.runway != nil {
         NavigationLink(
-          destination: NOTAMView(notam: runwayNOTAM)
+          destination: NOTAMView(
+            notam: runwayNOTAM,
+            downloadedNOTAMs: performance.downloadedNOTAMs,
+            plannedTime: weather.time,
+            performance: performance
+          )
         ) {
-          Label {
-            Text(NOTAMTitle).foregroundStyle(.primary)
-          } icon: {
+          HStack {
+            Text("NOTAMs").foregroundStyle(.primary)
+            Spacer()
+            NOTAMBadge(
+              configuredCount: performance.configuredNOTAMCount,
+              availableCount: performance.downloadedNOTAMCount,
+              isLoading: performance.isLoadingNOTAMs,
+              hasAttemptedFetch: performance.hasAttemptedNOTAMFetch
+            )
           }
         }.accessibilityIdentifier("NOTAMsSelector")
       }
     }
     .onReceive(nowVisibilityTimer) { _ in setShowNowButton() }
     .onAppear { setShowNowButton() }
-    .onChange(of: weather.time) { _, _ in setShowNowButton() }
+    .onChange(of: weather.time) { _, newTime in
+      setShowNowButton()
+      // Refetch NOTAMs when time changes
+      Task { await performance.fetchNOTAMs(plannedTime: newTime) }
+    }
     .task { await weather.load() }
+    .task(id: performance.runway?.persistentModelID) {
+      // Fetch NOTAMs when view appears or runway changes
+      guard performance.airport != nil, performance.runway != nil else { return }
+      await performance.fetchNOTAMs(plannedTime: weather.time)
+    }
   }
 
   private func setShowNowButton() {

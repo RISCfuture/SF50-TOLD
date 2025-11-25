@@ -1,3 +1,4 @@
+import SF50_Shared
 import SwiftData
 
 extension AirportBuilder {

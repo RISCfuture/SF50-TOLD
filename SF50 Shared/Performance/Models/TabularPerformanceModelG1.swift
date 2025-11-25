@@ -1,6 +1,6 @@
 import Foundation
 
-final class TabularPerformanceModelG1: BasePerformanceModel {
+public final class TabularPerformanceModelG1: BasePerformanceModel {
 
   // MARK: - Properties
 
@@ -46,7 +46,7 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
 
   // MARK: - Outputs
 
-  override var takeoffRunFt: Value<Double> {
+  public override var takeoffRunFt: Value<Double> {
     var run = takeoffRunBaseFt
     run *= takeoffRun_headwindAdjustment
     run *= takeoffRun_tailwindAdjustment
@@ -55,7 +55,7 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
     return run
   }
 
-  override var takeoffDistanceFt: Value<Double> {
+  public override var takeoffDistanceFt: Value<Double> {
     var distance = takeoffDistanceBaseFt
     distance *= takeoffDistance_headwindAdjustment
     distance *= takeoffDistance_tailwindAdjustment
@@ -63,51 +63,51 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
     return distance
   }
 
-  override var takeoffClimbGradientFtNmi: Value<Double> {
+  public override var takeoffClimbGradientFtNmi: Value<Double> {
     takeoffClimbGradientData.value(for: [weight, altitude, temperature])
   }
 
-  override var takeoffClimbRateFtMin: Value<Double> {
+  public override var takeoffClimbRateFtMin: Value<Double> {
     takeoffClimbRateData.value(for: [weight, altitude, temperature])
   }
 
-  var enrouteClimbGradientFtNmi: Value<Double> {
+  public var enrouteClimbGradientFtNmi: Value<Double> {
     let iceContaminated = configuration.iceProtection
     let data =
       iceContaminated ? enrouteClimb_gradientIceContaminatedData : enrouteClimb_gradientNormalData
     return data.value(for: [altitude, temperature, weight])
   }
 
-  var enrouteClimbRateFtMin: Value<Double> {
+  public var enrouteClimbRateFtMin: Value<Double> {
     let iceContaminated = configuration.iceProtection
     let data = iceContaminated ? enrouteClimb_rateIceContaminatedData : enrouteClimb_rateNormalData
     return data.value(for: [altitude, temperature, weight])
   }
 
-  var enrouteClimbSpeedKIAS: Value<Double> {
+  public var enrouteClimbSpeedKIAS: Value<Double> {
     let iceContaminated = configuration.iceProtection
     let data =
       iceContaminated ? enrouteClimb_speedIceContaminatedData : enrouteClimb_speedNormalData
     return data.value(for: [altitude, temperature, weight])
   }
 
-  var timeToClimbMin: Value<Double> {
+  public var timeToClimbMin: Value<Double> {
     timeFuelDistanceToClimb_timeData.value(for: [altitude, temperature, weight])
   }
 
-  var fuelToClimbUsGal: Value<Double> {
+  public var fuelToClimbUsGal: Value<Double> {
     timeFuelDistanceToClimb_fuelData.value(for: [altitude, temperature, weight])
   }
 
-  var distanceToClimbNm: Value<Double> {
+  public var distanceToClimbNm: Value<Double> {
     timeFuelDistanceToClimb_distanceData.value(for: [altitude, temperature, weight])
   }
 
-  override var VrefKts: Value<Double> {
+  public override var VrefKts: Value<Double> {
     vrefData.value(for: [weight])
   }
 
-  override var landingRunFt: Value<Double> {
+  public override var landingRunFt: Value<Double> {
     var run = landingRun_contaminationAddition(distance: landingRunBaseFt)
     run *= landingRun_headwindAdjustment
     run *= landingRun_tailwindAdjustment
@@ -116,7 +116,7 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
     return run
   }
 
-  override var landingDistanceFt: Value<Double> {
+  public override var landingDistanceFt: Value<Double> {
     // Calculate the increase in landing run due to contamination
     let baseLandingRun = landingRunBaseFt
     let contaminatedLandingRun = landingRun_contaminationAddition(distance: baseLandingRun)
@@ -161,7 +161,7 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
     return distance
   }
 
-  override var meetsGoAroundClimbGradient: Value<Bool> {
+  public override var meetsGoAroundClimbGradient: Value<Bool> {
     switch landingDistanceFt {
       case .notAvailable: .notAvailable
       case .notAuthorized: .notAuthorized
@@ -318,7 +318,7 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
   // MARK: - Initializers
 
   // swiftlint:disable force_try
-  override init(
+  public override init(
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,

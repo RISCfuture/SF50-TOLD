@@ -1,5 +1,6 @@
 import CoreLocation
 import Foundation
+import SF50_Shared
 
 public actor MockWeatherLoader: WeatherLoaderProtocol {
 

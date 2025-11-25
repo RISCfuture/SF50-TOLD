@@ -87,26 +87,3 @@ extension Measurement where UnitType == UnitSpeed {
   fileprivate var isPositive: Bool { asSpeed.value.rounded() >= 1 }
   fileprivate var isNegative: Bool { asSpeed.value.rounded() <= -1 }
 }
-
-#Preview {
-  PreviewView(insert: .KOAK) { preview in
-    let runway = AirportBuilder.KSQL.unsaved().runways[0]
-
-    return List {
-      LabeledContent("ISA") {
-        WindComponents(runway: runway, conditions: preview.ISA)
-      }
-      LabeledContent("Headwind") {
-        WindComponents(runway: runway, conditions: preview.lightWinds)
-      }
-      LabeledContent("Tailwind") {
-        WindComponents(
-          runway: runway,
-          conditions: preview.strongWinds,
-          crosswindLimit: .init(value: 18, unit: .knots),
-          tailwindLimit: .init(value: 10, unit: .knots)
-        )
-      }
-    }
-  }
-}

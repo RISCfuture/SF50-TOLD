@@ -1,6 +1,6 @@
 import Foundation
 
-class BaseRegressionPerformanceModel: BasePerformanceModel {
+public class BaseRegressionPerformanceModel: BasePerformanceModel {
 
   // MARK: - Properties
 
@@ -8,7 +8,7 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
   let boundsChecker: BoundsChecker
 
   /// Indicates if the takeoff inputs are below the minimum AFM table bounds
-  var takeoffInputsOffscaleLow: Bool {
+  public var takeoffInputsOffscaleLow: Bool {
     boundsChecker.takeoffBoundsStatus(
       weight: weight,
       altitude: altitude,
@@ -17,7 +17,7 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
   }
 
   /// Indicates if the takeoff inputs are above the maximum AFM table bounds
-  var takeoffInputsOffscaleHigh: Bool {
+  public var takeoffInputsOffscaleHigh: Bool {
     boundsChecker.takeoffBoundsStatus(
       weight: weight,
       altitude: altitude,
@@ -26,7 +26,7 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
   }
 
   /// Indicates if the landing inputs are below the minimum AFM table bounds
-  var landingInputsOffscaleLow: Bool {
+  public var landingInputsOffscaleLow: Bool {
     boundsChecker.landingBoundsStatus(
       weight: weight,
       altitude: altitude,
@@ -36,7 +36,7 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
   }
 
   /// Indicates if the landing inputs are above the maximum AFM table bounds
-  var landingInputsOffscaleHigh: Bool {
+  public var landingInputsOffscaleHigh: Bool {
     boundsChecker.landingBoundsStatus(
       weight: weight,
       altitude: altitude,
@@ -47,7 +47,7 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
 
   // MARK: - Initializer
 
-  init(
+  public init(
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,

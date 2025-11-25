@@ -33,10 +33,10 @@ enum UITestingHelper {
     let context = container.mainContext
 
     // Delete existing data
-    try? context.delete(model: Runway.self)
-    try? context.delete(model: Airport.self)
-    try? context.delete(model: NOTAM.self)
-    try? context.delete(model: Scenario.self)
+    try? context.delete(model: SF50_Shared.Runway.self)
+    try? context.delete(model: SF50_Shared.Airport.self)
+    try? context.delete(model: SF50_Shared.NOTAM.self)
+    try? context.delete(model: SF50_Shared.Scenario.self)
 
     // Insert test airports
     try? insertAirport(.KOAK, context: context)
@@ -50,8 +50,5 @@ enum UITestingHelper {
   private static func insertAirport(_ builder: AirportBuilder, context: ModelContext) throws {
     let airport = builder.unsaved()
     context.insert(airport)
-    for runway in airport.runways {
-      context.insert(runway)
-    }
   }
 }
