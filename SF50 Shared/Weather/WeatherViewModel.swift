@@ -37,6 +37,8 @@ public final class WeatherViewModel: WithIdentifiableError {
       // Don't reset it here - only reset explicitly when needed
       if conditions.source == .entered {
         isManualMode = true
+        // Clear any loading error when user enters custom weather
+        error = nil
       }
     }
   }

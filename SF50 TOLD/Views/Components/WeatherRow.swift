@@ -24,12 +24,14 @@ struct WeatherRow: View {
         Text("Loading weather…").foregroundStyle(.secondary)
           .accessibilityIdentifier("loadingWeatherLabel")
       }
-    } else if weather.error != nil {
-      Text("Couldn’t load weather — using ISA").foregroundStyle(.red)
-        .accessibilityIdentifier("loadingWeatherFailedLabel")
     } else if weather.conditions.source == .ISA {
-      Text("No weather — using ISA").foregroundStyle(.secondary)
-        .accessibilityIdentifier("noWeatherLabel")
+      if weather.error != nil {
+        Text("Couldn’t load weather — using ISA").foregroundStyle(.red)
+          .accessibilityIdentifier("loadingWeatherFailedLabel")
+      } else {
+        Text("No weather — using ISA").foregroundStyle(.secondary)
+          .accessibilityIdentifier("noWeatherLabel")
+      }
     } else {
       LoadedWeatherRow(
         conditions: weather.conditions,

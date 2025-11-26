@@ -34,28 +34,26 @@ struct WeatherSource: View {
   var body: some View {
     Section("Source") {
       HStack {
-        if weather.error != nil {
-          VStack(alignment: .leading) {
-            Text("Couldn’t load weather — using ISA")
+        switch weather.conditions.source {
+          case .NWS, .augmented:
+            Text("Using downloaded weather from NWS")
               .font(.system(size: 14))
-              .foregroundStyle(.red)
-          }
-        } else {
-          switch weather.conditions.source {
-            case .NWS, .augmented:
-              Text("Using downloaded weather from NWS")
+          case .WeatherKit:
+            Text("Using downloaded weather from Apple Weather")
+              .font(.system(size: 14))
+          case .entered:
+            Text("Using your custom weather")
+              .font(.system(size: 14))
+          case .ISA:
+            if weather.error != nil {
+              Text("Couldn’t load weather — using ISA")
                 .font(.system(size: 14))
-            case .WeatherKit:
-              Text("Using downloaded weather from Apple Weather")
-                .font(.system(size: 14))
-            case .entered:
-              Text("Using your custom weather")
-                .font(.system(size: 14))
-            case .ISA:
+                .foregroundStyle(.red)
+            } else {
               Text("Using ISA weather")
                 .font(.system(size: 14))
                 .foregroundStyle(.secondary)
-          }
+            }
         }
 
         Spacer()
