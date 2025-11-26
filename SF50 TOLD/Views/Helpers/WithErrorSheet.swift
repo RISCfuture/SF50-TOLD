@@ -3,17 +3,16 @@ import SwiftUI
 
 struct WithErrorSheet: ViewModifier {
   let state: WithIdentifiableError?
-  @State private var errorSheetIsPresented = false
+  @State private var presentedError: IdentifiableError?
 
   func body(content: Content) -> some View {
     content
-      .sheet(isPresented: $errorSheetIsPresented) {
-        ErrorSheet(error: state!.error!)
+      .sheet(item: $presentedError) { identifiableError in
+        ErrorSheet(error: identifiableError.error)
       }
       .onChange(of: state?.identifiableError) {
-        if state?.error != nil {
-          errorSheetIsPresented = true
-        }
+        // Capture the error at presentation time to avoid race conditions
+        presentedError = state?.identifiableError
       }
   }
 }
