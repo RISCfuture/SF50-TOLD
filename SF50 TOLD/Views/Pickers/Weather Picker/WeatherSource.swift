@@ -65,8 +65,12 @@ struct WeatherSource: View {
         }.accessibilityIdentifier("updateWeatherButton")
       }
 
-      RawWeather(rawText: weather.METAR)
-      RawWeather(rawText: formattedForecast)
+      if weather.METAR.hasValue {
+        RawWeather(rawText: weather.METAR)
+      }
+      if weather.TAF.hasValue {
+        RawWeather(rawText: formattedForecast)
+      }
     }
   }
 }
