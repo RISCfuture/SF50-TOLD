@@ -27,7 +27,6 @@ struct LandingView: View {
     .environment(weather)
     .environment(\.operation, .landing)
     .withErrorSheet(state: performance)
-    .withErrorSheet(state: weather)
     .onAppear {
       if performance == nil {
         performance = .init(container: modelContext.container)
