@@ -127,7 +127,7 @@ struct LandingAirportView: View {
     .onReceive(nowVisibilityTimer) { _ in setShowNowButton() }
     .onAppear { setShowNowButton() }
     .onChange(of: weather.time) { _, _ in setShowNowButton() }
-    .task { await weather.load() }
+    .task(id: weather.airport?.persistentModelID) { await weather.load() }
   }
 
   private func setShowNowButton() {
