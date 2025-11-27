@@ -4,3 +4,6 @@
 
 # swift-format config (downloaded in CI)
 .swift-format
+
+# NOTAM API Configuration (contains API token)
+SF50 TOLD/NOTAM/NOTAMAPIConfig.xcconfig
