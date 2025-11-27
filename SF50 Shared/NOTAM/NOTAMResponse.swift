@@ -64,23 +64,6 @@ public struct NOTAMResponse: Codable, Sendable, Identifiable {
   /// Raw AIXM XML or text NOTAM (only included in single NOTAM endpoint)
   public let rawMessage: String?
 
-  enum CodingKeys: String, CodingKey {
-    case id
-    case notamId = "notam_id"
-    case icaoLocation = "icao_location"
-    case effectiveStart = "effective_start"
-    case effectiveEnd = "effective_end"
-    case schedule
-    case notamText = "notam_text"
-    case qLine = "q_line"
-    case purpose
-    case scope
-    case trafficType = "traffic_type"
-    case createdAt = "created_at"
-    case updatedAt = "updated_at"
-    case rawMessage = "raw_message"
-  }
-
   /// Public initializer for creating NOTAM responses (e.g., in previews and tests)
   public init(
     id: Int,
@@ -112,6 +95,23 @@ public struct NOTAMResponse: Codable, Sendable, Identifiable {
     self.createdAt = createdAt
     self.updatedAt = updatedAt
     self.rawMessage = rawMessage
+  }
+
+  enum CodingKeys: String, CodingKey {
+    case id
+    case notamId = "notam_id"
+    case icaoLocation = "icao_location"
+    case effectiveStart = "effective_start"
+    case effectiveEnd = "effective_end"
+    case schedule
+    case notamText = "notam_text"
+    case qLine = "q_line"
+    case purpose
+    case scope
+    case trafficType = "traffic_type"
+    case createdAt = "created_at"
+    case updatedAt = "updated_at"
+    case rawMessage = "raw_message"
   }
 }
 

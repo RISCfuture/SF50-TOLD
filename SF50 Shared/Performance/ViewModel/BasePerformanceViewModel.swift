@@ -1,5 +1,6 @@
 import Defaults
 import Foundation
+import Logging
 import Observation
 import Sentry
 import SwiftData
@@ -9,6 +10,8 @@ import SwiftData
 @MainActor
 open class BasePerformanceViewModel: WithIdentifiableError {
   // MARK: - Properties
+
+  private static let logger = Logger(label: "codes.tim.SF50-TOLD.BasePerformanceViewModel")
 
   internal let context: ModelContext
   internal var model: PerformanceModel?
@@ -52,6 +55,17 @@ open class BasePerformanceViewModel: WithIdentifiableError {
   }
 
   public var error: Error?
+
+  // MARK: - Downloaded NOTAMs
+
+  /// NOTAMs downloaded from the API for the current airport
+  public private(set) var downloadedNOTAMs: [NOTAMResponse] = []
+
+  /// Whether NOTAMs are currently being loaded
+  public private(set) var isLoadingNOTAMs = false
+
+  /// Whether we have attempted to fetch NOTAMs for the current airport
+  public private(set) var hasAttemptedNOTAMFetch = false
 
   // MARK: - Computed Properties
 
@@ -206,6 +220,86 @@ open class BasePerformanceViewModel: WithIdentifiableError {
           recalculate()
         }
       }
+    }
+  }
+
+  // MARK: - NOTAM Fetching
+
+  /// Fetches NOTAMs for the current airport from the API
+  /// - Parameter plannedTime: The planned time for the flight, used to filter relevant NOTAMs
+  public func fetchNOTAMs(plannedTime: Date = Date()) async {
+    guard let airport else {
+      downloadedNOTAMs = []
+      return
+    }
+
+    // NOTAM API uses 3-letter identifiers (e.g., FAI) not ICAO codes (e.g., PAFA)
+    // Try locationID first, fallback to ICAO_ID if locationID unavailable
+    let primaryIdentifier = airport.locationID
+    let fallbackIdentifier = airport.ICAO_ID
+
+    // Check cache first
+    if let cached = await NOTAMCache.shared.get(for: primaryIdentifier) {
+      downloadedNOTAMs = filterNOTAMs(cached, relativeTo: plannedTime)
+      hasAttemptedNOTAMFetch = true
+      return
+    }
+
+    // Fetch from API
+    isLoadingNOTAMs = true
+
+    do {
+      // Fetch NOTAMs from 7 days before planned time to 30 days after
+      let startDate = Calendar.current.date(byAdding: .day, value: -7, to: plannedTime)
+      let endDate = Calendar.current.date(byAdding: .day, value: 30, to: plannedTime)
+
+      // Try primary identifier first
+      var response = try await NOTAMLoader.shared.fetchNOTAMs(
+        for: primaryIdentifier,
+        startDate: startDate,
+        endDate: endDate
+      )
+
+      // If no results and we have a fallback identifier, try that
+      if response.data.isEmpty, let fallbackIdentifier, fallbackIdentifier != primaryIdentifier {
+        response = try await NOTAMLoader.shared.fetchNOTAMs(
+          for: fallbackIdentifier,
+          startDate: startDate,
+          endDate: endDate
+        )
+      }
+
+      // Invalidate old cache only after successfully downloading new NOTAMs
+      await NOTAMCache.shared.invalidate(for: primaryIdentifier)
+
+      // Cache the new results
+      await NOTAMCache.shared.set(response.data, for: primaryIdentifier)
+
+      // Filter for relevant NOTAMs
+      downloadedNOTAMs = filterNOTAMs(response.data, relativeTo: plannedTime)
+
+      // Mark that we've attempted to fetch NOTAMs
+      hasAttemptedNOTAMFetch = true
+    } catch {
+      // Log error but don't show to user - NOTAMs are supplementary
+      Self.logger.error("Failed to fetch NOTAMs: \(error)")
+      downloadedNOTAMs = []
+      hasAttemptedNOTAMFetch = true
+    }
+
+    isLoadingNOTAMs = false
+  }
+
+  /// Filters NOTAMs to show only currently active or upcoming ones
+  private func filterNOTAMs(_ notams: [NOTAMResponse], relativeTo date: Date) -> [NOTAMResponse] {
+    notams.filter { notam in
+      // Include if no end time (permanent) or end time is in the future
+      guard let endTime = notam.effectiveEnd else { return true }
+      return endTime > date
+    }
+    .sorted { lhs, rhs in
+      // Sort by effective start, earliest first
+      lhs.effectiveStart < rhs.effectiveStart
     }
   }
 

@@ -23,6 +23,12 @@ public final class LandingPerformanceViewModel: BasePerformanceViewModel {
     return count
   }
 
+  /// Number of configured (user-entered) NOTAMs affecting this runway
+  public var configuredNOTAMCount: Int { NOTAMCount }
+
+  /// Number of downloaded NOTAMs from the API
+  public var downloadedNOTAMCount: Int { downloadedNOTAMs.count }
+
   public var requiredClimbGradient: Measurement<UnitSlope>? {
     guard let availableLandingRun,
       let obstacleHeight = runway?.notam?.obstacleHeight,

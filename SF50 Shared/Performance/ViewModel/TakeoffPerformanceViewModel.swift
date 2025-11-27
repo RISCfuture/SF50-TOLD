@@ -24,6 +24,12 @@ public final class TakeoffPerformanceViewModel: BasePerformanceViewModel {
     return count
   }
 
+  /// Number of configured (user-entered) NOTAMs affecting this runway
+  public var configuredNOTAMCount: Int { NOTAMCount }
+
+  /// Number of downloaded NOTAMs from the API
+  public var downloadedNOTAMCount: Int { downloadedNOTAMs.count }
+
   public var requiredClimbGradient: Measurement<UnitSlope>? {
     guard case .value(let takeoffRun) = takeoffRun,
       let availableTakeoffRun,

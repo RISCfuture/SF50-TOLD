@@ -16,6 +16,11 @@ public actor NOTAMCache {
   /// Cached NOTAM data by ICAO location
   private var cache: [String: CachedNOTAMs] = [:]
 
+  /// Returns the number of currently cached ICAO locations.
+  public var cacheSize: Int {
+    cache.count
+  }
+
   /// Private initializer to enforce singleton pattern
   private init() {}
 
@@ -62,11 +67,6 @@ public actor NOTAMCache {
     let count = cache.count
     cache.removeAll()
     Self.logger.info("Cleared all cache", metadata: ["cleared": "\(count)"])
-  }
-
-  /// Returns the number of currently cached ICAO locations.
-  public var cacheSize: Int {
-    cache.count
   }
 
   /// Cached NOTAM data with timestamp
