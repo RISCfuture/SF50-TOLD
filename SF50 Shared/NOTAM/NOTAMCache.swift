@@ -54,7 +54,7 @@ public actor NOTAMCache {
   ///
   /// - Parameter icao: ICAO airport code
   /// - Returns: Cached NOTAMs if available, nil otherwise
-  public func get(for icao: String) -> [NOTAMResponse]? {
+  public func get(for icao: String) -> [DownloadedNOTAM]? {
     guard let cached = cache[icao.uppercased()] else {
       return nil
     }
@@ -72,7 +72,7 @@ public actor NOTAMCache {
   /// - Parameters:
   ///   - notams: NOTAMs to cache
   ///   - icao: ICAO airport code
-  public func set(_ notams: [NOTAMResponse], for icao: String) {
+  public func set(_ notams: [DownloadedNOTAM], for icao: String) {
     cache[icao.uppercased()] = CachedNOTAMs(notams: notams, timestamp: Date())
     Self.logger.debug(
       "Cached NOTAMs for ICAO",
@@ -97,7 +97,7 @@ public actor NOTAMCache {
 
   /// Cached NOTAM data with timestamp
   private struct CachedNOTAMs {
-    let notams: [NOTAMResponse]
+    let notams: [DownloadedNOTAM]
     let timestamp: Date
   }
 }

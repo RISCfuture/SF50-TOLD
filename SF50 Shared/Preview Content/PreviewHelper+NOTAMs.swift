@@ -11,7 +11,7 @@ extension PreviewHelper {
     count: Int,
     icaoLocation: String = "KOAK",
     baseTime: Date = .now
-  ) -> [NOTAMResponse] {
+  ) -> [DownloadedNOTAM] {
     let loremTexts = [
       "RWY CLSD",
       "THR DISPLACED 320M. EFFECTIVE OPR LENGTH 1420M",
@@ -73,7 +73,7 @@ extension PreviewHelper {
       // Some NOTAMs have schedules
       let schedule = index.isMultiple(of: 7) ? "0800-1800" : nil
 
-      return NOTAMResponse(
+      return DownloadedNOTAM(
         id: index + 1,
         notamId: notamId,
         icaoLocation: icaoLocation,

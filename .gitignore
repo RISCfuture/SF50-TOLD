@@ -7,3 +7,10 @@
 
 # NOTAM API Configuration (contains API token)
 SF50 TOLD/NOTAM/NOTAMAPIConfig.xcconfig
+
+# Foundation Models adapter (large ~130MB file, downloaded separately)
+SF50 TOLD/Resources/Debug/*.fmadapter
+
+# Training data (large generated files)
+Training/.env
+Training/data/

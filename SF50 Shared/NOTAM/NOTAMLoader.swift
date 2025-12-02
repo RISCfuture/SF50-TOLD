@@ -128,7 +128,7 @@ public actor NOTAMLoader {
     scope: String? = nil,
     limit: Int = 100,
     offset: Int = 0
-  ) async throws -> NOTAMListResponse {
+  ) async throws -> DownloadedNOTAMList {
     // Build query parameters
     var components = URLComponents(string: "\(baseURL)/api/notams")!
     var queryItems: [URLQueryItem] = [
@@ -204,7 +204,7 @@ public actor NOTAMLoader {
 
     // Decode successful response
     do {
-      let notamResponse = try decoder.decode(NOTAMListResponse.self, from: data)
+      let notamResponse = try decoder.decode(DownloadedNOTAMList.self, from: data)
       Self.logger.info(
         "Successfully fetched NOTAMs",
         metadata: [
@@ -225,7 +225,7 @@ public actor NOTAMLoader {
   /// - Parameter notamId: The NOTAM identifier (e.g., "FDC 2/1234")
   /// - Returns: NOTAM response including raw message
   /// - Throws: `NOTAMLoader.Errors` on failure
-  public func fetchNOTAM(id notamId: String) async throws -> NOTAMResponse {
+  public func fetchNOTAM(id notamId: String) async throws -> DownloadedNOTAM {
     // URL-encode the NOTAM ID
     guard
       let encodedId = notamId.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
@@ -266,7 +266,7 @@ public actor NOTAMLoader {
 
     // Decode response (single NOTAM endpoint returns { "data": {...} })
     struct SingleNOTAMResponse: Codable {
-      let data: NOTAMResponse
+      let data: DownloadedNOTAM
     }
 
     do {

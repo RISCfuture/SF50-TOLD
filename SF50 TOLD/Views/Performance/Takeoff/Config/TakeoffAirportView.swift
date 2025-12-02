@@ -44,7 +44,8 @@ struct TakeoffAirportView: View {
     if let notam = runway.notam { return notam }
     let notam = NOTAM(runway: runway)
     runway.notam = notam
-    modelContext.insert(notam)
+    // Insert into the same context that owns the runway to avoid cross-context issues
+    runway.modelContext?.insert(notam)
     return notam
   }
 
@@ -134,18 +135,41 @@ struct TakeoffAirportView: View {
     .onChange(of: weather.time) { _, newTime in
       setShowNowButton()
       // Refetch NOTAMs when time changes
-      Task { await performance.fetchNOTAMs(plannedTime: newTime) }
+      Task {
+        await performance.fetchNOTAMs(plannedTime: newTime)
+        await parseAndApplyNOTAMs()
+      }
     }
     .task(id: weather.airport?.persistentModelID) { await weather.load() }
     .task(id: performance.runway?.persistentModelID) {
       // Fetch NOTAMs when view appears or runway changes
       guard performance.airport != nil, performance.runway != nil else { return }
       await performance.fetchNOTAMs(plannedTime: weather.time)
+      await parseAndApplyNOTAMs()
     }
   }
 
   private func setShowNowButton() {
     showNowButton = abs(weather.time.timeIntervalSinceNow) >= 120
+  }
+
+  /// Parses downloaded NOTAMs using the trained adapter and applies results
+  private func parseAndApplyNOTAMs() async {
+    guard #available(iOS 26.0, macOS 26.0, *) else { return }
+    guard let runway = performance.runway else { return }
+    guard !performance.downloadedNOTAMs.isEmpty else { return }
+
+    let interpretedNOTAMs = await NOTAMInterpreter.shared.parse(
+      performance.downloadedNOTAMs,
+      for: runway.name
+    )
+
+    // Apply parsed data to the runway's NOTAM on the main actor
+    guard !interpretedNOTAMs.isEmpty else { return }
+
+    for parsed in interpretedNOTAMs where !parsed.isEmpty {
+      parsed.apply(to: runwayNOTAM, for: .takeoff)
+    }
   }
 }
 

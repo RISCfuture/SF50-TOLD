@@ -11,5 +11,11 @@
 	<string>$(NOTAM_API_TOKEN)</string>
 	<key>NOTAM_API_BASE_URL</key>
 	<string>$(NOTAM_API_BASE_URL)</string>
+	<key>BAAppGroupID</key>
+	<string>group.codes.tim.TOLD</string>
+	<key>BAHasManagedAssetPacks</key>
+	<true/>
+	<key>BAUsesAppleHosting</key>
+	<true/>
 </dict>
 </plist>

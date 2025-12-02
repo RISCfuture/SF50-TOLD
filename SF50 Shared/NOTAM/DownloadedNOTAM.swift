@@ -4,9 +4,9 @@ import Foundation
 ///
 /// This is the top-level response structure returned by the NOTAM API for
 /// list queries. It includes both the NOTAM data and pagination metadata.
-public struct NOTAMListResponse: Codable, Sendable {
+public struct DownloadedNOTAMList: Codable, Sendable {
   /// Array of NOTAM entries
-  public let data: [NOTAMResponse]
+  public let data: [DownloadedNOTAM]
 
   /// Pagination metadata
   public let pagination: Pagination
@@ -46,7 +46,7 @@ public struct NOTAMListResponse: Codable, Sendable {
 /// - ``isEffectiveNow``: Whether NOTAM is currently in effect
 /// - ``isEffective(within:windowInterval:)``: Time-window effectiveness
 /// - ``isAerodromeRelated``: Whether NOTAM affects the aerodrome
-public struct NOTAMResponse: Codable, Sendable, Identifiable {
+public struct DownloadedNOTAM: Codable, Sendable, Identifiable {
   /// Database primary key
   public let id: Int
 
@@ -184,7 +184,7 @@ public struct NOTAMErrorResponse: Codable, Sendable {
   }
 }
 
-extension NOTAMResponse {
+extension DownloadedNOTAM {
   /// Returns true if the NOTAM is currently effective.
   public var isEffectiveNow: Bool {
     let now = Date()

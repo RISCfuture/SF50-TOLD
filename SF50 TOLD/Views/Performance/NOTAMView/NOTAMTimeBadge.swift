@@ -6,7 +6,7 @@ struct NOTAMTimeBadge: View {
   private static let criticalTimeInterval: TimeInterval = 3600  // 1 hr
   private static let warningTimeInterval: TimeInterval = 10800  // 3 hr
 
-  let notam: NOTAMResponse
+  let notam: DownloadedNOTAM
   let plannedTime: Date
 
   private var timeRelevance: TimeRelevance {

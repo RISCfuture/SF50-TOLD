@@ -78,6 +78,12 @@ struct SF50_TOLDApp: App {
         .task {
           ScenarioSeeder(container: sharedModelContainer).seedDefaultScenariosIfNeeded()
         }
+        .task {
+          // Initialize NOTAM adapter manager on iOS 26+
+          if #available(iOS 26.0, macOS 26.0, *) {
+            _ = NOTAMAdapterManager.shared
+          }
+        }
     }
   }
 

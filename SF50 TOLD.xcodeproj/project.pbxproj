@@ -10,6 +10,7 @@
 		0128374C2E5B8BB8002195A0 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0128374B2E5B8BB8002195A0 /* WidgetKit.framework */; };
 		0128374E2E5B8BB8002195A0 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0128374D2E5B8BB8002195A0 /* SwiftUI.framework */; };
 		0128375F2E5B8BB9002195A0 /* SF50 RunwaysExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0128374A2E5B8BB8002195A0 /* SF50 RunwaysExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		012B0ACD2EDE3348005DAF4A /* SF50 Asset Downloader.appex in Embed ExtensionKit Extensions */ = {isa = PBXBuildFile; fileRef = 012B0AC52EDE3348005DAF4A /* SF50 Asset Downloader.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		012B1E462DE2F272000D9ADC /* SF50_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012B1E3B2DE2F272000D9ADC /* SF50_Shared.framework */; };
 		012B1E502DE2F272000D9ADC /* SF50_Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012B1E3B2DE2F272000D9ADC /* SF50_Shared.framework */; };
 		012B1E512DE2F272000D9ADC /* SF50_Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012B1E3B2DE2F272000D9ADC /* SF50_Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -54,6 +55,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 012B1E3A2DE2F272000D9ADC;
 			remoteInfo = "SF50 Shared";
+		};
+		012B0ACB2EDE3348005DAF4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0163BC622DDEE9D3008FEE8F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 012B0AC42EDE3348005DAF4A;
+			remoteInfo = "SF50 Asset Downloader";
 		};
 		012B1E472DE2F272000D9ADC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -109,6 +117,15 @@
 			);
 			name = "Embed Foundation Extensions";
 		};
+		012B0ACE2EDE3348005DAF4A /* Embed ExtensionKit Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			dstPath = "$(EXTENSIONS_FOLDER_PATH)";
+			dstSubfolder = Product;
+			files = (
+				012B0ACD2EDE3348005DAF4A /* SF50 Asset Downloader.appex in Embed ExtensionKit Extensions */,
+			);
+			name = "Embed ExtensionKit Extensions";
+		};
 		012B1E552DE2F272000D9ADC /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			dstPath = "";
@@ -124,6 +141,7 @@
 		0128374A2E5B8BB8002195A0 /* SF50 RunwaysExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SF50 RunwaysExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0128374B2E5B8BB8002195A0 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0128374D2E5B8BB8002195A0 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		012B0AC52EDE3348005DAF4A /* SF50 Asset Downloader.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.extensionkit-extension"; includeInIndex = 0; path = "SF50 Asset Downloader.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		012B1E3B2DE2F272000D9ADC /* SF50_Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SF50_Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		012B1E452DE2F272000D9ADC /* SF50 SharedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SF50 SharedTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01442FC52E1D901900A0BD40 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
@@ -149,6 +167,20 @@
 				Icon.icon,
 			);
 			target = 016945982EB30848001602E6 /* DownloadNASR */;
+		};
+		012B0AD22EDE3348005DAF4A /* Exceptions for "SF50 Asset Downloader" folder in "SF50 Asset Downloader" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 012B0AC42EDE3348005DAF4A /* SF50 Asset Downloader */;
+		};
+		012B0AE72EDE5E3C005DAF4A /* Exceptions for "SF50 TOLD" folder in "SF50 TOLD" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Debug/NOTAMAdapter.fmadapter,
+			);
+			target = 0163BC692DDEE9D3008FEE8F /* SF50 TOLD */;
 		};
 		016945C42EB308A2001602E6 /* Exceptions for "SF50 Shared" folder in "DownloadNASR" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -190,6 +222,14 @@
 			path = "SF50 Runways";
 			sourceTree = "<group>";
 		};
+		012B0AC62EDE3348005DAF4A /* SF50 Asset Downloader */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				012B0AD22EDE3348005DAF4A /* Exceptions for "SF50 Asset Downloader" folder in "SF50 Asset Downloader" target */,
+			);
+			path = "SF50 Asset Downloader";
+			sourceTree = "<group>";
+		};
 		012B1E3C2DE2F272000D9ADC /* SF50 Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -210,6 +250,7 @@
 		0163BC6C2DDEE9D3008FEE8F /* SF50 TOLD */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				012B0AE72EDE5E3C005DAF4A /* Exceptions for "SF50 TOLD" folder in "SF50 TOLD" target */,
 				01162DCE2EB3414600E40422 /* Exceptions for "SF50 TOLD" folder in "DownloadNASR" target */,
 			);
 			path = "SF50 TOLD";
@@ -247,6 +288,11 @@
 				0128374E2E5B8BB8002195A0 /* SwiftUI.framework in Frameworks */,
 				0128374C2E5B8BB8002195A0 /* WidgetKit.framework in Frameworks */,
 				0198B4502E986226003CB126 /* (null) in Frameworks */,
+			);
+		};
+		012B0AC22EDE3348005DAF4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
 			);
 		};
 		012B1E382DE2F272000D9ADC /* Frameworks */ = {
@@ -336,6 +382,7 @@
 				0128374F2E5B8BB8002195A0 /* SF50 Runways */,
 				0191DC0D2E9322C20099FB0E /* Generate Screenshots */,
 				0169459A2EB30848001602E6 /* DownloadNASR */,
+				012B0AC62EDE3348005DAF4A /* SF50 Asset Downloader */,
 				01D1E30E2DDF865100C1CAC8 /* Frameworks */,
 				0163BC6B2DDEE9D3008FEE8F /* Products */,
 				012B12E62EDEB740005DAF4A /* Recovered References */,
@@ -353,6 +400,7 @@
 				0128374A2E5B8BB8002195A0 /* SF50 RunwaysExtension.appex */,
 				0191DC0C2E9322C20099FB0E /* Generate Screenshots.xctest */,
 				016945992EB30848001602E6 /* DownloadNASR.app */,
+				012B0AC52EDE3348005DAF4A /* SF50 Asset Downloader.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -399,6 +447,24 @@
 			productName = "SF50 RunwaysExtension";
 			productReference = 0128374A2E5B8BB8002195A0 /* SF50 RunwaysExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		012B0AC42EDE3348005DAF4A /* SF50 Asset Downloader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 012B0AD12EDE3348005DAF4A /* Build configuration list for PBXNativeTarget "SF50 Asset Downloader" */;
+			buildPhases = (
+				012B0AC12EDE3348005DAF4A /* Sources */,
+				012B0AC22EDE3348005DAF4A /* Frameworks */,
+				012B0AC32EDE3348005DAF4A /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				012B0AC62EDE3348005DAF4A /* SF50 Asset Downloader */,
+			);
+			name = "SF50 Asset Downloader";
+			productName = "SF50 Asset Downloader";
+			productReference = 012B0AC52EDE3348005DAF4A /* SF50 Asset Downloader.appex */;
+			productType = "com.apple.product-type.extensionkit-extension";
 		};
 		012B1E3A2DE2F272000D9ADC /* SF50 Shared */ = {
 			isa = PBXNativeTarget;
@@ -459,12 +525,15 @@
 				012B1E552DE2F272000D9ADC /* Embed Frameworks */,
 				012837602E5B8BB9002195A0 /* Embed Foundation Extensions */,
 				CC70812E05EB4C6A9C28744E /* Upload Debug Symbols to Sentry */,
+				012B0ACE2EDE3348005DAF4A /* Embed ExtensionKit Extensions */,
+				012B0AE82EDE5E42005DAF4A /* Copy FoundationModel Adapter */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				012B1E4F2DE2F272000D9ADC /* PBXTargetDependency */,
 				0128375E2E5B8BB9002195A0 /* PBXTargetDependency */,
+				012B0ACC2EDE3348005DAF4A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				0163BC6C2DDEE9D3008FEE8F /* SF50 TOLD */,
@@ -574,11 +643,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2600;
+				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					012837492E5B8BB8002195A0 = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					012B0AC42EDE3348005DAF4A = {
+						CreatedOnToolsVersion = 26.1.1;
 					};
 					012B1E3A2DE2F272000D9ADC = {
 						CreatedOnToolsVersion = 16.3;
@@ -640,12 +712,18 @@
 				012837492E5B8BB8002195A0 /* SF50 RunwaysExtension */,
 				0191DC0B2E9322C20099FB0E /* Generate Screenshots */,
 				016945982EB30848001602E6 /* DownloadNASR */,
+				012B0AC42EDE3348005DAF4A /* SF50 Asset Downloader */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		012837482E5B8BB8002195A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		012B0AC32EDE3348005DAF4A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -690,6 +768,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		012B0AE82EDE5E42005DAF4A /* Copy FoundationModel Adapter */ = {
+			isa = PBXShellScriptBuildPhase;
+			inputPaths = (
+				"$(SRCROOT)/SF50 TOLD/Resources/Debug/NOTAMAdapter.fmadapter",
+			);
+			name = "Copy FoundationModel Adapter";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME).app/NOTAMAdapter.fmadapter",
+			);
+			shellPath = /bin/sh;
+			shellScript = (
+				"ADAPTER_PATH=\"${SRCROOT}/SF50 TOLD/Resources/Debug/NOTAMAdapter.fmadapter\"",
+				"if [ \"$CONFIGURATION\" = \"Debug\" ] && [ -d \"$ADAPTER_PATH\" ]; then",
+				"    cp -R \"$ADAPTER_PATH\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/\"",
+				"fi",
+				"",
+			);
+		};
 		CC70812E05EB4C6A9C28744E /* Upload Debug Symbols to Sentry */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -735,6 +831,11 @@
 
 /* Begin PBXSourcesBuildPhase section */
 		012837462E5B8BB8002195A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		012B0AC12EDE3348005DAF4A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
 			);
@@ -786,6 +887,11 @@
 			isa = PBXTargetDependency;
 			target = 012B1E3A2DE2F272000D9ADC /* SF50 Shared */;
 			targetProxy = 012837652E5B8BC3002195A0 /* PBXContainerItemProxy */;
+		};
+		012B0ACC2EDE3348005DAF4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 012B0AC42EDE3348005DAF4A /* SF50 Asset Downloader */;
+			targetProxy = 012B0ACB2EDE3348005DAF4A /* PBXContainerItemProxy */;
 		};
 		012B1E482DE2F272000D9ADC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -872,6 +978,68 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		012B0ACF2EDE3348005DAF4A /* Debug configuration for PBXNativeTarget "SF50 Asset Downloader" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "SF50 Asset Downloader/SF50_Asset_Downloader.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 35;
+				DEVELOPMENT_TEAM = 2NFSK2WB24;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SF50 Asset Downloader/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SF50 Asset Downloader";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.2.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.AssetDownloader";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		012B0AD02EDE3348005DAF4A /* Release configuration for PBXNativeTarget "SF50 Asset Downloader" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "SF50 Asset Downloader/SF50_Asset_Downloader.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 35;
+				DEVELOPMENT_TEAM = 2NFSK2WB24;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SF50 Asset Downloader/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SF50 Asset Downloader";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.2.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "codes.tim.SF50-TOLD.AssetDownloader";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1393,6 +1561,14 @@
 			buildConfigurations = (
 				012837612E5B8BB9002195A0 /* Debug configuration for PBXNativeTarget "SF50 RunwaysExtension" */,
 				012837622E5B8BB9002195A0 /* Release configuration for PBXNativeTarget "SF50 RunwaysExtension" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		012B0AD12EDE3348005DAF4A /* Build configuration list for PBXNativeTarget "SF50 Asset Downloader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				012B0ACF2EDE3348005DAF4A /* Debug configuration for PBXNativeTarget "SF50 Asset Downloader" */,
+				012B0AD02EDE3348005DAF4A /* Release configuration for PBXNativeTarget "SF50 Asset Downloader" */,
 			);
 			defaultConfigurationName = Release;
 		};

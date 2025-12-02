@@ -89,7 +89,7 @@ open class BasePerformanceViewModel: WithIdentifiableError {
   // MARK: - Downloaded NOTAMs
 
   /// NOTAMs downloaded from the API for the current airport
-  public private(set) var downloadedNOTAMs: [NOTAMResponse] = []
+  public private(set) var downloadedNOTAMs: [DownloadedNOTAM] = []
 
   /// Whether NOTAMs are currently being loaded
   public private(set) var isLoadingNOTAMs = false
@@ -321,7 +321,8 @@ open class BasePerformanceViewModel: WithIdentifiableError {
   }
 
   /// Filters NOTAMs to show only currently active or upcoming ones
-  private func filterNOTAMs(_ notams: [NOTAMResponse], relativeTo date: Date) -> [NOTAMResponse] {
+  private func filterNOTAMs(_ notams: [DownloadedNOTAM], relativeTo date: Date) -> [DownloadedNOTAM]
+  {
     notams.filter { notam in
       // Include if no end time (permanent) or end time is in the future
       guard let endTime = notam.effectiveEnd else { return true }

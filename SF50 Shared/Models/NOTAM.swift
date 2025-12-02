@@ -31,6 +31,18 @@ public final class NOTAM {
   private var _obstacleHeight: Double  // meters
   private var _obstacleDistance: Double  // meters
 
+  /// Array of NOTAM IDs this data was derived from
+  public var sourceNOTAMs = Set<String>()
+
+  /// Timestamp when NOTAM data was last fetched from API
+  public var lastFetched: Date?
+
+  /// True if user has manually edited this NOTAM (prevents auto-updates)
+  public var isManuallyEdited: Bool = false
+
+  /// True if this NOTAM was automatically created by parsing downloaded NOTAMs
+  public var automaticallyCreated: Bool = false
+
   @Relationship(deleteRule: .nullify)
   var runway: Runway
 

@@ -2,7 +2,7 @@ import SF50_Shared
 import SwiftUI
 
 struct NOTAMListItemView: View {
-  let notam: NOTAMResponse
+  let notam: DownloadedNOTAM
   let plannedTime: Date
 
   var body: some View {

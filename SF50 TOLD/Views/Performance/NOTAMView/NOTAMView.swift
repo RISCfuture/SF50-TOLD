@@ -8,7 +8,7 @@ private enum PreviewError: Error {
 
 struct NOTAMView: View {
   @Bindable var notam: NOTAM
-  let downloadedNOTAMs: [NOTAMResponse]
+  let downloadedNOTAMs: [DownloadedNOTAM]
   let plannedTime: Date
   let isLoadingNOTAMs: Bool
 
@@ -22,7 +22,7 @@ struct NOTAMView: View {
   /// 3. Future aerodrome NOTAMs (soonest first)
   /// 4. Future non-aerodrome NOTAMs (soonest first)
   /// 5. Expired NOTAMs (most recently expired first)
-  private var sortedNOTAMs: [NOTAMResponse] {
+  private var sortedNOTAMs: [DownloadedNOTAM] {
     guard !downloadedNOTAMs.isEmpty else { return [] }
 
     return downloadedNOTAMs.sorted { lhs, rhs in
