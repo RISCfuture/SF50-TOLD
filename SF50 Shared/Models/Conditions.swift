@@ -21,7 +21,7 @@ public let standardSeaLevelPressure = Measurement(
 
 /// Atmospheric conditions used for performance calculations.
 ///
-/// `Conditions` represents weather observations or forecasts including wind,
+/// ``Conditions`` represents weather observations or forecasts including wind,
 /// temperature, dewpoint, and pressure. Conditions can be sourced from METAR,
 /// TAF, WeatherKit forecasts, or manually entered by the user.
 ///
@@ -31,24 +31,57 @@ public let standardSeaLevelPressure = Measurement(
 ///
 /// - ``init(windDirection:windSpeed:temperature:seaLevelPressure:)``
 /// - ``init(observation:)``
+/// - ``init(forecast:)``
+/// - ``init(weather:)-(CurrentWeather)``
+/// - ``init()``
 ///
-/// ### Properties
+/// ### Wind Properties
 ///
 /// - ``windDirection``
 /// - ``windSpeed``
-/// - ``temperature``
-/// - ``seaLevelPressure``
 /// - ``windsCalm``
+///
+/// ### Temperature and Pressure
+///
+/// - ``temperature``
+/// - ``dewpoint``
+/// - ``seaLevelPressure``
+/// - ``temperature(at:)``
+/// - ``densityAltitude(elevation:)``
+///
+/// ### Metadata
+///
+/// - ``validTime``
+/// - ``source``
+/// - ``Source``
+///
+/// ### Combining Conditions
+///
+/// - ``adding(conditions:)``
+/// - ``userModified(with:)``
 public struct Conditions: Sendable, Equatable {
+  /// Time interval during which these conditions are valid.
   public let validTime: DateInterval
+
+  /// Data source for these conditions.
   public let source: Source
 
+  /// Wind direction in degrees true, or `nil` for variable winds.
   public let windDirection: Measurement<UnitAngle>?
+
+  /// Wind speed, or `nil` if not reported.
   public let windSpeed: Measurement<UnitSpeed>?
+
+  /// Temperature, or `nil` if not reported.
   public let temperature: Measurement<UnitTemperature>?
+
+  /// Dewpoint temperature, or `nil` if not reported.
   public let dewpoint: Measurement<UnitTemperature>?
+
+  /// Sea level pressure, or `nil` if not reported.
   public let seaLevelPressure: Measurement<UnitPressure>?
 
+  /// Whether winds are calm (less than 1 knot or not reported).
   public var windsCalm: Bool {
     windSpeed.map { $0.converted(to: .knots).value < 1 } ?? true
   }
@@ -71,6 +104,15 @@ public struct Conditions: Sendable, Equatable {
     self.seaLevelPressure = seaLevelPressure
   }
 
+  /**
+   * Creates conditions with manually entered values.
+   *
+   * - Parameters:
+   *   - windDirection: Wind direction in degrees true.
+   *   - windSpeed: Wind speed.
+   *   - temperature: Temperature.
+   *   - seaLevelPressure: Sea level pressure (altimeter setting).
+   */
   public init(
     windDirection: Measurement<UnitAngle>? = nil,
     windSpeed: Measurement<UnitSpeed>? = nil,
@@ -86,6 +128,7 @@ public struct Conditions: Sendable, Equatable {
     source = .entered
   }
 
+  /// Creates conditions from a METAR observation.
   public init(observation: METAR) {
     validTime = .init(start: observation.observationTime, duration: 3600)
 
@@ -111,6 +154,7 @@ public struct Conditions: Sendable, Equatable {
     source = .NWS
   }
 
+  /// Creates conditions from a TAF forecast, or `nil` if the forecast is invalid.
   public init?(forecast: TAF) {
     validTime = .init(start: forecast.validFrom, end: forecast.validTo)
 
@@ -138,6 +182,7 @@ public struct Conditions: Sendable, Equatable {
     source = .NWS
   }
 
+  /// Creates conditions from WeatherKit current weather.
   public init(weather: CurrentWeather) {
     validTime = .init(start: weather.date, duration: 3600)
 
@@ -149,6 +194,7 @@ public struct Conditions: Sendable, Equatable {
     source = .WeatherKit
   }
 
+  /// Creates conditions from WeatherKit hourly forecast.
   public init(weather: HourWeather) {
     validTime = .init(start: weather.date, duration: 3600)
 
@@ -160,6 +206,7 @@ public struct Conditions: Sendable, Equatable {
     source = .WeatherKit
   }
 
+  /// Creates ISA standard conditions (sea level, 15°C, 1013.25 hPa, calm winds).
   public init() {
     validTime = .init(start: .now, duration: 3600)
     windDirection = .init(value: 0, unit: .degrees)
@@ -170,6 +217,7 @@ public struct Conditions: Sendable, Equatable {
     source = .ISA
   }
 
+  /// Returns conditions with missing values filled from WeatherKit current weather.
   func adding(weather: CurrentWeather) -> Self {
     .init(
       validTime: validTime,
@@ -182,6 +230,7 @@ public struct Conditions: Sendable, Equatable {
     )
   }
 
+  /// Returns conditions with missing values filled from WeatherKit hourly forecast.
   func adding(weather: HourWeather) -> Self {
     .init(
       validTime: validTime,
@@ -194,6 +243,7 @@ public struct Conditions: Sendable, Equatable {
     )
   }
 
+  /// Returns conditions with missing values filled from another conditions instance.
   public func adding(conditions: Self) -> Self {
     .init(
       validTime: validTime,
@@ -206,6 +256,7 @@ public struct Conditions: Sendable, Equatable {
     )
   }
 
+  /// Returns conditions modified by user-entered values, changing the source to `.entered`.
   public func userModified(with conditions: Self) -> Self {
     .init(
       validTime: validTime,
@@ -218,6 +269,7 @@ public struct Conditions: Sendable, Equatable {
     )
   }
 
+  /// Returns the temperature at the given elevation, using ISA lapse rate if not reported.
   public func temperature(at elevation: Measurement<UnitLength>) -> Measurement<UnitTemperature> {
     if source == .ISA {
       return ISATemperature(at: elevation)
@@ -225,6 +277,7 @@ public struct Conditions: Sendable, Equatable {
     return temperature ?? ISATemperature(at: elevation)
   }
 
+  /// Calculates density altitude at the given elevation using NWS dry-air formula.
   public func densityAltitude(elevation: Measurement<UnitLength>) -> Measurement<UnitLength> {
     // NWS formula uses station pressure (actual pressure at the elevation), not altimeter setting
     let stationPressureInHg = absolutePressure(elevation: elevation)
@@ -259,11 +312,17 @@ public struct Conditions: Sendable, Equatable {
     return .init(value: pressure, unit: .hectopascals)
   }
 
+  /// Data source for weather conditions.
   public enum Source: Sendable {
+    /// National Weather Service (METAR/TAF).
     case NWS
+    /// Apple WeatherKit.
     case WeatherKit
+    /// NWS data augmented with WeatherKit.
     case augmented
+    /// International Standard Atmosphere defaults.
     case ISA
+    /// Manually entered by user.
     case entered
   }
 }

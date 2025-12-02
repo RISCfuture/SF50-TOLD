@@ -1,5 +1,26 @@
 import Foundation
 
+/// Regression-based performance model for second-generation SF50 Vision Jet (G2/G2+).
+///
+/// ``RegressionPerformanceModelG2Plus`` calculates takeoff and landing performance using
+/// polynomial regression equations derived from AFM table data. This model provides
+/// smoother interpolation than the tabular model and includes statistical uncertainty.
+///
+/// The G2+ model uses the updated thrust schedule which provides improved takeoff
+/// performance compared to the G1.
+///
+/// ## Regression Approach
+///
+/// Each performance output (ground run, distance, climb rate, etc.) is computed using
+/// a polynomial equation with weight, altitude, and temperature as inputs. The
+/// coefficients were fitted to AFM table data with residual errors providing
+/// uncertainty bounds.
+///
+/// ## Usage
+///
+/// This model is selected automatically when the user has:
+/// - Regression model enabled in settings
+/// - G2/G2+ thrust schedule selected (updated thrust)
 final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel {
 
   // MARK: - Takeoff

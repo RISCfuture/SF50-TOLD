@@ -3,8 +3,46 @@ import SwiftData
 
 /// A runway at an airport with performance-critical dimensions and properties.
 ///
-/// `Runway` represents a single runway direction with associated metadata including
+/// ``Runway`` represents a single runway direction with associated metadata including
 /// length, elevation, heading, gradient, and declared distances for takeoff and landing.
+/// Each physical runway surface is represented by two ``Runway`` instances (one for each
+/// direction) linked via the ``reciprocal`` relationship.
+///
+/// ## Topics
+///
+/// ### Identification
+/// - ``name``
+/// - ``airport``
+/// - ``reciprocal``
+///
+/// ### Physical Properties
+/// - ``elevation``
+/// - ``trueHeading``
+/// - ``magneticHeading``
+/// - ``gradient``
+/// - ``gradientOrBestGuess``
+/// - ``length``
+/// - ``isTurf``
+///
+/// ### Declared Distances
+/// - ``takeoffRun``
+/// - ``takeoffRunOrLength``
+/// - ``takeoffDistance``
+/// - ``takeoffDistanceOrLength``
+/// - ``landingDistance``
+/// - ``landingDistanceOrLength``
+///
+/// ### NOTAM-Adjusted Distances
+/// - ``notam``
+/// - ``notamedTakeoffDistance``
+/// - ``notamedTakeoffRun``
+/// - ``notamedLandingDistance``
+/// - ``hasTakeoffDistanceNOTAM``
+/// - ``hasLandingDistanceNOTAM``
+///
+/// ### Wind Calculations
+/// - ``headwind(conditions:)``
+/// - ``crosswind(conditions:)``
 @Model
 public final class Runway {
   /// Runway identifier (e.g., "28L", "09", "16R")
@@ -97,8 +135,10 @@ public final class Runway {
   /// Returns declared LDA, or total length if LDA is not declared
   public var landingDistanceOrLength: Measurement<UnitLength> { landingDistance ?? length }
 
+  /// Runway magnetic heading, calculated from true heading and airport magnetic variation
   public var magneticHeading: Measurement<UnitAngle> { trueHeading + airport.variation }
 
+  /// Takeoff distance available adjusted for any active NOTAM restrictions
   public var notamedTakeoffDistance: Measurement<UnitLength> {
     if let shortening = notam?.takeoffDistanceShortening {
       takeoffDistanceOrLength - shortening
@@ -107,6 +147,7 @@ public final class Runway {
     }
   }
 
+  /// Takeoff run available adjusted for any active NOTAM restrictions
   public var notamedTakeoffRun: Measurement<UnitLength> {
     if let shortening = notam?.takeoffDistanceShortening {
       takeoffRunOrLength - shortening
@@ -115,6 +156,7 @@ public final class Runway {
     }
   }
 
+  /// Landing distance available adjusted for any active NOTAM restrictions
   public var notamedLandingDistance: Measurement<UnitLength> {
     if let shortening = notam?.landingDistanceShortening {
       landingDistanceOrLength - shortening
@@ -123,10 +165,27 @@ public final class Runway {
     }
   }
 
+  /// Whether there is an active NOTAM reducing takeoff distance
   public var hasTakeoffDistanceNOTAM: Bool { notam?.takeoffDistanceShortening.value ?? 0 > 0 }
 
+  /// Whether there is an active NOTAM reducing landing distance
   public var hasLandingDistanceNOTAM: Bool { notam?.landingDistanceShortening.value ?? 0 > 0 }
 
+  /**
+   * Creates a new runway.
+   *
+   * - Parameters:
+   *   - name: Runway designator (e.g., "28L", "09").
+   *   - elevation: Threshold elevation, or `nil` to use airport elevation.
+   *   - trueHeading: Runway true heading.
+   *   - gradient: Runway slope as fraction, or `nil` if unknown.
+   *   - length: Total runway length.
+   *   - takeoffRun: Declared TORA, or `nil` to use full length.
+   *   - takeoffDistance: Declared TODA, or `nil` to use full length.
+   *   - landingDistance: Declared LDA, or `nil` to use full length.
+   *   - isTurf: Whether the runway is unpaved (grass/turf).
+   *   - airport: The airport this runway belongs to.
+   */
   public init(
     name: String,
     elevation: Measurement<UnitLength>?,
@@ -153,6 +212,12 @@ public final class Runway {
     notam = nil
   }
 
+  /**
+   * Calculates the headwind component for the given conditions.
+   *
+   * - Parameter conditions: The atmospheric conditions including wind direction and speed.
+   * - Returns: The headwind component (positive = headwind, negative = tailwind).
+   */
   public func headwind(conditions: Conditions) -> Measurement<UnitSpeed> {
     guard let windDirection = conditions.windDirection,
       let windSpeed = conditions.windSpeed
@@ -161,6 +226,12 @@ public final class Runway {
     return windSpeed * cos(angle)
   }
 
+  /**
+   * Calculates the crosswind component for the given conditions.
+   *
+   * - Parameter conditions: The atmospheric conditions including wind direction and speed.
+   * - Returns: The crosswind component (positive = from right, negative = from left).
+   */
   public func crosswind(conditions: Conditions) -> Measurement<UnitSpeed> {
     guard let windDirection = conditions.windDirection,
       let windSpeed = conditions.windSpeed

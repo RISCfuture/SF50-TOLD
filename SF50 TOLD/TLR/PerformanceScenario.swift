@@ -4,6 +4,31 @@ import SwiftData
 
 // MARK: - Performance Scenario
 
+/// Defines adjustments to base conditions for "what-if" analysis.
+///
+/// ``PerformanceScenario`` represents a set of delta adjustments (temperature, wind,
+/// weight) and optional overrides (flaps, contamination) that are applied to base
+/// conditions to generate alternative performance calculations.
+///
+/// ## Usage
+///
+/// Scenarios enable pilots to see performance under different conditions:
+/// - "Hot day" (+10°C temperature)
+/// - "Light wind" (-5 kt headwind)
+/// - "Heavy" (+100 lb weight)
+/// - "Wet runway" (contamination override)
+///
+/// The ``apply(baseConditions:baseConfiguration:runway:)`` method returns adjusted
+/// conditions and configuration for performance calculations.
+///
+/// ## Persistence
+///
+/// User-defined scenarios are stored as `Scenario` SwiftData models. Use
+/// ``from(_:)`` to convert a model to a ``PerformanceScenario`` for calculations.
+///
+/// ## See Also
+///
+/// - ``ScenarioFetcher``
 struct PerformanceScenario: Sendable {
 
   // MARK: - Instance Properties

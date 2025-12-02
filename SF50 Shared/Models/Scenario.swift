@@ -3,9 +3,31 @@ import SwiftData
 
 /// A user-customizable performance scenario for takeoff or landing calculations.
 ///
-/// `Scenario` represents a set of adjustments to be applied to base conditions
+/// ``Scenario`` represents a set of adjustments to be applied to base conditions
 /// when calculating hypothetical performance. Scenarios can modify temperature,
 /// wind speed, weight, flap settings, and runway contamination.
+///
+/// ## Topics
+///
+/// ### Properties
+/// - ``name``
+/// - ``operation``
+///
+/// ### Delta Adjustments
+/// - ``deltaTemperature``
+/// - ``deltaWindSpeed``
+/// - ``deltaWeight``
+///
+/// ### Overrides
+/// - ``flapSettingOverride``
+/// - ``getFlapSettingOverride()``
+/// - ``contaminationOverride``
+/// - ``contaminationDepth``
+/// - ``getContaminationOverride()``
+/// - ``isDryOverride``
+///
+/// ### Factory Methods
+/// - ``defaultScenarios()``
 @Model
 public final class Scenario {
   /// Scenario name
@@ -59,6 +81,20 @@ public final class Scenario {
     set { _contaminationDepth = newValue?.converted(to: .meters).value }
   }
 
+  /**
+   * Creates a new scenario.
+   *
+   * - Parameters:
+   *   - name: Display name for this scenario.
+   *   - operation: Whether this scenario applies to takeoff or landing.
+   *   - deltaTemperature: Temperature adjustment to apply.
+   *   - deltaWindSpeed: Wind speed adjustment to apply.
+   *   - deltaWeight: Weight adjustment to apply.
+   *   - flapSettingOverride: Flap setting raw value to override, or `nil`.
+   *   - contaminationOverride: Contamination type raw value to override, or `nil`.
+   *   - contaminationDepth: Contamination depth for water/slush types.
+   *   - isDryOverride: Whether to force dry runway conditions.
+   */
   public init(
     name: String,
     operation: Operation,

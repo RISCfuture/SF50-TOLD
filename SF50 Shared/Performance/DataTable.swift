@@ -1,6 +1,33 @@
 import Foundation
 
-/// A data table for multi-dimensional interpolation of performance data
+/// A data table for multi-dimensional interpolation of performance data.
+///
+/// ``DataTable`` loads CSV data representing digitized AFM charts and performs
+/// 1D, 2D, or 3D linear interpolation to compute performance values for
+/// arbitrary inputs within the table's range.
+///
+/// ## Data Format
+///
+/// CSV files should have N input columns followed by 1 output column. For example,
+/// a 3D takeoff distance table has columns: weight, altitude, temperature, distance.
+///
+/// ## Interpolation
+///
+/// The table automatically detects dimensionality and uses the appropriate method:
+///
+/// - **1D**: Linear interpolation between two bounding points
+/// - **2D**: Bilinear interpolation between four corner points
+/// - **3D**: Trilinear interpolation between eight corner points
+///
+/// ## Out-of-Bounds Handling
+///
+/// When inputs fall outside the table's range, behavior depends on the
+/// ``Clamping`` mode:
+///
+/// - ``Clamping/none``: Returns ``.offscaleLow`` or ``.offscaleHigh``
+/// - ``Clamping/clampLow``: Clamps to minimum, returns offscale high if above max
+/// - ``Clamping/clampHigh``: Clamps to maximum, returns offscale low if below min
+/// - ``Clamping/clampBoth``: Clamps to both bounds, never returns offscale
 class DataTable {
   private typealias Row = [Double]
 

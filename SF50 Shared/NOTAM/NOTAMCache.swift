@@ -1,11 +1,37 @@
 import Foundation
 import Logging
 
-/// Actor responsible for caching NOTAM data fetched from the API.
-///
-/// `NOTAMCache` provides in-memory session-based caching of NOTAM responses.
-/// Cache persists for the lifetime of the app session and is only invalidated
-/// when new NOTAMs are successfully downloaded.
+/**
+ * Actor responsible for caching NOTAM data fetched from the API.
+ *
+ * ``NOTAMCache`` provides in-memory session-based caching of NOTAM responses.
+ * The cache persists for the lifetime of the app session and is only invalidated
+ * when new NOTAMs are successfully downloaded for the same location.
+ *
+ * ## Cache Behavior
+ *
+ * - **Session-based**: Cache lives in memory, cleared on app termination
+ * - **Location-keyed**: Each ICAO location has its own cache entry
+ * - **Explicit invalidation**: Call ``invalidate(for:)`` before updating
+ *
+ * ## Thread Safety
+ *
+ * As an actor, all cache operations are automatically serialized.
+ *
+ * ## Usage
+ *
+ * ```swift
+ * // Check cache
+ * if let cached = await NOTAMCache.shared.get(for: "KJFK") {
+ *     return cached
+ * }
+ *
+ * // Fetch and cache
+ * let notams = try await fetchFromAPI()
+ * await NOTAMCache.shared.invalidate(for: "KJFK")
+ * await NOTAMCache.shared.set(notams, for: "KJFK")
+ * ```
+ */
 public actor NOTAMCache {
   /// Shared singleton instance
   public static let shared = NOTAMCache()

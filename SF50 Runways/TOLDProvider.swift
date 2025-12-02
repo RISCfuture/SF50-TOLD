@@ -4,6 +4,17 @@ import SwiftData
 import SwiftUI
 import WidgetKit
 
+/// Timeline provider for the SF50 TOLD widget.
+///
+/// ``TOLDProvider`` supplies timeline entries containing runway performance data.
+/// The timeline refreshes every 15 minutes to capture weather changes, with
+/// immediate refresh available via `WidgetCenter.reloadTimelines` when settings change.
+///
+/// ## Timeline Behavior
+///
+/// - **Snapshot**: Returns current performance for quick preview
+/// - **Timeline**: Returns entries with 15-minute refresh policy
+/// - **Placeholder**: Shows empty state while loading
 struct TOLDProvider: TimelineProvider {
   private let performanceCalculator: PerformanceCalculator
 

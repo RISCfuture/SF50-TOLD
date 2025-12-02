@@ -2,21 +2,57 @@ import CoreLocation
 import Sentry
 import SwiftUI
 
+/// Errors that can occur during location streaming.
 public enum LocationError: Error {
+  /// User denied location permission.
   case permissionDenied
+  /// Location services unavailable.
   case locationUnavailable
 }
 
+/// Protocol for streaming device location updates.
+///
+/// ``LocationStreamer`` provides an abstraction for accessing device location,
+/// allowing dependency injection of mock locations for testing.
 @MainActor
 public protocol LocationStreamer: Sendable {
+  /// The most recent location, or nil if unavailable.
   var location: CLLocation? { get }
+  /// Any error that occurred during location updates.
   var error: Error? { get }
 
+  /// Start receiving location updates.
   func start() async
+  /// Stop receiving location updates.
   func stop() async
+  /// Returns an async stream of location updates.
   func locationUpdates() -> AsyncStream<CLLocation>
 }
 
+/// Core Location-based implementation of ``LocationStreamer``.
+///
+/// ``CoreLocationStreamer`` wraps `CLLocationManager` to provide:
+/// - Reference-counted start/stop
+/// - Async stream of location updates
+/// - Permission handling
+///
+/// ## Permission Handling
+///
+/// The streamer automatically requests "when in use" authorization. If denied,
+/// it sets ``error`` to ``LocationError/permissionDenied``.
+///
+/// ## Reference Counting
+///
+/// Multiple callers can call ``start()`` independently. Location updates only
+/// stop when all callers have called ``stop()``.
+///
+/// ## SwiftUI Integration
+///
+/// The streamer is available via the SwiftUI environment:
+///
+/// ```swift
+/// @Environment(\.locationStreamer) var locationStreamer
+/// ```
 @MainActor
 @Observable
 public final class CoreLocationStreamer: NSObject, LocationStreamer {

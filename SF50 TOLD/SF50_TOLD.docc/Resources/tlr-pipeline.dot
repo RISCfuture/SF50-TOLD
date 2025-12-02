@@ -1,0 +1,94 @@
+digraph TLRPipeline {
+    // Graph settings
+    rankdir=TB
+    splines=ortho
+    nodesep=0.8
+    ranksep=0.6
+    bgcolor="transparent"
+
+    // Modern, clean node styling
+    node [
+        shape=box
+        style="rounded,filled"
+        fontname="SF Pro Display, Helvetica Neue, Arial"
+        fontsize=13
+        fontcolor="#1a1a1a"
+        fillcolor="#f8f9fa"
+        color="#dee2e6"
+        penwidth=1.5
+        width=2.2
+        height=0.7
+    ]
+
+    // Edge styling
+    edge [
+        color="#6c757d"
+        penwidth=1.5
+        arrowsize=0.8
+        arrowhead=vee
+    ]
+
+    // Phase labels
+    subgraph cluster_phase1 {
+        label="Phase 1: Data Generation"
+        labeljust=l
+        labelloc=t
+        fontname="SF Pro Display, Helvetica Neue, Arial"
+        fontsize=11
+        fontcolor="#6c757d"
+        style="rounded,dashed"
+        color="#dee2e6"
+        bgcolor="#ffffff08"
+        margin=20
+
+        input [
+            label="PerformanceInput\n(configuration)"
+            fillcolor="#e7f1ff"
+            color="#4a90d9"
+        ]
+
+        reportdata [
+            label="BaseReportData\n(calculations)"
+            fillcolor="#e7f1ff"
+            color="#4a90d9"
+        ]
+
+        output [
+            label="ReportOutput\n(runway info + scenarios)"
+            fillcolor="#d4edda"
+            color="#28a745"
+        ]
+    }
+
+    subgraph cluster_phase2 {
+        label="Phase 2: HTML Rendering"
+        labeljust=l
+        labelloc=t
+        fontname="SF Pro Display, Helvetica Neue, Arial"
+        fontsize=11
+        fontcolor="#6c757d"
+        style="rounded,dashed"
+        color="#dee2e6"
+        bgcolor="#ffffff08"
+        margin=20
+
+        template [
+            label="BaseReportTemplate\n(HTML rendering)"
+            fillcolor="#fff3cd"
+            color="#ffc107"
+        ]
+
+        html [
+            label="HTML String"
+            fillcolor="#f8d7da"
+            color="#dc3545"
+            style="rounded,filled,bold"
+        ]
+    }
+
+    // Connections
+    input -> reportdata
+    reportdata -> output
+    output -> template
+    template -> html
+}

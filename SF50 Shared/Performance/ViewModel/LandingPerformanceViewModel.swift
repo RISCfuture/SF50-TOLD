@@ -3,6 +3,28 @@ import Foundation
 import Observation
 import SwiftData
 
+/// View model for landing performance calculations.
+///
+/// ``LandingPerformanceViewModel`` provides reactive landing performance values
+/// that update automatically when inputs change. It observes user settings for
+/// airport, runway, weight, and conditions, then calculates:
+///
+/// - ``Vref`` - Reference approach speed
+/// - ``landingRun`` - Ground run distance after touchdown
+/// - ``landingDistance`` - Total distance over 50ft obstacle
+/// - ``meetsGoAroundClimbGradient`` - Whether go-around gradient can be achieved
+///
+/// ## Go-Around Capability
+///
+/// The ``meetsGoAroundClimbGradient`` property indicates whether the aircraft
+/// can meet the required go-around climb gradient at the current weight and
+/// conditions. This is important for approach planning.
+///
+/// ## NOTAM Display
+///
+/// Both configured NOTAMs (user-entered runway restrictions) and downloaded
+/// NOTAMs (from FAA API) are tracked via ``configuredNOTAMCount`` and
+/// ``downloadedNOTAMCount``.
 @Observable
 @MainActor
 public final class LandingPerformanceViewModel: BasePerformanceViewModel {

@@ -1,10 +1,46 @@
 import Foundation
 import Logging
 
-/// Actor responsible for fetching NOTAM data from the NOTAM API.
-///
-/// `NOTAMLoader` provides thread-safe access to NOTAM data, with caching
-/// and error handling. It follows the same pattern as `WeatherLoader`.
+/**
+ * Actor responsible for fetching NOTAM data from the NOTAM API.
+ *
+ * ``NOTAMLoader`` provides thread-safe access to NOTAM data with error handling.
+ * It connects to a custom NOTAM API service to retrieve FAA NOTAMs in a structured
+ * JSON format.
+ *
+ * ## Configuration
+ *
+ * API credentials are loaded from the app bundle's Info.plist:
+ * - `NOTAM_API_BASE_URL`: Base URL for the NOTAM service
+ * - `NOTAM_API_TOKEN`: Bearer token for authentication
+ *
+ * ## Querying NOTAMs
+ *
+ * NOTAMs can be fetched by:
+ * - ICAO location code
+ * - Date range (effective start/end)
+ * - Purpose and scope filters
+ *
+ * ## Response Format
+ *
+ * Results are returned as ``NOTAMListResponse`` containing:
+ * - Array of ``NOTAMResponse`` objects
+ * - Pagination metadata
+ *
+ * ## Usage
+ *
+ * ```swift
+ * let response = try await NOTAMLoader.shared.fetchNOTAMs(
+ *     for: "KJFK",
+ *     startDate: Date(),
+ *     endDate: Date().addingTimeInterval(86400 * 7)
+ * )
+ *
+ * for notam in response.data {
+ *     print(notam.notamText)
+ * }
+ * ```
+ */
 public actor NOTAMLoader {
   /// Shared singleton instance
   public static let shared = NOTAMLoader()

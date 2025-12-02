@@ -1,5 +1,27 @@
 import Foundation
 
+/// Calculates landing distance increases due to runway contamination.
+///
+/// ``ContaminationCalculator`` provides methods to adjust landing ground run distances
+/// when runways are contaminated with water, slush, or snow. The AFM provides specific
+/// adjustment factors for different contamination types and depths.
+///
+/// ## Supported Contamination Types
+///
+/// - **Water or slush**: Standing water up to specified depth
+/// - **Slush or wet snow**: Depth-dependent adjustment
+/// - **Dry snow**: Fixed percentage increase
+/// - **Compact snow**: Fixed percentage increase (largest impact)
+///
+/// ## Calculation Methods
+///
+/// Two calculation approaches are supported:
+///
+/// 1. **Tabular**: Uses ``DataTable`` interpolation for exact AFM values
+/// 2. **Regression**: Uses polynomial formulas with uncertainty estimates
+///
+/// The regression approach includes RMSE uncertainty from curve fitting, propagated
+/// through to the final result.
 enum ContaminationCalculator {
 
   // MARK: - Tabular Model Contamination (using DataTable)

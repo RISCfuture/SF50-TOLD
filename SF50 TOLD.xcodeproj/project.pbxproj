@@ -311,6 +311,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		012B12E62EDEB740005DAF4A /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				01NOTAM01NOTAM01NOTAM /* NOTAMAPIConfig.xcconfig */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		0163BC612DDEE9D3008FEE8F = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +338,7 @@
 				0169459A2EB30848001602E6 /* DownloadNASR */,
 				01D1E30E2DDF865100C1CAC8 /* Frameworks */,
 				0163BC6B2DDEE9D3008FEE8F /* Products */,
+				012B12E62EDEB740005DAF4A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -706,6 +715,7 @@
 				"else",
 				"  echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"",
 				"fi",
+				"",
 				"",
 				"",
 				"",

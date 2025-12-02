@@ -1,6 +1,20 @@
 import Foundation
 import SF50_Shared
 
+/// Generates takeoff performance data for all runways and scenarios.
+///
+/// ``TakeoffReportData`` extends ``BaseReportData`` with takeoff-specific calculations:
+/// - Ground run and total distance to 50'
+/// - Climb gradient
+/// - Maximum takeoff weight considering field length, AFM limits, and obstacle clearance
+///
+/// ## Weight Determination
+///
+/// The ``determineMaxWeight(runway:)`` method uses binary search to find the highest
+/// weight that satisfies:
+/// 1. AFM performance chart limits
+/// 2. Available runway length
+/// 3. Obstacle clearance (if NOTAM specifies obstacles)
 class TakeoffReportData: BaseReportData<TakeoffRunwayPerformance, TakeoffPerformanceScenario> {
 
   // MARK: - Template Method Overrides

@@ -1,5 +1,38 @@
 import SwiftUI
 
+/// A reusable view for displaying ``Value`` types with range validation and uncertainty.
+///
+/// ``InterpolationView`` handles all cases of the ``Value`` enum:
+/// - Displays valid values using a custom content view
+/// - Shows uncertainty when available (with validation against bounds)
+/// - Renders appropriate error states (invalid, offscale, not authorized, etc.)
+///
+/// ## Range Validation
+///
+/// For numeric types, values are automatically color-coded:
+/// - **Primary**: Value is within the specified range
+/// - **Red**: Value exceeds the critical limit (max by default)
+/// - **Secondary**: Value is below the non-critical limit
+///
+/// The `maxCritical` parameter controls which limit is treated as critical.
+///
+/// ## Uncertainty Display
+///
+/// When the value includes uncertainty, it validates whether `value ± uncertainty`
+/// exceeds the bounds. The uncertainty text turns red if bounds would be exceeded.
+///
+/// ## Usage
+///
+/// ```swift
+/// InterpolationView(
+///     value: performance.takeoffDistance,
+///     maximum: availableRunway
+/// ) { distance in
+///     Text(distance, format: .measurement(width: .abbreviated))
+/// } displayUncertainty: { uncertainty in
+///     Text("± \(uncertainty.value, format: .number.precision(.fractionLength(0)))")
+/// }
+/// ```
 public struct InterpolationView<ValueType, Content: View>: View {
   public let value: Value<ValueType>
   public let minimum: ValueType?

@@ -1,6 +1,10 @@
 import Foundation
 
 /// Aircraft flap configuration settings.
+///
+/// The SF50 Vision Jet has three flap positions (Up, 50%, 100%) which affect
+/// takeoff and landing performance. Ice protection variants account for the
+/// performance penalty when the ice protection system is active.
 public enum FlapSetting: Sendable {
   /// Flaps up (clean configuration)
   case flapsUp
@@ -16,8 +20,15 @@ public enum FlapSetting: Sendable {
 
 /// Aircraft configuration including weight and flap setting.
 ///
-/// `Configuration` represents the physical configuration of the aircraft
+/// ``Configuration`` represents the physical configuration of the aircraft
 /// for performance calculations, including gross weight and flap deflection.
+///
+/// ## Topics
+///
+/// ### Properties
+/// - ``weight``
+/// - ``flapSetting``
+/// - ``iceProtection``
 public struct Configuration {
   /// Aircraft gross weight
   public let weight: Measurement<UnitMass>
@@ -40,6 +51,7 @@ public struct Configuration {
     self.iceProtection = iceProtection
   }
 
+  /// Returns a configuration with weight clamped to the specified range.
   func clampWeight(min: Measurement<UnitMass>? = nil, max: Measurement<UnitMass>? = nil) -> Self {
     var weight = weight
     if let min, min > weight { weight = min }
@@ -49,7 +61,13 @@ public struct Configuration {
   }
 }
 
+/// The generation of SF50 Vision Jet aircraft.
+///
+/// Different aircraft generations have different performance characteristics
+/// and require different performance models for accurate calculations.
 public enum AircraftType: String {
+  /// First generation SF50 Vision Jet
   case G1
+  /// Second generation and later SF50 Vision Jet (G2, G2+)
   case G2Plus
 }

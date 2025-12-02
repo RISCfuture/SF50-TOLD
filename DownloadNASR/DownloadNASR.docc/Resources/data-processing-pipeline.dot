@@ -1,0 +1,104 @@
+digraph DataProcessingPipeline {
+    // Graph settings
+    rankdir=TB
+    splines=ortho
+    nodesep=0.6
+    ranksep=0.5
+    bgcolor="transparent"
+
+    // Modern, clean node styling
+    node [
+        shape=box
+        style="rounded,filled"
+        fontname="SF Pro Display, Helvetica Neue, Arial"
+        fontsize=11
+        fontcolor="#1a1a1a"
+        fillcolor="#f8f9fa"
+        color="#dee2e6"
+        penwidth=1.5
+        width=1.7
+        height=0.55
+    ]
+
+    // Edge styling
+    edge [
+        color="#6c757d"
+        penwidth=1.5
+        arrowsize=0.7
+        arrowhead=vee
+    ]
+
+    // Data sources
+    subgraph cluster_sources {
+        label="Data Sources"
+        labeljust=l
+        labelloc=t
+        fontname="SF Pro Display, Helvetica Neue, Arial"
+        fontsize=10
+        fontcolor="#6c757d"
+        style="rounded,dashed"
+        color="#dee2e6"
+        bgcolor="#ffffff08"
+        margin=12
+
+        nasr [
+            label="FAA NASR\n(via SwiftNASR)"
+            fillcolor="#e7f1ff"
+            color="#4a90d9"
+        ]
+
+        ourairports [
+            label="OurAirports\n(CSV files)"
+            fillcolor="#e7f1ff"
+            color="#4a90d9"
+        ]
+    }
+
+    // Parsing stage
+    parse_nasr [
+        label="Parse Airports\n& Runways"
+        fillcolor="#f3e8ff"
+        color="#8b5cf6"
+    ]
+
+    parse_csv [
+        label="Parse CSV\n(TabularData)"
+        fillcolor="#f3e8ff"
+        color="#8b5cf6"
+    ]
+
+    // Processing stages
+    merge [
+        label="Merge & Dedupe\n(NASR priority)"
+        fillcolor="#fff3cd"
+        color="#ffc107"
+    ]
+
+    enrich [
+        label="Add Timezones\n& Mag Variation"
+        fillcolor="#fff3cd"
+        color="#ffc107"
+    ]
+
+    encode [
+        label="Encode as Plist\nCompress (LZMA)"
+        fillcolor="#d4edda"
+        color="#28a745"
+    ]
+
+    upload [
+        label="Upload to GitHub\n(optional)"
+        fillcolor="#24292e"
+        fontcolor="#ffffff"
+        color="#24292e"
+    ]
+
+    // Connections
+    nasr -> parse_nasr
+    ourairports -> parse_csv
+    parse_nasr -> merge
+    parse_csv -> merge
+    merge -> enrich
+    enrich -> encode
+    encode -> upload
+}

@@ -1,0 +1,92 @@
+digraph AirportLoadingPipeline {
+    // Graph settings
+    rankdir=TB
+    splines=ortho
+    nodesep=0.6
+    ranksep=0.7
+    bgcolor="transparent"
+
+    // Modern, clean node styling
+    node [
+        shape=box
+        style="rounded,filled"
+        fontname="SF Pro Display, Helvetica Neue, Arial"
+        fontsize=12
+        fontcolor="#1a1a1a"
+        fillcolor="#f8f9fa"
+        color="#dee2e6"
+        penwidth=1.5
+        width=2.0
+        height=0.6
+    ]
+
+    // Edge styling
+    edge [
+        color="#6c757d"
+        penwidth=1.5
+        arrowsize=0.8
+        arrowhead=vee
+    ]
+
+    // Source
+    github [
+        label="GitHub Repository\nSF50-TOLD-Airports\n(LZMA compressed)"
+        fillcolor="#24292e"
+        fontcolor="#ffffff"
+        color="#24292e"
+        height=0.9
+    ]
+
+    // Processing steps
+    subgraph cluster_loader {
+        label="AirportLoader (ModelActor)"
+        labeljust=l
+        labelloc=t
+        fontname="SF Pro Display, Helvetica Neue, Arial"
+        fontsize=11
+        fontcolor="#6c757d"
+        style="rounded,dashed"
+        color="#dee2e6"
+        bgcolor="#ffffff08"
+        margin=16
+
+        download [
+            label="1. Download"
+            fillcolor="#e7f1ff"
+            color="#4a90d9"
+        ]
+
+        decompress [
+            label="2. Decompress LZMA"
+            fillcolor="#e7f1ff"
+            color="#4a90d9"
+        ]
+
+        decode [
+            label="3. Decode Plist"
+            fillcolor="#e7f1ff"
+            color="#4a90d9"
+        ]
+
+        import [
+            label="4. Import to SwiftData"
+            fillcolor="#e7f1ff"
+            color="#4a90d9"
+        ]
+    }
+
+    // Destination
+    swiftdata [
+        label="SwiftData Store\nAirport models\nRunway models"
+        fillcolor="#d4edda"
+        color="#28a745"
+        height=0.9
+    ]
+
+    // Connections
+    github -> download [label="  Download  " fontname="SF Pro Display, Helvetica Neue, Arial" fontsize=10 fontcolor="#6c757d"]
+    download -> decompress
+    decompress -> decode
+    decode -> import
+    import -> swiftdata
+}

@@ -4,6 +4,44 @@ import SF50_Shared
 import SwiftData
 import SwiftNASR
 
+/**
+ * Downloads and imports airport data from the GitHub repository.
+ *
+ * ``AirportLoader`` is a `@ModelActor` that handles the complete airport data
+ * update pipeline:
+ *
+ * 1. **Download**: Fetches compressed airport data from GitHub
+ * 2. **Decompress**: Extracts LZMA-compressed property list
+ * 3. **Import**: Populates SwiftData with `Airport` and `Runway` models
+ *
+ * ## Data Source
+ *
+ * Airport data is pre-processed and hosted at:
+ * `github.com/RISCfuture/SF50-TOLD-Airports`
+ *
+ * The data combines FAA NASR (National Airspace System Resources) with
+ * OurAirports for international coverage.
+ *
+ * ## Progress Tracking
+ *
+ * Monitor the ``state`` property to track loading progress:
+ *
+ * ```swift
+ * let loader = AirportLoader(modelContainer: container)
+ * Task {
+ *     while true {
+ *         print(await loader.state)
+ *         try? await Task.sleep(for: .seconds(0.25))
+ *     }
+ * }
+ * let (cycle, lastUpdated) = try await loader.load()
+ * ```
+ *
+ * ## See Also
+ *
+ * - ``AirportLoaderViewModel``
+ * - ``State``
+ */
 @ModelActor
 actor AirportLoader {
   var state: State = .idle
@@ -157,6 +195,15 @@ actor AirportLoader {
     }
   }
 
+  /// Current state of the loading process.
+  ///
+  /// ## Cases
+  ///
+  /// - ``idle``: Not started
+  /// - ``downloading(progress:)``: Downloading from GitHub (0.0-1.0)
+  /// - ``extracting(progress:)``: Decompressing LZMA data
+  /// - ``loading(progress:)``: Importing into SwiftData (0.0-1.0)
+  /// - ``finished``: Complete
   enum State {
     case idle
     case downloading(progress: Float?)
@@ -165,8 +212,12 @@ actor AirportLoader {
     case finished
   }
 
+  /// Errors that can occur during airport data loading.
   enum Errors: Swift.Error {
+    /// The current AIRAC cycle data is not yet available on GitHub.
     case cycleNotAvailable
+
+    /// The server returned an unexpected response.
     case badResponse(_ response: URLResponse)
   }
 }

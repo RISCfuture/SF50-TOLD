@@ -1,7 +1,28 @@
 import Foundation
 
-/// Shared SF50-specific performance calculations used by both G1 and G2+ models.
-/// Contains identical regression formulas and adjustment factors that are common across SF50 variants.
+/// SF50-specific regression model with calculations shared across G1 and G2+ variants.
+///
+/// ``BaseSF50RegressionPerformanceModel`` provides polynomial regression formulas and
+/// adjustment factors that are identical between SF50 Vision Jet generations. This includes:
+///
+/// - En route climb performance (gradient, rate, speed)
+/// - Time/fuel/distance to climb calculations
+/// - Landing Vref calculations
+/// - Landing distance calculations with wind and surface adjustments
+///
+/// ## En Route Climb
+///
+/// The en route climb calculations provide performance during cruise climb after
+/// departure, including ice-contaminated variants for flight in icing conditions.
+///
+/// ## Adjustment Factors
+///
+/// Landing performance is adjusted for wind and surface conditions using factors
+/// derived from AFM data:
+///
+/// - Headwind/tailwind adjustments reduce/increase distances
+/// - Gradient adjustments account for runway slope
+/// - Unpaved surface adjustments add margin for grass runways
 class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
 
   // MARK: - En Route Climb

@@ -1,14 +1,40 @@
 import Foundation
 
-/// Represents the status of inputs relative to AFM table bounds.
+/// Status of inputs relative to AFM table bounds.
+///
+/// Used by ``BoundsChecker`` to indicate whether performance calculation inputs
+/// fall within, below, or above the valid data range.
 enum BoundsStatus {
+  /// All inputs are within the valid AFM table range.
   case withinBounds
+  /// One or more inputs are below the minimum table value.
   case belowMinimum
+  /// One or more inputs are above the maximum table value.
   case aboveMaximum
 }
 
-/// Checks whether performance calculation inputs are within the bounds of the AFM data tables.
-/// Used by regression models to validate inputs against the same bounds as tabular models.
+/// Validates performance calculation inputs against AFM data table bounds.
+///
+/// ``BoundsChecker`` is used by regression models to validate that inputs (weight,
+/// altitude, temperature) fall within the ranges covered by the original AFM tables.
+/// While regression models can extrapolate beyond these bounds, results outside the
+/// valid range may be less reliable.
+///
+/// ## Usage
+///
+/// ```swift
+/// let checker = BoundsChecker(modelType: .g1)
+///
+/// let status = checker.takeoffBoundsStatus(
+///     weight: 5800,
+///     altitude: 5000,
+///     temperature: 30
+/// )
+///
+/// if status == .aboveMaximum {
+///     // Warn user that inputs exceed AFM data range
+/// }
+/// ```
 final class BoundsChecker {
 
   private let takeoffRunData: DataTable

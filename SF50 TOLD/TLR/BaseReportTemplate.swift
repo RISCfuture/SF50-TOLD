@@ -9,6 +9,36 @@ import SwiftHtml
 
 // MARK: - Base Report Template
 
+/// Base class for rendering TLR reports to HTML using the Template Method pattern.
+///
+/// ``BaseReportTemplate`` provides the rendering skeleton for generating HTML reports.
+/// Subclasses override template methods to provide takeoff-specific or landing-specific
+/// table layouts and formatting.
+///
+/// ## Template Methods
+///
+/// Subclasses must override:
+/// - ``reportTitle()``: Returns the report title
+/// - ``operationType()``: Returns "Takeoff" or "Landing"
+/// - ``generateDataTable()``: Renders the conditions summary table
+/// - ``generateRunwaysTable(_:)``: Renders the runway analysis table
+/// - ``generatePerformanceTable(_:)``: Renders performance for a scenario
+/// - ``extractPerformances(from:)``: Extracts runway performances from a scenario
+/// - ``extractScenarioName(from:)``: Extracts the scenario name
+///
+/// ## Rendering
+///
+/// Call ``render(runways:scenarios:)`` to generate the complete HTML document:
+///
+/// ```swift
+/// let template = TakeoffReportTemplate(input: input)
+/// let html = template.render(runways: output.runwayInfo, scenarios: output.scenarios)
+/// ```
+///
+/// ## See Also
+///
+/// - ``TakeoffReportTemplate``
+/// - ``LandingReportTemplate``
 class BaseReportTemplate<PerformanceType, ScenarioType> {
   // MARK: - Instance Properties
 

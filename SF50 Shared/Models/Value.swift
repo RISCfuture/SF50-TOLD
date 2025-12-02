@@ -2,7 +2,7 @@ import Foundation
 
 /// A value that may be definite, uncertain, or in an error state.
 ///
-/// `Value` is used throughout the SF50 TOLD app to represent calculated performance values
+/// ``Value`` is used throughout the SF50 TOLD app to represent calculated performance values
 /// that may have uncertainty bounds or may be unavailable due to various conditions.
 ///
 /// ## Overview
@@ -28,16 +28,18 @@ import Foundation
 ///
 /// ### Transformations
 ///
-/// - ``map(_:)-5l4cn``
-/// - ``map(_:)-91d0j``
+/// - ``map(_:)-((T)->U)``
+/// - ``map(_:)-((T,T?)->(U,U?))``
 /// - ``flatMap(_:)``
 public enum Value<T> {
   /// A definite value with no uncertainty.
   case value(T)
 
-  /// A value with an associated uncertainty range.
-  ///
-  /// The uncertainty represents one standard deviation (σ) from the central value.
+  /**
+   * A value with an associated uncertainty range.
+   *
+   * The uncertainty represents one standard deviation (σ) from the central value.
+   */
   case valueWithUncertainty(T, uncertainty: T)
 
   /// The value is invalid due to invalid input parameters.
@@ -55,11 +57,14 @@ public enum Value<T> {
   /// The required value is below the minimum valid range for the performance model.
   case offscaleLow
 
-  /// Transforms the value using the provided closure.
-  ///
-  /// - Parameter transform: A closure that transforms the wrapped value.
-  /// - Returns: A new `Value` with the transformed type.
-  /// - Note: This method cannot be called on `.valueWithUncertainty`. Use the two-parameter version instead.
+  /**
+   * Transforms the value using the provided closure.
+   *
+   * - Parameter transform: A closure that transforms the wrapped value.
+   * - Returns: A new ``Value`` with the transformed type.
+   * - Note: This method cannot be called on ``valueWithUncertainty(_:uncertainty:)``.
+   *   Use the two-parameter version instead.
+   */
   public func map<U>(_ transform: (T) throws -> U) rethrows -> Value<U> {
     switch self {
       case .value(let v):
@@ -74,10 +79,12 @@ public enum Value<T> {
     }
   }
 
-  /// Transforms the value using a closure that returns a `Value`.
-  ///
-  /// - Parameter transform: A closure that transforms the wrapped value into a new `Value`.
-  /// - Returns: The result of applying the transform to the wrapped value.
+  /**
+   * Transforms the value using a closure that returns a ``Value``.
+   *
+   * - Parameter transform: A closure that transforms the wrapped value into a new ``Value``.
+   * - Returns: The result of applying the transform to the wrapped value.
+   */
   public func flatMap<U>(_ transform: (T) throws -> Value<U>) rethrows -> Value<U> {
     switch self {
       case .value(let v):
@@ -92,10 +99,12 @@ public enum Value<T> {
     }
   }
 
-  /// Transforms both the value and its uncertainty using the provided closure.
-  ///
-  /// - Parameter transform: A closure that transforms both the value and optional uncertainty.
-  /// - Returns: A new `Value` with the transformed type and uncertainty.
+  /**
+   * Transforms both the value and its uncertainty using the provided closure.
+   *
+   * - Parameter transform: A closure that transforms both the value and optional uncertainty.
+   * - Returns: A new ``Value`` with the transformed type and uncertainty.
+   */
   public func map<U>(_ transform: (T, T?) throws -> (U, U?)) rethrows -> Value<U> {
     switch self {
       case .value(let v):
@@ -119,6 +128,7 @@ extension Value: Sendable where T: Sendable {}
 extension Value: Equatable where T: Equatable {}
 
 extension Value where T: FloatingPoint, T: Comparable {
+  /// Multiplies two values, propagating uncertainty through quadrature.
   static func *= (lhs: inout Value<T>, rhs: Value<T>) {
     lhs =
       switch (lhs, rhs) {
@@ -155,12 +165,14 @@ extension Value where T: FloatingPoint, T: Comparable {
       }
   }
 
+  /// Multiplies a value by a scalar, scaling uncertainty proportionally.
   static func *= (lhs: inout Value<T>, rhs: T) {
     lhs = lhs.map { value, uncertainty in
       (value * rhs, uncertainty.map { $0 * abs(rhs) })
     }
   }
 
+  /// Multiplies a value by a scalar, scaling uncertainty proportionally.
   static func * (lhs: Value<T>, rhs: T) -> Value<T> {
     lhs.map { value, uncertainty in
       (value * rhs, uncertainty.map { $0 * abs(rhs) })

@@ -4,10 +4,32 @@ import Foundation
 import SF50_Shared
 import SwiftData
 
+/// Calculates takeoff performance for all runways at the selected airport.
+///
+/// ``PerformanceCalculator`` is the core business logic for the SF50 Runways widget.
+/// It loads the selected airport, fetches current weather, and calculates takeoff
+/// distances for each runway.
+///
+/// ## Data Flow
+///
+/// 1. Load selected airport from user defaults
+/// 2. Fetch current weather conditions from `WeatherLoader`
+/// 3. Calculate takeoff distance for each runway using `DefaultPerformanceCalculationService`
+/// 4. Return ``RunwayWidgetEntry`` for timeline display
+///
+/// ## Configuration
+///
+/// Uses settings from Defaults:
+/// - Empty weight, payload, fuel quantity
+/// - Regression model preference
+/// - Thrust schedule (G1 vs G2+)
+/// - Safety factors
 @MainActor
 class PerformanceCalculator {
+  /// SwiftData model context for airport/runway queries.
   private var modelContext: ModelContext
 
+  /// Calculated takeoff weight from user-configured empty weight, payload, and fuel.
   private var takeoffWeight: Measurement<UnitMass> {
     let emptyWeight = Defaults[.emptyWeight]
     let payload = Defaults[.payload]
@@ -18,6 +40,7 @@ class PerformanceCalculator {
     return emptyWeight + payload + fuelWeight
   }
 
+  /// Currently selected airport from user defaults, fetched from SwiftData.
   private var selectedAirport: Airport? {
     guard let airportID = Defaults[.takeoffAirport] else { return nil }
 
@@ -33,6 +56,7 @@ class PerformanceCalculator {
     }
   }
 
+  /// Creates a calculator, setting up the SwiftData model container.
   init() {
     let schema = Schema([
       Airport.self,
@@ -53,6 +77,7 @@ class PerformanceCalculator {
     }
   }
 
+  /// Generates timeline entries with current performance data.
   func generateEntries() async -> [RunwayWidgetEntry] {
     guard let airport = selectedAirport else {
       return [.empty()]
@@ -77,6 +102,7 @@ class PerformanceCalculator {
     return entriesFor(airport: airport, runwaySnapshots: runwaySnapshots, conditions: conditions)
   }
 
+  /// Creates lightweight snapshots from airport runways.
   private func createRunwaySnapshots(from airport: Airport) -> [RunwaySnapshot] {
     airport.runways.map { runway in
       RunwaySnapshot(
@@ -87,6 +113,7 @@ class PerformanceCalculator {
     }
   }
 
+  /// Loads current weather conditions for the airport.
   private func loadWeatherFor(airport: Airport) async -> Conditions? {
     // Try to load METAR data from WeatherLoader
     await WeatherLoader.shared.load(force: true)
@@ -106,6 +133,7 @@ class PerformanceCalculator {
     return nil
   }
 
+  /// Creates timeline entries for the given airport and conditions.
   private func entriesFor(
     airport: Airport,
     runwaySnapshots: [RunwaySnapshot],
@@ -138,6 +166,7 @@ class PerformanceCalculator {
     ]
   }
 
+  /// Calculates takeoff distances for all runways.
   private func runwayResults(airport: Airport, conditions: Conditions) -> [String: Value<
     Measurement<UnitLength>
   >] {

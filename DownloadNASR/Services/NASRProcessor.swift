@@ -3,13 +3,51 @@ import Logging
 import SwiftNASR
 import SwiftTimeZoneLookup
 
+/// Processes FAA NASR and OurAirports data into compressed format for app distribution.
+///
+/// ``NASRProcessor`` is the core component of the DownloadNASR tool. It orchestrates
+/// the complete data pipeline:
+///
+/// 1. Initialize timezone lookup database
+/// 2. Download and parse FAA NASR data using SwiftNASR
+/// 3. Download and parse OurAirports CSV data
+/// 4. Merge datasets (NASR takes priority)
+/// 5. Write to property list format
+/// 6. Compress using LZMA
+/// 7. Upload to GitHub (if token configured)
+///
+/// ## Progress Tracking
+///
+/// The processor reports progress through the ``progress`` property, with
+/// 7 total units representing each major step. Subscribe to KVO on
+/// `fractionCompleted` for UI updates.
+///
+/// ## Data Sources
+///
+/// - **FAA NASR**: Authoritative US airport data with precise runway info
+/// - **OurAirports**: Community database for international coverage
+///
+/// ## See Also
+///
+/// - ``OurAirportsLoader``
+/// - ``GitHubUploader``
 struct NASRProcessor {
+  /// The NASR cycle to download (e.g., 2501 for January 2025).
   let cycle: Cycle
+
+  /// Directory where output files will be written.
   let outputLocation: URL
+
+  /// Logger for status messages and errors.
   let logger: Logger
+
+  /// Progress object for tracking completion (7 total units).
   let progress: Progress
+
+  /// Callback invoked when GitHub upload fails (does not stop processing).
   var onUploadError: (@MainActor @Sendable (_ error: Error) -> Void)?
 
+  /// Executes the complete data processing pipeline.
   func process() async throws {
     // Create child progress objects for each major step
     // Total: 7 steps (timezone init, NASR load, OurAirports load, merge, write, compress, upload)
@@ -100,6 +138,7 @@ struct NASRProcessor {
     progress.localizedDescription = "Complete!"
   }
 
+  /// Downloads and parses FAA NASR airport data.
   private func loadNASRData(timezoneLookup: SwiftTimeZoneLookup, progress: Progress) async throws
     -> [AirportDataCodable.AirportCodable]
   {
@@ -208,6 +247,7 @@ struct NASRProcessor {
     return codableAirports
   }
 
+  /// Converts a NASR runway end to the codable format.
   private func makeRunwayCodable(
     runway: SwiftNASR.Runway,
     end: RunwayEnd,
@@ -259,6 +299,7 @@ struct NASRProcessor {
     )
   }
 
+  /// Merges NASR and OurAirports data, deduplicating by location ID.
   private func mergeAirports(
     NASRAirports: [AirportDataCodable.AirportCodable],
     ourAirports: [OurAirportData],
@@ -338,6 +379,7 @@ struct NASRProcessor {
     return mergedAirports
   }
 
+  /// Calculates bearing between two points in arcseconds.
   private func calculateBearing(from: (Float, Float), to: (Float, Float)) -> Float {
     let lat1 = from.0 / 3600 * .pi / 180
     let lat2 = to.0 / 3600 * .pi / 180
@@ -350,6 +392,7 @@ struct NASRProcessor {
     return (bearing + 360).truncatingRemainder(dividingBy: 360)
   }
 
+  /// Calculates magnetic variation using the WMM model.
   private func calculateMagneticVariation(_ latitudeDeg: Double, _ longitudeDeg: Double) -> Double {
     let geomagnetism = Geomagnetism(longitude: longitudeDeg, latitude: latitudeDeg)
     return geomagnetism.declination

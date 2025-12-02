@@ -2,22 +2,68 @@ import CoreLocation
 import Sentry
 import SwiftData
 
+/// View model for finding airports near the user's current location.
+///
+/// ``NearestAirportViewModel`` uses CoreLocation to track the user's position
+/// and queries SwiftData for nearby airports. Results are sorted by distance
+/// and limited to the closest 10 airports within a 50 nautical mile radius.
+///
+/// ## Location Updates
+///
+/// The view model subscribes to location updates via ``LocationStreamer``
+/// and automatically updates the airport list when the user moves.
+///
+/// ## Usage
+///
+/// ```swift
+/// let viewModel = NearestAirportViewModel(
+///     container: modelContainer,
+///     locationStreamer: CoreLocationStreamer()
+/// )
+///
+/// // Access nearest airports
+/// ForEach(viewModel.airports) { airport in
+///     Text(airport.name)
+/// }
+/// ```
+///
+/// ## See Also
+///
+/// - ``LocationStreamer``
+/// - ``CoreLocationStreamer``
 @Observable
 @MainActor
 public class NearestAirportViewModel {
-  private static let searchRadius = 50.0  // Nmi, roughly
+  /// Search radius in nautical miles
+  private static let searchRadius = 50.0
 
+  /// Airports sorted by distance from user's current location (max 10)
   public private(set) var airports: [Airport] = []
+
+  /// Error from location services or database query
   public private(set) var error: Error?
+
+  /// Current user location
   private var location: CLLocation? {
     didSet { updateAirports() }
   }
 
+  /// Location service provider
   private let streamer: any LocationStreamer
+
+  /// SwiftData container for airport queries
   private let container: ModelContainer
 
+  /// Background task for location updates
   private var updateTask: Task<Void, Never>?
 
+  /**
+   * Creates a view model with the specified data container and location streamer.
+   *
+   * - Parameters:
+   *   - container: SwiftData model container for airport queries.
+   *   - locationStreamer: Location service provider for tracking user position.
+   */
   public init(container: ModelContainer, locationStreamer: any LocationStreamer) {
     self.streamer = locationStreamer
     self.container = container

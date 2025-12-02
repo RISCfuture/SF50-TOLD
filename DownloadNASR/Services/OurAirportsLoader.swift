@@ -2,6 +2,30 @@ import Foundation
 import Logging
 import TabularData
 
+/// Downloads and parses airport data from the OurAirports database.
+///
+/// ``OurAirportsLoader`` fetches CSV data from OurAirports (a community-maintained
+/// database) to supplement FAA NASR data with international airports.
+///
+/// ## Data Source
+///
+/// CSV files are hosted at `davidmegginson.github.io/ourairports-data/`:
+/// - `airports.csv`: Airport records
+/// - `runways.csv`: Runway records
+///
+/// ## Processing
+///
+/// The loader:
+/// 1. Downloads both CSV files
+/// 2. Parses using TabularData framework
+/// 3. Filters to small/medium/large airports (excludes heliports, seaplane bases)
+/// 4. Filters runways ≥500 feet (excludes water runways)
+/// 5. Returns ``OurAirportData`` structs
+///
+/// ## See Also
+///
+/// - ``OurAirportData``
+/// - ``OurRunwayData``
 struct OurAirportsLoader {
   private let logger: Logger
   private let progress: Progress
@@ -187,24 +211,62 @@ struct OurAirportsLoader {
   }
 }
 
+/// Airport data parsed from OurAirports CSV.
+///
+/// Contains airport metadata needed for the app's airport database.
+/// Values are in OurAirports native units (feet, degrees).
 struct OurAirportData {
-  let id: String  // The unique id from OurAirports database (used as recordID)
-  let localId: String  // This maps to FAA location ID (local_code)
-  let ICAO_ID: String?  // The ICAO code (icao_code)
+  /// Unique ID from OurAirports database (used as recordID).
+  let id: String
+
+  /// FAA location ID (local_code field).
+  let localId: String
+
+  /// ICAO identifier if available.
+  let ICAO_ID: String?
+
+  /// Airport name.
   let name: String
+
+  /// City/municipality name.
   let municipality: String?
-  let latitude: Double  // decimal degrees
-  let longitude: Double  // decimal degrees
+
+  /// Latitude in decimal degrees.
+  let latitude: Double
+
+  /// Longitude in decimal degrees.
+  let longitude: Double
+
+  /// Field elevation in feet.
   let elevationFt: Double
+
+  /// Runways at this airport.
   let runways: [OurRunwayData]
 }
 
+/// Runway data parsed from OurAirports CSV.
+///
+/// Contains runway properties needed for performance calculations.
+/// Values are in OurAirports native units (feet, degrees).
 struct OurRunwayData {
+  /// Runway designator (e.g., "09L").
   let name: String
+
+  /// Threshold elevation in feet.
   let elevationFt: Double?
-  let trueHeading: Double  // degrees
+
+  /// True heading in degrees.
+  let trueHeading: Double
+
+  /// Runway length in feet.
   let lengthFt: Double
+
+  /// Displaced threshold distance in feet.
   let displacedThresholdFt: Double
+
+  /// Whether the runway has a turf (non-paved) surface.
   let isTurf: Bool
+
+  /// Name of the reciprocal runway end.
   let reciprocalName: String?
 }

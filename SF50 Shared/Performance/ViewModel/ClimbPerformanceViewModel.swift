@@ -3,6 +3,29 @@ import Foundation
 import Observation
 import SwiftData
 
+/// View model for en route climb performance calculations.
+///
+/// ``ClimbPerformanceViewModel`` provides reactive climb performance values
+/// for planning cruise climbs. Unlike takeoff/landing view models, this
+/// calculates en route performance at arbitrary altitudes and temperatures.
+///
+/// ## Inputs
+///
+/// - ``fuel`` - Fuel quantity (linked to takeoff fuel by default)
+/// - ``altitude`` - Target altitude for climb performance
+/// - ``ISADeviation`` - Temperature deviation from standard atmosphere
+/// - ``iceProtection`` - Whether ice protection systems are active
+///
+/// ## Outputs
+///
+/// - ``climbSpeed`` - Recommended climb speed (KIAS)
+/// - ``climbRate`` - Expected climb rate (ft/min)
+/// - ``climbGradient`` - Expected climb gradient (ft/nm)
+///
+/// ## OAT Calculation
+///
+/// The ``OAT`` property computes outside air temperature from altitude and
+/// ISA deviation using the standard lapse rate of 1.98°C per 1000 feet.
 @Observable
 @MainActor
 public final class ClimbPerformanceViewModel {

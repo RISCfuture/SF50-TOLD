@@ -1,5 +1,38 @@
 import Foundation
 
+/// Loads performance data tables from bundled CSV files.
+///
+/// ``DataTableLoader`` provides methods to load digitized AFM chart data for
+/// performance calculations. Each data table is stored as a CSV file in the
+/// app bundle, organized by model type (G1 or G2+) and performance category.
+///
+/// ## Data Organization
+///
+/// Performance data is organized in the bundle as:
+///
+/// ```
+/// Data/
+/// ├── g1/
+/// │   ├── takeoff/
+/// │   │   ├── ground run.csv
+/// │   │   ├── total distance.csv
+/// │   │   └── ... adjustment factors
+/// │   ├── landing/
+/// │   │   ├── 100/ (flaps 100)
+/// │   │   ├── 50/ (flaps 50)
+/// │   │   └── contamination/
+/// │   └── enroute climb/
+/// └── g2+/
+///     └── ... (similar structure)
+/// ```
+///
+/// ## Shared Data
+///
+/// Some data tables are shared between G1 and G2+ models:
+/// - Vref speeds
+/// - Ice-contaminated landing data
+/// - Contamination adjustments
+/// - Enroute climb data
 struct DataTableLoader {
 
   private let bundle: Bundle

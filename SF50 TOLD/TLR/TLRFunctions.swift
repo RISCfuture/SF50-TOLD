@@ -1,6 +1,17 @@
 import Defaults
 import SF50_Shared
 
+/// Generates a complete takeoff TLR report as HTML.
+///
+/// This function orchestrates the TLR generation pipeline:
+/// 1. Creates ``TakeoffReportData`` to calculate performance
+/// 2. Calls `generate()` to compute all runway and scenario results
+/// 3. Creates ``TakeoffReportTemplate`` to render to HTML
+///
+/// - Parameters:
+///   - input: Aircraft, weather, and runway configuration
+///   - scenarios: What-if scenarios to calculate (includes "Forecast Conditions")
+/// - Returns: Complete HTML document as a string
 func generateTakeoffReport(input: PerformanceInput, scenarios: [PerformanceScenario]) throws
   -> String
 {
@@ -12,6 +23,17 @@ func generateTakeoffReport(input: PerformanceInput, scenarios: [PerformanceScena
   return template.render(runways: output.runwayInfo, scenarios: output.scenarios)
 }
 
+/// Generates a complete landing TLR report as HTML.
+///
+/// This function orchestrates the TLR generation pipeline:
+/// 1. Creates ``LandingReportData`` to calculate performance
+/// 2. Calls `generate()` to compute all runway and scenario results
+/// 3. Creates ``LandingReportTemplate`` to render to HTML
+///
+/// - Parameters:
+///   - input: Aircraft, weather, and runway configuration
+///   - scenarios: What-if scenarios to calculate (includes "Forecast Conditions")
+/// - Returns: Complete HTML document as a string
 func generateLandingReport(input: PerformanceInput, scenarios: [PerformanceScenario]) throws
   -> String
 {
@@ -23,6 +45,7 @@ func generateLandingReport(input: PerformanceInput, scenarios: [PerformanceScena
   return template.render(runways: output.runwayInfo, scenarios: output.scenarios)
 }
 
+/// Formats a flap setting for display, with optional short form.
 func format(flapSetting setting: FlapSetting, short: Bool = false) -> String {
   if short {
     switch setting {

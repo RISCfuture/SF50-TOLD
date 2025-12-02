@@ -1,6 +1,21 @@
 import Foundation
 import SF50_Shared
 
+/// Generates landing performance data for all runways and scenarios.
+///
+/// ``LandingReportData`` extends ``BaseReportData`` with landing-specific calculations:
+/// - Vref (reference speed)
+/// - Landing ground run and total distance from 50'
+/// - Go-around climb gradient compliance
+/// - Maximum landing weight considering field length, AFM limits, and climb requirements
+///
+/// ## Weight Determination
+///
+/// The ``determineMaxWeight(runway:)`` method uses binary search to find the highest
+/// weight that satisfies:
+/// 1. AFM performance chart limits
+/// 2. Available runway length
+/// 3. Go-around climb gradient requirements
 class LandingReportData: BaseReportData<LandingRunwayPerformance, LandingPerformanceScenario> {
 
   // MARK: - Template Method Overrides

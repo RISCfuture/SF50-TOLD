@@ -1,0 +1,53 @@
+digraph ScenarioArchitecture {
+    // Graph settings
+    rankdir=LR
+    splines=ortho
+    nodesep=0.8
+    ranksep=1.0
+    bgcolor="transparent"
+
+    // Modern, clean node styling
+    node [
+        shape=box
+        style="rounded,filled"
+        fontname="SF Pro Display, Helvetica Neue, Arial"
+        fontsize=12
+        fontcolor="#1a1a1a"
+        fillcolor="#f8f9fa"
+        color="#dee2e6"
+        penwidth=1.5
+        width=2.0
+        height=0.7
+    ]
+
+    // Edge styling
+    edge [
+        color="#6c757d"
+        penwidth=1.5
+        arrowsize=0.8
+        arrowhead=vee
+    ]
+
+    // Nodes
+    scenario [
+        label="Scenario\n(SwiftData Model)"
+        fillcolor="#f3e8ff"
+        color="#8b5cf6"
+    ]
+
+    perfscenario [
+        label="PerformanceScenario\n(Sendable struct)"
+        fillcolor="#e7f1ff"
+        color="#4a90d9"
+    ]
+
+    apply [
+        label="apply(base...)\n→ adjusted conditions"
+        fillcolor="#d4edda"
+        color="#28a745"
+    ]
+
+    // Connections
+    scenario -> perfscenario
+    perfscenario -> apply
+}

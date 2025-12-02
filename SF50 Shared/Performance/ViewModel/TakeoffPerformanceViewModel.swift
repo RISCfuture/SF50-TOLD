@@ -3,6 +3,30 @@ import Foundation
 import Observation
 import SwiftData
 
+/// View model for takeoff performance calculations.
+///
+/// ``TakeoffPerformanceViewModel`` provides reactive takeoff performance values
+/// that update automatically when inputs change. It observes user settings for
+/// airport, runway, weight, and conditions, then calculates:
+///
+/// - ``takeoffRun`` - Ground run distance
+/// - ``takeoffDistance`` - Total distance over 50ft obstacle
+/// - ``takeoffClimbGradient`` - Initial climb gradient
+/// - ``takeoffClimbRate`` - Initial climb rate
+///
+/// ## Required Climb Gradient
+///
+/// When a NOTAM specifies obstacles off the departure end, the view model
+/// calculates ``requiredClimbGradient`` to clear the obstacle based on:
+/// - Distance from runway end to obstacle
+/// - Obstacle height above runway
+/// - Computed liftoff point (takeoff run)
+///
+/// ## NOTAM Display
+///
+/// Both configured NOTAMs (user-entered runway restrictions) and downloaded
+/// NOTAMs (from FAA API) are tracked via ``configuredNOTAMCount`` and
+/// ``downloadedNOTAMCount``.
 @Observable
 @MainActor
 public final class TakeoffPerformanceViewModel: BasePerformanceViewModel {

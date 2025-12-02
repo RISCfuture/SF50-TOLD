@@ -5,7 +5,37 @@ import Observation
 import Sentry
 import SwiftData
 
-/// Abstract base class for performance view models (Takeoff and Landing)
+/// Abstract base class for performance view models.
+///
+/// ``BasePerformanceViewModel`` provides shared infrastructure for takeoff and landing
+/// performance calculations, including:
+///
+/// - Input observation (airport, runway, weight, conditions)
+/// - Model initialization based on user settings
+/// - NOTAM fetching and caching
+/// - Automatic recalculation when inputs change
+///
+/// ## Subclassing
+///
+/// Subclasses must override:
+/// - ``airportDefaultsKey`` - Which airport setting to observe
+/// - ``runwayDefaultsKey`` - Which runway setting to observe
+/// - ``fuelDefaultsKey`` - Which fuel setting to observe
+/// - ``defaultFlapSetting`` - Default flap setting for the operation
+/// - ``recalculate()`` - Perform the actual performance calculation
+///
+/// ## Observation
+///
+/// The view model automatically observes changes to:
+/// - Selected airport and runway (from Defaults)
+/// - Weight components (empty weight, payload, fuel, density)
+/// - Model settings (regression vs tabular, thrust schedule)
+/// - Safety factor settings
+///
+/// ## NOTAM Support
+///
+/// Downloaded NOTAMs from the FAA API are available via ``downloadedNOTAMs``.
+/// Call ``fetchNOTAMs(plannedTime:)`` to load NOTAMs for the current airport.
 @Observable
 @MainActor
 open class BasePerformanceViewModel: WithIdentifiableError {

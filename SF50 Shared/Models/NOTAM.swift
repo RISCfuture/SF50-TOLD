@@ -3,8 +3,25 @@ import SwiftData
 
 /// Notice to Airmen (NOTAM) affecting runway performance.
 ///
-/// `NOTAM` represents temporary conditions that affect runway performance calculations,
+/// ``NOTAM`` represents temporary conditions that affect runway performance calculations,
 /// including contamination (ice, snow, water), displaced thresholds, and obstacles.
+///
+/// ## Topics
+///
+/// ### Contamination
+/// - ``contamination``
+///
+/// ### Distance Restrictions
+/// - ``takeoffDistanceShortening``
+/// - ``landingDistanceShortening``
+///
+/// ### Obstacles
+/// - ``obstacleHeight``
+/// - ``obstacleDistance``
+///
+/// ### State
+/// - ``isEmpty``
+/// - ``clearFor(operation:)``
 @Model
 public final class NOTAM {
   private var _contaminationType: String?
@@ -92,6 +109,10 @@ public final class NOTAM {
 }
 
 /// Runway surface contamination type and depth.
+///
+/// ``Contamination`` represents various runway surface conditions that degrade
+/// braking performance. Contamination data is used to apply performance penalties
+/// according to the AFM contaminated runway tables.
 public enum Contamination: Sendable, Hashable {
   /// Standing water or slush on the runway surface
   case waterOrSlush(depth: Measurement<UnitLength>)
@@ -105,6 +126,7 @@ public enum Contamination: Sendable, Hashable {
   /// Compacted snow or ice on the runway
   case compactSnow
 
+  /// Raw type string for persistence.
   var type: String {
     switch self {
       case .waterOrSlush: ContaminationType.waterOrSlush.rawValue
@@ -114,6 +136,7 @@ public enum Contamination: Sendable, Hashable {
     }
   }
 
+  /// Contamination depth in meters for types that require it.
   var depth: Double? {
     switch self {
       case .waterOrSlush(let depth): depth.converted(to: .meters).value
@@ -123,6 +146,7 @@ public enum Contamination: Sendable, Hashable {
     }
   }
 
+  /// Creates contamination from persistence storage values.
   init?(type: String?, depth: Double?) {
     guard let type, let typeEnum = ContaminationType(rawValue: type) else { return nil }
 
@@ -140,10 +164,15 @@ public enum Contamination: Sendable, Hashable {
     }
   }
 
+  /// Raw string values for persistence.
   enum ContaminationType: String {
+    /// Standing water or slush
     case waterOrSlush
+    /// Slush or wet snow
     case slushOrWetSnow
+    /// Dry snow coverage
     case drySnow
+    /// Compacted snow or ice
     case compactSnow
   }
 }

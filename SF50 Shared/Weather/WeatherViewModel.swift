@@ -4,6 +4,40 @@ import Observation
 import Sentry
 import SwiftData
 
+/// View model managing weather data for a specific operation (takeoff or landing).
+///
+/// ``WeatherViewModel`` provides reactive access to weather conditions including
+/// downloaded METAR/TAF data, manual user entries, and loading states. It supports
+/// both automatic weather updates and manual weather entry mode.
+///
+/// ## Weather Modes
+///
+/// - **Automatic**: Weather loaded from ``WeatherLoader`` and kept in sync
+/// - **Manual**: User-entered conditions preserved until explicitly reset
+/// - **ISA**: International Standard Atmosphere (used when no data available)
+///
+/// ## Manual Mode Behavior
+///
+/// When the user enters custom weather values:
+/// - The view model switches to manual mode
+/// - Downloaded weather updates are ignored
+/// - Manual mode persists until ``load(force:)`` is called with `force: true`
+/// - Changing airports resets manual mode
+///
+/// ## Usage
+///
+/// ```swift
+/// let weatherVM = WeatherViewModel(
+///     operation: .takeoff,
+///     container: modelContainer
+/// )
+///
+/// // Load weather for current airport
+/// await weatherVM.load()
+///
+/// // Access conditions
+/// let temp = weatherVM.conditions.temperature
+/// ```
 @Observable
 @MainActor
 public final class WeatherViewModel: WithIdentifiableError {

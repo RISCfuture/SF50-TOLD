@@ -1,6 +1,29 @@
 import Defaults
 import SwiftUI
 
+/// A view displaying headwind and crosswind components with visual indicators.
+///
+/// ``WindComponents`` shows wind components relative to a runway with:
+/// - **Headwind**: Green down-arrow, reduces takeoff/landing distance
+/// - **Tailwind**: Red up-arrow, increases distance
+/// - **Left crosswind**: Gray left-arrow
+/// - **Right crosswind**: Gray right-arrow
+///
+/// ## Limit Validation
+///
+/// When `tailwindLimit` or `crosswindLimit` is specified, the value turns red
+/// if limits are exceeded.
+///
+/// ## Usage
+///
+/// ```swift
+/// WindComponents(
+///     runway: selectedRunway,
+///     conditions: currentConditions,
+///     crosswindLimit: Measurement(value: 18, unit: .knots),
+///     tailwindLimit: Measurement(value: 10, unit: .knots)
+/// )
+/// ```
 public struct WindComponents: View {
   var runway: Runway
   var conditions: Conditions

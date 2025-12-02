@@ -1,6 +1,9 @@
 import SwiftUI
 
 /// The type of performance operation being calculated.
+///
+/// ``Operation`` distinguishes between takeoff and landing performance
+/// calculations, which use different AFM data tables and calculation methods.
 public enum Operation: String, Codable, Sendable {
   /// Takeoff performance calculation
   case takeoff

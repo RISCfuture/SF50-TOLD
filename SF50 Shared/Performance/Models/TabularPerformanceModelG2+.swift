@@ -1,5 +1,35 @@
 import Foundation
 
+/// Tabular performance model for second-generation SF50 Vision Jet (G2/G2+).
+///
+/// ``TabularPerformanceModelG2Plus`` calculates takeoff and landing performance using
+/// direct interpolation from digitized AFM table data. This model performs multi-dimensional
+/// linear interpolation to look up values.
+///
+/// The G2+ model uses the updated thrust schedule which provides improved takeoff
+/// performance compared to the G1.
+///
+/// ## Tabular Approach
+///
+/// Performance values are computed by loading CSV data tables containing digitized
+/// AFM chart values, then performing 1D, 2D, or 3D linear interpolation depending
+/// on the number of input parameters (weight, altitude, temperature).
+///
+/// ## Adjustment Factors
+///
+/// Base performance values are adjusted for environmental conditions using
+/// multiplicative factors loaded from additional data tables:
+///
+/// - Wind (headwind reduces distance, tailwind increases)
+/// - Gradient (uphill/downhill)
+/// - Surface (unpaved adds margin)
+/// - Contamination (snow, slush, water)
+///
+/// ## Usage
+///
+/// This model is selected automatically when the user has:
+/// - Tabular model enabled in settings (regression disabled)
+/// - G2/G2+ thrust schedule selected (updated thrust)
 final class TabularPerformanceModelG2Plus: BasePerformanceModel {
 
   // MARK: - Properties

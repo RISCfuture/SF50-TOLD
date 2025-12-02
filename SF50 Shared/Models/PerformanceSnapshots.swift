@@ -1,19 +1,50 @@
 import Foundation
 
-/// Sendable snapshot of NOTAM data for background performance calculations
+/// Sendable snapshot of NOTAM data for background performance calculations.
+///
+/// ``NOTAMSnapshot`` is a value type that captures NOTAM data for use in
+/// background actor contexts where the SwiftData ``NOTAM`` model cannot be accessed.
+///
+/// ## Topics
+///
+/// ### Properties
+/// - ``contaminationType``
+/// - ``contaminationDepth``
+/// - ``contamination``
+/// - ``takeoffDistanceShortening``
+/// - ``landingDistanceShortening``
+/// - ``obstacleHeight``
+/// - ``obstacleDistance``
+///
+/// ### Creating Snapshots
+/// - ``init(from:)``
 public struct NOTAMSnapshot: Sendable, Equatable {
+  /// Raw contamination type string for serialization
   public let contaminationType: String?
+
+  /// Depth of contamination on the runway surface
   public let contaminationDepth: Measurement<UnitLength>
+
+  /// Reduction in takeoff distance available
   public let takeoffDistanceShortening: Measurement<UnitLength>
+
+  /// Reduction in landing distance available
   public let landingDistanceShortening: Measurement<UnitLength>
+
+  /// Height of obstacle above runway
   public let obstacleHeight: Measurement<UnitLength>
+
+  /// Distance from threshold to obstacle
   public let obstacleDistance: Measurement<UnitLength>
 
+  /// Parsed contamination enum from type string and depth
   public var contamination: Contamination? {
     guard let type = contaminationType else { return nil }
     return Contamination(type: type, depth: contaminationDepth.converted(to: .meters).value)
   }
 
+  /// Creates a snapshot from a SwiftData NOTAM model.
+  /// - Parameter notam: The NOTAM to capture.
   public init(from notam: NOTAM) {
     self.contaminationType = notam.contamination?.type
     self.contaminationDepth = .init(value: notam.contamination?.depth ?? 0, unit: .meters)
@@ -40,27 +71,81 @@ public struct NOTAMSnapshot: Sendable, Equatable {
   }
 }
 
-/// Sendable snapshot of Runway data for background performance calculations
+/// Sendable snapshot of Runway data for background performance calculations.
+///
+/// ``RunwayInput`` is a value type that captures runway data for use in
+/// background actor contexts where the SwiftData ``Runway`` model cannot be accessed.
+/// It includes all runway properties needed for performance calculations.
+///
+/// ## Topics
+///
+/// ### Identification
+/// - ``id``
+/// - ``name``
+///
+/// ### Physical Properties
+/// - ``elevation``
+/// - ``trueHeading``
+/// - ``gradient``
+/// - ``length``
+/// - ``isTurf``
+///
+/// ### Declared Distances
+/// - ``takeoffRun``
+/// - ``takeoffDistance``
+/// - ``landingDistance``
+///
+/// ### NOTAM Data
+/// - ``notam``
+/// - ``withContamination(_:)``
+///
+/// ### Wind Calculations
+/// - ``headwind(conditions:)``
 public struct RunwayInput: Identifiable, Hashable, Sendable, Comparable {
   // MARK: - Properties
 
+  /// Unique identifier (runway name)
   public let id: String
 
+  /// Runway threshold elevation
   public let elevation: Measurement<UnitLength>
+
+  /// True heading of the runway
   public let trueHeading: Measurement<UnitAngle>
+
+  /// Runway gradient as a fraction (positive = upslope)
   public let gradient: Float
+
+  /// Total runway length
   public let length: Measurement<UnitLength>
+
+  /// Declared takeoff run available (TORA)
   public let takeoffRun: Measurement<UnitLength>?
+
+  /// Takeoff distance available, adjusted for NOTAMs
   public let takeoffDistance: Measurement<UnitLength>
+
+  /// Declared landing distance available (LDA)
   public let landingDistance: Measurement<UnitLength>?
+
+  /// Whether the runway has a turf surface
   public let isTurf: Bool
+
+  /// Active NOTAM snapshot if present
   public let notam: NOTAMSnapshot?
+
+  /// Magnetic variation at the airport
   public let airportVariation: Measurement<UnitAngle>
 
+  /// Runway designator (alias for id)
   public var name: String { id }
 
   // MARK: - Initialization
 
+  /// Creates a snapshot from SwiftData Runway and Airport models.
+  /// - Parameters:
+  ///   - runway: The runway to capture.
+  ///   - airport: The airport the runway belongs to.
   public init(from runway: Runway, airport: Airport) {
     self.id = runway.name
     self.elevation = runway.elevationOrAirportElevation
@@ -130,6 +215,9 @@ public struct RunwayInput: Identifiable, Hashable, Sendable, Comparable {
     hasher.combine(id)
   }
 
+  /// Calculates headwind component for the given weather conditions.
+  /// - Parameter conditions: The atmospheric conditions.
+  /// - Returns: Headwind component (positive = headwind, negative = tailwind).
   public func headwind(conditions: Conditions) -> Measurement<UnitSpeed> {
     guard let windDirection = conditions.windDirection,
       let windSpeed = conditions.windSpeed
@@ -190,16 +278,48 @@ public struct RunwayInput: Identifiable, Hashable, Sendable, Comparable {
   }
 }
 
-/// Sendable snapshot of Airport data for background performance calculations
+/// Sendable snapshot of Airport data for background performance calculations.
+///
+/// ``AirportInput`` is a value type that captures airport data for use in
+/// background actor contexts where the SwiftData ``Airport`` model cannot be accessed.
+///
+/// ## Topics
+///
+/// ### Properties
+/// - ``recordID``
+/// - ``locationID``
+/// - ``name``
+/// - ``elevation``
+/// - ``variation``
+/// - ``timeZone``
+/// - ``runways``
+///
+/// ### Creating Snapshots
+/// - ``init(from:)``
 public struct AirportInput: Sendable {
+  /// Unique SwiftData record identifier
   public let recordID: String
+
+  /// Airport location identifier (FAA LID or ICAO)
   public let locationID: String
+
+  /// Airport name
   public let name: String
+
+  /// Airport field elevation
   public let elevation: Measurement<UnitLength>
+
+  /// Magnetic variation at the airport
   public let variation: Measurement<UnitAngle>
+
+  /// Local timezone for the airport
   public let timeZone: TimeZone?
+
+  /// Runways at this airport
   public let runways: [RunwayInput]
 
+  /// Creates a snapshot from a SwiftData Airport model.
+  /// - Parameter airport: The airport to capture.
   public init(from airport: Airport) {
     self.recordID = airport.recordID
     self.locationID = airport.locationID

@@ -1,5 +1,36 @@
 import Foundation
 
+/// Calculates statistical uncertainty for regression model predictions.
+///
+/// ``ResidualErrorCalculator`` provides RMSE (Root Mean Square Error) values for
+/// regression model outputs. These values represent the statistical uncertainty
+/// from the curve-fitting process and are used to generate confidence intervals.
+///
+/// ## Residual Data
+///
+/// RMSE values are loaded from a bundled JSON file (`residuals.json`) that contains:
+///
+/// - Overall RMSE for each regression table
+/// - Binned RMSE values for different input ranges (weight, altitude, temperature)
+///
+/// ## Binned Errors
+///
+/// When inputs are provided, the calculator looks up RMSE values for the specific
+/// bins containing those inputs. Multiple bin matches are combined using
+/// root-sum-square for proper statistical combination.
+///
+/// ## Usage
+///
+/// ```swift
+/// let rmse = ResidualErrorCalculator.RMSE(
+///     for: "g1/takeoff/ground run",
+///     binParameters: [
+///         "weight": 5500,
+///         "altitude": 5000,
+///         "temperature": 25
+///     ]
+/// )
+/// ```
 enum ResidualErrorCalculator {
   private static let residualDataCache: [String: ResidualData] = {
     guard

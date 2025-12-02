@@ -2,23 +2,52 @@ import Foundation
 import Logging
 import SwiftNASR
 
+/// View model coordinating the airport data processing UI.
+///
+/// ``ProcessorViewModel`` manages the state for the DownloadNASR tool's main
+/// interface. It coordinates ``NASRProcessor`` execution and provides observable
+/// properties for progress display.
+///
+/// ## Usage
+///
+/// ```swift
+/// @State private var viewModel = ProcessorViewModel()
+///
+/// viewModel.process(cycle: .current, outputURL: downloadsURL)
+/// ```
 @Observable
 @MainActor
 class ProcessorViewModel {
+  /// Whether processing is currently running.
   var isProcessing = false
+
+  /// Current progress (0.0 to 1.0).
   var progress: Double = 0.0
+
+  /// Human-readable status message for current operation.
   var statusMessage = ""
+
+  /// Error message if processing failed.
   var errorMessage: String?
+
+  /// Log entries from the processor for display.
   var logEntries: [LogEntry] = []
+
+  /// Error that occurred during GitHub upload, if any.
   var uploadError: Error?
 
+  /// Task handle for cancellation support.
   private var processingTask: Task<Void, Never>?
+
+  /// Observation for progress updates.
   private var progressObservation: NSKeyValueObservation?
 
+  /// Whether to show the progress bar UI.
   var showProgressBar: Bool {
     (isProcessing || !statusMessage.isEmpty) && errorMessage == nil
   }
 
+  /// Starts processing for the given AIRAC cycle, outputting to the specified URL.
   func process(cycle: Cycle, outputURL: URL) {
     // Cancel any existing task
     processingTask?.cancel()
@@ -96,6 +125,7 @@ class ProcessorViewModel {
     }
   }
 
+  /// Resets all state to initial values.
   func reset() {
     isProcessing = false
     progress = 0.0
@@ -105,11 +135,13 @@ class ProcessorViewModel {
     logEntries = []
   }
 
+  /// Cancels the current processing task and resets state.
   func cancel() {
     processingTask?.cancel()
     reset()
   }
 
+  /// Adds a log entry to the display list.
   func addLogEntry(_ entry: LogEntry) {
     logEntries.append(entry)
   }

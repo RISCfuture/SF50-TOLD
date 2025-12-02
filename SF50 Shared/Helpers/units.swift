@@ -1,8 +1,15 @@
 import Defaults
 import Foundation
 
-// Convenience extension methods for converting measurements to user-preferred units
+// MARK: - Unit Conversion Extensions
+
+/// Convenience extension methods for converting measurements to user-preferred units.
+///
+/// These extensions provide semantic unit conversion methods that respect user preferences
+/// stored in Defaults. Each method returns the measurement converted to the appropriate
+/// unit based on user settings.
 extension Measurement where UnitType == UnitMass {
+  /// Converts to user's preferred weight unit.
   public var asWeight: Self { converted(to: Defaults[.weightUnit]) }
 }
 

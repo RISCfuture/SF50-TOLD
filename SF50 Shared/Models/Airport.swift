@@ -3,6 +3,9 @@ import Foundation
 import SwiftData
 
 /// The source of airport data.
+///
+/// Airport data can be sourced from official FAA databases (NASR) or from
+/// the community-maintained OurAirports dataset for international coverage.
 public enum DataSource: String, Codable {
   /// National Airspace System Resources (FAA)
   case NASR = "NASR"
@@ -12,9 +15,34 @@ public enum DataSource: String, Codable {
 
 /// An airport with associated runways and location data.
 ///
-/// `Airport` represents an aerodrome with its associated metadata including
+/// ``Airport`` represents an aerodrome with its associated metadata including
 /// location, elevation, magnetic variation, and runways. Airport data is
 /// persisted using SwiftData and can be sourced from NASR or OurAirports.
+///
+/// ## Topics
+///
+/// ### Identification
+/// - ``recordID``
+/// - ``locationID``
+/// - ``ICAO_ID``
+/// - ``displayID``
+/// - ``name``
+/// - ``city``
+///
+/// ### Location
+/// - ``latitude``
+/// - ``longitude``
+/// - ``elevation``
+/// - ``coordinate``
+/// - ``location``
+/// - ``timeZone``
+///
+/// ### Navigation
+/// - ``variation``
+///
+/// ### Relationships
+/// - ``runways``
+/// - ``dataSource``
 @Model
 public final class Airport {
   /// Unique identifier for SwiftData persistence
@@ -103,7 +131,22 @@ public final class Airport {
     return ICAO_ID ?? locationID
   }
 
-  /// Creates a new airport.
+  /**
+   * Creates a new airport.
+   *
+   * - Parameters:
+   *   - recordID: Unique identifier for SwiftData persistence.
+   *   - locationID: FAA location identifier (e.g., "JFK", "SFO").
+   *   - ICAO_ID: ICAO identifier if available (e.g., "KJFK").
+   *   - name: Full airport name.
+   *   - city: City where the airport is located.
+   *   - dataSource: Whether data is from NASR or OurAirports.
+   *   - latitude: Airport latitude.
+   *   - longitude: Airport longitude.
+   *   - elevation: Field elevation above sea level.
+   *   - variation: Magnetic variation (positive = east).
+   *   - timeZone: Local timezone for the airport.
+   */
   public init(
     recordID: String,
     locationID: String,

@@ -1,6 +1,9 @@
 import Foundation
 
 /// Response from the NOTAM API containing NOTAM data and pagination info.
+///
+/// This is the top-level response structure returned by the NOTAM API for
+/// list queries. It includes both the NOTAM data and pagination metadata.
 public struct NOTAMListResponse: Codable, Sendable {
   /// Array of NOTAM entries
   public let data: [NOTAMResponse]
@@ -21,6 +24,28 @@ public struct NOTAMListResponse: Codable, Sendable {
 }
 
 /// Individual NOTAM entry from the API.
+///
+/// ``NOTAMResponse`` represents a single Notice to Air Missions parsed from
+/// the FAA NOTAM system. It includes both structured Q-line data and the
+/// human-readable E-field text.
+///
+/// ## Time Fields
+///
+/// - ``effectiveStart``: When the NOTAM becomes effective (UTC)
+/// - ``effectiveEnd``: When the NOTAM expires (nil for permanent)
+/// - ``schedule``: Daily schedule if applicable (D-field)
+///
+/// ## Content
+///
+/// - ``notamText``: Human-readable description (E-field)
+/// - ``qLine``: Structured Q-line data (may be nil)
+/// - ``rawMessage``: Full AIXM XML (only in single-NOTAM queries)
+///
+/// ## Helper Methods
+///
+/// - ``isEffectiveNow``: Whether NOTAM is currently in effect
+/// - ``isEffective(within:windowInterval:)``: Time-window effectiveness
+/// - ``isAerodromeRelated``: Whether NOTAM affects the aerodrome
 public struct NOTAMResponse: Codable, Sendable, Identifiable {
   /// Database primary key
   public let id: Int

@@ -8,6 +8,13 @@ import SwiftHtml
 
 // MARK: - Takeoff Report Template
 
+/// Renders takeoff performance data to HTML format.
+///
+/// ``TakeoffReportTemplate`` extends ``BaseReportTemplate`` with takeoff-specific
+/// table layouts showing:
+/// - Takeoff data (airport, runway, OAT, wind, QNH, TOW)
+/// - Runway analysis (length, MTOW, limiting factor)
+/// - Performance tables (ground run, total distance, climb rate)
 class TakeoffReportTemplate: BaseReportTemplate<
   TakeoffRunwayPerformance, TakeoffPerformanceScenario
 >

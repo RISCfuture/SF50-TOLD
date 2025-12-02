@@ -1,5 +1,27 @@
 import Foundation
 
+/// Performance adjustment factor calculations.
+///
+/// ``PerformanceAdjustments`` provides static methods to calculate multiplicative
+/// adjustment factors for wind, gradient, and surface conditions. These factors
+/// are applied to base performance values to account for environmental effects.
+///
+/// ## Adjustment Types
+///
+/// - **Wind**: Headwind reduces distances, tailwind increases them
+/// - **Gradient**: Uphill increases takeoff run, decreases landing run (opposite effects)
+/// - **Surface**: Unpaved (turf) runways add margin to distances
+///
+/// ## Two Calculation Modes
+///
+/// 1. **Scalar factors**: Simple multipliers for regression models
+/// 2. **Table-based factors**: Weight-dependent factors from ``DataTable`` for tabular models
+///
+/// ## Factor Application
+///
+/// Factors are multiplicative: a factor of 1.0 means no change, 0.9 reduces by 10%,
+/// and 1.1 increases by 10%. Negative wind components (tailwind when headwind expected)
+/// are handled by separate methods.
 enum PerformanceAdjustments {
 
   // MARK: - Takeoff Run Adjustments

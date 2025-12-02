@@ -1,0 +1,103 @@
+digraph WidgetArchitecture {
+    // Graph settings
+    rankdir=TB
+    splines=ortho
+    nodesep=0.5
+    ranksep=0.6
+    bgcolor="transparent"
+
+    // Modern, clean node styling
+    node [
+        shape=box
+        style="rounded,filled"
+        fontname="SF Pro Display, Helvetica Neue, Arial"
+        fontsize=11
+        fontcolor="#1a1a1a"
+        fillcolor="#f8f9fa"
+        color="#dee2e6"
+        penwidth=1.5
+        width=1.8
+        height=0.55
+    ]
+
+    // Edge styling
+    edge [
+        color="#6c757d"
+        penwidth=1.5
+        arrowsize=0.7
+        arrowhead=vee
+    ]
+
+    // Main flow nodes
+    provider [
+        label="TOLDProvider\n(TimelineProvider)"
+        fillcolor="#f3e8ff"
+        color="#8b5cf6"
+    ]
+
+    calculator [
+        label="PerformanceCalculator\n(Business Logic)"
+        fillcolor="#e7f1ff"
+        color="#4a90d9"
+    ]
+
+    entry [
+        label="RunwayWidgetEntry\n(Timeline Entry)"
+        fillcolor="#d4edda"
+        color="#28a745"
+    ]
+
+    entryview [
+        label="SelectedAirportWidget\nEntryView"
+        fillcolor="#fff3cd"
+        color="#ffc107"
+    ]
+
+    // Data sources
+    subgraph cluster_data {
+        label="Data Sources"
+        labeljust=l
+        labelloc=t
+        fontname="SF Pro Display, Helvetica Neue, Arial"
+        fontsize=10
+        fontcolor="#6c757d"
+        style="rounded,dashed"
+        color="#dee2e6"
+        bgcolor="#ffffff08"
+        margin=12
+
+        weather [
+            label="WeatherLoader"
+            fillcolor="#fce4ec"
+            color="#e91e63"
+            width=1.4
+            height=0.45
+        ]
+
+        swiftdata [
+            label="SwiftData"
+            fillcolor="#fce4ec"
+            color="#e91e63"
+            width=1.4
+            height=0.45
+        ]
+    }
+
+    // Timeline policy
+    policy [
+        label="Timeline Policy:\nRefresh every 15 min"
+        fillcolor="#e8f4f8"
+        color="#17a2b8"
+        style="rounded,filled,dashed"
+    ]
+
+    // Connections
+    provider -> calculator
+    calculator -> entry
+    entry -> entryview
+
+    calculator -> weather [style=dashed]
+    calculator -> swiftdata [style=dashed]
+
+    provider -> policy [style=dashed constraint=false]
+}

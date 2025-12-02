@@ -8,6 +8,13 @@ import SwiftHtml
 
 // MARK: - Landing Report Template
 
+/// Renders landing performance data to HTML format.
+///
+/// ``LandingReportTemplate`` extends ``BaseReportTemplate`` with landing-specific
+/// table layouts showing:
+/// - Landing data (airport, runway, OAT, wind, QNH, LW, config)
+/// - Runway analysis (ALD, MLW, limiting factor, condition)
+/// - Performance tables (Vref, landing run, landing distance, go-around compliance)
 class LandingReportTemplate: BaseReportTemplate<
   LandingRunwayPerformance, LandingPerformanceScenario
 >

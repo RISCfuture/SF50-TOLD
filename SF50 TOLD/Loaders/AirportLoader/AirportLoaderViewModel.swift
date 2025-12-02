@@ -5,6 +5,26 @@ import Sentry
 import SwiftData
 import SwiftNASR
 
+/// View model coordinating airport data loading and UI state.
+///
+/// ``AirportLoaderViewModel`` manages the decision logic for when to show the
+/// airport loader UI and coordinates the actual loading process via ``AirportLoader``.
+///
+/// ## Loading Decision
+///
+/// The ``showLoader`` property determines whether to present the loading UI:
+/// - `true` when no data exists or data is out of date (and not deferred)
+/// - `false` when data is current or user chose to defer
+///
+/// ## Usage
+///
+/// ```swift
+/// @State private var loaderVM = AirportLoaderViewModel(container: container)
+///
+/// if loaderVM.showLoader {
+///     AirportLoaderView(viewModel: loaderVM)
+/// }
+/// ```
 @Observable
 @MainActor
 final class AirportLoaderViewModel: WithIdentifiableError {

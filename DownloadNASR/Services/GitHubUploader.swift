@@ -1,14 +1,34 @@
-//
-//  GitHubAPIUploader.swift
-//  DownloadNASR
-//
-//  Uploads files to GitHub repository using the Contents API
-//
-
 import Foundation
 import OSLog
 
-/// Handles uploading files to GitHub repository via REST API
+/// Uploads processed airport data to GitHub via REST API.
+///
+/// ``GitHubUploader`` uses the GitHub Contents API to upload compressed airport
+/// data files to the SF50-TOLD-Airports repository. This makes the data available
+/// for download by the iOS app.
+///
+/// ## Authentication
+///
+/// Requires a GitHub Personal Access Token with "Contents" write permission.
+/// Tokens are stored securely using ``KeychainManager``.
+///
+/// ## Usage
+///
+/// ```swift
+/// let uploader = GitHubUploader(token: token)
+/// try await uploader.uploadFile(
+///     filePath: localFile,
+///     targetPath: "3.0/2501.plist.lzma",
+///     commitMessage: "Update airport data for cycle 2501"
+/// )
+/// ```
+///
+/// ## Error Handling
+///
+/// Throws ``GitHubAPIError`` for common failure modes:
+/// - ``GitHubAPIError/invalidToken``: Token expired or invalid
+/// - ``GitHubAPIError/permissionDenied``: Token lacks write access
+/// - ``GitHubAPIError/repositoryNotFound``: Repo not found or not accessible
 class GitHubUploader {
   private let token: String
   private let repo: String
