@@ -351,7 +351,7 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,
-    notam: NOTAMSnapshot?
+    notam: NOTAMInput?
   ) {
     let loader = DataTableLoader(modelType: .g1)
     let vrefPrefix = BasePerformanceModel(

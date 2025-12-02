@@ -40,7 +40,7 @@ struct ContaminationTests {
 
     // Model with water contamination (0.25 inches)
     let waterContamination = Contamination.waterOrSlush(depth: .init(value: 0.25, unit: .inches))
-    let contaminatedNotam = NOTAMSnapshot(
+    let contaminatedNotam = NOTAMInput(
       contaminationType: waterContamination.type,
       contaminationDepth: .init(value: waterContamination.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -93,7 +93,7 @@ struct ContaminationTests {
 
     // Model with slush contamination (0.5 inches)
     let slushContamination = Contamination.slushOrWetSnow(depth: .init(value: 0.5, unit: .inches))
-    let contaminatedNotam = NOTAMSnapshot(
+    let contaminatedNotam = NOTAMInput(
       contaminationType: slushContamination.type,
       contaminationDepth: .init(value: slushContamination.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -139,7 +139,7 @@ struct ContaminationTests {
     }
 
     let drySnowContamination = Contamination.drySnow
-    let contaminatedNotam = NOTAMSnapshot(
+    let contaminatedNotam = NOTAMInput(
       contaminationType: drySnowContamination.type,
       contaminationDepth: .init(value: drySnowContamination.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -186,7 +186,7 @@ struct ContaminationTests {
     }
 
     let compactSnowContamination = Contamination.compactSnow
-    let contaminatedNotam = NOTAMSnapshot(
+    let contaminatedNotam = NOTAMInput(
       contaminationType: compactSnowContamination.type,
       contaminationDepth: .init(value: compactSnowContamination.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -241,7 +241,7 @@ struct ContaminationTests {
     }
 
     let waterContamination3 = Contamination.waterOrSlush(depth: .init(value: 0.5, unit: .inches))
-    let contaminatedNotam = NOTAMSnapshot(
+    let contaminatedNotam = NOTAMInput(
       contaminationType: waterContamination3.type,
       contaminationDepth: .init(value: waterContamination3.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -293,7 +293,7 @@ struct ContaminationTests {
     }
 
     let slushContamination2 = Contamination.slushOrWetSnow(depth: .init(value: 0.75, unit: .inches))
-    let contaminatedNotam = NOTAMSnapshot(
+    let contaminatedNotam = NOTAMInput(
       contaminationType: slushContamination2.type,
       contaminationDepth: .init(value: slushContamination2.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -339,7 +339,7 @@ struct ContaminationTests {
     }
 
     let drySnowContamination2 = Contamination.drySnow
-    let contaminatedNotam = NOTAMSnapshot(
+    let contaminatedNotam = NOTAMInput(
       contaminationType: drySnowContamination2.type,
       contaminationDepth: .init(value: drySnowContamination2.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -388,7 +388,7 @@ struct ContaminationTests {
     }
 
     let compactSnowContamination2 = Contamination.compactSnow
-    let contaminatedNotam = NOTAMSnapshot(
+    let contaminatedNotam = NOTAMInput(
       contaminationType: compactSnowContamination2.type,
       contaminationDepth: .init(value: compactSnowContamination2.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -430,7 +430,7 @@ struct ContaminationTests {
     let shallowWaterContamination = Contamination.waterOrSlush(
       depth: .init(value: 0.25, unit: .inches)
     )
-    let shallowNotam = NOTAMSnapshot(
+    let shallowNotam = NOTAMInput(
       contaminationType: shallowWaterContamination.type,
       contaminationDepth: .init(value: shallowWaterContamination.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -450,7 +450,7 @@ struct ContaminationTests {
     let deepWaterContamination = Contamination.waterOrSlush(
       depth: .init(value: 0.75, unit: .inches)
     )
-    let deepNotam = NOTAMSnapshot(
+    let deepNotam = NOTAMInput(
       contaminationType: deepWaterContamination.type,
       contaminationDepth: .init(value: deepWaterContamination.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -511,7 +511,7 @@ struct ContaminationTests {
     )
 
     let waterContamination4 = Contamination.waterOrSlush(depth: .init(value: 0.5, unit: .inches))
-    let contaminatedNotam = NOTAMSnapshot(
+    let contaminatedNotam = NOTAMInput(
       contaminationType: waterContamination4.type,
       contaminationDepth: .init(value: waterContamination4.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -566,7 +566,7 @@ struct ContaminationTests {
     )
 
     let compactSnowContamination3 = Contamination.compactSnow
-    let contaminatedNotam = NOTAMSnapshot(
+    let contaminatedNotam = NOTAMInput(
       contaminationType: compactSnowContamination3.type,
       contaminationDepth: .init(value: compactSnowContamination3.depth ?? 0, unit: .meters),
       takeoffDistanceShortening: .init(value: 0, unit: .feet),
@@ -624,9 +624,9 @@ struct ContaminationTests {
       let runway = Helper.createTestRunway()
       let runwayInput = RunwayInput(from: runway, airport: runway.airport)
 
-      let notam: NOTAMSnapshot? =
+      let notam: NOTAMInput? =
         if let contamination = testCase.contamination {
-          NOTAMSnapshot(
+          NOTAMInput(
             contaminationType: contamination.type,
             contaminationDepth: .init(value: contamination.depth ?? 0, unit: .meters),
             takeoffDistanceShortening: .init(value: 0, unit: .feet),

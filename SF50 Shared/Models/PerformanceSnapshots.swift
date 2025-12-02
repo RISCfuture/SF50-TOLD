@@ -2,7 +2,7 @@ import Foundation
 
 /// Sendable snapshot of NOTAM data for background performance calculations.
 ///
-/// ``NOTAMSnapshot`` is a value type that captures NOTAM data for use in
+/// ``NOTAMInput`` is a value type that captures NOTAM data for use in
 /// background actor contexts where the SwiftData ``NOTAM`` model cannot be accessed.
 ///
 /// ## Topics
@@ -18,7 +18,7 @@ import Foundation
 ///
 /// ### Creating Snapshots
 /// - ``init(from:)``
-public struct NOTAMSnapshot: Sendable, Equatable {
+public struct NOTAMInput: Sendable, Equatable {
   /// Raw contamination type string for serialization
   public let contaminationType: String?
 
@@ -132,7 +132,7 @@ public struct RunwayInput: Identifiable, Hashable, Sendable, Comparable {
   public let isTurf: Bool
 
   /// Active NOTAM snapshot if present
-  public let notam: NOTAMSnapshot?
+  public let notam: NOTAMInput?
 
   /// Magnetic variation at the airport
   public let airportVariation: Measurement<UnitAngle>
@@ -156,7 +156,7 @@ public struct RunwayInput: Identifiable, Hashable, Sendable, Comparable {
     self.takeoffDistance = runway.notamedTakeoffDistance
     self.landingDistance = runway.landingDistance
     self.isTurf = runway.isTurf
-    self.notam = runway.notam.map { NOTAMSnapshot(from: $0) }
+    self.notam = runway.notam.map { NOTAMInput(from: $0) }
     self.airportVariation = airport.variation
   }
 
@@ -170,7 +170,7 @@ public struct RunwayInput: Identifiable, Hashable, Sendable, Comparable {
     takeoffDistance: Measurement<UnitLength>,
     landingDistance: Measurement<UnitLength>?,
     isTurf: Bool,
-    notam: NOTAMSnapshot?,
+    notam: NOTAMInput?,
     airportVariation: Measurement<UnitAngle>
   ) {
     self.id = id
@@ -237,10 +237,10 @@ public struct RunwayInput: Identifiable, Hashable, Sendable, Comparable {
 
   /// Creates a copy of this runway with contamination override applied
   public func withContamination(_ contamination: Contamination?) -> Self {
-    let newNotam: NOTAMSnapshot?
+    let newNotam: NOTAMInput?
     if let notam {
       // Create a new NOTAM with the contamination override but keep other values
-      newNotam = NOTAMSnapshot(
+      newNotam = NOTAMInput(
         contaminationType: contamination?.type,
         contaminationDepth: .init(value: contamination?.depth ?? 0, unit: .meters),
         takeoffDistanceShortening: notam.takeoffDistanceShortening,
@@ -250,7 +250,7 @@ public struct RunwayInput: Identifiable, Hashable, Sendable, Comparable {
       )
     } else if let contamination {
       // Create a new NOTAM with just the contamination
-      newNotam = NOTAMSnapshot(
+      newNotam = NOTAMInput(
         contaminationType: contamination.type,
         contaminationDepth: .init(value: contamination.depth ?? 0, unit: .meters),
         takeoffDistanceShortening: .init(value: 0, unit: .meters),

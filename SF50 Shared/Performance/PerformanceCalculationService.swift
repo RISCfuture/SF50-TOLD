@@ -140,7 +140,7 @@ public final class DefaultPerformanceCalculationService: PerformanceCalculationS
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,
-    notam: NOTAMSnapshot?,
+    notam: NOTAMInput?,
     useRegressionModel: Bool,
     updatedThrustSchedule: Bool
   ) -> PerformanceModel {

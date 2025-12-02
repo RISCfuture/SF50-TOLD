@@ -25,7 +25,7 @@ open class BasePerformanceModel: PerformanceModel {
   public let conditions: Conditions
   public let configuration: Configuration
   public let runway: RunwayInput
-  public let notam: NOTAMSnapshot?
+  public let notam: NOTAMInput?
 
   // MARK: - Required Protocol Properties (to be overridden)
 
@@ -123,7 +123,7 @@ open class BasePerformanceModel: PerformanceModel {
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,
-    notam: NOTAMSnapshot?
+    notam: NOTAMInput?
   ) {
     self.conditions = conditions
     self.configuration = configuration

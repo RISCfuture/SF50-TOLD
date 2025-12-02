@@ -370,7 +370,7 @@ final class RegressionPerformanceModelG1: BaseSF50RegressionPerformanceModel {
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,
-    notam: NOTAMSnapshot?
+    notam: NOTAMInput?
   ) {
     super.init(
       conditions: conditions,

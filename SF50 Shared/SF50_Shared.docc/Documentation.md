@@ -27,7 +27,7 @@ Sendable value types for background calculations:
 
 - ``AirportInput``
 - ``RunwayInput``
-- ``NOTAMSnapshot``
+- ``NOTAMInput``
 - ``AirportDataCodable``
 
 ### Weather Integration

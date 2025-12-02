@@ -352,7 +352,7 @@ final class TabularPerformanceModelG2Plus: BasePerformanceModel {
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,
-    notam: NOTAMSnapshot?
+    notam: NOTAMInput?
   ) {
     let loader = DataTableLoader(modelType: .g2Plus)
     let landingPrefix = BasePerformanceModel(

@@ -71,7 +71,7 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,
-    notam: NOTAMSnapshot?,
+    notam: NOTAMInput?,
     modelType: DataTableLoader.ModelType
   ) {
     self.boundsChecker = BoundsChecker(modelType: modelType)

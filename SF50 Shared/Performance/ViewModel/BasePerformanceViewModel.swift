@@ -229,12 +229,12 @@ open class BasePerformanceViewModel: WithIdentifiableError {
 
     // Poll for changes to the NOTAM's snapshot
     runwayNOTAMObservationTask = Task { @MainActor in
-      var lastSnapshot = notam.map { NOTAMSnapshot(from: $0) }
+      var lastSnapshot = notam.map { NOTAMInput(from: $0) }
       while !Task.isCancelled {
         try? await Task.sleep(for: .milliseconds(500))
 
         // Access the current NOTAM (SwiftData should automatically fetch latest)
-        let currentSnapshot = notam.map { NOTAMSnapshot(from: $0) }
+        let currentSnapshot = notam.map { NOTAMInput(from: $0) }
 
         // Compare snapshots to detect changes
         if let last = lastSnapshot, let current = currentSnapshot {
@@ -339,7 +339,7 @@ open class BasePerformanceViewModel: WithIdentifiableError {
     guard let runway, let airport else { return nil }
 
     let runwaySnapshot = RunwayInput(from: runway, airport: airport)
-    let notamSnapshot = notam.map { NOTAMSnapshot(from: $0) }
+    let notamInput = notam.map { NOTAMInput(from: $0) }
 
     return if Defaults[.useRegressionModel] {
       if Defaults[.updatedThrustSchedule] {
@@ -347,14 +347,14 @@ open class BasePerformanceViewModel: WithIdentifiableError {
           conditions: conditions,
           configuration: configuration,
           runway: runwaySnapshot,
-          notam: notamSnapshot
+          notam: notamInput
         )
       } else {
         RegressionPerformanceModelG1(
           conditions: conditions,
           configuration: configuration,
           runway: runwaySnapshot,
-          notam: notamSnapshot
+          notam: notamInput
         )
       }
     } else {
@@ -363,14 +363,14 @@ open class BasePerformanceViewModel: WithIdentifiableError {
           conditions: conditions,
           configuration: configuration,
           runway: runwaySnapshot,
-          notam: notamSnapshot
+          notam: notamInput
         )
       } else {
         TabularPerformanceModelG1(
           conditions: conditions,
           configuration: configuration,
           runway: runwaySnapshot,
-          notam: notamSnapshot
+          notam: notamInput
         )
       }
     }

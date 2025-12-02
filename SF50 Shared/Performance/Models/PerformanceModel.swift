@@ -38,7 +38,7 @@ public protocol PerformanceModel {
   var runway: RunwayInput { get }
 
   /// Active NOTAM restrictions (contamination, obstacles, etc.).
-  var notam: NOTAMSnapshot? { get }
+  var notam: NOTAMInput? { get }
 
   /// Takeoff ground run distance in feet.
   var takeoffRunFt: Value<Double> { get }

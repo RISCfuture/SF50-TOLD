@@ -36,20 +36,20 @@ For background performance calculations, domain models are converted to
 
 - ``AirportInput`` - Immutable airport data
 - ``RunwayInput`` - Immutable runway data with NOTAM adjustments
-- ``NOTAMSnapshot`` - Immutable NOTAM state
+- ``NOTAMInput`` - Immutable NOTAM state
 
 ```swift
 // Create snapshots for background calculation
 let airportInput = AirportInput(from: airport)
 let runwayInput = RunwayInput(from: runway, airport: airport)
-let notamSnapshot = runway.notam.map { NOTAMSnapshot(from: $0) }
+let notamInput = runway.notam.map { NOTAMInput(from: $0) }
 
 // Pass to performance model (actor-safe)
 let model = RegressionPerformanceModelG1(
     conditions: conditions,
     configuration: configuration,
     runway: runwayInput,
-    notam: notamSnapshot
+    notam: notamInput
 )
 ```
 
@@ -117,7 +117,7 @@ func load() async {
 - ``Runway``
 - ``AirportInput``
 - ``RunwayInput``
-- ``NOTAMSnapshot``
+- ``NOTAMInput``
 - ``NOTAMLoader``
 - ``NOTAMCache``
 - ``LocationStreamer``
