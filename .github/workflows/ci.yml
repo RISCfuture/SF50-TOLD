@@ -19,11 +19,11 @@ jobs:
         include:
           - macos: macos-latest
             ios: "18.4"
-            xcode: "26"
+            xcode: "26.1"
             device: "iPhone 16 Pro"
           - macos: macos-latest
-            ios: "26.0"
-            xcode: "26"
+            ios: "26.1"
+            xcode: "26.1"
             device: "iPhone 17 Pro"
     runs-on: ${{ matrix.macos }}
     steps:
@@ -44,11 +44,11 @@ jobs:
         include:
           - macos: macos-latest
             ios: "18.4"
-            xcode: "26"
+            xcode: "26.1"
             device: "iPhone 16 Pro"
           - macos: macos-latest
-            ios: "26.0"
-            xcode: "26"
+            ios: "26.1"
+            xcode: "26.1"
             device: "iPhone 17 Pro"
     runs-on: ${{ matrix.macos }}
     steps:
