@@ -423,3 +423,13 @@ class BaseReportTemplate<PerformanceType, ScenarioType> {
     return true  // All performances are invalid
   }
 }
+
+extension AircraftInfo {
+  var model: String {
+    switch aircraftType {
+      case .g1: String(localized: "SF50 G1")
+      case .g2: String(localized: "SF50 G2")
+      case .g2Plus: String(localized: "SF50 G2+")
+    }
+  }
+}

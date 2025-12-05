@@ -345,13 +345,14 @@ final class TabularPerformanceModelG2Plus: BasePerformanceModel {
   // MARK: - Initializers
 
   // swiftlint:disable force_try
-  override init(
+  init(
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,
-    notam: NOTAMInput?
+    notam: NOTAMInput?,
+    aircraftType: AircraftType
   ) {
-    let loader = DataTableLoader(modelType: .g2Plus)
+    let loader = DataTableLoader(aircraftType: aircraftType)
     let landingPrefix = BasePerformanceModel(
       conditions: conditions,
       configuration: configuration,
@@ -389,7 +390,10 @@ final class TabularPerformanceModelG2Plus: BasePerformanceModel {
       landingPrefix: landingPrefix
     )
 
-    contaminationCalculator = try! ContaminationCalculator(loader: loader)
+    contaminationCalculator = try! ContaminationCalculator(
+      aircraftType: aircraftType,
+      loader: loader
+    )
 
     enrouteClimb_gradientNormalData = try! loader.loadEnrouteClimbGradientData(
       iceContaminated: false

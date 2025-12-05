@@ -24,7 +24,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let cleanRun: Double
@@ -53,7 +54,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g1
     )
 
     guard case .value(let contaminatedRun) = contaminatedModel.landingRunFt else {
@@ -77,7 +79,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     let cleanRun: Double
@@ -106,7 +109,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g2Plus
     )
 
     guard case .value(let contaminatedRun) = contaminatedModel.landingRunFt else {
@@ -130,7 +134,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     guard case .valueWithUncertainty(let cleanRun, _) = cleanModel.landingRunFt else {
@@ -152,7 +157,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g1
     )
 
     guard case .valueWithUncertainty(let contaminatedRun, _) = contaminatedModel.landingRunFt
@@ -177,7 +183,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     guard case .valueWithUncertainty(let cleanRun, _) = cleanModel.landingRunFt else {
@@ -199,7 +206,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g2Plus
     )
 
     guard case .valueWithUncertainty(let contaminatedRun, _) = contaminatedModel.landingRunFt
@@ -226,7 +234,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let cleanDistance: Double
@@ -254,7 +263,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g1
     )
 
     guard case .value(let contaminatedDistance) = contaminatedModel.landingDistanceFt else {
@@ -278,7 +288,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     let cleanDistance: Double
@@ -306,7 +317,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g2Plus
     )
 
     guard case .value(let contaminatedDistance) = contaminatedModel.landingDistanceFt else {
@@ -330,7 +342,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     guard case .valueWithUncertainty(let cleanDistance, _) = cleanModel.landingDistanceFt else {
@@ -352,7 +365,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g1
     )
 
     guard
@@ -379,7 +393,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     guard case .valueWithUncertainty(let cleanDistance, _) = cleanModel.landingDistanceFt else {
@@ -401,7 +416,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g2Plus
     )
 
     guard
@@ -443,7 +459,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: shallowNotam
+      notam: shallowNotam,
+      aircraftType: .g1
     )
 
     // Deep water (0.75 inches)
@@ -463,7 +480,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: deepNotam
+      notam: deepNotam,
+      aircraftType: .g1
     )
 
     let shallowRun: Double
@@ -507,7 +525,8 @@ struct ContaminationTests {
       conditions: headwindConditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let waterContamination4 = Contamination.waterOrSlush(depth: .init(value: 0.5, unit: .inches))
@@ -524,7 +543,8 @@ struct ContaminationTests {
       conditions: headwindConditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g1
     )
 
     let cleanDistance: Double
@@ -562,7 +582,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let compactSnowContamination3 = Contamination.compactSnow
@@ -579,7 +600,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g1
     )
 
     let cleanDistance: Double
@@ -620,7 +642,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     let cleanRun: Double
@@ -649,7 +672,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g2Plus
     )
 
     let contaminatedRun: Double
@@ -680,7 +704,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     guard case .valueWithUncertainty(let cleanRun, _) = cleanModel.landingRunFt else {
@@ -703,7 +728,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g2Plus
     )
 
     guard case .valueWithUncertainty(let contaminatedRun, _) = contaminatedModel.landingRunFt else {
@@ -728,7 +754,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let cleanRun: Double
@@ -757,7 +784,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g1
     )
 
     let contaminatedRun: Double
@@ -787,7 +815,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     guard case .valueWithUncertainty(let cleanRun, _) = cleanModel.landingRunFt else {
@@ -810,7 +839,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g1
     )
 
     guard case .valueWithUncertainty(let contaminatedRun, _) = contaminatedModel.landingRunFt else {
@@ -834,7 +864,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     let cleanDistance: Double
@@ -862,7 +893,8 @@ struct ContaminationTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: contaminatedNotam
+      notam: contaminatedNotam,
+      aircraftType: .g2Plus
     )
 
     let contaminatedDistance: Double
@@ -916,7 +948,8 @@ struct ContaminationTests {
         conditions: conditions,
         configuration: config,
         runway: runwayInput,
-        notam: notam
+        notam: notam,
+        aircraftType: .g1
       )
 
       if case .value(let run) = model.landingRunFt,

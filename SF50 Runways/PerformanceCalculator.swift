@@ -172,10 +172,10 @@ class PerformanceCalculator {
   >] {
     var results: [String: Value<Measurement<UnitLength>>] = [:]
 
-    let configuration = Configuration(weight: takeoffWeight, flapSetting: .flaps50)
-    let calculationService = DefaultPerformanceCalculationService.shared
-    let useRegressionModel = Defaults[.useRegressionModel]
-    let updatedThrustSchedule = Defaults[.updatedThrustSchedule]
+    let configuration = Configuration(weight: takeoffWeight, flapSetting: .flaps50),
+      calculationService = DefaultPerformanceCalculationService.shared,
+      useRegressionModel = Defaults[.useRegressionModel],
+      aircraftType = Defaults.Keys.aircraftType
 
     for runway in airport.runways {
       let runwaySnapshot = RunwayInput(from: runway, airport: airport)
@@ -188,7 +188,7 @@ class PerformanceCalculator {
         runway: runwaySnapshot,
         notam: runwaySnapshot.notam,
         useRegressionModel: useRegressionModel,
-        updatedThrustSchedule: updatedThrustSchedule
+        aircraftType: aircraftType
       )
 
       do {

@@ -31,8 +31,9 @@ struct PerformanceInput {
   /// Whether to use regression model vs tabular model.
   let useRegressionModel: Bool
 
-  /// Whether the aircraft has G2+ thrust schedule.
-  let updatedThrustSchedule: Bool
+  /// Aircraft type (G1, G2, or G2+). Use `aircraftType.usesUpdatedThrustSchedule`
+  /// for performance model selection.
+  let aircraftType: AircraftType
 
   /// Aircraft empty weight for max weight calculations.
   let emptyWeight: Measurement<UnitMass>
@@ -43,7 +44,7 @@ struct PerformanceInput {
   /// Aggregated aircraft info for display.
   var aircraftInfo: AircraftInfo {
     AircraftInfo(
-      updatedThrustSchedule: updatedThrustSchedule,
+      aircraftType: aircraftType,
       emptyWeight: emptyWeight
     )
   }
@@ -61,7 +62,7 @@ struct PerformanceInput {
     flapSetting: FlapSetting,
     safetyFactor: Double,
     useRegressionModel: Bool,
-    updatedThrustSchedule: Bool,
+    aircraftType: AircraftType,
     emptyWeight: Measurement<UnitMass>,
     date: Date
   ) {
@@ -72,7 +73,7 @@ struct PerformanceInput {
     self.flapSetting = flapSetting
     self.safetyFactor = safetyFactor
     self.useRegressionModel = useRegressionModel
-    self.updatedThrustSchedule = updatedThrustSchedule
+    self.aircraftType = aircraftType
     self.emptyWeight = emptyWeight
     self.date = date
   }
@@ -103,16 +104,11 @@ enum LimitingFactor: String, Codable, Sendable {
 /// ``AircraftInfo`` provides displayable aircraft information derived from
 /// configuration settings.
 struct AircraftInfo {
-  /// Whether the aircraft has the G2+ updated thrust schedule.
-  let updatedThrustSchedule: Bool
+  /// The aircraft type (G1, G2, or G2+).
+  let aircraftType: AircraftType
 
   /// Basic empty weight used for max weight calculations.
   let emptyWeight: Measurement<UnitMass>
-
-  /// Human-readable aircraft model name (e.g., "SF50 G2+").
-  var model: String {
-    updatedThrustSchedule ? String(localized: "SF50 G2+") : String(localized: "SF50 G1/G2")
-  }
 }
 
 /// Wind information for TLR display. Direction is nil for variable or calm winds.

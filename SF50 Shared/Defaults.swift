@@ -34,6 +34,31 @@ extension Defaults.Keys {
     default: false,
     suite: groupDefaults
   )
+  public static let aircraftTypeSetting = Key<AircraftTypeSetting?>(
+    "SF50/3/aircraftType",
+    suite: groupDefaults
+  )
+
+  /// Constructs the full `AircraftType` from stored settings.
+  ///
+  /// This combines `aircraftTypeSetting` and `updatedThrustSchedule` into a single
+  /// `AircraftType` value. For G2, the thrust schedule state is embedded in the enum case.
+  ///
+  /// For legacy users who haven't set `aircraftTypeSetting`:
+  /// - Returns `.g2Plus` if `updatedThrustSchedule` is true
+  /// - Returns `.g2(updatedThrustSchedule: false)` otherwise
+  public static var aircraftType: AircraftType {
+    guard let setting = Defaults[.aircraftTypeSetting] else {
+      // Legacy migration: infer from updatedThrustSchedule
+      return Defaults[.updatedThrustSchedule] ? .g2Plus : .g2(updatedThrustSchedule: false)
+    }
+    switch setting {
+      case .g1: return .g1
+      case .g2: return .g2(updatedThrustSchedule: Defaults[.updatedThrustSchedule])
+      case .g2Plus: return .g2Plus
+    }
+  }
+
   public static let defaultScenariosSeeded = Key<Bool>(
     "SF50/3/defaultScenariosSeeded",
     default: false,

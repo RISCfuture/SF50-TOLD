@@ -377,18 +377,19 @@ final class RegressionPerformanceModelG2Plus: BaseSF50RegressionPerformanceModel
 
   // MARK: - Initializer
 
-  init(
+  override init(
     conditions: Conditions,
     configuration: Configuration,
     runway: RunwayInput,
-    notam: NOTAMInput?
+    notam: NOTAMInput?,
+    aircraftType: AircraftType
   ) {
     super.init(
       conditions: conditions,
       configuration: configuration,
       runway: runway,
       notam: notam,
-      modelType: .g2Plus
+      aircraftType: aircraftType
     )
   }
 }

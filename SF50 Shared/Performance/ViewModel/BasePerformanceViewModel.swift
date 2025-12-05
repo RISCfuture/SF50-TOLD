@@ -190,13 +190,13 @@ open class BasePerformanceViewModel: WithIdentifiableError {
       }
     )
 
-    // Observe thrust schedule and model type changes
+    // Observe aircraft type and model type changes
     addTask(
       Task {
         for await _
           in Defaults
-          .updates(.updatedThrustSchedule, .useRegressionModel) where !Task.isCancelled
-        {
+          .updates(.aircraftTypeSetting, .updatedThrustSchedule, .useRegressionModel)
+        where !Task.isCancelled {
           model = initializeModel()
           recalculate()
         }
@@ -338,39 +338,44 @@ open class BasePerformanceViewModel: WithIdentifiableError {
   internal func initializeModel() -> (any PerformanceModel)? {
     guard let runway, let airport else { return nil }
 
-    let runwaySnapshot = RunwayInput(from: runway, airport: airport)
-    let notamInput = notam.map { NOTAMInput(from: $0) }
+    let runwaySnapshot = RunwayInput(from: runway, airport: airport),
+      notamInput = notam.map { NOTAMInput(from: $0) },
+      aircraftType = Defaults.Keys.aircraftType
 
     return if Defaults[.useRegressionModel] {
-      if Defaults[.updatedThrustSchedule] {
+      if aircraftType.usesUpdatedThrustSchedule {
         RegressionPerformanceModelG2Plus(
           conditions: conditions,
           configuration: configuration,
           runway: runwaySnapshot,
-          notam: notamInput
+          notam: notamInput,
+          aircraftType: aircraftType
         )
       } else {
         RegressionPerformanceModelG1(
           conditions: conditions,
           configuration: configuration,
           runway: runwaySnapshot,
-          notam: notamInput
+          notam: notamInput,
+          aircraftType: aircraftType
         )
       }
     } else {
-      if Defaults[.updatedThrustSchedule] {
+      if aircraftType.usesUpdatedThrustSchedule {
         TabularPerformanceModelG2Plus(
           conditions: conditions,
           configuration: configuration,
           runway: runwaySnapshot,
-          notam: notamInput
+          notam: notamInput,
+          aircraftType: aircraftType
         )
       } else {
         TabularPerformanceModelG1(
           conditions: conditions,
           configuration: configuration,
           runway: runwaySnapshot,
-          notam: notamInput
+          notam: notamInput,
+          aircraftType: aircraftType
         )
       }
     }

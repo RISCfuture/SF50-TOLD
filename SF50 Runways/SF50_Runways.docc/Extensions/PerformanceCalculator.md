@@ -28,7 +28,7 @@ The calculator reads aircraft configuration from user defaults:
 | Fuel quantity | `Defaults[.takeoffFuel]` |
 | Fuel density | `Defaults[.fuelDensity]` |
 | Safety factors | `Defaults[.safetyFactorDry/Wet]` |
-| Thrust schedule | `Defaults[.updatedThrustSchedule]` |
+| Thrust schedule | `Defaults.Keys.aircraftType.usesUpdatedThrustSchedule` |
 | Regression model | `Defaults[.useRegressionModel]` |
 
 ## Error Handling

@@ -75,10 +75,10 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
     configuration: Configuration,
     runway: RunwayInput,
     notam: NOTAMInput?,
-    modelType: DataTableLoader.ModelType
+    aircraftType: AircraftType
   ) {
-    self.boundsChecker = BoundsChecker(modelType: modelType)
-    self.contaminationCalculator = ContaminationCalculator(modelType: modelType)
+    self.boundsChecker = BoundsChecker(aircraftType: aircraftType)
+    self.contaminationCalculator = ContaminationCalculator(aircraftType: aircraftType)
     super.init(conditions: conditions, configuration: configuration, runway: runway, notam: notam)
   }
 

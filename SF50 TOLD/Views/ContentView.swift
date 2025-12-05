@@ -7,6 +7,9 @@ struct ContentView: View {
   @Default(.initialSetupComplete)
   private var initialSetupComplete
 
+  @Default(.aircraftTypeSetting)
+  private var aircraftTypeSetting
+
   @State private var tab = 1
   @State private var loader: AirportLoaderViewModel?
 
@@ -14,15 +17,17 @@ struct ContentView: View {
   private var context
 
   var body: some View {
-    content
-      .onAppear {
-        loader = .init(container: context.container)
-      }
-      .environment(\.locationStreamer, CoreLocationStreamer())
+    AircraftTypeProvider {
+      content
+    }
+    .onAppear {
+      loader = .init(container: context.container)
+    }
+    .environment(\.locationStreamer, CoreLocationStreamer())
   }
 
   @ViewBuilder private var content: some View {
-    if !initialSetupComplete {
+    if !initialSetupComplete || aircraftTypeSetting == nil {
       WelcomeView()
     } else if let loader, loader.showLoader {
       LoadingView()

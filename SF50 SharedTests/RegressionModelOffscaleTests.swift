@@ -19,7 +19,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     // Regression models should still return computed values, not .offscaleLow
@@ -46,7 +47,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     // Regression models should still return computed values, not .offscaleHigh
@@ -73,7 +75,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     // Regression models should still return computed values
@@ -99,7 +102,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     // Regression models should still return computed values
@@ -127,7 +131,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.takeoffRunFt {
@@ -152,7 +157,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.takeoffRunFt {
@@ -177,7 +183,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.takeoffRunFt {
@@ -202,7 +209,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.takeoffRunFt {
@@ -229,7 +237,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.landingRunFt {
@@ -254,7 +263,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.landingRunFt {
@@ -279,7 +289,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.takeoffRunFt {
@@ -304,7 +315,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.takeoffRunFt {
@@ -331,7 +343,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.landingRunFt {
@@ -356,7 +369,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.takeoffRunFt {
@@ -383,7 +397,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     // Should return actual values, not offscale
@@ -417,7 +432,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     // Should return actual values, not offscale
@@ -454,7 +470,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.landingRunFt {
@@ -479,7 +496,8 @@ struct RegressionModelOffscaleTests {
       conditions: conditions,
       configuration: config,
       runway: runwayInput,
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     switch model.landingRunFt {

@@ -7,14 +7,14 @@ private let maxDA = Measurement(value: 15_000, unit: UnitLength.feet)
 struct WeatherRow: View {
   var elevation: Measurement<UnitLength>
 
-  @Default(.updatedThrustSchedule)
-  private var updatedThrustSchedule
+  @Environment(\.aircraftType)
+  private var aircraftType
 
   @Environment(WeatherViewModel.self)
   private var weather
 
   private var limitations: Limitations.Type {
-    updatedThrustSchedule ? LimitationsG2Plus.self : LimitationsG1.self
+    aircraftType.limitations
   }
 
   var body: some View {

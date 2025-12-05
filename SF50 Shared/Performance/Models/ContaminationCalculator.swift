@@ -29,15 +29,12 @@ import Foundation
 /// ```swift
 /// // For tabular model
 /// let calculator = ContaminationCalculator(
-///   modelType: .g2Plus,
-///   compactSnowData: compactSnowTable,
-///   drySnowData: drySnowTable,
-///   slushData: slushTable,
-///   waterData: waterTable
+///   aircraftType: .g2Plus,
+///   loader: dataTableLoader
 /// )
 ///
 /// // For regression model
-/// let calculator = ContaminationCalculator(modelType: .g2Plus)
+/// let calculator = ContaminationCalculator(aircraftType: .g2Plus)
 ///
 /// let adjustedDistance = calculator.landingRunContaminationAddition(
 ///   distance: baseDistance,
@@ -48,7 +45,7 @@ final class ContaminationCalculator {
 
   // MARK: - Properties
 
-  private let modelType: DataTableLoader.ModelType
+  private let aircraftType: AircraftType
 
   // Data tables for tabular mode (nil for regression mode)
   private let compactSnowData: DataTable?
@@ -66,9 +63,11 @@ final class ContaminationCalculator {
   /// Use this initializer when the performance model uses tabular interpolation
   /// from digitized AFM data.
   ///
-  /// - Parameter loader: The data table loader to load contamination tables from
-  init(loader: DataTableLoader) throws {
-    self.modelType = loader.modelType
+  /// - Parameters:
+  ///   - aircraftType: The aircraft type
+  ///   - loader: The data table loader to load contamination tables from
+  init(aircraftType: AircraftType, loader: DataTableLoader) throws {
+    self.aircraftType = aircraftType
     self.compactSnowData = try loader.loadContaminationCompactSnowData()
     self.drySnowData = try loader.loadContaminationDrySnowData()
     self.slushData = try loader.loadContaminationSlushData()
@@ -80,9 +79,9 @@ final class ContaminationCalculator {
   /// Use this initializer when the performance model uses polynomial regression
   /// formulas derived from AFM data.
   ///
-  /// - Parameter modelType: The aircraft model type (G1 or G2+)
-  init(modelType: DataTableLoader.ModelType) {
-    self.modelType = modelType
+  /// - Parameter aircraftType: The aircraft type
+  init(aircraftType: AircraftType) {
+    self.aircraftType = aircraftType
     self.compactSnowData = nil
     self.drySnowData = nil
     self.slushData = nil
@@ -122,7 +121,7 @@ final class ContaminationCalculator {
       case .wetRunway:
         // G2/G2+ AFM Reissue A: Add 15% to landing ground distance for wet runway
         // G1: No effect (tabular data doesn't include wet runway adjustment)
-        guard modelType == .g2Plus else { return distance }
+        guard aircraftType.hasWetRunwayLandingDistanceFactor else { return distance }
         return distance.map { value, uncertainty in
           (value * 1.15, uncertainty.map { $0 * 1.15 })
         }
@@ -318,6 +317,15 @@ final class ContaminationCalculator {
         }
 
       return (newDistance, newUncertainty)
+    }
+  }
+}
+
+extension AircraftType {
+  var hasWetRunwayLandingDistanceFactor: Bool {
+    switch self {
+      case .g1: false
+      case .g2, .g2Plus: true
     }
   }
 }

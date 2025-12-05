@@ -19,7 +19,8 @@ struct TabularModelEdgeCaseTests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let groundRun = model.takeoffRunFt
@@ -65,7 +66,8 @@ struct TabularModelEdgeCaseTests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let landingRun = model.landingRunFt
@@ -101,7 +103,8 @@ struct TabularModelEdgeCaseTests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffRunFt
@@ -125,7 +128,8 @@ struct TabularModelEdgeCaseTests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffRunFt
@@ -142,7 +146,8 @@ struct TabularModelEdgeCaseTests {
       conditions: conditions,
       configuration: minWeightConfig,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     if case .value(let minWeightValue) = minWeightModel.takeoffRunFt {
@@ -161,7 +166,8 @@ struct TabularModelEdgeCaseTests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffRunFt
@@ -179,7 +185,8 @@ struct TabularModelEdgeCaseTests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffRunFt
@@ -207,7 +214,8 @@ struct TabularModelEdgeCaseTests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let result = model.takeoffRunFt
@@ -244,7 +252,8 @@ struct TabularModelEdgeCaseTests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffRunFt
@@ -276,7 +285,8 @@ struct TabularModelEdgeCaseTests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffRunFt
@@ -298,7 +308,8 @@ struct TabularModelEdgeCaseTests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffRunFt
@@ -331,14 +342,16 @@ struct TabularModelEdgeCaseTests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let modelG2Plus = TabularPerformanceModelG2Plus(
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       // Check takeoff performance
@@ -374,7 +387,8 @@ struct TabularModelEdgeCaseTests {
         conditions: baseConditions,
         configuration: baseConfig,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       if case .value(let value) = model.takeoffRunFt {

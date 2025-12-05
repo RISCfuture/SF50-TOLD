@@ -45,7 +45,7 @@ class LandingReportData: BaseReportData<LandingRunwayPerformance, LandingPerform
       runway: runway,
       notam: runway.notam,
       useRegressionModel: input.useRegressionModel,
-      updatedThrustSchedule: input.updatedThrustSchedule
+      aircraftType: input.aircraftType
     )
     let results = try performance.calculateLanding(
       for: perfModel,
@@ -105,7 +105,7 @@ class LandingReportData: BaseReportData<LandingRunwayPerformance, LandingPerform
         runway: runway,
         notam: runway.notam,
         useRegressionModel: input.useRegressionModel,
-        updatedThrustSchedule: input.updatedThrustSchedule
+        aircraftType: input.aircraftType
       )
       let results = try performance.calculateLanding(
         for: model,

@@ -13,7 +13,6 @@ enum UITestingHelper {
     let isGeneratingScreenshots = ProcessInfo.processInfo.arguments.contains("GENERATE-SCREENSHOTS")
 
     // Set minimal configuration for testing - let tests go through setup flow
-    Defaults[.updatedThrustSchedule] = false  // G1 model
     Defaults[.schemaVersion] = latestSchemaVersion
     Defaults[.favoriteAirports] = []  // Ensure no favorites at start
 

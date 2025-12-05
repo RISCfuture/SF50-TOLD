@@ -6,8 +6,8 @@ struct LandingLoadoutView: View {
   @Environment(LandingPerformanceViewModel.self)
   private var performance
 
-  @Default(.updatedThrustSchedule)
-  private var updatedThrustSchedule
+  @Environment(\.aircraftType)
+  private var aircraftType
 
   @Default(.emptyWeight)
   private var emptyWeight
@@ -25,7 +25,7 @@ struct LandingLoadoutView: View {
   private var fuelVolumeUnit
 
   private var limitations: Limitations.Type {
-    updatedThrustSchedule ? LimitationsG2Plus.self : LimitationsG1.self
+    aircraftType.limitations
   }
 
   var body: some View {

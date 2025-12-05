@@ -23,7 +23,7 @@ enum BoundsStatus {
 /// ## Usage
 ///
 /// ```swift
-/// let checker = BoundsChecker(modelType: .g1)
+/// let checker = BoundsChecker(aircraftType: .g1)
 ///
 /// let status = checker.takeoffBoundsStatus(
 ///     weight: 5800,
@@ -43,8 +43,8 @@ final class BoundsChecker {
   private let landingRunData_flaps50Ice: DataTable
 
   // swiftlint:disable force_try
-  init(modelType: DataTableLoader.ModelType) {
-    let loader = DataTableLoader(modelType: modelType)
+  init(aircraftType: AircraftType) {
+    let loader = DataTableLoader(aircraftType: aircraftType)
 
     // Load takeoff data for bounds
     self.takeoffRunData = try! loader.loadTakeoffRunData()

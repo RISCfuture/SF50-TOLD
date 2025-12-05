@@ -54,7 +54,8 @@ struct TabularPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let result = model.takeoffRunFt
@@ -80,7 +81,8 @@ struct TabularPerformanceModelG1Tests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffRunFt
@@ -111,7 +113,8 @@ struct TabularPerformanceModelG1Tests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffRunFt
@@ -148,7 +151,8 @@ struct TabularPerformanceModelG1Tests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffDistanceFt
@@ -189,7 +193,8 @@ struct TabularPerformanceModelG1Tests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let result = model.takeoffRunFt
@@ -237,7 +242,8 @@ struct TabularPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let result = model.takeoffDistanceFt
@@ -293,7 +299,8 @@ struct TabularPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let result = model.takeoffClimbGradientFtNmi
@@ -347,7 +354,8 @@ struct TabularPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let result = model.takeoffClimbRateFtMin
@@ -407,7 +415,8 @@ struct TabularPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let result = model.VrefKts
@@ -453,7 +462,8 @@ struct TabularPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let result = model.landingRunFt
@@ -496,7 +506,8 @@ struct TabularPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let result = model.landingRunFt
@@ -542,7 +553,8 @@ struct TabularPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let result = model.landingDistanceFt
@@ -585,7 +597,8 @@ struct TabularPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let result = model.landingDistanceFt
@@ -618,14 +631,16 @@ struct TabularPerformanceModelG1Tests {
       conditions: conditionsNoWind,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let modelHeadwind = TabularPerformanceModelG1(
       conditions: conditionsHeadwind,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     guard case .value(let noWindValue) = modelNoWind.takeoffRunFt,
@@ -655,14 +670,16 @@ struct TabularPerformanceModelG1Tests {
       conditions: conditionsNoWind,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let modelTailwind = TabularPerformanceModelG1(
       conditions: conditionsTailwind,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     guard case .value(let noWindValue) = modelNoWind.takeoffRunFt,
@@ -691,14 +708,16 @@ struct TabularPerformanceModelG1Tests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayFlat, airport: runwayFlat.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let modelUphill = TabularPerformanceModelG1(
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayUphill, airport: runwayUphill.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     guard case .value(let flatValue) = modelFlat.takeoffRunFt,
@@ -725,14 +744,16 @@ struct TabularPerformanceModelG1Tests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayFlat, airport: runwayFlat.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let modelDownhill = TabularPerformanceModelG1(
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayDownhill, airport: runwayDownhill.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     guard case .value(let flatValue) = modelFlat.takeoffRunFt,
@@ -761,14 +782,16 @@ struct TabularPerformanceModelG1Tests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayPaved, airport: runwayPaved.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let modelUnpaved = TabularPerformanceModelG1(
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayUnpaved, airport: runwayUnpaved.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     guard case .value(let pavedValue) = modelPaved.takeoffDistanceFt,

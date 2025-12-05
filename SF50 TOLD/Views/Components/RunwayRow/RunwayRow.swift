@@ -1,4 +1,3 @@
-import Defaults
 import SF50_Shared
 import SwiftUI
 
@@ -11,11 +10,11 @@ struct RunwayRow: View {
   @Environment(\.operation)
   private var operation
 
-  @Default(.updatedThrustSchedule)
-  private var updatedThrustSchedule
+  @Environment(\.aircraftType)
+  private var aircraftType
 
   private var limitations: Limitations.Type {
-    updatedThrustSchedule ? LimitationsG2Plus.self : LimitationsG1.self
+    aircraftType.limitations
   }
 
   private var crosswindLimit: Measurement<UnitSpeed>? {

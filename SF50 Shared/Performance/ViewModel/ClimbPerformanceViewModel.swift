@@ -167,13 +167,15 @@ public final class ClimbPerformanceViewModel {
     )
 
     // Initialize the appropriate model
+    let aircraftType = Defaults.Keys.aircraftType
     if Defaults[.useRegressionModel] {
-      if Defaults[.updatedThrustSchedule] {
+      if aircraftType.usesUpdatedThrustSchedule {
         let m = RegressionPerformanceModelG2Plus(
           conditions: conditions,
           configuration: configuration,
           runway: dummyRunway,
-          notam: nil
+          notam: nil,
+          aircraftType: aircraftType
         )
         climbSpeed = m.enrouteClimbSpeedKIAS.map { value, uncertainty in
           (
@@ -198,7 +200,8 @@ public final class ClimbPerformanceViewModel {
           conditions: conditions,
           configuration: configuration,
           runway: dummyRunway,
-          notam: nil
+          notam: nil,
+          aircraftType: aircraftType
         )
         climbSpeed = m.enrouteClimbSpeedKIAS.map { value, uncertainty in
           (
@@ -220,12 +223,13 @@ public final class ClimbPerformanceViewModel {
         }
       }
     } else {
-      if Defaults[.updatedThrustSchedule] {
+      if aircraftType.usesUpdatedThrustSchedule {
         let m = TabularPerformanceModelG2Plus(
           conditions: conditions,
           configuration: configuration,
           runway: dummyRunway,
-          notam: nil
+          notam: nil,
+          aircraftType: aircraftType
         )
         climbSpeed = m.enrouteClimbSpeedKIAS.map { value, uncertainty in
           (
@@ -250,7 +254,8 @@ public final class ClimbPerformanceViewModel {
           conditions: conditions,
           configuration: configuration,
           runway: dummyRunway,
-          notam: nil
+          notam: nil,
+          aircraftType: aircraftType
         )
         climbSpeed = m.enrouteClimbSpeedKIAS.map { value, uncertainty in
           (

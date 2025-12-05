@@ -20,7 +20,8 @@ struct RegressionPerformanceModelG2PlusTests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g2Plus
         )
       },
       valueExtractor: { $0.takeoffRunFt },
@@ -43,7 +44,8 @@ struct RegressionPerformanceModelG2PlusTests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g2Plus
         )
       },
       valueExtractor: { $0.takeoffDistanceFt },
@@ -66,7 +68,8 @@ struct RegressionPerformanceModelG2PlusTests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g2Plus
         )
       },
       valueExtractor: { $0.takeoffClimbGradientFtNmi },
@@ -87,7 +90,8 @@ struct RegressionPerformanceModelG2PlusTests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g2Plus
         )
       },
       valueExtractor: { $0.takeoffClimbRateFtMin },
@@ -113,14 +117,16 @@ struct RegressionPerformanceModelG2PlusTests {
       conditions: conditionsNoWind,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     let modelTailwind = RegressionPerformanceModelG2Plus(
       conditions: conditionsTailwind,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     // Extract values from the results (which may include uncertainty)
@@ -166,14 +172,16 @@ struct RegressionPerformanceModelG2PlusTests {
       conditions: conditionsNoWind,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     let modelHeadwind = RegressionPerformanceModelG2Plus(
       conditions: conditionsHeadwind,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     // Extract values from the results (which may include uncertainty)
@@ -217,21 +225,24 @@ struct RegressionPerformanceModelG2PlusTests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayFlat, airport: runwayFlat.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     let modelUphill = RegressionPerformanceModelG2Plus(
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayUphill, airport: runwayUphill.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     let modelDownhill = RegressionPerformanceModelG2Plus(
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayDownhill, airport: runwayDownhill.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     // Extract values from the results (which may include uncertainty)
@@ -301,7 +312,8 @@ struct RegressionPerformanceModelG2PlusTests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g2Plus
       )
 
       let regressionResult = regressionModel.meetsGoAroundClimbGradient
@@ -323,7 +335,8 @@ struct RegressionPerformanceModelG2PlusTests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g2Plus
       )
 
       let tabularLandingDistance = tabularModel.landingDistanceFt
@@ -362,7 +375,8 @@ struct RegressionPerformanceModelG2PlusTests {
       conditions: minWeightConditions,
       configuration: minWeightConfig,
       runway: RunwayInput(from: minWeightRunway, airport: minWeightRunway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     guard case .value(let minWeightMeets) = minWeightModel.meetsGoAroundClimbGradient else {
@@ -383,7 +397,8 @@ struct RegressionPerformanceModelG2PlusTests {
       conditions: maxWeightConditions,
       configuration: maxWeightConfig,
       runway: RunwayInput(from: maxWeightRunway, airport: maxWeightRunway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g2Plus
     )
 
     guard case .value(let maxWeightMeets) = maxWeightModel.meetsGoAroundClimbGradient else {
@@ -419,14 +434,16 @@ struct RegressionPerformanceModelG2PlusTests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g2Plus
       )
 
       let g2PlusModel = RegressionPerformanceModelG2Plus(
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g2Plus
       )
 
       if case .value(let g1Meets) = g1Model.meetsGoAroundClimbGradient,

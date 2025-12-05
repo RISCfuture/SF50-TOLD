@@ -36,10 +36,10 @@ import Foundation
 struct DataTableLoader {
 
   private let bundle: Bundle
-  let modelType: ModelType
+  let aircraftType: AircraftType
 
   private var dataURL: URL {
-    let directory = modelType == .g1 ? "Data/g1" : "Data/g2+"
+    let directory = "Data/\(aircraftType.dataDirectoryName)"
     return bundle.resourceURL!.appending(component: directory, directoryHint: .isDirectory)
   }
 
@@ -47,9 +47,9 @@ struct DataTableLoader {
     bundle.resourceURL!.appending(component: "Data/g1", directoryHint: .isDirectory)
   }
 
-  init(bundle: Bundle = Bundle(for: BasePerformanceModel.self), modelType: ModelType) {
+  init(bundle: Bundle = Bundle(for: BasePerformanceModel.self), aircraftType: AircraftType) {
     self.bundle = bundle
-    self.modelType = modelType
+    self.aircraftType = aircraftType
   }
 
   // MARK: - Main Performance Data Tables
@@ -250,9 +250,13 @@ struct DataTableLoader {
     let url = fromG1 ? g1DataURL.appending(path: path) : dataURL.appending(path: path)
     return try DataTable(fileURL: url)
   }
+}
 
-  enum ModelType {
-    case g1
-    case g2Plus
+extension AircraftType {
+  /// The directory name used for loading performance data tables.
+  ///
+  /// Aircraft with updated thrust schedule use g2+ data, others use g1 data.
+  var dataDirectoryName: String {
+    usesUpdatedThrustSchedule ? "g2+" : "g1"
   }
 }

@@ -20,7 +20,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.takeoffRunFt },
@@ -43,7 +44,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.takeoffDistanceFt },
@@ -66,7 +68,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.takeoffClimbGradientFtNmi },
@@ -87,7 +90,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.takeoffClimbRateFtMin },
@@ -132,7 +136,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: testConfig,
           runway: RunwayInput(from: runway, airport: runway.airport),
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
 
         let result = model.VrefKts
@@ -167,7 +172,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.landingRunFt },
@@ -191,7 +197,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.landingRunFt },
@@ -217,7 +224,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.landingDistanceFt },
@@ -241,7 +249,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.landingDistanceFt },
@@ -269,7 +278,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.enrouteClimbGradientFtNmi },
@@ -295,7 +305,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.enrouteClimbRateFtMin },
@@ -321,7 +332,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.enrouteClimbSpeedKIAS },
@@ -348,7 +360,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.enrouteClimbGradientFtNmi },
@@ -373,7 +386,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.enrouteClimbRateFtMin },
@@ -398,7 +412,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.enrouteClimbSpeedKIAS },
@@ -423,7 +438,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.timeToClimbMin },
@@ -446,7 +462,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.fuelToClimbUsGal },
@@ -469,7 +486,8 @@ struct RegressionPerformanceModelG1Tests {
           conditions: conditions,
           configuration: config,
           runway: runway,
-          notam: nil
+          notam: nil,
+          aircraftType: .g1
         )
       },
       valueExtractor: { $0.distanceToClimbNm },
@@ -495,14 +513,16 @@ struct RegressionPerformanceModelG1Tests {
       conditions: conditionsNoWind,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let modelHeadwind = RegressionPerformanceModelG1(
       conditions: conditionsHeadwind,
       configuration: config,
       runway: RunwayInput(from: runway, airport: runway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     // Extract values from the results (which may include uncertainty)
@@ -543,14 +563,16 @@ struct RegressionPerformanceModelG1Tests {
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayPaved, airport: runwayPaved.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     let modelUnpaved = RegressionPerformanceModelG1(
       conditions: conditions,
       configuration: config,
       runway: RunwayInput(from: runwayUnpaved, airport: runwayUnpaved.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     // Extract values from the results (which may include uncertainty)
@@ -619,7 +641,8 @@ struct RegressionPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let regressionResult = regressionModel.meetsGoAroundClimbGradient
@@ -641,7 +664,8 @@ struct RegressionPerformanceModelG1Tests {
         conditions: conditions,
         configuration: config,
         runway: RunwayInput(from: runway, airport: runway.airport),
-        notam: nil
+        notam: nil,
+        aircraftType: .g1
       )
 
       let tabularLandingDistance = tabularModel.landingDistanceFt
@@ -680,7 +704,8 @@ struct RegressionPerformanceModelG1Tests {
       conditions: minWeightConditions,
       configuration: minWeightConfig,
       runway: RunwayInput(from: minWeightRunway, airport: minWeightRunway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     guard case .value(let minWeightMeets) = minWeightModel.meetsGoAroundClimbGradient else {
@@ -701,7 +726,8 @@ struct RegressionPerformanceModelG1Tests {
       conditions: maxWeightConditions,
       configuration: maxWeightConfig,
       runway: RunwayInput(from: maxWeightRunway, airport: maxWeightRunway.airport),
-      notam: nil
+      notam: nil,
+      aircraftType: .g1
     )
 
     guard case .value(let maxWeightMeets) = maxWeightModel.meetsGoAroundClimbGradient else {

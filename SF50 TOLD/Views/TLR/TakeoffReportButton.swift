@@ -74,25 +74,25 @@ struct TakeoffReportButton: View {
     Task {
       do {
         // Fetch scenarios using ModelActor in background context
-        let fetcher = ScenarioFetcher(modelContainer: container)
-        let scenarios = try await fetcher.fetchTakeoffScenarios()
+        let fetcher = ScenarioFetcher(modelContainer: container),
+          scenarios = try await fetcher.fetchTakeoffScenarios()
 
         // Allow UI to update with loading state
         try await Task.sleep(nanoseconds: 100_000_000)
 
         // Capture snapshots and settings on main actor
-        let airportSnapshot = AirportInput(from: airport)
-        let runwaySnapshot = RunwayInput(from: runway, airport: airport)
-        let conditions = performance.conditions
-        let weight = performance.weight
-        let flapSetting = performance.flapSetting
-        let safetyFactor =
-          runwaySnapshot.notam?.contamination != nil
-          ? Defaults[.safetyFactorWet] : Defaults[.safetyFactorDry]
-        let useRegressionModel = Defaults[.useRegressionModel]
-        let updatedThrustSchedule = Defaults[.updatedThrustSchedule]
-        let emptyWeight = Defaults[.emptyWeight]
-        let date = weather.time
+        let airportSnapshot = AirportInput(from: airport),
+          runwaySnapshot = RunwayInput(from: runway, airport: airport),
+          conditions = performance.conditions,
+          weight = performance.weight,
+          flapSetting = performance.flapSetting,
+          safetyFactor =
+            runwaySnapshot.notam?.contamination != nil
+            ? Defaults[.safetyFactorWet] : Defaults[.safetyFactorDry],
+          useRegressionModel = Defaults[.useRegressionModel],
+          aircraftType = Defaults.Keys.aircraftType,
+          emptyWeight = Defaults[.emptyWeight],
+          date = weather.time
 
         // Now run the report generation in the background
         let input = PerformanceInput(
@@ -103,7 +103,7 @@ struct TakeoffReportButton: View {
           flapSetting: flapSetting,
           safetyFactor: safetyFactor,
           useRegressionModel: useRegressionModel,
-          updatedThrustSchedule: updatedThrustSchedule,
+          aircraftType: aircraftType,
           emptyWeight: emptyWeight,
           date: date
         )

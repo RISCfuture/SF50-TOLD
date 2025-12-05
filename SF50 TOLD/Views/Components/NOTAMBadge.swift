@@ -73,7 +73,8 @@ struct NOTAMBadge: View {
     }
     if hasAttemptedFetch {
       return String(
-        localized: "\(localCount, format: .count) configured, \(downloadedCount, format: .count) downloaded"
+        localized:
+          "\(localCount, format: .count) configured, \(downloadedCount, format: .count) downloaded"
       )
     }
     return String(localized: "\(localCount, format: .count) configured")

@@ -44,7 +44,7 @@ class TakeoffReportData: BaseReportData<TakeoffRunwayPerformance, TakeoffPerform
       runway: runway,
       notam: runway.notam,
       useRegressionModel: input.useRegressionModel,
-      updatedThrustSchedule: input.updatedThrustSchedule
+      aircraftType: input.aircraftType
     )
     let results = try performance.calculateTakeoff(
       for: perfModel,
@@ -104,7 +104,7 @@ class TakeoffReportData: BaseReportData<TakeoffRunwayPerformance, TakeoffPerform
         runway: runway,
         notam: runway.notam,
         useRegressionModel: input.useRegressionModel,
-        updatedThrustSchedule: input.updatedThrustSchedule
+        aircraftType: input.aircraftType
       )
       let results = try performance.calculateTakeoff(
         for: model,

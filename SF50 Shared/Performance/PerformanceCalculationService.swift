@@ -111,7 +111,7 @@ public struct LandingResults {
 /// - ``shared``
 ///
 /// ### Creating Models
-/// - ``createPerformanceModel(conditions:configuration:runway:notam:useRegressionModel:updatedThrustSchedule:)``
+/// - ``createPerformanceModel(conditions:configuration:runway:notam:useRegressionModel:aircraftType:)``
 ///
 /// ### Calculating Performance
 /// - ``calculateTakeoff(for:safetyFactor:)``
@@ -133,7 +133,7 @@ public final class DefaultPerformanceCalculationService: PerformanceCalculationS
    *   - runway: Runway data snapshot.
    *   - notam: Active NOTAM data if present.
    *   - useRegressionModel: Whether to use regression model (more accurate) vs tabular.
-   *   - updatedThrustSchedule: Whether the aircraft has G2+ thrust schedule.
+   *   - aircraftType: The user's configured aircraft type.
    * - Returns: A configured performance model ready for calculation.
    */
   public func createPerformanceModel(
@@ -142,37 +142,41 @@ public final class DefaultPerformanceCalculationService: PerformanceCalculationS
     runway: RunwayInput,
     notam: NOTAMInput?,
     useRegressionModel: Bool,
-    updatedThrustSchedule: Bool
+    aircraftType: AircraftType
   ) -> PerformanceModel {
     if useRegressionModel {
-      if updatedThrustSchedule {
+      if aircraftType.usesUpdatedThrustSchedule {
         return RegressionPerformanceModelG2Plus(
           conditions: conditions,
           configuration: configuration,
           runway: runway,
-          notam: notam
+          notam: notam,
+          aircraftType: aircraftType
         )
       }
       return RegressionPerformanceModelG1(
         conditions: conditions,
         configuration: configuration,
         runway: runway,
-        notam: notam
+        notam: notam,
+        aircraftType: aircraftType
       )
     }
-    if updatedThrustSchedule {
+    if aircraftType.usesUpdatedThrustSchedule {
       return TabularPerformanceModelG2Plus(
         conditions: conditions,
         configuration: configuration,
         runway: runway,
-        notam: notam
+        notam: notam,
+        aircraftType: aircraftType
       )
     }
     return TabularPerformanceModelG1(
       conditions: conditions,
       configuration: configuration,
       runway: runway,
-      notam: notam
+      notam: notam,
+      aircraftType: aircraftType
     )
   }
 

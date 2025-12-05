@@ -3,6 +3,9 @@ import SF50_Shared
 import SwiftUI
 
 struct WelcomeView: View {
+  @Default(.aircraftTypeSetting)
+  private var aircraftTypeSetting
+
   @Default(.updatedThrustSchedule)
   private var updatedThrustSchedule
 
@@ -12,7 +15,7 @@ struct WelcomeView: View {
   @Default(.emptyWeight)
   private var emptyWeight
 
-  @State private var model: Model = .g2
+  @State private var selectedType: AircraftTypeSetting = .g2
   @State private var g2UseUpdatedThrustSchedule = false
   @State private var showForm = false
   @State private var formOpacity = 0.0
@@ -26,14 +29,14 @@ struct WelcomeView: View {
         Image("Logo")
           .resizable()
           .aspectRatio(contentMode: .fit)
-          .frame(maxWidth: 200, alignment: /*@START_MENU_TOKEN@*/ .center /*@END_MENU_TOKEN@*/)
+          .frame(maxWidth: 200, alignment: .center)
           .accessibilityHidden(true)
         Text("Welcome to SF50 TOLD")
           .fontWeight(.bold)
           .multilineTextAlignment(.center)
           .padding(.bottom)
         if showForm {
-          Text("Let’s start by getting some information about your Vision Jet.")
+          Text("Let's start by getting some information about your Vision Jet.")
             .multilineTextAlignment(.leading)
             .opacity(formOpacity)
         }
@@ -44,17 +47,17 @@ struct WelcomeView: View {
         Form {
           Section {
             LabeledContent("Model") {
-              Picker("", selection: $model) {
-                Text("G1").tag(Model.g1)
-                Text("G2").tag(Model.g2)
-                Text("G2+").tag(Model.g2Plus)
+              Picker("", selection: $selectedType) {
+                Text("G1").tag(AircraftTypeSetting.g1)
+                Text("G2").tag(AircraftTypeSetting.g2)
+                Text("G2+").tag(AircraftTypeSetting.g2Plus)
               }
               .pickerStyle(.segmented)
               .frame(maxWidth: 200)
               .accessibilityIdentifier("modelPicker")
             }
 
-            if model == .g2 {
+            if selectedType == .g2 {
               VStack(alignment: .leading) {
                 Toggle("Use Updated Thrust Schedule", isOn: $g2UseUpdatedThrustSchedule)
                   .accessibilityIdentifier("updatedThrustScheduleToggle")
@@ -84,7 +87,8 @@ struct WelcomeView: View {
         Spacer()
 
         Button("Continue") {
-          switch model {
+          aircraftTypeSetting = selectedType
+          switch selectedType {
             case .g1: updatedThrustSchedule = false
             case .g2: updatedThrustSchedule = g2UseUpdatedThrustSchedule
             case .g2Plus: updatedThrustSchedule = true
@@ -102,17 +106,6 @@ struct WelcomeView: View {
         formOpacity = 1.0
       }
     }
-  }
-
-  private var maxLandingWeight: Measurement<UnitMass> {
-    switch model {
-      case .g1, .g2: LimitationsG1.maxLandingWeight
-      case .g2Plus: LimitationsG2Plus.maxLandingWeight
-    }
-  }
-
-  private enum Model {
-    case g1, g2, g2Plus
   }
 }
 
