@@ -1061,9 +1061,9 @@ final class SF50_TOLDUITests: XCTestCase {
       Thread.sleep(forTimeInterval: 0.5)
     }
 
-    // The button label should now show "NOTAMs (1)" indicating one contamination restriction
+    // The button label should include a configured NOTAM count of 1
     XCTAssertTrue(
-      notamButtonAfter.label.contains("(1)") || notamButtonAfter.label.contains("("),
+      notamButtonAfter.label.contains("1 configured"),
       "NOTAM button should show count after adding contamination"
     )
 

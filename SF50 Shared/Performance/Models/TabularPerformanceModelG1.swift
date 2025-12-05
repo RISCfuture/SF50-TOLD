@@ -57,10 +57,7 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
   private let landingDistance_tailwindData: DataTable
   private let landingDistance_unpavedData: DataTable
 
-  private let contamination_compactSnowData: DataTable
-  private let contamination_drySnowData: DataTable
-  private let contamination_slushData: DataTable
-  private let contamination_waterData: DataTable
+  private let contaminationCalculator: ContaminationCalculator
 
   private let enrouteClimb_gradientNormalData: DataTable
   private let enrouteClimb_rateNormalData: DataTable
@@ -397,10 +394,7 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
       landingPrefix: landingPrefix
     )
 
-    contamination_compactSnowData = try! loader.loadContaminationCompactSnowData()
-    contamination_drySnowData = try! loader.loadContaminationDrySnowData()
-    contamination_slushData = try! loader.loadContaminationSlushData()
-    contamination_waterData = try! loader.loadContaminationWaterData()
+    contaminationCalculator = try! ContaminationCalculator(loader: loader)
 
     enrouteClimb_gradientNormalData = try! loader.loadEnrouteClimbGradientData(
       iceContaminated: false
@@ -428,13 +422,9 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
   // MARK: - Functions
 
   private func landingRun_contaminationAddition(distance: Value<Double>) -> Value<Double> {
-    ContaminationCalculator.landingRunContaminationAddition(
+    contaminationCalculator.landingRunContaminationAddition(
       distance: distance,
-      contamination: notam?.contamination,
-      compactSnowData: contamination_compactSnowData,
-      drySnowData: contamination_drySnowData,
-      slushData: contamination_slushData,
-      waterData: contamination_waterData
+      contamination: notam?.contamination
     )
   }
 }

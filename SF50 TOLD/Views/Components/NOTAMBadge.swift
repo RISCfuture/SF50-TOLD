@@ -48,6 +48,8 @@ struct NOTAMBadge: View {
       Capsule()
         .fill(Color.secondary.opacity(0.1))
     )
+    .accessibilityElement(children: .ignore)
+    .accessibilityLabel(accessibilityLabel)
   }
 
   private var textColor: Color {
@@ -63,6 +65,18 @@ struct NOTAMBadge: View {
       return .secondary
     }
     return .primary
+  }
+
+  private var accessibilityLabel: String {
+    if isLoading {
+      return String(localized: "Loading NOTAMs")
+    }
+    if hasAttemptedFetch {
+      return String(
+        localized: "\(localCount, format: .count) configured, \(downloadedCount, format: .count) downloaded"
+      )
+    }
+    return String(localized: "\(localCount, format: .count) configured")
   }
 
   init(

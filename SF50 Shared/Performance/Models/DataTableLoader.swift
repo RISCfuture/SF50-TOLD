@@ -36,7 +36,7 @@ import Foundation
 struct DataTableLoader {
 
   private let bundle: Bundle
-  private let modelType: ModelType
+  let modelType: ModelType
 
   private var dataURL: URL {
     let directory = modelType == .g1 ? "Data/g1" : "Data/g2+"

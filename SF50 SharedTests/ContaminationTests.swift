@@ -606,6 +606,280 @@ struct ContaminationTests {
     #expect(contaminatedDistance.isApproximatelyEqual(to: 3927.85, relativeTolerance: 0.01))
   }
 
+  // MARK: - Wet Runway Tests (G2/G2+ AFM Reissue A)
+
+  @Test("Wet runway contamination increases landing run by 15% - Tabular G2+")
+  func wetRunwayContamination_increasesLandingRun_tabularG2Plus() {
+    let conditions = Helper.createTestConditions(temperature: 20)
+    let config = Helper.createTestConfiguration(weight: 5550)
+    let runway = Helper.createTestRunway()
+    let runwayInput = RunwayInput(from: runway, airport: runway.airport)
+
+    // Model without contamination
+    let cleanModel = TabularPerformanceModelG2Plus(
+      conditions: conditions,
+      configuration: config,
+      runway: runwayInput,
+      notam: nil
+    )
+
+    let cleanRun: Double
+    switch cleanModel.landingRunFt {
+      case .value(let val):
+        cleanRun = val
+      case .valueWithUncertainty(let val, _):
+        cleanRun = val
+      default:
+        Issue.record("Expected clean landing run value")
+        return
+    }
+
+    // Model with wet runway contamination
+    let wetRunwayContamination = Contamination.wetRunway
+    let contaminatedNotam = NOTAMInput(
+      contaminationType: wetRunwayContamination.type,
+      contaminationDepth: .init(value: 0, unit: .meters),
+      takeoffDistanceShortening: .init(value: 0, unit: .feet),
+      landingDistanceShortening: .init(value: 0, unit: .feet),
+      obstacleHeight: .init(value: 0, unit: .feet),
+      obstacleDistance: .init(value: 0, unit: .nauticalMiles)
+    )
+
+    let contaminatedModel = TabularPerformanceModelG2Plus(
+      conditions: conditions,
+      configuration: config,
+      runway: runwayInput,
+      notam: contaminatedNotam
+    )
+
+    let contaminatedRun: Double
+    switch contaminatedModel.landingRunFt {
+      case .value(let val):
+        contaminatedRun = val
+      case .valueWithUncertainty(let val, _):
+        contaminatedRun = val
+      default:
+        Issue.record("Expected contaminated landing run value")
+        return
+    }
+
+    // Wet runway should increase landing run by 15%
+    let expectedRun = cleanRun * 1.15
+    #expect(contaminatedRun.isApproximatelyEqual(to: expectedRun, relativeTolerance: 0.01))
+  }
+
+  @Test("Wet runway contamination increases landing run by 15% - Regression G2+")
+  func wetRunwayContamination_increasesLandingRun_regressionG2Plus() {
+    let conditions = Helper.createTestConditions(temperature: 20)
+    let config = Helper.createTestConfiguration(weight: 5550)
+    let runway = Helper.createTestRunway()
+    let runwayInput = RunwayInput(from: runway, airport: runway.airport)
+
+    // Model without contamination
+    let cleanModel = RegressionPerformanceModelG2Plus(
+      conditions: conditions,
+      configuration: config,
+      runway: runwayInput,
+      notam: nil
+    )
+
+    guard case .valueWithUncertainty(let cleanRun, _) = cleanModel.landingRunFt else {
+      Issue.record("Expected clean landing run value")
+      return
+    }
+
+    // Model with wet runway contamination
+    let wetRunwayContamination = Contamination.wetRunway
+    let contaminatedNotam = NOTAMInput(
+      contaminationType: wetRunwayContamination.type,
+      contaminationDepth: .init(value: 0, unit: .meters),
+      takeoffDistanceShortening: .init(value: 0, unit: .feet),
+      landingDistanceShortening: .init(value: 0, unit: .feet),
+      obstacleHeight: .init(value: 0, unit: .feet),
+      obstacleDistance: .init(value: 0, unit: .nauticalMiles)
+    )
+
+    let contaminatedModel = RegressionPerformanceModelG2Plus(
+      conditions: conditions,
+      configuration: config,
+      runway: runwayInput,
+      notam: contaminatedNotam
+    )
+
+    guard case .valueWithUncertainty(let contaminatedRun, _) = contaminatedModel.landingRunFt else {
+      Issue.record("Expected contaminated landing run value")
+      return
+    }
+
+    // Wet runway should increase landing run by 15%
+    let expectedRun = cleanRun * 1.15
+    #expect(contaminatedRun.isApproximatelyEqual(to: expectedRun, relativeTolerance: 0.01))
+  }
+
+  @Test("Wet runway contamination has no effect on G1 - Tabular")
+  func wetRunwayContamination_noEffectOnG1_tabular() {
+    let conditions = Helper.createTestConditions(temperature: 20)
+    let config = Helper.createTestConfiguration(weight: 5550)
+    let runway = Helper.createTestRunway()
+    let runwayInput = RunwayInput(from: runway, airport: runway.airport)
+
+    // Model without contamination
+    let cleanModel = TabularPerformanceModelG1(
+      conditions: conditions,
+      configuration: config,
+      runway: runwayInput,
+      notam: nil
+    )
+
+    let cleanRun: Double
+    switch cleanModel.landingRunFt {
+      case .value(let val):
+        cleanRun = val
+      case .valueWithUncertainty(let val, _):
+        cleanRun = val
+      default:
+        Issue.record("Expected clean landing run value")
+        return
+    }
+
+    // Model with wet runway contamination
+    let wetRunwayContamination = Contamination.wetRunway
+    let contaminatedNotam = NOTAMInput(
+      contaminationType: wetRunwayContamination.type,
+      contaminationDepth: .init(value: 0, unit: .meters),
+      takeoffDistanceShortening: .init(value: 0, unit: .feet),
+      landingDistanceShortening: .init(value: 0, unit: .feet),
+      obstacleHeight: .init(value: 0, unit: .feet),
+      obstacleDistance: .init(value: 0, unit: .nauticalMiles)
+    )
+
+    let contaminatedModel = TabularPerformanceModelG1(
+      conditions: conditions,
+      configuration: config,
+      runway: runwayInput,
+      notam: contaminatedNotam
+    )
+
+    let contaminatedRun: Double
+    switch contaminatedModel.landingRunFt {
+      case .value(let val):
+        contaminatedRun = val
+      case .valueWithUncertainty(let val, _):
+        contaminatedRun = val
+      default:
+        Issue.record("Expected contaminated landing run value")
+        return
+    }
+
+    // Wet runway should have no effect on G1
+    #expect(contaminatedRun.isApproximatelyEqual(to: cleanRun, relativeTolerance: 0.001))
+  }
+
+  @Test("Wet runway contamination increases landing run by 15% - Regression G1")
+  func wetRunwayContamination_increasesLandingRun_regressionG1() {
+    let conditions = Helper.createTestConditions(temperature: 20)
+    let config = Helper.createTestConfiguration(weight: 5550)
+    let runway = Helper.createTestRunway()
+    let runwayInput = RunwayInput(from: runway, airport: runway.airport)
+
+    // Model without contamination
+    let cleanModel = RegressionPerformanceModelG1(
+      conditions: conditions,
+      configuration: config,
+      runway: runwayInput,
+      notam: nil
+    )
+
+    guard case .valueWithUncertainty(let cleanRun, _) = cleanModel.landingRunFt else {
+      Issue.record("Expected clean landing run value")
+      return
+    }
+
+    // Model with wet runway contamination
+    let wetRunwayContamination = Contamination.wetRunway
+    let contaminatedNotam = NOTAMInput(
+      contaminationType: wetRunwayContamination.type,
+      contaminationDepth: .init(value: 0, unit: .meters),
+      takeoffDistanceShortening: .init(value: 0, unit: .feet),
+      landingDistanceShortening: .init(value: 0, unit: .feet),
+      obstacleHeight: .init(value: 0, unit: .feet),
+      obstacleDistance: .init(value: 0, unit: .nauticalMiles)
+    )
+
+    let contaminatedModel = RegressionPerformanceModelG1(
+      conditions: conditions,
+      configuration: config,
+      runway: runwayInput,
+      notam: contaminatedNotam
+    )
+
+    guard case .valueWithUncertainty(let contaminatedRun, _) = contaminatedModel.landingRunFt else {
+      Issue.record("Expected contaminated landing run value")
+      return
+    }
+
+    // Regression model: Wet runway should increase landing run by 15% for all aircraft
+    let expectedRun = cleanRun * 1.15
+    #expect(contaminatedRun.isApproximatelyEqual(to: expectedRun, relativeTolerance: 0.01))
+  }
+
+  @Test("Wet runway contamination increases total landing distance - G2+")
+  func wetRunwayContamination_increasesTotalLandingDistance_G2Plus() {
+    let conditions = Helper.createTestConditions(temperature: 20)
+    let config = Helper.createTestConfiguration(weight: 5550)
+    let runway = Helper.createTestRunway()
+    let runwayInput = RunwayInput(from: runway, airport: runway.airport)
+
+    let cleanModel = TabularPerformanceModelG2Plus(
+      conditions: conditions,
+      configuration: config,
+      runway: runwayInput,
+      notam: nil
+    )
+
+    let cleanDistance: Double
+    switch cleanModel.landingDistanceFt {
+      case .value(let val):
+        cleanDistance = val
+      case .valueWithUncertainty(let val, _):
+        cleanDistance = val
+      default:
+        Issue.record("Expected clean landing distance value")
+        return
+    }
+
+    let wetRunwayContamination = Contamination.wetRunway
+    let contaminatedNotam = NOTAMInput(
+      contaminationType: wetRunwayContamination.type,
+      contaminationDepth: .init(value: 0, unit: .meters),
+      takeoffDistanceShortening: .init(value: 0, unit: .feet),
+      landingDistanceShortening: .init(value: 0, unit: .feet),
+      obstacleHeight: .init(value: 0, unit: .feet),
+      obstacleDistance: .init(value: 0, unit: .nauticalMiles)
+    )
+
+    let contaminatedModel = TabularPerformanceModelG2Plus(
+      conditions: conditions,
+      configuration: config,
+      runway: runwayInput,
+      notam: contaminatedNotam
+    )
+
+    let contaminatedDistance: Double
+    switch contaminatedModel.landingDistanceFt {
+      case .value(let val):
+        contaminatedDistance = val
+      case .valueWithUncertainty(let val, _):
+        contaminatedDistance = val
+      default:
+        Issue.record("Expected contaminated landing distance value")
+        return
+    }
+
+    // Total landing distance should also increase (run increase propagates)
+    #expect(contaminatedDistance > cleanDistance)
+  }
+
   // MARK: - Logical Consistency Tests
 
   @Test("Landing run never exceeds total landing distance")

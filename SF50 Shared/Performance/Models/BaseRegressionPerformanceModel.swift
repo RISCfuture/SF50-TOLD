@@ -27,6 +27,9 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
   /// Bounds checker to validate inputs against AFM table ranges.
   let boundsChecker: BoundsChecker
 
+  /// Calculator for runway contamination effects.
+  let contaminationCalculator: ContaminationCalculator
+
   /// Indicates if the takeoff inputs are below the minimum AFM table bounds.
   var takeoffInputsOffscaleLow: Bool {
     boundsChecker.takeoffBoundsStatus(
@@ -75,6 +78,7 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
     modelType: DataTableLoader.ModelType
   ) {
     self.boundsChecker = BoundsChecker(modelType: modelType)
+    self.contaminationCalculator = ContaminationCalculator(modelType: modelType)
     super.init(conditions: conditions, configuration: configuration, runway: runway, notam: notam)
   }
 
@@ -94,7 +98,7 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
   // MARK: - Shared contamination calculation
 
   func landingRun_contaminationAddition(distance: Value<Double>) -> Value<Double> {
-    ContaminationCalculator.landingRunContaminationAddition(
+    contaminationCalculator.landingRunContaminationAddition(
       distance: distance,
       contamination: notam?.contamination
     )

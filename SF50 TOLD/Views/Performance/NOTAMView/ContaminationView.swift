@@ -7,6 +7,7 @@ private enum ContaminationType {
   case slushOrWetSnow
   case drySnow
   case compactSnow
+  case wetRunway
 
   var hasDepth: Bool {
     self == .waterOrSlush || self == .slushOrWetSnow
@@ -18,6 +19,7 @@ private enum ContaminationType {
       case .slushOrWetSnow: self = .slushOrWetSnow
       case .drySnow: self = .drySnow
       case .compactSnow: self = .compactSnow
+      case .wetRunway: self = .wetRunway
       case .none: self = .none
     }
   }
@@ -42,6 +44,7 @@ struct ContaminationView: View {
         Text("Contamination")
         Picker("", selection: $contaminationType) {
           Text("None").tag(ContaminationType.none)
+          Text("Wet Runway").tag(ContaminationType.wetRunway)
           Text("Water/Slush").tag(ContaminationType.waterOrSlush)
           Text("Slush/Wet Snow").tag(ContaminationType.slushOrWetSnow)
           Text("Dry Snow").tag(ContaminationType.drySnow)
@@ -93,6 +96,7 @@ struct ContaminationView: View {
         )
       case .drySnow: return .drySnow
       case .compactSnow: return .compactSnow
+      case .wetRunway: return .wetRunway
     }
   }
 }
@@ -104,7 +108,7 @@ extension Contamination {
         depth.converted(to: .inches).value
       case .slushOrWetSnow(let depth):
         depth.converted(to: .inches).value
-      case .drySnow, .compactSnow:
+      case .drySnow, .compactSnow, .wetRunway:
         0.0
     }
   }

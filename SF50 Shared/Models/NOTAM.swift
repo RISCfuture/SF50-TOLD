@@ -126,6 +126,9 @@ public enum Contamination: Sendable, Hashable {
   /// Compacted snow or ice on the runway
   case compactSnow
 
+  /// Wet runway surface
+  case wetRunway
+
   /// Raw type string for persistence.
   var type: String {
     switch self {
@@ -133,6 +136,7 @@ public enum Contamination: Sendable, Hashable {
       case .slushOrWetSnow: ContaminationType.slushOrWetSnow.rawValue
       case .drySnow: ContaminationType.drySnow.rawValue
       case .compactSnow: ContaminationType.compactSnow.rawValue
+      case .wetRunway: ContaminationType.wetRunway.rawValue
     }
   }
 
@@ -143,6 +147,7 @@ public enum Contamination: Sendable, Hashable {
       case .slushOrWetSnow(let depth): depth.converted(to: .meters).value
       case .drySnow: nil
       case .compactSnow: nil
+      case .wetRunway: nil
     }
   }
 
@@ -161,6 +166,8 @@ public enum Contamination: Sendable, Hashable {
         self = .drySnow
       case .compactSnow:
         self = .compactSnow
+      case .wetRunway:
+        self = .wetRunway
     }
   }
 
@@ -174,5 +181,7 @@ public enum Contamination: Sendable, Hashable {
     case drySnow
     /// Compacted snow or ice
     case compactSnow
+    /// Wet runway surface
+    case wetRunway
   }
 }
