@@ -109,20 +109,6 @@ struct DataTableLoader {
     return try loadDataTable(path: "enroute climb/\(subdir)/speed.csv", fromG1: true)
   }
 
-  // MARK: - Time Fuel Distance to Climb Data Tables
-
-  func loadTimeFuelDistanceTimeData() throws -> DataTable {
-    try loadDataTable(path: "time fuel distance to climb/time.csv", fromG1: true)
-  }
-
-  func loadTimeFuelDistanceFuelData() throws -> DataTable {
-    try loadDataTable(path: "time fuel distance to climb/fuel.csv", fromG1: true)
-  }
-
-  func loadTimeFuelDistanceDistanceData() throws -> DataTable {
-    try loadDataTable(path: "time fuel distance to climb/distance.csv", fromG1: true)
-  }
-
   // MARK: - Adjustment Factor Data Tables
 
   func loadTakeoffRunHeadwindData() throws -> DataTable {

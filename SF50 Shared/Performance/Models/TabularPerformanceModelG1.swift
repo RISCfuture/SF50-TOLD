@@ -66,10 +66,6 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
   private let enrouteClimb_rateIceContaminatedData: DataTable
   private let enrouteClimb_speedIceContaminatedData: DataTable
 
-  private let timeFuelDistanceToClimb_timeData: DataTable
-  private let timeFuelDistanceToClimb_fuelData: DataTable
-  private let timeFuelDistanceToClimb_distanceData: DataTable
-
   // MARK: - Outputs
 
   override var takeoffRunFt: Value<Double> {
@@ -115,18 +111,6 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
     let data =
       iceContaminated ? enrouteClimb_speedIceContaminatedData : enrouteClimb_speedNormalData
     return data.value(for: [altitude, temperature, weight])
-  }
-
-  var timeToClimbMin: Value<Double> {
-    timeFuelDistanceToClimb_timeData.value(for: [altitude, temperature, weight])
-  }
-
-  var fuelToClimbUsGal: Value<Double> {
-    timeFuelDistanceToClimb_fuelData.value(for: [altitude, temperature, weight])
-  }
-
-  var distanceToClimbNm: Value<Double> {
-    timeFuelDistanceToClimb_distanceData.value(for: [altitude, temperature, weight])
   }
 
   override var VrefKts: Value<Double> {
@@ -414,10 +398,6 @@ final class TabularPerformanceModelG1: BasePerformanceModel {
     enrouteClimb_speedIceContaminatedData = try! loader.loadEnrouteClimbSpeedData(
       iceContaminated: true
     )
-
-    timeFuelDistanceToClimb_timeData = try! loader.loadTimeFuelDistanceTimeData()
-    timeFuelDistanceToClimb_fuelData = try! loader.loadTimeFuelDistanceFuelData()
-    timeFuelDistanceToClimb_distanceData = try! loader.loadTimeFuelDistanceDistanceData()
 
     super.init(conditions: conditions, configuration: configuration, runway: runway, notam: notam)
   }
