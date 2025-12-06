@@ -145,39 +145,77 @@ public final class DefaultPerformanceCalculationService: PerformanceCalculationS
     aircraftType: AircraftType
   ) -> PerformanceModel {
     if useRegressionModel {
-      if aircraftType.usesUpdatedThrustSchedule {
-        return RegressionPerformanceModelG2Plus(
+      switch aircraftType {
+        case .g1:
+          return RegressionPerformanceModelG1(
+            conditions: conditions,
+            configuration: configuration,
+            runway: runway,
+            notam: notam,
+            aircraftType: aircraftType
+          )
+        case .g2(let updated):
+          if updated {
+            return RegressionPerformanceModelG2Plus(
+              conditions: conditions,
+              configuration: configuration,
+              runway: runway,
+              notam: notam,
+              aircraftType: aircraftType
+            )
+          }
+          return RegressionPerformanceModelG2(
+            conditions: conditions,
+            configuration: configuration,
+            runway: runway,
+            notam: notam,
+            aircraftType: aircraftType
+          )
+        case .g2Plus:
+          return RegressionPerformanceModelG2Plus(
+            conditions: conditions,
+            configuration: configuration,
+            runway: runway,
+            notam: notam,
+            aircraftType: aircraftType
+          )
+      }
+    }
+    switch aircraftType {
+      case .g1:
+        return TabularPerformanceModelG1(
           conditions: conditions,
           configuration: configuration,
           runway: runway,
           notam: notam,
           aircraftType: aircraftType
         )
-      }
-      return RegressionPerformanceModelG1(
-        conditions: conditions,
-        configuration: configuration,
-        runway: runway,
-        notam: notam,
-        aircraftType: aircraftType
-      )
+      case .g2(let updated):
+        if updated {
+          return TabularPerformanceModelG2Plus(
+            conditions: conditions,
+            configuration: configuration,
+            runway: runway,
+            notam: notam,
+            aircraftType: aircraftType
+          )
+        }
+        return TabularPerformanceModelG2(
+          conditions: conditions,
+          configuration: configuration,
+          runway: runway,
+          notam: notam,
+          aircraftType: aircraftType
+        )
+      case .g2Plus:
+        return TabularPerformanceModelG2Plus(
+          conditions: conditions,
+          configuration: configuration,
+          runway: runway,
+          notam: notam,
+          aircraftType: aircraftType
+        )
     }
-    if aircraftType.usesUpdatedThrustSchedule {
-      return TabularPerformanceModelG2Plus(
-        conditions: conditions,
-        configuration: configuration,
-        runway: runway,
-        notam: notam,
-        aircraftType: aircraftType
-      )
-    }
-    return TabularPerformanceModelG1(
-      conditions: conditions,
-      configuration: configuration,
-      runway: runway,
-      notam: notam,
-      aircraftType: aircraftType
-    )
   }
 
   public func calculateTakeoff(for model: PerformanceModel, safetyFactor: Double) throws

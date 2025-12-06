@@ -7,3 +7,6 @@
 
 # NOTAM API Configuration (contains API token)
 SF50 TOLD/NOTAM/NOTAMAPIConfig.xcconfig
+
+# Generated regression analysis plots
+scripts/regression_plots/

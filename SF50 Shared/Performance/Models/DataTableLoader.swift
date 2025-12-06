@@ -241,8 +241,15 @@ struct DataTableLoader {
 extension AircraftType {
   /// The directory name used for loading performance data tables.
   ///
-  /// Aircraft with updated thrust schedule use g2+ data, others use g1 data.
+  /// - G1: uses g1 data
+  /// - G2 without updated thrust: uses g2 data
+  /// - G2 with updated thrust: uses g2+ data
+  /// - G2+: uses g2+ data
   var dataDirectoryName: String {
-    usesUpdatedThrustSchedule ? "g2+" : "g1"
+    switch self {
+      case .g1: "g1"
+      case .g2(let updated): updated ? "g2+" : "g2"
+      case .g2Plus: "g2+"
+    }
   }
 }

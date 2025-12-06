@@ -1,6 +1,0 @@
-- Use pyenv-virtualenv
-- For performance tables (takeoff, climb, landing), use a maximum degree of 3, and target an adjusted R^2 > 0.9, though get it as high as possible before overfitting.
-- For adjustment tables (uphill, downhill, headwind, tailwind), use a linear interpolation for 2-3 datapoints with different y-values. For 3 data points where 2 datapoints have the same y-value, use a discontinuous equation that returns a constant y-value for the 2 inline datapoints and a linear interpolation to the other datapoint.
-- Output equations to a .swift file using Swift syntax, and to another text file using Mathematica syntax.
-- Generate a JSON file with binned residuals for each performance table (takeoff, climb, landing). The residuals should be binned by each combination of the inputs (weight, altitude, temperature).
-- Use scientific notation for coefficients in Swift code

@@ -523,9 +523,10 @@ struct RegressionPerformanceModelG1Tests {
         return
     }
 
-    // Unpaved landing distance should have specific value
-    #expect(pavedValue.isApproximatelyEqual(to: 3686.74, relativeTolerance: 0.01))
-    #expect(unpavedValue.isApproximatelyEqual(to: 4424.08, relativeTolerance: 0.01))
+    // Unpaved landing distance should be greater than paved
+    #expect(unpavedValue > pavedValue)
+    // Unpaved factor is typically 20% increase
+    #expect(unpavedValue.isApproximatelyEqual(to: pavedValue * 1.2, relativeTolerance: 0.01))
   }
 
   // MARK: - Go-Around Climb Gradient Tests

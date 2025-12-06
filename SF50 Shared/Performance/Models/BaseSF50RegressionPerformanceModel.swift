@@ -43,138 +43,32 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     return iceContaminated ? enrouteClimbSpeedKIAS_iceContaminated : enrouteClimbSpeedKIAS_normal
   }
 
-  private var enrouteClimbGradientFtNmi_normal: Value<Double> {
-    let value =
-      -4.874237e-01 * weight
-      - 4.572337e-02 * altitude
-      - 7.814000e+00 * temperature
-      + 2.744079e-05 * pow(weight, 2)
-      + 3.310746e-06 * weight * altitude
-      + 4.925860e-04 * weight * temperature
-      - 8.036127e-08 * pow(altitude, 2)
-      - 2.068553e-04 * altitude * temperature
-      - 1.013158e-01 * pow(temperature, 2)
-      + 2.671258e+03  // intercept
-
-    return .valueWithUncertainty(
-      value,
-      uncertainty: uncertainty(for: "g1/enroute climb/normal/gradient")
-    )
+  // Abstract properties - subclasses must override
+  var enrouteClimbGradientFtNmi_normal: Value<Double> {
+    fatalError("Subclasses must implement enrouteClimbGradientFtNmi_normal")
   }
 
-  private var enrouteClimbRateFtMin_normal: Value<Double> {
-    let value =
-      -1.497864e+00 * weight
-      - 1.470839e-01 * altitude
-      - 4.725863e+01 * temperature
-      + 8.515789e-05 * pow(weight, 2)
-      + 1.161424e-05 * weight * altitude
-      + 4.098812e-03 * weight * temperature
-      - 6.218664e-07 * pow(altitude, 2)
-      - 6.453944e-04 * altitude * temperature
-      - 3.469414e-01 * pow(temperature, 2)
-      + 8.280391e+03  // intercept
-
-    return .valueWithUncertainty(
-      value,
-      uncertainty: uncertainty(for: "g1/enroute climb/normal/rate")
-    )
+  var enrouteClimbRateFtMin_normal: Value<Double> {
+    fatalError("Subclasses must implement enrouteClimbRateFtMin_normal")
   }
 
-  private var enrouteClimbSpeedKIAS_normal: Value<Double> {
-    let value =
-      1.710676e-03 * weight
-      - 2.508275e-03 * altitude
-      - 6.211115e-01 * temperature
-      + 6.578947e-09 * pow(weight, 2)
-      + 3.771845e-08 * weight * altitude
-      + 1.005578e-05 * weight * temperature
-      - 2.467251e-08 * pow(altitude, 2)
-      - 2.635929e-05 * altitude * temperature
-      - 1.040358e-02 * pow(temperature, 2)
-      + 1.777981e+02  // intercept
-
-    return .valueWithUncertainty(
-      value,
-      uncertainty: uncertainty(for: "g1/enroute climb/normal/speed")
-    )
+  var enrouteClimbSpeedKIAS_normal: Value<Double> {
+    fatalError("Subclasses must implement enrouteClimbSpeedKIAS_normal")
   }
 
-  private var enrouteClimbGradientFtNmi_iceContaminated: Value<Double> {
-    let value =
-      -4.044019e-01 * weight
-      - 7.499937e-02 * altitude
-      - 1.096410e+01 * temperature
-      + 1.616279e-05 * pow(weight, 2)
-      + 6.128100e-06 * weight * altitude
-      + 6.382823e-04 * weight * temperature
-      - 1.301104e-07 * pow(altitude, 2)
-      - 3.260372e-04 * altitude * temperature
-      - 1.500103e-01 * pow(temperature, 2)
-      + 2.571454e+03  // intercept
-
-    return .valueWithUncertainty(
-      value,
-      uncertainty: uncertainty(for: "g1/enroute climb/ice contaminated/gradient")
-    )
+  var enrouteClimbGradientFtNmi_iceContaminated: Value<Double> {
+    fatalError("Subclasses must implement enrouteClimbGradientFtNmi_iceContaminated")
   }
 
-  private var enrouteClimbRateFtMin_iceContaminated: Value<Double> {
-    let value =
-      -1.519474e-01 * altitude
-      - 3.828843e+01 * temperature
-      - 9.878698e-01 * weight
-      - 1.219831e-06 * pow(altitude, 2)
-      - 8.122230e-04 * altitude * temperature
-      + 1.247279e-05 * altitude * weight
-      - 4.009787e-01 * pow(temperature, 2)
-      + 2.547891e-03 * temperature * weight
-      + 4.126357e-05 * pow(weight, 2)
-      + 6.212608e+03
-
-    return .valueWithUncertainty(
-      value,
-      uncertainty: uncertainty(for: "g1/enroute climb/ice contaminated/rate")
-    )
+  var enrouteClimbRateFtMin_iceContaminated: Value<Double> {
+    fatalError("Subclasses must implement enrouteClimbRateFtMin_iceContaminated")
   }
 
-  private var enrouteClimbSpeedKIAS_iceContaminated: Value<Double> {
-    let value =
-      -2.115789e-02 * weight
-      - 2.837160e-03 * altitude
-      - 4.431100e-01 * temperature
-      + 2.186047e-06 * pow(weight, 2)
-      + 4.056213e-07 * weight * altitude
-      + 6.342230e-05 * weight * temperature
-      + 8.800500e-09 * pow(altitude, 2)
-      - 1.347270e-06 * altitude * temperature
-      - 1.544318e-03 * pow(temperature, 2)
-      + 1.891283e+02  // intercept
-
-    return .valueWithUncertainty(
-      value,
-      uncertainty: uncertainty(for: "g1/enroute climb/ice contaminated/speed")
-    )
+  var enrouteClimbSpeedKIAS_iceContaminated: Value<Double> {
+    fatalError("Subclasses must implement enrouteClimbSpeedKIAS_iceContaminated")
   }
 
   // MARK: Landing
-
-  override var VrefKts: Value<Double> {
-    let value =
-      switch configuration.flapSetting {
-        case .flapsUp:
-          1.000000e-02 * weight + 4.900000e+01
-        case .flapsUpIce:
-          1.250000e-02 * weight + 6.500000e+01
-        case .flaps50:
-          9.000000e-03 * weight + 4.600000e+01
-        case .flaps50Ice:
-          1.100000e-02 * weight + 5.400000e+01
-        case .flaps100:
-          9.000000e-03 * weight + 3.500000e+01
-      }
-    return .value(value)
-  }
 
   override var landingDistanceFt: Value<Double> {
     // Calculate the increase in landing run due to contamination
@@ -221,72 +115,33 @@ class BaseSF50RegressionPerformanceModel: BaseRegressionPerformanceModel {
     return distance
   }
 
+  // Abstract properties - subclasses must override with variant-specific factors
   var landingRun_headwindAdjustment: Double {
-    let factor =
-      switch configuration.flapSetting {
-        case .flaps100: 0.08
-        default: 0.07
-      }
-    return PerformanceAdjustments.landingRunHeadwindAdjustment(factor: factor, headwind: headwind)
+    fatalError("Subclasses must implement landingRun_headwindAdjustment")
   }
 
   var landingDistance_headwindAdjustment: Double {
-    let factor =
-      switch configuration.flapSetting {
-        case .flaps50, .flapsUp:
-          max(0.112857 + -9.523810e-06 * weight, 0.01)  // Ensure positive, min 0.01
-        case .flaps50Ice, .flapsUpIce: 0.06
-        case .flaps100: 0.07
-      }
-    return PerformanceAdjustments.landingDistanceHeadwindAdjustment(
-      factor: factor,
-      headwind: headwind
-    )
+    fatalError("Subclasses must implement landingDistance_headwindAdjustment")
   }
 
   var landingRun_tailwindAdjustment: Double {
-    let factor =
-      switch configuration.flapSetting {
-        case .flaps100: 0.49
-        case .flaps50Ice, .flapsUpIce: 0.37
-        case .flaps50, .flapsUp: 0.42
-      }
-    return PerformanceAdjustments.landingRunTailwindAdjustment(factor: factor, tailwind: tailwind)
+    fatalError("Subclasses must implement landingRun_tailwindAdjustment")
   }
 
   var landingDistance_tailwindAdjustment: Double {
-    let factor =
-      switch configuration.flapSetting {
-        case .flaps50, .flapsUp:
-          0.432857 + -9.523810e-06 * weight
-        case .flaps50Ice, .flapsUpIce:
-          0.382857 + -9.523810e-06 * weight
-        case .flaps100:
-          0.492857 + -9.523810e-06 * weight
-      }
-    return PerformanceAdjustments.landingDistanceTailwindAdjustment(
-      factor: factor,
-      tailwind: tailwind
-    )
+    fatalError("Subclasses must implement landingDistance_tailwindAdjustment")
   }
 
   var landingRun_uphillAdjustment: Double {
-    let factor =
-      switch configuration.flapSetting {
-        case .flaps50Ice, .flapsUpIce: 0.06
-        default: 0.05
-      }
-    return PerformanceAdjustments.landingRunUphillAdjustment(factor: factor, uphill: uphill)
+    fatalError("Subclasses must implement landingRun_uphillAdjustment")
   }
 
   var landingRun_downhillAdjustment: Double {
-    let factor = 0.06
-    return PerformanceAdjustments.landingRunDownhillAdjustment(factor: factor, downhill: downhill)
+    fatalError("Subclasses must implement landingRun_downhillAdjustment")
   }
 
   var landingDistance_unpavedAdjustment: Double {
-    let factor = 0.2
-    return PerformanceAdjustments.landingDistanceUnpavedAdjustment(factor: factor)
+    fatalError("Subclasses must implement landingDistance_unpavedAdjustment")
   }
 
   // MARK: - Abstract Properties (to be implemented by subclasses)
