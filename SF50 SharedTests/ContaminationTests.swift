@@ -437,8 +437,8 @@ struct ContaminationTests {
 
   // MARK: - Contamination Depth Effects
 
-  @Test("Greater water depth increases contamination effect")
-  func greaterWaterDepth_increasesContaminationEffect() {
+  @Test("Shallower water depth causes greater distance increase per AFM")
+  func shallowerWaterDepth_causesGreaterDistanceIncrease() {
     let conditions = Helper.createTestConditions(temperature: 20)
     let config = Helper.createTestConfiguration(weight: 5000)
     let runway = Helper.createTestRunway()

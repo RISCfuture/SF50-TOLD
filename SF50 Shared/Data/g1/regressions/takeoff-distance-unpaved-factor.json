@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "name": "takeoff-distance-unpaved-factor",
+  "description": "Unpaved runway adjustment factor for takeoff total distance",
+  "type": "constant",
+  "variables": [],
+  "equation": {
+    "value": 0.21
+  }
+}

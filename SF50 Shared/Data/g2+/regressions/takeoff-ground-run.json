@@ -1,0 +1,89 @@
+{
+  "version": "1.0",
+  "name": "takeoff-ground-run",
+  "description": "Takeoff ground run base distance calculation",
+  "type": "polynomial",
+  "variables": [
+    "weight",
+    "altitude",
+    "temperature"
+  ],
+  "uncertainty_key": "g2+/takeoff/ground run",
+  "equation": {
+    "intercept": 295.10913061793553,
+    "terms": [
+      {
+        "coefficient": 0.034769013621208385,
+        "powers": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": 0.1270510039017385,
+        "powers": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": 0.006267213850218896,
+        "powers": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "coefficient": 3.747969787928797e-05,
+        "powers": [
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": -2.647408522297793e-05,
+        "powers": [
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": 0.00037173963392073063,
+        "powers": [
+          1,
+          0,
+          1
+        ]
+      },
+      {
+        "coefficient": 1.7592613305208875e-05,
+        "powers": [
+          0,
+          2,
+          0
+        ]
+      },
+      {
+        "coefficient": 0.003986585013973763,
+        "powers": [
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "coefficient": 0.5668318370013238,
+        "powers": [
+          0,
+          0,
+          2
+        ]
+      }
+    ]
+  }
+}

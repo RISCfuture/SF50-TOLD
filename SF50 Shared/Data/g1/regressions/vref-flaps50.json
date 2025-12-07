@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "name": "vref-flaps50",
+  "description": "Reference speed for flaps 50 configuration",
+  "type": "linear",
+  "variables": ["weight"],
+  "equation": {
+    "slope": 0.009,
+    "intercept": 46.0
+  }
+}

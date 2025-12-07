@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "name": "takeoff-run-downhill-factor",
+  "description": "Downhill adjustment factor for takeoff ground run",
+  "type": "piecewise",
+  "variables": ["weight"],
+  "equation": {
+    "breakpoints": [
+      {
+        "condition": {"variable": "weight", "operator": "<=", "value": 5500},
+        "result": {"type": "constant", "value": 0.01}
+      },
+      {
+        "condition": {"variable": "weight", "operator": ">", "value": 5500},
+        "result": {"type": "linear", "slope": 2.0e-05, "intercept": -0.1, "min_value": -0.1, "max_value": 0.1}
+      }
+    ]
+  }
+}

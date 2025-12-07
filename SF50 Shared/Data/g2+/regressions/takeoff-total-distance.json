@@ -1,0 +1,89 @@
+{
+  "version": "1.0",
+  "name": "takeoff-total-distance",
+  "description": "Takeoff total distance over 50ft obstacle",
+  "type": "polynomial",
+  "variables": [
+    "weight",
+    "altitude",
+    "temperature"
+  ],
+  "uncertainty_key": "g2+/takeoff/total distance",
+  "equation": {
+    "intercept": -184.73235153538553,
+    "terms": [
+      {
+        "coefficient": 0.05040864143505108,
+        "powers": [
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": 0.1055348031624709,
+        "powers": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": 0.006202498587804221,
+        "powers": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "coefficient": 7.338825664268209e-05,
+        "powers": [
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": -2.6851879674942766e-05,
+        "powers": [
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": 0.0005230742281915762,
+        "powers": [
+          1,
+          0,
+          1
+        ]
+      },
+      {
+        "coefficient": 2.7684624390346272e-05,
+        "powers": [
+          0,
+          2,
+          0
+        ]
+      },
+      {
+        "coefficient": 0.006181814586310531,
+        "powers": [
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "coefficient": 0.8649045333726187,
+        "powers": [
+          0,
+          0,
+          2
+        ]
+      }
+    ]
+  }
+}

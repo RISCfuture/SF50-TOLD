@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "name": "vref-flapsupice",
+  "description": "Reference speed for flaps up ice configuration",
+  "type": "linear",
+  "variables": ["weight"],
+  "equation": {
+    "slope": 0.0125,
+    "intercept": 65.0
+  }
+}

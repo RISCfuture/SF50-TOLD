@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "name": "vref-flaps50ice",
+  "description": "Reference speed for flaps 50 ice configuration",
+  "type": "linear",
+  "variables": ["weight"],
+  "equation": {
+    "slope": 0.011,
+    "intercept": 54.0
+  }
+}

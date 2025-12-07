@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "name": "go-around-climb-gradient",
+  "description": "Go-around climb gradient capability check",
+  "type": "logistic",
+  "variables": ["weight", "altitude", "temperature"],
+  "equation": {
+    "normalization": {
+      "weight": {"offset": 5000, "scale": 500},
+      "altitude": {"offset": 0, "scale": 10000},
+      "temperature": {"offset": 0, "scale": 50}
+    },
+    "polynomial_degree": 2,
+    "intercept": 5.759350e+00,
+    "coefficients": [
+      {"features": ["w"], "coefficient": 4.869268e-02},
+      {"features": ["a"], "coefficient": -1.168657e+00},
+      {"features": ["t"], "coefficient": -9.966391e-01},
+      {"features": ["w", "w"], "coefficient": -4.661816e-02},
+      {"features": ["w", "a"], "coefficient": -3.582346e-01},
+      {"features": ["w", "t"], "coefficient": -4.236130e-01},
+      {"features": ["a", "a"], "coefficient": -3.480137e+00},
+      {"features": ["a", "t"], "coefficient": 7.908706e-01},
+      {"features": ["t", "t"], "coefficient": -3.614055e+00}
+    ],
+    "threshold": 0.5
+  }
+}

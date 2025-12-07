@@ -43,6 +43,14 @@ import Foundation
 /// ```
 final class ContaminationCalculator {
 
+  // MARK: - Constants
+
+  /// Minimum contamination depth in inches from AFM tables.
+  /// Depths below this threshold are treated as clean runway (no contamination effect).
+  /// Per AFM: "Data is primarily for runways where greater than 0.1 inch (3.0 mm)
+  /// of contaminant is observed (FICON 4 or worse)."
+  private static let minimumDepthInches: Double = 0.125
+
   // MARK: - Properties
 
   private let aircraftType: AircraftType
@@ -175,10 +183,16 @@ final class ContaminationCalculator {
   ) -> Value<Double> {
     guard let waterData else { return distance }
 
+    let depthInches = depth.converted(to: .inches).value
+
+    // Per AFM, contamination data is only for depths > 0.1" (minimum table value is 0.125")
+    // For depths below this, treat as clean runway (no contamination effect)
+    guard depthInches >= Self.minimumDepthInches else { return distance }
+
     return distance.flatMap { distanceValue in
       waterData.value(
-        for: [distanceValue, depth.converted(to: .inches).value],
-        clamping: [.clampBoth, .clampBoth]
+        for: [distanceValue, depthInches],
+        clamping: [.clampBoth, .clampHigh]  // Clamp depth to max only, not below minimum
       )
     }
   }
@@ -189,10 +203,16 @@ final class ContaminationCalculator {
   ) -> Value<Double> {
     guard let slushData else { return distance }
 
+    let depthInches = depth.converted(to: .inches).value
+
+    // Per AFM, contamination data is only for depths > 0.1" (minimum table value is 0.125")
+    // For depths below this, treat as clean runway (no contamination effect)
+    guard depthInches >= Self.minimumDepthInches else { return distance }
+
     return distance.flatMap { distanceValue in
       slushData.value(
-        for: [distanceValue, depth.converted(to: .inches).value],
-        clamping: [.clampBoth, .clampBoth]
+        for: [distanceValue, depthInches],
+        clamping: [.clampBoth, .clampHigh]  // Clamp depth to max only, not below minimum
       )
     }
   }
@@ -221,11 +241,19 @@ final class ContaminationCalculator {
   ) -> Value<Double> {
     let depthInches = depth.converted(to: .inches).value
 
+    // Per AFM, contamination data is only for depths > 0.1" (minimum table value is 0.125")
+    // For depths below this, treat as clean runway (no contamination effect)
+    guard depthInches >= Self.minimumDepthInches else { return distance }
+
     return distance.map { distanceValue, existingUncertainty in
+      // Polynomial regression with interaction term: distance * depth
+      // This captures the AFM behavior where shallower water causes more distance increase
+      // than deeper water (due to reduced braking vs. increased drag)
       let newDistance =
-        1.406974e+00 * distanceValue
-        + 1.076892e-03 * depthInches
-        + 1.371359e+01
+        1.894551e+00 * distanceValue
+        + 1.804096e+00 * depthInches
+        - 1.319545e+00 * distanceValue * depthInches
+        + 4.370052e+00
 
       let contaminationUncertainty = ResidualErrorCalculator.contaminationRMSE(
         for: "water",
@@ -249,6 +277,10 @@ final class ContaminationCalculator {
     depth: Measurement<UnitLength>
   ) -> Value<Double> {
     let depthInches = depth.converted(to: .inches).value
+
+    // Per AFM, contamination data is only for depths > 0.1" (minimum table value is 0.125")
+    // For depths below this, treat as clean runway (no contamination effect)
+    guard depthInches >= Self.minimumDepthInches else { return distance }
 
     return distance.map { distanceValue, existingUncertainty in
       let newDistance =

@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "name": "takeoff-run-tailwind-factor",
+  "description": "Tailwind adjustment factor for takeoff ground run",
+  "type": "constant",
+  "variables": [],
+  "equation": {
+    "value": 0.4
+  }
+}

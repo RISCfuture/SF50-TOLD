@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "name": "takeoff-distance-tailwind-factor",
+  "description": "Tailwind adjustment factor for takeoff total distance",
+  "type": "piecewise",
+  "variables": ["weight"],
+  "equation": {
+    "breakpoints": [
+      {
+        "condition": {"variable": "weight", "operator": "<=", "value": 5500},
+        "result": {"type": "constant", "value": 0.36}
+      },
+      {
+        "condition": {"variable": "weight", "operator": ">", "value": 5500},
+        "result": {"type": "linear", "slope": -2.0e-05, "intercept": 0.47, "min_value": 0.1}
+      }
+    ]
+  }
+}

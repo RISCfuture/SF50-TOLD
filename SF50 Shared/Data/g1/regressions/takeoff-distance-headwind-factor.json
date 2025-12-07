@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "name": "takeoff-distance-headwind-factor",
+  "description": "Headwind adjustment factor for takeoff total distance",
+  "type": "constant",
+  "variables": [],
+  "equation": {
+    "value": 0.06
+  }
+}

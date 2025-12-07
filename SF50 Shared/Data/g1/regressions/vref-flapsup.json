@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "name": "vref-flapsup",
+  "description": "Reference speed for flaps up configuration",
+  "type": "linear",
+  "variables": ["weight"],
+  "equation": {
+    "slope": 0.01,
+    "intercept": 49.0
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "name": "takeoff-run-uphill-factor",
+  "description": "Uphill adjustment factor for takeoff ground run",
+  "type": "linear",
+  "variables": ["weight"],
+  "equation": {
+    "slope": 2.0e-05,
+    "intercept": 0.02
+  }
+}

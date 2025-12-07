@@ -30,6 +30,9 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
   /// Calculator for runway contamination effects.
   let contaminationCalculator: ContaminationCalculator
 
+  /// Loader for regression equation JSON files.
+  let equationLoader: RegressionEquationLoader
+
   /// Indicates if the takeoff inputs are below the minimum AFM table bounds.
   var takeoffInputsOffscaleLow: Bool {
     boundsChecker.takeoffBoundsStatus(
@@ -79,7 +82,34 @@ class BaseRegressionPerformanceModel: BasePerformanceModel {
   ) {
     self.boundsChecker = BoundsChecker(aircraftType: aircraftType)
     self.contaminationCalculator = ContaminationCalculator(aircraftType: aircraftType)
+    self.equationLoader = RegressionEquationLoader(aircraftType: aircraftType)
     super.init(conditions: conditions, configuration: configuration, runway: runway, notam: notam)
+  }
+
+  // MARK: - Equation Evaluation Helpers
+
+  /// Evaluates a regression equation with the current input conditions.
+  ///
+  /// - Parameter equation: The equation to evaluate.
+  /// - Returns: The calculated result with uncertainty.
+  func evaluate(_ equation: RegressionEquation) -> Value<Double> {
+    equation.evaluate(inputs: [
+      "weight": weight,
+      "altitude": altitude,
+      "temperature": temperature
+    ])
+  }
+
+  /// Evaluates a logistic equation with the current input conditions.
+  ///
+  /// - Parameter equation: The logistic equation to evaluate.
+  /// - Returns: The boolean result.
+  func evaluateBool(_ equation: RegressionEquation) -> Value<Bool> {
+    equation.evaluateBool(inputs: [
+      "weight": weight,
+      "altitude": altitude,
+      "temperature": temperature
+    ])
   }
 
   // MARK: - Shared uncertainty calculation
