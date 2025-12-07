@@ -1225,16 +1225,23 @@ final class SF50_TOLDUITests: XCTestCase {
     )
     safetyFactorDryField.clearAndType("1.1", app: app)
 
-    // Dismiss keyboard if it's up
-    app.tap()
-    Thread.sleep(forTimeInterval: 0.3)
+    // Dismiss keyboard by tapping outside the text field
+    if !app.keyboards.isEmpty {
+      // Tap on the navigation bar area to dismiss keyboard without affecting navigation
+      app.navigationBars.firstMatch.tap()
+      Thread.sleep(forTimeInterval: 0.3)
+    }
 
-    // Return to Takeoff tab
-    app.tapTab("Takeoff")
+    // Return to Takeoff tab - wait for tab bar to be ready
+    let takeoffTabButton = app.tabBars.buttons["Takeoff"]
+    XCTAssertTrue(
+      takeoffTabButton.waitForExistence(timeout: 2),
+      "Takeoff tab button should exist in tab bar"
+    )
+    takeoffTabButton.tap()
     waitForNavigation()
 
     // Verify we're actually on the Takeoff tab by checking for tab bar selection
-    let takeoffTabButton = app.tabBars.buttons["Takeoff"]
     XCTAssertTrue(takeoffTabButton.isSelected, "Should be on Takeoff tab")
 
     // Give extra time for the tab to fully switch and recalculations to complete

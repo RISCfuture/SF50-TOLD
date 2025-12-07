@@ -69,6 +69,29 @@ public final class ClimbPerformanceViewModel {
   public private(set) var climbRate: Value<Measurement<UnitSpeed>>
   public private(set) var climbGradient: Value<Measurement<UnitSlope>>
 
+  /// Approximates TAS from IAS using altitude (pressure ratio)
+  public var climbSpeedTAS: Value<Measurement<UnitSpeed>> {
+    climbSpeed.map { IAS, uncertainty in
+      let altFeet = altitude.converted(to: .feet).value
+      // TAS ≈ IAS / sqrt(σ), where σ ≈ (1 - altFeet/145442)^4.255876
+      let sigma = pow(1.0 - altFeet / 145442.0, 4.255876)
+      let TASMultiplier = 1.0 / sqrt(sigma)
+      let TAS = Measurement(value: IAS.value * TASMultiplier, unit: IAS.unit)
+      let uncert = uncertainty.map { Measurement(value: $0.value * TASMultiplier, unit: $0.unit) }
+      return (TAS, uncert)
+    }
+  }
+
+  /// Mach number for current climb speed
+  public var climbMach: Value<Double> {
+    climbSpeedTAS.flatMap { TAS in
+      let tempKelvin = OAT.converted(to: .kelvin).value
+      let speedOfSound = 38.967854 * sqrt(tempKelvin)
+      let TASKnots = TAS.converted(to: .knots).value
+      return .value(TASKnots / speedOfSound)
+    }
+  }
+
   // MARK: Private
 
   private var model: PerformanceModel?

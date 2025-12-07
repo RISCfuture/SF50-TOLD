@@ -9,6 +9,10 @@ struct ClimbResultsView: View {
   @Default(.speedUnit)
   private var speedUnit
 
+  private var showMach: Bool {
+    performance.altitude.converted(to: .feet).value >= 18400
+  }
+
   var body: some View {
     Section {
       // Prominent climb speed display
@@ -17,14 +21,44 @@ struct ClimbResultsView: View {
           .font(.headline)
           .foregroundStyle(.secondary)
 
-        InterpolationView(
-          value: performance.climbSpeed,
-          displayValue: { speed in
-            Text(speed.converted(to: speedUnit), format: .speed)
-              .font(.system(size: 48, weight: .bold, design: .rounded))
+        if showMach {
+          // Mach display with secondary airspeed
+          InterpolationView(
+            value: performance.climbMach,
+            displayValue: { mach in
+              HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text("M")
+                  .font(.system(size: 48, weight: .light, design: .rounded))
+                Text(mach, format: .mach)
+                  .font(.system(size: 48, weight: .bold, design: .rounded))
+                  .padding(.trailing, 4)
+
+                // Secondary IAS display
+                if case .value(let speed) = performance.climbSpeed {
+                  Text(speed.converted(to: speedUnit), format: .speed)
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
+                } else if case .valueWithUncertainty(let speed, _) = performance.climbSpeed {
+                  Text("(\(speed.converted(to: speedUnit), format: .speed))")
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
+                }
+              }
+              .accessibilityElement(children: .combine)
               .accessibilityIdentifier("climbSpeedValue")
-          }
-        )
+            }
+          )
+        } else {
+          // Standard IAS display
+          InterpolationView(
+            value: performance.climbSpeed,
+            displayValue: { speed in
+              Text(speed.converted(to: speedUnit), format: .speed)
+                .font(.system(size: 48, weight: .bold, design: .rounded))
+                .accessibilityIdentifier("climbSpeedValue")
+            }
+          )
+        }
       }
       .frame(maxWidth: .infinity)
 
@@ -67,17 +101,43 @@ struct ClimbResultsView: View {
   }
 }
 
-#Preview {
+#Preview("Offscale Low") {
   PreviewView { preview in
-    let performance = ClimbPerformanceViewModel(container: preview.container)
+    // Set defaults BEFORE creating view model (it observes these)
+    Defaults[.takeoffFuel] = .init(value: 50, unit: .gallons)
 
-    // Set realistic mid-climb conditions
-    // Need at least 150 gal fuel to reach min weight of 4500 lbs
-    // (3550 empty + 0 payload + 150 * 6.71 = 4556 lbs)
-    performance.fuel = .init(value: 180, unit: .gallons)
+    let performance = ClimbPerformanceViewModel(container: preview.container)
+    // Low fuel causes offscale low
+    performance.altitude = .init(value: 3000, unit: .feet)
+
+    return List { ClimbResultsView() }
+      .environment(performance)
+  }
+}
+
+#Preview("IAS Display") {
+  PreviewView { preview in
+    // Set defaults BEFORE creating view model (it observes these)
+    Defaults[.takeoffFuel] = .init(value: 180, unit: .gallons)
+
+    let performance = ClimbPerformanceViewModel(container: preview.container)
+    // Mid-altitude climb (below 18,400 ft) - shows IAS
     performance.altitude = .init(value: 10000, unit: .feet)
-    performance.ISADeviation = .init(value: 0, unit: .celsius)  // Standard ISA conditions
-    performance.iceProtection = false
+
+    return List { ClimbResultsView() }
+      .environment(performance)
+  }
+}
+
+#Preview("Mach Display") {
+  PreviewView { preview in
+    // Set defaults BEFORE creating view model (it observes these)
+    Defaults[.takeoffFuel] = .init(value: 180, unit: .gallons)
+
+    let performance = ClimbPerformanceViewModel(container: preview.container)
+    // High altitude climb (above 18,400 ft) - shows Mach
+    performance.altitude = .init(value: 25000, unit: .feet)
+    performance.ISADeviation = .init(value: -15, unit: .celsius)
 
     return List { ClimbResultsView() }
       .environment(performance)

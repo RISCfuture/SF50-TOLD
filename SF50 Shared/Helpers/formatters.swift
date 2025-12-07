@@ -11,6 +11,7 @@ extension FormatStyle where Self == FloatingPointFormatStyle<Double> {
   public static var rateOfClimb: Self { .number.rounded(increment: 1) }
   public static var gradient: Self { .number.rounded(increment: 1) }
   public static var speed: Self { .number.rounded(increment: 1) }
+  public static var mach: Self { .number.precision(.fractionLength(3)) }
   public static var temperature: Self { .number.rounded(increment: 1) }
   public static var airPressure: Self { .number.rounded(increment: 0.01) }
   public static var heading: Self { .number.rounded(increment: 1) }
