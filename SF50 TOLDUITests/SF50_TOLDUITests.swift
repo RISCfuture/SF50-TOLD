@@ -1,4 +1,5 @@
 // swiftlint:disable prefer_nimble
+// swiftlint:disable empty_count
 import XCTest
 
 final class SF50_TOLDUITests: XCTestCase {
@@ -1226,7 +1227,7 @@ final class SF50_TOLDUITests: XCTestCase {
     safetyFactorDryField.clearAndType("1.1", app: app)
 
     // Dismiss keyboard by tapping outside the text field
-    if !app.keyboards.isEmpty {
+    if app.keyboards.count > 0 {
       // Tap on the navigation bar area to dismiss keyboard without affecting navigation
       app.navigationBars.firstMatch.tap()
       Thread.sleep(forTimeInterval: 0.3)
@@ -1795,3 +1796,4 @@ final class SF50_TOLDUITests: XCTestCase {
   }
 }
 // swiftlint:enable prefer_nimble
+// swiftlint:enable empty_count
