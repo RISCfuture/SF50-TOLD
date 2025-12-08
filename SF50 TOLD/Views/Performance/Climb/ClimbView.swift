@@ -10,10 +10,16 @@ struct ClimbView: View {
 
   var body: some View {
     NavigationView {
-      Form {
-        ClimbConfigView()
-        ClimbResultsView()
-      }.navigationTitle("Climb")
+      if performance != nil {
+        Form {
+          ClimbConfigView()
+          ClimbResultsView()
+        }.navigationTitle("Climb")
+      } else {
+        ProgressView()
+          .controlSize(.extraLarge)
+          .navigationTitle("Climb")
+      }
     }
     .navigationViewStyle(navigationStyle)
     .environment(performance)

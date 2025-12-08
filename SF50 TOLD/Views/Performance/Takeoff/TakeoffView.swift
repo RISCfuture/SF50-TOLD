@@ -15,11 +15,17 @@ struct TakeoffView: View {
 
   var body: some View {
     NavigationView {
-      Form {
-        TakeoffPerformanceView()
-        TakeoffResultsView()
-        TakeoffReportButton()
-      }.navigationTitle("Takeoff")
+      if performance != nil && weather != nil {
+        Form {
+          TakeoffPerformanceView()
+          TakeoffResultsView()
+          TakeoffReportButton()
+        }.navigationTitle("Takeoff")
+      } else {
+        ProgressView()
+          .controlSize(.extraLarge)
+          .navigationTitle("Takeoff")
+      }
     }
     .navigationViewStyle(navigationStyle)
     .environment(performance)

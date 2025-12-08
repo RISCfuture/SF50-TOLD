@@ -16,11 +16,17 @@ struct LandingView: View {
 
   var body: some View {
     NavigationView {
-      Form {
-        LandingPerformanceView()
-        LandingResultsView()
-        LandingReportButton()
-      }.navigationTitle("Landing")
+      if performance != nil && weather != nil {
+        Form {
+          LandingPerformanceView()
+          LandingResultsView()
+          LandingReportButton()
+        }.navigationTitle("Landing")
+      } else {
+        ProgressView()
+          .controlSize(.extraLarge)
+          .navigationTitle("Landing")
+      }
     }
     .navigationViewStyle(navigationStyle)
     .environment(performance)
