@@ -26,13 +26,6 @@ import Foundation
 ///     └── ... (similar structure)
 /// ```
 ///
-/// ## Shared Data
-///
-/// Some data tables are shared between G1 and G2+ models:
-/// - Vref speeds
-/// - Ice-contaminated landing data
-/// - Contamination adjustments
-/// - Enroute climb data
 struct DataTableLoader {
 
   private let bundle: Bundle
@@ -43,8 +36,14 @@ struct DataTableLoader {
     return bundle.resourceURL!.appending(component: directory, directoryHint: .isDirectory)
   }
 
-  private var g1DataURL: URL {
-    bundle.resourceURL!.appending(component: "Data/g1", directoryHint: .isDirectory)
+  /// Fallback URL for G2+ aircraft to use G2 data when G2+ data is not available.
+  private var fallbackDataURL: URL? {
+    switch aircraftType {
+      case .g2Plus, .g2(true):
+        return bundle.resourceURL!.appending(component: "Data/g2", directoryHint: .isDirectory)
+      default:
+        return nil
+    }
   }
 
   init(bundle: Bundle = Bundle(for: BasePerformanceModel.self), aircraftType: AircraftType) {
@@ -63,21 +62,19 @@ struct DataTableLoader {
   }
 
   func loadLandingRunData(landingPrefix: String) throws -> DataTable {
-    let fromG1 = landingPrefix == "50 ice"
-    return try loadDataTable(path: "landing/\(landingPrefix)/ground run.csv", fromG1: fromG1)
+    try loadDataTable(path: "landing/\(landingPrefix)/ground run.csv")
   }
 
   func loadLandingDistanceData(landingPrefix: String) throws -> DataTable {
-    let fromG1 = landingPrefix == "50 ice"
-    return try loadDataTable(path: "landing/\(landingPrefix)/total distance.csv", fromG1: fromG1)
+    try loadDataTable(path: "landing/\(landingPrefix)/total distance.csv")
   }
 
   func loadVrefData() throws -> DataTable {
-    try loadDataTable(path: "vref/50.csv", fromG1: true)
+    try loadDataTable(path: "vref/50.csv")
   }
 
   func loadVrefData(vrefPrefix: String) throws -> DataTable {
-    try loadDataTable(path: "vref/\(vrefPrefix).csv", fromG1: true)
+    try loadDataTable(path: "vref/\(vrefPrefix).csv")
   }
 
   func loadTakeoffClimbGradientData() throws -> DataTable {
@@ -96,17 +93,17 @@ struct DataTableLoader {
 
   func loadEnrouteClimbGradientData(iceContaminated: Bool) throws -> DataTable {
     let subdir = iceContaminated ? "ice contaminated" : "normal"
-    return try loadDataTable(path: "enroute climb/\(subdir)/gradient.csv", fromG1: true)
+    return try loadDataTable(path: "enroute climb/\(subdir)/gradient.csv")
   }
 
   func loadEnrouteClimbRateData(iceContaminated: Bool) throws -> DataTable {
     let subdir = iceContaminated ? "ice contaminated" : "normal"
-    return try loadDataTable(path: "enroute climb/\(subdir)/rate.csv", fromG1: true)
+    return try loadDataTable(path: "enroute climb/\(subdir)/rate.csv")
   }
 
   func loadEnrouteClimbSpeedData(iceContaminated: Bool) throws -> DataTable {
     let subdir = iceContaminated ? "ice contaminated" : "normal"
-    return try loadDataTable(path: "enroute climb/\(subdir)/speed.csv", fromG1: true)
+    return try loadDataTable(path: "enroute climb/\(subdir)/speed.csv")
   }
 
   // MARK: - Adjustment Factor Data Tables
@@ -140,77 +137,49 @@ struct DataTableLoader {
   }
 
   func loadLandingRunHeadwindData(landingPrefix: String) throws -> DataTable {
-    let fromG1 = landingPrefix == "50 ice"
-    return try loadDataTable(
-      path: "landing/\(landingPrefix)/ground run - headwind factor.csv",
-      fromG1: fromG1
-    )
+    try loadDataTable(path: "landing/\(landingPrefix)/ground run - headwind factor.csv")
   }
 
   func loadLandingRunTailwindData(landingPrefix: String) throws -> DataTable {
-    let fromG1 = landingPrefix == "50 ice"
-    return try loadDataTable(
-      path: "landing/\(landingPrefix)/ground run - tailwind factor.csv",
-      fromG1: fromG1
-    )
+    try loadDataTable(path: "landing/\(landingPrefix)/ground run - tailwind factor.csv")
   }
 
   func loadLandingRunDownhillData(landingPrefix: String) throws -> DataTable {
-    let fromG1 = landingPrefix == "50 ice"
-    return try loadDataTable(
-      path: "landing/\(landingPrefix)/ground run - downhill factor.csv",
-      fromG1: fromG1
-    )
+    try loadDataTable(path: "landing/\(landingPrefix)/ground run - downhill factor.csv")
   }
 
   func loadLandingRunUphillData(landingPrefix: String) throws -> DataTable {
-    let fromG1 = landingPrefix == "50 ice"
-    return try loadDataTable(
-      path: "landing/\(landingPrefix)/ground run - uphill factor.csv",
-      fromG1: fromG1
-    )
+    try loadDataTable(path: "landing/\(landingPrefix)/ground run - uphill factor.csv")
   }
 
   func loadLandingDistanceHeadwindData(landingPrefix: String) throws -> DataTable {
-    let fromG1 = landingPrefix == "50 ice"
-    return try loadDataTable(
-      path: "landing/\(landingPrefix)/total distance - headwind factor.csv",
-      fromG1: fromG1
-    )
+    try loadDataTable(path: "landing/\(landingPrefix)/total distance - headwind factor.csv")
   }
 
   func loadLandingDistanceTailwindData(landingPrefix: String) throws -> DataTable {
-    let fromG1 = landingPrefix == "50 ice"
-    return try loadDataTable(
-      path: "landing/\(landingPrefix)/total distance - tailwind factor.csv",
-      fromG1: fromG1
-    )
+    try loadDataTable(path: "landing/\(landingPrefix)/total distance - tailwind factor.csv")
   }
 
   func loadLandingDistanceUnpavedData(landingPrefix: String) throws -> DataTable {
-    let fromG1 = landingPrefix == "50 ice"
-    return try loadDataTable(
-      path: "landing/\(landingPrefix)/total distance - unpaved factor.csv",
-      fromG1: fromG1
-    )
+    try loadDataTable(path: "landing/\(landingPrefix)/total distance - unpaved factor.csv")
   }
 
   // MARK: - Contamination Data Tables
 
   func loadCompactSnowLandingData() throws -> DataTable {
-    try loadDataTable(path: "landing/contamination/compact snow.csv", fromG1: true)
+    try loadDataTable(path: "landing/contamination/compact snow.csv")
   }
 
   func loadDrySnowLandingData() throws -> DataTable {
-    try loadDataTable(path: "landing/contamination/dry snow.csv", fromG1: true)
+    try loadDataTable(path: "landing/contamination/dry snow.csv")
   }
 
   func loadSlushLandingData() throws -> DataTable {
-    try loadDataTable(path: "landing/contamination/slush, wet snow.csv", fromG1: true)
+    try loadDataTable(path: "landing/contamination/slush, wet snow.csv")
   }
 
   func loadWaterLandingData() throws -> DataTable {
-    try loadDataTable(path: "landing/contamination/water.csv", fromG1: true)
+    try loadDataTable(path: "landing/contamination/water.csv")
   }
 
   // Alias methods for contamination data (used by TabularPerformanceModelG2+)
@@ -232,8 +201,21 @@ struct DataTableLoader {
 
   // MARK: - Helper Functions
 
-  private func loadDataTable(path: String, fromG1: Bool = false) throws -> DataTable {
-    let url = fromG1 ? g1DataURL.appending(path: path) : dataURL.appending(path: path)
+  private func loadDataTable(path: String) throws -> DataTable {
+    let url = dataURL.appending(path: path)
+
+    // Try primary location first
+    if FileManager.default.fileExists(atPath: url.path) {
+      return try DataTable(fileURL: url)
+    }
+
+    // Fall back to G2 data for G2+ aircraft if primary doesn't exist
+    if let fallbackURL = fallbackDataURL {
+      let fallback = fallbackURL.appending(path: path)
+      return try DataTable(fileURL: fallback)
+    }
+
+    // No fallback available, throw original error
     return try DataTable(fileURL: url)
   }
 }

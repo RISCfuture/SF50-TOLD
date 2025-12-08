@@ -26,12 +26,6 @@ import Foundation
 ///         └── ...
 /// ```
 ///
-/// ## Shared Data
-///
-/// Some equations are shared between G1 and G2+ models:
-/// - Vref speeds (all generations use G1 data)
-/// - Ice-contaminated landing data
-/// - Enroute climb data
 struct RegressionEquationLoader {
 
   private let bundle: Bundle
@@ -40,10 +34,6 @@ struct RegressionEquationLoader {
   private var dataURL: URL {
     let directory = "Data/\(aircraftType.dataDirectoryName)/regressions"
     return bundle.resourceURL!.appending(component: directory, directoryHint: .isDirectory)
-  }
-
-  private var g1DataURL: URL {
-    bundle.resourceURL!.appending(component: "Data/g1/regressions", directoryHint: .isDirectory)
   }
 
   init(bundle: Bundle = Bundle(for: BasePerformanceModel.self), aircraftType: AircraftType) {
@@ -103,14 +93,12 @@ struct RegressionEquationLoader {
 
   func loadLandingRunEquation(flapSetting: FlapSetting) throws -> RegressionEquation {
     let filename = "landing-run-\(flapSetting.regressionFileSuffix).json"
-    let fromG1 = flapSetting.isIceContaminated
-    return try loadEquation(filename: filename, fromG1: fromG1)
+    return try loadEquation(filename: filename)
   }
 
   func loadLandingDistanceEquation(flapSetting: FlapSetting) throws -> RegressionEquation {
     let filename = "landing-distance-\(flapSetting.regressionFileSuffix).json"
-    let fromG1 = flapSetting.isIceContaminated
-    return try loadEquation(filename: filename, fromG1: fromG1)
+    return try loadEquation(filename: filename)
   }
 
   func loadGoAroundClimbGradientEquation() throws -> RegressionEquation {
@@ -160,31 +148,30 @@ struct RegressionEquationLoader {
 
   func loadVrefEquation(flapSetting: FlapSetting) throws -> RegressionEquation {
     let filename = "vref-\(flapSetting.regressionFileSuffix).json"
-    // Vref always uses G1 data
-    return try loadEquation(filename: filename, fromG1: true)
+    return try loadEquation(filename: filename)
   }
 
   // MARK: - En Route Climb Equations
 
   func loadEnrouteClimbGradientEquation(iceContaminated: Bool) throws -> RegressionEquation {
     let suffix = iceContaminated ? "ice" : "normal"
-    return try loadEquation(filename: "enroute-climb-gradient-\(suffix).json", fromG1: true)
+    return try loadEquation(filename: "enroute-climb-gradient-\(suffix).json")
   }
 
   func loadEnrouteClimbRateEquation(iceContaminated: Bool) throws -> RegressionEquation {
     let suffix = iceContaminated ? "ice" : "normal"
-    return try loadEquation(filename: "enroute-climb-rate-\(suffix).json", fromG1: true)
+    return try loadEquation(filename: "enroute-climb-rate-\(suffix).json")
   }
 
   func loadEnrouteClimbSpeedEquation(iceContaminated: Bool) throws -> RegressionEquation {
     let suffix = iceContaminated ? "ice" : "normal"
-    return try loadEquation(filename: "enroute-climb-speed-\(suffix).json", fromG1: true)
+    return try loadEquation(filename: "enroute-climb-speed-\(suffix).json")
   }
 
   // MARK: - Private Helpers
 
-  private func loadEquation(filename: String, fromG1: Bool = false) throws -> RegressionEquation {
-    let url = fromG1 ? g1DataURL.appending(path: filename) : dataURL.appending(path: filename)
+  private func loadEquation(filename: String) throws -> RegressionEquation {
+    let url = dataURL.appending(path: filename)
     return try RegressionEquation(fileURL: url)
   }
 }
